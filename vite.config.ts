@@ -284,9 +284,24 @@ function vitePluginPraticagemApi(): Plugin {
   };
 }
 
+function vitePluginSpa404(): Plugin {
+  return {
+    name: "spa-404-fallback",
+    closeBundle() {
+      const publicDist = path.resolve(import.meta.dirname, "dist/public");
+      const indexPath = path.join(publicDist, "index.html");
+      const notFoundPath = path.join(publicDist, "404.html");
+      if (fs.existsSync(indexPath)) {
+        fs.copyFileSync(indexPath, notFoundPath);
+      }
+    },
+  };
+}
+
 const plugins = [
   vitePluginPublicPlatformConfig(),
   vitePluginPraticagemApi(),
+  vitePluginSpa404(),
   react(),
   tailwindcss(),
   jsxLocPlugin(),
@@ -294,6 +309,7 @@ const plugins = [
 ];
 
 export default defineConfig({
+  base: process.env.GITHUB_PAGES === "true" ? "/CaisLab/" : process.env.NODE_ENV === "development" ? "/" : "./",
   plugins,
   resolve: {
     alias: {

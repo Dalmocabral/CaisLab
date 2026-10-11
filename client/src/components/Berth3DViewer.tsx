@@ -158,7 +158,138 @@ function addVesselNameplate(
   group.add(labelQuay);
 }
 
-function addVessel(THREE: ThreeModule, scene: import("three").Scene, vessel: Vessel, total: number) {
+const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+const CONTAINER_SKIN_DEFS = [
+  {
+    id: "verde",
+    name: "Verde Atlas",
+    sideUrl: `${BASE_PATH}/textures/containers/skin-verde-atlas.png`,
+    frontUrl: `${BASE_PATH}/textures/containers/skin-verde-atlas-frente.png`,
+    roofColor: "#1d6a45",
+  },
+  {
+    id: "azul",
+    name: "Azul Oceânica",
+    sideUrl: `${BASE_PATH}/textures/containers/skin-azul-oceanica.png`,
+    frontUrl: `${BASE_PATH}/textures/containers/skin-azul-oceanica-frente.png`,
+    roofColor: "#1a4f7c",
+  },
+  {
+    id: "terracota",
+    name: "Terracota Coral",
+    sideUrl: `${BASE_PATH}/textures/containers/skin-terracota-coral.png`,
+    frontUrl: `${BASE_PATH}/textures/containers/skin-terracota-coral-frente.png`,
+    roofColor: "#b84e2a",
+  },
+  {
+    id: "amarelo",
+    name: "Amarelo Terminal",
+    sideUrl: `${BASE_PATH}/textures/containers/skin-amarelo-terminal.png`,
+    frontUrl: `${BASE_PATH}/textures/containers/skin-amarelo-terminal-frente.png`,
+    roofColor: "#d97706",
+  },
+  {
+    id: "branco",
+    name: "Branco Nuvem",
+    sideUrl: `${BASE_PATH}/textures/containers/skin-branco-nuvem.png`,
+    frontUrl: `${BASE_PATH}/textures/containers/skin-branco-nuvem-frente.png`,
+    roofColor: "#e2e8f0",
+  },
+  {
+    id: "rosa",
+    name: "Rosa Orquídea",
+    sideUrl: `${BASE_PATH}/textures/containers/skin-rosa-orquidea.png`,
+    frontUrl: `${BASE_PATH}/textures/containers/skin-rosa-orquidea-frente.png`,
+    roofColor: "#db2777",
+  },
+] as const;
+
+function containerSkinHash(vesselSeed: number, column: number, row: number, tier: number, skinCount: number): number {
+  let h = (vesselSeed ^ (column * 31337) ^ (row * 65537) ^ (tier * 131071)) >>> 0;
+  h = Math.imul(h ^ (h >>> 16), 0x85ebca6b) >>> 0;
+  h = Math.imul(h ^ (h >>> 13), 0xc2b2ae35) >>> 0;
+  h = (h ^ (h >>> 16)) >>> 0;
+  return h % skinCount;
+}
+
+function createContainerSkinMaterials(
+  THREE: ThreeModule,
+  skin: (typeof CONTAINER_SKIN_DEFS)[number],
+  onLoad?: () => void,
+) {
+  const loader = new THREE.TextureLoader();
+
+  const sideTex = loader.load(skin.sideUrl, () => {
+    onLoad?.();
+  });
+  sideTex.colorSpace = THREE.SRGBColorSpace;
+  sideTex.generateMipmaps = true;
+
+  const sideTexFlipped = sideTex.clone();
+  sideTexFlipped.wrapS = THREE.RepeatWrapping;
+  sideTexFlipped.repeat.x = -1;
+  sideTexFlipped.offset.x = 1;
+  sideTexFlipped.needsUpdate = true;
+
+  const frontTex = loader.load(skin.frontUrl, () => {
+    onLoad?.();
+  });
+  frontTex.colorSpace = THREE.SRGBColorSpace;
+  frontTex.generateMipmaps = true;
+
+  const frontTexFlipped = frontTex.clone();
+  frontTexFlipped.wrapS = THREE.RepeatWrapping;
+  frontTexFlipped.repeat.x = -1;
+  frontTexFlipped.offset.x = 1;
+  frontTexFlipped.needsUpdate = true;
+
+  const matFront = new THREE.MeshStandardMaterial({
+    map: frontTex,
+    color: "#ffffff",
+    roughness: 0.68,
+    metalness: 0.12,
+  });
+  const matBack = new THREE.MeshStandardMaterial({
+    map: frontTexFlipped,
+    color: "#ffffff",
+    roughness: 0.68,
+    metalness: 0.12,
+  });
+  const matRoof = new THREE.MeshStandardMaterial({
+    color: skin.roofColor,
+    roughness: 0.78,
+    metalness: 0.15,
+  });
+  const matFloor = new THREE.MeshStandardMaterial({
+    color: "#1e293b",
+    roughness: 0.9,
+    metalness: 0.2,
+  });
+  const matSide = new THREE.MeshStandardMaterial({
+    map: sideTex,
+    color: "#ffffff",
+    roughness: 0.68,
+    metalness: 0.12,
+  });
+  const matSideFlipped = new THREE.MeshStandardMaterial({
+    map: sideTexFlipped,
+    color: "#ffffff",
+    roughness: 0.68,
+    metalness: 0.12,
+  });
+
+  // BoxGeometry face mapping: 0:+X, 1:-X, 2:+Y, 3:-Y, 4:+Z, 5:-Z
+  return [matFront, matBack, matRoof, matFloor, matSide, matSideFlipped];
+}
+
+function addVessel(
+  THREE: ThreeModule,
+  scene: import("three").Scene,
+  vessel: Vessel,
+  total: number,
+  onTextureLoaded?: () => void,
+) {
   const direction = vessel.berthingSide === "boreste" ? -1 : 1;
   const loa = Math.max(1, vessel.loa);
   const beam = Math.max(1, vessel.beam);
@@ -794,13 +925,25 @@ function addVessel(THREE: ThreeModule, scene: import("three").Scene, vessel: Ves
       const containerHeight = 2.55;
 
       const containerGeometry = new THREE.BoxGeometry(containerLength, containerHeight, containerWidth);
-      const containerMaterial = new THREE.MeshStandardMaterial({ color: "#ffffff", roughness: 0.78 });
       const instanceCount = columns * rows * tiers;
-      const containers = new THREE.InstancedMesh(containerGeometry, containerMaterial, instanceCount);
       const cornerMaterial = new THREE.MeshStandardMaterial({ color: "#8a969b", roughness: 0.74, metalness: 0.16 });
       const cornerPosts = new THREE.InstancedMesh(new THREE.BoxGeometry(0.24, 2.48, 0.24), cornerMaterial, instanceCount * 4);
+
+      // InstancedMeshes para as skins autênticas variadas (Verde, Azul, Terracota, Amarelo, Branco, Rosa)
+      const skinMaterials = CONTAINER_SKIN_DEFS.map((skin) =>
+        createContainerSkinMaterials(THREE, skin, onTextureLoaded),
+      );
+      const containerMeshes = skinMaterials.map(
+        (mats) => new THREE.InstancedMesh(containerGeometry, mats, instanceCount),
+      );
+      const meshCounts = CONTAINER_SKIN_DEFS.map(() => 0);
+
+      // Seed determinístico baseado no navio para padrão estável e natural
+      const vesselSeed = (vessel.name || "vessel")
+        .split("")
+        .reduce((acc, char) => (acc * 31 + char.charCodeAt(0)) | 0, 7129);
+
       const pose = new THREE.Object3D();
-      let index = 0;
       let cornerIndex = 0;
       const bridgeStartX = Math.min(sternHouseX - houseLength / 2, bridgeX - bridgeLength / 2) - 0.7;
       const bridgeEndX = Math.max(sternHouseX + houseLength / 2, bridgeX + bridgeLength / 2) + 0.7;
@@ -818,8 +961,13 @@ function addVessel(THREE: ThreeModule, scene: import("three").Scene, vessel: Ves
             const containerZ = (row - (rows - 1) / 2) * rowSpacing;
             pose.position.set(containerX, containerY, containerZ);
             pose.updateMatrix();
-            containers.setMatrixAt(index, pose.matrix);
-            containers.setColorAt(index, new THREE.Color(CONTAINER_COLORS_3D[(column + row * 2 + tier * 3) % CONTAINER_COLORS_3D.length]));
+
+            // Mistura orgânica variada entre as 6 skins (com repetições naturais de pares e alternâncias ricas)
+            const skinIndex = containerSkinHash(vesselSeed, column, row, tier, CONTAINER_SKIN_DEFS.length);
+            const mesh = containerMeshes[skinIndex];
+            const cIdx = meshCounts[skinIndex];
+            mesh.setMatrixAt(cIdx, pose.matrix);
+            meshCounts[skinIndex] += 1;
 
             for (const xSide of [-1, 1]) {
               for (const zSide of [-1, 1]) {
@@ -833,17 +981,17 @@ function addVessel(THREE: ThreeModule, scene: import("three").Scene, vessel: Ves
                 cornerIndex += 1;
               }
             }
-            index += 1;
           }
         }
       }
 
-      containers.count = index;
+      containerMeshes.forEach((mesh, sIdx) => {
+        mesh.count = meshCounts[sIdx];
+        mesh.instanceMatrix.needsUpdate = true;
+        group.add(mesh);
+      });
       cornerPosts.count = cornerIndex;
-      containers.instanceMatrix.needsUpdate = true;
-      if (containers.instanceColor) containers.instanceColor.needsUpdate = true;
       cornerPosts.instanceMatrix.needsUpdate = true;
-      group.add(containers);
       group.add(cornerPosts);
     } else {
       // 📦 Carga Geral / Graneleiro: braçolas, escotilhas e guindastes de convés
@@ -1560,7 +1708,12 @@ function addCompanyBoundaryFence(
   scene.add(group);
 }
 
-function buildScene(THREE: ThreeModule, scene: import("three").Scene, scenario: Scenario) {
+function buildScene(
+  THREE: ThreeModule,
+  scene: import("three").Scene,
+  scenario: Scenario,
+  onTextureLoaded?: () => void,
+) {
   const total = Math.max(1, totalQuayLength(scenario.segments));
   const segments = segmentOffsets(scenario.segments);
   const segmentColors = ["#d9c8a9", "#d9cfbd", "#bccbd0", "#c7d7d7"];
@@ -1607,7 +1760,10 @@ function buildScene(THREE: ThreeModule, scene: import("three").Scene, scenario: 
     scene.add(posts);
   }
 
-  const vesselRefs = scenario.vessels.map((vessel) => ({ vessel, ...addVessel(THREE, scene, vessel, total) }));
+  const vesselRefs = scenario.vessels.map((vessel) => ({
+    vessel,
+    ...addVessel(THREE, scene, vessel, total, onTextureLoaded),
+  }));
   addMooringLines(THREE, scene, scenario, total);
   addShoreManifolds(THREE, scene, scenario, total);
   addCompanyBoundaryFence(THREE, scene, scenario, total);
@@ -1706,8 +1862,13 @@ export default function Berth3DViewer({ scenario }: Berth3DViewerProps) {
           renderer.domElement.setAttribute("aria-label", "Modelo 3D esquemático da atracação");
           host.appendChild(renderer.domElement);
 
-          const model = buildScene(THREE, scene, scenario);
-          const camera = new THREE.PerspectiveCamera(40, width / height, 0.5, model.total * 7 + 400);
+          let camera: import("three").PerspectiveCamera | null = null;
+          const render = () => {
+            if (!cancelled && renderer && scene && camera) renderer.render(scene, camera);
+          };
+
+          const model = buildScene(THREE, scene, scenario, render);
+          camera = new THREE.PerspectiveCamera(40, width / height, 0.5, model.total * 7 + 400);
           const verticalFov = THREE.MathUtils.degToRad(camera.fov);
           const horizontalFov = 2 * Math.atan(Math.tan(verticalFov / 2) * camera.aspect);
           const distanceToFitQuay = model.total / (2 * Math.tan(horizontalFov / 2));
@@ -1724,10 +1885,6 @@ export default function Berth3DViewer({ scenario }: Berth3DViewerProps) {
           controls.minDistance = 30;
           controls.maxDistance = model.total * 6 + 300;
           controls.update();
-
-          const render = () => {
-            if (!cancelled && renderer && scene) renderer.render(scene, camera);
-          };
           const defaultCameraPosition = camera.position.clone();
           const defaultCameraTarget = controls.target.clone();
           resetCameraRef.current = () => {

@@ -96,7 +96,8 @@ export async function fetchVesselCatalog(): Promise<CatalogVessel[]> {
       });
     } else {
       // Fallback para arquivo estático
-      const fallbackRes = await fetch("/vessels_catalog.json", { cache: "no-store" });
+      const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+      const fallbackRes = await fetch(`${basePath}/vessels_catalog.json`, { cache: "no-store" });
       if (fallbackRes.ok) {
         const data: CatalogVessel[] = await fallbackRes.json();
         data.forEach((v) => {
@@ -107,7 +108,8 @@ export async function fetchVesselCatalog(): Promise<CatalogVessel[]> {
   } catch (err) {
     console.warn("Aviso ao buscar navios salvos via API, usando fallback:", err);
     try {
-      const fallbackRes = await fetch("/vessels_catalog.json", { cache: "no-store" });
+      const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+      const fallbackRes = await fetch(`${basePath}/vessels_catalog.json`, { cache: "no-store" });
       if (fallbackRes.ok) {
         const data: CatalogVessel[] = await fallbackRes.json();
         data.forEach((v) => {

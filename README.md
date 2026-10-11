@@ -109,8 +109,8 @@ O simulador transforma cálculos complexos em um **Blueprint visual 2D em escala
 
 1. **Clonar o Repositório:**
    ```bash
-   git clone https://github.com/Dalmocabral/simulador-de-atraca--o.git
-   cd simulador-de-atraca--o
+   git clone https://github.com/Dalmocabral/CaisLab.git
+   cd CaisLab
    ```
 
 2. **Instalar as Dependências:**
