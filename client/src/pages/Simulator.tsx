@@ -73,6 +73,8 @@ import {
   getPortainerOperationalLimits,
   MAX_BAY_COUNT,
   normalizeBayCount,
+  MAX_ROW_COUNT,
+  normalizeRowCount,
 } from "@/lib/berth-model";
 import { saveVesselToCatalog } from "@/lib/vessel-catalog";
 
@@ -227,7 +229,7 @@ export default function Simulator() {
     }));
   }
 
-  function scheduleBayCatalogSave(vessel: Vessel, bayCount: number) {
+  function scheduleContainerLayoutCatalogSave(vessel: Vessel, bayCount?: number, rowCount?: number) {
     const pendingTimer = baySaveTimersRef.current.get(vessel.id);
     if (pendingTimer !== undefined) window.clearTimeout(pendingTimer);
 
@@ -240,9 +242,11 @@ export default function Simulator() {
         draft: vessel.draft,
         bayCount,
         bays: bayCount,
+        rowCount,
+        rows: rowCount,
         berthingSide: vessel.berthingSide,
         type: VESSEL_TYPE_LABELS[normalizeVesselType(vessel.vesselType, vessel.name)],
-      }).then(() => setNotice(`${vessel.name}: Bay salva automaticamente no catálogo do navio.`));
+      }).then(() => setNotice(`${vessel.name}: Configuração de Bays e Rows salva no catálogo.`));
     }, 500);
 
     baySaveTimersRef.current.set(vessel.id, timer);
@@ -819,14 +823,37 @@ export default function Simulator() {
                             onChange={(event) => {
                               const bayCount = event.target.value === "" ? undefined : normalizeBayCount(event.target.value);
                               patchVessel(selectedVessel.id, { bayCount, bays: bayCount });
-                              if (bayCount !== undefined) scheduleBayCatalogSave(selectedVessel, bayCount);
+                              scheduleContainerLayoutCatalogSave(selectedVessel, bayCount, selectedVessel.rowCount ?? selectedVessel.rows);
                             }}
                           />
                           <span>Bay</span>
                         </div>
                       </div>
+                      <div>
+                        <label className="field-label" htmlFor="vessel-row-count">Quantidade de Rows</label>
+                        <div className="unit-input">
+                          <input
+                            id="vessel-row-count"
+                            type="number"
+                            min="1"
+                            max={MAX_ROW_COUNT}
+                            step="1"
+                            inputMode="numeric"
+                            placeholder={`1–${MAX_ROW_COUNT}`}
+                            value={selectedVessel.rowCount ?? selectedVessel.rows ?? ""}
+                            onChange={(event) => {
+                              const rowCount = event.target.value === "" ? undefined : normalizeRowCount(event.target.value);
+                              patchVessel(selectedVessel.id, { rowCount, rows: rowCount });
+                              scheduleContainerLayoutCatalogSave(selectedVessel, selectedVessel.bayCount ?? selectedVessel.bays, rowCount);
+                            }}
+                          />
+                          <span>Row</span>
+                        </div>
+                      </div>
                     </div>
-                    <p className="form-hint">Ex.: 20 gera Bay 01, 03, 05...21. Bay 01 começa na proa; a região do passadiço fica sem numeração. Máximo: {MAX_BAY_COUNT}. O valor é salvo automaticamente no catálogo JSON do navio.</p>
+                    <p className="form-hint">
+                      Bays no comprimento (proa à popa) e Rows na boca (pares a bombordo, ímpares a boreste e 00 no centro se ímpar). Salvo no catálogo.
+                    </p>
                   </>
                 )}
 

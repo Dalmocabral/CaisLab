@@ -4,6 +4,8 @@ import {
   berthwiseOffsetFromStern,
   bollardDisplayPositions,
   bayNumberSequence,
+  rowNumberSequence,
+  normalizeRowCount,
   CONTAINER_COLORS,
   normalizeMooringOffset,
   MOORING_LINE_LABELS,
@@ -48,7 +50,7 @@ const QUAY_Y = 218;
 const CABLE_END_Y = 205;
 const VESSEL_BERTH_BOTTOM_Y = QUAY_Y - 55; // 55 px de distância do cais (metade dos 110 px)
 
-/** Renderiza o convés conteneiro como uma grade numerada de Bay e o castelo de ré. */
+/** Renderiza o convés conteneiro preenchendo o navio, com números de Bay acima e Rows na proa. */
 function renderContainerDeck(
   x: number,
   y: number,
@@ -57,54 +59,74 @@ function renderContainerDeck(
   bowInset: number,
   color: { fill: string; stroke: string },
   bayCount?: number,
+  rowCount?: number,
   mirrorText = false,
 ) {
   const bays = bayNumberSequence(bayCount);
-  const gridLeft = x + 8;
-  const gridRight = Math.max(gridLeft + 1, x + vesselWidth - bowInset - 6);
-  const gridWidth = gridRight - gridLeft;
-  const gridTop = y + 5;
-  const gridHeight = Math.max(1, vesselHeight - 10);
-  const labelBandHeight = Math.min(gridHeight * 0.3, Math.max(3, Math.min(8, gridHeight * 0.14)));
-  const containerTop = gridTop + labelBandHeight;
-  const containerHeight = Math.max(0.7, gridHeight - labelBandHeight);
-  const rowCount = Math.max(2, Math.min(8, Math.floor(containerHeight / 5.5)));
-  const cellWidth = gridWidth / Math.max(1, bays.length);
-  const cellHeight = containerHeight / rowCount;
-  const labelSize = bays.length ? Math.max(2.4, Math.min(5.2, cellWidth * 0.52)) : 3.2;
+  const rows = rowNumberSequence(rowCount);
+  const effectiveRows = rows.length > 0
+    ? rows
+    : rowNumberSequence(Math.max(4, Math.min(20, Math.round(vesselHeight / 2.7))));
+  const activeRowCount = effectiveRows.length;
+
+  // Os contêineres preenchem diretamente o navio (sem bordas/faixas internas consumindo espaço)
+  const deckLeft = x + 7;
+  const deckRight = Math.max(deckLeft + 1, x + vesselWidth - bowInset);
+  const deckWidth = deckRight - deckLeft;
+  const containerTop = y + 1.2;
+  const containerHeight = Math.max(1, vesselHeight - 2.4);
+  const cellHeight = containerHeight / Math.max(1, activeRowCount);
+
+  // Faixa na proa para os números das Rows
+  const rowNumberWidth = Math.max(6, Math.min(9.5, deckWidth * 0.042));
+  const bayAreaRight = deckRight - rowNumberWidth - 0.8;
+  const bayAreaWidth = Math.max(1, bayAreaRight - deckLeft);
+  const cellWidth = bayAreaWidth / Math.max(1, bays.length);
+  const labelSize = bays.length ? Math.max(2.6, Math.min(5.4, cellWidth * 0.54)) : 3.4;
+  const rowLabelSize = Math.max(2.0, Math.min(labelSize, cellHeight * 0.72));
+  const rowLabelX = deckRight - rowNumberWidth / 2;
+
   const houseX = x + Math.max(18, vesselWidth * 0.2);
   const houseW = Math.max(8, vesselWidth * 0.035);
-  const houseH = Math.max(14, gridHeight * 0.88);
-  const houseY = gridTop + (gridHeight - houseH) / 2;
-  const bayCellX = (index: number) => gridRight - ((index + 1) / Math.max(1, bays.length)) * gridWidth;
+  const houseH = Math.max(14, containerHeight * 0.92);
+  const houseY = y + (vesselHeight - houseH) / 2;
+  const bayCellX = (index: number) => bayAreaRight - ((index + 1) / Math.max(1, bays.length)) * bayAreaWidth;
   const intersectsHouse = (cellX: number) => cellX < houseX + houseW && cellX + cellWidth > houseX;
   const textTransform = (centerX: number) => mirrorText ? `translate(${centerX * 2} 0) scale(-1 1)` : undefined;
 
   return (
     <g className="deck-container-ship">
-      <rect x={gridLeft} y={gridTop} width={gridWidth} height={gridHeight} fill="#e8eff1" stroke="#aabcc1" strokeWidth="0.55" />
-      <rect x={gridLeft} y={gridTop} width={gridWidth} height={labelBandHeight} fill="#f8fbfc" stroke="#d6e1e4" strokeWidth="0.45" />
+      {/* Contêineres preenchendo as baias e rows */}
       {bays.map((bay, index) => {
         const cellX = bayCellX(index);
         if (intersectsHouse(cellX)) return null;
         return (
           <g key={`bay-column-${bay}`}>
-            {Array.from({ length: rowCount }, (_, row) => (
-              <rect
-                key={`bay-cell-${bay}-${row}`}
-                x={cellX + 0.55}
-                y={containerTop + row * cellHeight + 0.45}
-                width={Math.max(1, cellWidth - 1.1)}
-                height={Math.max(1, cellHeight - 0.9)}
-                rx="0.7"
-                fill={CONTAINER_COLORS[(index * 3 + row * 2) % CONTAINER_COLORS.length]}
-                stroke="#ffffff"
-                strokeWidth="0.4"
-              />
-            ))}
+            {effectiveRows.map((rowLabel, rIdx) => {
+              const cellY = containerTop + rIdx * cellHeight;
+              const cellH = Math.max(0.6, cellHeight - 0.35);
+              const cellW = Math.max(0.6, cellWidth - 0.35);
+              return (
+                <rect
+                  key={`bay-cell-${bay}-${rowLabel}`}
+                  x={cellX + 0.18}
+                  y={cellY + 0.18}
+                  width={cellW}
+                  height={cellH}
+                  rx="0.4"
+                  fill={CONTAINER_COLORS[(index * 3 + rIdx * 2) % CONTAINER_COLORS.length]}
+                  stroke="#ffffff"
+                  strokeWidth="0.25"
+                >
+                  <title>{`Bay ${bay} · Row ${rowLabel}`}</title>
+                </rect>
+              );
+            })}
           </g>
         );
       })}
+
+      {/* Números das Bays posicionados ACIMA do desenho do navio */}
       {bays.length > 0 ? (
         <>
           {bays.map((bay, index) => {
@@ -117,7 +139,7 @@ function renderContainerDeck(
                 <text
                   transform={textTransform(centerX)}
                   x={centerX}
-                  y={gridTop + labelBandHeight / 2}
+                  y={y - 3.2}
                   textAnchor="middle"
                   dominantBaseline="middle"
                   fontSize={labelSize}
@@ -135,10 +157,37 @@ function renderContainerDeck(
           })}
         </>
       ) : (
-        <text transform={textTransform((gridLeft + gridRight) / 2)} x={(gridLeft + gridRight) / 2} y={y + vesselHeight / 2} textAnchor="middle" dominantBaseline="middle" fontSize="3.2" fontWeight="700" fill="#71848b">
+        <text transform={textTransform((deckLeft + deckRight) / 2)} x={(deckLeft + deckRight) / 2} y={y + vesselHeight / 2} textAnchor="middle" dominantBaseline="middle" fontSize="3.2" fontWeight="700" fill="#71848b">
           INFORME A QUANTIDADE DE BAYS
         </text>
       )}
+
+      {/* Números das Rows na proa (mesma formatação das Bays, limpos e sem borda) */}
+      {effectiveRows.map((rowLabel, rIdx) => {
+        const rowCenterY = containerTop + (rIdx + 0.5) * cellHeight;
+        return (
+          <g key={`row-label-${rowLabel}-${rIdx}`}>
+            <title>{`Row ${rowLabel}`}</title>
+            <text
+              transform={textTransform(rowLabelX)}
+              x={rowLabelX}
+              y={rowCenterY}
+              textAnchor="middle"
+              dominantBaseline="middle"
+              fontSize={rowLabelSize}
+              fontWeight="800"
+              fill="#173343"
+              paintOrder="stroke"
+              stroke="#f8fbfc"
+              strokeWidth="0.7"
+              strokeLinejoin="round"
+            >
+              {rowLabel}
+            </text>
+          </g>
+        );
+      })}
+
       {/* Quebra-ondas de proa */}
       <path
         d={`M ${x + vesselWidth - bowInset} ${y + 3} L ${x + vesselWidth - 4} ${y + vesselHeight / 2} L ${x + vesselWidth - bowInset} ${y + vesselHeight - 3} Z`}
@@ -1431,13 +1480,13 @@ export default function BerthBlueprint({
               </title>
               {isSelected && !isPresentationMode && <rect x={x - 5} y={y - 25} width={Math.max(18, vesselWidth + 10)} height={vesselHeight + 37} rx="9" fill="none" stroke="#16869a" strokeWidth="1.5" strokeDasharray="4 4" />}
               {!isPresentationMode ? (
-                <text x={x + vesselWidth / 2} y={y - 13} textAnchor="middle" className={`ship-name ${isIssue ? "ship-name-issue" : ""}`}>
+                <text x={x + vesselWidth / 2} y={y - 15} textAnchor="middle" className={`ship-name ${isIssue ? "ship-name-issue" : ""}`}>
                   {vessel.name.length > 26 ? `${vessel.name.slice(0, 24)}…` : vessel.name}
                 </text>
               ) : (
                 <text
                   x={x + vesselWidth / 2}
-                  y={y - 14}
+                  y={y - 16}
                   textAnchor="middle"
                   style={{
                     fill: "#0f172a",
@@ -1465,7 +1514,7 @@ export default function BerthBlueprint({
                   ? renderGeneralCargoDeck(x, y, vesselWidth, vesselHeight, bowInset, color)
                   : (vesselType === "tanker" || vesselType === "chemical-tanker" || vesselType === "product-tanker")
                   ? renderTankerDeck(x, y, vesselWidth, vesselHeight, bowInset, color)
-                  : renderContainerDeck(x, y, vesselWidth, vesselHeight, bowInset, color, vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber, vessel.berthingSide === "bombordo")
+                  : renderContainerDeck(x, y, vesselWidth, vesselHeight, bowInset, color, vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber, vessel.rowCount ?? vessel.rows, vessel.berthingSide === "bombordo")
                 }
 
                 {/* Faixa de costado junto ao cais */}

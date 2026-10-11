@@ -11,6 +11,7 @@ import {
   MOORING_LINE_LABELS,
   normalizeMooringOffset,
   normalizeBayCount,
+  normalizeRowCount,
   normalizeVesselType,
   segmentOffsets,
   totalQuayLength,
@@ -912,7 +913,8 @@ function addVessel(
       const columns = Math.max(1, Math.min(40, baySlots || Math.max(4, Math.floor(loa / 16))));
       // Fileiras transversais (boca) modeladas na proporção real de contêineres marítimos (~2.44m de largura ISO)
       const usableBeam = beam * 0.82;
-      const rows = Math.max(4, Math.min(16, Math.round(usableBeam / 2.7)));
+      const userRows = normalizeRowCount(vessel.rowCount ?? vessel.rows);
+      const rows = userRows ?? Math.max(4, Math.min(24, Math.round(usableBeam / 2.7)));
       const rowSpacing = usableBeam / rows;
       const containerWidth = Math.max(2.1, rowSpacing - 0.28);
       const tiers = beam >= 40 ? 4 : beam >= 32 ? 3 : 2;

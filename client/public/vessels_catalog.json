@@ -134,9 +134,11 @@
     "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "08/10/2026 00:49",
+    "updatedAt": "11/10/2026 11:02",
     "bayCount": 77,
-    "bays": 77
+    "bays": 77,
+    "rowCount": 15,
+    "rows": 15
   },
   {
     "name": "LOG-IN PANTANAL",

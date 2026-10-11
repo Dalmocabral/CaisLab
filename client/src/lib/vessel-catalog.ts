@@ -1,4 +1,4 @@
-import { normalizeBayCount } from "./berth-model";
+import { normalizeBayCount, normalizeRowCount } from "./berth-model";
 
 export interface CatalogVessel {
   name: string;
@@ -9,6 +9,10 @@ export interface CatalogVessel {
   /** @deprecated Campo legado, mantido apenas para importar catálogos anteriores. */
   maxBayNumber?: number;
   bays?: number;
+  /** Quantidade de rows (filas transversais na boca). */
+  rowCount?: number;
+  /** @deprecated Campo legado mantido para compatibilidade. */
+  rows?: number;
   berthingSide: "boreste" | "bombordo";
   imo?: string;
   type?: string;
@@ -145,6 +149,7 @@ export async function saveVesselToCatalog(vessel: CatalogVessel): Promise<Catalo
   const cleanName = vessel.name.trim().toUpperCase();
   const { maxBayNumber, ...currentFields } = vessel;
   const bayCount = normalizeBayCount(vessel.bayCount ?? vessel.bays ?? maxBayNumber);
+  const rowCount = normalizeRowCount(vessel.rowCount ?? vessel.rows);
   const entry: CatalogVessel = {
     ...currentFields,
     name: cleanName,
@@ -153,6 +158,8 @@ export async function saveVesselToCatalog(vessel: CatalogVessel): Promise<Catalo
     draft: Math.max(0, Number(vessel.draft) || 0),
     bayCount,
     bays: bayCount,
+    rowCount,
+    rows: rowCount,
     berthingSide: vessel.berthingSide === "bombordo" ? "bombordo" : "boreste",
     updatedAt: new Date().toLocaleDateString("pt-BR") + " " + new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }),
   };
@@ -175,6 +182,8 @@ export async function saveVesselToCatalog(vessel: CatalogVessel): Promise<Catalo
       draft: entry.draft,
       bayCount: entry.bayCount,
       bays: entry.bayCount,
+      rowCount: entry.rowCount,
+      rows: entry.rowCount,
       berthingSide: entry.berthingSide,
     };
     map.set(cleanName, savedEntry);

@@ -62,6 +62,7 @@ export const VESSEL_TYPE_LABELS: Record<VesselType, string> = {
 };
 
 export const MAX_BAY_COUNT = 78;
+export const MAX_ROW_COUNT = 32;
 
 /** Normaliza a quantidade de bays informada pelo operador. */
 export function normalizeBayCount(value: unknown): number | undefined {
@@ -76,6 +77,45 @@ export function bayNumberSequence(value: unknown): number[] {
   if (!bayCount) return [];
   // Ex.: 20 bays -> 01, 03, 05, 07...21; bays ímpares são posições de 20 pés.
   return Array.from({ length: Math.floor(bayCount / 2) + 1 }, (_, index) => index * 2 + 1);
+}
+
+/** Normaliza a quantidade de rows (filas transversais) de contêineres na boca do navio. */
+export function normalizeRowCount(value: unknown): number | undefined {
+  if (value === null || value === undefined || value === "") return undefined;
+  const parsed = typeof value === "number" ? value : Number(value);
+  if (!Number.isFinite(parsed)) return undefined;
+  return Math.min(MAX_ROW_COUNT, Math.max(1, Math.round(parsed)));
+}
+
+/**
+ * Gera a sequência padrão de numeração de Row de bombordo a boreste (olhando para a proa):
+ * - Esquerda da proa (bombordo / port side): números PARES em ordem decrescente (ex: 12, 10, 08, 06, 04, 02)
+ * - Linha de centro: se a quantidade for ÍMPAR, existe a Row 00
+ * - Direita da proa (boreste / starboard side): números ÍMPARES em ordem crescente (ex: 01, 03, 05, 07, 09, 11)
+ */
+export function rowNumberSequence(value: unknown): string[] {
+  const rowCount = normalizeRowCount(value);
+  if (!rowCount) return [];
+  const isOdd = rowCount % 2 !== 0;
+  const sideCount = Math.floor(rowCount / 2);
+  const result: string[] = [];
+
+  // Pares (esquerda da proa / bombordo): do maior par decrescendo até 02
+  for (let i = sideCount; i >= 1; i--) {
+    result.push(String(i * 2).padStart(2, "0"));
+  }
+
+  // Se ímpar, existe a Row 00 no centro
+  if (isOdd) {
+    result.push("00");
+  }
+
+  // Ímpares (direita da proa / boreste): de 01 crescendo até o maior ímpar
+  for (let i = 1; i <= sideCount; i++) {
+    result.push(String((i - 1) * 2 + 1).padStart(2, "0"));
+  }
+
+  return result;
 }
 
 export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
@@ -238,6 +278,10 @@ export interface Vessel {
   maxBayNumber?: number;
   /** @deprecated Campo legado mantido para compatibilidade. */
   bays?: number;
+  /** Quantidade de rows (filas de contêineres na boca); omissa quando desconhecida. */
+  rowCount?: number;
+  /** @deprecated Campo legado mantido para compatibilidade. */
+  rows?: number;
 }
 
 export interface Portainer {
@@ -643,6 +687,8 @@ export function normalizeScenario(value: unknown): Scenario | null {
       vesselType,
       bayCount: normalizeBayCount((raw as any).bayCount ?? (raw as any).maxBayNumber ?? raw.bays),
       bays: normalizeBayCount((raw as any).bayCount ?? (raw as any).maxBayNumber ?? raw.bays),
+      rowCount: normalizeRowCount((raw as any).rowCount ?? raw.rows),
+      rows: normalizeRowCount((raw as any).rowCount ?? raw.rows),
     });
   }
 
