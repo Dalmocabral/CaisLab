@@ -1,23 +1,8 @@
 {
-  "updatedAt": "12/10/2026 11:35",
+  "updatedAt": "12/10/2026 14:41",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 7,
+  "count": 6,
   "maneuvers": [
-    {
-      "dateTime": "12/10 09:00",
-      "name": "EVER LEADER",
-      "draft": 11.5,
-      "loa": 334.98,
-      "beam": 45.83,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
-      "berthingSide": "boreste",
-      "imo": "9595503",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "SINGAPORE",
-      "terminal": "rio"
-    },
     {
       "dateTime": "12/10 21:00",
       "name": "MAERSK FRANKFURT",
