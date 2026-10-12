@@ -879,6 +879,21 @@ export function normalizeScenario(value: unknown): Scenario | null {
 export function readScenario(): Scenario {
   if (typeof window === "undefined") return createDemoScenario();
   try {
+    const isGitHubPages =
+      window.location.hostname.includes("github.io") ||
+      window.location.pathname.toLowerCase().includes("/caislab");
+
+    // No GitHub Pages, o cais sempre inicia resetado/limpo para uma nova simulação (sem navios antigos presos no cache)
+    if (isGitHubPages) {
+      try {
+        window.localStorage.removeItem(STORAGE_KEY);
+      } catch {}
+      const raw = window.sessionStorage.getItem(STORAGE_KEY);
+      if (!raw) return createDemoScenario();
+      const scenario = normalizeScenario(JSON.parse(raw));
+      return scenario ?? createDemoScenario();
+    }
+
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return createDemoScenario();
     const scenario = normalizeScenario(JSON.parse(raw));

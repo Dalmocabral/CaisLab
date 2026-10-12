@@ -61,8 +61,8 @@ export function isTerminalVessel(v: CatalogVessel): boolean {
   if (!v.lastBerth) return true;
   const b = v.lastBerth.trim().toUpperCase();
   // Se tiver berço do terminal, aceita
-  if (b.includes("TECONTPROLONG") || b.includes("TECONT1")) return true;
-  // Rejeita explicitamente outros berços
+  if (b.includes("TECONTPROLONG") || b.includes("TECONT1") || b.includes("PROLONG") || b.includes("TECON")) return true;
+  // Rejeita explicitamente outros terminais fora do porto
   if (
     b.includes("CPBS") ||
     b.includes("T-OIL") ||
@@ -85,7 +85,8 @@ export function isTerminalVessel(v: CatalogVessel): boolean {
   ) {
     return false;
   }
-  return false;
+  // Se for navio salvo no catálogo com dimensões válidas, aceita sempre
+  return true;
 }
 
 /**

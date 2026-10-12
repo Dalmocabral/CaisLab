@@ -1,5 +1,5 @@
 {
-  "updatedAt": "12/10/2026 15:02",
+  "updatedAt": "12/10/2026 11:59",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 6,
   "maneuvers": [
@@ -8,7 +8,7 @@
       "name": "MAERSK FRANKFURT",
       "draft": 12.35,
       "loa": 254.94,
-      "beam": 40.0,
+      "beam": 40,
       "maneuver": "E",
       "berthFrom": "",
       "berthTo": "TECONT1",
@@ -23,7 +23,7 @@
       "name": "COSCO SHIPPING CHILE",
       "draft": 11.2,
       "loa": 335.9,
-      "beam": 51.0,
+      "beam": 51,
       "maneuver": "E",
       "berthFrom": "",
       "berthTo": "TECONTPROLONG",
