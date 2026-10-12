@@ -229,24 +229,34 @@ export default function Simulator() {
     }));
   }
 
-  function scheduleContainerLayoutCatalogSave(vessel: Vessel, bayCount?: number, rowCount?: number) {
+  function scheduleContainerLayoutCatalogSave(
+    vessel: Vessel,
+    bayCount?: number,
+    rowCount?: number,
+    patch?: Partial<Vessel>,
+  ) {
     const pendingTimer = baySaveTimersRef.current.get(vessel.id);
     if (pendingTimer !== undefined) window.clearTimeout(pendingTimer);
 
+    const mergedVessel = { ...vessel, ...patch };
     const timer = window.setTimeout(() => {
       baySaveTimersRef.current.delete(vessel.id);
       void saveVesselToCatalog({
-        name: vessel.name,
-        loa: vessel.loa,
-        beam: vessel.beam,
-        draft: vessel.draft,
-        bayCount,
-        bays: bayCount,
-        rowCount,
-        rows: rowCount,
-        berthingSide: vessel.berthingSide,
-        type: VESSEL_TYPE_LABELS[normalizeVesselType(vessel.vesselType, vessel.name)],
-      }).then(() => setNotice(`${vessel.name}: Configuração de Bays e Rows salva no catálogo.`));
+        name: mergedVessel.name,
+        loa: mergedVessel.loa,
+        beam: mergedVessel.beam,
+        draft: mergedVessel.draft,
+        bayCount: bayCount ?? mergedVessel.bayCount ?? mergedVessel.bays,
+        bays: bayCount ?? mergedVessel.bayCount ?? mergedVessel.bays,
+        rowCount: rowCount ?? mergedVessel.rowCount ?? mergedVessel.rows,
+        rows: rowCount ?? mergedVessel.rowCount ?? mergedVessel.rows,
+        berthingSide: mergedVessel.berthingSide,
+        bridgePosition: mergedVessel.bridgePosition,
+        bridgeBay: mergedVessel.bridgeBay,
+        separateFunnel: mergedVessel.separateFunnel,
+        funnelBay: mergedVessel.funnelBay,
+        type: VESSEL_TYPE_LABELS[normalizeVesselType(mergedVessel.vesselType, mergedVessel.name)],
+      }).then(() => setNotice(`${mergedVessel.name}: Layout e casaria salvos no catálogo com sucesso.`));
     }, 500);
 
     baySaveTimersRef.current.set(vessel.id, timer);
@@ -854,6 +864,89 @@ export default function Simulator() {
                     <p className="form-hint">
                       Bays no comprimento (proa à popa) e Rows na boca (pares a bombordo, ímpares a boreste e 00 no centro se ímpar). Salvo no catálogo.
                     </p>
+
+                    {/* Layout da Superestrutura (Passadiço & Chaminé) */}
+                    <div className="mt-3 pt-3 border-t border-[#edf1f2] space-y-2.5">
+                      <div>
+                        <label className="field-label" htmlFor="vessel-bridge-position">Posição do Passadiço</label>
+                        <select
+                          id="vessel-bridge-position"
+                          className="side-select"
+                          value={selectedVessel.bridgePosition ?? "all-aft"}
+                          onChange={(event) => {
+                            const bridgePosition = event.target.value as "all-aft" | "between-bays";
+                            patchVessel(selectedVessel.id, { bridgePosition });
+                            scheduleContainerLayoutCatalogSave(selectedVessel, undefined, undefined, { bridgePosition });
+                          }}
+                        >
+                          <option value="all-aft">Na Popa Extrema (All Aft - Ex: CMA CGM Veracruz)</option>
+                          <option value="between-bays">Entre as Bays (Meio / Ilha de comando)</option>
+                        </select>
+                      </div>
+
+                      {selectedVessel.bridgePosition === "between-bays" && (
+                        <div className="space-y-2.5 bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                          <div>
+                            <label className="field-label" htmlFor="vessel-bridge-bay">Bay do Passadiço (onde morre a bay)</label>
+                            <div className="unit-input">
+                              <input
+                                id="vessel-bridge-bay"
+                                type="number"
+                                min="1"
+                                max={MAX_BAY_COUNT}
+                                step="1"
+                                value={selectedVessel.bridgeBay ?? 34}
+                                onChange={(event) => {
+                                  const bridgeBay = Number(event.target.value) || 34;
+                                  patchVessel(selectedVessel.id, { bridgeBay });
+                                  scheduleContainerLayoutCatalogSave(selectedVessel, undefined, undefined, { bridgeBay });
+                                }}
+                              />
+                              <span>Bay</span>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-2 pt-1">
+                            <input
+                              id="vessel-separate-funnel"
+                              type="checkbox"
+                              className="rounded border-slate-300 text-teal-600 focus:ring-teal-500"
+                              checked={Boolean(selectedVessel.separateFunnel)}
+                              onChange={(event) => {
+                                const separateFunnel = event.target.checked;
+                                patchVessel(selectedVessel.id, { separateFunnel });
+                                scheduleContainerLayoutCatalogSave(selectedVessel, undefined, undefined, { separateFunnel });
+                              }}
+                            />
+                            <label htmlFor="vessel-separate-funnel" className="text-xs font-semibold text-[#2d4b58] cursor-pointer">
+                              Chaminé separada do passadiço (Duas Ilhas)
+                            </label>
+                          </div>
+
+                          {selectedVessel.separateFunnel && (
+                            <div>
+                              <label className="field-label" htmlFor="vessel-funnel-bay">Bay da Chaminé (onde morre a bay)</label>
+                              <div className="unit-input">
+                                <input
+                                  id="vessel-funnel-bay"
+                                  type="number"
+                                  min="1"
+                                  max={MAX_BAY_COUNT}
+                                  step="1"
+                                  value={selectedVessel.funnelBay ?? 54}
+                                  onChange={(event) => {
+                                    const funnelBay = Number(event.target.value) || 54;
+                                    patchVessel(selectedVessel.id, { funnelBay });
+                                    scheduleContainerLayoutCatalogSave(selectedVessel, undefined, undefined, { funnelBay });
+                                  }}
+                                />
+                                <span>Bay</span>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </>
                 )}
 
@@ -1031,21 +1124,21 @@ export default function Simulator() {
 
         {/* Modal de Configuração dos Portêineres (P4 a P9) */}
         <Dialog open={isPortainerModalOpen} onOpenChange={setIsPortainerModalOpen}>
-          <DialogContent className="sm:max-w-xl p-6 bg-white border border-[#d8e1e4] rounded-xl shadow-2xl">
+          <DialogContent className="sm:max-w-3xl max-h-[92vh] flex flex-col p-6 bg-white border border-[#d8e1e4] rounded-xl shadow-2xl">
             <DialogHeader>
               <div className="section-kicker">INFRAESTRUTURA DE CARGA</div>
               <DialogTitle className="text-lg font-bold text-[#102d40] flex items-center justify-between">
-                <span>Portêineres STS do Terminal (P4 a P9)</span>
+                <span>Portêineres STS ZPMC do Terminal (P4 a P9)</span>
                 <span className="text-xs font-mono font-bold bg-[#e0f2fe] text-[#0369a1] px-2.5 py-1 rounded-full border border-[#bae6fd]">
-                  6 Guindastes de Cais
+                  6 Guindastes ZPMC (P8 e P9 Super Post-Panamax)
                 </span>
               </DialogTitle>
               <DialogDescription className="text-xs text-[#64748b]">
-                Gerenciamento operacional dos 6 guindastes de contêineres STS (Ship-to-Shore) do cais.
+                Gerenciamento operacional e dimensional dos 6 guindastes de contêineres STS (Ship-to-Shore) ZPMC do cais.
               </DialogDescription>
             </DialogHeader>
 
-            <div className="space-y-4 pt-2">
+            <div className="space-y-4 pt-2 overflow-y-auto pr-1">
               {/* Barra superior com interruptor geral e ações rápidas */}
               <div className="flex flex-wrap items-center justify-between gap-3 p-3 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg">
                 <label className="flex items-center gap-2 text-xs font-bold text-[#0f172a] cursor-pointer select-none">
@@ -1082,7 +1175,7 @@ export default function Simulator() {
               </div>
 
               {/* Lista dos 6 Portêineres */}
-              <div className="space-y-2 max-h-[380px] overflow-y-auto pr-1">
+              <div className="space-y-3">
                 {(scenario.portainers ?? DEFAULT_PORTAINERS).map((pt) => {
                   const ptLimits = getPortainerOperationalLimits(scenario.bollards)[pt.id];
                   const section = scenario.segments.length > 0
@@ -1102,76 +1195,186 @@ export default function Simulator() {
                     (v) => pt.position >= v.position && pt.position <= v.position + v.loa
                   );
 
+                  const isSuper = pt.id === "P8" || pt.id === "P9" || pt.category === "super-post-panamax";
+                  const defaultOutreach = isSuper ? 65 : 60;
+                  const defaultHeight = isSuper ? 48 : 44;
+                  const outreach = pt.boomOutreach ?? defaultOutreach;
+                  const height = pt.boomHeight ?? defaultHeight;
+
                   return (
                     <div
                       key={pt.id}
-                      className={`flex items-center justify-between gap-3 p-2.5 rounded-lg border transition-all ${
+                      className={`p-3 rounded-lg border transition-all space-y-2.5 ${
                         pt.enabled
                           ? "bg-white border-[#cbd5e1] hover:border-[#94a3b8] shadow-xs"
-                          : "bg-[#f1f5f9] border-[#e2e8f0] opacity-60"
+                          : "bg-[#f8fafc] border-[#e2e8f0] opacity-65"
                       }`}
                     >
-                      <div className="flex items-center gap-2.5">
-                        <input
-                          type="checkbox"
-                          checked={pt.enabled}
-                          onChange={(e) => patchPortainer(pt.id, { enabled: e.target.checked })}
-                          className="w-4 h-4 accent-[#16869a] rounded cursor-pointer"
-                          title={`Ativar ou ocultar ${pt.name}`}
-                        />
-                        <span
-                          className="w-9 h-6 rounded flex items-center justify-center text-white text-[11px] font-black font-mono shadow-xs shrink-0"
-                          style={{ background: pt.badgeColor }}
-                        >
-                          {pt.name}
-                        </span>
-                        <div>
-                          <div className="text-xs font-bold text-[#0f172a] flex items-center gap-1.5">
-                            <span>Portêiner {pt.name}</span>
-                            <span className="text-[10px] text-[#64748b] font-normal">· {section}</span>
-                            {ptLimits?.min !== undefined && (
-                              <span className="text-[9.5px] font-bold text-[#7e22ce] bg-[#f3e8ff] px-1.5 py-0.5 rounded border border-[#d8b4fe]">
-                                Limite mín: {ptLimits.min} m (297–296)
-                              </span>
-                            )}
-                            {ptLimits?.max !== undefined && (
-                              <span className="text-[9.5px] font-bold text-[#1d4ed8] bg-[#dbeafe] px-1.5 py-0.5 rounded border border-[#93c5fd]">
-                                Limite máx: {ptLimits.max} m (291–290)
-                              </span>
-                            )}
-                          </div>
-                          <div className="text-[10.5px] text-[#64748b]">
-                            {overVessel ? (
-                              <span className="text-[#0369a1] font-semibold">
-                                Operando sobre: {overVessel.name}
-                              </span>
-                            ) : (
-                              <span>Sem navio sob a lança</span>
-                            )}
-                          </div>
+                      {/* Linha 1: Identificação, Fabricante, Categoria e Limites */}
+                      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#f1f5f9] pb-2">
+                        <div className="flex items-center gap-2.5 flex-wrap">
+                          <input
+                            type="checkbox"
+                            checked={pt.enabled}
+                            onChange={(e) => patchPortainer(pt.id, { enabled: e.target.checked })}
+                            className="w-4 h-4 accent-[#16869a] rounded cursor-pointer"
+                            title={`Ativar ou ocultar ${pt.name}`}
+                          />
+                          <span
+                            className="w-9 h-6 rounded flex items-center justify-center text-white text-[11px] font-black font-mono shadow-xs shrink-0"
+                            style={{ background: pt.badgeColor }}
+                          >
+                            {pt.name}
+                          </span>
+                          <span className="text-xs font-bold text-[#0f172a]">Portêiner {pt.name}</span>
+
+                          {/* Fabricante e Categoria ZPMC */}
+                          {isSuper ? (
+                            <span className="text-[10px] font-extrabold text-[#be123c] bg-[#ffe4e6] border border-[#fecdd3] px-2 py-0.5 rounded-full flex items-center gap-1 shadow-xs">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#be123c]"></span>
+                              ZPMC · Super Post-Panamax
+                            </span>
+                          ) : (
+                            <span className="text-[10px] font-semibold text-[#1e293b] bg-[#f1f5f9] border border-[#cbd5e1] px-2 py-0.5 rounded-full flex items-center gap-1">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#64748b]"></span>
+                              ZPMC · Post-Panamax
+                            </span>
+                          )}
+
+                          <span className="text-[11px] text-[#64748b] font-medium">· {section}</span>
+                        </div>
+
+                        {/* Limites Operacionais de Deslocamento */}
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          {ptLimits?.min !== undefined && (
+                            <span className="text-[10px] font-bold text-[#7e22ce] bg-[#f3e8ff] px-2 py-0.5 rounded border border-[#d8b4fe] whitespace-nowrap">
+                              Limite mín: {ptLimits.min} m (297–296)
+                            </span>
+                          )}
+                          {ptLimits?.max !== undefined && (
+                            <span className="text-[10px] font-bold text-[#1d4ed8] bg-[#dbeafe] px-2 py-0.5 rounded border border-[#93c5fd] whitespace-nowrap">
+                              Limite máx: {ptLimits.max} m (291–290)
+                            </span>
+                          )}
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-1.5 shrink-0">
-                        <span className="text-xs text-[#64748b] font-medium">Estação:</span>
-                        <div className="flex items-center">
-                          <input
-                            type="number"
-                            step="0.5"
-                            min={ptLimits?.min ?? 0}
-                            max={ptLimits?.max ?? total}
-                            value={pt.position}
-                            onChange={(e) => patchPortainer(pt.id, { position: Math.max(0, Number(e.target.value)) })}
-                            className="w-20 h-8 px-2 border border-[#cbd5e1] rounded-l-md text-xs font-mono font-bold text-[#0f172a] focus:outline-none focus:border-[#16869a]"
-                          />
-                          <span className="h-8 px-2 bg-[#f1f5f9] border border-l-0 border-[#cbd5e1] rounded-r-md text-[11px] font-bold text-[#64748b] flex items-center">
-                            m
-                          </span>
+                      {/* Linha 2: Inputs Operacionais e Cobertura da Boca */}
+                      <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
+                        {/* Inputs à esquerda */}
+                        <div className="md:col-span-7 flex flex-wrap items-center gap-3">
+                          {/* Posição no cais */}
+                          <div className="flex items-center gap-1.5">
+                            <label className="text-[11px] text-[#475569] font-semibold whitespace-nowrap" title="Posição do pórtico ao longo do cais">
+                              Estação:
+                            </label>
+                            <div className="flex items-center">
+                              <input
+                                type="number"
+                                step="0.5"
+                                min={ptLimits?.min ?? 0}
+                                max={ptLimits?.max ?? total}
+                                value={pt.position}
+                                onChange={(e) => patchPortainer(pt.id, { position: Math.max(0, Number(e.target.value)) })}
+                                className="w-16 h-7 px-2 border border-[#cbd5e1] rounded-l-md text-xs font-mono font-bold text-[#0f172a] focus:outline-none focus:border-[#16869a]"
+                              />
+                              <span className="h-7 px-1.5 bg-[#f1f5f9] border border-l-0 border-[#cbd5e1] rounded-r-md text-[10px] font-bold text-[#64748b] flex items-center">
+                                m
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Alcance da Lança (Outreach Mar) */}
+                          <div className="flex items-center gap-1.5">
+                            <label className="text-[11px] text-[#475569] font-semibold whitespace-nowrap" title="Alcance útil da lança sobre o mar medido do trilho marítimo até a ponta (ISO/STS)">
+                              Lança:
+                            </label>
+                            <div className="flex items-center">
+                              <input
+                                type="number"
+                                step="1"
+                                min="30"
+                                max="85"
+                                value={outreach}
+                                onChange={(e) => patchPortainer(pt.id, { boomOutreach: Math.max(25, Number(e.target.value) || defaultOutreach) })}
+                                className="w-14 h-7 px-2 border border-[#cbd5e1] rounded-l-md text-xs font-mono font-bold text-[#0f172a] focus:outline-none focus:border-[#16869a]"
+                              />
+                              <span className="h-7 px-1.5 bg-[#f1f5f9] border border-l-0 border-[#cbd5e1] rounded-r-md text-[10px] font-bold text-[#64748b] flex items-center">
+                                m
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Altura sob a lança (Clearance) */}
+                          <div className="flex items-center gap-1.5">
+                            <label className="text-[11px] text-[#475569] font-semibold whitespace-nowrap" title="Altura livre da viga inferior da lança acima do trilho do cais">
+                              Altura:
+                            </label>
+                            <div className="flex items-center">
+                              <input
+                                type="number"
+                                step="1"
+                                min="20"
+                                max="75"
+                                value={height}
+                                onChange={(e) => patchPortainer(pt.id, { boomHeight: Math.max(15, Number(e.target.value) || defaultHeight) })}
+                                className="w-14 h-7 px-2 border border-[#cbd5e1] rounded-l-md text-xs font-mono font-bold text-[#0f172a] focus:outline-none focus:border-[#16869a]"
+                              />
+                              <span className="h-7 px-1.5 bg-[#f1f5f9] border border-l-0 border-[#cbd5e1] rounded-r-md text-[10px] font-bold text-[#64748b] flex items-center">
+                                m
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Status da Embarcação e Cobertura da Boca à direita */}
+                        <div className="md:col-span-5 flex flex-col justify-center min-w-0">
+                          {overVessel ? (
+                            (() => {
+                              const reachOverShip = outreach - 4;
+                              const diff = reachOverShip - overVessel.beam;
+                              const coversAll = diff >= 0;
+                              return (
+                                <div className="bg-[#f0f9ff] border border-[#bae6fd] rounded-md px-2.5 py-1.5 space-y-1">
+                                  <div className="text-[11px] font-bold text-[#0369a1] truncate flex items-center gap-1">
+                                    <span>🚢 {overVessel.name}</span>
+                                    <span className="text-[#64748b] font-medium text-[10px]">(Boca: {overVessel.beam} m)</span>
+                                  </div>
+                                  <div>
+                                    {coversAll ? (
+                                      <span className="inline-flex items-center text-[10px] font-bold text-emerald-800 bg-emerald-100/90 px-1.5 py-0.5 rounded border border-emerald-300">
+                                        ✓ Cobre 100% da boca (+{diff.toFixed(1)} m de margem)
+                                      </span>
+                                    ) : (
+                                      <span className="inline-flex items-center text-[10px] font-bold text-amber-900 bg-amber-100/95 px-1.5 py-0.5 rounded border border-amber-300">
+                                        ⚠ Lança curta: faltam {Math.abs(diff).toFixed(1)} m na boca
+                                      </span>
+                                    )}
+                                  </div>
+                                </div>
+                              );
+                            })()
+                          ) : (
+                            <div className="text-[11px] text-[#94a3b8] italic px-1">
+                              Sem navio sob a lança no momento
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
                   );
                 })}
+              </div>
+
+              <div className="p-2.5 bg-[#f0f9ff] border border-[#bae6fd] rounded-md text-[11px] text-[#0369a1] space-y-1">
+                <div>
+                  <strong>📐 Padrão de Medição Técnica (Norma ISO 4301 / FEM):</strong>
+                </div>
+                <div className="text-[10.5px] leading-relaxed text-[#0c4a6e]">
+                  • <strong>Fabricante & Tipologia:</strong> Todos os 6 portêineres são do fabricante <strong>ZPMC</strong>, sendo <strong>P8 e P9 do tipo Super Post-Panamax</strong> (lança estendida de 65m para navios com até 22–24 fileiras de contêineres).<br />
+                  • <strong>Alcance da Lança (Waterside Outreach):</strong> Medido a partir do <strong>eixo do trilho marítimo</strong> até a extremidade frontal sobre a água. Descontando a distância cais-costado (~4 m), você confere se a lança cobre todas as fileiras (rows) do navio.<br />
+                  • <strong>Altura sob a Lança (Lift Height / Clearance):</strong> Medida da cota do <strong>topo do trilho do cais</strong> até a face inferior da lança.
+                </div>
               </div>
 
               <div className="p-2.5 bg-[#fefce8] border border-[#fef08a] rounded-md text-[11px] text-[#854d0e] flex items-start gap-2">

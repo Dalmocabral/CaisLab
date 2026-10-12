@@ -21,6 +21,10 @@ import {
   getPortainerOperationalLimits,
   clampPortainerPosition,
   normalizeVesselType,
+  resolveVesselSuperstructure,
+  get40ftBayPair,
+  getOccupiedBayNumbers,
+  type Vessel,
 } from "@/lib/berth-model";
 
 import {
@@ -58,48 +62,149 @@ function renderContainerDeck(
   vesselHeight: number,
   bowInset: number,
   color: { fill: string; stroke: string },
-  bayCount?: number,
-  rowCount?: number,
+  vessel: Vessel,
   mirrorText = false,
 ) {
-  const bays = bayNumberSequence(bayCount);
-  const rows = rowNumberSequence(rowCount);
+  const config = resolveVesselSuperstructure(vessel);
+  const bays = bayNumberSequence(vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber);
+  const rows = rowNumberSequence(vessel.rowCount ?? vessel.rows);
   const effectiveRows = rows.length > 0
     ? rows
     : rowNumberSequence(Math.max(4, Math.min(20, Math.round(vesselHeight / 2.7))));
   const activeRowCount = effectiveRows.length;
 
-  // Os contêineres preenchem diretamente o navio (sem bordas/faixas internas consumindo espaço)
-  const deckLeft = x + 7;
-  const deckRight = Math.max(deckLeft + 1, x + vesselWidth - bowInset);
-  const deckWidth = deckRight - deckLeft;
   const containerTop = y + 1.2;
   const containerHeight = Math.max(1, vesselHeight - 2.4);
   const cellHeight = containerHeight / Math.max(1, activeRowCount);
+
+  // Modo 1: Casaria 100% na popa (All-Aft, como CMA CGM Veracruz)
+  const isAllAft = config.bridgePosition === "all-aft";
+
+  const aftHouseW = Math.max(12, Math.min(24, vesselWidth * 0.065));
+  const aftHouseH = Math.max(14, containerHeight * 0.88);
+  const aftHouseX = x + 2.5;
+  const aftHouseY = y + (vesselHeight - aftHouseH) / 2;
+
+  // Deck de contêineres: se a casaria for na popa, os contêineres começam colados nela
+  const deckLeft = isAllAft ? aftHouseX + aftHouseW + 1.2 : x + 7;
+  const deckRight = Math.max(deckLeft + 1, x + vesselWidth - bowInset);
+  const deckWidth = deckRight - deckLeft;
 
   // Faixa na proa para os números das Rows
   const rowNumberWidth = Math.max(6, Math.min(9.5, deckWidth * 0.042));
   const bayAreaRight = deckRight - rowNumberWidth - 0.8;
   const bayAreaWidth = Math.max(1, bayAreaRight - deckLeft);
-  const cellWidth = bayAreaWidth / Math.max(1, bays.length);
+
+  // Separação visual entre as bays de 40' (cada par de bays de 20' forma uma bay/hatch de 40')
+  const num40ftGaps = Math.max(0, Math.floor((bays.length - 1) / 2));
+  const rawBayWidth = bayAreaWidth / Math.max(1, bays.length);
+  const hatchGap = bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0;
+  const totalGapsWidth = num40ftGaps * hatchGap;
+  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth);
+  const cellWidth = availableBayWidth / Math.max(1, bays.length);
   const labelSize = bays.length ? Math.max(2.6, Math.min(5.4, cellWidth * 0.54)) : 3.4;
   const rowLabelSize = Math.max(2.0, Math.min(labelSize, cellHeight * 0.72));
   const rowLabelX = deckRight - rowNumberWidth / 2;
 
-  const houseX = x + Math.max(18, vesselWidth * 0.2);
-  const houseW = Math.max(8, vesselWidth * 0.035);
-  const houseH = Math.max(14, containerHeight * 0.92);
-  const houseY = y + (vesselHeight - houseH) / 2;
-  const bayCellX = (index: number) => bayAreaRight - ((index + 1) / Math.max(1, bays.length)) * bayAreaWidth;
-  const intersectsHouse = (cellX: number) => cellX < houseX + houseW && cellX + cellWidth > houseX;
+  // Posição X da baia considerando o espaço visual entre escotilhas de 40'
+  const bayCellX = (index: number) => {
+    const gapsBefore = Math.floor(index / 2);
+    return bayAreaRight - ((index + 1) * cellWidth + gapsBefore * hatchGap);
+  };
+
+  // Modo 2: Passadiço entre as bays (Ilha / Casaria no meio)
+  const bridgeIndices: number[] = [];
+  const funnelIndices: number[] = [];
+
+  if (!isAllAft && bays.length > 0) {
+    const targetBridgeBay = config.bridgeBay ?? config.bridgeBayStart ?? 34;
+    const occupiedBridgeBays = getOccupiedBayNumbers(
+      targetBridgeBay,
+      config.bridgeBayStart,
+      config.bridgeBayEnd
+    );
+    bays.forEach((b, idx) => {
+      if (occupiedBridgeBays.includes(b)) {
+        bridgeIndices.push(idx);
+      }
+    });
+
+    // Fallback se o número estiver fora do range exato: pega o mais próximo e seu par de 40'
+    if (bridgeIndices.length === 0) {
+      let closestIdx = 0;
+      let minDiff = Infinity;
+      bays.forEach((b, idx) => {
+        const diff = Math.abs(b - targetBridgeBay);
+        if (diff < minDiff) {
+          minDiff = diff;
+          closestIdx = idx;
+        }
+      });
+      const closestBay = bays[closestIdx];
+      const pair = get40ftBayPair(closestBay);
+      bays.forEach((b, idx) => {
+        if (b >= pair[0] && b <= pair[1]) {
+          bridgeIndices.push(idx);
+        }
+      });
+      if (bridgeIndices.length === 0) {
+        bridgeIndices.push(closestIdx);
+      }
+    }
+
+    if (config.separateFunnel) {
+      const targetFunnelBay = config.funnelBay ?? config.funnelBayStart ?? 54;
+      const occupiedFunnelBays = getOccupiedBayNumbers(
+        targetFunnelBay,
+        config.funnelBayStart,
+        config.funnelBayEnd
+      );
+      bays.forEach((b, idx) => {
+        if (occupiedFunnelBays.includes(b)) {
+          funnelIndices.push(idx);
+        }
+      });
+
+      if (funnelIndices.length === 0) {
+        let closestIdx = 0;
+        let minDiff = Infinity;
+        bays.forEach((b, idx) => {
+          const diff = Math.abs(b - targetFunnelBay);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestIdx = idx;
+          }
+        });
+        const closestBay = bays[closestIdx];
+        const pair = get40ftBayPair(closestBay);
+        bays.forEach((b, idx) => {
+          if (b >= pair[0] && b <= pair[1]) {
+            funnelIndices.push(idx);
+          }
+        });
+        if (funnelIndices.length === 0) {
+          funnelIndices.push(closestIdx);
+        }
+      }
+    }
+  }
+
+  const bridgeSet = new Set(bridgeIndices);
+  const funnelSet = new Set(funnelIndices);
+
+  const isBayOccupied = (index: number) => {
+    if (isAllAft) return false;
+    return bridgeSet.has(index) || funnelSet.has(index);
+  };
+
   const textTransform = (centerX: number) => mirrorText ? `translate(${centerX * 2} 0) scale(-1 1)` : undefined;
 
   return (
     <g className="deck-container-ship">
       {/* Contêineres preenchendo as baias e rows */}
       {bays.map((bay, index) => {
+        if (isBayOccupied(index)) return null;
         const cellX = bayCellX(index);
-        if (intersectsHouse(cellX)) return null;
         return (
           <g key={`bay-column-${bay}`}>
             {effectiveRows.map((rowLabel, rIdx) => {
@@ -126,16 +231,16 @@ function renderContainerDeck(
         );
       })}
 
-      {/* Números das Bays posicionados ACIMA do desenho do navio */}
+      {/* Números das Bays posicionados ACIMA do desenho do navio (as bays ocupadas por casaria no meio não mostram label) */}
       {bays.length > 0 ? (
         <>
           {bays.map((bay, index) => {
+            if (isBayOccupied(index)) return null;
             const cellX = bayCellX(index);
-            if (intersectsHouse(cellX)) return null;
             const centerX = cellX + cellWidth / 2;
             return (
               <g key={`bay-label-${bay}`}>
-                <title>{`Bay ${bay} · posição de 20 pés`}</title>
+                <title>{`Bay ${bay} · posição de ${bay % 2 === 0 ? "40" : "20"} pés`}</title>
                 <text
                   transform={textTransform(centerX)}
                   x={centerX}
@@ -195,18 +300,126 @@ function renderContainerDeck(
         stroke="#64748b"
         strokeWidth="0.8"
       />
-      {/* Superestrutura de ré / Passadiço */}
-      <rect
-        x={houseX}
-        y={houseY}
-        width={houseW}
-        height={houseH}
-        rx="2"
-        fill={color.fill}
-        stroke={color.stroke}
-        strokeWidth="1"
-        opacity="1"
-      />
+
+      {/* ESTRUTURAS: */}
+      {/* 1. Casaria na Popa Extrema (All-Aft, ex: CMA CGM Veracruz) */}
+      {isAllAft && (
+        <g className="superstructure-all-aft">
+          <rect
+            x={aftHouseX}
+            y={aftHouseY}
+            width={aftHouseW}
+            height={aftHouseH}
+            rx="2"
+            fill={color.fill}
+            stroke={color.stroke}
+            strokeWidth="1.2"
+          />
+          {/* Asas do passadiço até a borda */}
+          <line
+            x1={aftHouseX + aftHouseW * 0.72}
+            y1={y + 1.5}
+            x2={aftHouseX + aftHouseW * 0.72}
+            y2={y + vesselHeight - 1.5}
+            stroke={color.stroke}
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+          {/* Chaminé na popa */}
+          <ellipse
+            cx={aftHouseX + aftHouseW * 0.28}
+            cy={y + vesselHeight / 2}
+            rx={Math.max(2.2, aftHouseW * 0.16)}
+            ry={Math.max(2, vesselHeight * 0.12)}
+            fill="#1e293b"
+            stroke="#0f172a"
+            strokeWidth="0.8"
+          />
+        </g>
+      )}
+
+      {/* 2. Passadiço Entre as Bays (Sem deixar vão branco, ocupando toda a escotilha de 40' ou faixa de bays) */}
+      {!isAllAft && bridgeIndices.length > 0 && (
+        <g className="superstructure-bridge-island">
+          {(() => {
+            const minX = Math.min(...bridgeIndices.map((idx) => bayCellX(idx)));
+            const maxX = Math.max(...bridgeIndices.map((idx) => bayCellX(idx) + cellWidth));
+            const slotW = Math.max(1.2, maxX - minX - 0.35);
+            const slotX = minX + 0.18;
+            return (
+              <>
+                <rect
+                  x={slotX}
+                  y={y + 2.5}
+                  width={slotW}
+                  height={vesselHeight - 5}
+                  rx="1.8"
+                  fill={color.fill}
+                  stroke={color.stroke}
+                  strokeWidth="1.2"
+                />
+                {/* Asas do passadiço */}
+                <line
+                  x1={slotX + slotW * 0.55}
+                  y1={y + 0.8}
+                  x2={slotX + slotW * 0.55}
+                  y2={y + vesselHeight - 0.8}
+                  stroke={color.stroke}
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                />
+                {/* Se a chaminé não for separada, desenha chaminé no próprio passadiço (lado de ré) */}
+                {!config.separateFunnel && (
+                  <ellipse
+                    cx={slotX + slotW * 0.25}
+                    cy={y + vesselHeight / 2}
+                    rx={Math.max(2.2, Math.min(4.8, slotW * 0.22))}
+                    ry={Math.max(1.8, Math.min(3.2, vesselHeight * 0.11))}
+                    fill="#1e293b"
+                    stroke="#0f172a"
+                    strokeWidth="0.7"
+                  />
+                )}
+              </>
+            );
+          })()}
+        </g>
+      )}
+
+      {/* 3. Chaminé Separada Entre as Bays (ocupando toda a escotilha da bay da chaminé) */}
+      {!isAllAft && config.separateFunnel && funnelIndices.length > 0 && (
+        <g className="superstructure-funnel-island">
+          {(() => {
+            const minX = Math.min(...funnelIndices.map((idx) => bayCellX(idx)));
+            const maxX = Math.max(...funnelIndices.map((idx) => bayCellX(idx) + cellWidth));
+            const slotW = Math.max(1.2, maxX - minX - 0.35);
+            const slotX = minX + 0.18;
+            return (
+              <>
+                <rect
+                  x={slotX}
+                  y={y + 3.2}
+                  width={slotW}
+                  height={vesselHeight - 6.4}
+                  rx="1.6"
+                  fill="#334155"
+                  stroke="#0f172a"
+                  strokeWidth="1.1"
+                />
+                <ellipse
+                  cx={slotX + slotW / 2}
+                  cy={y + vesselHeight / 2}
+                  rx={Math.max(2.2, Math.min(4.5, slotW * 0.32))}
+                  ry={Math.max(2.0, Math.min(3.8, vesselHeight * 0.16))}
+                  fill="#0f172a"
+                  stroke="#ffffff"
+                  strokeWidth="0.5"
+                />
+              </>
+            );
+          })()}
+        </g>
+      )}
     </g>
   );
 }
@@ -853,7 +1066,10 @@ function renderPortainerSvg({
   const cx = trackStart + portainer.position * scale;
   const seaRailY = 242;
   const landRailY = 272;
-  const boomTipY = 110;
+  const boomOutreach = portainer.boomOutreach ?? 55;
+  // Alcance da lança sobre o navio a partir da borda do cais/costado (descontando ~4m cais-costado)
+  const reachOverShip = Math.max(10, boomOutreach - 4);
+  const boomTipY = VESSEL_BERTH_BOTTOM_Y - reachOverShip * scale;
   const sillLeftX = cx - 9;
   const sillRightX = cx + 9;
   const girderLeftX = cx - 4.2;
@@ -865,6 +1081,9 @@ function renderPortainerSvg({
   else if (portainer.id === "P6") arrowLabel = "◀ P6";
   else if (portainer.id === "P5") arrowLabel = "P5 ▶";
   else if (portainer.id === "P4") arrowLabel = "◀ P4";
+
+  const numRungs = Math.max(6, Math.floor((seaRailY - boomTipY) / 8));
+  const trolleyY = (VESSEL_BERTH_BOTTOM_Y + boomTipY) / 2;
 
   return (
     <g
@@ -882,7 +1101,7 @@ function renderPortainerSvg({
       onPointerEnter={onPointerEnter}
       onPointerLeave={onPointerLeave}
     >
-      <title>{`Portêiner ${portainer.name} · Estação ${portainer.position.toFixed(1).replace(".", ",")} m · Arraste para reposicionar ao longo do cais`}</title>
+      <title>{`Portêiner ${portainer.name} · Lança: ${boomOutreach} m (Alcance sobre navio: ${reachOverShip.toFixed(1)} m) · Estação ${portainer.position.toFixed(1).replace(".", ",")} m · Arraste para reposicionar ao longo do cais`}</title>
 
       {/* Linha guia de centro / alinhamento do portêiner */}
       <line
@@ -896,7 +1115,7 @@ function renderPortainerSvg({
         opacity="0.4"
       />
 
-      {/* Lança Marítima (Boom) projetando-se sobre o navio */}
+      {/* Lança Marítima (Boom) projetando-se sobre o navio com alcance real configurado */}
       {/* Vigas principais da lança */}
       <line
         x1={girderLeftX}
@@ -915,20 +1134,49 @@ function renderPortainerSvg({
         strokeWidth="1.8"
       />
 
-      {/* Ponta da lança marítima (Headframe) */}
+      {/* Ponta da lança marítima (Headframe) com indicador de alcance em metros */}
       <line
-        x1={girderLeftX - 1.5}
+        x1={girderLeftX - 2.5}
         y1={boomTipY}
-        x2={girderRightX + 1.5}
+        x2={girderRightX + 2.5}
         y2={boomTipY}
         stroke="#0f172a"
-        strokeWidth="2.4"
+        strokeWidth="2.6"
       />
       <circle cx={girderLeftX} cy={boomTipY} r="1.4" fill="#f8fafc" stroke="#0f172a" strokeWidth="0.6" />
       <circle cx={girderRightX} cy={boomTipY} r="1.4" fill="#f8fafc" stroke="#0f172a" strokeWidth="0.6" />
 
+      {/* Etiqueta na ponta com a metragem da lança (permite conferir visualmente a cobertura da boca) */}
+      <rect
+        x={cx - 11}
+        y={boomTipY - 8.5}
+        width="22"
+        height="6.8"
+        rx="1.5"
+        fill="#0f172a"
+        stroke={portainer.color}
+        strokeWidth="0.6"
+        opacity={isHovered ? 1 : 0.85}
+      />
+      <text
+        x={cx}
+        y={boomTipY - 4.8}
+        textAnchor="middle"
+        dominantBaseline="central"
+        style={{
+          fill: "#ffffff",
+          fontSize: "4.8px",
+          fontWeight: 900,
+          letterSpacing: "0.2px",
+          userSelect: "none",
+          pointerEvents: "none",
+        }}
+      >
+        {boomOutreach}m
+      </text>
+
       {/* Tirantes e treliças diagonais da lança (Lattice rungs) */}
-      {Array.from({ length: 15 }, (_, i) => {
+      {Array.from({ length: numRungs }, (_, i) => {
         const yRung = boomTipY + 4 + i * 8;
         if (yRung >= seaRailY) return null;
         return (
@@ -960,7 +1208,7 @@ function renderPortainerSvg({
         {/* Carro do trole sobre os trilhos da lança */}
         <rect
           x={cx - 6}
-          y={136}
+          y={trolleyY - 4.5}
           width="12"
           height="9"
           rx="1"
@@ -971,7 +1219,7 @@ function renderPortainerSvg({
         {/* Barra amarela do spreader telescópico */}
         <rect
           x={cx - 7.5}
-          y={138.5}
+          y={trolleyY - 2}
           width="15"
           height="4"
           rx="0.6"
@@ -980,14 +1228,14 @@ function renderPortainerSvg({
           strokeWidth="0.6"
         />
         {/* 4 guias / twistlocks nos cantos do spreader */}
-        <circle cx={cx - 6.5} cy={139.5} r="0.8" fill="#1e293b" />
-        <circle cx={cx + 6.5} cy={139.5} r="0.8" fill="#1e293b" />
-        <circle cx={cx - 6.5} cy={141.5} r="0.8" fill="#1e293b" />
-        <circle cx={cx + 6.5} cy={141.5} r="0.8" fill="#1e293b" />
+        <circle cx={cx - 6.5} cy={trolleyY - 1} r="0.8" fill="#1e293b" />
+        <circle cx={cx + 6.5} cy={trolleyY - 1} r="0.8" fill="#1e293b" />
+        <circle cx={cx - 6.5} cy={trolleyY + 1} r="0.8" fill="#1e293b" />
+        <circle cx={cx + 6.5} cy={trolleyY + 1} r="0.8" fill="#1e293b" />
         {/* Cabine panorâmica envidraçada do operador do trole */}
         <rect
           x={cx + 6}
-          y={137.5}
+          y={trolleyY - 3}
           width="3.5"
           height="6"
           rx="0.6"
@@ -1514,7 +1762,7 @@ export default function BerthBlueprint({
                   ? renderGeneralCargoDeck(x, y, vesselWidth, vesselHeight, bowInset, color)
                   : (vesselType === "tanker" || vesselType === "chemical-tanker" || vesselType === "product-tanker")
                   ? renderTankerDeck(x, y, vesselWidth, vesselHeight, bowInset, color)
-                  : renderContainerDeck(x, y, vesselWidth, vesselHeight, bowInset, color, vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber, vessel.rowCount ?? vessel.rows, vessel.berthingSide === "bombordo")
+                  : renderContainerDeck(x, y, vesselWidth, vesselHeight, bowInset, color, vessel, vessel.berthingSide === "bombordo")
                 }
 
                 {/* Faixa de costado junto ao cais */}

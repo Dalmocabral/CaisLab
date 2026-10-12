@@ -217,11 +217,13 @@ function containerSkinHash(vesselSeed: number, column: number, row: number, tier
 function createContainerSkinMaterials(
   THREE: ThreeModule,
   skin: (typeof CONTAINER_SKIN_DEFS)[number],
+  is40ft = false,
   onLoad?: () => void,
 ) {
   const loader = new THREE.TextureLoader();
 
   const sideTex = loader.load(skin.sideUrl, () => {
+    sideTexFlipped.needsUpdate = true;
     onLoad?.();
   });
   sideTex.colorSpace = THREE.SRGBColorSpace;
@@ -233,7 +235,19 @@ function createContainerSkinMaterials(
   sideTexFlipped.offset.x = 1;
   sideTexFlipped.needsUpdate = true;
 
+  if (is40ft) {
+    sideTex.wrapS = THREE.RepeatWrapping;
+    sideTex.repeat.x = 2;
+    sideTex.needsUpdate = true;
+
+    sideTexFlipped.wrapS = THREE.RepeatWrapping;
+    sideTexFlipped.repeat.x = -2;
+    sideTexFlipped.offset.x = 1;
+    sideTexFlipped.needsUpdate = true;
+  }
+
   const frontTex = loader.load(skin.frontUrl, () => {
+    frontTexFlipped.needsUpdate = true;
     onLoad?.();
   });
   frontTex.colorSpace = THREE.SRGBColorSpace;
@@ -695,14 +709,38 @@ function addVessel(
     const tiers = beam >= 40 ? 4 : beam >= 32 ? 3 : 2;
     const topContainerY = deckHeight + 1.38 + tiers * 2.68;
     const towerHeight = isContainer ? Math.max(15.2, topContainerY - deckHeight + 4.2) : 13.5;
+    const isAllAft = vessel.bridgePosition !== "between-bays";
+    const totalBays = vessel.bayCount ?? vessel.bays ?? 50;
+    const hasSeparateFunnel = isContainer && !isAllAft && Boolean(vessel.separateFunnel);
     const houseLength = isContainer
-      ? Math.max(8, Math.min(loa * 0.045, 14))
+      ? (!isAllAft ? Math.max(12.5, Math.min(loa * 0.048, 15.5)) : Math.max(8, Math.min(loa * 0.045, 14)))
       : Math.max(16, Math.min(loa * 0.12, 38));
     const houseMaterial = new THREE.MeshStandardMaterial({ color: "#f1f5f9", roughness: 0.62 });
     const funnelColor = isTanker ? "#ea580c" : (VESSEL_COLORS[vessel.color]?.stroke ?? "#285a78");
     const funnelMaterial = new THREE.MeshStandardMaterial({ color: funnelColor, roughness: 0.65 });
 
-    const sternHouseX = direction * (-loa * 0.35);
+    let sternHouseX: number;
+    if (isContainer) {
+      if (isAllAft) {
+        // Encostado na ré (como CMA CGM Veracruz)
+        sternHouseX = direction * (-loa * 0.44 + houseLength * 0.5);
+      } else {
+        // Entre as bays
+        const targetBay = vessel.bridgeBay ?? 34;
+        const bayRatio = Math.max(0.08, Math.min(0.92, 1 - (targetBay / Math.max(1, totalBays))));
+        sternHouseX = direction * (loa * bayRatio - loa / 2);
+      }
+    } else {
+      sternHouseX = direction * (-loa * 0.35);
+    }
+
+    // Coordenadas da chaminé separada (quando duas ilhas)
+    const targetFunnelBay = vessel.funnelBay ?? 40;
+    const funnelBayRatio = Math.max(0.05, Math.min(0.95, 1 - (targetFunnelBay / Math.max(1, totalBays))));
+    const separateFunnelX = direction * (loa * funnelBayRatio - loa / 2);
+    const separateFunnelLength = Math.max(10, Math.min(loa * 0.045, 14));
+    const separateFunnelWidth = beam * 0.36;
+    const separateFunnelHeight = towerHeight * 0.92;
 
     // 1. Bloco de Acomodações Multi-andares
     addBox(THREE, group, [houseLength, towerHeight, beam * 0.68], [sternHouseX, deckHeight + towerHeight / 2, 0], houseMaterial);
@@ -759,17 +797,30 @@ function addVessel(
       group.add(dome);
     });
 
-    // 4. Chaminé (Funnel) na ré da casaria
-    const funnelHeight = isTanker ? towerHeight * 0.8 : towerHeight * 0.88;
-    const funnelWidth = beam * 0.24;
-    const funnelLength = houseLength * 0.38;
-    const funnelX = sternHouseX - direction * (houseLength * 0.38);
-    addBox(THREE, group, [funnelLength, funnelHeight, funnelWidth], [funnelX, deckHeight + funnelHeight / 2, 0], funnelMaterial);
-    [-funnelWidth * 0.24, funnelWidth * 0.24].forEach((pz) => {
-      const pipe = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 2.6, 8), darkDetailMaterial);
-      pipe.position.set(funnelX, deckHeight + funnelHeight + 1.2, pz);
-      group.add(pipe);
-    });
+    // 4. Chaminé (Funnel)
+    if (hasSeparateFunnel) {
+      // Chaminé SEPARADA (Duas Ilhas - ex: EVER LEADER) posicionada exatamente na funnelBay
+      addBox(THREE, group, [separateFunnelLength, separateFunnelHeight, separateFunnelWidth], [separateFunnelX, deckHeight + separateFunnelHeight / 2, 0], funnelMaterial);
+      [-separateFunnelWidth * 0.22, separateFunnelWidth * 0.22].forEach((pz) => {
+        const pipe = new THREE.Mesh(new THREE.CylinderGeometry(0.65, 0.65, 3.2, 10), darkDetailMaterial);
+        pipe.position.set(separateFunnelX, deckHeight + separateFunnelHeight + 1.5, pz);
+        group.add(pipe);
+      });
+      // Plataforma / chapéu no topo da chaminé
+      addBox(THREE, group, [separateFunnelLength * 1.05, 0.3, separateFunnelWidth * 1.05], [separateFunnelX, deckHeight + separateFunnelHeight + 0.15, 0], darkDetailMaterial);
+    } else {
+      // Chaminé integrada na ré da casaria
+      const funnelHeight = isTanker ? towerHeight * 0.8 : towerHeight * 0.88;
+      const funnelWidth = beam * 0.24;
+      const funnelLength = houseLength * 0.38;
+      const funnelX = sternHouseX - direction * (houseLength * 0.38);
+      addBox(THREE, group, [funnelLength, funnelHeight, funnelWidth], [funnelX, deckHeight + funnelHeight / 2, 0], funnelMaterial);
+      [-funnelWidth * 0.24, funnelWidth * 0.24].forEach((pz) => {
+        const pipe = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 2.6, 8), darkDetailMaterial);
+        pipe.position.set(funnelX, deckHeight + funnelHeight + 1.2, pz);
+        group.add(pipe);
+      });
+    }
 
     // Equipamentos náuticos da Proa / Castelo para navios tanque (sem caixas/tampão sobressalente)
     if (isTanker) {
@@ -921,24 +972,49 @@ function addVessel(
 
       const cargoStartFromStern = loa * 0.03;
       const cargoLength = loa * 0.9;
-      const columnSpacing = cargoLength / columns;
-      // Comprimento longitudinal proporcional ao slot (formato retangular nítido de contêiner 20'/40' pés)
-      const containerLength = Math.max(5.8, Math.min(12.2, columnSpacing * 0.92));
+
+      // Separação física e visual entre escotilhas/bays de 40' (cada par de colunas de 20' forma uma bay de 40')
+      const num40ftGaps3D = Math.max(0, Math.floor((columns - 1) / 2));
+      const rawSlot = cargoLength / columns;
+      const hatchGap3D = columns > 2 ? Math.max(1.8, Math.min(3.2, rawSlot * 0.35)) : 0;
+      const totalGapsLen = num40ftGaps3D * hatchGap3D;
+      const usableCargoLength = Math.max(10, cargoLength - totalGapsLen);
+      const columnSlotLen = usableCargoLength / columns;
+      // Dimensões de contêineres padrão ISO marítimos (20' pés e 40' pés)
+      const containerLength20 = Math.max(5.8, Math.min(6.2, columnSlotLen * 0.92));
+      const containerLength40 = Math.max(11.8, Math.min(12.4, 2 * containerLength20 + 0.35));
       const containerHeight = 2.55;
 
-      const containerGeometry = new THREE.BoxGeometry(containerLength, containerHeight, containerWidth);
-      const instanceCount = columns * rows * tiers;
-      const cornerMaterial = new THREE.MeshStandardMaterial({ color: "#8a969b", roughness: 0.74, metalness: 0.16 });
-      const cornerPosts = new THREE.InstancedMesh(new THREE.BoxGeometry(0.24, 2.48, 0.24), cornerMaterial, instanceCount * 4);
+      const containerGeometry20 = new THREE.BoxGeometry(containerLength20, containerHeight, containerWidth);
+      const containerGeometry40 = new THREE.BoxGeometry(containerLength40, containerHeight, containerWidth);
 
-      // InstancedMeshes para as skins autênticas variadas (Verde, Azul, Terracota, Amarelo, Branco, Rosa)
-      const skinMaterials = CONTAINER_SKIN_DEFS.map((skin) =>
-        createContainerSkinMaterials(THREE, skin, onTextureLoaded),
+      const maxInstances20 = columns * rows * tiers;
+      const maxInstances40 = Math.ceil(columns / 2) * rows * tiers;
+
+      const cornerMaterial = new THREE.MeshStandardMaterial({ color: "#8a969b", roughness: 0.74, metalness: 0.16 });
+      const cornerPosts = new THREE.InstancedMesh(
+        new THREE.BoxGeometry(0.24, 2.48, 0.24),
+        cornerMaterial,
+        (maxInstances20 + maxInstances40) * 4,
       );
-      const containerMeshes = skinMaterials.map(
-        (mats) => new THREE.InstancedMesh(containerGeometry, mats, instanceCount),
+
+      // InstancedMeshes para as skins nas versões 20' e 40' (com corrugações e proporções ideais)
+      const skinMaterials20 = CONTAINER_SKIN_DEFS.map((skin) =>
+        createContainerSkinMaterials(THREE, skin, false, onTextureLoaded),
       );
-      const meshCounts = CONTAINER_SKIN_DEFS.map(() => 0);
+      const skinMaterials40 = CONTAINER_SKIN_DEFS.map((skin) =>
+        createContainerSkinMaterials(THREE, skin, true, onTextureLoaded),
+      );
+
+      const containerMeshes20 = skinMaterials20.map(
+        (mats) => new THREE.InstancedMesh(containerGeometry20, mats, maxInstances20),
+      );
+      const containerMeshes40 = skinMaterials40.map(
+        (mats) => new THREE.InstancedMesh(containerGeometry40, mats, maxInstances40),
+      );
+
+      const meshCounts20 = CONTAINER_SKIN_DEFS.map(() => 0);
+      const meshCounts40 = CONTAINER_SKIN_DEFS.map(() => 0);
 
       // Seed determinístico baseado no navio para padrão estável e natural
       const vesselSeed = (vessel.name || "vessel")
@@ -949,46 +1025,144 @@ function addVessel(
       let cornerIndex = 0;
       const bridgeStartX = Math.min(sternHouseX - houseLength / 2, bridgeX - bridgeLength / 2) - 0.7;
       const bridgeEndX = Math.max(sternHouseX + houseLength / 2, bridgeX + bridgeLength / 2) + 0.7;
+      const funnelStartX = hasSeparateFunnel ? Math.min(separateFunnelX - separateFunnelLength / 2, separateFunnelX + separateFunnelLength / 2) - 0.7 : 0;
+      const funnelEndX = hasSeparateFunnel ? Math.max(separateFunnelX - separateFunnelLength / 2, separateFunnelX + separateFunnelLength / 2) + 0.7 : 0;
 
-      for (let column = 0; column < columns; column += 1) {
-        const fromStern = cargoStartFromStern + columnSpacing * (column + 0.5);
-        const containerX = direction * (fromStern - loa / 2);
-        const containerMinX = containerX - containerLength / 2;
-        const containerMaxX = containerX + containerLength / 2;
-        if (containerMinX < bridgeEndX && containerMaxX > bridgeStartX) continue;
+      const addContainer = (
+        is40: boolean,
+        boxX: number,
+        boxY: number,
+        boxZ: number,
+        colHash: number,
+        row: number,
+        tier: number,
+      ) => {
+        const boxLength = is40 ? containerLength40 : containerLength20;
+        pose.position.set(boxX, boxY, boxZ);
+        pose.updateMatrix();
+
+        const skinIndex = containerSkinHash(vesselSeed, colHash, row, tier, CONTAINER_SKIN_DEFS.length);
+        if (is40) {
+          const mesh = containerMeshes40[skinIndex];
+          const cIdx = meshCounts40[skinIndex];
+          mesh.setMatrixAt(cIdx, pose.matrix);
+          meshCounts40[skinIndex] += 1;
+        } else {
+          const mesh = containerMeshes20[skinIndex];
+          const cIdx = meshCounts20[skinIndex];
+          mesh.setMatrixAt(cIdx, pose.matrix);
+          meshCounts20[skinIndex] += 1;
+        }
+
+        for (const xSide of [-1, 1]) {
+          for (const zSide of [-1, 1]) {
+            pose.position.set(
+              boxX + (xSide * (boxLength - 0.26)) / 2,
+              boxY,
+              boxZ + (zSide * (containerWidth - 0.26)) / 2,
+            );
+            pose.updateMatrix();
+            cornerPosts.setMatrixAt(cornerIndex, pose.matrix);
+            cornerIndex += 1;
+          }
+        }
+      };
+
+      const totalHatches = Math.floor(columns / 2);
+
+      for (let h = 0; h < totalHatches; h++) {
+        const colA = 2 * h;
+        const colB = 2 * h + 1;
+
+        const gapsBefore = h;
+        const fromSternA = cargoStartFromStern + (colA + 0.5) * columnSlotLen + gapsBefore * hatchGap3D;
+        const fromSternB = cargoStartFromStern + (colB + 0.5) * columnSlotLen + gapsBefore * hatchGap3D;
+
+        const containerXA = direction * (fromSternA - loa / 2);
+        const containerXB = direction * (fromSternB - loa / 2);
+        const containerX40 = (containerXA + containerXB) / 2;
+
+        const colAMinX = Math.min(containerXA - containerLength20 / 2, containerXA + containerLength20 / 2);
+        const colAMaxX = Math.max(containerXA - containerLength20 / 2, containerXA + containerLength20 / 2);
+        const colBMinX = Math.min(containerXB - containerLength20 / 2, containerXB + containerLength20 / 2);
+        const colBMaxX = Math.max(containerXB - containerLength20 / 2, containerXB + containerLength20 / 2);
+
+        const colABlocked = (colAMinX < bridgeEndX && colAMaxX > bridgeStartX) ||
+          (hasSeparateFunnel && colAMinX < funnelEndX && colAMaxX > funnelStartX);
+        const colBBlocked = (colBMinX < bridgeEndX && colBMaxX > bridgeStartX) ||
+          (hasSeparateFunnel && colBMinX < funnelEndX && colBMaxX > funnelStartX);
+
+        // Se ambos os slots estão bloqueados pela casaria ou chaminé, pula a escotilha inteira
+        if (colABlocked && colBBlocked) continue;
+
+        // Distribuição orgânica realista entre as bays solicitada pelo usuário:
+        // Pode ser dois contêineres de 20', outro de 40', e vice-versa, mesclando bays de 40' e 20'
+        const hatchHash = ((vesselSeed ^ (h * 49287) ^ 0x9e3779b9) >>> 0) % 100;
+        const isAll40 = hatchHash < 50;
+        const isAll20 = hatchHash >= 50 && hatchHash < 82;
 
         for (let row = 0; row < rows; row += 1) {
+          const containerZ = (row - (rows - 1) / 2) * rowSpacing;
+
+          let use40 = false;
+          if (!colABlocked && !colBBlocked) {
+            if (isAll40) {
+              use40 = true;
+            } else if (isAll20) {
+              use40 = false;
+            } else {
+              // Escotilha mista: fileiras centrais ou alternadas
+              const rowHash = ((vesselSeed ^ (h * 49287) ^ (row * 65537)) >>> 0) % 100;
+              use40 = rowHash < 55;
+            }
+          }
+
           for (let tier = 0; tier < tiers; tier += 1) {
             const containerY = deckHeight + 1.38 + tier * 2.68;
-            const containerZ = (row - (rows - 1) / 2) * rowSpacing;
-            pose.position.set(containerX, containerY, containerZ);
-            pose.updateMatrix();
 
-            // Mistura orgânica variada entre as 6 skins (com repetições naturais de pares e alternâncias ricas)
-            const skinIndex = containerSkinHash(vesselSeed, column, row, tier, CONTAINER_SKIN_DEFS.length);
-            const mesh = containerMeshes[skinIndex];
-            const cIdx = meshCounts[skinIndex];
-            mesh.setMatrixAt(cIdx, pose.matrix);
-            meshCounts[skinIndex] += 1;
-
-            for (const xSide of [-1, 1]) {
-              for (const zSide of [-1, 1]) {
-                pose.position.set(
-                  containerX + (xSide * (containerLength - 0.26)) / 2,
-                  containerY,
-                  containerZ + (zSide * (containerWidth - 0.26)) / 2,
-                );
-                pose.updateMatrix();
-                cornerPosts.setMatrixAt(cornerIndex, pose.matrix);
-                cornerIndex += 1;
+            if (use40) {
+              addContainer(true, containerX40, containerY, containerZ, colA, row, tier);
+            } else {
+              if (!colABlocked) {
+                addContainer(false, containerXA, containerY, containerZ, colA, row, tier);
+              }
+              if (!colBBlocked) {
+                addContainer(false, containerXB, containerY, containerZ, colB, row, tier);
               }
             }
           }
         }
       }
 
-      containerMeshes.forEach((mesh, sIdx) => {
-        mesh.count = meshCounts[sIdx];
+      // Se columns for ímpar, processa a última coluna avulsa como 20'
+      if (columns % 2 !== 0) {
+        const col = columns - 1;
+        const gapsBefore = Math.floor(col / 2);
+        const fromStern = cargoStartFromStern + (col + 0.5) * columnSlotLen + gapsBefore * hatchGap3D;
+        const containerX = direction * (fromStern - loa / 2);
+        const minX = Math.min(containerX - containerLength20 / 2, containerX + containerLength20 / 2);
+        const maxX = Math.max(containerX - containerLength20 / 2, containerX + containerLength20 / 2);
+        const blocked = (minX < bridgeEndX && maxX > bridgeStartX) ||
+          (hasSeparateFunnel && minX < funnelEndX && maxX > funnelStartX);
+
+        if (!blocked) {
+          for (let row = 0; row < rows; row += 1) {
+            const containerZ = (row - (rows - 1) / 2) * rowSpacing;
+            for (let tier = 0; tier < tiers; tier += 1) {
+              const containerY = deckHeight + 1.38 + tier * 2.68;
+              addContainer(false, containerX, containerY, containerZ, col, row, tier);
+            }
+          }
+        }
+      }
+
+      containerMeshes20.forEach((mesh, sIdx) => {
+        mesh.count = meshCounts20[sIdx];
+        mesh.instanceMatrix.needsUpdate = true;
+        group.add(mesh);
+      });
+      containerMeshes40.forEach((mesh, sIdx) => {
+        mesh.count = meshCounts40[sIdx];
         mesh.instanceMatrix.needsUpdate = true;
         group.add(mesh);
       });
@@ -1086,6 +1260,57 @@ function addRoundBeamBatch(
   parent.add(mesh);
 }
 
+function createPortainerLogoMaterial(
+  THREE: ThreeModule,
+  id: string,
+  isSuperPostPanamax: boolean
+): import("three").Material {
+  if (typeof document === "undefined") {
+    return new THREE.MeshStandardMaterial({ color: "#e2e8f0", roughness: 0.5 });
+  }
+  const canvas = document.createElement("canvas");
+  canvas.width = 512;
+  canvas.height = 256;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return new THREE.MeshStandardMaterial({ color: "#e2e8f0", roughness: 0.5 });
+
+  // Fundo cinza industrial da caixa de máquinas ZPMC
+  ctx.fillStyle = "#e2e8f0";
+  ctx.fillRect(0, 0, 512, 256);
+
+  // Borda perimetral
+  ctx.lineWidth = 10;
+  ctx.strokeStyle = isSuperPostPanamax ? "#be123c" : "#1e293b";
+  ctx.strokeRect(6, 6, 500, 244);
+
+  // Logotipo ZPMC em destaque
+  ctx.fillStyle = "#0f172a";
+  ctx.font = "900 84px sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText("ZPMC", 195, 100);
+
+  // Badge colorido com ID do pórtico (ex: P8, P9)
+  ctx.fillStyle = isSuperPostPanamax ? "#be123c" : "#2563eb";
+  ctx.beginPath();
+  ctx.roundRect(350, 58, 125, 84, 16);
+  ctx.fill();
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "900 62px sans-serif";
+  ctx.fillText(id, 412, 102);
+
+  // Faixa de Categoria inferior
+  ctx.fillStyle = isSuperPostPanamax ? "#be123c" : "#334155";
+  ctx.fillRect(16, 175, 480, 62);
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "bold 28px sans-serif";
+  ctx.fillText(isSuperPostPanamax ? "SUPER POST-PANAMAX" : "POST-PANAMAX STS", 256, 208);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.needsUpdate = true;
+  return new THREE.MeshStandardMaterial({ map: texture, roughness: 0.35, metalness: 0.1 });
+}
+
 function addPortainer(
   THREE: ThreeModule,
   scene: import("three").Scene,
@@ -1097,53 +1322,88 @@ function addPortainer(
   group.position.x = stationToX(portainer.position, total);
 
   const craneColor = new THREE.Color(portainer.color || "#15803d");
-  const braceColor = craneColor.clone().lerp(new THREE.Color("#eef2f3"), 0.42);
-  const frameMaterial = new THREE.MeshStandardMaterial({ color: craneColor, roughness: 0.64, metalness: 0.22 });
-  const braceMaterial = new THREE.MeshStandardMaterial({ color: braceColor, roughness: 0.7, metalness: 0.16 });
-  const darkMaterial = new THREE.MeshStandardMaterial({ color: "#39474d", roughness: 0.76, metalness: 0.22 });
-  const glassMaterial = new THREE.MeshStandardMaterial({ color: "#244859", roughness: 0.3, metalness: 0.2 });
-  const paleMaterial = new THREE.MeshStandardMaterial({ color: "#e7ecee", roughness: 0.65, metalness: 0.06 });
-  const spreaderMaterial = new THREE.MeshStandardMaterial({ color: "#e5b52a", roughness: 0.62, metalness: 0.16 });
+  const braceColor = craneColor.clone().lerp(new THREE.Color("#eef2f3"), 0.38);
+  const frameMaterial = new THREE.MeshStandardMaterial({ color: craneColor, roughness: 0.58, metalness: 0.28 });
+  const braceMaterial = new THREE.MeshStandardMaterial({ color: braceColor, roughness: 0.65, metalness: 0.2 });
+  const darkMaterial = new THREE.MeshStandardMaterial({ color: "#29353b", roughness: 0.72, metalness: 0.3 });
+  const glassMaterial = new THREE.MeshStandardMaterial({ color: "#38bdf8", roughness: 0.2, metalness: 0.1, transparent: true, opacity: 0.85 });
+  const paleMaterial = new THREE.MeshStandardMaterial({ color: "#f1f5f9", roughness: 0.65, metalness: 0.08 });
+  const spreaderMaterial = new THREE.MeshStandardMaterial({ color: "#eab308", roughness: 0.55, metalness: 0.2 });
+  const warningYellowMaterial = new THREE.MeshStandardMaterial({ color: "#facc15", roughness: 0.6 });
 
-  const groundY = QUAY_TOP_Y + 1.35;
-  const topY = 28.5;
+  // Cotas dinâmicas configuradas (ZPMC Super Post-Panamax para P8/P9 vs Post-Panamax)
+  const isSuperPostPanamax = portainer.id === "P8" || portainer.id === "P9" || portainer.category === "super-post-panamax";
+  const defaultOutreach = isSuperPostPanamax ? 65 : 60;
+  const defaultHeight = isSuperPostPanamax ? 48 : 44;
+  const boomOutreach = portainer.boomOutreach ?? defaultOutreach;
+  const boomHeight = portainer.boomHeight ?? defaultHeight;
+
+  const groundY = QUAY_TOP_Y + 0.3;
   const landBaseZ = -21;
-  const landTopZ = -19.5;
   const waterBaseZ = -1.2;
-  const waterTopZ = -4.0;
+  const portalSpanZ = Math.abs(waterBaseZ - landBaseZ); // ~19.8m de bitola
+  const portalCenterZ = (waterBaseZ + landBaseZ) / 2; // ~ -11.1m
+
+  const boomBottomY = groundY + boomHeight;
+  const boomTopY = boomBottomY + 4.2;
+  const portalTopY = boomBottomY - 1.2;
+  const portalArchY = groundY + Math.min(18, boomHeight * 0.42);
+
+  const boomStartZ = -2.5;
+  const boomEndZ = waterBaseZ + boomOutreach;
+  const backreachEndZ = landBaseZ - 13.5; // ~ -34.5m
+  const boomHalfWidth = 4.2;
+
+  // 1. Pernas do Pórtico (Gantry Legs - Heavy Tapered Box Girders)
   const watersideLegs: BeamSegment3D[] = [];
   const landsideLegs: BeamSegment3D[] = [];
-  const legFootings: Array<[number, number, number]> = [];
-  const wheelPositions: Array<[number, number, number]> = [];
+  const bogieCenters: Array<[number, number, number]> = [];
 
   for (const xSide of [-1, 1]) {
-    for (const [isWaterside, baseZ, topZ] of [
-      [false, landBaseZ, landTopZ],
-      [true, waterBaseZ, waterTopZ],
-    ] as const) {
-      const baseX = xSide * 10;
-      const topX = xSide * 7.7;
-      const segment = {
-        start: [baseX, groundY, baseZ] as [number, number, number],
-        end: [topX, topY, topZ] as [number, number, number],
-      };
-      (isWaterside ? watersideLegs : landsideLegs).push(segment);
-      legFootings.push([baseX, groundY, baseZ]);
-      for (let wheel = 0; wheel < 4; wheel += 1) {
-        wheelPositions.push([baseX + (wheel - 1.5) * 1.35, QUAY_TOP_Y + 0.93, baseZ - 1.0]);
-        wheelPositions.push([baseX + (wheel - 1.5) * 1.35, QUAY_TOP_Y + 0.93, baseZ + 1.0]);
-      }
+    const baseX = xSide * 9.2;
+    const topX = xSide * 7.5;
+
+    // Perna Lado Terra
+    landsideLegs.push({
+      start: [baseX, groundY + 1.2, landBaseZ],
+      end: [topX, portalTopY, landBaseZ + 2.4],
+    });
+    bogieCenters.push([baseX, groundY + 0.5, landBaseZ]);
+
+    // Perna Lado Mar
+    watersideLegs.push({
+      start: [baseX, groundY + 1.2, waterBaseZ],
+      end: [topX, portalTopY, waterBaseZ - 2.4],
+    });
+    bogieCenters.push([baseX, groundY + 0.5, waterBaseZ]);
+  }
+
+  addBoxBeamBatch(THREE, group, landsideLegs, [1.6, 1.8], frameMaterial);
+  addBoxBeamBatch(THREE, group, watersideLegs, [1.8, 2.0], frameMaterial);
+
+  // 2. Balancins e Truques de Rodas com 8 Rodas por Pé (Equalizer Bogies)
+  const wheels: Array<[number, number, number]> = [];
+  for (const [bx, by, bz] of bogieCenters) {
+    // Balancim principal longitudinal
+    addBox(THREE, group, [9.2, 0.9, 1.6], [bx, by + 0.35, bz], darkMaterial);
+    // Sub-balancins articulados
+    addBox(THREE, group, [4.2, 0.6, 1.4], [bx - 2.3, by, bz], darkMaterial);
+    addBox(THREE, group, [4.2, 0.6, 1.4], [bx + 2.3, by, bz], darkMaterial);
+    // Para-choques / limpa-trilhos amarelos
+    addBox(THREE, group, [0.6, 0.7, 1.5], [bx - 4.7, by + 0.2, bz], warningYellowMaterial);
+    addBox(THREE, group, [0.6, 0.7, 1.5], [bx + 4.7, by + 0.2, bz], warningYellowMaterial);
+
+    // 8 Rodas de aço por pé (4 eixos duplos sobre o trilho)
+    for (let w = 0; w < 4; w++) {
+      const wx = bx + (w - 1.5) * 2.2;
+      wheels.push([wx, by - 0.15, bz - 0.45]);
+      wheels.push([wx, by - 0.15, bz + 0.45]);
     }
   }
 
-  addBoxBeamBatch(THREE, group, landsideLegs, [1.45, 1.65], frameMaterial);
-  addBoxBeamBatch(THREE, group, watersideLegs, [1.9, 2.0], frameMaterial);
-  for (const [x, , z] of legFootings) {
-    addBox(THREE, group, [7.3, 0.95, 4.0], [x, groundY, z], darkMaterial);
-  }
-  const wheelMesh = new THREE.InstancedMesh(new THREE.CylinderGeometry(0.68, 0.68, 1.15, 12), darkMaterial, wheelPositions.length);
+  const wheelMesh = new THREE.InstancedMesh(new THREE.CylinderGeometry(0.55, 0.55, 0.6, 12), darkMaterial, wheels.length);
   const wheelPose = new THREE.Object3D();
-  wheelPositions.forEach(([x, y, z], index) => {
+  wheels.forEach(([x, y, z], index) => {
     wheelPose.position.set(x, y, z);
     wheelPose.rotation.x = Math.PI / 2;
     wheelPose.updateMatrix();
@@ -1152,129 +1412,246 @@ function addPortainer(
   wheelMesh.instanceMatrix.needsUpdate = true;
   group.add(wheelMesh);
 
-  const portalMembers: BeamSegment3D[] = [];
-  const portalBraces: BeamSegment3D[] = [];
+  // 3. Travessas e Arco do Portal (Portal Crossbeams & Arch)
+  const portalBeams: BeamSegment3D[] = [];
+  // Travessa do portal (portal tie beam onde passam os caminhões)
+  portalBeams.push(
+    { start: [-7.8, portalArchY, waterBaseZ - 1.8], end: [7.8, portalArchY, waterBaseZ - 1.8] },
+    { start: [-7.8, portalArchY, landBaseZ + 1.8], end: [7.8, portalArchY, landBaseZ + 1.8] },
+    // Vigas superiores do portal
+    { start: [-7.5, portalTopY, waterBaseZ - 2.4], end: [7.5, portalTopY, waterBaseZ - 2.4] },
+    { start: [-7.5, portalTopY, landBaseZ + 2.4], end: [7.5, portalTopY, landBaseZ + 2.4] },
+  );
+  // Vigas de conexão transversais entre perna mar e terra
   for (const xSide of [-1, 1]) {
-    const x = xSide * 7.7;
-    portalMembers.push(
-      { start: [x, 8.5, landTopZ], end: [x, 8.5, waterTopZ] },
-      { start: [x, 18.5, landTopZ], end: [x, 18.5, waterTopZ] },
-    );
-    portalBraces.push(
-      { start: [xSide * 9.5, 6, landBaseZ], end: [x, 21, waterTopZ] },
-      { start: [xSide * 9.5, 6, waterBaseZ], end: [x, 21, landTopZ] },
+    const x = xSide * 7.5;
+    portalBeams.push(
+      { start: [x, portalArchY, landBaseZ + 1.8], end: [x, portalArchY, waterBaseZ - 1.8] },
+      { start: [x, portalTopY, landBaseZ + 2.4], end: [x, portalTopY, waterBaseZ - 2.4] },
     );
   }
-  const portalCrossbeams: BeamSegment3D[] = [
-    { start: [-8, topY, landTopZ], end: [8, topY, landTopZ] },
-    { start: [-8, topY, waterTopZ], end: [8, topY, waterTopZ] },
-    { start: [-7.7, 18.5, landTopZ], end: [7.7, 18.5, landTopZ] },
-    { start: [-7.7, 18.5, waterTopZ], end: [7.7, 18.5, waterTopZ] },
+  addBoxBeamBatch(THREE, group, portalBeams, [1.4, 1.5], frameMaterial);
+
+  // Contraventamento diagonal lateral (K / X-Bracing nas laterais)
+  const sideBracing: BeamSegment3D[] = [];
+  for (const xSide of [-1, 1]) {
+    const x1 = xSide * 8.8;
+    const x2 = xSide * 7.5;
+    sideBracing.push(
+      { start: [x1, groundY + 1.2, landBaseZ], end: [x2, portalArchY, portalCenterZ] },
+      { start: [x1, groundY + 1.2, waterBaseZ], end: [x2, portalArchY, portalCenterZ] },
+      { start: [x2, portalArchY, portalCenterZ], end: [x2, portalTopY, landBaseZ + 2.4] },
+      { start: [x2, portalArchY, portalCenterZ], end: [x2, portalTopY, waterBaseZ - 2.4] },
+    );
+  }
+  addBoxBeamBatch(THREE, group, sideBracing, [0.75, 0.75], braceMaterial);
+
+  // Plataforma do topo do portal
+  addBox(THREE, group, [17.0, 1.4, portalSpanZ - 3], [0, portalTopY, portalCenterZ], frameMaterial);
+
+  // 4. O Grande Carretel de Cabos de Força (Conforme fotos 1, 2 e 3)
+  const reelX = 9.8;
+  const reelY = groundY + 10.5;
+  const reelZ = portalCenterZ + 1.5;
+  const reelOuterRadius = 3.8;
+  const reelInnerRadius = 1.4;
+  const reelWidth = 1.6;
+
+  // Aro externo duplo
+  const reelRimGeom = new THREE.TorusGeometry(reelOuterRadius, 0.18, 8, 24);
+  const reelRim1 = new THREE.Mesh(reelRimGeom, frameMaterial);
+  reelRim1.position.set(reelX, reelY, reelZ - reelWidth / 2);
+  reelRim1.rotation.y = Math.PI / 2;
+  group.add(reelRim1);
+  const reelRim2 = new THREE.Mesh(reelRimGeom, frameMaterial);
+  reelRim2.position.set(reelX, reelY, reelZ + reelWidth / 2);
+  reelRim2.rotation.y = Math.PI / 2;
+  group.add(reelRim2);
+
+  // Tambor central do carretel
+  const reelHub = new THREE.Mesh(new THREE.CylinderGeometry(reelInnerRadius, reelInnerRadius, reelWidth + 0.2, 16), darkMaterial);
+  reelHub.position.set(reelX, reelY, reelZ);
+  reelHub.rotation.z = Math.PI / 2;
+  group.add(reelHub);
+
+  // 8 Raios metálicos (spokes) conectando o centro ao aro
+  const reelSpokes: BeamSegment3D[] = [];
+  for (let s = 0; s < 8; s++) {
+    const angle = (s * Math.PI) / 4;
+    const cos = Math.cos(angle);
+    const sin = Math.sin(angle);
+    reelSpokes.push(
+      { start: [reelX, reelY + sin * reelInnerRadius, reelZ + cos * reelInnerRadius], end: [reelX, reelY + sin * reelOuterRadius, reelZ + cos * reelOuterRadius] }
+    );
+  }
+  addBoxBeamBatch(THREE, group, reelSpokes, [0.18, 0.25], frameMaterial);
+
+  // Braço de suporte do carretel conectado à perna do guindaste
+  addBox(THREE, group, [2.5, 0.6, 0.8], [reelX - 1.25, reelY, reelZ], darkMaterial);
+  addBox(THREE, group, [0.4, 6.0, 0.4], [reelX, reelY - 4.5, reelZ], darkMaterial);
+
+  // 5. Torre Superior em A-Frame (Pylon / Cathead)
+  const pylonApexY = boomTopY + (isSuperPostPanamax ? 27.0 : 22.0);
+  const pylonApexZ = portalCenterZ + 0.5;
+
+  const pylonMembers: BeamSegment3D[] = [
+    // Duas pernas inclinadas da torre
+    { start: [-6.5, boomTopY, pylonApexZ - 2.8], end: [-1.4, pylonApexY, pylonApexZ] },
+    { start: [6.5, boomTopY, pylonApexZ - 2.8], end: [1.4, pylonApexY, pylonApexZ] },
+    { start: [-6.5, boomTopY, pylonApexZ + 2.8], end: [-1.4, pylonApexY, pylonApexZ] },
+    { start: [6.5, boomTopY, pylonApexZ + 2.8], end: [1.4, pylonApexY, pylonApexZ] },
+    // Travessas horizontais da torre
+    { start: [-5.2, boomTopY + (isSuperPostPanamax ? 12.5 : 10.5), pylonApexZ], end: [5.2, boomTopY + (isSuperPostPanamax ? 12.5 : 10.5), pylonApexZ] },
+    { start: [-3.2, boomTopY + (isSuperPostPanamax ? 20.0 : 17.0), pylonApexZ], end: [3.2, boomTopY + (isSuperPostPanamax ? 20.0 : 17.0), pylonApexZ] },
   ];
-  addBoxBeamBatch(THREE, group, portalMembers, [0.9, 0.9], braceMaterial);
-  addBoxBeamBatch(THREE, group, portalBraces, [0.72, 0.72], braceMaterial);
-  addBoxBeamBatch(THREE, group, portalCrossbeams, [1.3, 1.3], frameMaterial);
-  addBox(THREE, group, [17.5, 2.0, 22.8], [0, topY, (landTopZ + waterTopZ) / 2], frameMaterial);
+  addBoxBeamBatch(THREE, group, pylonMembers, [1.2, 1.2], frameMaterial);
 
-  addBox(THREE, group, [10.5, 4.7, 8.5], [0, 31.5, -15.0], paleMaterial);
-  addBox(THREE, group, [8.0, 3.4, 4.2], [0, 31.1, -23.0], darkMaterial);
-  addBox(THREE, group, [5.8, 0.42, 8.6], [0, 32.2, -15.0], glassMaterial);
-  const cableReel = new THREE.Mesh(new THREE.CylinderGeometry(2.2, 2.2, 2.2, 16), darkMaterial);
-  cableReel.rotation.z = Math.PI / 2;
-  cableReel.position.set(0, 12.0, -17.3);
-  group.add(cableReel);
+  // Plataforma dupla de roldanas no ápice da torre (Cathead Platform)
+  addBox(THREE, group, [4.8, 0.45, 4.2], [0, pylonApexY + 0.2, pylonApexZ], paleMaterial);
+  addBox(THREE, group, [4.6, 1.1, 0.1], [0, pylonApexY + 0.8, pylonApexZ - 2.0], warningYellowMaterial);
+  addBox(THREE, group, [4.6, 1.1, 0.1], [0, pylonApexY + 0.8, pylonApexZ + 2.0], warningYellowMaterial);
+  addBox(THREE, group, [0.1, 1.1, 4.0], [-2.3, pylonApexY + 0.8, pylonApexZ], warningYellowMaterial);
+  addBox(THREE, group, [0.1, 1.1, 4.0], [2.3, pylonApexY + 0.8, pylonApexZ], warningYellowMaterial);
 
-  const boomStartZ = -2.5;
-  const boomEndZ = 49;
-  const boomBottomY = 32.6;
-  const boomTopY = 37.0;
-  const boomHalfWidth = 4.6;
-  const boomChordMembers: BeamSegment3D[] = [];
+  // Roldanas de cabo no ápice
+  const sheave1 = new THREE.Mesh(new THREE.CylinderGeometry(0.85, 0.85, 2.2, 16), darkMaterial);
+  sheave1.position.set(0, pylonApexY + 1.2, pylonApexZ);
+  sheave1.rotation.z = Math.PI / 2;
+  group.add(sheave1);
+
+  // 6. Lança Marítima (Outreach Boom) e Contra-Lança (Backreach)
+  const boomTotalLength = boomEndZ - backreachEndZ;
+  const boomGirders: BeamSegment3D[] = [];
   const boomLattice: BeamSegment3D[] = [];
-  const boomCrossMembers: BeamSegment3D[] = [];
-  const panelCount = 13;
-  const panelLength = (boomEndZ - boomStartZ) / panelCount;
+  const boomCrossWalkway: BeamSegment3D[] = [];
+
   for (const xSide of [-1, 1]) {
     const x = xSide * boomHalfWidth;
-    boomChordMembers.push(
-      { start: [x, boomBottomY, boomStartZ], end: [x, boomBottomY, boomEndZ] },
-      { start: [x, boomTopY, boomStartZ], end: [x, boomTopY, boomEndZ] },
+    // Vigas caixão principais longitudinais (inferior e superior)
+    boomGirders.push(
+      { start: [x, boomBottomY, backreachEndZ], end: [x, boomBottomY, boomEndZ] },
+      { start: [x, boomTopY, backreachEndZ], end: [x, boomTopY, boomEndZ] },
     );
-    for (let panel = 0; panel <= panelCount; panel += 1) {
-      const z = boomStartZ + panel * panelLength;
-      boomLattice.push({ start: [x, boomBottomY, z], end: [x, boomTopY, z] });
-      if (panel < panelCount) {
-        const nextZ = z + panelLength;
-        boomLattice.push(
-          { start: [x, boomBottomY, z], end: [x, boomTopY, nextZ] },
-          { start: [x, boomTopY, z], end: [x, boomBottomY, nextZ] },
-        );
-      }
-      boomCrossMembers.push(
-        { start: [-boomHalfWidth, boomBottomY, z], end: [boomHalfWidth, boomBottomY, z] },
-        { start: [-boomHalfWidth, boomTopY, z], end: [boomHalfWidth, boomTopY, z] },
+
+    // Treliças verticais ao longo de toda a extensão
+    const panels = Math.max(16, Math.floor(boomTotalLength / 4.2));
+    const pLen = boomTotalLength / panels;
+    for (let p = 0; p < panels; p++) {
+      const z1 = backreachEndZ + p * pLen;
+      const z2 = z1 + pLen;
+      boomLattice.push(
+        { start: [x, boomBottomY, z1], end: [x, boomTopY, z1] },
+        { start: [x, boomBottomY, z1], end: [x, boomTopY, z2] },
+        { start: [x, boomTopY, z1], end: [x, boomBottomY, z2] },
       );
     }
   }
-  addBoxBeamBatch(THREE, group, boomChordMembers, [0.75, 0.75], frameMaterial);
-  addBoxBeamBatch(THREE, group, boomLattice, [0.36, 0.36], braceMaterial);
-  addBoxBeamBatch(THREE, group, boomCrossMembers, [0.32, 0.32], frameMaterial);
-  const boomHinge = new THREE.Mesh(new THREE.CylinderGeometry(1.05, 1.05, 12, 12), darkMaterial);
-  boomHinge.rotation.z = Math.PI / 2;
-  boomHinge.position.set(0, (boomBottomY + boomTopY) / 2, boomStartZ);
-  group.add(boomHinge);
+  addBoxBeamBatch(THREE, group, boomGirders, [0.85, 0.85], frameMaterial);
+  addBoxBeamBatch(THREE, group, boomLattice, [0.32, 0.32], braceMaterial);
 
-  const towerApex: [number, number, number] = [0, 51, -9];
-  const towerMembers: BeamSegment3D[] = [
-    { start: [-6.2, topY, -9], end: towerApex },
-    { start: [6.2, topY, -9], end: towerApex },
-    { start: [0, 32, -9], end: towerApex },
-    { start: [-6.2, 39, -9], end: [6.2, 39, -9] },
-  ];
-  addBoxBeamBatch(THREE, group, towerMembers, [0.62, 0.62], frameMaterial);
-  const stayRods: BeamSegment3D[] = [];
-  for (const xSide of [-1, 1]) {
-    stayRods.push(
-      { start: towerApex, end: [xSide * boomHalfWidth, boomTopY, boomEndZ] },
-      { start: towerApex, end: [xSide * boomHalfWidth, boomTopY, -31] },
+  // Passarela de pedestres (Walkway) com guarda-corpos no topo da lança
+  addBox(THREE, group, [1.4, 0.15, boomTotalLength], [0, boomTopY + 0.1, (boomEndZ + backreachEndZ) / 2], paleMaterial);
+  for (const xSide of [-0.75, 0.75]) {
+    boomCrossWalkway.push(
+      { start: [xSide, boomTopY + 1.1, backreachEndZ], end: [xSide, boomTopY + 1.1, boomEndZ] }
     );
   }
-  addRoundBeamBatch(THREE, group, stayRods, 0.16, darkMaterial);
+  addRoundBeamBatch(THREE, group, boomCrossWalkway, 0.05, warningYellowMaterial);
 
-  const trolleyZ = 26;
-  const trolleyY = boomBottomY - 0.95;
-  addBox(THREE, group, [7.0, 1.5, 5.5], [0, trolleyY, trolleyZ], darkMaterial);
-  addBox(THREE, group, [2.2, 2.0, 2.0], [3.7, trolleyY - 0.5, trolleyZ], paleMaterial);
-  addBox(THREE, group, [1.72, 0.7, 0.08], [3.7, trolleyY - 0.42, trolleyZ + 1.04], glassMaterial);
-  addBox(THREE, group, [1.72, 0.7, 0.08], [3.7, trolleyY - 0.42, trolleyZ - 1.04], glassMaterial);
-  const trolleyWheels = new THREE.InstancedMesh(new THREE.CylinderGeometry(0.44, 0.44, 0.8, 10), darkMaterial, 4);
-  const trolleyPose = new THREE.Object3D();
-  let trolleyWheelIndex = 0;
-  for (const x of [-3.45, 3.45]) {
-    for (const z of [trolleyZ - 1.9, trolleyZ + 1.9]) {
-      trolleyPose.position.set(x, boomBottomY + 0.24, z);
-      trolleyPose.rotation.z = Math.PI / 2;
-      trolleyPose.updateMatrix();
-      trolleyWheels.setMatrixAt(trolleyWheelIndex, trolleyPose.matrix);
-      trolleyWheelIndex += 1;
-    }
+  // Cabeceira da lança (Headframe com batente e roldanas na ponta marítima)
+  addBox(THREE, group, [boomHalfWidth * 2 + 1.4, 2.2, 1.2], [0, (boomBottomY + boomTopY) / 2, boomEndZ], darkMaterial);
+  // Holofotes de alta potência apontados para o convés do navio
+  for (const xSide of [-2.5, 0, 2.5]) {
+    addBox(THREE, group, [0.8, 0.6, 0.5], [xSide, boomBottomY - 0.4, boomEndZ - 0.5], paleMaterial);
   }
-  trolleyWheels.instanceMatrix.needsUpdate = true;
-  group.add(trolleyWheels);
+
+  // 7. Tirantes Rígidos da Lança (Forestays Articulados com Elos) & Backstays
+  const stayBars: BeamSegment3D[] = [];
+  const stayMidZ = boomStartZ + boomOutreach * 0.48;
+  const stayMidY = boomTopY + 3.8;
+  const stayTipZ = boomStartZ + boomOutreach * 0.88;
+
+  for (const xSide of [-1, 1]) {
+    const x = xSide * boomHalfWidth;
+    // Tirante superior descendo do Ápice até a articulação intermediária
+    stayBars.push(
+      { start: [xSide * 1.4, pylonApexY, pylonApexZ], end: [x, stayMidY, stayMidZ] },
+      // Tirante inferior da articulação intermediária até a ponta da lança
+      { start: [x, stayMidY, stayMidZ], end: [x, boomTopY, stayTipZ] },
+      // Pendurais verticais ligando o tirante à lança
+      { start: [x, stayMidY, stayMidZ], end: [x, boomTopY, stayMidZ] },
+      // Tirantes Traseiros (Backstays) do Ápice descendo até a ponta da contra-lança
+      { start: [xSide * 1.4, pylonApexY, pylonApexZ], end: [x, boomTopY, backreachEndZ + 1.5] },
+    );
+  }
+  addRoundBeamBatch(THREE, group, stayBars, 0.24, darkMaterial);
+
+  // Barra de união transversal entre os tirantes esquerdo e direito
+  addRoundBeamBatch(THREE, group, [
+    { start: [-boomHalfWidth, stayMidY, stayMidZ], end: [boomHalfWidth, stayMidY, stayMidZ] }
+  ], 0.2, frameMaterial);
+
+  // 8. Casa de Máquinas (Machinery House) na Contra-Lança
+  const machZ = landBaseZ - 6.5; // ~ -27.5m
+  const machY = boomTopY + 3.2;
+  const machWidth = isSuperPostPanamax ? 13.5 : 12.5;
+  const machHeight = isSuperPostPanamax ? 6.2 : 5.8;
+  const machLength = isSuperPostPanamax ? 12.5 : 11.5;
+  addBox(THREE, group, [machWidth, machHeight, machLength], [0, machY, machZ], paleMaterial);
+  // Detalhes da casa de máquinas: venezianas de ventilação e faixa técnica
+  addBox(THREE, group, [machWidth + 0.1, 1.4, machLength * 0.65], [0, machY + 1.2, machZ], darkMaterial);
+  addBox(THREE, group, [machWidth + 0.7, 0.2, machLength + 0.7], [0, machY + machHeight / 2 + 0.1, machZ], frameMaterial);
+
+  // Placas laterais com logotipo ZPMC e Categoria
+  const logoMaterial = createPortainerLogoMaterial(THREE, portainer.id, isSuperPostPanamax);
+  const logoPlateGeo = new THREE.PlaneGeometry(machLength * 0.72, machHeight * 0.68);
+  // Lado direito (+X)
+  const plateRight = new THREE.Mesh(logoPlateGeo, logoMaterial);
+  plateRight.position.set(machWidth / 2 + 0.08, machY, machZ);
+  plateRight.rotation.y = Math.PI / 2;
+  group.add(plateRight);
+  // Lado esquerdo (-X)
+  const plateLeft = new THREE.Mesh(logoPlateGeo, logoMaterial);
+  plateLeft.position.set(-machWidth / 2 - 0.08, machY, machZ);
+  plateLeft.rotation.y = -Math.PI / 2;
+  group.add(plateLeft);
+
+  // 9. Trole (Trolley) com Cabine Panorâmica e Spreader Automático com Flippers
+  const trolleyZ = Math.min(boomEndZ - 6, Math.max(boomStartZ + 12, waterBaseZ + 18));
+  const trolleyY = boomBottomY - 0.7;
+
+  // Chassi do trole correndo sob as vigas da lança
+  addBox(THREE, group, [boomHalfWidth * 2 - 0.4, 1.4, 5.8], [0, trolleyY, trolleyZ], darkMaterial);
+
+  // Cabine Panorâmica Envidraçada do Operador (suspensa voltada para o mar)
+  const cabinX = 3.6;
+  const cabinY = trolleyY - 1.8;
+  addBox(THREE, group, [2.4, 2.2, 2.8], [cabinX, cabinY, trolleyZ + 1.2], paleMaterial);
+  addBox(THREE, group, [2.2, 1.2, 0.08], [cabinX, cabinY - 0.2, trolleyZ + 2.62], glassMaterial); // Janela frontal mar
+  addBox(THREE, group, [0.08, 1.2, 2.6], [cabinX + 1.22, cabinY - 0.2, trolleyZ + 1.2], glassMaterial); // Janela lateral
+
+  // 4 Cabos de aço de içamento (Wire Ropes)
+  const spreaderY = Math.max(groundY + 8, boomBottomY - 18.0);
   const hoistCables: BeamSegment3D[] = [];
   for (const xSide of [-1, 1]) {
     for (const zSide of [-1, 1]) {
       hoistCables.push({
-        start: [xSide * 4.7, trolleyY - 0.2, trolleyZ + zSide * 1.8],
-        end: [xSide * 4.7, 20.56, trolleyZ + zSide * 1.2],
+        start: [xSide * 3.8, trolleyY - 0.4, trolleyZ + zSide * 2.2],
+        end: [xSide * 5.8, spreaderY + 0.8, trolleyZ + zSide * 1.1],
       });
     }
   }
-  addRoundBeamBatch(THREE, group, hoistCables, 0.13, darkMaterial);
-  addBox(THREE, group, [12.2, 0.52, 2.6], [0, 20.3, trolleyZ], spreaderMaterial);
+  addRoundBeamBatch(THREE, group, hoistCables, 0.08, darkMaterial);
+
+  // Spreader Telescópico Automático (Amarelo de segurança)
+  addBox(THREE, group, [12.4, 0.65, 2.5], [0, spreaderY + 0.35, trolleyZ], spreaderMaterial);
+  addBox(THREE, group, [2.6, 0.85, 2.6], [0, spreaderY + 0.85, trolleyZ], darkMaterial); // Torreta do spreader
+
+  // 4 Aletas guias / flippers anguladas nos cantos do spreader
   for (const xSide of [-1, 1]) {
     for (const zSide of [-1, 1]) {
-      addBox(THREE, group, [0.65, 0.72, 0.62], [xSide * 5.75, 20.2, trolleyZ + zSide * 1.12], darkMaterial);
+      const flipper = addBox(THREE, group, [0.4, 1.1, 0.4], [xSide * 6.2, spreaderY - 0.2, trolleyZ + zSide * 1.3], warningYellowMaterial);
+      flipper.rotation.z = -xSide * 0.35;
     }
   }
 

@@ -124,7 +124,10 @@ def run_sync():
     try:
         res = requests.get(url, headers=headers, timeout=12)
         res.encoding = res.apparent_encoding
-        soup = BeautifulSoup(res.text, "lxml")
+        try:
+            soup = BeautifulSoup(res.text, "lxml")
+        except Exception:
+            soup = BeautifulSoup(res.text, "html.parser")
         rows = soup.find_all("tr", id=re.compile(r"trManobraArea"))
 
         for row in rows:

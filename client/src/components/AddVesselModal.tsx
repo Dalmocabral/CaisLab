@@ -91,6 +91,10 @@ export default function AddVesselModal({
   const [manualType, setManualType] = useState<VesselType>("container");
   const [manualBays, setManualBays] = useState<number | undefined>(undefined);
   const [manualRows, setManualRows] = useState<number | undefined>(undefined);
+  const [manualBridgePosition, setManualBridgePosition] = useState<"all-aft" | "between-bays">("all-aft");
+  const [manualBridgeBay, setManualBridgeBay] = useState<number | undefined>(34);
+  const [manualSeparateFunnel, setManualSeparateFunnel] = useState(false);
+  const [manualFunnelBay, setManualFunnelBay] = useState<number | undefined>(54);
   const [saveToCatalog, setSaveToCatalog] = useState(true);
 
   // Reset any accidental scroll when switching tabs
@@ -203,6 +207,10 @@ export default function AddVesselModal({
     const savedVessel = catalog.find((item) => item.name.trim().toUpperCase() === m.name.trim().toUpperCase());
     const bayCount = normalizeBayCount(savedVessel?.bayCount ?? savedVessel?.bays ?? savedVessel?.maxBayNumber);
     const rowCount = normalizeRowCount(savedVessel?.rowCount ?? savedVessel?.rows);
+    const bridgePosition = savedVessel?.bridgePosition;
+    const bridgeBay = savedVessel?.bridgeBay;
+    const separateFunnel = savedVessel?.separateFunnel;
+    const funnelBay = savedVessel?.funnelBay;
 
     const newVessel: Vessel = {
       id,
@@ -220,6 +228,10 @@ export default function AddVesselModal({
       bays: bayCount,
       rowCount,
       rows: rowCount,
+      bridgePosition,
+      bridgeBay,
+      separateFunnel,
+      funnelBay,
     };
 
     // Auto save to persistent catalog
@@ -233,6 +245,10 @@ export default function AddVesselModal({
       rowCount,
       rows: rowCount,
       berthingSide: side,
+      bridgePosition,
+      bridgeBay,
+      separateFunnel,
+      funnelBay,
       imo: m.imo,
       type: m.type || VESSEL_TYPE_LABELS[vesselType],
       flag: m.flag,
@@ -277,6 +293,10 @@ export default function AddVesselModal({
       bays: bayCount,
       rowCount,
       rows: rowCount,
+      bridgePosition: v.bridgePosition,
+      bridgeBay: v.bridgeBay,
+      separateFunnel: v.separateFunnel,
+      funnelBay: v.funnelBay,
     };
 
     onAddVessel(
@@ -296,6 +316,10 @@ export default function AddVesselModal({
     const draft = Math.max(0, Number(manualDraft) || 10);
     const bayCount = manualType === "container" ? normalizeBayCount(manualBays) : undefined;
     const rowCount = manualType === "container" ? normalizeRowCount(manualRows) : undefined;
+    const bridgePosition = manualType === "container" ? manualBridgePosition : undefined;
+    const bridgeBay = manualType === "container" && manualBridgePosition === "between-bays" ? manualBridgeBay : undefined;
+    const separateFunnel = manualType === "container" && manualBridgePosition === "between-bays" ? manualSeparateFunnel : undefined;
+    const funnelBay = manualType === "container" && manualBridgePosition === "between-bays" && manualSeparateFunnel ? manualFunnelBay : undefined;
     const position = calculateNextPosition(loa);
 
     const newVessel: Vessel = {
@@ -314,6 +338,10 @@ export default function AddVesselModal({
       bays: bayCount,
       rowCount,
       rows: rowCount,
+      bridgePosition,
+      bridgeBay,
+      separateFunnel,
+      funnelBay,
     };
 
     if (saveToCatalog) {
@@ -327,6 +355,10 @@ export default function AddVesselModal({
         rowCount,
         rows: rowCount,
         berthingSide: manualSide,
+        bridgePosition,
+        bridgeBay,
+        separateFunnel,
+        funnelBay,
         type: VESSEL_TYPE_LABELS[manualType],
       });
       await loadCatalog();
@@ -929,7 +961,8 @@ export default function AddVesselModal({
               </div>
 
               {manualType === "container" && (
-                <div className="grid grid-cols-2 gap-3">
+                <>
+                  <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="block text-xs font-bold text-[#2d4b58] mb-1" htmlFor="manual-bay-count">
                       Quantidade de Bays (até {MAX_BAY_COUNT})
@@ -975,7 +1008,80 @@ export default function AddVesselModal({
                     </div>
                   </div>
                 </div>
-              )}
+
+                {/* Layout da Superestrutura (Passadiço & Chaminé) */}
+                <div className="space-y-2.5 p-3 bg-slate-50 border border-slate-200 rounded-lg">
+                  <div>
+                    <label className="block text-xs font-bold text-[#2d4b58] mb-1">
+                      Posição do Passadiço
+                    </label>
+                    <select
+                      value={manualBridgePosition}
+                      onChange={(e) => setManualBridgePosition(e.target.value as "all-aft" | "between-bays")}
+                      className="w-full px-3 py-2 text-xs border border-[#cfdce0] rounded-lg focus:outline-none focus:border-[#16869a] bg-white text-[#1e293b]"
+                    >
+                      <option value="all-aft">Na Popa Extrema (All Aft - Ex: CMA CGM Veracruz)</option>
+                      <option value="between-bays">Entre as Bays (Meio / Ilha de comando)</option>
+                    </select>
+                  </div>
+
+                  {manualBridgePosition === "between-bays" && (
+                    <div className="space-y-2.5 pt-1">
+                      <div>
+                        <label className="block text-xs font-bold text-[#2d4b58] mb-1">
+                          Bay do Passadiço (onde morre a bay)
+                        </label>
+                        <div className="relative">
+                          <input
+                            type="number"
+                            min="1"
+                            max={MAX_BAY_COUNT}
+                            step="1"
+                            value={manualBridgeBay ?? 34}
+                            onChange={(e) => setManualBridgeBay(Number(e.target.value) || 34)}
+                            className="w-full pl-3 pr-12 py-2 text-xs border border-[#cfdce0] rounded-lg focus:outline-none focus:border-[#16869a] bg-white"
+                          />
+                          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400">Bay</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 pt-1">
+                        <input
+                          id="manual-separate-funnel-check"
+                          type="checkbox"
+                          className="rounded border-slate-300 text-teal-600 focus:ring-teal-500"
+                          checked={manualSeparateFunnel}
+                          onChange={(e) => setManualSeparateFunnel(e.target.checked)}
+                        />
+                        <label htmlFor="manual-separate-funnel-check" className="text-xs font-semibold text-[#2d4b58] cursor-pointer">
+                          Chaminé separada do passadiço (Duas Ilhas)
+                        </label>
+                      </div>
+
+                      {manualSeparateFunnel && (
+                        <div>
+                          <label className="block text-xs font-bold text-[#2d4b58] mb-1">
+                            Bay da Chaminé (onde morre a bay)
+                          </label>
+                          <div className="relative">
+                            <input
+                              type="number"
+                              min="1"
+                              max={MAX_BAY_COUNT}
+                              step="1"
+                              value={manualFunnelBay ?? 54}
+                              onChange={(e) => setManualFunnelBay(Number(e.target.value) || 54)}
+                              className="w-full pl-3 pr-12 py-2 text-xs border border-[#cfdce0] rounded-lg focus:outline-none focus:border-[#16869a] bg-white"
+                            />
+                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400">Bay</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
 
               <div className="grid grid-cols-2 gap-3">
                 <div>

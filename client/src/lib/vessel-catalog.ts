@@ -1,4 +1,4 @@
-import { normalizeBayCount, normalizeRowCount } from "./berth-model";
+import { normalizeBayCount, normalizeRowCount, type BridgePositionType } from "./berth-model";
 
 export interface CatalogVessel {
   name: string;
@@ -19,6 +19,15 @@ export interface CatalogVessel {
   flag?: string;
   lastBerth?: string;
   updatedAt?: string;
+  /** Posição do passadiço: 'all-aft' (popa extrema) ou 'between-bays' (entre as bays). */
+  bridgePosition?: BridgePositionType;
+  bridgeBay?: number;
+  bridgeBayStart?: number;
+  bridgeBayEnd?: number;
+  separateFunnel?: boolean;
+  funnelBay?: number;
+  funnelBayStart?: number;
+  funnelBayEnd?: number;
 }
 
 export interface PraticagemManeuver {
@@ -247,7 +256,8 @@ export async function fetchPraticagemLive(): Promise<PraticagemLiveResponse> {
   }
 
   try {
-    const fallbackRes = await fetch("/praticagem_live.json", { cache: "no-store" });
+    const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+    const fallbackRes = await fetch(`${basePath}/praticagem_live.json`, { cache: "no-store" });
     if (fallbackRes.ok) {
       return await fallbackRes.json();
     }
@@ -269,9 +279,12 @@ export async function syncPraticagemNow(): Promise<{ success: boolean; count?: n
       return { success: true, count: data.maneuversCount, message: "Praticagem RJ sincronizada com sucesso!" };
     }
   } catch (err) {
-    console.warn("Erro ao acionar /api/praticagem/sync:", err);
+    console.warn("API /api/praticagem/sync indisponível (modo estático/GitHub Pages):", err);
   }
-  return { success: false, message: "Não foi possível sincronizar no momento." };
+  return {
+    success: false,
+    message: "No GitHub Pages, as manobras são sincronizadas automaticamente a cada 2 horas via GitHub Actions. No app Electron, a sincronização é em tempo real.",
+  };
 }
 
 /**

@@ -75,8 +75,102 @@ export function normalizeBayCount(value: unknown): number | undefined {
 export function bayNumberSequence(value: unknown): number[] {
   const bayCount = normalizeBayCount(value);
   if (!bayCount) return [];
-  // Ex.: 20 bays -> 01, 03, 05, 07...21; bays ímpares são posições de 20 pés.
-  return Array.from({ length: Math.floor(bayCount / 2) + 1 }, (_, index) => index * 2 + 1);
+  // Bays de 20 pés são ímpares (01, 03...); se a última bay for par (ex.: 50, 78), inclui a bay par de 40 pés no final.
+  const isEven = bayCount % 2 === 0;
+  const oddCount = isEven ? bayCount / 2 : Math.floor(bayCount / 2) + 1;
+  const seq = Array.from({ length: oddCount }, (_, index) => index * 2 + 1);
+  if (isEven && bayCount > 0 && !seq.includes(bayCount)) {
+    seq.push(bayCount);
+  }
+  return seq;
+}
+
+/**
+ * Retorna o par de bays de 20 pés que compõem uma bay / escotilha de 40 pés.
+ * Ex: 58 (40') -> [57, 59]
+ *     57 ou 59 -> [57, 59]
+ *     34 (40') -> [33, 35]
+ *     02 (40') -> [01, 03]
+ */
+export function get40ftBayPair(bayNumber: number): [number, number] {
+  if (bayNumber <= 0) return [1, 3];
+  if (bayNumber % 2 === 0) {
+    return [bayNumber - 1, bayNumber + 1];
+  }
+  if ((bayNumber - 1) % 4 === 0) {
+    return [bayNumber, bayNumber + 2];
+  }
+  return [bayNumber - 2, bayNumber];
+}
+
+/**
+ * Retorna a lista de números de bays ocupadas pela superestrutura (passadiço ou chaminé).
+ * Considera que cada bay de 40 pés (par) ocupa os dois slots de 20 pés (ímpares).
+ */
+export function getOccupiedBayNumbers(
+  targetBay?: number,
+  startBay?: number,
+  endBay?: number,
+): number[] {
+  const primary = targetBay ?? startBay;
+  if (!primary) return [];
+  const start = startBay ?? primary;
+  const end = endBay ?? primary;
+
+  const minTarget = Math.min(start, end);
+  const maxTarget = Math.max(start, end);
+
+  const [min20] = get40ftBayPair(minTarget);
+  const [, max20] = get40ftBayPair(maxTarget);
+
+  const occupied: number[] = [];
+  for (let b = min20; b <= max20; b++) {
+    occupied.push(b);
+  }
+  return occupied;
+}
+
+export type BridgePositionType = "all-aft" | "between-bays";
+
+export interface VesselSuperstructure {
+  bridgePosition: BridgePositionType;
+  bridgeBay?: number;
+  bridgeBayStart?: number;
+  bridgeBayEnd?: number;
+  separateFunnel: boolean;
+  funnelBay?: number;
+  funnelBayStart?: number;
+  funnelBayEnd?: number;
+}
+
+export function resolveVesselSuperstructure(vessel: Partial<Vessel>): VesselSuperstructure {
+  const bridgePos: BridgePositionType = vessel.bridgePosition === "between-bays" ? "between-bays" : "all-aft";
+  const bBay = typeof vessel.bridgeBay === "number"
+    ? vessel.bridgeBay
+    : typeof vessel.bridgeBayStart === "number"
+    ? vessel.bridgeBayStart
+    : bridgePos === "between-bays"
+    ? 34
+    : undefined;
+  const sepFunnel = Boolean(vessel.separateFunnel);
+  const fBay = typeof vessel.funnelBay === "number"
+    ? vessel.funnelBay
+    : typeof vessel.funnelBayStart === "number"
+    ? vessel.funnelBayStart
+    : sepFunnel
+    ? 54
+    : undefined;
+
+  return {
+    bridgePosition: bridgePos,
+    bridgeBay: bBay,
+    bridgeBayStart: vessel.bridgeBayStart ?? bBay,
+    bridgeBayEnd: vessel.bridgeBayEnd ?? bBay,
+    separateFunnel: sepFunnel,
+    funnelBay: fBay,
+    funnelBayStart: vessel.funnelBayStart ?? fBay,
+    funnelBayEnd: vessel.funnelBayEnd ?? fBay,
+  };
 }
 
 /** Normaliza a quantidade de rows (filas transversais) de contêineres na boca do navio. */
@@ -282,24 +376,42 @@ export interface Vessel {
   rowCount?: number;
   /** @deprecated Campo legado mantido para compatibilidade. */
   rows?: number;
+  /** Posição do passadiço: 'all-aft' (popa extrema, como CMA CGM Veracruz) ou 'between-bays' (entre bays). */
+  bridgePosition?: BridgePositionType;
+  /** Bay onde o passadiço fica quando 'between-bays' (ex: 34). */
+  bridgeBay?: number;
+  bridgeBayStart?: number;
+  bridgeBayEnd?: number;
+  /** Indica se a chaminé é separada do passadiço (navios grandes / duas ilhas). */
+  separateFunnel?: boolean;
+  /** Bay onde a chaminé separada fica (ex: 54). */
+  funnelBay?: number;
+  funnelBayStart?: number;
+  funnelBayEnd?: number;
 }
+
+export type PortainerCategory = "super-post-panamax" | "post-panamax";
 
 export interface Portainer {
   id: string; // P4, P5, P6, P7, P8, P9
   name: string;
+  manufacturer?: string; // "ZPMC"
+  category?: PortainerCategory; // "super-post-panamax" (P8, P9) | "post-panamax" (P4, P5, P6, P7)
   position: number;
   color: string;
   badgeColor: string;
   enabled: boolean;
+  boomOutreach?: number; // Alcance útil da lança sobre o mar medido a partir do trilho marítimo (m)
+  boomHeight?: number; // Altura livre sob a lança a partir da cota do trilho/cais (m)
 }
 
 export const DEFAULT_PORTAINERS: Portainer[] = [
-  { id: "P7", name: "P7", position: 175, color: "#65a30d", badgeColor: "#4d7c0f", enabled: true },
-  { id: "P6", name: "P6", position: 215, color: "#2563eb", badgeColor: "#1d4ed8", enabled: true },
-  { id: "P9", name: "P9", position: 255, color: "#be123c", badgeColor: "#9f1239", enabled: true },
-  { id: "P8", name: "P8", position: 295, color: "#ea580c", badgeColor: "#c2410c", enabled: true },
-  { id: "P5", name: "P5", position: 640, color: "#9333ea", badgeColor: "#7e22ce", enabled: true },
-  { id: "P4", name: "P4", position: 695, color: "#78350f", badgeColor: "#58250b", enabled: true },
+  { id: "P7", name: "P7", manufacturer: "ZPMC", category: "post-panamax", position: 175, color: "#65a30d", badgeColor: "#4d7c0f", enabled: true, boomOutreach: 60, boomHeight: 44 },
+  { id: "P6", name: "P6", manufacturer: "ZPMC", category: "post-panamax", position: 215, color: "#2563eb", badgeColor: "#1d4ed8", enabled: true, boomOutreach: 60, boomHeight: 44 },
+  { id: "P9", name: "P9", manufacturer: "ZPMC", category: "super-post-panamax", position: 255, color: "#be123c", badgeColor: "#9f1239", enabled: true, boomOutreach: 65, boomHeight: 48 },
+  { id: "P8", name: "P8", manufacturer: "ZPMC", category: "super-post-panamax", position: 295, color: "#ea580c", badgeColor: "#c2410c", enabled: true, boomOutreach: 65, boomHeight: 48 },
+  { id: "P5", name: "P5", manufacturer: "ZPMC", category: "post-panamax", position: 640, color: "#9333ea", badgeColor: "#7e22ce", enabled: true, boomOutreach: 52, boomHeight: 40 },
+  { id: "P4", name: "P4", manufacturer: "ZPMC", category: "post-panamax", position: 695, color: "#78350f", badgeColor: "#58250b", enabled: true, boomOutreach: 52, boomHeight: 40 },
 ];
 
 export interface PortainerLimit {
@@ -689,6 +801,14 @@ export function normalizeScenario(value: unknown): Scenario | null {
       bays: normalizeBayCount((raw as any).bayCount ?? (raw as any).maxBayNumber ?? raw.bays),
       rowCount: normalizeRowCount((raw as any).rowCount ?? raw.rows),
       rows: normalizeRowCount((raw as any).rowCount ?? raw.rows),
+      bridgePosition: (raw as any).bridgePosition === "between-bays" ? "between-bays" : "all-aft",
+      bridgeBay: typeof (raw as any).bridgeBay === "number" ? (raw as any).bridgeBay : typeof (raw as any).bridgeBayStart === "number" ? (raw as any).bridgeBayStart : undefined,
+      bridgeBayStart: typeof (raw as any).bridgeBayStart === "number" ? (raw as any).bridgeBayStart : typeof (raw as any).bridgeBay === "number" ? (raw as any).bridgeBay : undefined,
+      bridgeBayEnd: typeof (raw as any).bridgeBayEnd === "number" ? (raw as any).bridgeBayEnd : typeof (raw as any).bridgeBay === "number" ? (raw as any).bridgeBay : undefined,
+      separateFunnel: Boolean((raw as any).separateFunnel),
+      funnelBay: typeof (raw as any).funnelBay === "number" ? (raw as any).funnelBay : typeof (raw as any).funnelBayStart === "number" ? (raw as any).funnelBayStart : undefined,
+      funnelBayStart: typeof (raw as any).funnelBayStart === "number" ? (raw as any).funnelBayStart : typeof (raw as any).funnelBay === "number" ? (raw as any).funnelBay : undefined,
+      funnelBayEnd: typeof (raw as any).funnelBayEnd === "number" ? (raw as any).funnelBayEnd : typeof (raw as any).funnelBay === "number" ? (raw as any).funnelBay : undefined,
     });
   }
 
@@ -719,13 +839,21 @@ export function normalizeScenario(value: unknown): Scenario | null {
         if (!isRecord(raw) || typeof raw.id !== "string" || !raw.id) return [];
         const def = DEFAULT_PORTAINERS.find((p) => p.id === raw.id);
         const pos = typeof raw.position === "number" && Number.isFinite(raw.position) ? Math.max(0, raw.position) : (def?.position ?? 150);
+        const boomOutreach = typeof raw.boomOutreach === "number" && Number.isFinite(raw.boomOutreach) ? Math.max(20, Math.min(90, raw.boomOutreach)) : (def?.boomOutreach ?? 55);
+        const boomHeight = typeof raw.boomHeight === "number" && Number.isFinite(raw.boomHeight) ? Math.max(15, Math.min(80, raw.boomHeight)) : (def?.boomHeight ?? 42);
+        const manufacturer = typeof raw.manufacturer === "string" ? raw.manufacturer : (def?.manufacturer ?? "ZPMC");
+        const category = raw.category === "super-post-panamax" || raw.category === "post-panamax" ? raw.category : (def?.category ?? "post-panamax");
         return [{
           id: raw.id,
           name: typeof raw.name === "string" ? raw.name : raw.id,
+          manufacturer,
+          category,
           position: pos,
           color: typeof raw.color === "string" ? raw.color : (def?.color ?? "#2563eb"),
           badgeColor: typeof raw.badgeColor === "string" ? raw.badgeColor : (def?.badgeColor ?? "#1d4ed8"),
           enabled: typeof raw.enabled === "boolean" ? raw.enabled : true,
+          boomOutreach,
+          boomHeight,
         }];
       });
       DEFAULT_PORTAINERS.forEach((def) => {

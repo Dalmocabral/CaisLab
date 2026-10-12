@@ -5,9 +5,12 @@ on:
     branches:
       - main
   workflow_dispatch:
+  schedule:
+    # Sincronização automática com a Praticagem RJ a cada 2 horas
+    - cron: '0 */2 * * *'
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -21,11 +24,35 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Sync Praticagem RJ live maneuvers
+        run: python scripts/sync_praticagem.py
+        continue-on-error: true
+
+      - name: Commit and push updated maneuvers
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add client/public/praticagem_live.json client/public/vessels_catalog.json vessels_catalog.json || true
+          git commit -m "chore(praticagem): atualizar manobras ao vivo [skip ci]" || echo "Nenhuma alteração nos dados da praticagem"
+          git push origin main || echo "Push ignorado"
+        continue-on-error: true
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: "npm"
 
       - name: Install dependencies
         run: npm install
