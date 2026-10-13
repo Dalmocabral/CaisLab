@@ -72,92 +72,17 @@ export function normalizeBayCount(value: unknown): number | undefined {
   return Math.min(MAX_BAY_COUNT, Math.max(1, Math.round(parsed)));
 }
 
-export function normalizeFortyFootOnlyBays(value: unknown): number[] {
-  if (Array.isArray(value)) {
-    return Array.from(
-      new Set(
-        value
-          .map((n) => Number(n))
-          .filter((n) => Number.isFinite(n) && n > 0)
-          .map((n) => Math.round(n))
-      )
-    ).sort((a, b) => a - b);
-  }
-  if (typeof value === "string") {
-    return Array.from(
-      new Set(
-        value
-          .split(/[,;\s]+/)
-          .map((s) => Number(s.trim()))
-          .filter((n) => Number.isFinite(n) && n > 0)
-          .map((n) => Math.round(n))
-      )
-    ).sort((a, b) => a - b);
-  }
-  return [];
-}
-
-export function bayNumberSequence(
-  value: unknown,
-  fortyFootOnlyBaysInput?: unknown,
-  bridgeBayInput?: unknown,
-): number[] {
+export function bayNumberSequence(value: unknown): number[] {
   const bayCount = normalizeBayCount(value);
   if (!bayCount) return [];
-  const fortyOnly = new Set(normalizeFortyFootOnlyBays(fortyFootOnlyBaysInput));
-  const bridgeBay = typeof bridgeBayInput === "number" && bridgeBayInput > 0 ? Math.round(bridgeBayInput) : undefined;
-
-  if (fortyOnly.size === 0 && !bridgeBay) {
-    const isEven = bayCount % 2 === 0;
-    const oddCount = isEven ? bayCount / 2 : Math.floor(bayCount / 2) + 1;
-    const seq = Array.from({ length: oddCount }, (_, index) => index * 2 + 1);
-    if (isEven && bayCount > 0 && !seq.includes(bayCount)) {
-      seq.push(bayCount);
-    }
-    return seq;
+  // Bays de 20 pés são ímpares (01, 03...); se a última bay for par (ex.: 50, 78), inclui a bay par de 40 pés no final.
+  const isEven = bayCount % 2 === 0;
+  const oddCount = isEven ? bayCount / 2 : Math.floor(bayCount / 2) + 1;
+  const seq = Array.from({ length: oddCount }, (_, index) => index * 2 + 1);
+  if (isEven && bayCount > 0 && !seq.includes(bayCount)) {
+    seq.push(bayCount);
   }
-
-  const specialEvens = new Set<number>();
-  if (bridgeBay && bridgeBay % 2 === 0) specialEvens.add(bridgeBay);
-  fortyOnly.forEach((f) => {
-    if (f % 2 === 0) specialEvens.add(f);
-  });
-
-  const seq: number[] = [];
-  const handled = new Set<number>();
-  let b = 2;
-  while (b <= bayCount + 2) {
-    if (specialEvens.has(b)) {
-      seq.push(b);
-      handled.add(b);
-      if (specialEvens.has(b + 2)) {
-        b += 2;
-      } else {
-        b += 4;
-      }
-      continue;
-    }
-    if (fortyOnly.has(b)) {
-      seq.push(b);
-      handled.add(b);
-    } else {
-      if (b - 1 <= bayCount && !handled.has(b - 1)) {
-        seq.push(b - 1);
-        handled.add(b - 1);
-      }
-      if (b + 1 <= bayCount && !handled.has(b + 1)) {
-        seq.push(b + 1);
-        handled.add(b + 1);
-      }
-    }
-    b += 4;
-  }
-  specialEvens.forEach((ev) => {
-    if (ev <= bayCount && !seq.includes(ev)) {
-      seq.push(ev);
-    }
-  });
-  return Array.from(new Set(seq)).sort((x, y) => x - y);
+  return seq;
 }
 
 /**
@@ -180,7 +105,7 @@ export function get40ftBayPair(bayNumber: number): [number, number] {
 
 /**
  * Retorna a lista de números de bays ocupadas pela superestrutura (passadiço ou chaminé).
- * Considera que cada bay de 40 pés (par) ocupa os dois slots de 20 pés (ímpares), ou a própria bay se for especial.
+ * Considera que cada bay de 40 pés (par) ocupa os dois slots de 20 pés (ímpares).
  */
 export function getOccupiedBayNumbers(
   targetBay?: number,
@@ -195,16 +120,14 @@ export function getOccupiedBayNumbers(
   const minTarget = Math.min(start, end);
   const maxTarget = Math.max(start, end);
 
-  const occupied: number[] = [primary];
-  for (let b = minTarget; b <= maxTarget; b++) {
-    occupied.push(b);
-  }
   const [min20] = get40ftBayPair(minTarget);
   const [, max20] = get40ftBayPair(maxTarget);
+
+  const occupied: number[] = [];
   for (let b = min20; b <= max20; b++) {
     occupied.push(b);
   }
-  return Array.from(new Set(occupied));
+  return occupied;
 }
 
 export type BridgePositionType = "all-aft" | "between-bays";
@@ -465,8 +388,6 @@ export interface Vessel {
   funnelBay?: number;
   funnelBayStart?: number;
   funnelBayEnd?: number;
-  /** Bays de 40' puras (não aceitam contêineres de 20', exibidas com numeração par ex: 54, 58, 78). */
-  fortyFootOnlyBays?: number[];
 }
 
 export type PortainerCategory = "super-post-panamax" | "post-panamax";
@@ -888,7 +809,6 @@ export function normalizeScenario(value: unknown): Scenario | null {
       funnelBay: typeof (raw as any).funnelBay === "number" ? (raw as any).funnelBay : typeof (raw as any).funnelBayStart === "number" ? (raw as any).funnelBayStart : undefined,
       funnelBayStart: typeof (raw as any).funnelBayStart === "number" ? (raw as any).funnelBayStart : typeof (raw as any).funnelBay === "number" ? (raw as any).funnelBay : undefined,
       funnelBayEnd: typeof (raw as any).funnelBayEnd === "number" ? (raw as any).funnelBayEnd : typeof (raw as any).funnelBay === "number" ? (raw as any).funnelBay : undefined,
-      fortyFootOnlyBays: normalizeFortyFootOnlyBays((raw as any).fortyFootOnlyBays),
     });
   }
 

@@ -43,7 +43,6 @@ import {
   normalizeBayCount,
   MAX_ROW_COUNT,
   normalizeRowCount,
-  normalizeFortyFootOnlyBays,
   normalizeVesselType,
   VESSEL_COLORS,
   makeId,
@@ -96,7 +95,6 @@ export default function AddVesselModal({
   const [manualBridgeBay, setManualBridgeBay] = useState<number | undefined>(34);
   const [manualSeparateFunnel, setManualSeparateFunnel] = useState(false);
   const [manualFunnelBay, setManualFunnelBay] = useState<number | undefined>(54);
-  const [manualFortyOnlyBays, setManualFortyOnlyBays] = useState<string>("");
   const [saveToCatalog, setSaveToCatalog] = useState(true);
 
   // Reset any accidental scroll when switching tabs
@@ -213,7 +211,6 @@ export default function AddVesselModal({
     const bridgeBay = savedVessel?.bridgeBay;
     const separateFunnel = savedVessel?.separateFunnel;
     const funnelBay = savedVessel?.funnelBay;
-    const fortyFootOnlyBays = savedVessel?.fortyFootOnlyBays;
 
     const newVessel: Vessel = {
       id,
@@ -235,7 +232,6 @@ export default function AddVesselModal({
       bridgeBay,
       separateFunnel,
       funnelBay,
-      fortyFootOnlyBays,
     };
 
     // Auto save to persistent catalog
@@ -253,7 +249,6 @@ export default function AddVesselModal({
       bridgeBay,
       separateFunnel,
       funnelBay,
-      fortyFootOnlyBays,
       imo: m.imo,
       type: m.type || VESSEL_TYPE_LABELS[vesselType],
       flag: m.flag,
@@ -302,7 +297,6 @@ export default function AddVesselModal({
       bridgeBay: v.bridgeBay,
       separateFunnel: v.separateFunnel,
       funnelBay: v.funnelBay,
-      fortyFootOnlyBays: v.fortyFootOnlyBays,
     };
 
     onAddVessel(
@@ -326,7 +320,6 @@ export default function AddVesselModal({
     const bridgeBay = manualType === "container" && manualBridgePosition === "between-bays" ? manualBridgeBay : undefined;
     const separateFunnel = manualType === "container" && manualBridgePosition === "between-bays" ? manualSeparateFunnel : undefined;
     const funnelBay = manualType === "container" && manualBridgePosition === "between-bays" && manualSeparateFunnel ? manualFunnelBay : undefined;
-    const fortyFootOnlyBays = manualType === "container" ? normalizeFortyFootOnlyBays(manualFortyOnlyBays) : undefined;
     const position = calculateNextPosition(loa);
 
     const newVessel: Vessel = {
@@ -349,7 +342,6 @@ export default function AddVesselModal({
       bridgeBay,
       separateFunnel,
       funnelBay,
-      fortyFootOnlyBays,
     };
 
     if (saveToCatalog) {
@@ -367,7 +359,6 @@ export default function AddVesselModal({
         bridgeBay,
         separateFunnel,
         funnelBay,
-        fortyFootOnlyBays,
         type: VESSEL_TYPE_LABELS[manualType],
       });
       await loadCatalog();
@@ -1088,22 +1079,6 @@ export default function AddVesselModal({
                       )}
                     </div>
                   )}
-
-                  <div>
-                    <label className="block text-xs font-bold text-[#2d4b58] mb-1">
-                      Bays de 40' puras (sem contêiner de 20')
-                    </label>
-                    <input
-                      type="text"
-                      value={manualFortyOnlyBays}
-                      onChange={(e) => setManualFortyOnlyBays(e.target.value)}
-                      placeholder="Ex: 54, 58, 78"
-                      className="w-full px-3 py-2 text-xs border border-[#cfdce0] rounded-lg focus:outline-none focus:border-[#16869a] bg-white text-[#1e293b]"
-                    />
-                    <span className="text-[10px] text-slate-500 mt-0.5 block">
-                      Bays que não aceitam contêineres de 20' e usam numeração de 40' (ex: 54, 58, 78).
-                    </span>
-                  </div>
                 </div>
               </>
             )}

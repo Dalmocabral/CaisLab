@@ -66,11 +66,7 @@ function renderContainerDeck(
   mirrorText = false,
 ) {
   const config = resolveVesselSuperstructure(vessel);
-  const bays = bayNumberSequence(
-    vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber,
-    vessel.fortyFootOnlyBays,
-    config.bridgeBay
-  );
+  const bays = bayNumberSequence(vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber);
   const rows = rowNumberSequence(vessel.rowCount ?? vessel.rows);
   const effectiveRows = rows.length > 0
     ? rows
@@ -99,56 +95,22 @@ function renderContainerDeck(
   const bayAreaRight = deckRight - rowNumberWidth - 0.8;
   const bayAreaWidth = Math.max(1, bayAreaRight - deckLeft);
 
-  // Proporções das bays: Bays pares (40' puras como 54, 58, 78 e passadiço 56) têm largura dupla (2 unidades de 20')
-  const bayUnits = bays.map((b) => (b % 2 === 0 ? 2 : 1));
-  const hasGapBefore = bays.map((b, i) => {
-    if (i === 0) return false;
-    const prev = bays[i - 1];
-    // Se a bay anterior e a atual formam um par de 20' na mesma escotilha de 40', não há vão entre elas
-    if (prev % 2 !== 0 && b % 2 !== 0 && get40ftBayPair(prev)[1] === b) {
-      return false;
-    }
-    return true;
-  });
-  const totalGaps = hasGapBefore.filter(Boolean).length;
-  const totalUnits = bayUnits.reduce((acc, u) => acc + u, 0);
-  const rawUnitWidth = bayAreaWidth / Math.max(1, totalUnits);
-  const hatchGap = totalGaps > 0 ? Math.max(1.4, Math.min(3.8, rawUnitWidth * 0.6)) : 0;
-  const availableBayWidth = Math.max(1, bayAreaWidth - totalGaps * hatchGap);
-  const unitWidth = availableBayWidth / Math.max(1, totalUnits);
-
-  let currentRight = bayAreaRight;
-  const bayLayouts: Array<{
-    bay: number;
-    index: number;
-    x: number;
-    width: number;
-    centerX: number;
-    isFortyFoot: boolean;
-  }> = [];
-
-  for (let i = 0; i < bays.length; i++) {
-    if (hasGapBefore[i]) {
-      currentRight -= hatchGap;
-    }
-    const width = bayUnits[i] * unitWidth;
-    const x = currentRight - width;
-    bayLayouts.push({
-      bay: bays[i],
-      index: i,
-      x,
-      width,
-      centerX: x + width / 2,
-      isFortyFoot: bays[i] % 2 === 0,
-    });
-    currentRight = x;
-  }
-
-  const bayCellX = (index: number) => bayLayouts[index]?.x ?? 0;
-  const bayCellWidth = (index: number) => bayLayouts[index]?.width ?? unitWidth;
-  const labelSize = bays.length ? Math.max(2.6, Math.min(5.4, unitWidth * 0.54)) : 3.4;
+  // Separação visual entre as bays de 40' (cada par de bays de 20' forma uma bay/hatch de 40')
+  const num40ftGaps = Math.max(0, Math.floor((bays.length - 1) / 2));
+  const rawBayWidth = bayAreaWidth / Math.max(1, bays.length);
+  const hatchGap = bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0;
+  const totalGapsWidth = num40ftGaps * hatchGap;
+  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth);
+  const cellWidth = availableBayWidth / Math.max(1, bays.length);
+  const labelSize = bays.length ? Math.max(2.6, Math.min(5.4, cellWidth * 0.54)) : 3.4;
   const rowLabelSize = Math.max(2.0, Math.min(labelSize, cellHeight * 0.72));
   const rowLabelX = deckRight - rowNumberWidth / 2;
+
+  // Posição X da baia considerando o espaço visual entre escotilhas de 40'
+  const bayCellX = (index: number) => {
+    const gapsBefore = Math.floor(index / 2);
+    return bayAreaRight - ((index + 1) * cellWidth + gapsBefore * hatchGap);
+  };
 
   // Modo 2: Passadiço entre as bays (Ilha / Casaria no meio)
   const bridgeIndices: number[] = [];
@@ -240,27 +202,28 @@ function renderContainerDeck(
   return (
     <g className="deck-container-ship">
       {/* Contêineres preenchendo as baias e rows */}
-      {bayLayouts.map((layout) => {
-        if (isBayOccupied(layout.index)) return null;
+      {bays.map((bay, index) => {
+        if (isBayOccupied(index)) return null;
+        const cellX = bayCellX(index);
         return (
-          <g key={`bay-column-${layout.bay}`}>
+          <g key={`bay-column-${bay}`}>
             {effectiveRows.map((rowLabel, rIdx) => {
               const cellY = containerTop + rIdx * cellHeight;
               const cellH = Math.max(0.6, cellHeight - 0.35);
-              const cellW = Math.max(0.6, layout.width - 0.35);
+              const cellW = Math.max(0.6, cellWidth - 0.35);
               return (
                 <rect
-                  key={`bay-cell-${layout.bay}-${rowLabel}`}
-                  x={layout.x + 0.18}
+                  key={`bay-cell-${bay}-${rowLabel}`}
+                  x={cellX + 0.18}
                   y={cellY + 0.18}
                   width={cellW}
                   height={cellH}
                   rx="0.4"
-                  fill={CONTAINER_COLORS[(layout.index * 3 + rIdx * 2) % CONTAINER_COLORS.length]}
+                  fill={CONTAINER_COLORS[(index * 3 + rIdx * 2) % CONTAINER_COLORS.length]}
                   stroke="#ffffff"
                   strokeWidth="0.25"
                 >
-                  <title>{`Bay ${layout.bay} · Row ${rowLabel}${layout.isFortyFoot ? " (40')" : " (20')"}`}</title>
+                  <title>{`Bay ${bay} · Row ${rowLabel}`}</title>
                 </rect>
               );
             })}
@@ -269,16 +232,18 @@ function renderContainerDeck(
       })}
 
       {/* Números das Bays posicionados ACIMA do desenho do navio (as bays ocupadas por casaria no meio não mostram label) */}
-      {bayLayouts.length > 0 ? (
+      {bays.length > 0 ? (
         <>
-          {bayLayouts.map((layout) => {
-            if (isBayOccupied(layout.index)) return null;
+          {bays.map((bay, index) => {
+            if (isBayOccupied(index)) return null;
+            const cellX = bayCellX(index);
+            const centerX = cellX + cellWidth / 2;
             return (
-              <g key={`bay-label-${layout.bay}`}>
-                <title>{`Bay ${layout.bay} · posição de ${layout.isFortyFoot ? "40" : "20"} pés`}</title>
+              <g key={`bay-label-${bay}`}>
+                <title>{`Bay ${bay} · posição de ${bay % 2 === 0 ? "40" : "20"} pés`}</title>
                 <text
-                  transform={textTransform(layout.centerX)}
-                  x={layout.centerX}
+                  transform={textTransform(centerX)}
+                  x={centerX}
                   y={y - 3.2}
                   textAnchor="middle"
                   dominantBaseline="middle"
@@ -290,7 +255,7 @@ function renderContainerDeck(
                   strokeWidth="0.7"
                   strokeLinejoin="round"
                 >
-                  {String(layout.bay).padStart(2, "0")}
+                  {String(bay).padStart(2, "0")}
                 </text>
               </g>
             );
@@ -378,7 +343,7 @@ function renderContainerDeck(
         <g className="superstructure-bridge-island">
           {(() => {
             const minX = Math.min(...bridgeIndices.map((idx) => bayCellX(idx)));
-            const maxX = Math.max(...bridgeIndices.map((idx) => bayCellX(idx) + bayCellWidth(idx)));
+            const maxX = Math.max(...bridgeIndices.map((idx) => bayCellX(idx) + cellWidth));
             const slotW = Math.max(1.2, maxX - minX - 0.35);
             const slotX = minX + 0.18;
             return (
@@ -426,7 +391,7 @@ function renderContainerDeck(
         <g className="superstructure-funnel-island">
           {(() => {
             const minX = Math.min(...funnelIndices.map((idx) => bayCellX(idx)));
-            const maxX = Math.max(...funnelIndices.map((idx) => bayCellX(idx) + bayCellWidth(idx)));
+            const maxX = Math.max(...funnelIndices.map((idx) => bayCellX(idx) + cellWidth));
             const slotW = Math.max(1.2, maxX - minX - 0.35);
             const slotX = minX + 0.18;
             return (

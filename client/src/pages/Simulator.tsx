@@ -75,7 +75,6 @@ import {
   normalizeBayCount,
   MAX_ROW_COUNT,
   normalizeRowCount,
-  normalizeFortyFootOnlyBays,
 } from "@/lib/berth-model";
 import { saveVesselToCatalog } from "@/lib/vessel-catalog";
 
@@ -261,7 +260,6 @@ export default function Simulator() {
         bridgeBay: mergedVessel.bridgeBay,
         separateFunnel: mergedVessel.separateFunnel,
         funnelBay: mergedVessel.funnelBay,
-        fortyFootOnlyBays: mergedVessel.fortyFootOnlyBays,
         type: VESSEL_TYPE_LABELS[normalizeVesselType(mergedVessel.vesselType, mergedVessel.name)],
       }).then(() => setNotice(`${mergedVessel.name}: Layout e casaria salvos no catálogo com sucesso.`));
     }, 500);
@@ -953,27 +951,6 @@ export default function Simulator() {
                           )}
                         </div>
                       )}
-
-                      <div className="pt-1">
-                        <label className="field-label" htmlFor="vessel-forty-only-bays">
-                          Bays de 40' puras (sem contêiner de 20')
-                        </label>
-                        <input
-                          id="vessel-forty-only-bays"
-                          type="text"
-                          className="w-full text-xs font-semibold px-2.5 py-1.5 border border-slate-300 rounded bg-white text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-teal-500"
-                          placeholder="Ex: 54, 58, 78"
-                          value={Array.isArray(selectedVessel.fortyFootOnlyBays) && selectedVessel.fortyFootOnlyBays.length > 0 ? selectedVessel.fortyFootOnlyBays.join(", ") : ""}
-                          onChange={(event) => {
-                            const parsed = normalizeFortyFootOnlyBays(event.target.value);
-                            patchVessel(selectedVessel.id, { fortyFootOnlyBays: parsed });
-                            scheduleContainerLayoutCatalogSave(selectedVessel, undefined, undefined, { fortyFootOnlyBays: parsed });
-                          }}
-                        />
-                        <span className="text-[10px] text-slate-500 mt-0.5 block">
-                          Bays que utilizam numeração par e só aceitam contêineres de 40 pés (ex: 54, 58, 78).
-                        </span>
-                      </div>
                     </div>
                   </>
                 )}

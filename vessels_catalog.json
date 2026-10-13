@@ -150,14 +150,9 @@
     "bayCount": 78,
     "bays": 78,
     "separateFunnel": false,
-    "rowCount": 18,
-    "rows": 18,
-    "funnelBay": 40,
-    "fortyFootOnlyBays": [
-      54,
-      58,
-      78
-    ]
+    "rowCount": 14,
+    "rows": 14,
+    "funnelBay": 40
   },
   {
     "name": "FELIXSTOWE",
