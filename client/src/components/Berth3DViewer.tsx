@@ -1265,48 +1265,114 @@ function addRoundBeamBatch(
 function createPortainerLogoMaterial(
   THREE: ThreeModule,
   id: string,
-  isSuperPostPanamax: boolean
+  isSuperPostPanamax: boolean,
+  badgeColor?: string,
 ): import("three").Material {
   if (typeof document === "undefined") {
-    return new THREE.MeshStandardMaterial({ color: "#e2e8f0", roughness: 0.5 });
+    return new THREE.MeshStandardMaterial({ color: "#f8fafc", roughness: 0.5 });
   }
   const canvas = document.createElement("canvas");
-  canvas.width = 512;
-  canvas.height = 256;
+  canvas.width = 1024;
+  canvas.height = 512;
   const ctx = canvas.getContext("2d");
-  if (!ctx) return new THREE.MeshStandardMaterial({ color: "#e2e8f0", roughness: 0.5 });
+  if (!ctx) return new THREE.MeshStandardMaterial({ color: "#f8fafc", roughness: 0.5 });
 
-  // Fundo cinza industrial da caixa de máquinas ZPMC
-  ctx.fillStyle = "#e2e8f0";
-  ctx.fillRect(0, 0, 512, 256);
+  // Fundo branco industrial da placa do terminal
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, 0, 1024, 512);
 
-  // Borda perimetral
-  ctx.lineWidth = 10;
-  ctx.strokeStyle = isSuperPostPanamax ? "#be123c" : "#1e293b";
-  ctx.strokeRect(6, 6, 500, 244);
+  // Faixa superior com cores corporativas da Rio Brasil Terminais (Navy e Laranja ICTSI)
+  ctx.fillStyle = "#002b49";
+  ctx.fillRect(0, 0, 1024, 18);
+  ctx.fillStyle = "#f96207";
+  ctx.fillRect(0, 18, 1024, 8);
 
-  // Logotipo ZPMC em destaque
-  ctx.fillStyle = "#0f172a";
-  ctx.font = "900 84px sans-serif";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.fillText("ZPMC", 195, 100);
-
-  // Badge colorido com ID do pórtico (ex: P8, P9)
-  ctx.fillStyle = isSuperPostPanamax ? "#be123c" : "#2563eb";
+  // Símbolo / Emblema dinâmico da Rio Brasil Terminais (arco estilizado em laranja e azul)
+  // Vela / curva superior laranja
+  ctx.fillStyle = "#f96207";
   ctx.beginPath();
-  ctx.roundRect(350, 58, 125, 84, 16);
+  ctx.moveTo(60, 270);
+  ctx.bezierCurveTo(60, 150, 120, 105, 175, 105);
+  ctx.bezierCurveTo(145, 145, 125, 210, 155, 270);
+  ctx.closePath();
   ctx.fill();
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "900 62px sans-serif";
-  ctx.fillText(id, 412, 102);
 
-  // Faixa de Categoria inferior
-  ctx.fillStyle = isSuperPostPanamax ? "#be123c" : "#334155";
-  ctx.fillRect(16, 175, 480, 62);
+  // Onda / curva base azul marinho
+  ctx.fillStyle = "#002b49";
+  ctx.beginPath();
+  ctx.moveTo(100, 285);
+  ctx.bezierCurveTo(135, 225, 180, 185, 220, 168);
+  ctx.bezierCurveTo(195, 215, 170, 255, 195, 285);
+  ctx.closePath();
+  ctx.fill();
+
+  // Elemento circular de destaque
+  ctx.fillStyle = "#f96207";
+  ctx.beginPath();
+  ctx.arc(205, 130, 14, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Tipografia oficial: RIO BRASIL TERMINAIS
+  ctx.textAlign = "left";
+  ctx.textBaseline = "alphabetic";
+  ctx.fillStyle = "#002b49";
+  ctx.font = "900 64px system-ui, -apple-system, sans-serif";
+  ctx.fillText("RIO BRASIL", 242, 178);
+
+  ctx.fillStyle = "#f96207";
+  ctx.font = "800 46px system-ui, -apple-system, sans-serif";
+  ctx.fillText("TERMINAIS", 245, 232);
+
+  ctx.fillStyle = "#475569";
+  ctx.font = "700 22px system-ui, -apple-system, sans-serif";
+  ctx.fillText("PORTO DO RIO DE JANEIRO", 246, 268);
+
+  // Badge em destaque com número do portêiner (ex: P4, P5, P6, P7, P8, P9)
+  const badgeX = 720;
+  const badgeY = 75;
+  const badgeW = 250;
+  const badgeH = 225;
+  const badgeR = 24;
+
+  ctx.fillStyle = "#002b49";
+  ctx.beginPath();
+  ctx.roundRect(badgeX, badgeY, badgeW, badgeH, badgeR);
+  ctx.fill();
+
+  ctx.lineWidth = 8;
+  ctx.strokeStyle = badgeColor || (isSuperPostPanamax ? "#f59e0b" : "#f96207");
+  ctx.stroke();
+
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#93c5fd";
+  ctx.font = "800 22px system-ui, -apple-system, sans-serif";
+  ctx.fillText("PORTÊINER", badgeX + badgeW / 2, badgeY + 44);
+
   ctx.fillStyle = "#ffffff";
-  ctx.font = "bold 28px sans-serif";
-  ctx.fillText(isSuperPostPanamax ? "SUPER POST-PANAMAX" : "POST-PANAMAX STS", 256, 208);
+  ctx.font = "900 120px system-ui, -apple-system, sans-serif";
+  ctx.fillText(id, badgeX + badgeW / 2, badgeY + 165);
+
+  // Faixa técnica inferior da máquina
+  ctx.fillStyle = "#002b49";
+  ctx.fillRect(0, 360, 1024, 152);
+
+  ctx.fillStyle = "#f96207";
+  ctx.fillRect(0, 352, 1024, 8);
+
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "800 34px system-ui, -apple-system, sans-serif";
+  const catText = isSuperPostPanamax ? "SUPER POST-PANAMAX STS CRANE" : "POST-PANAMAX STS CRANE";
+  ctx.fillText(catText, 512, 422);
+
+  ctx.fillStyle = "#94a3b8";
+  ctx.font = "700 24px system-ui, -apple-system, sans-serif";
+  ctx.fillText("RIO BRASIL TERMINAL 1 • AN ICTSI GROUP COMPANY", 512, 468);
+
+  // Borda perimetral externa
+  ctx.lineWidth = 14;
+  ctx.strokeStyle = "#002b49";
+  ctx.strokeRect(7, 7, 1010, 498);
 
   const texture = new THREE.CanvasTexture(canvas);
   texture.needsUpdate = true;
@@ -1679,8 +1745,8 @@ function addPortainer(
   addBox(THREE, group, [machWidth + 0.1, 1.4, machLength * 0.65], [0, machY + 1.2, machZ], darkMaterial);
   addBox(THREE, group, [machWidth + 0.7, 0.2, machLength + 0.7], [0, machY + machHeight / 2 + 0.1, machZ], frameMaterial);
 
-  // Placas laterais com logotipo ZPMC e Categoria
-  const logoMaterial = createPortainerLogoMaterial(THREE, portainer.id, isSuperPostPanamax);
+  // Placas laterais com logotipo Rio Brasil Terminais e ID do portêiner
+  const logoMaterial = createPortainerLogoMaterial(THREE, portainer.id, isSuperPostPanamax, portainer.badgeColor || portainer.color);
   const logoPlateGeo = new THREE.PlaneGeometry(machLength * 0.72, machHeight * 0.68);
   const plateRight = new THREE.Mesh(logoPlateGeo, logoMaterial);
   plateRight.position.set(machWidth / 2 + 0.08, machY, machZ);
