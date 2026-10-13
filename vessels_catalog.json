@@ -9,7 +9,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "13/10/2026 04:31"
+    "updatedAt": "13/10/2026 11:09"
   },
   {
     "name": "CMA CGM PUCCINI",
@@ -82,7 +82,7 @@
     "imo": "9945887",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "13/10/2026 04:31",
+    "updatedAt": "13/10/2026 11:09",
     "flag": "HONG KONG, CHINA",
     "bayCount": 78,
     "bays": 78,
@@ -144,7 +144,7 @@
     "imo": "9850795",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "13/10/2026 04:31",
+    "updatedAt": "13/10/2026 11:09",
     "flag": "LIBERIA"
   },
   {
@@ -249,13 +249,20 @@
     "name": "MAERSK FRANKFURT",
     "loa": 254.94,
     "beam": 40,
-    "draft": 12.35,
+    "draft": 12.6,
     "berthingSide": "boreste",
     "imo": "9969065",
-    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "lastBerth": "TECONT1",
-    "updatedAt": "12/10/2026 22:39",
-    "flag": "PANAMA"
+    "updatedAt": "13/10/2026 08:08",
+    "flag": "PANAMA",
+    "bayCount": 58,
+    "bays": 58,
+    "rowCount": 14,
+    "rows": 14,
+    "bridgePosition": "between-bays",
+    "bridgeBay": 35,
+    "separateFunnel": false
   },
   {
     "name": "MALIAKOS",
@@ -306,7 +313,7 @@
     "imo": "9612789",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "13/10/2026 04:31",
+    "updatedAt": "13/10/2026 11:09",
     "flag": "BRAZIL"
   },
   {
@@ -318,7 +325,7 @@
     "imo": "9416991",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONT1",
-    "updatedAt": "13/10/2026 04:31",
+    "updatedAt": "13/10/2026 11:09",
     "flag": "SINGAPORE"
   },
   {
