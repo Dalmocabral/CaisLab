@@ -1,23 +1,8 @@
 {
-  "updatedAt": "12/10/2026 22:39",
+  "updatedAt": "13/10/2026 02:40",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 6,
+  "count": 5,
   "maneuvers": [
-    {
-      "dateTime": "12/10 21:00",
-      "name": "MAERSK FRANKFURT",
-      "draft": 12.35,
-      "loa": 254.94,
-      "beam": 40.0,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "boreste",
-      "imo": "9969065",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "PANAMA",
-      "terminal": "rio"
-    },
     {
       "dateTime": "13/10 14:00",
       "name": "COSCO SHIPPING CHILE",
