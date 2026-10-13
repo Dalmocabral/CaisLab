@@ -12,6 +12,7 @@ import {
   normalizeMooringOffset,
   normalizeBayCount,
   normalizeRowCount,
+  normalizeFortyFootOnlyBays,
   normalizeVesselType,
   segmentOffsets,
   totalQuayLength,
@@ -1069,6 +1070,8 @@ function addVessel(
       };
 
       const totalHatches = Math.floor(columns / 2);
+      const fortyOnlyBays = normalizeFortyFootOnlyBays(vessel.fortyFootOnlyBays);
+      const fortyOnlySet = new Set(fortyOnlyBays);
 
       for (let h = 0; h < totalHatches; h++) {
         const colA = 2 * h;
@@ -1095,18 +1098,26 @@ function addVessel(
         // Se ambos os slots estão bloqueados pela casaria ou chaminé, pula a escotilha inteira
         if (colABlocked && colBBlocked) continue;
 
+        // Se a escotilha coincide com uma das bays de 40' puras (ex: 54, 58, 78), força uso de 40'
+        const isFortyOnlyHatch = (() => {
+          if (fortyOnlySet.size === 0) return false;
+          const ratioFromBow = Math.max(0, Math.min(1, 1 - (fromSternA / cargoLength)));
+          const approxBay = 1 + ratioFromBow * ((bayCount ?? columns * 2) - 1);
+          return Array.from(fortyOnlySet).some((b) => Math.abs(b - approxBay) <= 2.8);
+        })();
+
         // Distribuição orgânica realista entre as bays solicitada pelo usuário:
         // Pode ser dois contêineres de 20', outro de 40', e vice-versa, mesclando bays de 40' e 20'
         const hatchHash = ((vesselSeed ^ (h * 49287) ^ 0x9e3779b9) >>> 0) % 100;
-        const isAll40 = hatchHash < 50;
-        const isAll20 = hatchHash >= 50 && hatchHash < 82;
+        const isAll40 = isFortyOnlyHatch || hatchHash < 50;
+        const isAll20 = !isFortyOnlyHatch && (hatchHash >= 50 && hatchHash < 82);
 
         for (let row = 0; row < rows; row += 1) {
           const containerZ = (row - (rows - 1) / 2) * rowSpacing;
 
           let use40 = false;
           if (!colABlocked && !colBBlocked) {
-            if (isAll40) {
+            if (isFortyOnlyHatch || isAll40) {
               use40 = true;
             } else if (isAll20) {
               use40 = false;

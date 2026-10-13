@@ -1,4 +1,9 @@
-import { normalizeBayCount, normalizeRowCount, type BridgePositionType } from "./berth-model";
+import {
+  normalizeBayCount,
+  normalizeRowCount,
+  normalizeFortyFootOnlyBays,
+  type BridgePositionType,
+} from "./berth-model";
 
 export interface CatalogVessel {
   name: string;
@@ -28,6 +33,8 @@ export interface CatalogVessel {
   funnelBay?: number;
   funnelBayStart?: number;
   funnelBayEnd?: number;
+  /** Bays de 40' puras (não aceitam contêineres de 20', ex: 54, 58, 78). */
+  fortyFootOnlyBays?: number[];
 }
 
 export interface PraticagemManeuver {
@@ -160,6 +167,7 @@ export async function saveVesselToCatalog(vessel: CatalogVessel): Promise<Catalo
   const { maxBayNumber, ...currentFields } = vessel;
   const bayCount = normalizeBayCount(vessel.bayCount ?? vessel.bays ?? maxBayNumber);
   const rowCount = normalizeRowCount(vessel.rowCount ?? vessel.rows);
+  const fortyFootOnlyBays = normalizeFortyFootOnlyBays(vessel.fortyFootOnlyBays);
   const entry: CatalogVessel = {
     ...currentFields,
     name: cleanName,
@@ -171,6 +179,7 @@ export async function saveVesselToCatalog(vessel: CatalogVessel): Promise<Catalo
     rowCount,
     rows: rowCount,
     berthingSide: vessel.berthingSide === "bombordo" ? "bombordo" : "boreste",
+    fortyFootOnlyBays: fortyFootOnlyBays.length > 0 ? fortyFootOnlyBays : undefined,
     updatedAt: new Date().toLocaleDateString("pt-BR") + " " + new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }),
   };
 
@@ -182,7 +191,8 @@ export async function saveVesselToCatalog(vessel: CatalogVessel): Promise<Catalo
     const definedFields = Object.fromEntries(
       Object.entries(entry).filter(([, value]) => value !== undefined),
     ) as Partial<CatalogVessel>;
-    const { maxBayNumber: _legacyBayNumber, ...existingFields } = existing ?? {};
+    const existingFields = (existing ? { ...existing } : {}) as Partial<CatalogVessel>;
+    delete existingFields.maxBayNumber;
     const savedEntry: CatalogVessel = {
       ...existingFields,
       ...definedFields,
@@ -195,6 +205,7 @@ export async function saveVesselToCatalog(vessel: CatalogVessel): Promise<Catalo
       rowCount: entry.rowCount,
       rows: entry.rowCount,
       berthingSide: entry.berthingSide,
+      fortyFootOnlyBays: entry.fortyFootOnlyBays ?? existing?.fortyFootOnlyBays,
     };
     map.set(cleanName, savedEntry);
     const updatedList = Array.from(map.values()).sort((a, b) => a.name.localeCompare(b.name));

@@ -141,18 +141,23 @@
     "draft": 11.5,
     "berthingSide": "boreste",
     "imo": "9595503",
-    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "12/10/2026 11:35",
+    "updatedAt": "12/10/2026 23:22",
     "bridgePosition": "between-bays",
     "bridgeBay": 56,
     "bayCount": 78,
     "bays": 78,
     "separateFunnel": false,
-    "rowCount": 14,
-    "rows": 14,
-    "funnelBay": 40
+    "rowCount": 18,
+    "rows": 18,
+    "funnelBay": 40,
+    "fortyFootOnlyBays": [
+      54,
+      58,
+      78
+    ]
   },
   {
     "name": "FELIXSTOWE",
