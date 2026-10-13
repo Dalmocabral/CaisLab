@@ -236,8 +236,23 @@ function renderContainerDeck(
         <>
           {bays.map((bay, index) => {
             if (isBayOccupied(index)) return null;
+
+            const isVeracruz = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("VERACRUZ");
+
+            // No navio Veracruz, remove a bay 49 e deixa a 50 centralizada entre a divisão dos contêineres de 20'
+            if (isVeracruz && bay === 49) return null;
+
             const cellX = bayCellX(index);
-            const centerX = cellX + cellWidth / 2;
+            let centerX = cellX + cellWidth / 2;
+
+            if (isVeracruz && bay === 50) {
+              const idx49 = bays.indexOf(49);
+              if (idx49 !== -1) {
+                const cellX49 = bayCellX(idx49);
+                centerX = (cellX + cellWidth / 2 + cellX49 + cellWidth / 2) / 2;
+              }
+            }
+
             return (
               <g key={`bay-label-${bay}`}>
                 <title>{`Bay ${bay} · posição de ${bay % 2 === 0 ? "40" : "20"} pés`}</title>
