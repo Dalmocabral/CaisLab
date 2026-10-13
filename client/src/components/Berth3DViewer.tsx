@@ -1318,6 +1318,7 @@ function addPortainer(
   scene: import("three").Scene,
   portainer: NonNullable<Scenario["portainers"]>[number],
   total: number,
+  isOverVessel = false,
 ) {
   if (!portainer.enabled) return;
   const group = new THREE.Group();
@@ -1521,119 +1522,196 @@ function addPortainer(
   sheave1.rotation.z = Math.PI / 2;
   group.add(sheave1);
 
-  // 6. Lança Marítima (Outreach Boom) e Contra-Lança (Backreach)
-  const boomTotalLength = boomEndZ - backreachEndZ;
-  const boomGirders: BeamSegment3D[] = [];
-  const boomLattice: BeamSegment3D[] = [];
-  const boomCrossWalkway: BeamSegment3D[] = [];
+  // 6. Contra-Lança Fixa (Fixed Backreach na estrutura do pórtico)
+  const backreachLength = boomStartZ - backreachEndZ;
+  const backreachGirders: BeamSegment3D[] = [];
+  const backreachLattice: BeamSegment3D[] = [];
+  const backreachCrossWalkway: BeamSegment3D[] = [];
 
   for (const xSide of [-1, 1]) {
     const x = xSide * boomHalfWidth;
-    // Vigas caixão principais longitudinais (inferior e superior)
-    boomGirders.push(
-      { start: [x, boomBottomY, backreachEndZ], end: [x, boomBottomY, boomEndZ] },
-      { start: [x, boomTopY, backreachEndZ], end: [x, boomTopY, boomEndZ] },
+    backreachGirders.push(
+      { start: [x, boomBottomY, backreachEndZ], end: [x, boomBottomY, boomStartZ] },
+      { start: [x, boomTopY, backreachEndZ], end: [x, boomTopY, boomStartZ] },
     );
-
-    // Treliças verticais ao longo de toda a extensão
-    const panels = Math.max(16, Math.floor(boomTotalLength / 4.2));
-    const pLen = boomTotalLength / panels;
+    const panels = Math.max(8, Math.floor(backreachLength / 4.2));
+    const pLen = backreachLength / panels;
     for (let p = 0; p < panels; p++) {
       const z1 = backreachEndZ + p * pLen;
       const z2 = z1 + pLen;
-      boomLattice.push(
+      backreachLattice.push(
         { start: [x, boomBottomY, z1], end: [x, boomTopY, z1] },
         { start: [x, boomBottomY, z1], end: [x, boomTopY, z2] },
         { start: [x, boomTopY, z1], end: [x, boomBottomY, z2] },
       );
     }
+    backreachLattice.push({ start: [x, boomBottomY, boomStartZ], end: [x, boomTopY, boomStartZ] });
   }
-  addBoxBeamBatch(THREE, group, boomGirders, [0.85, 0.85], frameMaterial);
-  addBoxBeamBatch(THREE, group, boomLattice, [0.32, 0.32], braceMaterial);
+  addBoxBeamBatch(THREE, group, backreachGirders, [0.85, 0.85], frameMaterial);
+  addBoxBeamBatch(THREE, group, backreachLattice, [0.32, 0.32], braceMaterial);
 
-  // Passarela de pedestres (Walkway) com guarda-corpos no topo da lança
-  addBox(THREE, group, [1.4, 0.15, boomTotalLength], [0, boomTopY + 0.1, (boomEndZ + backreachEndZ) / 2], paleMaterial);
+  // Passarela de pedestres fixa na contra-lança
+  addBox(THREE, group, [1.4, 0.15, backreachLength], [0, boomTopY + 0.1, (boomStartZ + backreachEndZ) / 2], paleMaterial);
   for (const xSide of [-0.75, 0.75]) {
-    boomCrossWalkway.push(
-      { start: [xSide, boomTopY + 1.1, backreachEndZ], end: [xSide, boomTopY + 1.1, boomEndZ] }
+    backreachCrossWalkway.push(
+      { start: [xSide, boomTopY + 1.1, backreachEndZ], end: [xSide, boomTopY + 1.1, boomStartZ] }
     );
   }
-  addRoundBeamBatch(THREE, group, boomCrossWalkway, 0.05, warningYellowMaterial);
+  addRoundBeamBatch(THREE, group, backreachCrossWalkway, 0.05, warningYellowMaterial);
+  addBox(THREE, group, [boomHalfWidth * 2 + 1.2, 2.0, 1.0], [0, (boomBottomY + boomTopY) / 2, backreachEndZ], darkMaterial);
 
-  // Cabeceira da lança (Headframe com batente e roldanas na ponta marítima)
-  addBox(THREE, group, [boomHalfWidth * 2 + 1.4, 2.2, 1.2], [0, (boomBottomY + boomTopY) / 2, boomEndZ], darkMaterial);
-  // Holofotes de alta potência apontados para o convés do navio
-  for (const xSide of [-2.5, 0, 2.5]) {
-    addBox(THREE, group, [0.8, 0.6, 0.5], [xSide, boomBottomY - 0.4, boomEndZ - 0.5], paleMaterial);
-  }
+  // 7. Lança Marítima Móvel (Movable Outreach Boom com Articulação Hinge)
+  const boomGroup = new THREE.Group();
+  boomGroup.position.set(0, boomBottomY, boomStartZ);
 
-  // 7. Tirantes Rígidos da Lança (Forestays Articulados com Elos) & Backstays
-  const stayBars: BeamSegment3D[] = [];
-  const stayMidZ = boomStartZ + boomOutreach * 0.48;
-  const stayMidY = boomTopY + 3.8;
-  const stayTipZ = boomStartZ + boomOutreach * 0.88;
+  const outreachLength = boomEndZ - boomStartZ;
+  const outreachGirders: BeamSegment3D[] = [];
+  const outreachLattice: BeamSegment3D[] = [];
+  const outreachCrossWalkway: BeamSegment3D[] = [];
 
   for (const xSide of [-1, 1]) {
     const x = xSide * boomHalfWidth;
-    // Tirante superior descendo do Ápice até a articulação intermediária
-    stayBars.push(
-      { start: [xSide * 1.4, pylonApexY, pylonApexZ], end: [x, stayMidY, stayMidZ] },
-      // Tirante inferior da articulação intermediária até a ponta da lança
-      { start: [x, stayMidY, stayMidZ], end: [x, boomTopY, stayTipZ] },
-      // Pendurais verticais ligando o tirante à lança
-      { start: [x, stayMidY, stayMidZ], end: [x, boomTopY, stayMidZ] },
-      // Tirantes Traseiros (Backstays) do Ápice descendo até a ponta da contra-lança
-      { start: [xSide * 1.4, pylonApexY, pylonApexZ], end: [x, boomTopY, backreachEndZ + 1.5] },
+    outreachGirders.push(
+      { start: [x, 0, 0], end: [x, 0, outreachLength] },
+      { start: [x, 4.2, 0], end: [x, 4.2, outreachLength] },
+    );
+
+    const panels = Math.max(12, Math.floor(outreachLength / 4.2));
+    const pLen = outreachLength / panels;
+    for (let p = 0; p < panels; p++) {
+      const z1 = p * pLen;
+      const z2 = z1 + pLen;
+      outreachLattice.push(
+        { start: [x, 0, z1], end: [x, 4.2, z1] },
+        { start: [x, 0, z1], end: [x, 4.2, z2] },
+        { start: [x, 4.2, z1], end: [x, 0, z2] },
+      );
+    }
+    outreachLattice.push({ start: [x, 0, outreachLength], end: [x, 4.2, outreachLength] });
+
+    // Pino reforçado da articulação (Hinge pin)
+    const pin = new THREE.Mesh(new THREE.CylinderGeometry(0.75, 0.75, 1.2, 16), darkMaterial);
+    pin.position.set(x, 0, 0);
+    pin.rotation.z = Math.PI / 2;
+    boomGroup.add(pin);
+  }
+  addBoxBeamBatch(THREE, boomGroup, outreachGirders, [0.85, 0.85], frameMaterial);
+  addBoxBeamBatch(THREE, boomGroup, outreachLattice, [0.32, 0.32], braceMaterial);
+
+  // Passarela de pedestres no topo da lança marítima
+  addBox(THREE, boomGroup, [1.4, 0.15, outreachLength], [0, 4.2 + 0.1, outreachLength / 2], paleMaterial);
+  for (const xSide of [-0.75, 0.75]) {
+    outreachCrossWalkway.push(
+      { start: [xSide, 4.2 + 1.1, 0], end: [xSide, 4.2 + 1.1, outreachLength] }
     );
   }
-  addRoundBeamBatch(THREE, group, stayBars, 0.24, darkMaterial);
+  addRoundBeamBatch(THREE, boomGroup, outreachCrossWalkway, 0.05, warningYellowMaterial);
 
-  // Barra de união transversal entre os tirantes esquerdo e direito
-  addRoundBeamBatch(THREE, group, [
-    { start: [-boomHalfWidth, stayMidY, stayMidZ], end: [boomHalfWidth, stayMidY, stayMidZ] }
-  ], 0.2, frameMaterial);
+  // Cabeceira da lança na ponta marítima
+  addBox(THREE, boomGroup, [boomHalfWidth * 2 + 1.4, 2.2, 1.2], [0, 2.1, outreachLength], darkMaterial);
+  // Holofotes de alta potência apontados para o convés
+  for (const xSide of [-2.5, 0, 2.5]) {
+    addBox(THREE, boomGroup, [0.8, 0.6, 0.5], [xSide, -0.4, outreachLength - 0.5], paleMaterial);
+  }
 
-  // 8. Casa de Máquinas (Machinery House) na Contra-Lança
+  // Ângulo da lança: na área de navio = arriada (0 rad / horizontal). Fora da área de navio = levantada (~68.4°).
+  const boomAngle = isOverVessel ? 0 : -Math.PI * 0.38;
+  boomGroup.rotation.x = boomAngle;
+  group.add(boomGroup);
+
+  // 8. Tirantes e Cabos de Içamento (Forestays & Backstays)
+  const backstays: BeamSegment3D[] = [];
+  for (const xSide of [-1, 1]) {
+    const x = xSide * boomHalfWidth;
+    backstays.push({
+      start: [xSide * 1.4, pylonApexY, pylonApexZ],
+      end: [x, boomTopY, backreachEndZ + 1.5],
+    });
+  }
+  addRoundBeamBatch(THREE, group, backstays, 0.24, darkMaterial);
+
+  if (isOverVessel) {
+    // Lança Arriada: tirantes rígidos articulados horizontais conectando o ápice à lança
+    const stayMidZ = boomStartZ + boomOutreach * 0.48;
+    const stayMidY = boomTopY + 3.8;
+    const stayTipZ = boomStartZ + boomOutreach * 0.88;
+    const stayBars: BeamSegment3D[] = [];
+
+    for (const xSide of [-1, 1]) {
+      const x = xSide * boomHalfWidth;
+      stayBars.push(
+        { start: [xSide * 1.4, pylonApexY, pylonApexZ], end: [x, stayMidY, stayMidZ] },
+        { start: [x, stayMidY, stayMidZ], end: [x, boomTopY, stayTipZ] },
+        { start: [x, stayMidY, stayMidZ], end: [x, boomTopY, stayMidZ] },
+      );
+    }
+    addRoundBeamBatch(THREE, group, stayBars, 0.24, darkMaterial);
+    addRoundBeamBatch(THREE, group, [
+      { start: [-boomHalfWidth, stayMidY, stayMidZ], end: [boomHalfWidth, stayMidY, stayMidZ] }
+    ], 0.2, frameMaterial);
+  } else {
+    // Lança Levantada: cabos de aço de luffing estendidos do ápice da torre até a lança erguida
+    const cosA = Math.cos(boomAngle);
+    const sinA = Math.sin(boomAngle);
+    const localAnchorZ = boomOutreach * 0.52;
+    const localAnchorY = 4.2;
+    const yAnc = boomBottomY + localAnchorY * cosA - localAnchorZ * sinA;
+    const zAnc = boomStartZ + localAnchorY * sinA + localAnchorZ * cosA;
+
+    const luffingCables: BeamSegment3D[] = [];
+    for (const xSide of [-1, 1]) {
+      const x = xSide * boomHalfWidth;
+      luffingCables.push(
+        { start: [xSide * 1.4, pylonApexY + 1.2, pylonApexZ], end: [x, yAnc, zAnc] },
+        { start: [xSide * 1.4, pylonApexY + 0.6, pylonApexZ], end: [x, yAnc - 1.2, zAnc - 0.6] },
+      );
+    }
+    addRoundBeamBatch(THREE, group, luffingCables, 0.18, darkMaterial);
+  }
+
+  // 9. Casa de Máquinas (Machinery House) na Contra-Lança Fixa
   const machZ = landBaseZ - 6.5; // ~ -27.5m
   const machY = boomTopY + 3.2;
   const machWidth = isSuperPostPanamax ? 13.5 : 12.5;
   const machHeight = isSuperPostPanamax ? 6.2 : 5.8;
   const machLength = isSuperPostPanamax ? 12.5 : 11.5;
   addBox(THREE, group, [machWidth, machHeight, machLength], [0, machY, machZ], paleMaterial);
-  // Detalhes da casa de máquinas: venezianas de ventilação e faixa técnica
   addBox(THREE, group, [machWidth + 0.1, 1.4, machLength * 0.65], [0, machY + 1.2, machZ], darkMaterial);
   addBox(THREE, group, [machWidth + 0.7, 0.2, machLength + 0.7], [0, machY + machHeight / 2 + 0.1, machZ], frameMaterial);
 
   // Placas laterais com logotipo ZPMC e Categoria
   const logoMaterial = createPortainerLogoMaterial(THREE, portainer.id, isSuperPostPanamax);
   const logoPlateGeo = new THREE.PlaneGeometry(machLength * 0.72, machHeight * 0.68);
-  // Lado direito (+X)
   const plateRight = new THREE.Mesh(logoPlateGeo, logoMaterial);
   plateRight.position.set(machWidth / 2 + 0.08, machY, machZ);
   plateRight.rotation.y = Math.PI / 2;
   group.add(plateRight);
-  // Lado esquerdo (-X)
   const plateLeft = new THREE.Mesh(logoPlateGeo, logoMaterial);
   plateLeft.position.set(-machWidth / 2 - 0.08, machY, machZ);
   plateLeft.rotation.y = -Math.PI / 2;
   group.add(plateLeft);
 
-  // 9. Trole (Trolley) com Cabine Panorâmica e Spreader Automático com Flippers
-  const trolleyZ = Math.min(boomEndZ - 6, Math.max(boomStartZ + 12, waterBaseZ + 18));
+  // 10. Trole (Trolley) com Cabine Panorâmica e Spreader Automático
+  const trolleyZ = isOverVessel
+    ? Math.min(boomEndZ - 6, Math.max(boomStartZ + 12, waterBaseZ + 18))
+    : boomStartZ - 4.2;
   const trolleyY = boomBottomY - 0.7;
 
-  // Chassi do trole correndo sob as vigas da lança
+  // Chassi do trole correndo sob as vigas
   addBox(THREE, group, [boomHalfWidth * 2 - 0.4, 1.4, 5.8], [0, trolleyY, trolleyZ], darkMaterial);
 
-  // Cabine Panorâmica Envidraçada do Operador (suspensa voltada para o mar)
+  // Cabine Panorâmica Envidraçada do Operador
   const cabinX = 3.6;
   const cabinY = trolleyY - 1.8;
   addBox(THREE, group, [2.4, 2.2, 2.8], [cabinX, cabinY, trolleyZ + 1.2], paleMaterial);
-  addBox(THREE, group, [2.2, 1.2, 0.08], [cabinX, cabinY - 0.2, trolleyZ + 2.62], glassMaterial); // Janela frontal mar
-  addBox(THREE, group, [0.08, 1.2, 2.6], [cabinX + 1.22, cabinY - 0.2, trolleyZ + 1.2], glassMaterial); // Janela lateral
+  addBox(THREE, group, [2.2, 1.2, 0.08], [cabinX, cabinY - 0.2, trolleyZ + 2.62], glassMaterial);
+  addBox(THREE, group, [0.08, 1.2, 2.6], [cabinX + 1.22, cabinY - 0.2, trolleyZ + 1.2], glassMaterial);
 
-  // 4 Cabos de aço de içamento (Wire Ropes)
-  const spreaderY = Math.max(groundY + 8, boomBottomY - 18.0);
+  // Spreader e cabos de içamento
+  const spreaderY = isOverVessel
+    ? Math.max(groundY + 8, boomBottomY - 18.0)
+    : trolleyY - 2.8;
+
   const hoistCables: BeamSegment3D[] = [];
   for (const xSide of [-1, 1]) {
     for (const zSide of [-1, 1]) {
@@ -1645,15 +1723,15 @@ function addPortainer(
   }
   addRoundBeamBatch(THREE, group, hoistCables, 0.08, darkMaterial);
 
-  // Spreader Telescópico Automático (Amarelo de segurança)
+  // Spreader Telescópico Automático
   addBox(THREE, group, [12.4, 0.65, 2.5], [0, spreaderY + 0.35, trolleyZ], spreaderMaterial);
-  addBox(THREE, group, [2.6, 0.85, 2.6], [0, spreaderY + 0.85, trolleyZ], darkMaterial); // Torreta do spreader
+  addBox(THREE, group, [2.6, 0.85, 2.6], [0, spreaderY + 0.85, trolleyZ], darkMaterial);
 
-  // 4 Aletas guias / flippers anguladas nos cantos do spreader
+  // Aletas guias / flippers
   for (const xSide of [-1, 1]) {
     for (const zSide of [-1, 1]) {
       const flipper = addBox(THREE, group, [0.4, 1.1, 0.4], [xSide * 6.2, spreaderY - 0.2, trolleyZ + zSide * 1.3], warningYellowMaterial);
-      flipper.rotation.z = -xSide * 0.35;
+      flipper.rotation.z = isOverVessel ? -xSide * 0.35 : 0;
     }
   }
 
@@ -2150,7 +2228,15 @@ function buildScene(
   addCompanyBoundaryFence(THREE, scene, scenario, total);
 
   if (scenario.showPortainers !== false) {
-    for (const portainer of scenario.portainers ?? DEFAULT_PORTAINERS) addPortainer(THREE, scene, portainer, total);
+    const vessels = scenario.vessels ?? [];
+    for (const portainer of scenario.portainers ?? DEFAULT_PORTAINERS) {
+      const isOverVessel = vessels.some((vessel) => {
+        const vStart = Math.min(vessel.position, vessel.position + vessel.loa);
+        const vEnd = Math.max(vessel.position, vessel.position + vessel.loa);
+        return portainer.position >= vStart - 2 && portainer.position <= vEnd + 2;
+      });
+      addPortainer(THREE, scene, portainer, total, isOverVessel);
+    }
   }
 
   const gangwayMaterial = new THREE.MeshStandardMaterial({ color: "#7c72aa", roughness: 0.8 });
