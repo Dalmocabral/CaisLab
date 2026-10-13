@@ -233,6 +233,7 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "OCEAN MERMAID": "research-survey",
   "CMA CGM IRON": "container",
   "CMA CGM PUCCINI": "container",
+  "CMA CGM VERACRUZ": "container",
   "COSCO SHIPPING ARGENTINA": "container",
   "COSCO SHIPPING BRAZIL": "container",
   "COSCO SHIPPING CHILE": "container",
@@ -248,6 +249,46 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "NC BREDA": "container",
   "TOKYO EXPRESS": "container",
   "ZIM BALTIMORE": "container",
+};
+
+export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
+  "COSCO SHIPPING CHILE": {
+    name: "COSCO SHIPPING CHILE",
+    loa: 335.9,
+    beam: 51.0,
+    draft: 11.2,
+    bayCount: 78,
+    bays: 78,
+    rowCount: 20,
+    rows: 20,
+    bridgePosition: "between-bays",
+    bridgeBay: 22,
+    bridgeBayStart: 22,
+    bridgeBayEnd: 22,
+    separateFunnel: true,
+    funnelBay: 64,
+    funnelBayStart: 64,
+    funnelBayEnd: 64,
+    vesselType: "container",
+  },
+  "CMA CGM VERACRUZ": {
+    name: "CMA CGM VERACRUZ",
+    loa: 228.62,
+    beam: 32.22,
+    draft: 9.7,
+    bayCount: 50,
+    bays: 50,
+    rowCount: 13,
+    rows: 13,
+    bridgePosition: "all-aft",
+    bridgeBay: 50,
+    bridgeBayStart: 50,
+    bridgeBayEnd: 50,
+    separateFunnel: false,
+    funnelBayStart: 44,
+    funnelBayEnd: 46,
+    vesselType: "container",
+  },
 };
 
 export function normalizeVesselType(raw?: string | null, vesselName?: string | null): VesselType {
@@ -574,7 +615,7 @@ export interface BerthIssue {
   message: string;
 }
 
-export const STORAGE_KEY = "caislab:scenario:v5";
+export const STORAGE_KEY = "caislab:scenario:v6";
 
 export const VESSEL_COLORS: Record<VesselColor, { label: string; fill: string; stroke: string; accent: string }> = {
   blue: { label: "Azul", fill: "#3f779b", stroke: "#285a78", accent: "#b9dce9" },
@@ -749,7 +790,57 @@ export function createDemoScenario(): Scenario {
       { id: "segment-prolongamento", name: "Prolongamento", length: 430 },
       { id: "segment-tecon", name: "Tecon 1", length: 385 },
     ],
-    vessels: [],
+    vessels: [
+      {
+        id: "vessel-cosco-chile",
+        name: "COSCO SHIPPING CHILE",
+        loa: 335.9,
+        beam: 51.0,
+        draft: 11.2,
+        position: 100,
+        berthingSide: "boreste",
+        gangwayOffset: 168,
+        mooringLines: [],
+        color: "blue",
+        vesselType: "container",
+        bayCount: 78,
+        bays: 78,
+        rowCount: 20,
+        rows: 20,
+        bridgePosition: "between-bays",
+        bridgeBay: 22,
+        bridgeBayStart: 22,
+        bridgeBayEnd: 22,
+        separateFunnel: true,
+        funnelBay: 64,
+        funnelBayStart: 64,
+        funnelBayEnd: 64,
+      },
+      {
+        id: "vessel-veracruz",
+        name: "CMA CGM VERACRUZ",
+        loa: 228.62,
+        beam: 32.22,
+        draft: 9.7,
+        position: 520,
+        berthingSide: "boreste",
+        gangwayOffset: 114,
+        mooringLines: [],
+        color: "teal",
+        vesselType: "container",
+        bayCount: 50,
+        bays: 50,
+        rowCount: 13,
+        rows: 13,
+        bridgePosition: "all-aft",
+        bridgeBay: 50,
+        bridgeBayStart: 50,
+        bridgeBayEnd: 50,
+        separateFunnel: false,
+        funnelBayStart: 44,
+        funnelBayEnd: 46,
+      },
+    ],
     bollards: createBollardInventory(),
     portainers: DEFAULT_PORTAINERS.map((p) => ({ ...p })),
     showPortainers: true,
@@ -802,30 +893,70 @@ export function normalizeScenario(value: unknown): Scenario | null {
       typeof raw.vesselType === "string" ? raw.vesselType : typeof raw.type === "string" ? raw.type : undefined,
       raw.name,
     );
+    const upperName = (raw.name ?? "").toUpperCase().trim();
+    const knownDefault = KNOWN_VESSEL_DEFAULTS[upperName] ??
+      (upperName.includes("VERACRUZ") ? KNOWN_VESSEL_DEFAULTS["CMA CGM VERACRUZ"] :
+      (upperName.includes("COSCO") && upperName.includes("CHILE")) ? KNOWN_VESSEL_DEFAULTS["COSCO SHIPPING CHILE"] : undefined);
+
+    const rawBayCount = (raw as any).bayCount ?? (raw as any).maxBayNumber ?? raw.bays;
+    const bayCount = normalizeBayCount(rawBayCount !== undefined ? rawBayCount : knownDefault?.bayCount);
+    const rawRowCount = (raw as any).rowCount ?? raw.rows;
+    const rowCount = normalizeRowCount(rawRowCount !== undefined ? rawRowCount : knownDefault?.rowCount);
+    const bridgePosition = (raw as any).bridgePosition === "between-bays"
+      ? "between-bays"
+      : (raw as any).bridgePosition === "all-aft"
+      ? "all-aft"
+      : knownDefault?.bridgePosition ?? "all-aft";
+    const bridgeBay = typeof (raw as any).bridgeBay === "number"
+      ? (raw as any).bridgeBay
+      : typeof (raw as any).bridgeBayStart === "number"
+      ? (raw as any).bridgeBayStart
+      : knownDefault?.bridgeBay;
+    const bridgeBayStart = typeof (raw as any).bridgeBayStart === "number"
+      ? (raw as any).bridgeBayStart
+      : bridgeBay ?? knownDefault?.bridgeBayStart;
+    const bridgeBayEnd = typeof (raw as any).bridgeBayEnd === "number"
+      ? (raw as any).bridgeBayEnd
+      : bridgeBay ?? knownDefault?.bridgeBayEnd;
+    const separateFunnel = (raw as any).separateFunnel !== undefined
+      ? Boolean((raw as any).separateFunnel)
+      : Boolean(knownDefault?.separateFunnel);
+    const funnelBay = typeof (raw as any).funnelBay === "number"
+      ? (raw as any).funnelBay
+      : typeof (raw as any).funnelBayStart === "number"
+      ? (raw as any).funnelBayStart
+      : knownDefault?.funnelBay;
+    const funnelBayStart = typeof (raw as any).funnelBayStart === "number"
+      ? (raw as any).funnelBayStart
+      : funnelBay ?? knownDefault?.funnelBayStart;
+    const funnelBayEnd = typeof (raw as any).funnelBayEnd === "number"
+      ? (raw as any).funnelBayEnd
+      : funnelBay ?? knownDefault?.funnelBayEnd;
+
     vessels.push({
       id: typeof raw.id === "string" && raw.id ? raw.id : makeId("navio"),
       name: raw.name,
       loa,
-      beam: typeof raw.beam === "number" && Number.isFinite(raw.beam) ? Math.max(0, raw.beam) : 0,
-      draft: typeof raw.draft === "number" && Number.isFinite(raw.draft) ? Math.max(0, raw.draft) : 0,
+      beam: typeof raw.beam === "number" && Number.isFinite(raw.beam) ? Math.max(0, raw.beam) : (knownDefault?.beam ?? 0),
+      draft: typeof raw.draft === "number" && Number.isFinite(raw.draft) ? Math.max(0, raw.draft) : (knownDefault?.draft ?? 0),
       position: raw.position,
       berthingSide: raw.berthingSide === "bombordo" || raw.berthingSide === "boreste" ? raw.berthingSide : "boreste",
       gangwayOffset: Math.min(loa, Math.max(0, gangway)),
       mooringLines,
       color,
       vesselType,
-      bayCount: normalizeBayCount((raw as any).bayCount ?? (raw as any).maxBayNumber ?? raw.bays),
-      bays: normalizeBayCount((raw as any).bayCount ?? (raw as any).maxBayNumber ?? raw.bays),
-      rowCount: normalizeRowCount((raw as any).rowCount ?? raw.rows),
-      rows: normalizeRowCount((raw as any).rowCount ?? raw.rows),
-      bridgePosition: (raw as any).bridgePosition === "between-bays" ? "between-bays" : "all-aft",
-      bridgeBay: typeof (raw as any).bridgeBay === "number" ? (raw as any).bridgeBay : typeof (raw as any).bridgeBayStart === "number" ? (raw as any).bridgeBayStart : undefined,
-      bridgeBayStart: typeof (raw as any).bridgeBayStart === "number" ? (raw as any).bridgeBayStart : typeof (raw as any).bridgeBay === "number" ? (raw as any).bridgeBay : undefined,
-      bridgeBayEnd: typeof (raw as any).bridgeBayEnd === "number" ? (raw as any).bridgeBayEnd : typeof (raw as any).bridgeBay === "number" ? (raw as any).bridgeBay : undefined,
-      separateFunnel: Boolean((raw as any).separateFunnel),
-      funnelBay: typeof (raw as any).funnelBay === "number" ? (raw as any).funnelBay : typeof (raw as any).funnelBayStart === "number" ? (raw as any).funnelBayStart : undefined,
-      funnelBayStart: typeof (raw as any).funnelBayStart === "number" ? (raw as any).funnelBayStart : typeof (raw as any).funnelBay === "number" ? (raw as any).funnelBay : undefined,
-      funnelBayEnd: typeof (raw as any).funnelBayEnd === "number" ? (raw as any).funnelBayEnd : typeof (raw as any).funnelBay === "number" ? (raw as any).funnelBay : undefined,
+      bayCount,
+      bays: bayCount,
+      rowCount,
+      rows: rowCount,
+      bridgePosition,
+      bridgeBay,
+      bridgeBayStart,
+      bridgeBayEnd,
+      separateFunnel,
+      funnelBay,
+      funnelBayStart,
+      funnelBayEnd,
     });
   }
 
@@ -896,25 +1027,15 @@ export function normalizeScenario(value: unknown): Scenario | null {
 export function readScenario(): Scenario {
   if (typeof window === "undefined") return createDemoScenario();
   try {
-    const isGitHubPages =
-      window.location.hostname.includes("github.io") ||
-      window.location.pathname.toLowerCase().includes("/caislab");
+    const raw =
+      window.localStorage.getItem(STORAGE_KEY) ||
+      window.sessionStorage.getItem(STORAGE_KEY);
 
-    // No GitHub Pages, o cais sempre inicia resetado/limpo para uma nova simulação (sem navios antigos presos no cache)
-    if (isGitHubPages) {
-      try {
-        window.localStorage.removeItem(STORAGE_KEY);
-      } catch {}
-      const raw = window.sessionStorage.getItem(STORAGE_KEY);
-      if (!raw) return createDemoScenario();
-      const scenario = normalizeScenario(JSON.parse(raw));
-      return scenario ?? createDemoScenario();
-    }
-
-    const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return createDemoScenario();
     const scenario = normalizeScenario(JSON.parse(raw));
-    if (!scenario) return createDemoScenario();
+    if (!scenario || !scenario.vessels || scenario.vessels.length === 0) {
+      return createDemoScenario();
+    }
     // Ensure bollards match the 33 bollards with exact measurements and types from the port plan
     const b277 = scenario.bollards.find((b) => b.id === "277");
     const b288 = scenario.bollards.find((b) => b.id === "288");

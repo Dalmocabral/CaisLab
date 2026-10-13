@@ -84,12 +84,12 @@ function metres(value: number) {
 
 function safeWriteScenario(scenario: Scenario) {
   try {
-    const isGitHubPages =
-      typeof window !== "undefined" &&
-      (window.location.hostname.includes("github.io") ||
-        window.location.pathname.toLowerCase().includes("/caislab"));
-    const storage = isGitHubPages ? window.sessionStorage : window.localStorage;
-    storage.setItem(STORAGE_KEY, JSON.stringify(scenario));
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(scenario));
+    } catch {}
+    try {
+      window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(scenario));
+    } catch {}
     return true;
   } catch {
     return false;

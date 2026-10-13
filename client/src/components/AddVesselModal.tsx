@@ -47,6 +47,7 @@ import {
   VESSEL_COLORS,
   makeId,
   normalizeMooringOffset,
+  KNOWN_VESSEL_DEFAULTS,
 } from "@/lib/berth-model";
 
 interface AddVesselModalProps {
@@ -204,13 +205,18 @@ export default function AddVesselModal({
     const position = calculateNextPosition(loa, m.berthTo);
     const color = getNextColor();
     const vesselType = normalizeVesselType(m.type);
-    const savedVessel = catalog.find((item) => item.name.trim().toUpperCase() === m.name.trim().toUpperCase());
-    const bayCount = normalizeBayCount(savedVessel?.bayCount ?? savedVessel?.bays ?? savedVessel?.maxBayNumber);
-    const rowCount = normalizeRowCount(savedVessel?.rowCount ?? savedVessel?.rows);
-    const bridgePosition = savedVessel?.bridgePosition;
-    const bridgeBay = savedVessel?.bridgeBay;
-    const separateFunnel = savedVessel?.separateFunnel;
-    const funnelBay = savedVessel?.funnelBay;
+    const upperName = m.name.trim().toUpperCase();
+    const knownDefault = KNOWN_VESSEL_DEFAULTS[upperName] ??
+      (upperName.includes("VERACRUZ") ? KNOWN_VESSEL_DEFAULTS["CMA CGM VERACRUZ"] :
+      (upperName.includes("COSCO") && upperName.includes("CHILE")) ? KNOWN_VESSEL_DEFAULTS["COSCO SHIPPING CHILE"] : undefined);
+
+    const savedVessel = catalog.find((item) => item.name.trim().toUpperCase() === upperName);
+    const bayCount = normalizeBayCount(savedVessel?.bayCount ?? savedVessel?.bays ?? savedVessel?.maxBayNumber ?? knownDefault?.bayCount);
+    const rowCount = normalizeRowCount(savedVessel?.rowCount ?? savedVessel?.rows ?? knownDefault?.rowCount);
+    const bridgePosition = savedVessel?.bridgePosition ?? knownDefault?.bridgePosition;
+    const bridgeBay = savedVessel?.bridgeBay ?? knownDefault?.bridgeBay;
+    const separateFunnel = savedVessel?.separateFunnel ?? knownDefault?.separateFunnel;
+    const funnelBay = savedVessel?.funnelBay ?? knownDefault?.funnelBay;
 
     const newVessel: Vessel = {
       id,
@@ -274,8 +280,18 @@ export default function AddVesselModal({
     const position = calculateNextPosition(loa);
     const color = getNextColor();
     const vesselType = normalizeVesselType(v.type);
-    const bayCount = normalizeBayCount(v.bayCount ?? v.bays ?? v.maxBayNumber);
-    const rowCount = normalizeRowCount(v.rowCount ?? v.rows);
+
+    const upperName = v.name.trim().toUpperCase();
+    const knownDefault = KNOWN_VESSEL_DEFAULTS[upperName] ??
+      (upperName.includes("VERACRUZ") ? KNOWN_VESSEL_DEFAULTS["CMA CGM VERACRUZ"] :
+      (upperName.includes("COSCO") && upperName.includes("CHILE")) ? KNOWN_VESSEL_DEFAULTS["COSCO SHIPPING CHILE"] : undefined);
+
+    const bayCount = normalizeBayCount(v.bayCount ?? v.bays ?? v.maxBayNumber ?? knownDefault?.bayCount);
+    const rowCount = normalizeRowCount(v.rowCount ?? v.rows ?? knownDefault?.rowCount);
+    const bridgePosition = v.bridgePosition ?? knownDefault?.bridgePosition;
+    const bridgeBay = v.bridgeBay ?? knownDefault?.bridgeBay;
+    const separateFunnel = v.separateFunnel ?? knownDefault?.separateFunnel;
+    const funnelBay = v.funnelBay ?? knownDefault?.funnelBay;
 
     const newVessel: Vessel = {
       id,
@@ -293,10 +309,10 @@ export default function AddVesselModal({
       bays: bayCount,
       rowCount,
       rows: rowCount,
-      bridgePosition: v.bridgePosition,
-      bridgeBay: v.bridgeBay,
-      separateFunnel: v.separateFunnel,
-      funnelBay: v.funnelBay,
+      bridgePosition,
+      bridgeBay,
+      separateFunnel,
+      funnelBay,
     };
 
     onAddVessel(

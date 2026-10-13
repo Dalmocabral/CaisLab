@@ -40,6 +40,7 @@
     "rows": 13,
     "bridgePosition": "all-aft",
     "superstructureLayout": "custom",
+    "bridgeBay": 50,
     "bridgeBayStart": 50,
     "bridgeBayEnd": 50,
     "separateFunnel": false,
@@ -85,10 +86,16 @@
     "flag": "HONG KONG, CHINA",
     "bayCount": 78,
     "bays": 78,
+    "rowCount": 20,
+    "rows": 20,
     "bridgePosition": "between-bays",
     "bridgeBay": 22,
+    "bridgeBayStart": 22,
+    "bridgeBayEnd": 22,
     "separateFunnel": true,
-    "funnelBay": 64
+    "funnelBay": 64,
+    "funnelBayStart": 64,
+    "funnelBayEnd": 64
   },
   {
     "name": "EVER FAME",
