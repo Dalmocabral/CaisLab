@@ -72,7 +72,7 @@ export function normalizeBayCount(value: unknown): number | undefined {
   return Math.min(MAX_BAY_COUNT, Math.max(1, Math.round(parsed)));
 }
 
-export function bayNumberSequence(value: unknown): number[] {
+export function bayNumberSequence(value: unknown, vesselName?: string): number[] {
   const bayCount = normalizeBayCount(value);
   if (!bayCount) return [];
   // Bays de 20 pés são ímpares (01, 03...); se a última bay for par (ex.: 50, 78), inclui a bay par de 40 pés no final.
@@ -82,6 +82,23 @@ export function bayNumberSequence(value: unknown): number[] {
   if (isEven && bayCount > 0 && !seq.includes(bayCount)) {
     seq.push(bayCount);
   }
+
+  // No navio EVER LEADER não tem bay 53 e 59 (são 54 e 58) e a bay 77 não existe (é apenas 78)
+  const isEverLeader = typeof vesselName === "string" && vesselName.trim().toUpperCase().includes("EVER LEADER");
+  if (isEverLeader) {
+    return Array.from(
+      new Set(
+        seq
+          .filter((b) => b !== 77)
+          .map((b) => {
+            if (b === 53) return 54;
+            if (b === 59) return 58;
+            return b;
+          })
+      )
+    );
+  }
+
   return seq;
 }
 

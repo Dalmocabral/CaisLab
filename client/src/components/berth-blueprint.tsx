@@ -66,7 +66,7 @@ function renderContainerDeck(
   mirrorText = false,
 ) {
   const config = resolveVesselSuperstructure(vessel);
-  const bays = bayNumberSequence(vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber);
+  const bays = bayNumberSequence(vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber, vessel.name);
   const rows = rowNumberSequence(vessel.rowCount ?? vessel.rows);
   const effectiveRows = rows.length > 0
     ? rows

@@ -960,7 +960,7 @@ function addVessel(
       addBox(THREE, group, [2.2, 0.6, 2.2], [0, deckHeight + gantryHeight - 0.4, 0], new THREE.MeshStandardMaterial({ color: "#eab308" }));
     } else if (isContainer) {
       const bayCount = normalizeBayCount(vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber);
-      const baySlots = bayCount ? bayNumberSequence(bayCount).length : 0;
+      const baySlots = bayCount ? bayNumberSequence(bayCount, vessel.name).length : 0;
       const columns = Math.max(1, Math.min(40, baySlots || Math.max(4, Math.floor(loa / 16))));
       // Fileiras transversais (boca) modeladas na proporção real de contêineres marítimos (~2.44m de largura ISO)
       const usableBeam = beam * 0.82;
@@ -1100,13 +1100,15 @@ function addVessel(
         const hatchHash = ((vesselSeed ^ (h * 49287) ^ 0x9e3779b9) >>> 0) % 100;
         const isAll40 = hatchHash < 50;
         const isAll20 = hatchHash >= 50 && hatchHash < 82;
+        const isEverLeader = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("EVER LEADER");
+        const isNearBridgeEverLeader = isEverLeader && Math.abs(containerX40 - bridgeX) < houseLength + 16;
 
         for (let row = 0; row < rows; row += 1) {
           const containerZ = (row - (rows - 1) / 2) * rowSpacing;
 
           let use40 = false;
           if (!colABlocked && !colBBlocked) {
-            if (isAll40) {
+            if (isNearBridgeEverLeader || isAll40) {
               use40 = true;
             } else if (isAll20) {
               use40 = false;
