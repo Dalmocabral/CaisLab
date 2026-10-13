@@ -82,7 +82,7 @@
     "imo": "9945887",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "13/10/2026 13:10",
+    "updatedAt": "13/10/2026 19:59",
     "flag": "HONG KONG, CHINA",
     "bayCount": 78,
     "bays": 78,
@@ -144,7 +144,7 @@
     "imo": "9850795",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "13/10/2026 13:10",
+    "updatedAt": "13/10/2026 19:59",
     "flag": "LIBERIA"
   },
   {
@@ -313,19 +313,19 @@
     "imo": "9612789",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "13/10/2026 13:10",
+    "updatedAt": "13/10/2026 19:59",
     "flag": "BRAZIL"
   },
   {
     "name": "NYK RUMINA",
     "loa": 294.12,
     "beam": 32.25,
-    "draft": 12.6,
+    "draft": 12.4,
     "berthingSide": "boreste",
     "imo": "9416991",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONT1",
-    "updatedAt": "13/10/2026 13:10",
+    "updatedAt": "13/10/2026 19:59",
     "flag": "SINGAPORE"
   },
   {
@@ -339,6 +339,18 @@
     "flag": "BAHAMAS",
     "lastBerth": "TECONT1",
     "updatedAt": "05/10/2026 08:25"
+  },
+  {
+    "name": "SPYROS V",
+    "loa": 261.03,
+    "beam": 32.3,
+    "draft": 12.6,
+    "berthingSide": "boreste",
+    "imo": "9453365",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "MALTA",
+    "lastBerth": "TECONT1",
+    "updatedAt": "13/10/2026 19:59"
   },
   {
     "name": "TOKYO EXPRESS",

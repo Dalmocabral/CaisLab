@@ -1,5 +1,5 @@
 {
-  "updatedAt": "13/10/2026 13:10",
+  "updatedAt": "13/10/2026 19:59",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 5,
   "maneuvers": [
@@ -21,7 +21,7 @@
     {
       "dateTime": "13/10 18:00",
       "name": "NYK RUMINA",
-      "draft": 12.6,
+      "draft": 12.4,
       "loa": 294.12,
       "beam": 32.25,
       "maneuver": "E",
@@ -34,7 +34,22 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "14/10 22:00",
+      "dateTime": "14/10 18:30",
+      "name": "SPYROS V",
+      "draft": 12.6,
+      "loa": 261.03,
+      "beam": 32.3,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONT1",
+      "berthingSide": "boreste",
+      "imo": "9453365",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "MALTA",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "15/10 08:00",
       "name": "NC BRISA",
       "draft": 9.5,
       "loa": 223.96,
@@ -46,21 +61,6 @@
       "imo": "9612789",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "BRAZIL",
-      "terminal": "rio"
-    },
-    {
-      "dateTime": "16/10 15:00",
-      "name": "CMA CGM IRON",
-      "draft": 14.7,
-      "loa": 335.23,
-      "beam": 51.06,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
-      "berthingSide": "boreste",
-      "imo": "9996678",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "MALTA",
       "terminal": "rio"
     },
     {
