@@ -95,12 +95,18 @@ function renderContainerDeck(
   const bayAreaRight = deckRight - rowNumberWidth - 0.8;
   const bayAreaWidth = Math.max(1, bayAreaRight - deckLeft);
 
+  const isCoscoChile = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("COSCO") && vessel.name.toUpperCase().includes("CHILE");
+  const idx63 = bays.indexOf(63);
+  const idx65 = bays.indexOf(65);
+  const hasCoscoFunnel = isCoscoChile && config.separateFunnel && idx63 !== -1 && idx65 !== -1;
+
   // Separação visual entre as bays de 40' (cada par de bays de 20' forma uma bay/hatch de 40')
   const num40ftGaps = Math.max(0, Math.floor((bays.length - 1) / 2));
-  const rawBayWidth = bayAreaWidth / Math.max(1, bays.length);
+  const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + (hasCoscoFunnel ? 1.4 : 0));
   const hatchGap = bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0;
   const totalGapsWidth = num40ftGaps * hatchGap;
-  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth);
+  const coscoFunnelSlotW = hasCoscoFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
+  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW);
   const cellWidth = availableBayWidth / Math.max(1, bays.length);
   const labelSize = bays.length ? Math.max(2.6, Math.min(5.4, cellWidth * 0.54)) : 3.4;
   const rowLabelSize = Math.max(2.0, Math.min(labelSize, cellHeight * 0.72));
@@ -109,7 +115,11 @@ function renderContainerDeck(
   // Posição X da baia considerando o espaço visual entre escotilhas de 40'
   const bayCellX = (index: number) => {
     const gapsBefore = Math.floor(index / 2);
-    return bayAreaRight - ((index + 1) * cellWidth + gapsBefore * hatchGap);
+    let xPos = bayAreaRight - ((index + 1) * cellWidth + gapsBefore * hatchGap);
+    if (hasCoscoFunnel && index >= idx65) {
+      xPos -= coscoFunnelSlotW;
+    }
+    return xPos;
   };
 
   // Modo 2: Passadiço entre as bays (Ilha / Casaria no meio)
@@ -152,7 +162,7 @@ function renderContainerDeck(
       }
     }
 
-    if (config.separateFunnel) {
+    if (config.separateFunnel && !hasCoscoFunnel) {
       const targetFunnelBay = config.funnelBay ?? config.funnelBayStart ?? 54;
       const occupiedFunnelBays = getOccupiedBayNumbers(
         targetFunnelBay,
@@ -438,6 +448,43 @@ function renderContainerDeck(
                   cy={y + vesselHeight / 2}
                   rx={Math.max(2.2, Math.min(4.5, slotW * 0.32))}
                   ry={Math.max(2.0, Math.min(3.8, vesselHeight * 0.16))}
+                  fill="#0f172a"
+                  stroke="#ffffff"
+                  strokeWidth="0.5"
+                />
+              </>
+            );
+          })()}
+        </g>
+      )}
+
+      {/* 3b. Chaminé Separada Específica do COSCO (estreita entre as bays 63 e 65, sem ocultar as bays) */}
+      {!isAllAft && hasCoscoFunnel && (
+        <g className="superstructure-funnel-island-cosco">
+          {(() => {
+            const rightOf65 = bayCellX(idx65) + cellWidth;
+            const leftOf63 = bayCellX(idx63);
+            const slotW = Math.max(1.6, coscoFunnelSlotW - 0.35);
+            const slotX = (rightOf65 + leftOf63 - slotW) / 2;
+            const centerFunnelX = slotX + slotW / 2;
+            return (
+              <>
+                <title>Chaminé (Bay 64)</title>
+                <rect
+                  x={slotX}
+                  y={y + 3.2}
+                  width={slotW}
+                  height={vesselHeight - 6.4}
+                  rx="1.6"
+                  fill="#334155"
+                  stroke="#0f172a"
+                  strokeWidth="1.1"
+                />
+                <ellipse
+                  cx={centerFunnelX}
+                  cy={y + vesselHeight / 2}
+                  rx={Math.max(1.8, Math.min(3.6, slotW * 0.36))}
+                  ry={Math.max(1.8, Math.min(3.4, vesselHeight * 0.15))}
                   fill="#0f172a"
                   stroke="#ffffff"
                   strokeWidth="0.5"
