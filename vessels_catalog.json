@@ -9,7 +9,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "13/10/2026 03:25"
+    "updatedAt": "13/10/2026 03:39"
   },
   {
     "name": "CMA CGM PUCCINI",
@@ -81,7 +81,7 @@
     "imo": "9945887",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "13/10/2026 03:25",
+    "updatedAt": "13/10/2026 03:39",
     "flag": "HONG KONG, CHINA",
     "bayCount": 78,
     "bays": 78,
@@ -137,7 +137,7 @@
     "imo": "9850795",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "13/10/2026 03:25",
+    "updatedAt": "13/10/2026 03:39",
     "flag": "LIBERIA"
   },
   {
@@ -299,7 +299,7 @@
     "imo": "9612789",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "13/10/2026 03:25",
+    "updatedAt": "13/10/2026 03:39",
     "flag": "BRAZIL"
   },
   {
@@ -311,7 +311,7 @@
     "imo": "9416991",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONT1",
-    "updatedAt": "13/10/2026 03:25",
+    "updatedAt": "13/10/2026 03:39",
     "flag": "SINGAPORE"
   },
   {
