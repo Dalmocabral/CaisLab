@@ -1,38 +1,8 @@
 {
-  "updatedAt": "13/10/2026 19:59",
+  "updatedAt": "13/10/2026 23:38",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 5,
+  "count": 3,
   "maneuvers": [
-    {
-      "dateTime": "13/10 16:00",
-      "name": "COSCO SHIPPING CHILE",
-      "draft": 11.2,
-      "loa": 335.9,
-      "beam": 51.0,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
-      "berthingSide": "boreste",
-      "imo": "9945887",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "HONG KONG, CHINA",
-      "terminal": "rio"
-    },
-    {
-      "dateTime": "13/10 18:00",
-      "name": "NYK RUMINA",
-      "draft": 12.4,
-      "loa": 294.12,
-      "beam": 32.25,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "boreste",
-      "imo": "9416991",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "SINGAPORE",
-      "terminal": "rio"
-    },
     {
       "dateTime": "14/10 18:30",
       "name": "SPYROS V",
