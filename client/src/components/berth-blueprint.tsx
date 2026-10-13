@@ -238,9 +238,13 @@ function renderContainerDeck(
             if (isBayOccupied(index)) return null;
 
             const isVeracruz = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("VERACRUZ");
+            const isCoscoChile = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("COSCO") && vessel.name.toUpperCase().includes("CHILE");
 
             // No navio Veracruz, remove a bay 49 e deixa a 50 centralizada entre a divisão dos contêineres de 20'
             if (isVeracruz && bay === 49) return null;
+
+            // No navio Cosco Chile, remove a bay 77 e deixa a 78 centralizada entre a divisão dos contêineres de 20'
+            if (isCoscoChile && bay === 77) return null;
 
             const cellX = bayCellX(index);
             let centerX = cellX + cellWidth / 2;
@@ -250,6 +254,14 @@ function renderContainerDeck(
               if (idx49 !== -1) {
                 const cellX49 = bayCellX(idx49);
                 centerX = (cellX + cellWidth / 2 + cellX49 + cellWidth / 2) / 2;
+              }
+            }
+
+            if (isCoscoChile && bay === 78) {
+              const idx77 = bays.indexOf(77);
+              if (idx77 !== -1) {
+                const cellX77 = bayCellX(idx77);
+                centerX = (cellX + cellWidth / 2 + cellX77 + cellWidth / 2) / 2;
               }
             }
 
