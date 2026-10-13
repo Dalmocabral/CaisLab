@@ -1262,6 +1262,169 @@ function addRoundBeamBatch(
   parent.add(mesh);
 }
 
+let cachedRioLogoImg: HTMLImageElement | null = null;
+
+function getRioLogoImage(): HTMLImageElement | null {
+  if (typeof document === "undefined") return null;
+  if (!cachedRioLogoImg) {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = `${import.meta.env.BASE_URL}rio_brasil_terminal_logo.png`;
+    cachedRioLogoImg = img;
+  }
+  return cachedRioLogoImg;
+}
+
+function drawRioBrasilPlate(
+  ctx: CanvasRenderingContext2D,
+  id: string,
+  isSuperPostPanamax: boolean,
+  badgeColor?: string,
+  logoImg?: HTMLImageElement | null,
+) {
+  const w = 1024;
+  const h = 512;
+
+  // Fundo branco industrial da placa
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, 0, w, h);
+
+  // Faixa superior com cores corporativas da Rio Brasil Terminais
+  ctx.fillStyle = "#002b49";
+  ctx.fillRect(0, 0, w, 16);
+  ctx.fillStyle = "#f96207";
+  ctx.fillRect(0, 16, w, 8);
+
+  // Logo da Rio Brasil Terminal
+  if (logoImg && logoImg.complete && logoImg.naturalWidth > 0) {
+    // Desenha o logotipo oficial exatamente a partir da imagem PNG fornecida
+    const targetW = 670;
+    const aspect = logoImg.naturalHeight / logoImg.naturalWidth;
+    const targetH = targetW * aspect;
+    const logoX = 35;
+    const logoY = 30 + (320 - targetH) / 2;
+    ctx.drawImage(logoImg, logoX, logoY, targetW, targetH);
+  } else {
+    // Fallback vetorial de alta precisão enquanto a imagem carrega
+    ctx.save();
+    // Paralelogramo Laranja com guindaste
+    ctx.fillStyle = "#f96207";
+    ctx.beginPath();
+    ctx.moveTo(70, 275);
+    ctx.lineTo(245, 275);
+    ctx.lineTo(285, 115);
+    ctx.lineTo(110, 115);
+    ctx.closePath();
+    ctx.fill();
+
+    // Silhueta do guindaste portêiner dentro do paralelogramo
+    ctx.strokeStyle = "#000000";
+    ctx.lineWidth = 6;
+    ctx.lineCap = "round";
+    ctx.beginPath();
+    // Lança horizontal
+    ctx.moveTo(115, 175);
+    ctx.lineTo(260, 175);
+    // Torre / Cathead
+    ctx.moveTo(185, 125);
+    ctx.lineTo(185, 235);
+    // Tirantes em A
+    ctx.moveTo(185, 125);
+    ctx.lineTo(125, 175);
+    ctx.moveTo(185, 125);
+    ctx.lineTo(245, 175);
+    // Pernas do pórtico
+    ctx.moveTo(185, 175);
+    ctx.lineTo(185, 260);
+    ctx.moveTo(215, 175);
+    ctx.lineTo(215, 260);
+    // Travessa
+    ctx.moveTo(185, 230);
+    ctx.lineTo(215, 230);
+    ctx.stroke();
+
+    // Casa de máquinas do guindaste sobre a lança
+    ctx.fillStyle = "#000000";
+    ctx.fillRect(215, 150, 32, 25);
+
+    // Três faixas inclinadas: Verde, Amarela, Azul
+    const stripes = [
+      { color: "#009b3a", x1: 256, x2: 296 },
+      { color: "#fed100", x1: 276, x2: 316 },
+      { color: "#002776", x1: 296, x2: 336 },
+    ];
+    for (const s of stripes) {
+      ctx.fillStyle = s.color;
+      ctx.beginPath();
+      ctx.moveTo(s.x1, 275);
+      ctx.lineTo(s.x1 + 14, 275);
+      ctx.lineTo(s.x2 + 14, 115);
+      ctx.lineTo(s.x2, 115);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // Tipografia: RIO BRASIL TERMINAL
+    ctx.fillStyle = "#000000";
+    ctx.font = "italic 900 60px system-ui, -apple-system, sans-serif";
+    ctx.textAlign = "left";
+    ctx.fillText("RIO BRASIL", 355, 178);
+    ctx.fillText("TERMINAL", 355, 240);
+
+    // Subtítulo: An ICTSI Group Company
+    ctx.font = "italic 700 24px system-ui, -apple-system, sans-serif";
+    ctx.fillText("An ICTSI Group Company", 360, 282);
+    ctx.restore();
+  }
+
+  // Crachá com o Número do Portêiner em destaque à direita (ex: P4, P5, P6, P7, P8, P9)
+  const badgeX = 735;
+  const badgeY = 70;
+  const badgeW = 250;
+  const badgeH = 240;
+  const badgeR = 24;
+
+  ctx.fillStyle = "#002b49";
+  ctx.beginPath();
+  ctx.roundRect(badgeX, badgeY, badgeW, badgeH, badgeR);
+  ctx.fill();
+
+  ctx.lineWidth = 8;
+  ctx.strokeStyle = badgeColor || (isSuperPostPanamax ? "#f59e0b" : "#f96207");
+  ctx.stroke();
+
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#93c5fd";
+  ctx.font = "800 22px system-ui, -apple-system, sans-serif";
+  ctx.fillText("PORTÊINER", badgeX + badgeW / 2, badgeY + 48);
+
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "900 125px system-ui, -apple-system, sans-serif";
+  ctx.fillText(id, badgeX + badgeW / 2, badgeY + 175);
+
+  // Faixa técnica inferior da máquina
+  ctx.fillStyle = "#002b49";
+  ctx.fillRect(0, 360, w, 152);
+
+  ctx.fillStyle = "#f96207";
+  ctx.fillRect(0, 352, w, 8);
+
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "800 34px system-ui, -apple-system, sans-serif";
+  const catText = isSuperPostPanamax ? "SUPER POST-PANAMAX STS CRANE" : "POST-PANAMAX STS CRANE";
+  ctx.fillText(catText, 512, 422);
+
+  ctx.fillStyle = "#94a3b8";
+  ctx.font = "700 24px system-ui, -apple-system, sans-serif";
+  ctx.fillText("RIO BRASIL TERMINAL 1 • AN ICTSI GROUP COMPANY", 512, 468);
+
+  // Borda perimetral externa
+  ctx.lineWidth = 14;
+  ctx.strokeStyle = "#002b49";
+  ctx.strokeRect(7, 7, w - 14, h - 14);
+}
+
 function createPortainerLogoMaterial(
   THREE: ThreeModule,
   id: string,
@@ -1277,105 +1440,23 @@ function createPortainerLogoMaterial(
   const ctx = canvas.getContext("2d");
   if (!ctx) return new THREE.MeshStandardMaterial({ color: "#f8fafc", roughness: 0.5 });
 
-  // Fundo branco industrial da placa do terminal
-  ctx.fillStyle = "#ffffff";
-  ctx.fillRect(0, 0, 1024, 512);
+  const logoImg = getRioLogoImage();
+  const render = () => {
+    drawRioBrasilPlate(ctx, id, isSuperPostPanamax, badgeColor, logoImg);
+  };
 
-  // Faixa superior com cores corporativas da Rio Brasil Terminais (Navy e Laranja ICTSI)
-  ctx.fillStyle = "#002b49";
-  ctx.fillRect(0, 0, 1024, 18);
-  ctx.fillStyle = "#f96207";
-  ctx.fillRect(0, 18, 1024, 8);
-
-  // Símbolo / Emblema dinâmico da Rio Brasil Terminais (arco estilizado em laranja e azul)
-  // Vela / curva superior laranja
-  ctx.fillStyle = "#f96207";
-  ctx.beginPath();
-  ctx.moveTo(60, 270);
-  ctx.bezierCurveTo(60, 150, 120, 105, 175, 105);
-  ctx.bezierCurveTo(145, 145, 125, 210, 155, 270);
-  ctx.closePath();
-  ctx.fill();
-
-  // Onda / curva base azul marinho
-  ctx.fillStyle = "#002b49";
-  ctx.beginPath();
-  ctx.moveTo(100, 285);
-  ctx.bezierCurveTo(135, 225, 180, 185, 220, 168);
-  ctx.bezierCurveTo(195, 215, 170, 255, 195, 285);
-  ctx.closePath();
-  ctx.fill();
-
-  // Elemento circular de destaque
-  ctx.fillStyle = "#f96207";
-  ctx.beginPath();
-  ctx.arc(205, 130, 14, 0, Math.PI * 2);
-  ctx.fill();
-
-  // Tipografia oficial: RIO BRASIL TERMINAIS
-  ctx.textAlign = "left";
-  ctx.textBaseline = "alphabetic";
-  ctx.fillStyle = "#002b49";
-  ctx.font = "900 64px system-ui, -apple-system, sans-serif";
-  ctx.fillText("RIO BRASIL", 242, 178);
-
-  ctx.fillStyle = "#f96207";
-  ctx.font = "800 46px system-ui, -apple-system, sans-serif";
-  ctx.fillText("TERMINAIS", 245, 232);
-
-  ctx.fillStyle = "#475569";
-  ctx.font = "700 22px system-ui, -apple-system, sans-serif";
-  ctx.fillText("PORTO DO RIO DE JANEIRO", 246, 268);
-
-  // Badge em destaque com número do portêiner (ex: P4, P5, P6, P7, P8, P9)
-  const badgeX = 720;
-  const badgeY = 75;
-  const badgeW = 250;
-  const badgeH = 225;
-  const badgeR = 24;
-
-  ctx.fillStyle = "#002b49";
-  ctx.beginPath();
-  ctx.roundRect(badgeX, badgeY, badgeW, badgeH, badgeR);
-  ctx.fill();
-
-  ctx.lineWidth = 8;
-  ctx.strokeStyle = badgeColor || (isSuperPostPanamax ? "#f59e0b" : "#f96207");
-  ctx.stroke();
-
-  ctx.textAlign = "center";
-  ctx.fillStyle = "#93c5fd";
-  ctx.font = "800 22px system-ui, -apple-system, sans-serif";
-  ctx.fillText("PORTÊINER", badgeX + badgeW / 2, badgeY + 44);
-
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "900 120px system-ui, -apple-system, sans-serif";
-  ctx.fillText(id, badgeX + badgeW / 2, badgeY + 165);
-
-  // Faixa técnica inferior da máquina
-  ctx.fillStyle = "#002b49";
-  ctx.fillRect(0, 360, 1024, 152);
-
-  ctx.fillStyle = "#f96207";
-  ctx.fillRect(0, 352, 1024, 8);
-
-  ctx.textAlign = "center";
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "800 34px system-ui, -apple-system, sans-serif";
-  const catText = isSuperPostPanamax ? "SUPER POST-PANAMAX STS CRANE" : "POST-PANAMAX STS CRANE";
-  ctx.fillText(catText, 512, 422);
-
-  ctx.fillStyle = "#94a3b8";
-  ctx.font = "700 24px system-ui, -apple-system, sans-serif";
-  ctx.fillText("RIO BRASIL TERMINAL 1 • AN ICTSI GROUP COMPANY", 512, 468);
-
-  // Borda perimetral externa
-  ctx.lineWidth = 14;
-  ctx.strokeStyle = "#002b49";
-  ctx.strokeRect(7, 7, 1010, 498);
+  render();
 
   const texture = new THREE.CanvasTexture(canvas);
   texture.needsUpdate = true;
+
+  if (logoImg && !logoImg.complete) {
+    logoImg.addEventListener("load", () => {
+      render();
+      texture.needsUpdate = true;
+    });
+  }
+
   return new THREE.MeshStandardMaterial({ map: texture, roughness: 0.35, metalness: 0.1 });
 }
 

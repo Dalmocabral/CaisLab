@@ -75,11 +75,11 @@
   {
     "name": "COSCO SHIPPING CHILE",
     "loa": 335.9,
-    "beam": 51.0,
+    "beam": 51,
     "draft": 11.2,
     "berthingSide": "boreste",
     "imo": "9945887",
-    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "lastBerth": "TECONTPROLONG",
     "updatedAt": "13/10/2026 03:18",
     "flag": "HONG KONG, CHINA",
@@ -88,7 +88,7 @@
     "bridgePosition": "between-bays",
     "bridgeBay": 22,
     "separateFunnel": true,
-    "funnelBay": 70
+    "funnelBay": 64
   },
   {
     "name": "EVER FAME",
