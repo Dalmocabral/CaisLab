@@ -131,8 +131,8 @@ export function getOccupiedBayNumbers(
 ): number[] {
   const primary = targetBay ?? startBay;
   if (!primary) return [];
-  const start = startBay ?? primary;
-  const end = endBay ?? primary;
+  const start = typeof targetBay === "number" ? targetBay : (startBay ?? primary);
+  const end = typeof targetBay === "number" ? targetBay : (endBay ?? primary);
 
   const minTarget = Math.min(start, end);
   const maxTarget = Math.max(start, end);
@@ -181,12 +181,12 @@ export function resolveVesselSuperstructure(vessel: Partial<Vessel>): VesselSupe
   return {
     bridgePosition: bridgePos,
     bridgeBay: bBay,
-    bridgeBayStart: vessel.bridgeBayStart ?? bBay,
-    bridgeBayEnd: vessel.bridgeBayEnd ?? bBay,
+    bridgeBayStart: typeof vessel.bridgeBay === "number" ? vessel.bridgeBay : (vessel.bridgeBayStart ?? bBay),
+    bridgeBayEnd: typeof vessel.bridgeBay === "number" ? vessel.bridgeBay : (vessel.bridgeBayEnd ?? bBay),
     separateFunnel: sepFunnel,
     funnelBay: fBay,
-    funnelBayStart: vessel.funnelBayStart ?? fBay,
-    funnelBayEnd: vessel.funnelBayEnd ?? fBay,
+    funnelBayStart: typeof vessel.funnelBay === "number" ? vessel.funnelBay : (vessel.funnelBayStart ?? fBay),
+    funnelBayEnd: typeof vessel.funnelBay === "number" ? vessel.funnelBay : (vessel.funnelBayEnd ?? fBay),
   };
 }
 
@@ -790,57 +790,7 @@ export function createDemoScenario(): Scenario {
       { id: "segment-prolongamento", name: "Prolongamento", length: 430 },
       { id: "segment-tecon", name: "Tecon 1", length: 385 },
     ],
-    vessels: [
-      {
-        id: "vessel-cosco-chile",
-        name: "COSCO SHIPPING CHILE",
-        loa: 335.9,
-        beam: 51.0,
-        draft: 11.2,
-        position: 100,
-        berthingSide: "boreste",
-        gangwayOffset: 168,
-        mooringLines: [],
-        color: "blue",
-        vesselType: "container",
-        bayCount: 78,
-        bays: 78,
-        rowCount: 20,
-        rows: 20,
-        bridgePosition: "between-bays",
-        bridgeBay: 22,
-        bridgeBayStart: 22,
-        bridgeBayEnd: 22,
-        separateFunnel: true,
-        funnelBay: 64,
-        funnelBayStart: 64,
-        funnelBayEnd: 64,
-      },
-      {
-        id: "vessel-veracruz",
-        name: "CMA CGM VERACRUZ",
-        loa: 228.62,
-        beam: 32.22,
-        draft: 9.7,
-        position: 520,
-        berthingSide: "boreste",
-        gangwayOffset: 114,
-        mooringLines: [],
-        color: "teal",
-        vesselType: "container",
-        bayCount: 50,
-        bays: 50,
-        rowCount: 13,
-        rows: 13,
-        bridgePosition: "all-aft",
-        bridgeBay: 50,
-        bridgeBayStart: 50,
-        bridgeBayEnd: 50,
-        separateFunnel: false,
-        funnelBayStart: 44,
-        funnelBayEnd: 46,
-      },
-    ],
+    vessels: [],
     bollards: createBollardInventory(),
     portainers: DEFAULT_PORTAINERS.map((p) => ({ ...p })),
     showPortainers: true,
@@ -1027,15 +977,16 @@ export function normalizeScenario(value: unknown): Scenario | null {
 export function readScenario(): Scenario {
   if (typeof window === "undefined") return createDemoScenario();
   try {
-    const raw =
-      window.localStorage.getItem(STORAGE_KEY) ||
-      window.sessionStorage.getItem(STORAGE_KEY);
+    try {
+      window.localStorage.removeItem(STORAGE_KEY);
+      window.localStorage.removeItem("caislab:scenario:v5");
+      window.localStorage.removeItem("caislab:scenario:v6");
+    } catch {}
 
+    const raw = window.sessionStorage.getItem(STORAGE_KEY);
     if (!raw) return createDemoScenario();
     const scenario = normalizeScenario(JSON.parse(raw));
-    if (!scenario || !scenario.vessels || scenario.vessels.length === 0) {
-      return createDemoScenario();
-    }
+    if (!scenario) return createDemoScenario();
     // Ensure bollards match the 33 bollards with exact measurements and types from the port plan
     const b277 = scenario.bollards.find((b) => b.id === "277");
     const b288 = scenario.bollards.find((b) => b.id === "288");

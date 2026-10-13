@@ -254,14 +254,14 @@
     "imo": "9969065",
     "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "lastBerth": "TECONT1",
-    "updatedAt": "13/10/2026 08:08",
+    "updatedAt": "13/10/2026 08:10",
     "flag": "PANAMA",
     "bayCount": 58,
     "bays": 58,
     "rowCount": 14,
     "rows": 14,
     "bridgePosition": "between-bays",
-    "bridgeBay": 35,
+    "bridgeBay": 3,
     "separateFunnel": false
   },
   {

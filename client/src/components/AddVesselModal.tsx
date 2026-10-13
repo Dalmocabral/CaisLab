@@ -1053,8 +1053,9 @@ export default function AddVesselModal({
                             min="1"
                             max={MAX_BAY_COUNT}
                             step="1"
-                            value={manualBridgeBay ?? 34}
-                            onChange={(e) => setManualBridgeBay(Number(e.target.value) || 34)}
+                            placeholder="34"
+                            value={manualBridgeBay !== undefined && manualBridgeBay !== null ? manualBridgeBay : ""}
+                            onChange={(e) => setManualBridgeBay(e.target.value === "" ? undefined : Math.max(1, Math.min(MAX_BAY_COUNT, Number(e.target.value))))}
                             className="w-full pl-3 pr-12 py-2 text-xs border border-[#cfdce0] rounded-lg focus:outline-none focus:border-[#16869a] bg-white"
                           />
                           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400">Bay</span>
@@ -1085,8 +1086,9 @@ export default function AddVesselModal({
                               min="1"
                               max={MAX_BAY_COUNT}
                               step="1"
-                              value={manualFunnelBay ?? 54}
-                              onChange={(e) => setManualFunnelBay(Number(e.target.value) || 54)}
+                              placeholder="54"
+                              value={manualFunnelBay !== undefined && manualFunnelBay !== null ? manualFunnelBay : ""}
+                              onChange={(e) => setManualFunnelBay(e.target.value === "" ? undefined : Math.max(1, Math.min(MAX_BAY_COUNT, Number(e.target.value))))}
                               className="w-full pl-3 pr-12 py-2 text-xs border border-[#cfdce0] rounded-lg focus:outline-none focus:border-[#16869a] bg-white"
                             />
                             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400">Bay</span>

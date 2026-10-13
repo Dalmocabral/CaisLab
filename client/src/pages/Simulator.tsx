@@ -84,12 +84,7 @@ function metres(value: number) {
 
 function safeWriteScenario(scenario: Scenario) {
   try {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(scenario));
-    } catch {}
-    try {
-      window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(scenario));
-    } catch {}
+    window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(scenario));
     return true;
   } catch {
     return false;
@@ -258,8 +253,12 @@ export default function Simulator() {
         berthingSide: mergedVessel.berthingSide,
         bridgePosition: mergedVessel.bridgePosition,
         bridgeBay: mergedVessel.bridgeBay,
+        bridgeBayStart: mergedVessel.bridgeBayStart ?? mergedVessel.bridgeBay,
+        bridgeBayEnd: mergedVessel.bridgeBayEnd ?? mergedVessel.bridgeBay,
         separateFunnel: mergedVessel.separateFunnel,
         funnelBay: mergedVessel.funnelBay,
+        funnelBayStart: mergedVessel.funnelBayStart ?? mergedVessel.funnelBay,
+        funnelBayEnd: mergedVessel.funnelBayEnd ?? mergedVessel.funnelBay,
         type: VESSEL_TYPE_LABELS[normalizeVesselType(mergedVessel.vesselType, mergedVessel.name)],
       }).then(() => setNotice(`${mergedVessel.name}: Layout e casaria salvos no catálogo com sucesso.`));
     }, 500);
@@ -900,11 +899,21 @@ export default function Simulator() {
                                 min="1"
                                 max={MAX_BAY_COUNT}
                                 step="1"
-                                value={selectedVessel.bridgeBay ?? 34}
+                                placeholder="34"
+                                value={selectedVessel.bridgeBay !== undefined && selectedVessel.bridgeBay !== null ? selectedVessel.bridgeBay : ""}
                                 onChange={(event) => {
-                                  const bridgeBay = Number(event.target.value) || 34;
-                                  patchVessel(selectedVessel.id, { bridgeBay });
-                                  scheduleContainerLayoutCatalogSave(selectedVessel, undefined, undefined, { bridgeBay });
+                                  const raw = event.target.value;
+                                  const bridgeBay = raw === "" ? undefined : Math.max(1, Math.min(MAX_BAY_COUNT, Number(raw)));
+                                  patchVessel(selectedVessel.id, {
+                                    bridgeBay,
+                                    bridgeBayStart: bridgeBay,
+                                    bridgeBayEnd: bridgeBay,
+                                  });
+                                  scheduleContainerLayoutCatalogSave(selectedVessel, undefined, undefined, {
+                                    bridgeBay,
+                                    bridgeBayStart: bridgeBay,
+                                    bridgeBayEnd: bridgeBay,
+                                  });
                                 }}
                               />
                               <span>Bay</span>
@@ -938,11 +947,21 @@ export default function Simulator() {
                                   min="1"
                                   max={MAX_BAY_COUNT}
                                   step="1"
-                                  value={selectedVessel.funnelBay ?? 54}
+                                  placeholder="54"
+                                  value={selectedVessel.funnelBay !== undefined && selectedVessel.funnelBay !== null ? selectedVessel.funnelBay : ""}
                                   onChange={(event) => {
-                                    const funnelBay = Number(event.target.value) || 54;
-                                    patchVessel(selectedVessel.id, { funnelBay });
-                                    scheduleContainerLayoutCatalogSave(selectedVessel, undefined, undefined, { funnelBay });
+                                    const raw = event.target.value;
+                                    const funnelBay = raw === "" ? undefined : Math.max(1, Math.min(MAX_BAY_COUNT, Number(raw)));
+                                    patchVessel(selectedVessel.id, {
+                                      funnelBay,
+                                      funnelBayStart: funnelBay,
+                                      funnelBayEnd: funnelBay,
+                                    });
+                                    scheduleContainerLayoutCatalogSave(selectedVessel, undefined, undefined, {
+                                      funnelBay,
+                                      funnelBayStart: funnelBay,
+                                      funnelBayEnd: funnelBay,
+                                    });
                                   }}
                                 />
                                 <span>Bay</span>
