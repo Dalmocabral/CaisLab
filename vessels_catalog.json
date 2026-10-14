@@ -84,14 +84,14 @@
     "imo": "9945887",
     "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "14/10/2026 08:39",
+    "updatedAt": "14/10/2026 11:58",
     "flag": "HONG KONG, CHINA",
     "bayCount": 78,
     "bays": 78,
     "rowCount": 20,
     "rows": 20,
-    "tierCount": 5,
-    "tiers": 5,
+    "tierCount": 9,
+    "tiers": 9,
     "bridgePosition": "between-bays",
     "bridgeBay": 22,
     "bridgeBayStart": 22,
@@ -148,7 +148,7 @@
     "imo": "9850795",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "14/10/2026 14:54",
+    "updatedAt": "14/10/2026 15:02",
     "flag": "LIBERIA"
   },
   {
@@ -319,7 +319,7 @@
     "imo": "9612789",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "14/10/2026 14:54",
+    "updatedAt": "14/10/2026 15:02",
     "flag": "BRAZIL"
   },
   {
@@ -331,7 +331,7 @@
     "imo": "9416991",
     "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "lastBerth": "TECONT1",
-    "updatedAt": "14/10/2026 08:45",
+    "updatedAt": "14/10/2026 11:59",
     "flag": "SINGAPORE",
     "bayCount": 70,
     "bays": 70,
@@ -341,8 +341,9 @@
     "bridgeBayEnd": 56,
     "rowCount": 12,
     "rows": 12,
-    "tierCount": 4,
-    "tiers": 4
+    "tierCount": 6,
+    "tiers": 6,
+    "separateFunnel": false
   },
   {
     "name": "OCEAN MERMAID",
@@ -366,7 +367,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONT1",
-    "updatedAt": "14/10/2026 14:54"
+    "updatedAt": "14/10/2026 15:02"
   },
   {
     "name": "TOKYO EXPRESS",
