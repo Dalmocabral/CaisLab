@@ -448,6 +448,272 @@ export interface Vessel {
   funnelBayEnd?: number;
 }
 
+export interface ContainerHatchPlan {
+  hatchIndex: number;
+  colA: number;
+  colB?: number;
+  bay20A: number;
+  bay20B?: number;
+  fromSternA: number;
+  fromSternB?: number;
+  centerFromStern: number;
+  length40: number;
+  length20: number;
+  isBlockedByBridge: boolean;
+  isBlockedByFunnel: boolean;
+  colABlocked: boolean;
+  colBBlocked: boolean;
+}
+
+export interface VesselContainerDeckPlan {
+  loa: number;
+  beam: number;
+  bays: number[];
+  cellWidth: number;
+  hatchGap: number;
+  bowInset: number;
+  deckLeft: number;
+  deckRight: number;
+  isAllAft: boolean;
+  bridgeCenterFromStern: number;
+  bridgeLength: number;
+  hasSeparateFunnel: boolean;
+  funnelCenterFromStern?: number;
+  funnelLength?: number;
+  bridgeIndices: number[];
+  funnelIndices: number[];
+  hatches: ContainerHatchPlan[];
+  bayCellFromStern: (index: number) => number;
+}
+
+export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselContainerDeckPlan {
+  const loa = Math.max(1, vessel.loa ?? 200);
+  const beam = Math.max(1, vessel.beam ?? 32);
+  const config = resolveVesselSuperstructure(vessel);
+  const bays = bayNumberSequence(vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber, vessel.name);
+  const isAllAft = config.bridgePosition === "all-aft";
+
+  const bowInset = Math.min(23, loa * 0.16);
+  const aftHouseW = Math.max(12, Math.min(24, loa * 0.065));
+  const aftHouseX = 2.5;
+
+  const deckLeft = isAllAft ? aftHouseX + aftHouseW + 1.2 : 7;
+  const deckRight = Math.max(deckLeft + 1, loa - bowInset);
+  const deckWidth = deckRight - deckLeft;
+
+  const rowNumberWidth = Math.max(6, Math.min(9.5, deckWidth * 0.042));
+  const bayAreaRight = deckRight - rowNumberWidth - 0.8;
+  const bayAreaWidth = Math.max(1, bayAreaRight - deckLeft);
+
+  const isCoscoChile = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("COSCO") && vessel.name.toUpperCase().includes("CHILE");
+  const idx63 = bays.indexOf(63);
+  const idx65 = bays.indexOf(65);
+  const hasCoscoFunnel = isCoscoChile && config.separateFunnel && idx63 !== -1 && idx65 !== -1;
+
+  const num40ftGaps = Math.max(0, Math.floor((bays.length - 1) / 2));
+  const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + (hasCoscoFunnel ? 1.4 : 0));
+  const hatchGap = bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0;
+  const totalGapsWidth = num40ftGaps * hatchGap;
+  const coscoFunnelSlotW = hasCoscoFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
+  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW);
+  const cellWidth = availableBayWidth / Math.max(1, bays.length);
+
+  const bayCellFromStern = (index: number) => {
+    const gapsBefore = Math.floor(index / 2);
+    let xPos = bayAreaRight - ((index + 1) * cellWidth + gapsBefore * hatchGap);
+    if (hasCoscoFunnel && index >= idx65) {
+      xPos -= coscoFunnelSlotW;
+    }
+    return xPos;
+  };
+
+  const bridgeIndices: number[] = [];
+  const funnelIndices: number[] = [];
+
+  if (!isAllAft && bays.length > 0) {
+    const targetBridgeBay = config.bridgeBay ?? config.bridgeBayStart ?? 34;
+    const occupiedBridgeBays = getOccupiedBayNumbers(
+      targetBridgeBay,
+      config.bridgeBayStart,
+      config.bridgeBayEnd
+    );
+    bays.forEach((b, idx) => {
+      if (occupiedBridgeBays.includes(b)) {
+        bridgeIndices.push(idx);
+      }
+    });
+
+    if (bridgeIndices.length === 0) {
+      let closestIdx = 0;
+      let minDiff = Infinity;
+      bays.forEach((b, idx) => {
+        const diff = Math.abs(b - targetBridgeBay);
+        if (diff < minDiff) {
+          minDiff = diff;
+          closestIdx = idx;
+        }
+      });
+      const closestBay = bays[closestIdx];
+      const pair = get40ftBayPair(closestBay);
+      bays.forEach((b, idx) => {
+        if (b >= pair[0] && b <= pair[1]) {
+          bridgeIndices.push(idx);
+        }
+      });
+      if (bridgeIndices.length === 0) {
+        bridgeIndices.push(closestIdx);
+      }
+    }
+
+    if (config.separateFunnel && !hasCoscoFunnel) {
+      const targetFunnelBay = config.funnelBay ?? config.funnelBayStart ?? 54;
+      const occupiedFunnelBays = getOccupiedBayNumbers(
+        targetFunnelBay,
+        config.funnelBayStart,
+        config.funnelBayEnd
+      );
+      bays.forEach((b, idx) => {
+        if (occupiedFunnelBays.includes(b)) {
+          funnelIndices.push(idx);
+        }
+      });
+
+      if (funnelIndices.length === 0) {
+        let closestIdx = 0;
+        let minDiff = Infinity;
+        bays.forEach((b, idx) => {
+          const diff = Math.abs(b - targetFunnelBay);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestIdx = idx;
+          }
+        });
+        const closestBay = bays[closestIdx];
+        const pair = get40ftBayPair(closestBay);
+        bays.forEach((b, idx) => {
+          if (b >= pair[0] && b <= pair[1]) {
+            funnelIndices.push(idx);
+          }
+        });
+        if (funnelIndices.length === 0) {
+          funnelIndices.push(closestIdx);
+        }
+      }
+    }
+  }
+
+  let bridgeCenterFromStern: number;
+  let bridgeLength: number;
+
+  if (isAllAft) {
+    bridgeCenterFromStern = aftHouseX + aftHouseW / 2;
+    bridgeLength = aftHouseW;
+  } else if (bridgeIndices.length > 0) {
+    const minX = Math.min(...bridgeIndices.map((idx) => bayCellFromStern(idx)));
+    const maxX = Math.max(...bridgeIndices.map((idx) => bayCellFromStern(idx) + cellWidth));
+    bridgeCenterFromStern = (minX + maxX) / 2;
+    bridgeLength = Math.max(12, maxX - minX);
+  } else {
+    bridgeCenterFromStern = loa * 0.65;
+    bridgeLength = Math.max(12, Math.min(loa * 0.048, 15.5));
+  }
+
+  let funnelCenterFromStern: number | undefined;
+  let funnelLength: number | undefined;
+
+  if (hasCoscoFunnel) {
+    const rightOf65 = bayCellFromStern(idx65) + cellWidth;
+    const leftOf63 = bayCellFromStern(idx63);
+    funnelCenterFromStern = (rightOf65 + leftOf63) / 2;
+    funnelLength = Math.max(6, coscoFunnelSlotW);
+  } else if (config.separateFunnel && funnelIndices.length > 0) {
+    const minX = Math.min(...funnelIndices.map((idx) => bayCellFromStern(idx)));
+    const maxX = Math.max(...funnelIndices.map((idx) => bayCellFromStern(idx) + cellWidth));
+    funnelCenterFromStern = (minX + maxX) / 2;
+    funnelLength = Math.max(8, maxX - minX);
+  }
+
+  const bridgeSet = new Set(bridgeIndices);
+  const funnelSet = new Set(funnelIndices);
+
+  const isBayBlocked = (idx: number) => {
+    if (isAllAft) return false;
+    return bridgeSet.has(idx) || funnelSet.has(idx);
+  };
+
+  const totalHatches = Math.ceil(bays.length / 2);
+  const hatches: ContainerHatchPlan[] = [];
+
+  for (let h = 0; h < totalHatches; h++) {
+    const colA = 2 * h;
+    const colB = 2 * h + 1 < bays.length ? 2 * h + 1 : undefined;
+
+    const bay20A = bays[colA];
+    const bay20B = colB !== undefined ? bays[colB] : undefined;
+
+    const cellXA = bayCellFromStern(colA);
+    const fromSternA = cellXA + cellWidth / 2;
+
+    let fromSternB: number | undefined;
+    let centerFromStern: number;
+    let length40: number;
+
+    if (colB !== undefined) {
+      const cellXB = bayCellFromStern(colB);
+      fromSternB = cellXB + cellWidth / 2;
+      centerFromStern = (cellXB + cellXA + cellWidth) / 2;
+      length40 = (cellXA + cellWidth) - cellXB;
+    } else {
+      centerFromStern = fromSternA;
+      length40 = cellWidth;
+    }
+
+    const colABlocked = isBayBlocked(colA);
+    const colBBlocked = colB !== undefined ? isBayBlocked(colB) : false;
+
+    const isBlockedByBridge = bridgeSet.has(colA) || (colB !== undefined && bridgeSet.has(colB));
+    const isBlockedByFunnel = funnelSet.has(colA) || (colB !== undefined && funnelSet.has(colB));
+
+    hatches.push({
+      hatchIndex: h,
+      colA,
+      colB,
+      bay20A,
+      bay20B,
+      fromSternA,
+      fromSternB,
+      centerFromStern,
+      length40,
+      length20: cellWidth,
+      isBlockedByBridge,
+      isBlockedByFunnel,
+      colABlocked,
+      colBBlocked,
+    });
+  }
+
+  return {
+    loa,
+    beam,
+    bays,
+    cellWidth,
+    hatchGap,
+    bowInset,
+    deckLeft,
+    deckRight,
+    isAllAft,
+    bridgeCenterFromStern,
+    bridgeLength,
+    hasSeparateFunnel: Boolean(config.separateFunnel),
+    funnelCenterFromStern,
+    funnelLength,
+    bridgeIndices,
+    funnelIndices,
+    hatches,
+    bayCellFromStern,
+  };
+}
+
 export type PortainerCategory = "super-post-panamax" | "post-panamax";
 
 export interface Portainer {

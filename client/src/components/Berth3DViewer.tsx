@@ -16,6 +16,7 @@ import {
   segmentOffsets,
   totalQuayLength,
   VESSEL_COLORS,
+  getVesselContainerDeckPlan,
 } from "@/lib/berth-model";
 
 interface Berth3DViewerProps {
@@ -709,10 +710,13 @@ function addVessel(
     const tiers = beam >= 40 ? 4 : beam >= 32 ? 3 : 2;
     const topContainerY = deckHeight + 1.38 + tiers * 2.68;
     const towerHeight = isContainer ? Math.max(15.2, topContainerY - deckHeight + 4.2) : 13.5;
-    const isAllAft = vessel.bridgePosition !== "between-bays";
+    const deckPlan = isContainer ? getVesselContainerDeckPlan(vessel) : null;
+    const isAllAft = deckPlan ? deckPlan.isAllAft : (vessel.bridgePosition !== "between-bays");
     const totalBays = vessel.bayCount ?? vessel.bays ?? 50;
-    const hasSeparateFunnel = isContainer && !isAllAft && Boolean(vessel.separateFunnel);
-    const houseLength = isContainer
+    const hasSeparateFunnel = deckPlan ? deckPlan.hasSeparateFunnel : (isContainer && !isAllAft && Boolean(vessel.separateFunnel));
+    const houseLength = deckPlan
+      ? deckPlan.bridgeLength
+      : isContainer
       ? (!isAllAft ? Math.max(12.5, Math.min(loa * 0.048, 15.5)) : Math.max(8, Math.min(loa * 0.045, 14)))
       : Math.max(16, Math.min(loa * 0.12, 38));
     const houseMaterial = new THREE.MeshStandardMaterial({ color: "#f1f5f9", roughness: 0.62 });
@@ -720,7 +724,9 @@ function addVessel(
     const funnelMaterial = new THREE.MeshStandardMaterial({ color: funnelColor, roughness: 0.65 });
 
     let sternHouseX: number;
-    if (isContainer) {
+    if (deckPlan) {
+      sternHouseX = direction * (deckPlan.bridgeCenterFromStern - loa / 2);
+    } else if (isContainer) {
       if (isAllAft) {
         // Encostado na ré (como CMA CGM Veracruz)
         sternHouseX = direction * (-loa * 0.44 + houseLength * 0.5);
@@ -735,10 +741,17 @@ function addVessel(
     }
 
     // Coordenadas da chaminé separada (quando duas ilhas)
-    const targetFunnelBay = vessel.funnelBay ?? 40;
-    const funnelBayRatio = Math.max(0.05, Math.min(0.95, 1 - (targetFunnelBay / Math.max(1, totalBays))));
-    const separateFunnelX = direction * (loa * funnelBayRatio - loa / 2);
-    const separateFunnelLength = Math.max(10, Math.min(loa * 0.045, 14));
+    let separateFunnelX: number;
+    let separateFunnelLength: number;
+    if (deckPlan?.funnelCenterFromStern !== undefined) {
+      separateFunnelX = direction * (deckPlan.funnelCenterFromStern - loa / 2);
+      separateFunnelLength = Math.max(6, Math.min(deckPlan.funnelLength ?? 12, 14));
+    } else {
+      const targetFunnelBay = vessel.funnelBay ?? 40;
+      const funnelBayRatio = Math.max(0.05, Math.min(0.95, 1 - (targetFunnelBay / Math.max(1, totalBays))));
+      separateFunnelX = direction * (loa * funnelBayRatio - loa / 2);
+      separateFunnelLength = Math.max(10, Math.min(loa * 0.045, 14));
+    }
     const separateFunnelWidth = beam * 0.36;
     const separateFunnelHeight = towerHeight * 0.92;
 
@@ -756,8 +769,8 @@ function addVessel(
     const bridgeBottomY = deckHeight + towerHeight;
     const bridgeHeight = 3.8;
     const bridgeCenterY = bridgeBottomY + bridgeHeight / 2;
-    const bridgeLength = houseLength * 0.78;
-    const bridgeX = sternHouseX + direction * (houseLength * 0.08);
+    const bridgeLength = isAllAft ? houseLength * 0.78 : Math.min(houseLength * 0.92, Math.max(8, houseLength - 1.2));
+    const bridgeX = isAllAft ? sternHouseX + direction * (houseLength * 0.08) : sternHouseX;
 
     addBox(THREE, group, [bridgeLength, bridgeHeight, beam * 0.72], [bridgeX, bridgeCenterY, 0], houseMaterial);
 
@@ -959,9 +972,7 @@ function addVessel(
       });
       addBox(THREE, group, [2.2, 0.6, 2.2], [0, deckHeight + gantryHeight - 0.4, 0], new THREE.MeshStandardMaterial({ color: "#eab308" }));
     } else if (isContainer) {
-      const bayCount = normalizeBayCount(vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber);
-      const baySlots = bayCount ? bayNumberSequence(bayCount, vessel.name).length : 0;
-      const columns = Math.max(1, Math.min(40, baySlots || Math.max(4, Math.floor(loa / 16))));
+      const plan = deckPlan ?? getVesselContainerDeckPlan(vessel);
       // Fileiras transversais (boca) modeladas na proporção real de contêineres marítimos (~2.44m de largura ISO)
       const usableBeam = beam * 0.82;
       const userRows = normalizeRowCount(vessel.rowCount ?? vessel.rows);
@@ -970,26 +981,16 @@ function addVessel(
       const containerWidth = Math.max(2.1, rowSpacing - 0.28);
       const tiers = beam >= 40 ? 4 : beam >= 32 ? 3 : 2;
 
-      const cargoStartFromStern = loa * 0.03;
-      const cargoLength = loa * 0.9;
-
-      // Separação física e visual entre escotilhas/bays de 40' (cada par de colunas de 20' forma uma bay de 40')
-      const num40ftGaps3D = Math.max(0, Math.floor((columns - 1) / 2));
-      const rawSlot = cargoLength / columns;
-      const hatchGap3D = columns > 2 ? Math.max(1.8, Math.min(3.2, rawSlot * 0.35)) : 0;
-      const totalGapsLen = num40ftGaps3D * hatchGap3D;
-      const usableCargoLength = Math.max(10, cargoLength - totalGapsLen);
-      const columnSlotLen = usableCargoLength / columns;
-      // Dimensões de contêineres padrão ISO marítimos (20' pés e 40' pés)
-      const containerLength20 = Math.max(5.8, Math.min(6.2, columnSlotLen * 0.92));
+      // Dimensões de contêineres padrão ISO marítimos (20' pés e 40' pés) alinhados às escotilhas reais
+      const containerLength20 = Math.max(5.8, Math.min(6.2, plan.cellWidth * 0.95));
       const containerLength40 = Math.max(11.8, Math.min(12.4, 2 * containerLength20 + 0.35));
       const containerHeight = 2.55;
 
       const containerGeometry20 = new THREE.BoxGeometry(containerLength20, containerHeight, containerWidth);
       const containerGeometry40 = new THREE.BoxGeometry(containerLength40, containerHeight, containerWidth);
 
-      const maxInstances20 = columns * rows * tiers;
-      const maxInstances40 = Math.ceil(columns / 2) * rows * tiers;
+      const maxInstances20 = (plan.hatches.length * 2) * rows * tiers;
+      const maxInstances40 = plan.hatches.length * rows * tiers;
 
       const cornerMaterial = new THREE.MeshStandardMaterial({ color: "#8a969b", roughness: 0.74, metalness: 0.16 });
       const cornerPosts = new THREE.InstancedMesh(
@@ -1023,10 +1024,6 @@ function addVessel(
 
       const pose = new THREE.Object3D();
       let cornerIndex = 0;
-      const bridgeStartX = Math.min(sternHouseX - houseLength / 2, bridgeX - bridgeLength / 2) - 0.7;
-      const bridgeEndX = Math.max(sternHouseX + houseLength / 2, bridgeX + bridgeLength / 2) + 0.7;
-      const funnelStartX = hasSeparateFunnel ? Math.min(separateFunnelX - separateFunnelLength / 2, separateFunnelX + separateFunnelLength / 2) - 0.7 : 0;
-      const funnelEndX = hasSeparateFunnel ? Math.max(separateFunnelX - separateFunnelLength / 2, separateFunnelX + separateFunnelLength / 2) + 0.7 : 0;
 
       const addContainer = (
         is40: boolean,
@@ -1068,35 +1065,20 @@ function addVessel(
         }
       };
 
-      const totalHatches = Math.floor(columns / 2);
+      for (const hatch of plan.hatches) {
+        // Se a escotilha inteira estiver ocupada por casaria ou chaminé, pula
+        if (hatch.isBlockedByBridge || hatch.isBlockedByFunnel) {
+          continue;
+        }
 
-      for (let h = 0; h < totalHatches; h++) {
-        const colA = 2 * h;
-        const colB = 2 * h + 1;
+        const containerXA = direction * (hatch.fromSternA - loa / 2);
+        const containerXB = hatch.fromSternB !== undefined ? direction * (hatch.fromSternB - loa / 2) : containerXA;
+        const containerX40 = direction * (hatch.centerFromStern - loa / 2);
 
-        const gapsBefore = h;
-        const fromSternA = cargoStartFromStern + (colA + 0.5) * columnSlotLen + gapsBefore * hatchGap3D;
-        const fromSternB = cargoStartFromStern + (colB + 0.5) * columnSlotLen + gapsBefore * hatchGap3D;
+        // Se ambos os slots individuais estiverem bloqueados, pula
+        if (hatch.colABlocked && hatch.colBBlocked) continue;
 
-        const containerXA = direction * (fromSternA - loa / 2);
-        const containerXB = direction * (fromSternB - loa / 2);
-        const containerX40 = (containerXA + containerXB) / 2;
-
-        const colAMinX = Math.min(containerXA - containerLength20 / 2, containerXA + containerLength20 / 2);
-        const colAMaxX = Math.max(containerXA - containerLength20 / 2, containerXA + containerLength20 / 2);
-        const colBMinX = Math.min(containerXB - containerLength20 / 2, containerXB + containerLength20 / 2);
-        const colBMaxX = Math.max(containerXB - containerLength20 / 2, containerXB + containerLength20 / 2);
-
-        const colABlocked = (colAMinX < bridgeEndX && colAMaxX > bridgeStartX) ||
-          (hasSeparateFunnel && colAMinX < funnelEndX && colAMaxX > funnelStartX);
-        const colBBlocked = (colBMinX < bridgeEndX && colBMaxX > bridgeStartX) ||
-          (hasSeparateFunnel && colBMinX < funnelEndX && colBMaxX > funnelStartX);
-
-        // Se ambos os slots estão bloqueados pela casaria ou chaminé, pula a escotilha inteira
-        if (colABlocked && colBBlocked) continue;
-
-        // Distribuição orgânica realista entre as bays solicitada pelo usuário:
-        // Pode ser dois contêineres de 20', outro de 40', e vice-versa, mesclando bays de 40' e 20'
+        const h = hatch.hatchIndex;
         const hatchHash = ((vesselSeed ^ (h * 49287) ^ 0x9e3779b9) >>> 0) % 100;
         const isAll40 = hatchHash < 50;
         const isAll20 = hatchHash >= 50 && hatchHash < 82;
@@ -1107,7 +1089,7 @@ function addVessel(
           const containerZ = (row - (rows - 1) / 2) * rowSpacing;
 
           let use40 = false;
-          if (!colABlocked && !colBBlocked) {
+          if (!hatch.colABlocked && !hatch.colBBlocked && hatch.colB !== undefined) {
             if (isNearBridgeEverLeader || isAll40) {
               use40 = true;
             } else if (isAll20) {
@@ -1123,36 +1105,14 @@ function addVessel(
             const containerY = deckHeight + 1.38 + tier * 2.68;
 
             if (use40) {
-              addContainer(true, containerX40, containerY, containerZ, colA, row, tier);
+              addContainer(true, containerX40, containerY, containerZ, hatch.colA, row, tier);
             } else {
-              if (!colABlocked) {
-                addContainer(false, containerXA, containerY, containerZ, colA, row, tier);
+              if (!hatch.colABlocked) {
+                addContainer(false, containerXA, containerY, containerZ, hatch.colA, row, tier);
               }
-              if (!colBBlocked) {
-                addContainer(false, containerXB, containerY, containerZ, colB, row, tier);
+              if (!hatch.colBBlocked && hatch.colB !== undefined) {
+                addContainer(false, containerXB, containerY, containerZ, hatch.colB, row, tier);
               }
-            }
-          }
-        }
-      }
-
-      // Se columns for ímpar, processa a última coluna avulsa como 20'
-      if (columns % 2 !== 0) {
-        const col = columns - 1;
-        const gapsBefore = Math.floor(col / 2);
-        const fromStern = cargoStartFromStern + (col + 0.5) * columnSlotLen + gapsBefore * hatchGap3D;
-        const containerX = direction * (fromStern - loa / 2);
-        const minX = Math.min(containerX - containerLength20 / 2, containerX + containerLength20 / 2);
-        const maxX = Math.max(containerX - containerLength20 / 2, containerX + containerLength20 / 2);
-        const blocked = (minX < bridgeEndX && maxX > bridgeStartX) ||
-          (hasSeparateFunnel && minX < funnelEndX && maxX > funnelStartX);
-
-        if (!blocked) {
-          for (let row = 0; row < rows; row += 1) {
-            const containerZ = (row - (rows - 1) / 2) * rowSpacing;
-            for (let tier = 0; tier < tiers; tier += 1) {
-              const containerY = deckHeight + 1.38 + tier * 2.68;
-              addContainer(false, containerX, containerY, containerZ, col, row, tier);
             }
           }
         }
