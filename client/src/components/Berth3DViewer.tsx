@@ -217,50 +217,106 @@ function containerSkinHash(vesselSeed: number, column: number, row: number, tier
   return h % skinCount;
 }
 
+// Cache global para evitar downloads duplicados e lentidão no carregamento 3D
+const containerImageCache = new Map<string, HTMLImageElement>();
+
+function create1x1Canvas(colorHex: string): HTMLCanvasElement {
+  const canvas = document.createElement("canvas");
+  canvas.width = 1;
+  canvas.height = 1;
+  const ctx = canvas.getContext("2d");
+  if (ctx) {
+    ctx.fillStyle = colorHex;
+    ctx.fillRect(0, 0, 1, 1);
+  }
+  return canvas;
+}
+
+function loadOrGetImage(
+  url: string,
+  onLoaded: (img: HTMLImageElement) => void,
+): HTMLImageElement | null {
+  const cached = containerImageCache.get(url);
+  if (cached && cached.complete && cached.naturalWidth > 0) {
+    return cached;
+  }
+  const img = new Image();
+  img.crossOrigin = "anonymous";
+  img.src = url;
+  img.onload = () => {
+    containerImageCache.set(url, img);
+    onLoaded(img);
+  };
+  img.onerror = (err) => {
+    console.warn(`[CaisLab 3D] Não foi possível carregar textura: ${url}`, err);
+  };
+  return null;
+}
+
 function createContainerSkinMaterials(
   THREE: ThreeModule,
   skin: (typeof CONTAINER_SKIN_DEFS)[number],
   is40ft = false,
   onLoad?: () => void,
 ) {
-  const loader = new THREE.TextureLoader();
+  // Placeholder imediato na cor do contêiner para NUNCA exibir faces pretas enquanto carrega
+  const placeholder = create1x1Canvas(skin.roofColor);
 
-  const sideTex = loader.load(skin.sideUrl, () => {
-    sideTexFlipped.needsUpdate = true;
-    onLoad?.();
-  });
+  const sideTex = new THREE.Texture(placeholder as any);
   sideTex.colorSpace = THREE.SRGBColorSpace;
   sideTex.generateMipmaps = true;
+  sideTex.wrapS = THREE.RepeatWrapping;
+  sideTex.repeat.x = is40ft ? 2 : 1;
+  sideTex.needsUpdate = true;
 
-  const sideTexFlipped = sideTex.clone();
+  const sideTexFlipped = new THREE.Texture(placeholder as any);
+  sideTexFlipped.colorSpace = THREE.SRGBColorSpace;
+  sideTexFlipped.generateMipmaps = true;
   sideTexFlipped.wrapS = THREE.RepeatWrapping;
-  sideTexFlipped.repeat.x = -1;
+  sideTexFlipped.repeat.x = is40ft ? -2 : -1;
   sideTexFlipped.offset.x = 1;
   sideTexFlipped.needsUpdate = true;
 
-  if (is40ft) {
-    sideTex.wrapS = THREE.RepeatWrapping;
-    sideTex.repeat.x = 2;
+  const handleSideLoaded = (img: HTMLImageElement) => {
+    (sideTex as any).image = img;
     sideTex.needsUpdate = true;
-
-    sideTexFlipped.wrapS = THREE.RepeatWrapping;
-    sideTexFlipped.repeat.x = -2;
-    sideTexFlipped.offset.x = 1;
+    (sideTexFlipped as any).image = img;
     sideTexFlipped.needsUpdate = true;
+    onLoad?.();
+  };
+
+  const cachedSide = loadOrGetImage(skin.sideUrl, handleSideLoaded);
+  if (cachedSide) {
+    handleSideLoaded(cachedSide);
   }
 
-  const frontTex = loader.load(skin.frontUrl, () => {
-    frontTexFlipped.needsUpdate = true;
-    onLoad?.();
-  });
+  const frontTex = new THREE.Texture(placeholder as any);
   frontTex.colorSpace = THREE.SRGBColorSpace;
   frontTex.generateMipmaps = true;
+  frontTex.wrapS = THREE.RepeatWrapping;
+  frontTex.repeat.x = 1;
+  frontTex.needsUpdate = true;
 
-  const frontTexFlipped = frontTex.clone();
+  const frontTexFlipped = new THREE.Texture(placeholder as any);
+  frontTexFlipped.colorSpace = THREE.SRGBColorSpace;
+  frontTexFlipped.generateMipmaps = true;
   frontTexFlipped.wrapS = THREE.RepeatWrapping;
   frontTexFlipped.repeat.x = -1;
   frontTexFlipped.offset.x = 1;
   frontTexFlipped.needsUpdate = true;
+
+  const handleFrontLoaded = (img: HTMLImageElement) => {
+    (frontTex as any).image = img;
+    frontTex.needsUpdate = true;
+    (frontTexFlipped as any).image = img;
+    frontTexFlipped.needsUpdate = true;
+    onLoad?.();
+  };
+
+  const cachedFront = loadOrGetImage(skin.frontUrl, handleFrontLoaded);
+  if (cachedFront) {
+    handleFrontLoaded(cachedFront);
+  }
 
   const matFront = new THREE.MeshStandardMaterial({
     map: frontTex,
