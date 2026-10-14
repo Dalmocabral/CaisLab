@@ -324,7 +324,7 @@ export default function Simulator() {
   function addMooringKit(vesselId: string) {
     const vessel = scenario.vessels.find((item) => item.id === vesselId);
     if (!vessel) return;
-    const types: MooringLineType[] = ["lancante-proa", "spring-proa", "spring-popa", "lancante-popa"];
+    const types: MooringLineType[] = ["lancante-popa", "spring-popa", "spring-proa", "lancante-proa"];
     const newLines: MooringLine[] = types.map((type) => ({
       id: makeId("cabo"),
       type,
@@ -334,10 +334,20 @@ export default function Simulator() {
     setScenario((current) => ({
       ...current,
       vessels: current.vessels.map((v) =>
-        v.id === vesselId ? { ...v, mooringLines: [...newLines, ...v.mooringLines] } : v
+        v.id === vesselId ? { ...v, mooringLines: newLines } : v
       ),
     }));
-    setNotice(`4 cabos adicionados (Popa + Proa) ao navio "${vessel.name}".`);
+    setNotice(`Configuração "Cabo spring + lançante" adicionada ao navio "${vessel.name}".`);
+  }
+
+  function removeMooringKit(vesselId: string) {
+    setScenario((current) => ({
+      ...current,
+      vessels: current.vessels.map((v) =>
+        v.id === vesselId ? { ...v, mooringLines: [] } : v
+      ),
+    }));
+    setNotice("Cabos de amarração excluídos com sucesso.");
   }
 
   function patchMooringLine(vesselId: string, lineId: string, patch: Partial<MooringLine>) {
@@ -988,47 +998,78 @@ export default function Simulator() {
 
                 <section className="mooring-editor" aria-label="Amarrações do navio">
                   <div className="mooring-editor-heading">
-                    <div><span className="section-kicker">CONEXÕES VISUAIS</span><h4>Lançantes e springs</h4></div>
-                    <button
-                      className="button button-add mooring-add-button"
-                      type="button"
-                      title="Adicionar conjunto padrão (1 spring e 1 lançante na proa + 1 spring e 1 lançante na popa)"
-                      onClick={() => addMooringKit(selectedVessel.id)}
-                    >
-                      <Sparkles size={14} /> Cabos Popa + Proa
-                    </button>
+                    <div><span className="section-kicker">CONEXÕES VISUAIS</span><h4>Cabos de amarração</h4></div>
+                    {selectedVessel.mooringLines.length === 0 && (
+                      <button
+                        className="button button-add mooring-add-button"
+                        type="button"
+                        title="Adicionar configuração padrão de amarração (Spring + Lançante)"
+                        onClick={() => addMooringKit(selectedVessel.id)}
+                      >
+                        <Sparkles size={14} /> Inserir cabos
+                      </button>
+                    )}
                   </div>
-                  <p className="form-hint">Os pontos iniciais são ilustrativos: proa a 90% e popa a 10% do LOA. Ajuste pela planta (proa: 70–100%; popa: 0–30% medidos desde a popa) e arraste a ponta amarela até o cabeço. As posições esquemáticas dos cabeços não são coordenadas reais.</p>
-                  {selectedVessel.mooringLines.length === 0 && <div className="mooring-empty">Nenhuma linha cadastrada para este navio.</div>}
-                  {selectedVessel.mooringLines.map((line) => {
-                    const connectedBollard = scenario.bollards.find((bollard) => bollard.id === line.bollardId);
-                    const offsetLimits = mooringOffsetLimits(line.type, selectedVessel.loa);
-                    const hasShipPoint = line.shipOffset !== null && line.shipOffset >= 0 && line.shipOffset <= selectedVessel.loa;
-                    const connected = hasShipPoint && connectedBollard !== undefined;
-                    const configured = connected && connectedBollard.position !== null && connectedBollard.position <= total;
-                    const offsetOutsideEndZone = line.shipOffset !== null && (line.shipOffset < offsetLimits.min || line.shipOffset > offsetLimits.max);
-                    return (
-                      <div className="mooring-line-card" key={line.id}>
-                        <div className="mooring-select-row">
-                          <label className="visually-hidden" htmlFor={`line-type-${line.id}`}>Tipo da amarração</label>
-                          <select id={`line-type-${line.id}`} className="mooring-select" value={line.type} onChange={(event) => { const type = event.target.value as MooringLineType; patchMooringLine(selectedVessel.id, line.id, { type, shipOffset: defaultMooringOffset(type, selectedVessel.loa) }); }}>
-                            {(Object.entries(MOORING_LINE_LABELS) as [MooringLineType, string][]).map(([type, label]) => <option key={type} value={type}>{label}</option>)}
-                          </select>
-                          <label className="visually-hidden" htmlFor={`line-bollard-${line.id}`}>Cabeço de amarração</label>
-                          <select id={`line-bollard-${line.id}`} className="mooring-select" value={line.bollardId ?? ""} onChange={(event) => patchMooringLine(selectedVessel.id, line.id, { bollardId: event.target.value || null })}>
-                            <option value="">Selecionar cabeço…</option>
-                            {scenario.bollards.map((bollard) => <option key={bollard.id} value={bollard.id}>Cabeço {bollard.id}{bollard.position === null ? " · sem posição" : bollard.position > total ? " · fora do cais" : ` · ${metres(bollard.position)}`}</option>)}
-                          </select>
-                          <button type="button" className="icon-button mooring-remove" aria-label={`Remover ${MOORING_LINE_LABELS[line.type]}`} title="Remover amarração" onClick={() => removeMooringLine(selectedVessel.id, line.id)}><X size={15} /></button>
+                  {selectedVessel.mooringLines.length === 0 ? (
+                    <div className="mooring-empty">
+                      Nenhum cabo inserido para este navio. Clique no botão acima para adicionar a amarração.
+                    </div>
+                  ) : (
+                    <div className="mooring-kit-card">
+                      <div className="mooring-kit-header">
+                        <div className="mooring-kit-title-group">
+                          <h5 className="mooring-kit-title">Cabo spring + lançante</h5>
                         </div>
-                        <div className="mooring-offset-row">
-                          <label htmlFor={`line-offset-${line.id}`}>Ponto na {line.type.endsWith("proa") ? "proa" : "popa"} · distância desde a popa</label>
-                          <div className="unit-input mooring-offset-input"><input id={`line-offset-${line.id}`} type="number" min={offsetLimits.min} max={offsetLimits.max} step="0.1" value={line.shipOffset ?? defaultMooringOffset(line.type, selectedVessel.loa)} onChange={(event) => patchMooringLine(selectedVessel.id, line.id, { shipOffset: event.target.value === "" ? null : Number(event.target.value) })} onBlur={() => patchMooringLine(selectedVessel.id, line.id, { shipOffset: normalizeMooringOffset(line.type, selectedVessel.loa, line.shipOffset) })} /><span>m</span></div>
-                        </div>
-                        <span className={`mooring-line-status ${configured && !offsetOutsideEndZone ? "mooring-ready" : "mooring-pending"}`}>{offsetOutsideEndZone ? `Ponto fora da faixa da ${line.type.endsWith("proa") ? "proa" : "popa"}; ajuste a distância desde a popa` : configured ? `Cabo conectado ao cabeço ${connectedBollard.id} · estação cadastrada` : connectedBollard && connectedBollard.position !== null && connectedBollard.position > total ? `Cabeço ${connectedBollard.id} está fora do comprimento do cais` : connected ? `Cabeço ${connectedBollard.id} selecionado · posição ilustrativa; informe a estação real` : hasShipPoint ? "Arraste a ponta amarela no blueprint até o cabeço desejado" : "Ponto de proa/popa sugerido; confira a planta do navio"}</span>
+                        <button
+                          type="button"
+                          className="mooring-kit-delete"
+                          title="Excluir amarrações deste navio"
+                          onClick={() => removeMooringKit(selectedVessel.id)}
+                        >
+                          <Trash2 size={13} /> Excluir
+                        </button>
                       </div>
-                    );
-                  })}
+
+                      <div className="mooring-kit-lines">
+                        {selectedVessel.mooringLines.map((line) => {
+                          const connectedBollard = scenario.bollards.find((bollard) => bollard.id === line.bollardId);
+                          const isConfigured = connectedBollard !== undefined && connectedBollard.position !== null && connectedBollard.position <= total;
+                          return (
+                            <div className="mooring-kit-line-row" key={line.id}>
+                              <div className="mooring-line-meta">
+                                <span className={`mooring-line-dot ${isConfigured ? "mooring-dot-connected" : ""}`} />
+                                <span className="mooring-line-name">{MOORING_LINE_LABELS[line.type]}</span>
+                                <span className="mooring-line-location">
+                                  {line.type === "lancante-popa" && "Popa (centro)"}
+                                  {line.type === "spring-popa" && "Popa (costado)"}
+                                  {line.type === "spring-proa" && "Proa (costado)"}
+                                  {line.type === "lancante-proa" && "Proa (bico)"}
+                                </span>
+                              </div>
+                              <div className="mooring-line-bollard-select">
+                                <select
+                                  id={`line-bollard-${line.id}`}
+                                  className="mooring-select"
+                                  value={line.bollardId ?? ""}
+                                  onChange={(event) => patchMooringLine(selectedVessel.id, line.id, { bollardId: event.target.value || null })}
+                                >
+                                  <option value="">Selecionar cabeço…</option>
+                                  {scenario.bollards.map((bollard) => (
+                                    <option key={bollard.id} value={bollard.id}>
+                                      Cabeço {bollard.id}{bollard.position === null ? " · sem pos" : bollard.position > total ? " · fora" : ` · ${metres(bollard.position)}`}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      <p className="form-hint" style={{ marginTop: "7px", marginBottom: "0" }}>
+                        Cabos fixados nos 4 pontos estruturais. Selecione os cabeços acima ou arraste as pontas amarelas no blueprint.
+                      </p>
+                    </div>
+                  )}
                 </section>
 
                 <label className="field-label color-field-label">Identificação visual</label>

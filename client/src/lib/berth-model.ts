@@ -629,13 +629,23 @@ export const CONTAINER_COLORS = ["#d8e7e7", "#bdd8dd", "#e5c5a4", "#b7c7d0", "#c
 const MOORING_TYPES = Object.keys(MOORING_LINE_LABELS) as MooringLineType[];
 
 export function defaultMooringOffset(type: MooringLineType, loa: number) {
-  return loa * (type.endsWith("proa") ? 0.9 : 0.1);
+  switch (type) {
+    case "lancante-popa":
+      return 0;
+    case "spring-popa":
+      return loa * 0.04;
+    case "spring-proa":
+      return loa * 0.84;
+    case "lancante-proa":
+    default:
+      return loa;
+  }
 }
 
 export function mooringOffsetLimits(type: MooringLineType, loa: number) {
   return type.endsWith("proa")
-    ? { min: loa * 0.7, max: loa }
-    : { min: 0, max: loa * 0.3 };
+    ? { min: loa * 0.6, max: loa }
+    : { min: 0, max: loa * 0.4 };
 }
 
 /** Keeps bow cables in the forward third and stern cables in the aft third. */

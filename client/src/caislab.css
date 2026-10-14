@@ -207,6 +207,21 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 .mooring-editor-heading h4 { margin: 3px 0 0; color: #294652; font-size: 11px; font-weight: 710; }
 .mooring-add-button { min-height: 28px; }
 .mooring-empty { margin: 6px 0; padding: 8px; color: #788b91; background: #f8fafa; border: 1px dashed #dbe5e7; border-radius: 6px; font-size: 8px; }
+.mooring-kit-card { margin-top: 7px; padding: 9px 10px; background: #fbfdfd; border: 1px solid #dce5e7; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
+.mooring-kit-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #ebf1f2; }
+.mooring-kit-title-group { display: flex; align-items: center; gap: 6px; }
+.mooring-kit-title { margin: 0; color: #1e3a47; font-size: 10.5px; font-weight: 750; letter-spacing: 0.1px; }
+.mooring-kit-delete { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; border-radius: 5px; font-size: 8.5px; font-weight: 700; cursor: pointer; transition: all 0.15s ease; }
+.mooring-kit-delete:hover { background: #fee2e2; border-color: #f87171; color: #b91c1c; }
+.mooring-kit-lines { display: flex; flex-direction: column; gap: 5px; }
+.mooring-kit-line-row { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: center; gap: 6px; padding: 4px 6px; background: #ffffff; border: 1px solid #e5ecee; border-radius: 6px; }
+.mooring-line-meta { display: flex; align-items: center; gap: 5px; min-width: 0; overflow: hidden; }
+.mooring-line-dot { width: 6.5px; height: 6.5px; border-radius: 50%; background: #eab308; flex-shrink: 0; }
+.mooring-dot-connected { background: #16a34a; }
+.mooring-line-name { font-size: 8.5px; font-weight: 700; color: #233e4a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mooring-line-location { font-size: 7.5px; color: #82969e; white-space: nowrap; margin-left: auto; padding-right: 2px; }
+.mooring-line-bollard-select { min-width: 0; }
+.mooring-line-bollard-select .mooring-select { height: 26px; font-size: 8px; }
 .mooring-line-card { margin-top: 7px; padding: 8px; background: #fafcfc; border: 1px solid #e8eeee; border-radius: 7px; }
 .mooring-select-row { display: grid; grid-template-columns: minmax(0,.9fr) minmax(0,1.2fr) 27px; align-items: center; gap: 5px; }
 .mooring-select { width: 100%; min-width: 0; height: 30px; padding: 0 4px; color: #34515c; background: #fff; border: 1px solid #dfe7e9; border-radius: 5px; font-size: 8px; }

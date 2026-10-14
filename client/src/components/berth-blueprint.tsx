@@ -25,6 +25,7 @@ import {
   get40ftBayPair,
   getOccupiedBayNumbers,
   type Vessel,
+  type MooringLineType,
 } from "@/lib/berth-model";
 
 import {
@@ -51,8 +52,55 @@ interface BerthBlueprintProps {
 const PAD = 54;
 const HEIGHT = 390;
 const QUAY_Y = 218;
-const CABLE_END_Y = 205;
-const VESSEL_BERTH_BOTTOM_Y = QUAY_Y - 55; // 55 px de distância do cais (metade dos 110 px)
+const CABLE_END_Y = 215;
+const VESSEL_BERTH_BOTTOM_Y = QUAY_Y - 18; // 18 px de distância do cais (costado encostado nas defensas)
+
+/** Calcula os pontos estruturais de fixação dos cabos no navio (conforme os 4 pontos marcados pelo usuário):
+ * - Lançante de popa: centro do espelho de popa (transom)
+ * - Spring de popa: canto da popa junto ao cais
+ * - Spring de proa: ombro da proa junto ao cais (início do afunilamento da proa)
+ * - Lançante de proa: bico da proa
+ */
+function getMooringShipAnchor(
+  lineType: MooringLineType,
+  vessel: Vessel,
+  scale: number,
+  trackStart: number
+): { x: number; y: number } {
+  const x = trackStart + vessel.position * scale;
+  const vesselWidth = vessel.loa * scale;
+  const vesselHeight = Math.max(20, vessel.beam * scale);
+  const y = VESSEL_BERTH_BOTTOM_Y - vesselHeight;
+  const bowInset = Math.min(23 * scale, vesselWidth * 0.16);
+  const isBombordo = vessel.berthingSide === "bombordo";
+
+  switch (lineType) {
+    case "lancante-popa":
+      // Centro do espelho de popa (transom)
+      return isBombordo
+        ? { x: x + vesselWidth, y: y + vesselHeight / 2 }
+        : { x: x, y: y + vesselHeight / 2 };
+
+    case "spring-popa":
+      // Canto da popa junto ao cais
+      return isBombordo
+        ? { x: x + vesselWidth - 6, y: y + vesselHeight }
+        : { x: x + 6, y: y + vesselHeight };
+
+    case "spring-proa":
+      // Ombro da proa junto ao cais (início do afunilamento do bico)
+      return isBombordo
+        ? { x: x + bowInset, y: y + vesselHeight }
+        : { x: x + vesselWidth - bowInset, y: y + vesselHeight };
+
+    case "lancante-proa":
+    default:
+      // Bico da proa
+      return isBombordo
+        ? { x: x, y: y + vesselHeight / 2 }
+        : { x: x + vesselWidth, y: y + vesselHeight / 2 };
+  }
+}
 
 /** Renderiza o convés conteneiro preenchendo o navio, com números de Bay acima e Rows na proa. */
 function renderContainerDeck(
@@ -1141,13 +1189,12 @@ function renderPortainerSvg({
   const seaRailY = 242;
   const landRailY = 272;
   const boomOutreach = portainer.boomOutreach ?? 55;
-  // Alcance da lança sobre o navio a partir da borda do cais/costado (descontando ~4m cais-costado)
-  const reachOverShip = Math.max(10, boomOutreach - 4);
-  const boomTipY = VESSEL_BERTH_BOTTOM_Y - reachOverShip * scale;
-  const sillLeftX = cx - 9;
-  const sillRightX = cx + 9;
-  const girderLeftX = cx - 4.2;
-  const girderRightX = cx + 4.2;
+  // Alcance real da lança sobre o navio projetando-se a partir do costado de atracação
+  const boomTipY = VESSEL_BERTH_BOTTOM_Y - boomOutreach * scale;
+  const sillLeftX = cx - 11;
+  const sillRightX = cx + 11;
+  const girderLeftX = cx - 5.2;
+  const girderRightX = cx + 5.2;
 
   // Rótulo com setas conforme o modelo original do terminal
   let arrowLabel = portainer.name;
@@ -1175,7 +1222,7 @@ function renderPortainerSvg({
       onPointerEnter={onPointerEnter}
       onPointerLeave={onPointerLeave}
     >
-      <title>{`Portêiner ${portainer.name} · Lança: ${boomOutreach} m (Alcance sobre navio: ${reachOverShip.toFixed(1)} m) · Estação ${portainer.position.toFixed(1).replace(".", ",")} m · Arraste para reposicionar ao longo do cais`}</title>
+      <title>{`Portêiner ${portainer.name} · Lança: ${boomOutreach} m · Estação ${portainer.position.toFixed(1).replace(".", ",")} m · Arraste para reposicionar ao longo do cais`}</title>
 
       {/* Linha guia de centro / alinhamento do portêiner */}
       <line
@@ -1197,7 +1244,7 @@ function renderPortainerSvg({
         x2={girderLeftX}
         y2={landRailY}
         stroke={portainer.color}
-        strokeWidth="1.8"
+        strokeWidth="2.2"
       />
       <line
         x1={girderRightX}
@@ -1205,17 +1252,17 @@ function renderPortainerSvg({
         x2={girderRightX}
         y2={landRailY}
         stroke={portainer.color}
-        strokeWidth="1.8"
+        strokeWidth="2.2"
       />
 
       {/* Ponta da lança marítima (Headframe) com indicador de alcance em metros */}
       <line
-        x1={girderLeftX - 2.5}
+        x1={girderLeftX - 3}
         y1={boomTipY}
-        x2={girderRightX + 2.5}
+        x2={girderRightX + 3}
         y2={boomTipY}
         stroke="#0f172a"
-        strokeWidth="2.6"
+        strokeWidth="2.8"
       />
       <circle cx={girderLeftX} cy={boomTipY} r="1.4" fill="#f8fafc" stroke="#0f172a" strokeWidth="0.6" />
       <circle cx={girderRightX} cy={boomTipY} r="1.4" fill="#f8fafc" stroke="#0f172a" strokeWidth="0.6" />
@@ -1730,28 +1777,23 @@ export default function BerthBlueprint({
           );
         })}
 
-        {/* Cabos amarelos; estações esquemáticas dos cabeços permanecem ilustrativas até o levantamento real. */}
+        {/* Cabos amarelos; conectados aos pontos estruturais do navio e cabeços */}
         {sortedVessels.flatMap((vessel) => {
-          const vesselHeight = Math.max(20, vessel.beam * scale);
-          const y = VESSEL_BERTH_BOTTOM_Y - vesselHeight;
           return vessel.mooringLines.map((line) => {
             const bollard = line.bollardId ? bollardById.get(line.bollardId) : undefined;
-            const offsetFromStern = normalizeMooringOffset(line.type, vessel.loa, line.shipOffset);
-            const shipStation = vessel.position + berthwiseOffsetFromStern(vessel.loa, vessel.berthingSide, offsetFromStern);
-            const shipX = trackStart + shipStation * scale;
+            const { x: shipX, y: shipY } = getMooringShipAnchor(line.type, vessel, scale, trackStart);
             const bollardDisplay = bollard?.id ? bollardDisplayById.get(bollard.id) : undefined;
             const isDragging = dragRef.current?.kind === "mooring" && dragRef.current.vesselId === vessel.id && dragRef.current.lineId === line.id;
             const bollardX = bollardDisplay ? trackStart + bollardDisplay.position * scale : shipX;
             const endX = isDragging && lineDragPoint ? lineDragPoint.x : bollardX;
-            const endY = isDragging && lineDragPoint ? lineDragPoint.y : CABLE_END_Y;
+            const endY = isDragging && lineDragPoint ? lineDragPoint.y : bollardDisplay ? CABLE_END_Y : shipY;
             const isSpring = line.type.startsWith("spring");
             const stationDescription = bollardDisplay?.estimated ? "estação ilustrativa, não levantada" : bollardDisplay ? `estação ${bollardDisplay.position} m` : "cabeço ainda não escolhido";
             return (
               <g key={`line-${vessel.id}-${line.id}`}>
                 <title>{vessel.name} · {MOORING_LINE_LABELS[line.type]} · {bollard ? `Cabeço ${bollard.id} · ${stationDescription}` : stationDescription}</title>
-                <line x1={shipX} y1={y + vesselHeight - 1} x2={endX} y2={endY} stroke="#51491d" strokeWidth="4.2" opacity="0.42" pointerEvents="none" />
-                <line x1={shipX} y1={y + vesselHeight - 1} x2={endX} y2={endY} stroke="#f1cc19" strokeWidth="2.8" strokeDasharray={isSpring ? "5 3" : undefined} opacity="0.98" pointerEvents="none" />
-                <circle cx={shipX} cy={y + vesselHeight - 1} r="3.4" fill="#f1cc19" stroke="#51491d" strokeWidth="1" pointerEvents="none" />
+                <line x1={shipX} y1={shipY} x2={endX} y2={endY} stroke="#51491d" strokeWidth="4.2" opacity="0.42" pointerEvents="none" />
+                <line x1={shipX} y1={shipY} x2={endX} y2={endY} stroke="#f1cc19" strokeWidth="2.8" strokeDasharray={isSpring ? "5 3" : undefined} opacity="0.98" pointerEvents="none" />
               </g>
             );
           });
@@ -2256,9 +2298,9 @@ export default function BerthBlueprint({
               {/* Hitbox ampliada para o cursor e hover com mouse */}
               <rect
                 x={x - 9}
-                y="192"
+                y="210"
                 width="18"
-                height="46"
+                height="28"
                 className="bollard-hitbox"
                 fill="transparent"
                 style={{ cursor: "pointer" }}
@@ -2266,16 +2308,16 @@ export default function BerthBlueprint({
               {/* Haste vertical do cabeço com ponta superior e base sobre o cais */}
               <line
                 x1={x}
-                y1="200"
+                y1="210"
                 x2={x}
-                y2="224"
+                y2="234"
                 stroke={isHovered ? "#f1cc19" : "#111a1d"}
                 strokeWidth={isHovered ? "2.6" : "2.2"}
               />
               {/* Cápsula arredondada do cabeço com a cor oficial do seu tipo */}
               <rect
                 x={x - 4.3}
-                y={205}
+                y={215}
                 width="8.6"
                 height="19"
                 rx="2.6"
@@ -2287,10 +2329,10 @@ export default function BerthBlueprint({
               {/* Numeração na vertical dentro do cabeço */}
               <text
                 x={x}
-                y={214.5}
+                y={224.5}
                 textAnchor="middle"
                 dominantBaseline="central"
-                transform={`rotate(-90 ${x} 214.5)`}
+                transform={`rotate(-90 ${x} 224.5)`}
                 className={`bollard-number ${display.estimated ? "bollard-number-estimated" : ""}`}
                 style={{
                   fill: isHovered ? "#111a1d" : "#ffffff",
@@ -2321,7 +2363,7 @@ export default function BerthBlueprint({
             <g key={`gap-bollard-${display.id}-${next.id}`} pointerEvents="none">
               <text
                 x={midX}
-                y="221"
+                y="224.5"
                 textAnchor="middle"
                 dominantBaseline="central"
                 style={{
@@ -2342,14 +2384,12 @@ export default function BerthBlueprint({
         })}
 
         {/* Alças de cabo em camada superior para continuarem arrastáveis sobre os símbolos pretos. */}
-        {sortedVessels.flatMap((vessel, vesselIndex) => vessel.mooringLines.map((line) => {
-          const offsetFromStern = normalizeMooringOffset(line.type, vessel.loa, line.shipOffset);
+        {sortedVessels.flatMap((vessel) => vessel.mooringLines.map((line) => {
+          const { x: shipX, y: shipY } = getMooringShipAnchor(line.type, vessel, scale, trackStart);
           const display = line.bollardId ? bollardDisplayById.get(line.bollardId) : undefined;
-          const shipStation = vessel.position + berthwiseOffsetFromStern(vessel.loa, vessel.berthingSide, offsetFromStern);
-          const shipX = trackStart + shipStation * scale;
           const isDragging = dragRef.current?.kind === "mooring" && dragRef.current.vesselId === vessel.id && dragRef.current.lineId === line.id;
           const x = isDragging && lineDragPoint ? lineDragPoint.x : display ? trackStart + display.position * scale : shipX;
-          const y = isDragging && lineDragPoint ? lineDragPoint.y : CABLE_END_Y;
+          const y = isDragging && lineDragPoint ? lineDragPoint.y : display ? CABLE_END_Y : shipY;
           return (
             <g key={`line-handle-${vessel.id}-${line.id}`}>
               <circle cx={x} cy={y} r={isDragging ? 5.5 : 4.2} fill="#f1cc19" stroke="#51491d" strokeWidth="1.4" pointerEvents="none" />
@@ -2443,7 +2483,7 @@ export default function BerthBlueprint({
             className="pointer-events-none absolute z-30 transition-all duration-150 ease-out"
             style={{
               left: clampedX,
-              top: (QUAY_Y - 18) * zoom,
+              top: (215 - 10) * zoom,
               transform: "translate(-50%, -100%)",
               width: cardWidth,
             }}
