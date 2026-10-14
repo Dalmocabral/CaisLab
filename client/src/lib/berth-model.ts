@@ -63,6 +63,7 @@ export const VESSEL_TYPE_LABELS: Record<VesselType, string> = {
 
 export const MAX_BAY_COUNT = 78;
 export const MAX_ROW_COUNT = 32;
+export const MAX_TIER_COUNT = 10;
 
 /** Normaliza a quantidade de bays informada pelo operador. */
 export function normalizeBayCount(value: unknown): number | undefined {
@@ -229,6 +230,22 @@ export function rowNumberSequence(value: unknown): string[] {
   return result;
 }
 
+/** Normaliza a quantidade de tiers (camadas verticais de contêineres sobre o convés). */
+export function normalizeTierCount(value: unknown): number | undefined {
+  if (value === null || value === undefined || value === "") return undefined;
+  const parsed = typeof value === "number" ? value : Number(value);
+  if (!Number.isFinite(parsed)) return undefined;
+  return Math.min(MAX_TIER_COUNT, Math.max(1, Math.round(parsed)));
+}
+
+/** Estima a quantidade padrão de tiers no convés com base na boca do navio caso não informada */
+export function defaultTierCountForBeam(beam: number): number {
+  if (beam >= 48) return 5;
+  if (beam >= 38) return 4;
+  if (beam >= 30) return 4;
+  return 3;
+}
+
 export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "OCEAN MERMAID": "research-survey",
   "CMA CGM IRON": "container",
@@ -262,6 +279,8 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     bays: 70,
     rowCount: 12,
     rows: 12,
+    tierCount: 4,
+    tiers: 4,
     bridgePosition: "between-bays",
     bridgeBay: 56,
     bridgeBayStart: 56,
@@ -278,6 +297,8 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     bays: 78,
     rowCount: 20,
     rows: 20,
+    tierCount: 5,
+    tiers: 5,
     bridgePosition: "between-bays",
     bridgeBay: 22,
     bridgeBayStart: 22,
@@ -297,6 +318,8 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     bays: 50,
     rowCount: 13,
     rows: 13,
+    tierCount: 4,
+    tiers: 4,
     bridgePosition: "all-aft",
     bridgeBay: 50,
     bridgeBayStart: 50,
@@ -451,6 +474,10 @@ export interface Vessel {
   rowCount?: number;
   /** @deprecated Campo legado mantido para compatibilidade. */
   rows?: number;
+  /** Quantidade de tiers (camadas de contêineres sobre o convés); omissa quando desconhecida. */
+  tierCount?: number;
+  /** @deprecated Campo legado mantido para compatibilidade. */
+  tiers?: number;
   /** Posição do passadiço: 'all-aft' (popa extrema, como CMA CGM Veracruz) ou 'between-bays' (entre bays). */
   bridgePosition?: BridgePositionType;
   /** Bay onde o passadiço fica quando 'between-bays' (ex: 34). */
@@ -909,7 +936,7 @@ export interface Scenario {
 
 export interface BerthIssue {
   vesselId: string;
-  kind: "edge" | "spacing" | "overlap";
+  kind: "edge" | "spacing" | "overlap" | "equipment";
   message: string;
 }
 
@@ -1160,6 +1187,8 @@ export function normalizeScenario(value: unknown): Scenario | null {
     const bayCount = normalizeBayCount(rawBayCount !== undefined ? rawBayCount : knownDefault?.bayCount);
     const rawRowCount = (raw as any).rowCount ?? raw.rows;
     const rowCount = normalizeRowCount(rawRowCount !== undefined ? rawRowCount : knownDefault?.rowCount);
+    const rawTierCount = (raw as any).tierCount ?? raw.tiers;
+    const tierCount = normalizeTierCount(rawTierCount !== undefined ? rawTierCount : knownDefault?.tierCount);
     const bridgePosition = (raw as any).bridgePosition === "between-bays"
       ? "between-bays"
       : (raw as any).bridgePosition === "all-aft"
@@ -1207,6 +1236,8 @@ export function normalizeScenario(value: unknown): Scenario | null {
       bays: bayCount,
       rowCount,
       rows: rowCount,
+      tierCount,
+      tiers: tierCount,
       bridgePosition,
       bridgeBay,
       bridgeBayStart,
@@ -1357,6 +1388,40 @@ export function calculateIssues(scenario: Scenario): BerthIssue[] {
       }
     }
   }
+
+  // Verificação de interferência e capacidade de portêineres sobre navios porta-contêineres
+  if (scenario.showPortainers !== false && Array.isArray(scenario.portainers)) {
+    const activePortainers = scenario.portainers.filter((p) => p.enabled);
+    for (const portainer of activePortainers) {
+      for (const vessel of scenario.vessels) {
+        if (vessel.vesselType && vessel.vesselType !== "container") continue;
+        const vesselEnd = vessel.position + vessel.loa;
+        if (portainer.position >= vessel.position && portainer.position <= vesselEnd) {
+          const tiers = normalizeTierCount(vessel.tierCount ?? vessel.tiers) ?? defaultTierCountForBeam(vessel.beam);
+          const estimatedDraft = vessel.draft > 0 ? vessel.draft : 10;
+          const deckHeightAboveQuay = Math.max(7, estimatedDraft * 0.9 - 1);
+          const requiredHeight = deckHeightAboveQuay + tiers * 2.6 + 3.8;
+
+          if (portainer.boomHeight && portainer.boomHeight < requiredHeight) {
+            issues.push({
+              vesselId: vessel.id,
+              kind: "equipment",
+              message: `Portêiner ${portainer.name} (altura ${portainer.boomHeight} m) insuficiente para a pilha de ${tiers} tiers do ${vessel.name} (necessário ~${requiredHeight.toFixed(1)} m sob a lança)`,
+            });
+          }
+
+          if (portainer.boomOutreach && vessel.beam > 0 && portainer.boomOutreach < vessel.beam) {
+            issues.push({
+              vesselId: vessel.id,
+              kind: "equipment",
+              message: `Portêiner ${portainer.name} (alcance ${portainer.boomOutreach} m) não cobre a boca total do ${vessel.name} (${vessel.beam.toFixed(1)} m)`,
+            });
+          }
+        }
+      }
+    }
+  }
+
   return issues;
 }
 

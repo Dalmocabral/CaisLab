@@ -75,6 +75,8 @@ import {
   normalizeBayCount,
   MAX_ROW_COUNT,
   normalizeRowCount,
+  MAX_TIER_COUNT,
+  normalizeTierCount,
 } from "@/lib/berth-model";
 import { saveVesselToCatalog } from "@/lib/vessel-catalog";
 
@@ -233,8 +235,11 @@ export default function Simulator() {
     vessel: Vessel,
     bayCount?: number,
     rowCount?: number,
-    patch?: Partial<Vessel>,
+    tierCountOrPatch?: number | Partial<Vessel>,
+    patchObj?: Partial<Vessel>,
   ) {
+    const patch = typeof tierCountOrPatch === "object" ? tierCountOrPatch : patchObj;
+    const tierCount = typeof tierCountOrPatch === "number" ? tierCountOrPatch : undefined;
     const pendingTimer = baySaveTimersRef.current.get(vessel.id);
     if (pendingTimer !== undefined) window.clearTimeout(pendingTimer);
 
@@ -250,6 +255,8 @@ export default function Simulator() {
         bays: bayCount ?? mergedVessel.bayCount ?? mergedVessel.bays,
         rowCount: rowCount ?? mergedVessel.rowCount ?? mergedVessel.rows,
         rows: rowCount ?? mergedVessel.rowCount ?? mergedVessel.rows,
+        tierCount: tierCount ?? mergedVessel.tierCount ?? mergedVessel.tiers,
+        tiers: tierCount ?? mergedVessel.tierCount ?? mergedVessel.tiers,
         berthingSide: mergedVessel.berthingSide,
         bridgePosition: mergedVessel.bridgePosition,
         bridgeBay: mergedVessel.bridgeBay,
@@ -831,9 +838,9 @@ export default function Simulator() {
                 </div>
                 {normalizeVesselType(selectedVessel.vesselType, selectedVessel.name) === "container" && (
                   <>
-                    <div className="field-row">
+                    <div className="field-row" style={{ gridTemplateColumns: "1fr 1fr 1fr" }}>
                       <div>
-                        <label className="field-label" htmlFor="vessel-bay-count">Quantidade de Bays</label>
+                        <label className="field-label" htmlFor="vessel-bay-count">Bays</label>
                         <div className="unit-input">
                           <input
                             id="vessel-bay-count"
@@ -847,14 +854,14 @@ export default function Simulator() {
                             onChange={(event) => {
                               const bayCount = event.target.value === "" ? undefined : normalizeBayCount(event.target.value);
                               patchVessel(selectedVessel.id, { bayCount, bays: bayCount });
-                              scheduleContainerLayoutCatalogSave(selectedVessel, bayCount, selectedVessel.rowCount ?? selectedVessel.rows);
+                              scheduleContainerLayoutCatalogSave(selectedVessel, bayCount, selectedVessel.rowCount ?? selectedVessel.rows, selectedVessel.tierCount ?? selectedVessel.tiers);
                             }}
                           />
                           <span>Bay</span>
                         </div>
                       </div>
                       <div>
-                        <label className="field-label" htmlFor="vessel-row-count">Quantidade de Rows</label>
+                        <label className="field-label" htmlFor="vessel-row-count">Rows</label>
                         <div className="unit-input">
                           <input
                             id="vessel-row-count"
@@ -868,15 +875,36 @@ export default function Simulator() {
                             onChange={(event) => {
                               const rowCount = event.target.value === "" ? undefined : normalizeRowCount(event.target.value);
                               patchVessel(selectedVessel.id, { rowCount, rows: rowCount });
-                              scheduleContainerLayoutCatalogSave(selectedVessel, selectedVessel.bayCount ?? selectedVessel.bays, rowCount);
+                              scheduleContainerLayoutCatalogSave(selectedVessel, selectedVessel.bayCount ?? selectedVessel.bays, rowCount, selectedVessel.tierCount ?? selectedVessel.tiers);
                             }}
                           />
                           <span>Row</span>
                         </div>
                       </div>
+                      <div>
+                        <label className="field-label" htmlFor="vessel-tier-count">Tiers Convés</label>
+                        <div className="unit-input">
+                          <input
+                            id="vessel-tier-count"
+                            type="number"
+                            min="1"
+                            max={MAX_TIER_COUNT}
+                            step="1"
+                            inputMode="numeric"
+                            placeholder={`1–${MAX_TIER_COUNT}`}
+                            value={selectedVessel.tierCount ?? selectedVessel.tiers ?? ""}
+                            onChange={(event) => {
+                              const tierCount = event.target.value === "" ? undefined : normalizeTierCount(event.target.value);
+                              patchVessel(selectedVessel.id, { tierCount, tiers: tierCount });
+                              scheduleContainerLayoutCatalogSave(selectedVessel, selectedVessel.bayCount ?? selectedVessel.bays, selectedVessel.rowCount ?? selectedVessel.rows, tierCount);
+                            }}
+                          />
+                          <span>Tier</span>
+                        </div>
+                      </div>
                     </div>
                     <p className="form-hint">
-                      Bays no comprimento (proa à popa) e Rows na boca (pares a bombordo, ímpares a boreste e 00 no centro se ímpar). Salvo no catálogo.
+                      Bays no comprimento, Rows na boca e Tiers sobre o convés (valida altura da lança dos portêineres). Salvo no catálogo.
                     </p>
 
                     {/* Layout da Superestrutura (Passadiço & Chaminé) */}

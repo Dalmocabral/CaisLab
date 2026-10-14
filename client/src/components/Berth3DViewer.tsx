@@ -12,6 +12,8 @@ import {
   normalizeMooringOffset,
   normalizeBayCount,
   normalizeRowCount,
+  normalizeTierCount,
+  defaultTierCountForBeam,
   normalizeVesselType,
   segmentOffsets,
   totalQuayLength,
@@ -707,7 +709,7 @@ function addVessel(
     // 🚢 MODELOS CONVENCIONAIS (CONTAINER, CHEMICAL TANKER, PRODUCT TANKER, GENERAL CARGO)
     // Superestrutura na RÉ
     // =========================================================================
-    const tiers = beam >= 40 ? 4 : beam >= 32 ? 3 : 2;
+    const tiers = normalizeTierCount(vessel.tierCount ?? vessel.tiers) ?? defaultTierCountForBeam(beam);
     const topContainerY = deckHeight + 1.38 + tiers * 2.68;
     const towerHeight = isContainer ? Math.max(15.2, topContainerY - deckHeight + 4.2) : 13.5;
     const deckPlan = isContainer ? getVesselContainerDeckPlan(vessel) : null;
@@ -979,7 +981,7 @@ function addVessel(
       const rows = userRows ?? Math.max(4, Math.min(24, Math.round(usableBeam / 2.7)));
       const rowSpacing = usableBeam / rows;
       const containerWidth = Math.max(2.1, rowSpacing - 0.28);
-      const tiers = beam >= 40 ? 4 : beam >= 32 ? 3 : 2;
+      const tiers = normalizeTierCount(vessel.tierCount ?? vessel.tiers) ?? defaultTierCountForBeam(beam);
 
       // Dimensões de contêineres padrão ISO marítimos (20' pés e 40' pés) alinhados às escotilhas reais
       const containerLength20 = Math.max(5.8, Math.min(6.2, plan.cellWidth * 0.95));

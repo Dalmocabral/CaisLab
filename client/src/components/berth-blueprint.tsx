@@ -6,6 +6,8 @@ import {
   bayNumberSequence,
   rowNumberSequence,
   normalizeRowCount,
+  normalizeTierCount,
+  defaultTierCountForBeam,
   CONTAINER_COLORS,
   normalizeMooringOffset,
   MOORING_LINE_LABELS,
@@ -1908,6 +1910,7 @@ export default function BerthBlueprint({
             >
               <title>
                 {vessel.name} · {VESSEL_TYPE_LABELS[vesselType]} · LOA {vessel.loa} m · posição {vessel.position.toFixed(1)} m
+                {vesselType === "container" ? ` · ${normalizeTierCount(vessel.tierCount ?? vessel.tiers) ?? defaultTierCountForBeam(vessel.beam)} tiers no convés` : ""}
                 {messages.length ? ` · ${messages.join("; ")}` : ""}
               </title>
               {isSelected && !isPresentationMode && <rect x={x - 5} y={y - 25} width={Math.max(18, vesselWidth + 10)} height={vesselHeight + 37} rx="9" fill="none" stroke="#16869a" strokeWidth="1.5" strokeDasharray="4 4" />}

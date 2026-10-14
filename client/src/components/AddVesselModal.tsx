@@ -43,6 +43,8 @@ import {
   normalizeBayCount,
   MAX_ROW_COUNT,
   normalizeRowCount,
+  MAX_TIER_COUNT,
+  normalizeTierCount,
   normalizeVesselType,
   VESSEL_COLORS,
   makeId,
@@ -92,6 +94,7 @@ export default function AddVesselModal({
   const [manualType, setManualType] = useState<VesselType>("container");
   const [manualBays, setManualBays] = useState<number | undefined>(undefined);
   const [manualRows, setManualRows] = useState<number | undefined>(undefined);
+  const [manualTiers, setManualTiers] = useState<number | undefined>(undefined);
   const [manualBridgePosition, setManualBridgePosition] = useState<"all-aft" | "between-bays">("all-aft");
   const [manualBridgeBay, setManualBridgeBay] = useState<number | undefined>(34);
   const [manualSeparateFunnel, setManualSeparateFunnel] = useState(false);
@@ -288,6 +291,7 @@ export default function AddVesselModal({
 
     const bayCount = normalizeBayCount(v.bayCount ?? v.bays ?? v.maxBayNumber ?? knownDefault?.bayCount);
     const rowCount = normalizeRowCount(v.rowCount ?? v.rows ?? knownDefault?.rowCount);
+    const tierCount = normalizeTierCount(v.tierCount ?? v.tiers ?? knownDefault?.tierCount);
     const bridgePosition = v.bridgePosition ?? knownDefault?.bridgePosition;
     const bridgeBay = v.bridgeBay ?? knownDefault?.bridgeBay;
     const separateFunnel = v.separateFunnel ?? knownDefault?.separateFunnel;
@@ -309,6 +313,8 @@ export default function AddVesselModal({
       bays: bayCount,
       rowCount,
       rows: rowCount,
+      tierCount,
+      tiers: tierCount,
       bridgePosition,
       bridgeBay,
       separateFunnel,
@@ -332,6 +338,7 @@ export default function AddVesselModal({
     const draft = Math.max(0, Number(manualDraft) || 10);
     const bayCount = manualType === "container" ? normalizeBayCount(manualBays) : undefined;
     const rowCount = manualType === "container" ? normalizeRowCount(manualRows) : undefined;
+    const tierCount = manualType === "container" ? normalizeTierCount(manualTiers) : undefined;
     const bridgePosition = manualType === "container" ? manualBridgePosition : undefined;
     const bridgeBay = manualType === "container" && manualBridgePosition === "between-bays" ? manualBridgeBay : undefined;
     const separateFunnel = manualType === "container" && manualBridgePosition === "between-bays" ? manualSeparateFunnel : undefined;
@@ -354,6 +361,8 @@ export default function AddVesselModal({
       bays: bayCount,
       rowCount,
       rows: rowCount,
+      tierCount,
+      tiers: tierCount,
       bridgePosition,
       bridgeBay,
       separateFunnel,
@@ -370,6 +379,8 @@ export default function AddVesselModal({
         bays: bayCount,
         rowCount,
         rows: rowCount,
+        tierCount,
+        tiers: tierCount,
         berthingSide: manualSide,
         bridgePosition,
         bridgeBay,
@@ -978,10 +989,10 @@ export default function AddVesselModal({
 
               {manualType === "container" && (
                 <>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-3 gap-2.5">
                   <div>
                     <label className="block text-xs font-bold text-[#2d4b58] mb-1" htmlFor="manual-bay-count">
-                      Quantidade de Bays (até {MAX_BAY_COUNT})
+                      Bays (até {MAX_BAY_COUNT})
                     </label>
                     <div className="relative">
                       <input
@@ -996,14 +1007,14 @@ export default function AddVesselModal({
                           event.target.value === "" ? undefined : normalizeBayCount(event.target.value)
                         )}
                         placeholder="Ex.: 20"
-                        className="w-full pl-3 pr-12 py-2 text-xs border border-[#cfdce0] rounded-lg focus:outline-none focus:border-[#16869a]"
+                        className="w-full pl-2.5 pr-8 py-2 text-xs border border-[#cfdce0] rounded-lg focus:outline-none focus:border-[#16869a]"
                       />
-                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400">Bay</span>
+                      <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-gray-400">Bay</span>
                     </div>
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-[#2d4b58] mb-1" htmlFor="manual-row-count">
-                      Quantidade de Rows (até {MAX_ROW_COUNT})
+                      Rows (até {MAX_ROW_COUNT})
                     </label>
                     <div className="relative">
                       <input
@@ -1018,9 +1029,31 @@ export default function AddVesselModal({
                           event.target.value === "" ? undefined : normalizeRowCount(event.target.value)
                         )}
                         placeholder="Ex.: 12"
-                        className="w-full pl-3 pr-12 py-2 text-xs border border-[#cfdce0] rounded-lg focus:outline-none focus:border-[#16869a]"
+                        className="w-full pl-2.5 pr-8 py-2 text-xs border border-[#cfdce0] rounded-lg focus:outline-none focus:border-[#16869a]"
                       />
-                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400">Row</span>
+                      <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-gray-400">Row</span>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-[#2d4b58] mb-1" htmlFor="manual-tier-count">
+                      Tiers Convés (até {MAX_TIER_COUNT})
+                    </label>
+                    <div className="relative">
+                      <input
+                        id="manual-tier-count"
+                        type="number"
+                        min="1"
+                        max={MAX_TIER_COUNT}
+                        step="1"
+                        inputMode="numeric"
+                        value={manualTiers ?? ""}
+                        onChange={(event) => setManualTiers(
+                          event.target.value === "" ? undefined : normalizeTierCount(event.target.value)
+                        )}
+                        placeholder="Ex.: 4"
+                        className="w-full pl-2.5 pr-8 py-2 text-xs border border-[#cfdce0] rounded-lg focus:outline-none focus:border-[#16869a]"
+                      />
+                      <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-gray-400">Tier</span>
                     </div>
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-import { normalizeBayCount, normalizeRowCount, type BridgePositionType } from "./berth-model";
+import { normalizeBayCount, normalizeRowCount, normalizeTierCount, type BridgePositionType } from "./berth-model";
 
 export interface CatalogVessel {
   name: string;
@@ -13,6 +13,10 @@ export interface CatalogVessel {
   rowCount?: number;
   /** @deprecated Campo legado mantido para compatibilidade. */
   rows?: number;
+  /** Quantidade de tiers (camadas de contêineres sobre o convés). */
+  tierCount?: number;
+  /** @deprecated Campo legado mantido para compatibilidade. */
+  tiers?: number;
   berthingSide: "boreste" | "bombordo";
   imo?: string;
   type?: string;
@@ -194,6 +198,8 @@ export async function saveVesselToCatalog(vessel: CatalogVessel): Promise<Catalo
       bays: entry.bayCount,
       rowCount: entry.rowCount,
       rows: entry.rowCount,
+      tierCount: entry.tierCount,
+      tiers: entry.tierCount,
       berthingSide: entry.berthingSide,
     };
     map.set(cleanName, savedEntry);

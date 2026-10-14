@@ -38,6 +38,8 @@
     "bays": 50,
     "rowCount": 13,
     "rows": 13,
+    "tierCount": 4,
+    "tiers": 4,
     "bridgePosition": "all-aft",
     "superstructureLayout": "custom",
     "bridgeBay": 50,
@@ -88,6 +90,8 @@
     "bays": 78,
     "rowCount": 20,
     "rows": 20,
+    "tierCount": 5,
+    "tiers": 5,
     "bridgePosition": "between-bays",
     "bridgeBay": 22,
     "bridgeBayStart": 22,
@@ -336,7 +340,9 @@
     "bridgeBayStart": 56,
     "bridgeBayEnd": 56,
     "rowCount": 12,
-    "rows": 12
+    "rows": 12,
+    "tierCount": 4,
+    "tiers": 4
   },
   {
     "name": "OCEAN MERMAID",
