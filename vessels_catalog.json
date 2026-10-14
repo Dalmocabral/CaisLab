@@ -82,12 +82,12 @@
     "imo": "9945887",
     "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "14/10/2026 08:14",
+    "updatedAt": "14/10/2026 08:39",
     "flag": "HONG KONG, CHINA",
     "bayCount": 78,
     "bays": 78,
-    "rowCount": 18,
-    "rows": 18,
+    "rowCount": 20,
+    "rows": 20,
     "bridgePosition": "between-bays",
     "bridgeBay": 22,
     "bridgeBayStart": 22,
@@ -144,7 +144,7 @@
     "imo": "9850795",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "14/10/2026 11:24",
+    "updatedAt": "14/10/2026 11:48",
     "flag": "LIBERIA"
   },
   {
@@ -315,20 +315,28 @@
     "imo": "9612789",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "14/10/2026 11:24",
+    "updatedAt": "14/10/2026 11:48",
     "flag": "BRAZIL"
   },
   {
     "name": "NYK RUMINA",
     "loa": 294.12,
     "beam": 32.25,
-    "draft": 12.4,
+    "draft": 12.6,
     "berthingSide": "boreste",
     "imo": "9416991",
-    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "lastBerth": "TECONT1",
-    "updatedAt": "13/10/2026 19:59",
-    "flag": "SINGAPORE"
+    "updatedAt": "14/10/2026 08:45",
+    "flag": "SINGAPORE",
+    "bayCount": 70,
+    "bays": 70,
+    "bridgePosition": "between-bays",
+    "bridgeBay": 56,
+    "bridgeBayStart": 56,
+    "bridgeBayEnd": 56,
+    "rowCount": 12,
+    "rows": 12
   },
   {
     "name": "OCEAN MERMAID",
@@ -352,7 +360,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONT1",
-    "updatedAt": "14/10/2026 11:24"
+    "updatedAt": "14/10/2026 11:48"
   },
   {
     "name": "TOKYO EXPRESS",
