@@ -247,11 +247,28 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "MALIAKOS": "container",
   "NC BRAVO": "container",
   "NC BREDA": "container",
+  "NYK RUMINA": "container",
   "TOKYO EXPRESS": "container",
   "ZIM BALTIMORE": "container",
 };
 
 export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
+  "NYK RUMINA": {
+    name: "NYK RUMINA",
+    loa: 294.12,
+    beam: 32.25,
+    draft: 12.6,
+    bayCount: 70,
+    bays: 70,
+    rowCount: 12,
+    rows: 12,
+    bridgePosition: "between-bays",
+    bridgeBay: 56,
+    bridgeBayStart: 56,
+    bridgeBayEnd: 56,
+    separateFunnel: false,
+    vesselType: "container",
+  },
   "COSCO SHIPPING CHILE": {
     name: "COSCO SHIPPING CHILE",
     loa: 335.9,
@@ -510,12 +527,19 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const idx65 = bays.indexOf(65);
   const hasCoscoFunnel = isCoscoChile && config.separateFunnel && idx63 !== -1 && idx65 !== -1;
 
+  const isNykRumina = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("NYK") && vessel.name.toUpperCase().includes("RUMINA");
+  const idx55 = bays.indexOf(55);
+  const idx57 = bays.indexOf(57);
+  const hasNykBridge = isNykRumina && idx55 !== -1 && idx57 !== -1;
+
   const num40ftGaps = Math.max(0, Math.floor((bays.length - 1) / 2));
-  const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + (hasCoscoFunnel ? 1.4 : 0));
+  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasNykBridge ? 2.0 : 0);
+  const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + extraSlots);
   const hatchGap = bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0;
   const totalGapsWidth = num40ftGaps * hatchGap;
   const coscoFunnelSlotW = hasCoscoFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
-  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW);
+  const nykBridgeSlotW = hasNykBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
+  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - nykBridgeSlotW);
   const cellWidth = availableBayWidth / Math.max(1, bays.length);
 
   const bayCellFromStern = (index: number) => {
@@ -524,13 +548,16 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     if (hasCoscoFunnel && index >= idx65) {
       xPos -= coscoFunnelSlotW;
     }
+    if (hasNykBridge && index >= idx57) {
+      xPos -= nykBridgeSlotW;
+    }
     return xPos;
   };
 
   const bridgeIndices: number[] = [];
   const funnelIndices: number[] = [];
 
-  if (!isAllAft && bays.length > 0) {
+  if (!isAllAft && bays.length > 0 && !hasNykBridge) {
     const targetBridgeBay = config.bridgeBay ?? config.bridgeBayStart ?? 34;
     const occupiedBridgeBays = getOccupiedBayNumbers(
       targetBridgeBay,
@@ -608,6 +635,11 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   if (isAllAft) {
     bridgeCenterFromStern = aftHouseX + aftHouseW / 2;
     bridgeLength = aftHouseW;
+  } else if (hasNykBridge) {
+    const rightOf57 = bayCellFromStern(idx57) + cellWidth;
+    const leftOf55 = bayCellFromStern(idx55);
+    bridgeCenterFromStern = (rightOf57 + leftOf55) / 2;
+    bridgeLength = Math.max(10, nykBridgeSlotW - 0.4);
   } else if (bridgeIndices.length > 0) {
     const minX = Math.min(...bridgeIndices.map((idx) => bayCellFromStern(idx)));
     const maxX = Math.max(...bridgeIndices.map((idx) => bayCellFromStern(idx) + cellWidth));

@@ -148,13 +148,20 @@ function renderContainerDeck(
   const idx65 = bays.indexOf(65);
   const hasCoscoFunnel = isCoscoChile && config.separateFunnel && idx63 !== -1 && idx65 !== -1;
 
+  const isNykRumina = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("NYK") && vessel.name.toUpperCase().includes("RUMINA");
+  const idx55 = bays.indexOf(55);
+  const idx57 = bays.indexOf(57);
+  const hasNykBridge = isNykRumina && idx55 !== -1 && idx57 !== -1;
+
   // Separação visual entre as bays de 40' (cada par de bays de 20' forma uma bay/hatch de 40')
   const num40ftGaps = Math.max(0, Math.floor((bays.length - 1) / 2));
-  const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + (hasCoscoFunnel ? 1.4 : 0));
+  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasNykBridge ? 2.0 : 0);
+  const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + extraSlots);
   const hatchGap = bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0;
   const totalGapsWidth = num40ftGaps * hatchGap;
   const coscoFunnelSlotW = hasCoscoFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
-  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW);
+  const nykBridgeSlotW = hasNykBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
+  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - nykBridgeSlotW);
   const cellWidth = availableBayWidth / Math.max(1, bays.length);
   const labelSize = bays.length ? Math.max(2.6, Math.min(5.4, cellWidth * 0.54)) : 3.4;
   const rowLabelSize = Math.max(2.0, Math.min(labelSize, cellHeight * 0.72));
@@ -167,6 +174,9 @@ function renderContainerDeck(
     if (hasCoscoFunnel && index >= idx65) {
       xPos -= coscoFunnelSlotW;
     }
+    if (hasNykBridge && index >= idx57) {
+      xPos -= nykBridgeSlotW;
+    }
     return xPos;
   };
 
@@ -174,7 +184,7 @@ function renderContainerDeck(
   const bridgeIndices: number[] = [];
   const funnelIndices: number[] = [];
 
-  if (!isAllAft && bays.length > 0) {
+  if (!isAllAft && bays.length > 0 && !hasNykBridge) {
     const targetBridgeBay = config.bridgeBay ?? config.bridgeBayStart ?? 34;
     const occupiedBridgeBays = getOccupiedBayNumbers(
       targetBridgeBay,
@@ -320,6 +330,17 @@ function renderContainerDeck(
               if (idx77 !== -1) {
                 const cellX77 = bayCellX(idx77);
                 centerX = (cellX + cellWidth / 2 + cellX77 + cellWidth / 2) / 2;
+              }
+            }
+
+            // No navio NYK Rumina, remove a bay 69 e deixa a 70 centralizada entre a divisão dos contêineres de 20'
+            if (isNykRumina && bay === 69) return null;
+
+            if (isNykRumina && bay === 70) {
+              const idx69 = bays.indexOf(69);
+              if (idx69 !== -1) {
+                const cellX69 = bayCellX(idx69);
+                centerX = (cellX + cellWidth / 2 + cellX69 + cellWidth / 2) / 2;
               }
             }
 
@@ -536,6 +557,53 @@ function renderContainerDeck(
                   fill="#0f172a"
                   stroke="#ffffff"
                   strokeWidth="0.5"
+                />
+              </>
+            );
+          })()}
+        </g>
+      )}
+
+      {/* 2b. Passadiço Específico do NYK RUMINA (entre as bays 55 e 57, sem ocultar as bays) */}
+      {!isAllAft && hasNykBridge && (
+        <g className="superstructure-bridge-island-nyk">
+          {(() => {
+            const rightOf57 = bayCellX(idx57) + cellWidth;
+            const leftOf55 = bayCellX(idx55);
+            const slotW = Math.max(8.0, nykBridgeSlotW - 0.4);
+            const slotX = (rightOf57 + leftOf55 - slotW) / 2;
+            return (
+              <>
+                <title>Passadiço (entre Bay 55 e Bay 57)</title>
+                <rect
+                  x={slotX}
+                  y={y + 2.5}
+                  width={slotW}
+                  height={vesselHeight - 5}
+                  rx="1.8"
+                  fill={color.fill}
+                  stroke={color.stroke}
+                  strokeWidth="1.2"
+                />
+                {/* Asas do passadiço */}
+                <line
+                  x1={slotX + slotW * 0.55}
+                  y1={y + 0.8}
+                  x2={slotX + slotW * 0.55}
+                  y2={y + vesselHeight - 0.8}
+                  stroke={color.stroke}
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                />
+                {/* Chaminé no próprio passadiço (lado de ré) */}
+                <ellipse
+                  cx={slotX + slotW * 0.25}
+                  cy={y + vesselHeight / 2}
+                  rx={Math.max(2.2, Math.min(4.8, slotW * 0.22))}
+                  ry={Math.max(1.8, Math.min(3.2, vesselHeight * 0.11))}
+                  fill="#1e293b"
+                  stroke="#0f172a"
+                  strokeWidth="0.7"
                 />
               </>
             );
