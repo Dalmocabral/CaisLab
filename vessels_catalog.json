@@ -76,18 +76,18 @@
   {
     "name": "COSCO SHIPPING CHILE",
     "loa": 335.9,
-    "beam": 51.0,
+    "beam": 51,
     "draft": 11.2,
     "berthingSide": "boreste",
     "imo": "9945887",
-    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "13/10/2026 19:59",
+    "updatedAt": "14/10/2026 08:14",
     "flag": "HONG KONG, CHINA",
     "bayCount": 78,
     "bays": 78,
-    "rowCount": 20,
-    "rows": 20,
+    "rowCount": 18,
+    "rows": 18,
     "bridgePosition": "between-bays",
     "bridgeBay": 22,
     "bridgeBayStart": 22,
@@ -144,7 +144,7 @@
     "imo": "9850795",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "14/10/2026 09:08",
+    "updatedAt": "14/10/2026 11:24",
     "flag": "LIBERIA"
   },
   {
@@ -254,15 +254,17 @@
     "imo": "9969065",
     "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "lastBerth": "TECONT1",
-    "updatedAt": "13/10/2026 08:10",
+    "updatedAt": "13/10/2026 08:41",
     "flag": "PANAMA",
     "bayCount": 58,
     "bays": 58,
     "rowCount": 14,
     "rows": 14,
     "bridgePosition": "between-bays",
-    "bridgeBay": 3,
-    "separateFunnel": false
+    "bridgeBay": 42,
+    "separateFunnel": false,
+    "bridgeBayStart": 42,
+    "bridgeBayEnd": 42
   },
   {
     "name": "MALIAKOS",
@@ -313,7 +315,7 @@
     "imo": "9612789",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "14/10/2026 09:08",
+    "updatedAt": "14/10/2026 11:24",
     "flag": "BRAZIL"
   },
   {
@@ -350,7 +352,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONT1",
-    "updatedAt": "14/10/2026 09:08"
+    "updatedAt": "14/10/2026 11:24"
   },
   {
     "name": "TOKYO EXPRESS",
