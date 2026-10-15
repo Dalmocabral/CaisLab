@@ -1,23 +1,8 @@
 {
-  "updatedAt": "14/10/2026 22:50",
+  "updatedAt": "15/10/2026 02:21",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 3,
+  "count": 2,
   "maneuvers": [
-    {
-      "dateTime": "14/10 18:30",
-      "name": "SPYROS V",
-      "draft": 12.6,
-      "loa": 261.03,
-      "beam": 32.3,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "boreste",
-      "imo": "9453365",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "MALTA",
-      "terminal": "rio"
-    },
     {
       "dateTime": "15/10 08:00",
       "name": "NC BRISA",
