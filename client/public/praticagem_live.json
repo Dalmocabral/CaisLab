@@ -1,19 +1,19 @@
 {
-  "updatedAt": "15/10/2026 08:41",
+  "updatedAt": "15/10/2026 14:32",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 2,
   "maneuvers": [
     {
-      "dateTime": "15/10 08:00",
-      "name": "NC BRISA",
-      "draft": 9.5,
-      "loa": 223.96,
-      "beam": 34.88,
+      "dateTime": "16/10 13:00",
+      "name": "LOG-IN PANTANAL",
+      "draft": 8.5,
+      "loa": 182.47,
+      "beam": 25.2,
       "maneuver": "E",
       "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
+      "berthTo": "TECONT1",
       "berthingSide": "boreste",
-      "imo": "9612789",
+      "imo": "9351799",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "BRAZIL",
       "terminal": "rio"

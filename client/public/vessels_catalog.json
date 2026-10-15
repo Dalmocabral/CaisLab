@@ -148,7 +148,7 @@
     "imo": "9850795",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "15/10/2026 08:41",
+    "updatedAt": "15/10/2026 14:32",
     "flag": "LIBERIA"
   },
   {
@@ -207,13 +207,13 @@
     "name": "LOG-IN PANTANAL",
     "loa": 182.47,
     "beam": 25.2,
-    "draft": 9,
+    "draft": 8.5,
     "berthingSide": "boreste",
     "imo": "9351799",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "01/10/2026 23:23"
+    "updatedAt": "15/10/2026 14:32"
   },
   {
     "name": "LONCOMILLA",
