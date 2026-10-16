@@ -148,7 +148,7 @@
     "imo": "9850795",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "16/10/2026 02:13",
+    "updatedAt": "16/10/2026 02:15",
     "flag": "LIBERIA"
   },
   {
@@ -213,7 +213,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "16/10/2026 02:13",
+    "updatedAt": "16/10/2026 02:15",
     "bayCount": 40,
     "bays": 40,
     "rowCount": 10,
@@ -379,7 +379,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "16/10/2026 02:13"
+    "updatedAt": "16/10/2026 02:15"
   },
   {
     "name": "SPYROS V",
