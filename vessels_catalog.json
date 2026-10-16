@@ -148,7 +148,7 @@
     "imo": "9850795",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "16/10/2026 14:24",
+    "updatedAt": "16/10/2026 19:08",
     "flag": "LIBERIA"
   },
   {
@@ -381,7 +381,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "16/10/2026 14:24"
+    "updatedAt": "16/10/2026 19:08"
   },
   {
     "name": "SPYROS V",
@@ -414,6 +414,18 @@
     "updatedAt": "06/10/2026 09:38",
     "bayCount": 57,
     "bays": 57
+  },
+  {
+    "name": "XIN WEI HAI",
+    "loa": 263.23,
+    "beam": 32.3,
+    "draft": 11.3,
+    "berthingSide": "boreste",
+    "imo": "9312573",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "CHINA, PEOPLE'S REPUBLIC OF",
+    "lastBerth": "TECONT1",
+    "updatedAt": "16/10/2026 19:08"
   },
   {
     "name": "ZIM BALTIMORE",
