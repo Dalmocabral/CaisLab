@@ -148,7 +148,7 @@
     "imo": "9850795",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "15/10/2026 22:46",
+    "updatedAt": "15/10/2026 22:49",
     "flag": "LIBERIA"
   },
   {
@@ -210,10 +210,16 @@
     "draft": 8.5,
     "berthingSide": "boreste",
     "imo": "9351799",
-    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "15/10/2026 22:46"
+    "updatedAt": "15/10/2026 22:55",
+    "bayCount": 40,
+    "bays": 40,
+    "rowCount": 10,
+    "rows": 10,
+    "tierCount": 5,
+    "tiers": 5
   },
   {
     "name": "LONCOMILLA",
@@ -317,10 +323,16 @@
     "draft": 9.5,
     "berthingSide": "boreste",
     "imo": "9612789",
-    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "15/10/2026 08:41",
-    "flag": "BRAZIL"
+    "updatedAt": "15/10/2026 22:49",
+    "flag": "BRAZIL",
+    "bayCount": 47,
+    "bays": 47,
+    "rowCount": 12,
+    "rows": 12,
+    "tierCount": 6,
+    "tiers": 6
   },
   {
     "name": "NYK RUMINA",
@@ -361,13 +373,13 @@
     "name": "SEASPAN EMPIRE",
     "loa": 294.13,
     "beam": 32.2,
-    "draft": 10.0,
+    "draft": 10,
     "berthingSide": "boreste",
     "imo": "9407160",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "15/10/2026 22:46"
+    "updatedAt": "15/10/2026 22:49"
   },
   {
     "name": "SPYROS V",
@@ -376,10 +388,16 @@
     "draft": 12.6,
     "berthingSide": "boreste",
     "imo": "9453365",
-    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "flag": "MALTA",
     "lastBerth": "TECONT1",
-    "updatedAt": "14/10/2026 22:50"
+    "updatedAt": "14/10/2026 22:50",
+    "tierCount": 5,
+    "tiers": 5,
+    "rowCount": 10,
+    "rows": 10,
+    "bayCount": 50,
+    "bays": 50
   },
   {
     "name": "TOKYO EXPRESS",
