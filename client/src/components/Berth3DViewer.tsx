@@ -1145,6 +1145,7 @@ function addVessel(
 
         for (let row = 0; row < rows; row += 1) {
           const containerZ = (row - (rows - 1) / 2) * rowSpacing;
+          const distFromCenter = rows > 1 ? Math.abs(row - (rows - 1) / 2) / ((rows - 1) / 2) : 0;
 
           let use40 = false;
           if (!hatch.colABlocked && !hatch.colBBlocked && hatch.colB !== undefined) {
@@ -1159,16 +1160,51 @@ function addVessel(
             }
           }
 
-          for (let tier = 0; tier < tiers; tier += 1) {
-            const containerY = deckHeight + 1.38 + tier * 2.68;
+          // Variação orgânica e realista da altura da pilha por slot:
+          const getStackHeight = (colSlot: number) => {
+            if (tiers <= 1) return tiers;
+            const stackHash = ((vesselSeed ^ (h * 73856093) ^ (row * 19349663) ^ (colSlot * 83492791)) >>> 0) % 100;
+            let height = tiers;
 
-            if (use40) {
+            // Degrau natural nas bordas externas (bombordo / boreste):
+            if (distFromCenter > 0.82) {
+              if (stackHash < 45) height = Math.max(1, tiers - 1);
+              else if (stackHash < 75) height = Math.max(1, tiers - 2);
+            } else if (distFromCenter > 0.6) {
+              if (stackHash < 30) height = Math.max(1, tiers - 1);
+            }
+
+            // Variação suave entre escotilhas (algumas colunas com 1 contêiner a menos no topo)
+            if (stackHash > 80 && stackHash <= 92) {
+              height = Math.max(1, height - 1);
+            } else if (stackHash > 92 && stackHash < 97) {
+              height = Math.max(1, height - 2);
+            } else if (stackHash >= 97 && distFromCenter > 0.7 && tiers >= 3) {
+              // Vão ocasional na borda externa (slot vazio no convés)
+              height = Math.max(0, height - 3);
+            }
+
+            return Math.min(tiers, Math.max(0, height));
+          };
+
+          if (use40) {
+            const h40 = getStackHeight(hatch.colA);
+            for (let tier = 0; tier < h40; tier += 1) {
+              const containerY = deckHeight + 1.38 + tier * 2.68;
               addContainer(true, containerX40, containerY, containerZ, hatch.colA, row, tier);
-            } else {
-              if (!hatch.colABlocked) {
+            }
+          } else {
+            if (!hatch.colABlocked) {
+              const h20A = getStackHeight(hatch.colA);
+              for (let tier = 0; tier < h20A; tier += 1) {
+                const containerY = deckHeight + 1.38 + tier * 2.68;
                 addContainer(false, containerXA, containerY, containerZ, hatch.colA, row, tier);
               }
-              if (!hatch.colBBlocked && hatch.colB !== undefined) {
+            }
+            if (!hatch.colBBlocked && hatch.colB !== undefined) {
+              const h20B = getStackHeight(hatch.colB);
+              for (let tier = 0; tier < h20B; tier += 1) {
+                const containerY = deckHeight + 1.38 + tier * 2.68;
                 addContainer(false, containerXB, containerY, containerZ, hatch.colB, row, tier);
               }
             }

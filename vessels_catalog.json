@@ -148,7 +148,7 @@
     "imo": "9850795",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "16/10/2026 02:15",
+    "updatedAt": "15/10/2026 23:30",
     "flag": "LIBERIA"
   },
   {
@@ -213,13 +213,15 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "16/10/2026 02:15",
+    "updatedAt": "15/10/2026 23:30",
     "bayCount": 40,
     "bays": 40,
     "rowCount": 10,
     "rows": 10,
     "tierCount": 5,
-    "tiers": 5
+    "tiers": 5,
+    "bridgePosition": "all-aft",
+    "separateFunnel": false
   },
   {
     "name": "LONCOMILLA",
@@ -373,13 +375,13 @@
     "name": "SEASPAN EMPIRE",
     "loa": 294.13,
     "beam": 32.2,
-    "draft": 10.0,
+    "draft": 10,
     "berthingSide": "boreste",
     "imo": "9407160",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "16/10/2026 02:15"
+    "updatedAt": "15/10/2026 23:30"
   },
   {
     "name": "SPYROS V",
