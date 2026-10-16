@@ -56,6 +56,7 @@ import {
   type Bollard,
   type BollardType,
   BOLLARD_TYPES,
+  getAssetUrl,
   type MooringLine,
   type MooringLineType,
   VESSEL_COLORS,
@@ -507,7 +508,7 @@ export default function Simulator() {
     <div className="app-shell">
       <header className="topbar">
         <div className="brand-lockup">
-          <img src="/favicon.svg" alt="" className="brand-mark" />
+          <img src={getAssetUrl("favicon.svg")} alt="" className="brand-mark" />
           <div className="brand-copy">
             <span className="brand-name">CaisLab</span>
             <span className="brand-caption">PLANEJAMENTO DE ATRACAÇÃO</span>
@@ -1124,7 +1125,7 @@ export default function Simulator() {
 
         <section className="calculation-note">
           <div className="calculation-note-icon"><Info size={17} /></div>
-          <p><strong>* Leitura do requisito mínimo:</strong> soma dos LOAs mais o afastamento configurado nas duas bordas do cais e entre navios. Cabeços, cabos e escada são mostrados a partir das posições inseridas; o app não calcula tensão, ângulo admissível, capacidade dos cabeços, passarela segura ou autoriza a operação. <a href="/arquitetura-e-limites.md" target="_blank" rel="noreferrer">Consulte arquitetura, premissas e limites.</a></p>
+          <p><strong>* Leitura do requisito mínimo:</strong> soma dos LOAs mais o afastamento configurado nas duas bordas do cais e entre navios. Cabeços, cabos e escada são mostrados a partir das posições inseridas; o app não calcula tensão, ângulo admissível, capacidade dos cabeços, passarela segura ou autoriza a operação. <a href={getAssetUrl("arquitetura-e-limites.md")} target="_blank" rel="noreferrer">Consulte arquitetura, premissas e limites.</a></p>
         </section>
 
         <footer className="page-footer" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px", padding: "14px 0", borderTop: "1px solid #e2e8ea", marginTop: "24px" }}>

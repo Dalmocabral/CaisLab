@@ -10,7 +10,7 @@ import {
   Download,
 } from "lucide-react";
 import BerthBlueprint from "@/components/berth-blueprint";
-import { type Scenario } from "@/lib/berth-model";
+import { type Scenario, getAssetUrl } from "@/lib/berth-model";
 import { exportAndShareBerthImage } from "@/lib/export-image";
 
 interface BerthViewModalProps {
@@ -209,7 +209,7 @@ export default function BerthViewModal({
           {/* Logotipo da empresa/terminal no canto superior esquerdo (sem sombra e sem bordas) */}
           <div className="absolute top-3 left-4 z-40 pointer-events-none select-none">
             <img
-              src="/logo.png"
+              src={getAssetUrl("logo.png")}
               alt="Logo"
               className="h-10 sm:h-12 w-auto object-contain"
             />

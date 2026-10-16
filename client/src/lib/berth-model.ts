@@ -17,12 +17,28 @@ export interface BerthSegment {
 
 export type BollardType = "duplo" | "alto-antigo" | "alto-novo" | "baixo-antigo" | "avariado";
 
+export const BASE_PATH = (typeof import.meta !== "undefined" && import.meta.env?.BASE_URL)
+  ? (import.meta.env.BASE_URL === "./" ? "." : import.meta.env.BASE_URL.replace(/\/$/, ""))
+  : "";
+
+export function getAssetUrl(path: string): string {
+  if (!path) return "";
+  if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("data:")) {
+    return path;
+  }
+  if (BASE_PATH && BASE_PATH !== "." && path.startsWith(BASE_PATH)) {
+    return path;
+  }
+  const clean = path.replace(/^\.?\//, "");
+  return BASE_PATH ? `${BASE_PATH}/${clean}` : `/${clean}`;
+}
+
 export const BOLLARD_TYPES: Record<BollardType, { label: string; color: string; border: string; image: string }> = {
-  "duplo": { label: "Cabeço duplo", color: "#3a7ebf", border: "#225a8d", image: "/bollards/cabeco-duplo.png" },
-  "alto-antigo": { label: "Cabeço alto antigo", color: "#3d4529", border: "#252b17", image: "/bollards/cabeco-alto-antigo.jpg" },
-  "alto-novo": { label: "Cabeço alto novo", color: "#6c757d", border: "#495057", image: "/bollards/cabeco-alto-novo.jpg" },
-  "baixo-antigo": { label: "Cabeço baixo antigo", color: "#e67e22", border: "#b85d10", image: "/bollards/cabeco-baixo-antigo.png" },
-  "avariado": { label: "Cabeço avariado", color: "#d62828", border: "#9e1515", image: "/bollards/cabeco-duplo.png" },
+  "duplo": { label: "Cabeço duplo", color: "#3a7ebf", border: "#225a8d", image: getAssetUrl("bollards/cabeco-duplo.png") },
+  "alto-antigo": { label: "Cabeço alto antigo", color: "#3d4529", border: "#252b17", image: getAssetUrl("bollards/cabeco-alto-antigo.jpg") },
+  "alto-novo": { label: "Cabeço alto novo", color: "#6c757d", border: "#495057", image: getAssetUrl("bollards/cabeco-alto-novo.jpg") },
+  "baixo-antigo": { label: "Cabeço baixo antigo", color: "#e67e22", border: "#b85d10", image: getAssetUrl("bollards/cabeco-baixo-antigo.png") },
+  "avariado": { label: "Cabeço avariado", color: "#d62828", border: "#9e1515", image: getAssetUrl("bollards/cabeco-duplo.png") },
 };
 
 export interface Bollard {

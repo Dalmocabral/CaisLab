@@ -1,4 +1,5 @@
 import { toast } from "sonner";
+import { getAssetUrl } from "@/lib/berth-model";
 
 export async function exportAndShareBerthImage({
   containerElement,
@@ -94,7 +95,7 @@ export async function exportAndShareBerthImage({
       await new Promise<void>((resolve) => {
         logoImg.onload = () => resolve();
         logoImg.onerror = () => resolve();
-        logoImg.src = "/logo.png";
+        logoImg.src = getAssetUrl("logo.png");
       });
 
       if (logoImg.complete && logoImg.naturalWidth > 0) {

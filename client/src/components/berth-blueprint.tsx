@@ -16,6 +16,7 @@ import {
   VESSEL_COLORS,
   type BollardType,
   BOLLARD_TYPES,
+  getAssetUrl,
   type VesselType,
   VESSEL_TYPE_LABELS,
   type Portainer,
@@ -2580,7 +2581,7 @@ export default function BerthBlueprint({
               {/* Foto real da infraestrutura portuária */}
               <div className="relative w-full h-36 bg-[#0f172a]/5 rounded-lg overflow-hidden border border-[#e2e8f0] mb-2 shadow-inner flex items-center justify-center">
                 <img
-                  src={bConfig.image}
+                  src={getAssetUrl(bConfig.image)}
                   alt={bConfig.label}
                   className="w-full h-full object-cover"
                 />
@@ -2704,7 +2705,7 @@ export default function BerthBlueprint({
                         }`}
                       >
                         <img
-                          src={cfg.image}
+                          src={getAssetUrl(cfg.image)}
                           alt={cfg.label}
                           className="w-10 h-10 rounded object-cover border border-[#cbd5e1] shrink-0"
                         />

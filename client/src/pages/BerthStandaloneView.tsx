@@ -11,6 +11,8 @@ import {
   readScenario,
   STORAGE_KEY,
   type Scenario,
+  getAssetUrl,
+  BASE_PATH,
 } from "@/lib/berth-model";
 import { exportAndShareBerthImage } from "@/lib/export-image";
 
@@ -87,7 +89,7 @@ export default function BerthStandaloneView() {
       <header className="flex items-center justify-between px-4 py-2 bg-slate-900 border-b border-slate-800 shrink-0">
         <div className="flex items-center gap-3">
           <a
-            href="/"
+            href={BASE_PATH ? `${BASE_PATH}/` : "/"}
             className="flex items-center gap-1.5 text-xs text-slate-300 hover:text-white px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 transition"
           >
             <ArrowLeft size={14} /> Voltar ao Simulador
@@ -182,7 +184,7 @@ export default function BerthStandaloneView() {
         {/* Logotipo da empresa/terminal no canto superior esquerdo (sem sombra e sem bordas) */}
         <div className="absolute top-3 left-4 z-40 pointer-events-none select-none">
           <img
-            src="/logo.png"
+            src={getAssetUrl("logo.png")}
             alt="Logo"
             className="h-10 sm:h-12 w-auto object-contain"
           />
