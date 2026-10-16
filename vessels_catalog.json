@@ -148,7 +148,7 @@
     "imo": "9850795",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "15/10/2026 22:49",
+    "updatedAt": "16/10/2026 02:03",
     "flag": "LIBERIA"
   },
   {
@@ -210,10 +210,10 @@
     "draft": 8.5,
     "berthingSide": "boreste",
     "imo": "9351799",
-    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "15/10/2026 22:55",
+    "updatedAt": "16/10/2026 02:03",
     "bayCount": 40,
     "bays": 40,
     "rowCount": 10,
@@ -373,13 +373,13 @@
     "name": "SEASPAN EMPIRE",
     "loa": 294.13,
     "beam": 32.2,
-    "draft": 10,
+    "draft": 10.0,
     "berthingSide": "boreste",
     "imo": "9407160",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "15/10/2026 22:49"
+    "updatedAt": "16/10/2026 02:03"
   },
   {
     "name": "SPYROS V",
