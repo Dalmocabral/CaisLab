@@ -329,6 +329,60 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     funnelBayEnd: 46,
     vesselType: "container",
   },
+  "LOG-IN PANTANAL": {
+    name: "LOG-IN PANTANAL",
+    loa: 182.47,
+    beam: 25.2,
+    draft: 8.5,
+    bayCount: 40,
+    bays: 40,
+    rowCount: 10,
+    rows: 10,
+    tierCount: 5,
+    tiers: 5,
+    bridgePosition: "all-aft",
+    bridgeBay: 40,
+    bridgeBayStart: 40,
+    bridgeBayEnd: 40,
+    separateFunnel: false,
+    vesselType: "container",
+  },
+  "NC BRISA": {
+    name: "NC BRISA",
+    loa: 223.96,
+    beam: 34.88,
+    draft: 9.5,
+    bayCount: 47,
+    bays: 47,
+    rowCount: 12,
+    rows: 12,
+    tierCount: 6,
+    tiers: 6,
+    bridgePosition: "all-aft",
+    bridgeBay: 47,
+    bridgeBayStart: 47,
+    bridgeBayEnd: 47,
+    separateFunnel: false,
+    vesselType: "container",
+  },
+  "SPYROS V": {
+    name: "SPYROS V",
+    loa: 261.03,
+    beam: 32.3,
+    draft: 12.6,
+    bayCount: 50,
+    bays: 50,
+    rowCount: 10,
+    rows: 10,
+    tierCount: 5,
+    tiers: 5,
+    bridgePosition: "between-bays",
+    bridgeBay: 34,
+    bridgeBayStart: 34,
+    bridgeBayEnd: 34,
+    separateFunnel: false,
+    vesselType: "container",
+  },
 };
 
 export function normalizeVesselType(raw?: string | null, vesselName?: string | null): VesselType {
@@ -1181,7 +1235,10 @@ export function normalizeScenario(value: unknown): Scenario | null {
     const upperName = (raw.name ?? "").toUpperCase().trim();
     const knownDefault = KNOWN_VESSEL_DEFAULTS[upperName] ??
       (upperName.includes("VERACRUZ") ? KNOWN_VESSEL_DEFAULTS["CMA CGM VERACRUZ"] :
-      (upperName.includes("COSCO") && upperName.includes("CHILE")) ? KNOWN_VESSEL_DEFAULTS["COSCO SHIPPING CHILE"] : undefined);
+      (upperName.includes("COSCO") && upperName.includes("CHILE")) ? KNOWN_VESSEL_DEFAULTS["COSCO SHIPPING CHILE"] :
+      (upperName.includes("PANTANAL") ? KNOWN_VESSEL_DEFAULTS["LOG-IN PANTANAL"] :
+      (upperName.includes("BRISA") ? KNOWN_VESSEL_DEFAULTS["NC BRISA"] :
+      (upperName.includes("SPYROS") ? KNOWN_VESSEL_DEFAULTS["SPYROS V"] : undefined))));
 
     const rawBayCount = (raw as any).bayCount ?? (raw as any).maxBayNumber ?? raw.bays;
     const bayCount = normalizeBayCount(rawBayCount !== undefined ? rawBayCount : knownDefault?.bayCount);

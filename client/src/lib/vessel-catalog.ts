@@ -113,9 +113,9 @@ export async function fetchVesselCatalog(): Promise<CatalogVessel[]> {
         if (v.name && isTerminalVessel(v)) map.set(v.name.trim().toUpperCase(), v);
       });
     } else {
-      // Fallback para arquivo estático
+      // Fallback para arquivo estático com cache-busting para garantir versão mais recente no GitHub Pages
       const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
-      const fallbackRes = await fetch(`${basePath}/vessels_catalog.json`, { cache: "no-store" });
+      const fallbackRes = await fetch(`${basePath}/vessels_catalog.json?t=${Date.now()}`, { cache: "no-store" });
       if (fallbackRes.ok) {
         const data: CatalogVessel[] = await fallbackRes.json();
         data.forEach((v) => {
@@ -127,7 +127,7 @@ export async function fetchVesselCatalog(): Promise<CatalogVessel[]> {
     console.warn("Aviso ao buscar navios salvos via API, usando fallback:", err);
     try {
       const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
-      const fallbackRes = await fetch(`${basePath}/vessels_catalog.json`, { cache: "no-store" });
+      const fallbackRes = await fetch(`${basePath}/vessels_catalog.json?t=${Date.now()}`, { cache: "no-store" });
       if (fallbackRes.ok) {
         const data: CatalogVessel[] = await fallbackRes.json();
         data.forEach((v) => {
@@ -139,13 +139,39 @@ export async function fetchVesselCatalog(): Promise<CatalogVessel[]> {
     }
   }
 
-  // 2. Mesclar com localStorage (para edições ou criações locais imediatas)
+  // 2. Mesclar com localStorage (para edições ou criações locais imediatas), preservando campos configurados do catálogo JSON
   try {
     const localRaw = localStorage.getItem(LOCAL_STORAGE_CATALOG_KEY);
     if (localRaw) {
       const localData: CatalogVessel[] = JSON.parse(localRaw);
       localData.forEach((v) => {
-        if (v.name && isTerminalVessel(v)) map.set(v.name.trim().toUpperCase(), v);
+        if (v.name && isTerminalVessel(v)) {
+          const key = v.name.trim().toUpperCase();
+          const existing = map.get(key);
+          if (existing) {
+            // Preserva bays/rows/tiers do catálogo JSON caso o localStorage não os tenha
+            map.set(key, {
+              ...existing,
+              ...v,
+              bayCount: v.bayCount ?? v.bays ?? existing.bayCount ?? existing.bays,
+              bays: v.bayCount ?? v.bays ?? existing.bayCount ?? existing.bays,
+              rowCount: v.rowCount ?? v.rows ?? existing.rowCount ?? existing.rows,
+              rows: v.rowCount ?? v.rows ?? existing.rowCount ?? existing.rows,
+              tierCount: v.tierCount ?? v.tiers ?? existing.tierCount ?? existing.tiers,
+              tiers: v.tierCount ?? v.tiers ?? existing.tierCount ?? existing.tiers,
+              bridgePosition: v.bridgePosition ?? existing.bridgePosition,
+              bridgeBay: v.bridgeBay ?? existing.bridgeBay,
+              bridgeBayStart: v.bridgeBayStart ?? existing.bridgeBayStart,
+              bridgeBayEnd: v.bridgeBayEnd ?? existing.bridgeBayEnd,
+              separateFunnel: v.separateFunnel ?? existing.separateFunnel,
+              funnelBay: v.funnelBay ?? existing.funnelBay,
+              funnelBayStart: v.funnelBayStart ?? existing.funnelBayStart,
+              funnelBayEnd: v.funnelBayEnd ?? existing.funnelBayEnd,
+            });
+          } else {
+            map.set(key, v);
+          }
+        }
       });
     }
   } catch (e) {

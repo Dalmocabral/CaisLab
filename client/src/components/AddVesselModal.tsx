@@ -207,15 +207,19 @@ export default function AddVesselModal({
     const side: BerthingSide = m.berthingSide === "bombordo" ? "bombordo" : "boreste";
     const position = calculateNextPosition(loa, m.berthTo);
     const color = getNextColor();
-    const vesselType = normalizeVesselType(m.type);
+    const vesselType = normalizeVesselType(m.type, m.name);
     const upperName = m.name.trim().toUpperCase();
     const knownDefault = KNOWN_VESSEL_DEFAULTS[upperName] ??
       (upperName.includes("VERACRUZ") ? KNOWN_VESSEL_DEFAULTS["CMA CGM VERACRUZ"] :
-      (upperName.includes("COSCO") && upperName.includes("CHILE")) ? KNOWN_VESSEL_DEFAULTS["COSCO SHIPPING CHILE"] : undefined);
+      (upperName.includes("COSCO") && upperName.includes("CHILE")) ? KNOWN_VESSEL_DEFAULTS["COSCO SHIPPING CHILE"] :
+      (upperName.includes("PANTANAL") ? KNOWN_VESSEL_DEFAULTS["LOG-IN PANTANAL"] :
+      (upperName.includes("BRISA") ? KNOWN_VESSEL_DEFAULTS["NC BRISA"] :
+      (upperName.includes("SPYROS") ? KNOWN_VESSEL_DEFAULTS["SPYROS V"] : undefined))));
 
     const savedVessel = catalog.find((item) => item.name.trim().toUpperCase() === upperName);
     const bayCount = normalizeBayCount(savedVessel?.bayCount ?? savedVessel?.bays ?? savedVessel?.maxBayNumber ?? knownDefault?.bayCount);
     const rowCount = normalizeRowCount(savedVessel?.rowCount ?? savedVessel?.rows ?? knownDefault?.rowCount);
+    const tierCount = normalizeTierCount(savedVessel?.tierCount ?? savedVessel?.tiers ?? knownDefault?.tierCount);
     const bridgePosition = savedVessel?.bridgePosition ?? knownDefault?.bridgePosition;
     const bridgeBay = savedVessel?.bridgeBay ?? knownDefault?.bridgeBay;
     const separateFunnel = savedVessel?.separateFunnel ?? knownDefault?.separateFunnel;
@@ -237,6 +241,8 @@ export default function AddVesselModal({
       bays: bayCount,
       rowCount,
       rows: rowCount,
+      tierCount,
+      tiers: tierCount,
       bridgePosition,
       bridgeBay,
       separateFunnel,
@@ -253,6 +259,8 @@ export default function AddVesselModal({
       bays: bayCount,
       rowCount,
       rows: rowCount,
+      tierCount,
+      tiers: tierCount,
       berthingSide: side,
       bridgePosition,
       bridgeBay,
