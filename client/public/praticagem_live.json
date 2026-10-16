@@ -1,12 +1,12 @@
 {
-  "updatedAt": "16/10/2026 19:08",
+  "updatedAt": "16/10/2026 22:19",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 3,
   "maneuvers": [
     {
       "dateTime": "16/10 21:00",
       "name": "SEASPAN EMPIRE",
-      "draft": 10.0,
+      "draft": 9.8,
       "loa": 294.13,
       "beam": 32.2,
       "maneuver": "E",

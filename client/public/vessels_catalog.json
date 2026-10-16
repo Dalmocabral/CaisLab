@@ -148,7 +148,7 @@
     "imo": "9850795",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "16/10/2026 19:08",
+    "updatedAt": "16/10/2026 22:19",
     "flag": "LIBERIA"
   },
   {
@@ -375,13 +375,13 @@
     "name": "SEASPAN EMPIRE",
     "loa": 294.13,
     "beam": 32.2,
-    "draft": 10.0,
+    "draft": 9.8,
     "berthingSide": "boreste",
     "imo": "9407160",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "16/10/2026 19:08"
+    "updatedAt": "16/10/2026 22:19"
   },
   {
     "name": "SPYROS V",
@@ -425,7 +425,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "CHINA, PEOPLE'S REPUBLIC OF",
     "lastBerth": "TECONT1",
-    "updatedAt": "16/10/2026 19:08"
+    "updatedAt": "16/10/2026 22:19"
   },
   {
     "name": "ZIM BALTIMORE",
