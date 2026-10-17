@@ -148,7 +148,7 @@
     "imo": "9850795",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "16/10/2026 22:14",
+    "updatedAt": "17/10/2026 01:50",
     "flag": "LIBERIA"
   },
   {
@@ -381,7 +381,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "16/10/2026 22:14",
+    "updatedAt": "17/10/2026 01:50",
     "bayCount": 71,
     "bays": 71,
     "bridgePosition": "between-bays",
@@ -435,7 +435,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "CHINA, PEOPLE'S REPUBLIC OF",
     "lastBerth": "TECONT1",
-    "updatedAt": "16/10/2026 22:14"
+    "updatedAt": "17/10/2026 01:50"
   },
   {
     "name": "ZIM BALTIMORE",
