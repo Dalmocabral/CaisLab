@@ -2539,8 +2539,10 @@ export default function BerthBlueprint({
 
       {/* Card flutuante com foto real e dados ao passar o mouse pelo cabeço */}
       {!editingBollardId && hoveredDisplay && (() => {
+        const hoveredBollard = bollardById.get(hoveredDisplay.id);
         const bType: BollardType = hoveredBollard?.type || hoveredDisplay.type || "duplo";
         const bConfig = BOLLARD_TYPES[bType] || BOLLARD_TYPES["duplo"];
+        const bImage = hoveredBollard?.image || hoveredDisplay.image || bConfig.image;
         const bIndex = bollardDisplays.findIndex((b) => b.id === hoveredDisplay.id);
         const nextDisplay = bIndex >= 0 && bIndex < bollardDisplays.length - 1 ? bollardDisplays[bIndex + 1] : null;
         const distToNext = nextDisplay ? Math.abs(nextDisplay.position - hoveredDisplay.position) : null;
@@ -2581,7 +2583,7 @@ export default function BerthBlueprint({
               {/* Foto real da infraestrutura portuária */}
               <div className="relative w-full h-36 bg-[#0f172a]/5 rounded-lg overflow-hidden border border-[#e2e8f0] mb-2 shadow-inner flex items-center justify-center">
                 <img
-                  src={getAssetUrl(bConfig.image)}
+                  src={getAssetUrl(bImage)}
                   alt={bConfig.label}
                   className="w-full h-full object-cover"
                 />

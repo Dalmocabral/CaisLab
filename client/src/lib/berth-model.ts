@@ -46,7 +46,10 @@ export interface Bollard {
   /** Metros desde o início do cais; null significa posição ainda não cadastrada. */
   position: number | null;
   type?: BollardType;
+  image?: string;
 }
+
+export const CABECO_SIMPLES_IDS = new Set(["296", "295", "294", "293", "292", "291", "290", "282", "280", "279"]);
 
 export interface MooringLine {
   id: string;
@@ -1061,7 +1064,7 @@ export function makeId(prefix: string) {
   return `${prefix}-${Math.random().toString(36).slice(2, 8)}-${Date.now().toString(36).slice(-4)}`;
 }
 
-export const DEFAULT_BOLLARD_CONFIG: { id: string; distanceToNext: number; type: BollardType }[] = [
+export const DEFAULT_BOLLARD_CONFIG: { id: string; distanceToNext: number; type: BollardType; image?: string }[] = [
   { id: "309", distanceToNext: 19.8, type: "duplo" },
   { id: "308", distanceToNext: 19.8, type: "duplo" },
   { id: "307", distanceToNext: 19.8, type: "duplo" },
@@ -1075,13 +1078,13 @@ export const DEFAULT_BOLLARD_CONFIG: { id: string; distanceToNext: number; type:
   { id: "299", distanceToNext: 25.0, type: "duplo" },
   { id: "298", distanceToNext: 25.0, type: "duplo" },
   { id: "297", distanceToNext: 30.0, type: "duplo" },
-  { id: "296", distanceToNext: 26.0, type: "alto-novo" },
-  { id: "295", distanceToNext: 30.0, type: "alto-novo" },
-  { id: "294", distanceToNext: 26.0, type: "alto-novo" },
-  { id: "293", distanceToNext: 30.0, type: "alto-novo" },
-  { id: "292", distanceToNext: 25.0, type: "alto-novo" },
-  { id: "291", distanceToNext: 30.0, type: "alto-novo" },
-  { id: "290", distanceToNext: 26.0, type: "alto-novo" },
+  { id: "296", distanceToNext: 26.0, type: "alto-novo", image: getAssetUrl("bollards/cabeco-simples.png") },
+  { id: "295", distanceToNext: 30.0, type: "alto-novo", image: getAssetUrl("bollards/cabeco-simples.png") },
+  { id: "294", distanceToNext: 26.0, type: "alto-novo", image: getAssetUrl("bollards/cabeco-simples.png") },
+  { id: "293", distanceToNext: 30.0, type: "alto-novo", image: getAssetUrl("bollards/cabeco-simples.png") },
+  { id: "292", distanceToNext: 25.0, type: "alto-novo", image: getAssetUrl("bollards/cabeco-simples.png") },
+  { id: "291", distanceToNext: 30.0, type: "alto-novo", image: getAssetUrl("bollards/cabeco-simples.png") },
+  { id: "290", distanceToNext: 26.0, type: "alto-novo", image: getAssetUrl("bollards/cabeco-simples.png") },
   { id: "289", distanceToNext: 30.0, type: "baixo-antigo" },
   { id: "288", distanceToNext: 38.0, type: "baixo-antigo" },
   { id: "287", distanceToNext: 25.5, type: "baixo-antigo" },
@@ -1089,10 +1092,10 @@ export const DEFAULT_BOLLARD_CONFIG: { id: string; distanceToNext: number; type:
   { id: "285", distanceToNext: 26.0, type: "baixo-antigo" },
   { id: "284", distanceToNext: 25.0, type: "baixo-antigo" },
   { id: "283", distanceToNext: 25.0, type: "baixo-antigo" },
-  { id: "282", distanceToNext: 26.0, type: "alto-novo" },
+  { id: "282", distanceToNext: 26.0, type: "alto-novo", image: getAssetUrl("bollards/cabeco-simples.png") },
   { id: "281", distanceToNext: 25.5, type: "alto-novo" },
-  { id: "280", distanceToNext: 25.5, type: "alto-novo" },
-  { id: "279", distanceToNext: 25.5, type: "alto-novo" },
+  { id: "280", distanceToNext: 25.5, type: "alto-novo", image: getAssetUrl("bollards/cabeco-simples.png") },
+  { id: "279", distanceToNext: 25.5, type: "alto-novo", image: getAssetUrl("bollards/cabeco-simples.png") },
   { id: "278", distanceToNext: 26.5, type: "baixo-antigo" },
   { id: "277", distanceToNext: 0, type: "alto-antigo" },
 ];
@@ -1104,6 +1107,7 @@ export function createBollardInventory(): Bollard[] {
       id: item.id,
       position: Number(currentPos.toFixed(1)),
       type: item.type,
+      image: CABECO_SIMPLES_IDS.has(item.id) ? getAssetUrl("bollards/cabeco-simples.png") : item.image,
     };
     currentPos += item.distanceToNext;
     return bollard;
@@ -1115,6 +1119,7 @@ export interface BollardDisplayPosition {
   position: number;
   estimated: boolean;
   type?: BollardType;
+  image?: string;
 }
 
 /** Unpositioned bollards get schematic display slots only; their saved position remains null. */
@@ -1123,8 +1128,9 @@ export function bollardDisplayPositions(bollards: Bollard[], quayLength: number)
   const lastIndex = Math.max(1, bollards.length - 1);
   const positions: BollardDisplayPosition[] = [];
   bollards.forEach((bollard, index) => {
+    const image = bollard.image || (CABECO_SIMPLES_IDS.has(bollard.id) ? getAssetUrl("bollards/cabeco-simples.png") : undefined);
     if (bollard.position !== null) {
-      if (bollard.position <= quayLength) positions.push({ id: bollard.id, position: bollard.position, estimated: false, type: bollard.type });
+      if (bollard.position <= quayLength) positions.push({ id: bollard.id, position: bollard.position, estimated: false, type: bollard.type, image });
       return;
     }
     positions.push({
@@ -1132,6 +1138,7 @@ export function bollardDisplayPositions(bollards: Bollard[], quayLength: number)
       position: bollards.length <= 1 ? quayLength / 2 : (index / lastIndex) * quayLength,
       estimated: true,
       type: bollard.type,
+      image,
     });
   });
   return positions;
@@ -1337,7 +1344,11 @@ export function normalizeScenario(value: unknown): Scenario | null {
         const type = (typeof raw.type === "string" && Object.prototype.hasOwnProperty.call(BOLLARD_TYPES, raw.type))
           ? (raw.type as BollardType)
           : undefined;
-        return [{ id: raw.id, position, type }];
+        const def = DEFAULT_BOLLARD_CONFIG.find((d) => d.id === raw.id);
+        const image = CABECO_SIMPLES_IDS.has(raw.id)
+          ? getAssetUrl("bollards/cabeco-simples.png")
+          : (typeof raw.image === "string" ? raw.image : def?.image);
+        return [{ id: raw.id, position, type, image }];
       });
     }
 
@@ -1405,6 +1416,12 @@ export function readScenario(): Scenario {
     const b289 = scenario.bollards.find((b) => b.id === "289");
     if (!b277 || !b288 || !b289 || b289.type !== "baixo-antigo" || b277.type !== "alto-antigo" || Math.abs((b277.position ?? 0) - 823.4) > 1.0) {
       scenario.bollards = createBollardInventory();
+    } else {
+      scenario.bollards.forEach((b) => {
+        if (CABECO_SIMPLES_IDS.has(b.id) && b.image !== getAssetUrl("bollards/cabeco-simples.png")) {
+          b.image = getAssetUrl("bollards/cabeco-simples.png");
+        }
+      });
     }
     return scenario;
   } catch {
