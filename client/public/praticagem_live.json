@@ -1,23 +1,8 @@
 {
-  "updatedAt": "17/10/2026 16:44",
+  "updatedAt": "17/10/2026 19:50",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 3,
+  "count": 2,
   "maneuvers": [
-    {
-      "dateTime": "17/10 14:00",
-      "name": "XIN WEI HAI",
-      "draft": 11.2,
-      "loa": 263.23,
-      "beam": 32.3,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "boreste",
-      "imo": "9312573",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "CHINA, PEOPLE'S REPUBLIC OF",
-      "terminal": "rio"
-    },
     {
       "dateTime": "18/10 06:00",
       "name": "EVER FIT",
