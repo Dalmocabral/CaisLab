@@ -378,10 +378,18 @@
     "draft": 9.8,
     "berthingSide": "boreste",
     "imo": "9407160",
-    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "16/10/2026 22:19"
+    "updatedAt": "16/10/2026 22:06",
+    "bayCount": 71,
+    "bays": 71,
+    "bridgePosition": "between-bays",
+    "bridgeBay": 56,
+    "bridgeBayStart": 56,
+    "bridgeBayEnd": 56,
+    "rowCount": 13,
+    "rows": 13
   },
   {
     "name": "SPYROS V",

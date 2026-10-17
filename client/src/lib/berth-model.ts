@@ -52,6 +52,7 @@ export interface Bollard {
 export const CABECO_SIMPLES_IDS = new Set(["296", "295", "294", "293", "292", "291", "290", "282", "280", "279"]);
 export const CABECO_DUPLO_IDS = new Set(["309", "308", "307", "306", "305", "304", "303", "302", "301", "300", "299", "298", "297"]);
 export const CABECO_BAIXO_ANTIGO_IDS = new Set(["289", "288", "287", "286", "285", "284", "283", "278", "277"]);
+export const CABECO_BAIXO_NOVO_IDS = new Set(["281"]);
 
 export interface MooringLine {
   id: string;
@@ -1095,7 +1096,7 @@ export const DEFAULT_BOLLARD_CONFIG: { id: string; distanceToNext: number; type:
   { id: "284", distanceToNext: 25.0, type: "baixo-antigo", image: getAssetUrl("bollards/cabecos-baixo-antigo.png") },
   { id: "283", distanceToNext: 25.0, type: "baixo-antigo", image: getAssetUrl("bollards/cabecos-baixo-antigo.png") },
   { id: "282", distanceToNext: 26.0, type: "alto-novo", image: getAssetUrl("bollards/cabeco-simples.png") },
-  { id: "281", distanceToNext: 25.5, type: "alto-novo" },
+  { id: "281", distanceToNext: 25.5, type: "alto-novo", image: getAssetUrl("bollards/cabecos-baixo-novo.png") },
   { id: "280", distanceToNext: 25.5, type: "alto-novo", image: getAssetUrl("bollards/cabeco-simples.png") },
   { id: "279", distanceToNext: 25.5, type: "alto-novo", image: getAssetUrl("bollards/cabeco-simples.png") },
   { id: "278", distanceToNext: 26.5, type: "baixo-antigo", image: getAssetUrl("bollards/cabecos-baixo-antigo.png") },
@@ -1115,6 +1116,8 @@ export function createBollardInventory(): Bollard[] {
         ? getAssetUrl("bollards/cabeco-duplos.png")
         : CABECO_BAIXO_ANTIGO_IDS.has(item.id)
         ? getAssetUrl("bollards/cabecos-baixo-antigo.png")
+        : CABECO_BAIXO_NOVO_IDS.has(item.id)
+        ? getAssetUrl("bollards/cabecos-baixo-novo.png")
         : item.image,
     };
     currentPos += item.distanceToNext;
@@ -1143,6 +1146,8 @@ export function bollardDisplayPositions(bollards: Bollard[], quayLength: number)
         ? getAssetUrl("bollards/cabeco-duplos.png")
         : CABECO_BAIXO_ANTIGO_IDS.has(bollard.id)
         ? getAssetUrl("bollards/cabecos-baixo-antigo.png")
+        : CABECO_BAIXO_NOVO_IDS.has(bollard.id)
+        ? getAssetUrl("bollards/cabecos-baixo-novo.png")
         : undefined
     );
     if (bollard.position !== null) {
@@ -1367,6 +1372,8 @@ export function normalizeScenario(value: unknown): Scenario | null {
           ? getAssetUrl("bollards/cabeco-duplos.png")
           : CABECO_BAIXO_ANTIGO_IDS.has(raw.id)
           ? getAssetUrl("bollards/cabecos-baixo-antigo.png")
+          : CABECO_BAIXO_NOVO_IDS.has(raw.id)
+          ? getAssetUrl("bollards/cabecos-baixo-novo.png")
           : (typeof raw.image === "string" ? raw.image : def?.image);
         return [{ id: raw.id, position, type, image }];
       });
@@ -1444,6 +1451,8 @@ export function readScenario(): Scenario {
           b.image = getAssetUrl("bollards/cabeco-duplos.png");
         } else if (CABECO_BAIXO_ANTIGO_IDS.has(b.id) && b.image !== getAssetUrl("bollards/cabecos-baixo-antigo.png")) {
           b.image = getAssetUrl("bollards/cabecos-baixo-antigo.png");
+        } else if (CABECO_BAIXO_NOVO_IDS.has(b.id) && b.image !== getAssetUrl("bollards/cabecos-baixo-novo.png")) {
+          b.image = getAssetUrl("bollards/cabecos-baixo-novo.png");
         }
       });
     }
