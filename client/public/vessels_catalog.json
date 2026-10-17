@@ -65,15 +65,15 @@
   },
   {
     "name": "COSCO SHIPPING BRAZIL",
-    "loa": 300,
-    "beam": 48,
+    "loa": 335.93,
+    "beam": 51.04,
     "draft": 13.5,
     "berthingSide": "boreste",
     "imo": "9945837",
-    "type": "CONTAINER SHIP",
-    "flag": "",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "HONG KONG, CHINA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "2026-10-01"
+    "updatedAt": "17/10/2026 13:21"
   },
   {
     "name": "COSCO SHIPPING CHILE",
@@ -148,7 +148,7 @@
     "imo": "9850795",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "17/10/2026 08:08",
+    "updatedAt": "17/10/2026 13:21",
     "flag": "LIBERIA"
   },
   {
@@ -435,7 +435,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "CHINA, PEOPLE'S REPUBLIC OF",
     "lastBerth": "TECONT1",
-    "updatedAt": "17/10/2026 08:08"
+    "updatedAt": "17/10/2026 13:21"
   },
   {
     "name": "ZIM BALTIMORE",
