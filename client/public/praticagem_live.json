@@ -1,12 +1,12 @@
 {
-  "updatedAt": "17/10/2026 13:21",
+  "updatedAt": "17/10/2026 16:44",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 3,
   "maneuvers": [
     {
       "dateTime": "17/10 14:00",
       "name": "XIN WEI HAI",
-      "draft": 11.3,
+      "draft": 11.2,
       "loa": 263.23,
       "beam": 32.3,
       "maneuver": "E",
@@ -19,7 +19,7 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "18/10 07:00",
+      "dateTime": "18/10 06:00",
       "name": "EVER FIT",
       "draft": 14.4,
       "loa": 333.9,
