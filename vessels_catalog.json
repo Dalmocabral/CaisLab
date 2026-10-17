@@ -389,7 +389,9 @@
     "bridgeBayStart": 56,
     "bridgeBayEnd": 56,
     "rowCount": 13,
-    "rows": 13
+    "rows": 13,
+    "tierCount": 5,
+    "tiers": 5
   },
   {
     "name": "SPYROS V",

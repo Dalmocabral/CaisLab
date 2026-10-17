@@ -34,6 +34,7 @@ import BerthBlueprint from "@/components/berth-blueprint";
 import AddVesselModal from "@/components/AddVesselModal";
 import BerthViewModal from "@/components/BerthViewModal";
 import Berth3DModal from "@/components/Berth3DModal";
+import { preloadContainerTextures } from "@/components/Berth3DViewer";
 import {
   calculateIssues,
   createBollardInventory,
@@ -113,6 +114,11 @@ export default function Simulator() {
       localStorage.setItem("caislab:blueprint_zoom", String(zoom));
     } catch {}
   }, [zoom]);
+
+  useEffect(() => {
+    // Pré-carrega as texturas dos contêineres 3D em background para exibição imediata na primeira abertura
+    void preloadContainerTextures();
+  }, []);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const [storageError, setStorageError] = useState(false);
   const [notice, setNotice] = useState("");
@@ -534,6 +540,7 @@ export default function Simulator() {
             className="button button-quiet text-[#0d9488] hover:text-[#0f766e] hover:bg-teal-50 border border-teal-200/90 shadow-xs font-semibold"
             type="button"
             onClick={() => setIsBerth3DModalOpen(true)}
+            onMouseEnter={() => void preloadContainerTextures()}
             title="Abrir Visualização 3D interativa do cais, navios, portêineres e amarrações"
           >
             <Box size={14} className="text-[#0d9488]" /> <span>Visualização 3D</span>

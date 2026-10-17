@@ -287,6 +287,7 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "NC BRAVO": "container",
   "NC BREDA": "container",
   "NYK RUMINA": "container",
+  "SEASPAN EMPIRE": "container",
   "TOKYO EXPRESS": "container",
   "ZIM BALTIMORE": "container",
 };
@@ -303,6 +304,24 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     rows: 12,
     tierCount: 4,
     tiers: 4,
+    bridgePosition: "between-bays",
+    bridgeBay: 56,
+    bridgeBayStart: 56,
+    bridgeBayEnd: 56,
+    separateFunnel: false,
+    vesselType: "container",
+  },
+  "SEASPAN EMPIRE": {
+    name: "SEASPAN EMPIRE",
+    loa: 294.13,
+    beam: 32.2,
+    draft: 9.8,
+    bayCount: 71,
+    bays: 71,
+    rowCount: 13,
+    rows: 13,
+    tierCount: 5,
+    tiers: 5,
     bridgePosition: "between-bays",
     bridgeBay: 56,
     bridgeBayStart: 56,
@@ -631,17 +650,18 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const hasCoscoFunnel = isCoscoChile && config.separateFunnel && idx63 !== -1 && idx65 !== -1;
 
   const isNykRumina = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("NYK") && vessel.name.toUpperCase().includes("RUMINA");
+  const isSeaspanEmpire = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("SEASPAN") && vessel.name.toUpperCase().includes("EMPIRE");
   const idx55 = bays.indexOf(55);
   const idx57 = bays.indexOf(57);
-  const hasNykBridge = isNykRumina && idx55 !== -1 && idx57 !== -1;
+  const hasSpecialBridge55_57 = (isNykRumina || isSeaspanEmpire) && idx55 !== -1 && idx57 !== -1;
 
   const num40ftGaps = Math.max(0, Math.floor((bays.length - 1) / 2));
-  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasNykBridge ? 2.0 : 0);
+  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0);
   const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + extraSlots);
   const hatchGap = bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0;
   const totalGapsWidth = num40ftGaps * hatchGap;
   const coscoFunnelSlotW = hasCoscoFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
-  const nykBridgeSlotW = hasNykBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
+  const nykBridgeSlotW = hasSpecialBridge55_57 ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - nykBridgeSlotW);
   const cellWidth = availableBayWidth / Math.max(1, bays.length);
 
@@ -651,7 +671,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     if (hasCoscoFunnel && index >= idx65) {
       xPos -= coscoFunnelSlotW;
     }
-    if (hasNykBridge && index >= idx57) {
+    if (hasSpecialBridge55_57 && index >= idx57) {
       xPos -= nykBridgeSlotW;
     }
     return xPos;
@@ -660,7 +680,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const bridgeIndices: number[] = [];
   const funnelIndices: number[] = [];
 
-  if (!isAllAft && bays.length > 0 && !hasNykBridge) {
+  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57) {
     const targetBridgeBay = config.bridgeBay ?? config.bridgeBayStart ?? 34;
     const occupiedBridgeBays = getOccupiedBayNumbers(
       targetBridgeBay,
@@ -738,7 +758,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   if (isAllAft) {
     bridgeCenterFromStern = aftHouseX + aftHouseW / 2;
     bridgeLength = aftHouseW;
-  } else if (hasNykBridge) {
+  } else if (hasSpecialBridge55_57) {
     const rightOf57 = bayCellFromStern(idx57) + cellWidth;
     const leftOf55 = bayCellFromStern(idx55);
     bridgeCenterFromStern = (rightOf57 + leftOf55) / 2;

@@ -19,6 +19,7 @@ import {
   totalQuayLength,
   VESSEL_COLORS,
   getVesselContainerDeckPlan,
+  getAssetUrl,
 } from "@/lib/berth-model";
 
 interface Berth3DViewerProps {
@@ -162,49 +163,47 @@ function addVesselNameplate(
   group.add(labelQuay);
 }
 
-const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, "");
-
-const CONTAINER_SKIN_DEFS = [
+export const CONTAINER_SKIN_DEFS = [
   {
     id: "verde",
     name: "Verde Atlas",
-    sideUrl: `${BASE_PATH}/textures/containers/skin-verde-atlas.png`,
-    frontUrl: `${BASE_PATH}/textures/containers/skin-verde-atlas-frente.png`,
+    sideUrl: getAssetUrl("textures/containers/skin-verde-atlas.png"),
+    frontUrl: getAssetUrl("textures/containers/skin-verde-atlas-frente.png"),
     roofColor: "#1d6a45",
   },
   {
     id: "azul",
     name: "Azul Oceânica",
-    sideUrl: `${BASE_PATH}/textures/containers/skin-azul-oceanica.png`,
-    frontUrl: `${BASE_PATH}/textures/containers/skin-azul-oceanica-frente.png`,
+    sideUrl: getAssetUrl("textures/containers/skin-azul-oceanica.png"),
+    frontUrl: getAssetUrl("textures/containers/skin-azul-oceanica-frente.png"),
     roofColor: "#1a4f7c",
   },
   {
     id: "terracota",
     name: "Terracota Coral",
-    sideUrl: `${BASE_PATH}/textures/containers/skin-terracota-coral.png`,
-    frontUrl: `${BASE_PATH}/textures/containers/skin-terracota-coral-frente.png`,
+    sideUrl: getAssetUrl("textures/containers/skin-terracota-coral.png"),
+    frontUrl: getAssetUrl("textures/containers/skin-terracota-coral-frente.png"),
     roofColor: "#b84e2a",
   },
   {
     id: "amarelo",
     name: "Amarelo Terminal",
-    sideUrl: `${BASE_PATH}/textures/containers/skin-amarelo-terminal.png`,
-    frontUrl: `${BASE_PATH}/textures/containers/skin-amarelo-terminal-frente.png`,
+    sideUrl: getAssetUrl("textures/containers/skin-amarelo-terminal.png"),
+    frontUrl: getAssetUrl("textures/containers/skin-amarelo-terminal-frente.png"),
     roofColor: "#d97706",
   },
   {
     id: "branco",
     name: "Branco Nuvem",
-    sideUrl: `${BASE_PATH}/textures/containers/skin-branco-nuvem.png`,
-    frontUrl: `${BASE_PATH}/textures/containers/skin-branco-nuvem-frente.png`,
+    sideUrl: getAssetUrl("textures/containers/skin-branco-nuvem.png"),
+    frontUrl: getAssetUrl("textures/containers/skin-branco-nuvem-frente.png"),
     roofColor: "#e2e8f0",
   },
   {
     id: "rosa",
     name: "Rosa Orquídea",
-    sideUrl: `${BASE_PATH}/textures/containers/skin-rosa-orquidea.png`,
-    frontUrl: `${BASE_PATH}/textures/containers/skin-rosa-orquidea-frente.png`,
+    sideUrl: getAssetUrl("textures/containers/skin-rosa-orquidea.png"),
+    frontUrl: getAssetUrl("textures/containers/skin-rosa-orquidea-frente.png"),
     roofColor: "#db2777",
   },
 ] as const;
@@ -219,6 +218,25 @@ function containerSkinHash(vesselSeed: number, column: number, row: number, tier
 
 // Cache global para evitar downloads duplicados e lentidão no carregamento 3D
 const containerImageCache = new Map<string, HTMLImageElement>();
+const pendingCallbacks = new Map<string, Array<(img: HTMLImageElement) => void>>();
+
+/** Pré-carrega todas as texturas de contêiner em background para exibição imediata */
+export function preloadContainerTextures(): Promise<void> {
+  const urls = CONTAINER_SKIN_DEFS.flatMap((skin) => [skin.sideUrl, skin.frontUrl]);
+  return Promise.all(
+    urls.map(
+      (url) =>
+        new Promise<void>((resolve) => {
+          const cached = containerImageCache.get(url);
+          if (cached && cached.complete && cached.naturalWidth > 0) {
+            resolve();
+            return;
+          }
+          loadOrGetImage(url, () => resolve());
+        }),
+    ),
+  ).then(() => undefined);
+}
 
 function create1x1Canvas(colorHex: string): HTMLCanvasElement {
   const canvas = document.createElement("canvas");
@@ -240,14 +258,29 @@ function loadOrGetImage(
   if (cached && cached.complete && cached.naturalWidth > 0) {
     return cached;
   }
+  const pending = pendingCallbacks.get(url);
+  if (pending) {
+    pending.push(onLoaded);
+    return null;
+  }
+  pendingCallbacks.set(url, [onLoaded]);
   const img = new Image();
   img.crossOrigin = "anonymous";
   img.src = url;
   img.onload = () => {
     containerImageCache.set(url, img);
-    onLoaded(img);
+    const callbacks = pendingCallbacks.get(url) || [];
+    pendingCallbacks.delete(url);
+    callbacks.forEach((cb) => {
+      try {
+        cb(img);
+      } catch (err) {
+        console.warn("[CaisLab 3D] Erro ao aplicar textura de contêiner:", err);
+      }
+    });
   };
   img.onerror = (err) => {
+    pendingCallbacks.delete(url);
     console.warn(`[CaisLab 3D] Não foi possível carregar textura: ${url}`, err);
   };
   return null;
@@ -277,19 +310,6 @@ function createContainerSkinMaterials(
   sideTexFlipped.offset.x = 1;
   sideTexFlipped.needsUpdate = true;
 
-  const handleSideLoaded = (img: HTMLImageElement) => {
-    (sideTex as any).image = img;
-    sideTex.needsUpdate = true;
-    (sideTexFlipped as any).image = img;
-    sideTexFlipped.needsUpdate = true;
-    onLoad?.();
-  };
-
-  const cachedSide = loadOrGetImage(skin.sideUrl, handleSideLoaded);
-  if (cachedSide) {
-    handleSideLoaded(cachedSide);
-  }
-
   const frontTex = new THREE.Texture(placeholder as any);
   frontTex.colorSpace = THREE.SRGBColorSpace;
   frontTex.generateMipmaps = true;
@@ -304,19 +324,6 @@ function createContainerSkinMaterials(
   frontTexFlipped.repeat.x = -1;
   frontTexFlipped.offset.x = 1;
   frontTexFlipped.needsUpdate = true;
-
-  const handleFrontLoaded = (img: HTMLImageElement) => {
-    (frontTex as any).image = img;
-    frontTex.needsUpdate = true;
-    (frontTexFlipped as any).image = img;
-    frontTexFlipped.needsUpdate = true;
-    onLoad?.();
-  };
-
-  const cachedFront = loadOrGetImage(skin.frontUrl, handleFrontLoaded);
-  if (cachedFront) {
-    handleFrontLoaded(cachedFront);
-  }
 
   const matFront = new THREE.MeshStandardMaterial({
     map: frontTex,
@@ -352,6 +359,36 @@ function createContainerSkinMaterials(
     roughness: 0.68,
     metalness: 0.12,
   });
+
+  const handleSideLoaded = (img: HTMLImageElement) => {
+    (sideTex as any).image = img;
+    sideTex.needsUpdate = true;
+    (sideTexFlipped as any).image = img;
+    sideTexFlipped.needsUpdate = true;
+    matSide.needsUpdate = true;
+    matSideFlipped.needsUpdate = true;
+    onLoad?.();
+  };
+
+  const handleFrontLoaded = (img: HTMLImageElement) => {
+    (frontTex as any).image = img;
+    frontTex.needsUpdate = true;
+    (frontTexFlipped as any).image = img;
+    frontTexFlipped.needsUpdate = true;
+    matFront.needsUpdate = true;
+    matBack.needsUpdate = true;
+    onLoad?.();
+  };
+
+  const cachedSide = loadOrGetImage(skin.sideUrl, handleSideLoaded);
+  if (cachedSide) {
+    handleSideLoaded(cachedSide);
+  }
+
+  const cachedFront = loadOrGetImage(skin.frontUrl, handleFrontLoaded);
+  if (cachedFront) {
+    handleFrontLoaded(cachedFront);
+  }
 
   // BoxGeometry face mapping: 0:+X, 1:-X, 2:+Y, 3:-Y, 4:+Z, 5:-Z
   return [matFront, matBack, matRoof, matFloor, matSide, matSideFlipped];
@@ -2530,13 +2567,15 @@ export default function Berth3DViewer({ scenario }: Berth3DViewerProps) {
           renderer.domElement.setAttribute("aria-label", "Modelo 3D esquemático da atracação");
           host.appendChild(renderer.domElement);
 
-          let camera: import("three").PerspectiveCamera | null = null;
+          const approxTotal = Math.max(1, totalQuayLength(scenario.segments));
+          const camera = new THREE.PerspectiveCamera(40, width / height, 0.5, approxTotal * 7 + 400);
           const render = () => {
             if (!cancelled && renderer && scene && camera) renderer.render(scene, camera);
           };
 
           const model = buildScene(THREE, scene, scenario, render);
-          camera = new THREE.PerspectiveCamera(40, width / height, 0.5, model.total * 7 + 400);
+          camera.far = model.total * 7 + 400;
+          camera.updateProjectionMatrix();
           const verticalFov = THREE.MathUtils.degToRad(camera.fov);
           const horizontalFov = 2 * Math.atan(Math.tan(verticalFov / 2) * camera.aspect);
           const distanceToFitQuay = model.total / (2 * Math.tan(horizontalFov / 2));

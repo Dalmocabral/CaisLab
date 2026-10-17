@@ -152,18 +152,19 @@ function renderContainerDeck(
   const hasCoscoFunnel = isCoscoChile && config.separateFunnel && idx63 !== -1 && idx65 !== -1;
 
   const isNykRumina = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("NYK") && vessel.name.toUpperCase().includes("RUMINA");
+  const isSeaspanEmpire = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("SEASPAN") && vessel.name.toUpperCase().includes("EMPIRE");
   const idx55 = bays.indexOf(55);
   const idx57 = bays.indexOf(57);
-  const hasNykBridge = isNykRumina && idx55 !== -1 && idx57 !== -1;
+  const hasSpecialBridge55_57 = (isNykRumina || isSeaspanEmpire) && idx55 !== -1 && idx57 !== -1;
 
   // Separação visual entre as bays de 40' (cada par de bays de 20' forma uma bay/hatch de 40')
   const num40ftGaps = Math.max(0, Math.floor((bays.length - 1) / 2));
-  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasNykBridge ? 2.0 : 0);
+  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0);
   const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + extraSlots);
   const hatchGap = bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0;
   const totalGapsWidth = num40ftGaps * hatchGap;
   const coscoFunnelSlotW = hasCoscoFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
-  const nykBridgeSlotW = hasNykBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
+  const nykBridgeSlotW = hasSpecialBridge55_57 ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - nykBridgeSlotW);
   const cellWidth = availableBayWidth / Math.max(1, bays.length);
   const labelSize = bays.length ? Math.max(2.6, Math.min(5.4, cellWidth * 0.54)) : 3.4;
@@ -177,7 +178,7 @@ function renderContainerDeck(
     if (hasCoscoFunnel && index >= idx65) {
       xPos -= coscoFunnelSlotW;
     }
-    if (hasNykBridge && index >= idx57) {
+    if (hasSpecialBridge55_57 && index >= idx57) {
       xPos -= nykBridgeSlotW;
     }
     return xPos;
@@ -187,7 +188,7 @@ function renderContainerDeck(
   const bridgeIndices: number[] = [];
   const funnelIndices: number[] = [];
 
-  if (!isAllAft && bays.length > 0 && !hasNykBridge) {
+  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57) {
     const targetBridgeBay = config.bridgeBay ?? config.bridgeBayStart ?? 34;
     const occupiedBridgeBays = getOccupiedBayNumbers(
       targetBridgeBay,
@@ -567,8 +568,8 @@ function renderContainerDeck(
         </g>
       )}
 
-      {/* 2b. Passadiço Específico do NYK RUMINA (entre as bays 55 e 57, sem ocultar as bays) */}
-      {!isAllAft && hasNykBridge && (
+      {/* 2b. Passadiço Específico do NYK RUMINA / SEASPAN EMPIRE (entre as bays 55 e 57, sem ocultar as bays) */}
+      {!isAllAft && hasSpecialBridge55_57 && (
         <g className="superstructure-bridge-island-nyk">
           {(() => {
             const rightOf57 = bayCellX(idx57) + cellWidth;
