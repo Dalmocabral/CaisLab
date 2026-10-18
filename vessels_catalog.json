@@ -412,10 +412,11 @@
     "draft": 6.5,
     "berthingSide": "bombordo",
     "imo": "9710878",
-    "type": "PIPE LAYER",
-    "flag": "ISLE OF MAN",
+    "type": "PIPE LAYER (Offshore / PLSV)",
+    "vesselType": "offshore",
     "lastBerth": "TECONT1",
-    "updatedAt": "18/10/2026 19:51"
+    "updatedAt": "18/10/2026 19:51",
+    "flag": "ISLE OF MAN"
   },
   {
     "name": "SPYROS V",

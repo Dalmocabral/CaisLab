@@ -146,10 +146,24 @@
     "draft": 14.3,
     "berthingSide": "boreste",
     "imo": "9850795",
-    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "18/10/2026 08:25",
-    "flag": "LIBERIA"
+    "updatedAt": "18/10/2026 16:31",
+    "flag": "LIBERIA",
+    "bayCount": 76,
+    "bays": 76,
+    "rowCount": 20,
+    "rows": 20,
+    "bridgePosition": "between-bays",
+    "bridgeBay": 30,
+    "bridgeBayStart": 30,
+    "bridgeBayEnd": 30,
+    "separateFunnel": true,
+    "funnelBay": 62,
+    "funnelBayStart": 62,
+    "funnelBayEnd": 62,
+    "tierCount": 7,
+    "tiers": 7
   },
   {
     "name": "EVER LEADER",
@@ -393,7 +407,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "17/10/2026 01:50",
+    "updatedAt": "17/10/2026 22:52",
     "bayCount": 71,
     "bays": 71,
     "bridgePosition": "between-bays",
@@ -403,7 +417,8 @@
     "rowCount": 13,
     "rows": 13,
     "tierCount": 5,
-    "tiers": 5
+    "tiers": 5,
+    "separateFunnel": false
   },
   {
     "name": "SEVEN RIO",
@@ -412,10 +427,11 @@
     "draft": 6.5,
     "berthingSide": "bombordo",
     "imo": "9710878",
-    "type": "PIPE LAYER",
-    "flag": "ISLE OF MAN",
+    "type": "PIPE LAYER (Offshore / PLSV)",
+    "vesselType": "offshore",
     "lastBerth": "TECONT1",
-    "updatedAt": "18/10/2026 19:51"
+    "updatedAt": "18/10/2026 19:51",
+    "flag": "ISLE OF MAN"
   },
   {
     "name": "SPYROS V",

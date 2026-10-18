@@ -1168,7 +1168,8 @@ function renderOffshoreDeck(
   vesselWidth: number,
   vesselHeight: number,
   bowInset: number,
-  color: { fill: string; stroke: string }
+  color: { fill: string; stroke: string },
+  vesselName?: string
 ) {
   // Superestrutura na PROA
   const houseW = Math.max(16, Math.min(48, vesselWidth * 0.28));
@@ -1179,6 +1180,10 @@ function renderOffshoreDeck(
   // Enorme convés de carga aberto na ré em pranchamento de madeira
   const aftDeckX = x + 6;
   const aftDeckW = Math.max(12, houseX - aftDeckX);
+
+  const isPipeLayer = Boolean(
+    vesselName && (vesselName.toUpperCase().includes("SEVEN") || vesselName.toUpperCase().includes("PIPE"))
+  );
 
   return (
     <g>
@@ -1208,6 +1213,53 @@ function renderOffshoreDeck(
       <circle cx={houseX - 5} cy={y + vesselHeight * 0.3} r="3" fill="#1e3a8a" stroke="#0f172a" strokeWidth="0.7" />
       <line x1={houseX - 5} y1={y + vesselHeight * 0.3} x2={houseX - 18} y2={y + vesselHeight * 0.35} stroke="#eab308" strokeWidth="1.6" strokeLinecap="round" />
 
+      {/* Carretéis / Carrosséis de Dutos Flexíveis Submarinos (Pipe Reels / Carousels para Pipe Layer) */}
+      {isPipeLayer && (() => {
+        const reel1X = aftDeckX + aftDeckW * 0.28;
+        const reel2X = aftDeckX + aftDeckW * 0.62;
+        const reelY = y + vesselHeight / 2;
+        const reelR = Math.min(7.5, vesselHeight * 0.30);
+        return (
+          <g className="plsv-pipe-reels">
+            <title>Carretéis de Dutos Flexíveis Submarinos (Pipe Carousels)</title>
+            {[reel1X, reel2X].map((rx, idx) => (
+              <g key={`reel-${idx}`}>
+                <circle cx={rx} cy={reelY} r={reelR} fill="#1e293b" stroke="#64748b" strokeWidth="1" />
+                <circle cx={rx} cy={reelY} r={reelR * 0.78} fill="#475569" stroke="#94a3b8" strokeWidth="0.8" />
+                <circle cx={rx} cy={reelY} r={reelR * 0.52} fill="#334155" stroke="#f59e0b" strokeWidth="0.8" />
+                <circle cx={rx} cy={reelY} r={reelR * 0.22} fill="#f8fafc" stroke="#0f172a" strokeWidth="0.8" />
+              </g>
+            ))}
+          </g>
+        );
+      })()}
+
+      {/* Torre VLS de Lançamento de Dutos (Vertical Lay System Tower para Pipe Layer) */}
+      {isPipeLayer && (() => {
+        const towerX = houseX - 8;
+        const towerY = y + vesselHeight / 2;
+        const towerW = Math.max(7, vesselWidth * 0.07);
+        const towerH = vesselHeight * 0.60;
+        return (
+          <g className="plsv-vls-tower">
+            <title>Torre VLS de Lançamento de Dutos Submarinos (Pipe Lay Tower)</title>
+            <rect
+              x={towerX - towerW / 2}
+              y={towerY - towerH / 2}
+              width={towerW}
+              height={towerH}
+              rx="1.2"
+              fill="#1e293b"
+              stroke="#0f172a"
+              strokeWidth="1.1"
+            />
+            <line x1={towerX - towerW / 2} y1={towerY - towerH / 2} x2={towerX + towerW / 2} y2={towerY + towerH / 2} stroke="#dc2626" strokeWidth="1.2" />
+            <line x1={towerX - towerW / 2} y1={towerY + towerH / 2} x2={towerX + towerW / 2} y2={towerY - towerH / 2} stroke="#dc2626" strokeWidth="1.2" />
+            <rect x={towerX - 2.2} y={towerY - 2.8} width="4.4" height="5.6" rx="0.5" fill="#eab308" stroke="#a16207" strokeWidth="0.6" />
+          </g>
+        );
+      })()}
+
       {/* Superestrutura na PROA */}
       <rect
         x={houseX}
@@ -1231,6 +1283,32 @@ function renderOffshoreDeck(
       {/* Botes fechados embutidos */}
       <rect x={houseX + 4} y={y + 1} width={Math.max(5, houseW * 0.26)} height="2.2" rx="1" fill="#ea580c" stroke="#9a3412" strokeWidth="0.5" />
       <rect x={houseX + 4} y={y + vesselHeight - 3.2} width={Math.max(5, houseW * 0.26)} height="2.2" rx="1" fill="#ea580c" stroke="#9a3412" strokeWidth="0.5" />
+
+      {/* Heliponto sobre a Proa (Helideck em balanço para Pipe Layer / PLSV) */}
+      {isPipeLayer && (() => {
+        const heliR = Math.min(8.5, vesselHeight * 0.36);
+        const heliX = houseX + houseW - 1.5;
+        const heliY = y + vesselHeight / 2;
+        return (
+          <g className="plsv-helideck">
+            <title>Heliponto (Helideck) da Proa</title>
+            <circle cx={heliX} cy={heliY} r={heliR + 0.8} fill="#475569" stroke="#1e293b" strokeWidth="0.8" />
+            <circle cx={heliX} cy={heliY} r={heliR} fill="#334155" stroke="#f8fafc" strokeWidth="0.8" />
+            <circle cx={heliX} cy={heliY} r={heliR * 0.65} fill="none" stroke="#ffffff" strokeWidth="0.9" strokeDasharray="3 1.5" />
+            <text
+              x={heliX}
+              y={heliY + 2.2}
+              textAnchor="middle"
+              fontSize={`${heliR * 0.85}px`}
+              fontWeight="900"
+              fill="#eab308"
+              style={{ pointerEvents: "none", userSelect: "none" }}
+            >
+              H
+            </text>
+          </g>
+        );
+      })()}
     </g>
   );
 }
@@ -1946,7 +2024,7 @@ export default function BerthBlueprint({
                 {vesselType === "research-survey"
                   ? renderResearchSurveyDeck(x, y, vesselWidth, vesselHeight, bowInset, color)
                   : (vesselType === "offshore" || vesselType === "diving-support")
-                  ? renderOffshoreDeck(x, y, vesselWidth, vesselHeight, bowInset, color)
+                  ? renderOffshoreDeck(x, y, vesselWidth, vesselHeight, bowInset, color, vessel.name)
                   : vesselType === "general-cargo"
                   ? renderGeneralCargoDeck(x, y, vesselWidth, vesselHeight, bowInset, color)
                   : (vesselType === "tanker" || vesselType === "chemical-tanker" || vesselType === "product-tanker")

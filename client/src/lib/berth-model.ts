@@ -78,7 +78,7 @@ export const VESSEL_TYPE_LABELS: Record<VesselType, string> = {
   "product-tanker": "Petroleiro de Produtos (Product Tanker)",
   "tanker": "Petroleiro / Químico (Tanker Geral)",
   "general-cargo": "Carga Geral / Graneleiro (General Cargo)",
-  "offshore": "Apoio Marítimo (Platform Supply Ship / PSV / AHTS)",
+  "offshore": "Apoio Marítimo / Offshore (Pipe Layer / PLSV / PSV / AHTS)",
   "diving-support": "Apoio a Mergulho / Subsea (Diving Support Vessel - DSV)",
   "research-survey": "Pesquisa / Hidrográfico (Research Survey Vessel)",
 };
@@ -270,6 +270,10 @@ export function defaultTierCountForBeam(beam: number): number {
 
 export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "OCEAN MERMAID": "research-survey",
+  "SEVEN RIO": "offshore",
+  "SEVEN CRUZEIRO": "offshore",
+  "SEVEN WAVES": "offshore",
+  "SEVEN SUN": "offshore",
   "CMA CGM IRON": "container",
   "CMA CGM PUCCINI": "container",
   "CMA CGM VERACRUZ": "container",
@@ -328,6 +332,15 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     bridgeBayEnd: 56,
     separateFunnel: false,
     vesselType: "container",
+  },
+  "SEVEN RIO": {
+    name: "SEVEN RIO",
+    loa: 145.95,
+    beam: 29.98,
+    draft: 6.5,
+    berthingSide: "bombordo",
+    vesselType: "offshore",
+    color: "orange",
   },
   "COSCO SHIPPING CHILE": {
     name: "COSCO SHIPPING CHILE",
@@ -502,10 +515,19 @@ export function normalizeVesselType(raw?: string | null, vesselName?: string | n
     return "diving-support";
   }
 
-  // 6. Apoio Offshore / PSV / Supply
+  // 6. Apoio Offshore / Pipe Layer (PLSV) / PSV / Supply
   if (
     upper === "offshore" ||
     upper.includes("OFFSHORE") ||
+    upper.includes("PIPE") ||
+    upper.includes("PIPELAYER") ||
+    upper.includes("PIPE LAYER") ||
+    upper.includes("PIPE-LAYER") ||
+    upper.includes("PLSV") ||
+    upper.includes("SUBSEA") ||
+    upper.includes("LANÇADOR") ||
+    upper.includes("LANCADOR") ||
+    upper.includes("DUTOS") ||
     upper.includes("PLATFORM SUPPLY") ||
     upper.includes("PSV") ||
     upper.includes("AHTS") ||
@@ -513,7 +535,7 @@ export function normalizeVesselType(raw?: string | null, vesselName?: string | n
     upper.includes("TUG") ||
     upper.includes("REBOCADOR") ||
     upper.includes("OSRV") ||
-    upper.includes("PLSV") ||
+    upperName.includes("SEVEN") ||
     upperName.includes("SUPPLY") ||
     upperName.includes("AHTS") ||
     upperName.includes("SKANDI") ||

@@ -206,8 +206,8 @@ export default function AddVesselModal({
     const draft = Math.max(0, m.draft || 10);
     const side: BerthingSide = m.berthingSide === "bombordo" ? "bombordo" : "boreste";
     const position = calculateNextPosition(loa, m.berthTo);
-    const color = getNextColor();
     const vesselType = normalizeVesselType(m.type, m.name);
+    const isContainer = vesselType === "container";
     const upperName = m.name.trim().toUpperCase();
     const knownDefault = KNOWN_VESSEL_DEFAULTS[upperName] ??
       (upperName.includes("VERACRUZ") ? KNOWN_VESSEL_DEFAULTS["CMA CGM VERACRUZ"] :
@@ -215,15 +215,16 @@ export default function AddVesselModal({
       (upperName.includes("PANTANAL") ? KNOWN_VESSEL_DEFAULTS["LOG-IN PANTANAL"] :
       (upperName.includes("BRISA") ? KNOWN_VESSEL_DEFAULTS["NC BRISA"] :
       (upperName.includes("SPYROS") ? KNOWN_VESSEL_DEFAULTS["SPYROS V"] : undefined))));
+    const color = knownDefault?.color ?? getNextColor();
 
     const savedVessel = catalog.find((item) => item.name.trim().toUpperCase() === upperName);
-    const bayCount = normalizeBayCount(savedVessel?.bayCount ?? savedVessel?.bays ?? savedVessel?.maxBayNumber ?? knownDefault?.bayCount);
-    const rowCount = normalizeRowCount(savedVessel?.rowCount ?? savedVessel?.rows ?? knownDefault?.rowCount);
-    const tierCount = normalizeTierCount(savedVessel?.tierCount ?? savedVessel?.tiers ?? knownDefault?.tierCount);
-    const bridgePosition = savedVessel?.bridgePosition ?? knownDefault?.bridgePosition;
-    const bridgeBay = savedVessel?.bridgeBay ?? knownDefault?.bridgeBay;
-    const separateFunnel = savedVessel?.separateFunnel ?? knownDefault?.separateFunnel;
-    const funnelBay = savedVessel?.funnelBay ?? knownDefault?.funnelBay;
+    const bayCount = isContainer ? normalizeBayCount(savedVessel?.bayCount ?? savedVessel?.bays ?? savedVessel?.maxBayNumber ?? knownDefault?.bayCount) : undefined;
+    const rowCount = isContainer ? normalizeRowCount(savedVessel?.rowCount ?? savedVessel?.rows ?? knownDefault?.rowCount) : undefined;
+    const tierCount = isContainer ? normalizeTierCount(savedVessel?.tierCount ?? savedVessel?.tiers ?? knownDefault?.tierCount) : undefined;
+    const bridgePosition = isContainer ? (savedVessel?.bridgePosition ?? knownDefault?.bridgePosition) : undefined;
+    const bridgeBay = isContainer ? (savedVessel?.bridgeBay ?? knownDefault?.bridgeBay) : undefined;
+    const separateFunnel = isContainer ? (savedVessel?.separateFunnel ?? knownDefault?.separateFunnel) : undefined;
+    const funnelBay = isContainer ? (savedVessel?.funnelBay ?? knownDefault?.funnelBay) : undefined;
 
     const newVessel: Vessel = {
       id,
@@ -289,21 +290,22 @@ export default function AddVesselModal({
     const draft = Math.max(0, v.draft || 10);
     const side: BerthingSide = v.berthingSide === "bombordo" ? "bombordo" : "boreste";
     const position = calculateNextPosition(loa);
-    const color = getNextColor();
-    const vesselType = normalizeVesselType(v.type);
+    const vesselType = normalizeVesselType((v as any).vesselType || v.type, v.name);
+    const isContainer = vesselType === "container";
+    const color = (KNOWN_VESSEL_DEFAULTS[v.name.trim().toUpperCase()]?.color) ?? (v as any).color ?? getNextColor();
 
     const upperName = v.name.trim().toUpperCase();
     const knownDefault = KNOWN_VESSEL_DEFAULTS[upperName] ??
       (upperName.includes("VERACRUZ") ? KNOWN_VESSEL_DEFAULTS["CMA CGM VERACRUZ"] :
       (upperName.includes("COSCO") && upperName.includes("CHILE")) ? KNOWN_VESSEL_DEFAULTS["COSCO SHIPPING CHILE"] : undefined);
 
-    const bayCount = normalizeBayCount(v.bayCount ?? v.bays ?? v.maxBayNumber ?? knownDefault?.bayCount);
-    const rowCount = normalizeRowCount(v.rowCount ?? v.rows ?? knownDefault?.rowCount);
-    const tierCount = normalizeTierCount(v.tierCount ?? v.tiers ?? knownDefault?.tierCount);
-    const bridgePosition = v.bridgePosition ?? knownDefault?.bridgePosition;
-    const bridgeBay = v.bridgeBay ?? knownDefault?.bridgeBay;
-    const separateFunnel = v.separateFunnel ?? knownDefault?.separateFunnel;
-    const funnelBay = v.funnelBay ?? knownDefault?.funnelBay;
+    const bayCount = isContainer ? normalizeBayCount(v.bayCount ?? v.bays ?? v.maxBayNumber ?? knownDefault?.bayCount) : undefined;
+    const rowCount = isContainer ? normalizeRowCount(v.rowCount ?? v.rows ?? knownDefault?.rowCount) : undefined;
+    const tierCount = isContainer ? normalizeTierCount(v.tierCount ?? v.tiers ?? knownDefault?.tierCount) : undefined;
+    const bridgePosition = isContainer ? (v.bridgePosition ?? knownDefault?.bridgePosition) : undefined;
+    const bridgeBay = isContainer ? (v.bridgeBay ?? knownDefault?.bridgeBay) : undefined;
+    const separateFunnel = isContainer ? (v.separateFunnel ?? knownDefault?.separateFunnel) : undefined;
+    const funnelBay = isContainer ? (v.funnelBay ?? knownDefault?.funnelBay) : undefined;
 
     const newVessel: Vessel = {
       id,

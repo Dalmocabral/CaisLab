@@ -420,16 +420,22 @@ function addVessel(
   const isOffshore = vType === "offshore" || vType === "diving-support";
   const isDiving = vType === "diving-support";
   const isResearch = vType === "research-survey";
+  const isPipeLayer = isOffshore && (
+    (vessel.name?.toUpperCase().includes("SEVEN") ?? false) ||
+    (vessel.name?.toUpperCase().includes("PIPE") ?? false) ||
+    ((vessel as any).type?.toUpperCase().includes("PIPE") ?? false) ||
+    ((vessel as any).type?.toUpperCase().includes("PLSV") ?? false)
+  );
 
   // Cor do casco:
   // - Tanker: azul-claro marítimo da foto de referência (#5da8bc)
-  // - Offshore / Diving: vermelho vibrante (#dc2626) como DOF ou azul marítimo (#0284c7) como MMC/PSV
+  // - Offshore / Diving: vermelho vibrante (#dc2626) como DOF/Subsea 7 ou azul marítimo (#0284c7) como MMC/PSV
   // - Research / Survey (ex: OCEAN MERMAID): azul marinho oceanográfico (#1e40af)
   // - Container / Outros: conforme paleta selecionada
   const hullColor = isTanker
     ? "#5da8bc"
     : isOffshore
-    ? (vessel.color === "orange" ? "#dc2626" : vessel.color === "teal" ? "#0f766e" : "#0284c7")
+    ? (isPipeLayer ? (vessel.color === "blue" ? "#0284c7" : "#dc2626") : (vessel.color === "orange" ? "#dc2626" : vessel.color === "teal" ? "#0f766e" : "#0284c7"))
     : isResearch
     ? "#1e40af"
     : (VESSEL_COLORS[vessel.color]?.stroke ?? "#285a78");
@@ -612,22 +618,133 @@ function addVessel(
     sternRoller.position.set(aftDeckEnd, deckHeight + 0.65, 0);
     group.add(sternRoller);
 
-    // 9. Equipamento Especial Offshore: Torre Subsea / Guindaste Pedestal Articulado (DOF/MMC)
-    const craneMat = isDiving ? new THREE.MeshStandardMaterial({ color: "#1e3a8a", metalness: 0.4 }) : subseaBlueMat;
-    const craneBaseX = fwdHouseX - direction * (houseLen * 0.5 + 4.5);
-    const craneZ = direction * (beam * 0.28);
-    const cranePedestal = new THREE.Mesh(new THREE.CylinderGeometry(1.3, 1.5, 7.8, 12), craneMat);
-    cranePedestal.position.set(craneBaseX, deckHeight + 3.9, craneZ);
-    group.add(cranePedestal);
-    addBox(THREE, group, [3.2, 2.4, 2.6], [craneBaseX, deckHeight + 8.8, craneZ], craneMat);
-    addBox(THREE, group, [1.4, 1.2, 1.8], [craneBaseX - direction * 1.6, deckHeight + 9.0, craneZ], darkDetailMaterial);
-    const boomLen = loa * 0.28;
-    const craneBoom = addBox(THREE, group, [boomLen, 0.9, 0.9], [craneBaseX - direction * (boomLen * 0.42), deckHeight + 11.2, craneZ], craneMat);
-    craneBoom.rotation.z = direction * 0.18;
-    const craneCable = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 6.5, 6), darkDetailMaterial);
-    craneCable.position.set(craneBaseX - direction * (boomLen * 0.85), deckHeight + 8.0, craneZ);
-    group.add(craneCable);
-    addBox(THREE, group, [0.8, 1.2, 0.8], [craneBaseX - direction * (boomLen * 0.85), deckHeight + 4.8, craneZ], safetyYellowMat);
+    // 9. Equipamento Especial Offshore: VLS Torre + Bobinas para Pipe Layer (SEVEN RIO / PLSV) ou Guindaste para PSV / Diving
+    if (isPipeLayer) {
+      // 9a. Torre VLS de Lançamento Vertical de Linhas Flexíveis / Dutos
+      const vlsX = fwdHouseX - direction * (houseLen * 0.5 + 4.2);
+      const vlsH = 22.0; // Altura da torre acima do convés (~33m acima d'água)
+      const vlsW = beam * 0.44;
+      const vlsL = 6.8;
+      const vlsTilt = direction * 0.16; // Leve inclinação angular operacional em direção à ré
+      const vlsMat = new THREE.MeshStandardMaterial({ color: "#eab308", metalness: 0.35, roughness: 0.5 }); // Amarelo industrial Subsea 7
+      const vlsDarkMat = new THREE.MeshStandardMaterial({ color: "#1e293b", roughness: 0.6 });
+
+      const towerGroup = new THREE.Group();
+      towerGroup.position.set(vlsX, deckHeight, 0);
+      towerGroup.rotation.z = vlsTilt;
+
+      // Colunas estruturais mestras da torre VLS (quatro pilares treliçados)
+      [-vlsW * 0.42, vlsW * 0.42].forEach((cz) => {
+        for (const cx of [-vlsL * 0.38, vlsL * 0.38]) {
+          const col = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.52, vlsH, 8), vlsMat);
+          col.position.set(cx, vlsH / 2, cz);
+          towerGroup.add(col);
+        }
+        addBox(THREE, towerGroup, [vlsL * 0.85, 0.45, 0.4], [0, vlsH * 0.45, cz], vlsMat);
+        addBox(THREE, towerGroup, [vlsL * 0.85, 0.5, 0.45], [0, vlsH * 0.92, cz], vlsMat);
+      });
+
+      // Travessas horizontais e passadiços de manutenção da torre
+      for (let th = 0.25; th <= 0.85; th += 0.2) {
+        addBox(THREE, towerGroup, [vlsL * 0.85, 0.35, vlsW * 0.92], [0, vlsH * th, 0], vlsDarkMat);
+      }
+
+      // Roda Alinhadora Superior (Aligner Wheel / Chute arch)
+      const alignerWheel = new THREE.Mesh(new THREE.CylinderGeometry(2.5, 2.5, 2.0, 20), vlsMat);
+      alignerWheel.rotation.x = Math.PI / 2;
+      alignerWheel.position.set(0, vlsH + 0.6, 0);
+      towerGroup.add(alignerWheel);
+
+      const alignerCore = new THREE.Mesh(new THREE.CylinderGeometry(1.2, 1.2, 2.2, 16), vlsDarkMat);
+      alignerCore.rotation.x = Math.PI / 2;
+      alignerCore.position.set(0, vlsH + 0.6, 0);
+      towerGroup.add(alignerCore);
+
+      // Tensionadores de Esteiras (Track Tensioners) dentro da torre
+      [vlsH * 0.38, vlsH * 0.68].forEach((th) => {
+        addBox(THREE, towerGroup, [2.4, 2.8, 2.2], [0, th, 0], vlsDarkMat);
+        addBox(THREE, towerGroup, [2.6, 0.8, 1.8], [0, th, 0], safetyYellowMat);
+      });
+
+      // Linha Flexível / Duto sendo lançado descendo pelo centro da torre até o moonpool
+      const pipeCylinder = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.28, vlsH + 3, 10), new THREE.MeshStandardMaterial({ color: "#ea580c", roughness: 0.4 }));
+      pipeCylinder.position.set(0, vlsH / 2, 0);
+      towerGroup.add(pipeCylinder);
+
+      group.add(towerGroup);
+
+      // Mesa de Trabalho e Hang-off Clamp no convés
+      addBox(THREE, group, [vlsL * 1.1, 1.2, vlsW * 1.15], [vlsX, deckHeight + 0.6, 0], darkDetailMaterial);
+
+      // 9b. Carrosséis de Dutos Flexíveis sobre o Convés (Pipe Reels / Underdeck Carousels)
+      const reelCoilMat = new THREE.MeshStandardMaterial({ color: "#b45309", roughness: 0.7 });
+      const reelFlangeMat = new THREE.MeshStandardMaterial({ color: "#334155", metalness: 0.4, roughness: 0.5 });
+
+      const reel1X = aftDeckCenterX + direction * (aftDeckLen * 0.12);
+      const reel1R = Math.min(beam * 0.36, 10.5);
+      const reelH = 4.2;
+
+      // Bobina 1
+      const reel1 = new THREE.Mesh(new THREE.CylinderGeometry(reel1R, reel1R, reelH, 24), reelCoilMat);
+      reel1.position.set(reel1X, deckHeight + reelH / 2 + 0.2, 0);
+      group.add(reel1);
+      const f1Top = new THREE.Mesh(new THREE.CylinderGeometry(reel1R * 1.05, reel1R * 1.05, 0.3, 24), reelFlangeMat);
+      f1Top.position.set(reel1X, deckHeight + reelH + 0.2, 0);
+      group.add(f1Top);
+      const hub1 = new THREE.Mesh(new THREE.CylinderGeometry(1.4, 1.4, reelH + 1.2, 16), darkDetailMaterial);
+      hub1.position.set(reel1X, deckHeight + (reelH + 1.2) / 2, 0);
+      group.add(hub1);
+
+      // Bobina 2 (à ré)
+      const reel2X = aftDeckCenterX - direction * (aftDeckLen * 0.26);
+      const reel2R = Math.min(beam * 0.32, 9.5);
+      const reel2 = new THREE.Mesh(new THREE.CylinderGeometry(reel2R, reel2R, reelH, 24), reelCoilMat);
+      reel2.position.set(reel2X, deckHeight + reelH / 2 + 0.2, 0);
+      group.add(reel2);
+      const f2Top = new THREE.Mesh(new THREE.CylinderGeometry(reel2R * 1.05, reel2R * 1.05, 0.3, 24), reelFlangeMat);
+      f2Top.position.set(reel2X, deckHeight + reelH + 0.2, 0);
+      group.add(f2Top);
+      const hub2 = new THREE.Mesh(new THREE.CylinderGeometry(1.4, 1.4, reelH + 1.2, 16), darkDetailMaterial);
+      hub2.position.set(reel2X, deckHeight + (reelH + 1.2) / 2, 0);
+      group.add(hub2);
+
+      // Calha aérea de direcionamento dos dutos dos carrosséis para a torre VLS
+      addBox(THREE, group, [Math.abs(vlsX - reel1X), 0.6, 1.4], [(vlsX + reel1X) / 2, deckHeight + 4.8, 0], vlsDarkMat);
+
+      // 9c. Guindaste Subsea Heavy-Lift Knuckle-Boom AHC (400t) a boreste/bombordo
+      const craneBaseX = vlsX - direction * 6.5;
+      const craneZ = direction * (beam * 0.33);
+      const cranePedestal = new THREE.Mesh(new THREE.CylinderGeometry(1.6, 1.8, 8.5, 14), vlsDarkMat);
+      cranePedestal.position.set(craneBaseX, deckHeight + 4.25, craneZ);
+      group.add(cranePedestal);
+      addBox(THREE, group, [3.8, 2.8, 3.2], [craneBaseX, deckHeight + 9.6, craneZ], vlsMat);
+      const boom1Len = loa * 0.20;
+      const boom1 = addBox(THREE, group, [boom1Len, 1.1, 1.1], [craneBaseX - direction * (boom1Len * 0.45), deckHeight + 12.0, craneZ], vlsMat);
+      boom1.rotation.z = direction * 0.22;
+      const boom2Len = loa * 0.16;
+      const boom2 = addBox(THREE, group, [boom2Len, 0.85, 0.85], [craneBaseX - direction * (boom1Len * 0.85 + boom2Len * 0.42), deckHeight + 13.6, craneZ], vlsMat);
+      boom2.rotation.z = -direction * 0.08;
+      const craneCable = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 9.0, 6), darkDetailMaterial);
+      craneCable.position.set(craneBaseX - direction * (boom1Len * 0.85 + boom2Len * 0.8), deckHeight + 8.8, craneZ);
+      group.add(craneCable);
+      addBox(THREE, group, [1.1, 1.4, 1.1], [craneBaseX - direction * (boom1Len * 0.85 + boom2Len * 0.8), deckHeight + 4.2, craneZ], safetyYellowMat);
+    } else {
+      const craneMat = isDiving ? new THREE.MeshStandardMaterial({ color: "#1e3a8a", metalness: 0.4 }) : subseaBlueMat;
+      const craneBaseX = fwdHouseX - direction * (houseLen * 0.5 + 4.5);
+      const craneZ = direction * (beam * 0.28);
+      const cranePedestal = new THREE.Mesh(new THREE.CylinderGeometry(1.3, 1.5, 7.8, 12), craneMat);
+      cranePedestal.position.set(craneBaseX, deckHeight + 3.9, craneZ);
+      group.add(cranePedestal);
+      addBox(THREE, group, [3.2, 2.4, 2.6], [craneBaseX, deckHeight + 8.8, craneZ], craneMat);
+      addBox(THREE, group, [1.4, 1.2, 1.8], [craneBaseX - direction * 1.6, deckHeight + 9.0, craneZ], darkDetailMaterial);
+      const boomLen = loa * 0.28;
+      const craneBoom = addBox(THREE, group, [boomLen, 0.9, 0.9], [craneBaseX - direction * (boomLen * 0.42), deckHeight + 11.2, craneZ], craneMat);
+      craneBoom.rotation.z = direction * 0.18;
+      const craneCable = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 6.5, 6), darkDetailMaterial);
+      craneCable.position.set(craneBaseX - direction * (boomLen * 0.85), deckHeight + 8.0, craneZ);
+      group.add(craneCable);
+      addBox(THREE, group, [0.8, 1.2, 0.8], [craneBaseX - direction * (boomLen * 0.85), deckHeight + 4.8, craneZ], safetyYellowMat);
+    }
 
     // 10. Bote de Resgate Rápido (FRC - Fast Rescue Craft) em Turco
     const frcZ = -direction * (beam * 0.42);
@@ -639,9 +756,58 @@ function addVessel(
     // Castelo de proa elevado e fechado (flared forecastle)
     const fwdBowX = direction * (loa * 0.44);
     addBox(THREE, group, [loa * 0.12, 3.2, beam * 0.74], [fwdBowX, deckHeight + 1.6, 0], hullMaterial);
-    const bowMast = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.18, 5.2, 8), new THREE.MeshStandardMaterial({ color: "#ffffff" }));
-    bowMast.position.set(direction * (loa * 0.48), deckHeight + 4.2, 0);
-    group.add(bowMast);
+
+    if (isPipeLayer) {
+      // 🚁 Helideck Suspenso sobre a Proa (Típico PLSV Subsea 7 / Seven Rio)
+      const heliR = Math.min(beam * 0.44, 12.0);
+      const heliY = deckHeight + 6.2;
+      const heliX = direction * (loa * 0.45);
+
+      // Plataforma Octagonal do Helideck
+      const heliMat = new THREE.MeshStandardMaterial({ color: "#1e293b", roughness: 0.85 });
+      const heliDeck = new THREE.Mesh(new THREE.CylinderGeometry(heliR, heliR, 0.38, 8), heliMat);
+      heliDeck.position.set(heliX, heliY, 0);
+      group.add(heliDeck);
+
+      // Círculo de toque Verde do Helideck
+      const circleMat = new THREE.MeshStandardMaterial({ color: "#16a34a", roughness: 0.6 });
+      const heliCircle = new THREE.Mesh(new THREE.CylinderGeometry(heliR * 0.72, heliR * 0.72, 0.42, 16), circleMat);
+      heliCircle.position.set(heliX, heliY + 0.02, 0);
+      group.add(heliCircle);
+
+      const heliInner = new THREE.Mesh(new THREE.CylinderGeometry(heliR * 0.58, heliR * 0.58, 0.44, 16), heliMat);
+      heliInner.position.set(heliX, heliY + 0.03, 0);
+      group.add(heliInner);
+
+      // Letra "H" Amarela de Aterrissagem
+      addBox(THREE, group, [heliR * 0.55, 0.46, heliR * 0.14], [heliX, heliY + 0.04, 0], safetyYellowMat);
+      addBox(THREE, group, [heliR * 0.14, 0.46, heliR * 0.50], [heliX - heliR * 0.20, heliY + 0.04, 0], safetyYellowMat);
+      addBox(THREE, group, [heliR * 0.14, 0.46, heliR * 0.50], [heliX + heliR * 0.20, heliY + 0.04, 0], safetyYellowMat);
+
+      // Pilares de Suporte estrutural do Helideck ancorados no castelo de proa
+      const pilarMat = new THREE.MeshStandardMaterial({ color: "#f8fafc", metalness: 0.2, roughness: 0.6 });
+      const legOffsets = [
+        [-heliR * 0.55, -heliR * 0.55],
+        [-heliR * 0.55, heliR * 0.55],
+        [heliR * 0.55, -heliR * 0.55],
+        [heliR * 0.55, heliR * 0.55],
+      ];
+      legOffsets.forEach(([dx, dz]) => {
+        const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.28, 4.6, 8), pilarMat);
+        leg.position.set(heliX + dx * 0.8, deckHeight + 3.9, dz * 0.8);
+        group.add(leg);
+      });
+
+      // Rede de segurança perimetral (Safety Netting)
+      const netMat = new THREE.MeshStandardMaterial({ color: "#475569", roughness: 0.7 });
+      const safetyRim = new THREE.Mesh(new THREE.CylinderGeometry(heliR * 1.08, heliR * 1.08, 0.15, 8), netMat);
+      safetyRim.position.set(heliX, heliY - 0.1, 0);
+      group.add(safetyRim);
+    } else {
+      const bowMast = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.18, 5.2, 8), new THREE.MeshStandardMaterial({ color: "#ffffff" }));
+      bowMast.position.set(direction * (loa * 0.48), deckHeight + 4.2, 0);
+      group.add(bowMast);
+    }
   } else if (isResearch) {
     // =========================================================================
     // 🛰️ MODELO RESEARCH SURVEY VESSEL (ex: OCEAN MERMAID, Fugro, Oceanográfico)
