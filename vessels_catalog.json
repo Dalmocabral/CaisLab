@@ -73,7 +73,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "HONG KONG, CHINA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "18/10/2026 20:08",
+    "updatedAt": "18/10/2026 20:17",
     "bayCount": 78,
     "bays": 78,
     "rowCount": 20,
@@ -328,7 +328,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "18/10/2026 20:08"
+    "updatedAt": "18/10/2026 20:17"
   },
   {
     "name": "NC BRAVO",
@@ -444,7 +444,7 @@
     "type": "PIPE LAYER",
     "vesselType": "offshore",
     "lastBerth": "TECONT1",
-    "updatedAt": "18/10/2026 20:08",
+    "updatedAt": "18/10/2026 20:17",
     "flag": "ISLE OF MAN"
   },
   {
