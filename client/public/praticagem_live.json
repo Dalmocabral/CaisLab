@@ -1,23 +1,8 @@
 {
-  "updatedAt": "18/10/2026 21:05",
+  "updatedAt": "18/10/2026 22:02",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 3,
+  "count": 2,
   "maneuvers": [
-    {
-      "dateTime": "18/10 16:00",
-      "name": "SEVEN RIO",
-      "draft": 6.5,
-      "loa": 145.95,
-      "beam": 29.98,
-      "maneuver": "M",
-      "berthFrom": "A10",
-      "berthTo": "TECONT1",
-      "berthingSide": "bombordo",
-      "imo": "9710878",
-      "type": "PIPE LAYER",
-      "flag": "ISLE OF MAN",
-      "terminal": "rio"
-    },
     {
       "dateTime": "19/10 15:30",
       "name": "MERCOSUL FORTALEZA",
