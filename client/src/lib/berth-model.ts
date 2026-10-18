@@ -122,12 +122,6 @@ export function bayNumberSequence(value: unknown, vesselName?: string): number[]
     );
   }
 
-  // No navio FORTALEZA (MERCOSUL / MAERSK FORTALEZA): 10 escotilhas de 40' bem distribuídas (bays 01 a 39)
-  const isFortaleza = typeof vesselName === "string" && vesselName.trim().toUpperCase().includes("FORTALEZA");
-  if (isFortaleza) {
-    return Array.from({ length: 20 }, (_, index) => index * 2 + 1);
-  }
-
   return seq;
 }
 
@@ -457,16 +451,16 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     loa: 185.97,
     beam: 34.88,
     draft: 10.7,
-    bayCount: 40,
-    bays: 40,
+    bayCount: 58,
+    bays: 58,
     rowCount: 14,
     rows: 14,
     tierCount: 5,
     tiers: 5,
     bridgePosition: "all-aft",
-    bridgeBay: 40,
-    bridgeBayStart: 40,
-    bridgeBayEnd: 40,
+    bridgeBay: 48,
+    bridgeBayStart: 48,
+    bridgeBayEnd: 48,
     separateFunnel: false,
     vesselType: "container",
   },
@@ -475,16 +469,16 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     loa: 185.97,
     beam: 34.88,
     draft: 10.7,
-    bayCount: 40,
-    bays: 40,
+    bayCount: 58,
+    bays: 58,
     rowCount: 14,
     rows: 14,
     tierCount: 5,
     tiers: 5,
     bridgePosition: "all-aft",
-    bridgeBay: 40,
-    bridgeBayStart: 40,
-    bridgeBayEnd: 40,
+    bridgeBay: 48,
+    bridgeBayStart: 48,
+    bridgeBayEnd: 48,
     separateFunnel: false,
     vesselType: "container",
   },
@@ -756,10 +750,12 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const loa = Math.max(1, vessel.loa ?? 200);
   const beam = Math.max(1, vessel.beam ?? 32);
   const config = resolveVesselSuperstructure(vessel);
-  const bays = bayNumberSequence(vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber, vessel.name);
-  const isAllAft = config.bridgePosition === "all-aft";
-
   const isFortaleza = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("FORTALEZA");
+  // No 3D do Fortaleza: 10 escotilhas de 40' bem distribuídas (bays 01 a 39) com vão entre bays
+  const bays = isFortaleza
+    ? Array.from({ length: 20 }, (_, index) => index * 2 + 1)
+    : bayNumberSequence(vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber, vessel.name);
+  const isAllAft = config.bridgePosition === "all-aft";
 
   const bowInset = isFortaleza ? Math.min(16, loa * 0.09) : Math.min(23, loa * 0.16);
   const aftHouseW = isFortaleza ? 13.5 : Math.max(12, Math.min(24, loa * 0.065));
@@ -1480,9 +1476,7 @@ export function normalizeScenario(value: unknown): Scenario | null {
       upperName.includes("SPYROS") ? KNOWN_VESSEL_DEFAULTS["SPYROS V"] : undefined);
 
     const rawBayCount = (raw as any).bayCount ?? (raw as any).maxBayNumber ?? raw.bays;
-    const bayCount = isFortaleza && (!rawBayCount || rawBayCount > 40)
-      ? 40
-      : normalizeBayCount(rawBayCount !== undefined ? rawBayCount : knownDefault?.bayCount);
+    const bayCount = normalizeBayCount(rawBayCount !== undefined ? rawBayCount : knownDefault?.bayCount);
     const rawRowCount = (raw as any).rowCount ?? raw.rows;
     const rowCount = isFortaleza
       ? 14
