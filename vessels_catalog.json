@@ -73,7 +73,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "HONG KONG, CHINA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "18/10/2026 13:40"
+    "updatedAt": "18/10/2026 17:00"
   },
   {
     "name": "COSCO SHIPPING CHILE",
@@ -300,7 +300,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "18/10/2026 13:40"
+    "updatedAt": "18/10/2026 17:00"
   },
   {
     "name": "NC BRAVO",
@@ -404,6 +404,18 @@
     "rows": 13,
     "tierCount": 5,
     "tiers": 5
+  },
+  {
+    "name": "SEVEN RIO",
+    "loa": 145.95,
+    "beam": 29.98,
+    "draft": 6.5,
+    "berthingSide": "bombordo",
+    "imo": "9710878",
+    "type": "PIPE LAYER",
+    "flag": "ISLE OF MAN",
+    "lastBerth": "TECONT1",
+    "updatedAt": "18/10/2026 17:00"
   },
   {
     "name": "SPYROS V",
