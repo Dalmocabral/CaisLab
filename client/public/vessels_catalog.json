@@ -70,10 +70,14 @@
     "draft": 13.5,
     "berthingSide": "boreste",
     "imo": "9945837",
-    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "flag": "HONG KONG, CHINA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "18/10/2026 19:51"
+    "updatedAt": "18/10/2026 16:55",
+    "bayCount": 78,
+    "bays": 78,
+    "rowCount": 20,
+    "rows": 20
   },
   {
     "name": "COSCO SHIPPING CHILE",
