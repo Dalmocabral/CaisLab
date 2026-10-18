@@ -1,12 +1,12 @@
 {
-  "updatedAt": "18/10/2026 02:06",
+  "updatedAt": "18/10/2026 08:25",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 2,
   "maneuvers": [
     {
       "dateTime": "18/10 06:00",
       "name": "EVER FIT",
-      "draft": 14.4,
+      "draft": 14.3,
       "loa": 333.9,
       "beam": 48.43,
       "maneuver": "E",

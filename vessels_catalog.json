@@ -73,7 +73,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "HONG KONG, CHINA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "18/10/2026 02:06"
+    "updatedAt": "18/10/2026 08:25"
   },
   {
     "name": "COSCO SHIPPING CHILE",
@@ -143,12 +143,12 @@
     "name": "EVER FIT",
     "loa": 333.9,
     "beam": 48.43,
-    "draft": 14.4,
+    "draft": 14.3,
     "berthingSide": "boreste",
     "imo": "9850795",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "18/10/2026 02:06",
+    "updatedAt": "18/10/2026 08:25",
     "flag": "LIBERIA"
   },
   {
