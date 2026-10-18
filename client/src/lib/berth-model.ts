@@ -363,6 +363,48 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     funnelBayEnd: 64,
     vesselType: "container",
   },
+  "COSCO SHIPPING BRAZIL": {
+    name: "COSCO SHIPPING BRAZIL",
+    loa: 335.93,
+    beam: 51.04,
+    draft: 13.5,
+    bayCount: 78,
+    bays: 78,
+    rowCount: 20,
+    rows: 20,
+    tierCount: 5,
+    tiers: 5,
+    bridgePosition: "between-bays",
+    bridgeBay: 22,
+    bridgeBayStart: 22,
+    bridgeBayEnd: 22,
+    separateFunnel: true,
+    funnelBay: 64,
+    funnelBayStart: 64,
+    funnelBayEnd: 64,
+    vesselType: "container",
+  },
+  "COSCO SHIPPING ARGENTINA": {
+    name: "COSCO SHIPPING ARGENTINA",
+    loa: 335.95,
+    beam: 51.04,
+    draft: 13.0,
+    bayCount: 78,
+    bays: 78,
+    rowCount: 20,
+    rows: 20,
+    tierCount: 5,
+    tiers: 5,
+    bridgePosition: "between-bays",
+    bridgeBay: 22,
+    bridgeBayStart: 22,
+    bridgeBayEnd: 22,
+    separateFunnel: true,
+    funnelBay: 64,
+    funnelBayStart: 64,
+    funnelBayEnd: 64,
+    vesselType: "container",
+  },
   "CMA CGM VERACRUZ": {
     name: "CMA CGM VERACRUZ",
     loa: 228.62,
@@ -1321,7 +1363,7 @@ export function normalizeScenario(value: unknown): Scenario | null {
     const upperName = (raw.name ?? "").toUpperCase().trim();
     const knownDefault = KNOWN_VESSEL_DEFAULTS[upperName] ??
       (upperName.includes("VERACRUZ") ? KNOWN_VESSEL_DEFAULTS["CMA CGM VERACRUZ"] :
-      (upperName.includes("COSCO") && upperName.includes("CHILE")) ? KNOWN_VESSEL_DEFAULTS["COSCO SHIPPING CHILE"] :
+      (upperName.includes("COSCO") && (upperName.includes("CHILE") || upperName.includes("BRAZIL") || upperName.includes("BRASIL") || upperName.includes("ARGENTINA") || upperName.includes("URUGUAY"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["COSCO SHIPPING BRAZIL"]) :
       (upperName.includes("PANTANAL") ? KNOWN_VESSEL_DEFAULTS["LOG-IN PANTANAL"] :
       (upperName.includes("BRISA") ? KNOWN_VESSEL_DEFAULTS["NC BRISA"] :
       (upperName.includes("SPYROS") ? KNOWN_VESSEL_DEFAULTS["SPYROS V"] : undefined))));
@@ -1332,11 +1374,12 @@ export function normalizeScenario(value: unknown): Scenario | null {
     const rowCount = normalizeRowCount(rawRowCount !== undefined ? rawRowCount : knownDefault?.rowCount);
     const rawTierCount = (raw as any).tierCount ?? raw.tiers;
     const tierCount = normalizeTierCount(rawTierCount !== undefined ? rawTierCount : knownDefault?.tierCount);
+    const hasExplicitBridge = typeof (raw as any).bridgeBay === "number" || typeof (raw as any).bridgeBayStart === "number";
     const bridgePosition = (raw as any).bridgePosition === "between-bays"
       ? "between-bays"
-      : (raw as any).bridgePosition === "all-aft"
-      ? "all-aft"
-      : knownDefault?.bridgePosition ?? "all-aft";
+      : hasExplicitBridge
+      ? ((raw as any).bridgePosition ?? "all-aft")
+      : (knownDefault?.bridgePosition ?? (raw as any).bridgePosition ?? "all-aft");
     const bridgeBay = typeof (raw as any).bridgeBay === "number"
       ? (raw as any).bridgeBay
       : typeof (raw as any).bridgeBayStart === "number"
