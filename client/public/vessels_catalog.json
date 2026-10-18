@@ -73,7 +73,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "HONG KONG, CHINA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "18/10/2026 08:25"
+    "updatedAt": "18/10/2026 13:40"
   },
   {
     "name": "COSCO SHIPPING CHILE",
@@ -289,6 +289,18 @@
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
     "updatedAt": "02/10/2026 11:12"
+  },
+  {
+    "name": "MERCOSUL FORTALEZA",
+    "loa": 185.97,
+    "beam": 34.88,
+    "draft": 10.7,
+    "berthingSide": "boreste",
+    "imo": "9784661",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "BRAZIL",
+    "lastBerth": "TECONTPROLONG",
+    "updatedAt": "18/10/2026 13:40"
   },
   {
     "name": "NC BRAVO",
