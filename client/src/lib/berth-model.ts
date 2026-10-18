@@ -708,10 +708,16 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const bayAreaRight = deckRight - rowNumberWidth - 0.8;
   const bayAreaWidth = Math.max(1, bayAreaRight - deckLeft);
 
-  const isCoscoChile = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("COSCO") && vessel.name.toUpperCase().includes("CHILE");
+  const isCoscoClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("COSCO") && (
+    vessel.name.toUpperCase().includes("CHILE") ||
+    vessel.name.toUpperCase().includes("BRAZIL") ||
+    vessel.name.toUpperCase().includes("BRASIL") ||
+    vessel.name.toUpperCase().includes("ARGENTINA") ||
+    vessel.name.toUpperCase().includes("URUGUAY")
+  );
   const idx63 = bays.indexOf(63);
   const idx65 = bays.indexOf(65);
-  const hasCoscoFunnel = isCoscoChile && config.separateFunnel && idx63 !== -1 && idx65 !== -1;
+  const hasCoscoFunnel = isCoscoClass && config.separateFunnel && idx63 !== -1 && idx65 !== -1;
 
   const isNykRumina = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("NYK") && vessel.name.toUpperCase().includes("RUMINA");
   const isSeaspanEmpire = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("SEASPAN") && vessel.name.toUpperCase().includes("EMPIRE");

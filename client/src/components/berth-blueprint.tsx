@@ -146,10 +146,16 @@ function renderContainerDeck(
   const bayAreaRight = deckRight - rowNumberWidth - 0.8;
   const bayAreaWidth = Math.max(1, bayAreaRight - deckLeft);
 
-  const isCoscoChile = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("COSCO") && vessel.name.toUpperCase().includes("CHILE");
+  const isCoscoClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("COSCO") && (
+    vessel.name.toUpperCase().includes("CHILE") ||
+    vessel.name.toUpperCase().includes("BRAZIL") ||
+    vessel.name.toUpperCase().includes("BRASIL") ||
+    vessel.name.toUpperCase().includes("ARGENTINA") ||
+    vessel.name.toUpperCase().includes("URUGUAY")
+  );
   const idx63 = bays.indexOf(63);
   const idx65 = bays.indexOf(65);
-  const hasCoscoFunnel = isCoscoChile && config.separateFunnel && idx63 !== -1 && idx65 !== -1;
+  const hasCoscoFunnel = isCoscoClass && config.separateFunnel && idx63 !== -1 && idx65 !== -1;
 
   const isNykRumina = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("NYK") && vessel.name.toUpperCase().includes("RUMINA");
   const isSeaspanEmpire = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("SEASPAN") && vessel.name.toUpperCase().includes("EMPIRE");
@@ -310,13 +316,19 @@ function renderContainerDeck(
             if (isBayOccupied(index)) return null;
 
             const isVeracruz = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("VERACRUZ");
-            const isCoscoChile = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("COSCO") && vessel.name.toUpperCase().includes("CHILE");
+            const isCoscoClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("COSCO") && (
+              vessel.name.toUpperCase().includes("CHILE") ||
+              vessel.name.toUpperCase().includes("BRAZIL") ||
+              vessel.name.toUpperCase().includes("BRASIL") ||
+              vessel.name.toUpperCase().includes("ARGENTINA") ||
+              vessel.name.toUpperCase().includes("URUGUAY")
+            );
 
             // No navio Veracruz, remove a bay 49 e deixa a 50 centralizada entre a divisão dos contêineres de 20'
             if (isVeracruz && bay === 49) return null;
 
-            // No navio Cosco Chile, remove a bay 77 e deixa a 78 centralizada entre a divisão dos contêineres de 20'
-            if (isCoscoChile && bay === 77) return null;
+            // No navio Cosco, remove a bay 77 e deixa a 78 centralizada entre a divisão dos contêineres de 20'
+            if (isCoscoClass && bay === 77) return null;
 
             const cellX = bayCellX(index);
             let centerX = cellX + cellWidth / 2;
@@ -329,7 +341,7 @@ function renderContainerDeck(
               }
             }
 
-            if (isCoscoChile && bay === 78) {
+            if (isCoscoClass && bay === 78) {
               const idx77 = bays.indexOf(77);
               if (idx77 !== -1) {
                 const cellX77 = bayCellX(idx77);
