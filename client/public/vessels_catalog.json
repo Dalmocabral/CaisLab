@@ -70,10 +70,10 @@
     "draft": 13.5,
     "berthingSide": "boreste",
     "imo": "9945837",
-    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "HONG KONG, CHINA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "18/10/2026 16:55",
+    "updatedAt": "18/10/2026 19:57",
     "bayCount": 78,
     "bays": 78,
     "rowCount": 20,
@@ -318,7 +318,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "18/10/2026 19:51"
+    "updatedAt": "18/10/2026 19:57"
   },
   {
     "name": "NC BRAVO",
@@ -431,10 +431,10 @@
     "draft": 6.5,
     "berthingSide": "bombordo",
     "imo": "9710878",
-    "type": "PIPE LAYER (Offshore / PLSV)",
+    "type": "PIPE LAYER",
     "vesselType": "offshore",
     "lastBerth": "TECONT1",
-    "updatedAt": "18/10/2026 19:51",
+    "updatedAt": "18/10/2026 19:57",
     "flag": "ISLE OF MAN"
   },
   {
