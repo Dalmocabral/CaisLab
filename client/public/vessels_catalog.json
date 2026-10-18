@@ -73,7 +73,11 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "HONG KONG, CHINA",
     "lastBerth": "TECONTPROLONG",
+<<<<<<< HEAD
     "updatedAt": "18/10/2026 20:28",
+=======
+    "updatedAt": "18/10/2026 17:34",
+>>>>>>> b15c20a (feat(fortaleza): ajustar dimensoes manuais, espacamento de bays e deck 3d do Mercosul Fortaleza)
     "bayCount": 78,
     "bays": 78,
     "rowCount": 20,
@@ -276,14 +280,23 @@
   },
   {
     "name": "MAERSK FORTALEZA",
-    "loa": 254.9,
-    "beam": 40,
-    "draft": 10.5,
-    "bayCount": 58,
-    "bays": 58,
+    "loa": 185.97,
+    "beam": 34.88,
+    "draft": 10.7,
+    "bayCount": 40,
+    "bays": 40,
+    "rowCount": 14,
+    "rows": 14,
+    "tierCount": 5,
+    "tiers": 5,
     "berthingSide": "boreste",
     "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
-    "updatedAt": "06/10/2026 09:21"
+    "bridgePosition": "all-aft",
+    "bridgeBay": 40,
+    "bridgeBayStart": 40,
+    "bridgeBayEnd": 40,
+    "separateFunnel": false,
+    "updatedAt": "18/10/2026 17:48"
   },
   {
     "name": "MAERSK FRANKFURT",
@@ -325,10 +338,21 @@
     "draft": 10.7,
     "berthingSide": "boreste",
     "imo": "9784661",
-    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "flag": "BRAZIL",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "18/10/2026 20:28"
+    "updatedAt": "18/10/2026 20:28",
+    "bayCount": 40,
+    "bays": 40,
+    "rowCount": 14,
+    "rows": 14,
+    "tierCount": 5,
+    "tiers": 5,
+    "bridgePosition": "all-aft",
+    "bridgeBay": 40,
+    "bridgeBayStart": 40,
+    "bridgeBayEnd": 40,
+    "separateFunnel": false
   },
   {
     "name": "NC BRAVO",

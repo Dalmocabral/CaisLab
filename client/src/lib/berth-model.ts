@@ -122,6 +122,12 @@ export function bayNumberSequence(value: unknown, vesselName?: string): number[]
     );
   }
 
+  // No navio FORTALEZA (MERCOSUL / MAERSK FORTALEZA): 10 escotilhas de 40' bem distribuídas (bays 01 a 39)
+  const isFortaleza = typeof vesselName === "string" && vesselName.trim().toUpperCase().includes("FORTALEZA");
+  if (isFortaleza) {
+    return Array.from({ length: 20 }, (_, index) => index * 2 + 1);
+  }
+
   return seq;
 }
 
@@ -446,6 +452,42 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     funnelBayEnd: 46,
     vesselType: "container",
   },
+  "MERCOSUL FORTALEZA": {
+    name: "MERCOSUL FORTALEZA",
+    loa: 185.97,
+    beam: 34.88,
+    draft: 10.7,
+    bayCount: 40,
+    bays: 40,
+    rowCount: 14,
+    rows: 14,
+    tierCount: 5,
+    tiers: 5,
+    bridgePosition: "all-aft",
+    bridgeBay: 40,
+    bridgeBayStart: 40,
+    bridgeBayEnd: 40,
+    separateFunnel: false,
+    vesselType: "container",
+  },
+  "MAERSK FORTALEZA": {
+    name: "MAERSK FORTALEZA",
+    loa: 185.97,
+    beam: 34.88,
+    draft: 10.7,
+    bayCount: 40,
+    bays: 40,
+    rowCount: 14,
+    rows: 14,
+    tierCount: 5,
+    tiers: 5,
+    bridgePosition: "all-aft",
+    bridgeBay: 40,
+    bridgeBayStart: 40,
+    bridgeBayEnd: 40,
+    separateFunnel: false,
+    vesselType: "container",
+  },
   "LOG-IN PANTANAL": {
     name: "LOG-IN PANTANAL",
     loa: 182.47,
@@ -717,15 +759,17 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const bays = bayNumberSequence(vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber, vessel.name);
   const isAllAft = config.bridgePosition === "all-aft";
 
-  const bowInset = Math.min(23, loa * 0.16);
-  const aftHouseW = Math.max(12, Math.min(24, loa * 0.065));
-  const aftHouseX = 2.5;
+  const isFortaleza = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("FORTALEZA");
+
+  const bowInset = isFortaleza ? Math.min(16, loa * 0.09) : Math.min(23, loa * 0.16);
+  const aftHouseW = isFortaleza ? 13.5 : Math.max(12, Math.min(24, loa * 0.065));
+  const aftHouseX = isFortaleza ? 6.5 : 2.5;
 
   const deckLeft = isAllAft ? aftHouseX + aftHouseW + 1.2 : 7;
   const deckRight = Math.max(deckLeft + 1, loa - bowInset);
   const deckWidth = deckRight - deckLeft;
 
-  const rowNumberWidth = Math.max(6, Math.min(9.5, deckWidth * 0.042));
+  const rowNumberWidth = isFortaleza ? 3.5 : Math.max(6, Math.min(9.5, deckWidth * 0.042));
   const bayAreaRight = deckRight - rowNumberWidth - 0.8;
   const bayAreaWidth = Math.max(1, bayAreaRight - deckLeft);
 
@@ -765,7 +809,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const num40ftGaps = Math.max(0, Math.floor((bays.length - 1) / 2));
   const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0);
   const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + extraSlots);
-  const hatchGap = bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0;
+  const hatchGap = isFortaleza ? 1.6 : (bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0);
   const totalGapsWidth = num40ftGaps * hatchGap;
   const coscoFunnelSlotW = hasCoscoFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
   const everFitFunnelSlotW = hasEverFitFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
@@ -1425,26 +1469,36 @@ export function normalizeScenario(value: unknown): Scenario | null {
       raw.name,
     );
     const upperName = (raw.name ?? "").toUpperCase().trim();
+    const isFortaleza = upperName.includes("FORTALEZA");
     const knownDefault = KNOWN_VESSEL_DEFAULTS[upperName] ??
       (upperName.includes("VERACRUZ") ? KNOWN_VESSEL_DEFAULTS["CMA CGM VERACRUZ"] :
+      isFortaleza ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["MERCOSUL FORTALEZA"]) :
       (upperName.includes("COSCO") && (upperName.includes("CHILE") || upperName.includes("BRAZIL") || upperName.includes("BRASIL") || upperName.includes("ARGENTINA") || upperName.includes("URUGUAY"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["COSCO SHIPPING BRAZIL"]) :
       (upperName.includes("EVER") && (upperName.includes("FIT") || upperName.includes("FAR") || upperName.includes("FAME") || upperName.includes("FASHION") || upperName.includes("FORTUNE"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["EVER FIT"]) :
-      (upperName.includes("PANTANAL") ? KNOWN_VESSEL_DEFAULTS["LOG-IN PANTANAL"] :
-      (upperName.includes("BRISA") ? KNOWN_VESSEL_DEFAULTS["NC BRISA"] :
-      (upperName.includes("SPYROS") ? KNOWN_VESSEL_DEFAULTS["SPYROS V"] : undefined))));
+      upperName.includes("PANTANAL") ? KNOWN_VESSEL_DEFAULTS["LOG-IN PANTANAL"] :
+      upperName.includes("BRISA") ? KNOWN_VESSEL_DEFAULTS["NC BRISA"] :
+      upperName.includes("SPYROS") ? KNOWN_VESSEL_DEFAULTS["SPYROS V"] : undefined);
 
     const rawBayCount = (raw as any).bayCount ?? (raw as any).maxBayNumber ?? raw.bays;
-    const bayCount = normalizeBayCount(rawBayCount !== undefined ? rawBayCount : knownDefault?.bayCount);
+    const bayCount = isFortaleza && (!rawBayCount || rawBayCount > 40)
+      ? 40
+      : normalizeBayCount(rawBayCount !== undefined ? rawBayCount : knownDefault?.bayCount);
     const rawRowCount = (raw as any).rowCount ?? raw.rows;
-    const rowCount = normalizeRowCount(rawRowCount !== undefined ? rawRowCount : knownDefault?.rowCount);
+    const rowCount = isFortaleza
+      ? 14
+      : normalizeRowCount(rawRowCount !== undefined ? rawRowCount : knownDefault?.rowCount);
     const rawTierCount = (raw as any).tierCount ?? raw.tiers;
-    const tierCount = normalizeTierCount(rawTierCount !== undefined ? rawTierCount : knownDefault?.tierCount);
+    const tierCount = isFortaleza
+      ? 5
+      : normalizeTierCount(rawTierCount !== undefined ? rawTierCount : knownDefault?.tierCount);
     const hasExplicitBridge = typeof (raw as any).bridgeBay === "number" || typeof (raw as any).bridgeBayStart === "number";
-    const bridgePosition = (raw as any).bridgePosition === "between-bays"
+    const bridgePosition = isFortaleza
+      ? "all-aft"
+      : ((raw as any).bridgePosition === "between-bays"
       ? "between-bays"
       : hasExplicitBridge
       ? ((raw as any).bridgePosition ?? "all-aft")
-      : (knownDefault?.bridgePosition ?? (raw as any).bridgePosition ?? "all-aft");
+      : (knownDefault?.bridgePosition ?? (raw as any).bridgePosition ?? "all-aft"));
     const bridgeBay = typeof (raw as any).bridgeBay === "number"
       ? (raw as any).bridgeBay
       : typeof (raw as any).bridgeBayStart === "number"

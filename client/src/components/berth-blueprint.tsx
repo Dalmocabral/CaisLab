@@ -131,18 +131,21 @@ function renderContainerDeck(
   // Modo 1: Casaria 100% na popa (All-Aft, como CMA CGM Veracruz)
   const isAllAft = config.bridgePosition === "all-aft";
 
-  const aftHouseW = Math.max(12, Math.min(24, vesselWidth * 0.065));
+  const isFortaleza = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("FORTALEZA");
+
+  const effectiveBowInset = isFortaleza ? Math.min(16, vesselWidth * 0.09) : bowInset;
+  const aftHouseW = isFortaleza ? 13.5 : Math.max(12, Math.min(24, vesselWidth * 0.065));
   const aftHouseH = Math.max(14, containerHeight * 0.88);
-  const aftHouseX = x + 2.5;
+  const aftHouseX = isFortaleza ? x + 6.5 : x + 2.5;
   const aftHouseY = y + (vesselHeight - aftHouseH) / 2;
 
   // Deck de contêineres: se a casaria for na popa, os contêineres começam colados nela
   const deckLeft = isAllAft ? aftHouseX + aftHouseW + 1.2 : x + 7;
-  const deckRight = Math.max(deckLeft + 1, x + vesselWidth - bowInset);
+  const deckRight = Math.max(deckLeft + 1, x + vesselWidth - effectiveBowInset);
   const deckWidth = deckRight - deckLeft;
 
   // Faixa na proa para os números das Rows
-  const rowNumberWidth = Math.max(6, Math.min(9.5, deckWidth * 0.042));
+  const rowNumberWidth = isFortaleza ? 3.5 : Math.max(6, Math.min(9.5, deckWidth * 0.042));
   const bayAreaRight = deckRight - rowNumberWidth - 0.8;
   const bayAreaWidth = Math.max(1, bayAreaRight - deckLeft);
 
@@ -183,7 +186,7 @@ function renderContainerDeck(
   const num40ftGaps = Math.max(0, Math.floor((bays.length - 1) / 2));
   const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0);
   const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + extraSlots);
-  const hatchGap = bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0;
+  const hatchGap = isFortaleza ? 1.6 : (bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0);
   const totalGapsWidth = num40ftGaps * hatchGap;
   const coscoFunnelSlotW = hasCoscoFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
   const everFitFunnelSlotW = hasEverFitFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;

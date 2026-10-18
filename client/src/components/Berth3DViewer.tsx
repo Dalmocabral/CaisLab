@@ -1243,8 +1243,11 @@ function addVessel(
       const tiers = normalizeTierCount(vessel.tierCount ?? vessel.tiers) ?? defaultTierCountForBeam(beam);
 
       // Dimensões de contêineres padrão ISO marítimos (20' pés e 40' pés) alinhados às escotilhas reais
-      const containerLength20 = Math.max(5.8, Math.min(6.2, plan.cellWidth * 0.95));
-      const containerLength40 = Math.max(11.8, Math.min(12.4, 2 * containerLength20 + 0.35));
+      const containerLength20 = Math.max(5.75, Math.min(6.15, plan.cellWidth * 0.94));
+      // Garante folga física visível (gap) entre bays de 40' adjacentes sem sobreposição / amontoamento
+      const baseLen40 = 2 * containerLength20 + 0.32;
+      const maxAllowed40 = plan.hatchGap > 0 ? (2 * plan.cellWidth + 0.15) : 12.3;
+      const containerLength40 = Math.max(11.6, Math.min(maxAllowed40, baseLen40));
       const containerHeight = 2.55;
 
       const containerGeometry20 = new THREE.BoxGeometry(containerLength20, containerHeight, containerWidth);
@@ -1274,6 +1277,19 @@ function addVessel(
       const containerMeshes40 = skinMaterials40.map(
         (mats) => new THREE.InstancedMesh(containerGeometry40, mats, maxInstances40),
       );
+
+      // Passarelas transversais / coamings entre escotilhas para destacar o vão entre bays
+      if (plan.hatchGap >= 1.0) {
+        const catwalkMat = new THREE.MeshStandardMaterial({ color: "#1e293b", roughness: 0.8 });
+        for (let h = 0; h < plan.hatches.length - 1; h += 1) {
+          const hCurr = plan.hatches[h];
+          const hNext = plan.hatches[h + 1];
+          if (!hCurr.isBlockedByBridge && !hNext.isBlockedByBridge && !hCurr.isBlockedByFunnel && !hNext.isBlockedByFunnel) {
+            const midX = direction * (((hCurr.centerFromStern + hNext.centerFromStern) / 2) - loa / 2);
+            addBox(THREE, group, [0.42, 0.28, usableBeam * 0.98], [midX, deckHeight + 0.14, 0], catwalkMat);
+          }
+        }
+      }
 
       const meshCounts20 = CONTAINER_SKIN_DEFS.map(() => 0);
       const meshCounts40 = CONTAINER_SKIN_DEFS.map(() => 0);
