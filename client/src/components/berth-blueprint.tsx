@@ -163,15 +163,33 @@ function renderContainerDeck(
   const idx57 = bays.indexOf(57);
   const hasSpecialBridge55_57 = (isNykRumina || isSeaspanEmpire) && idx55 !== -1 && idx57 !== -1;
 
+  const isEverFitClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("EVER") && (
+    vessel.name.toUpperCase().includes("FIT") ||
+    vessel.name.toUpperCase().includes("FAR") ||
+    vessel.name.toUpperCase().includes("FAME") ||
+    vessel.name.toUpperCase().includes("FASHION") ||
+    vessel.name.toUpperCase().includes("FORTUNE") ||
+    vessel.name.toUpperCase().includes("FAST") ||
+    vessel.name.toUpperCase().includes("FORE") ||
+    vessel.name.toUpperCase().includes("FUTURE")
+  );
+  const idx27 = bays.indexOf(27);
+  const idx29 = bays.indexOf(29);
+  const idx61 = bays.indexOf(61);
+  const hasEverFitBridge = isEverFitClass && idx27 !== -1 && idx29 !== -1;
+  const hasEverFitFunnel = isEverFitClass && config.separateFunnel && idx61 !== -1 && idx63 !== -1;
+
   // Separação visual entre as bays de 40' (cada par de bays de 20' forma uma bay/hatch de 40')
   const num40ftGaps = Math.max(0, Math.floor((bays.length - 1) / 2));
-  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0);
+  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0);
   const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + extraSlots);
   const hatchGap = bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0;
   const totalGapsWidth = num40ftGaps * hatchGap;
   const coscoFunnelSlotW = hasCoscoFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
+  const everFitFunnelSlotW = hasEverFitFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
   const nykBridgeSlotW = hasSpecialBridge55_57 ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
-  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - nykBridgeSlotW);
+  const everFitBridgeSlotW = hasEverFitBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
+  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW);
   const cellWidth = availableBayWidth / Math.max(1, bays.length);
   const labelSize = bays.length ? Math.max(2.6, Math.min(5.4, cellWidth * 0.54)) : 3.4;
   const rowLabelSize = Math.max(2.0, Math.min(labelSize, cellHeight * 0.72));
@@ -179,13 +197,22 @@ function renderContainerDeck(
 
   // Posição X da baia considerando o espaço visual entre escotilhas de 40'
   const bayCellX = (index: number) => {
-    const gapsBefore = Math.floor(index / 2);
+    let gapsBefore = Math.floor(index / 2);
+    if (hasEverFitFunnel && index >= idx63) {
+      gapsBefore = Math.floor((index - 1) / 2);
+    }
     let xPos = bayAreaRight - ((index + 1) * cellWidth + gapsBefore * hatchGap);
     if (hasCoscoFunnel && index >= idx65) {
       xPos -= coscoFunnelSlotW;
     }
+    if (hasEverFitFunnel && index >= idx63) {
+      xPos -= everFitFunnelSlotW;
+    }
     if (hasSpecialBridge55_57 && index >= idx57) {
       xPos -= nykBridgeSlotW;
+    }
+    if (hasEverFitBridge && index >= idx29) {
+      xPos -= everFitBridgeSlotW;
     }
     return xPos;
   };
@@ -194,7 +221,7 @@ function renderContainerDeck(
   const bridgeIndices: number[] = [];
   const funnelIndices: number[] = [];
 
-  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57) {
+  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge) {
     const targetBridgeBay = config.bridgeBay ?? config.bridgeBayStart ?? 34;
     const occupiedBridgeBays = getOccupiedBayNumbers(
       targetBridgeBay,
@@ -230,7 +257,7 @@ function renderContainerDeck(
       }
     }
 
-    if (config.separateFunnel && !hasCoscoFunnel) {
+    if (config.separateFunnel && !hasCoscoFunnel && !hasEverFitFunnel) {
       const targetFunnelBay = config.funnelBay ?? config.funnelBayStart ?? 54;
       const occupiedFunnelBays = getOccupiedBayNumbers(
         targetFunnelBay,
@@ -346,6 +373,17 @@ function renderContainerDeck(
               if (idx77 !== -1) {
                 const cellX77 = bayCellX(idx77);
                 centerX = (cellX + cellWidth / 2 + cellX77 + cellWidth / 2) / 2;
+              }
+            }
+
+            // No navio Ever Fit, remove a bay 75 e deixa a 76 centralizada entre a divisão dos contêineres de 20'
+            if (isEverFitClass && bay === 75) return null;
+
+            if (isEverFitClass && bay === 76) {
+              const idx75 = bays.indexOf(75);
+              if (idx75 !== -1) {
+                const cellX75 = bayCellX(idx75);
+                centerX = (cellX + cellWidth / 2 + cellX75 + cellWidth / 2) / 2;
               }
             }
 
@@ -620,6 +658,80 @@ function renderContainerDeck(
                   fill="#1e293b"
                   stroke="#0f172a"
                   strokeWidth="0.7"
+                />
+              </>
+            );
+          })()}
+        </g>
+      )}
+
+      {/* 2c. Passadiço Específico do EVER FIT (entre as bays 27 e 29, sem ocultar as bays) */}
+      {!isAllAft && hasEverFitBridge && (
+        <g className="superstructure-bridge-island-everfit">
+          {(() => {
+            const rightOf29 = bayCellX(idx29) + cellWidth;
+            const leftOf27 = bayCellX(idx27);
+            const slotW = Math.max(8.0, everFitBridgeSlotW - 0.4);
+            const slotX = (rightOf29 + leftOf27 - slotW) / 2;
+            return (
+              <>
+                <title>Passadiço (entre Bay 27 e Bay 29)</title>
+                <rect
+                  x={slotX}
+                  y={y + 2.5}
+                  width={slotW}
+                  height={vesselHeight - 5}
+                  rx="1.8"
+                  fill={color.fill}
+                  stroke={color.stroke}
+                  strokeWidth="1.2"
+                />
+                {/* Asas do passadiço */}
+                <line
+                  x1={slotX + slotW * 0.55}
+                  y1={y + 0.8}
+                  x2={slotX + slotW * 0.55}
+                  y2={y + vesselHeight - 0.8}
+                  stroke={color.stroke}
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                />
+              </>
+            );
+          })()}
+        </g>
+      )}
+
+      {/* 3c. Chaminé Separada Específica do EVER FIT (entre as bays 61 e 63, deixando a 61 de 20' na frente) */}
+      {!isAllAft && hasEverFitFunnel && (
+        <g className="superstructure-funnel-island-everfit">
+          {(() => {
+            const rightOf63 = bayCellX(idx63) + cellWidth;
+            const leftOf61 = bayCellX(idx61);
+            const slotW = Math.max(1.6, everFitFunnelSlotW - 0.35);
+            const slotX = (rightOf63 + leftOf61 - slotW) / 2;
+            const centerFunnelX = slotX + slotW / 2;
+            return (
+              <>
+                <title>Chaminé (entre Bay 61 e Bay 63)</title>
+                <rect
+                  x={slotX}
+                  y={y + 3.2}
+                  width={slotW}
+                  height={vesselHeight - 6.4}
+                  rx="1.6"
+                  fill="#14532d"
+                  stroke="#052e16"
+                  strokeWidth="1.1"
+                />
+                <ellipse
+                  cx={centerFunnelX}
+                  cy={y + vesselHeight / 2}
+                  rx={Math.max(1.8, Math.min(3.6, slotW * 0.36))}
+                  ry={Math.max(1.8, Math.min(3.4, vesselHeight * 0.15))}
+                  fill="#052e16"
+                  stroke="#ffffff"
+                  strokeWidth="0.5"
                 />
               </>
             );

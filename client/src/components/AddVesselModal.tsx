@@ -212,6 +212,7 @@ export default function AddVesselModal({
     const knownDefault = KNOWN_VESSEL_DEFAULTS[upperName] ??
       (upperName.includes("VERACRUZ") ? KNOWN_VESSEL_DEFAULTS["CMA CGM VERACRUZ"] :
       (upperName.includes("COSCO") && (upperName.includes("CHILE") || upperName.includes("BRAZIL") || upperName.includes("BRASIL") || upperName.includes("ARGENTINA") || upperName.includes("URUGUAY"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["COSCO SHIPPING BRAZIL"]) :
+      (upperName.includes("EVER") && (upperName.includes("FIT") || upperName.includes("FAR") || upperName.includes("FAME") || upperName.includes("FASHION") || upperName.includes("FORTUNE"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["EVER FIT"]) :
       (upperName.includes("PANTANAL") ? KNOWN_VESSEL_DEFAULTS["LOG-IN PANTANAL"] :
       (upperName.includes("BRISA") ? KNOWN_VESSEL_DEFAULTS["NC BRISA"] :
       (upperName.includes("SPYROS") ? KNOWN_VESSEL_DEFAULTS["SPYROS V"] : undefined))));
@@ -297,7 +298,8 @@ export default function AddVesselModal({
     const upperName = v.name.trim().toUpperCase();
     const knownDefault = KNOWN_VESSEL_DEFAULTS[upperName] ??
       (upperName.includes("VERACRUZ") ? KNOWN_VESSEL_DEFAULTS["CMA CGM VERACRUZ"] :
-      (upperName.includes("COSCO") && (upperName.includes("CHILE") || upperName.includes("BRAZIL") || upperName.includes("BRASIL") || upperName.includes("ARGENTINA") || upperName.includes("URUGUAY"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["COSCO SHIPPING BRAZIL"]) : undefined);
+      (upperName.includes("COSCO") && (upperName.includes("CHILE") || upperName.includes("BRAZIL") || upperName.includes("BRASIL") || upperName.includes("ARGENTINA") || upperName.includes("URUGUAY"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["COSCO SHIPPING BRAZIL"]) :
+      (upperName.includes("EVER") && (upperName.includes("FIT") || upperName.includes("FAR") || upperName.includes("FAME") || upperName.includes("FASHION") || upperName.includes("FORTUNE"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["EVER FIT"]) : undefined);
 
     const bayCount = isContainer ? normalizeBayCount(v.bayCount ?? v.bays ?? v.maxBayNumber ?? knownDefault?.bayCount) : undefined;
     const rowCount = isContainer ? normalizeRowCount(v.rowCount ?? v.rows ?? knownDefault?.rowCount) : undefined;

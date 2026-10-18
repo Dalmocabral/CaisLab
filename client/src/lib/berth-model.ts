@@ -405,6 +405,27 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     funnelBayEnd: 64,
     vesselType: "container",
   },
+  "EVER FIT": {
+    name: "EVER FIT",
+    loa: 333.9,
+    beam: 48.43,
+    draft: 14.3,
+    bayCount: 76,
+    bays: 76,
+    rowCount: 20,
+    rows: 20,
+    tierCount: 7,
+    tiers: 7,
+    bridgePosition: "between-bays",
+    bridgeBay: 28,
+    bridgeBayStart: 28,
+    bridgeBayEnd: 28,
+    separateFunnel: true,
+    funnelBay: 62,
+    funnelBayStart: 62,
+    funnelBayEnd: 62,
+    vesselType: "container",
+  },
   "CMA CGM VERACRUZ": {
     name: "CMA CGM VERACRUZ",
     loa: 228.62,
@@ -725,24 +746,51 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const idx57 = bays.indexOf(57);
   const hasSpecialBridge55_57 = (isNykRumina || isSeaspanEmpire) && idx55 !== -1 && idx57 !== -1;
 
+  const isEverFitClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("EVER") && (
+    vessel.name.toUpperCase().includes("FIT") ||
+    vessel.name.toUpperCase().includes("FAR") ||
+    vessel.name.toUpperCase().includes("FAME") ||
+    vessel.name.toUpperCase().includes("FASHION") ||
+    vessel.name.toUpperCase().includes("FORTUNE") ||
+    vessel.name.toUpperCase().includes("FAST") ||
+    vessel.name.toUpperCase().includes("FORE") ||
+    vessel.name.toUpperCase().includes("FUTURE")
+  );
+  const idx27 = bays.indexOf(27);
+  const idx29 = bays.indexOf(29);
+  const idx61 = bays.indexOf(61);
+  const hasEverFitBridge = isEverFitClass && idx27 !== -1 && idx29 !== -1;
+  const hasEverFitFunnel = isEverFitClass && config.separateFunnel && idx61 !== -1 && idx63 !== -1;
+
   const num40ftGaps = Math.max(0, Math.floor((bays.length - 1) / 2));
-  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0);
+  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0);
   const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + extraSlots);
   const hatchGap = bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0;
   const totalGapsWidth = num40ftGaps * hatchGap;
   const coscoFunnelSlotW = hasCoscoFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
+  const everFitFunnelSlotW = hasEverFitFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
   const nykBridgeSlotW = hasSpecialBridge55_57 ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
-  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - nykBridgeSlotW);
+  const everFitBridgeSlotW = hasEverFitBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
+  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW);
   const cellWidth = availableBayWidth / Math.max(1, bays.length);
 
   const bayCellFromStern = (index: number) => {
-    const gapsBefore = Math.floor(index / 2);
+    let gapsBefore = Math.floor(index / 2);
+    if (hasEverFitFunnel && index >= idx63) {
+      gapsBefore = Math.floor((index - 1) / 2);
+    }
     let xPos = bayAreaRight - ((index + 1) * cellWidth + gapsBefore * hatchGap);
     if (hasCoscoFunnel && index >= idx65) {
       xPos -= coscoFunnelSlotW;
     }
+    if (hasEverFitFunnel && index >= idx63) {
+      xPos -= everFitFunnelSlotW;
+    }
     if (hasSpecialBridge55_57 && index >= idx57) {
       xPos -= nykBridgeSlotW;
+    }
+    if (hasEverFitBridge && index >= idx29) {
+      xPos -= everFitBridgeSlotW;
     }
     return xPos;
   };
@@ -750,7 +798,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const bridgeIndices: number[] = [];
   const funnelIndices: number[] = [];
 
-  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57) {
+  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge) {
     const targetBridgeBay = config.bridgeBay ?? config.bridgeBayStart ?? 34;
     const occupiedBridgeBays = getOccupiedBayNumbers(
       targetBridgeBay,
@@ -785,7 +833,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
       }
     }
 
-    if (config.separateFunnel && !hasCoscoFunnel) {
+    if (config.separateFunnel && !hasCoscoFunnel && !hasEverFitFunnel) {
       const targetFunnelBay = config.funnelBay ?? config.funnelBayStart ?? 54;
       const occupiedFunnelBays = getOccupiedBayNumbers(
         targetFunnelBay,
@@ -833,6 +881,11 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     const leftOf55 = bayCellFromStern(idx55);
     bridgeCenterFromStern = (rightOf57 + leftOf55) / 2;
     bridgeLength = Math.max(10, nykBridgeSlotW - 0.4);
+  } else if (hasEverFitBridge) {
+    const rightOf29 = bayCellFromStern(idx29) + cellWidth;
+    const leftOf27 = bayCellFromStern(idx27);
+    bridgeCenterFromStern = (rightOf29 + leftOf27) / 2;
+    bridgeLength = Math.max(10, everFitBridgeSlotW - 0.4);
   } else if (bridgeIndices.length > 0) {
     const minX = Math.min(...bridgeIndices.map((idx) => bayCellFromStern(idx)));
     const maxX = Math.max(...bridgeIndices.map((idx) => bayCellFromStern(idx) + cellWidth));
@@ -851,6 +904,11 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     const leftOf63 = bayCellFromStern(idx63);
     funnelCenterFromStern = (rightOf65 + leftOf63) / 2;
     funnelLength = Math.max(6, coscoFunnelSlotW);
+  } else if (hasEverFitFunnel) {
+    const rightOf63 = bayCellFromStern(idx63) + cellWidth;
+    const leftOf61 = bayCellFromStern(idx61);
+    funnelCenterFromStern = (rightOf63 + leftOf61) / 2;
+    funnelLength = Math.max(6, everFitFunnelSlotW);
   } else if (config.separateFunnel && funnelIndices.length > 0) {
     const minX = Math.min(...funnelIndices.map((idx) => bayCellFromStern(idx)));
     const maxX = Math.max(...funnelIndices.map((idx) => bayCellFromStern(idx) + cellWidth));
@@ -1370,6 +1428,7 @@ export function normalizeScenario(value: unknown): Scenario | null {
     const knownDefault = KNOWN_VESSEL_DEFAULTS[upperName] ??
       (upperName.includes("VERACRUZ") ? KNOWN_VESSEL_DEFAULTS["CMA CGM VERACRUZ"] :
       (upperName.includes("COSCO") && (upperName.includes("CHILE") || upperName.includes("BRAZIL") || upperName.includes("BRASIL") || upperName.includes("ARGENTINA") || upperName.includes("URUGUAY"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["COSCO SHIPPING BRAZIL"]) :
+      (upperName.includes("EVER") && (upperName.includes("FIT") || upperName.includes("FAR") || upperName.includes("FAME") || upperName.includes("FASHION") || upperName.includes("FORTUNE"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["EVER FIT"]) :
       (upperName.includes("PANTANAL") ? KNOWN_VESSEL_DEFAULTS["LOG-IN PANTANAL"] :
       (upperName.includes("BRISA") ? KNOWN_VESSEL_DEFAULTS["NC BRISA"] :
       (upperName.includes("SPYROS") ? KNOWN_VESSEL_DEFAULTS["SPYROS V"] : undefined))));
