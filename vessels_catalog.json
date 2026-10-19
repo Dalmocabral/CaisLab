@@ -9,7 +9,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "19/10/2026 16:42"
+    "updatedAt": "19/10/2026 21:51"
   },
   {
     "name": "COSCO SHIPPING BRAZIL",
@@ -21,7 +21,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "HONG KONG, CHINA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "19/10/2026 16:42"
+    "updatedAt": "19/10/2026 21:51"
   },
   {
     "name": "EVER FAITH",
@@ -33,7 +33,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "19/10/2026 16:42"
+    "updatedAt": "19/10/2026 21:51"
   },
   {
     "name": "MERCOSUL FORTALEZA",
@@ -58,5 +58,17 @@
     "flag": "ISLE OF MAN",
     "lastBerth": "TECONT1",
     "updatedAt": "18/10/2026 21:05"
+  },
+  {
+    "name": "WINDEA CURIE",
+    "loa": 89.6,
+    "beam": 19.82,
+    "draft": 5.1,
+    "berthingSide": "boreste",
+    "imo": "1025124",
+    "type": "COMMISSIONING SERVICE OPERATION VESSEL",
+    "flag": "PORTUGAL (MAR)",
+    "lastBerth": "TECONT1",
+    "updatedAt": "19/10/2026 21:51"
   }
 ]

@@ -1,21 +1,21 @@
 {
-  "updatedAt": "19/10/2026 16:42",
+  "updatedAt": "19/10/2026 21:51",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 4,
   "maneuvers": [
     {
-      "dateTime": "19/10 15:00",
-      "name": "MERCOSUL FORTALEZA",
-      "draft": 10.8,
-      "loa": 185.97,
-      "beam": 34.88,
+      "dateTime": "20/10 08:00",
+      "name": "WINDEA CURIE",
+      "draft": 5.1,
+      "loa": 89.6,
+      "beam": 19.82,
       "maneuver": "E",
       "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
+      "berthTo": "TECONT1",
       "berthingSide": "boreste",
-      "imo": "9784661",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "BRAZIL",
+      "imo": "1025124",
+      "type": "COMMISSIONING SERVICE OPERATION VESSEL",
+      "flag": "PORTUGAL (MAR)",
       "terminal": "rio"
     },
     {
