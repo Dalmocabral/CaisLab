@@ -1,27 +1,51 @@
 [
   {
+    "name": "CMA CGM KRYPTON",
+    "loa": 335.23,
+    "beam": 51.06,
+    "draft": 14.1,
+    "berthingSide": "boreste",
+    "imo": "9996733",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "MALTA",
+    "lastBerth": "TECONTPROLONG",
+    "updatedAt": "19/10/2026 16:42"
+  },
+  {
     "name": "COSCO SHIPPING BRAZIL",
     "loa": 335.93,
     "beam": 51.04,
-    "draft": 13.5,
+    "draft": 14.1,
     "berthingSide": "boreste",
     "imo": "9945837",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "HONG KONG, CHINA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "19/10/2026 09:25"
+    "updatedAt": "19/10/2026 16:42"
+  },
+  {
+    "name": "EVER FAITH",
+    "loa": 333.96,
+    "beam": 48.52,
+    "draft": 14.5,
+    "berthingSide": "boreste",
+    "imo": "9850525",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "PANAMA",
+    "lastBerth": "TECONTPROLONG",
+    "updatedAt": "19/10/2026 16:42"
   },
   {
     "name": "MERCOSUL FORTALEZA",
     "loa": 185.97,
     "beam": 34.88,
-    "draft": 10.7,
+    "draft": 10.8,
     "berthingSide": "boreste",
     "imo": "9784661",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "19/10/2026 09:25"
+    "updatedAt": "19/10/2026 16:42"
   },
   {
     "name": "SEVEN RIO",

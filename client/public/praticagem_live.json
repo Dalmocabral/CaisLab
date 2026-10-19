@@ -1,12 +1,12 @@
 {
-  "updatedAt": "19/10/2026 09:25",
+  "updatedAt": "19/10/2026 16:42",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 2,
+  "count": 4,
   "maneuvers": [
     {
-      "dateTime": "19/10 15:30",
+      "dateTime": "19/10 15:00",
       "name": "MERCOSUL FORTALEZA",
-      "draft": 10.7,
+      "draft": 10.8,
       "loa": 185.97,
       "beam": 34.88,
       "maneuver": "E",
@@ -21,7 +21,7 @@
     {
       "dateTime": "21/10 07:00",
       "name": "COSCO SHIPPING BRAZIL",
-      "draft": 13.5,
+      "draft": 14.1,
       "loa": 335.93,
       "beam": 51.04,
       "maneuver": "E",
@@ -31,6 +31,36 @@
       "imo": "9945837",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "HONG KONG, CHINA",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "27/10 08:00",
+      "name": "CMA CGM KRYPTON",
+      "draft": 14.1,
+      "loa": 335.23,
+      "beam": 51.06,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONTPROLONG",
+      "berthingSide": "boreste",
+      "imo": "9996733",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "MALTA",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "08/11 05:30",
+      "name": "EVER FAITH",
+      "draft": 14.5,
+      "loa": 333.96,
+      "beam": 48.52,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONTPROLONG",
+      "berthingSide": "boreste",
+      "imo": "9850525",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "PANAMA",
       "terminal": "rio"
     }
   ]
