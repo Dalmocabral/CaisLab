@@ -9,7 +9,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "20/10/2026 06:51"
+    "updatedAt": "20/10/2026 13:08"
   },
   {
     "name": "COSCO SHIPPING BRAZIL",
@@ -21,7 +21,19 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "HONG KONG, CHINA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "20/10/2026 06:51"
+    "updatedAt": "20/10/2026 13:08"
+  },
+  {
+    "name": "EVER FAIR",
+    "loa": 333.95,
+    "beam": 48.43,
+    "draft": 14.8,
+    "berthingSide": "boreste",
+    "imo": "9850886",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "LIBERIA",
+    "lastBerth": "TECONTPROLONG",
+    "updatedAt": "20/10/2026 13:08"
   },
   {
     "name": "EVER FAITH",
@@ -33,7 +45,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "20/10/2026 06:51"
+    "updatedAt": "20/10/2026 13:08"
   },
   {
     "name": "MERCOSUL FORTALEZA",

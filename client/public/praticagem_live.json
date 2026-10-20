@@ -1,23 +1,8 @@
 {
-  "updatedAt": "20/10/2026 06:51",
+  "updatedAt": "20/10/2026 13:08",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 4,
   "maneuvers": [
-    {
-      "dateTime": "20/10 08:00",
-      "name": "WINDEA CURIE",
-      "draft": 5.1,
-      "loa": 89.6,
-      "beam": 19.82,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "boreste",
-      "imo": "1025124",
-      "type": "COMMISSIONING SERVICE OPERATION VESSEL",
-      "flag": "PORTUGAL (MAR)",
-      "terminal": "rio"
-    },
     {
       "dateTime": "21/10 07:00",
       "name": "COSCO SHIPPING BRAZIL",
@@ -46,6 +31,21 @@
       "imo": "9996733",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "MALTA",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "04/11 06:30",
+      "name": "EVER FAIR",
+      "draft": 14.8,
+      "loa": 333.95,
+      "beam": 48.43,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONTPROLONG",
+      "berthingSide": "boreste",
+      "imo": "9850886",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "LIBERIA",
       "terminal": "rio"
     },
     {
