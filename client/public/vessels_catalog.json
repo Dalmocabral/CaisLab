@@ -9,7 +9,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "20/10/2026 00:49"
+    "updatedAt": "20/10/2026 06:51"
   },
   {
     "name": "COSCO SHIPPING BRAZIL",
@@ -21,7 +21,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "HONG KONG, CHINA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "20/10/2026 00:49"
+    "updatedAt": "20/10/2026 06:51"
   },
   {
     "name": "EVER FAITH",
@@ -33,7 +33,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "20/10/2026 00:49"
+    "updatedAt": "20/10/2026 06:51"
   },
   {
     "name": "MERCOSUL FORTALEZA",
@@ -69,6 +69,6 @@
     "type": "COMMISSIONING SERVICE OPERATION VESSEL",
     "flag": "PORTUGAL (MAR)",
     "lastBerth": "TECONT1",
-    "updatedAt": "20/10/2026 00:49"
+    "updatedAt": "20/10/2026 06:51"
   }
 ]
