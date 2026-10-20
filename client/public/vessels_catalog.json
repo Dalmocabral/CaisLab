@@ -21,7 +21,21 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "HONG KONG, CHINA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "20/10/2026 18:11"
+    "updatedAt": "20/10/2026 18:11",
+    "bayCount": 78,
+    "bays": 78,
+    "rowCount": 20,
+    "rows": 20,
+    "tierCount": 9,
+    "tiers": 9,
+    "bridgePosition": "between-bays",
+    "bridgeBay": 22,
+    "bridgeBayStart": 22,
+    "bridgeBayEnd": 22,
+    "separateFunnel": true,
+    "funnelBay": 64,
+    "funnelBayStart": 64,
+    "funnelBayEnd": 64
   },
   {
     "name": "EVER FAIR",
