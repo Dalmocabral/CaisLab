@@ -9,7 +9,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "20/10/2026 13:08"
+    "updatedAt": "20/10/2026 18:11"
   },
   {
     "name": "COSCO SHIPPING BRAZIL",
@@ -21,7 +21,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "HONG KONG, CHINA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "20/10/2026 13:08"
+    "updatedAt": "20/10/2026 18:11"
   },
   {
     "name": "EVER FAIR",
@@ -33,7 +33,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "20/10/2026 13:08"
+    "updatedAt": "20/10/2026 18:11"
   },
   {
     "name": "EVER FAITH",
@@ -45,7 +45,19 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "20/10/2026 13:08"
+    "updatedAt": "20/10/2026 18:11"
+  },
+  {
+    "name": "KOTA ELOK",
+    "loa": 335.0,
+    "beam": 51.0,
+    "draft": 14.6,
+    "berthingSide": "boreste",
+    "imo": "1081831",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "SINGAPORE",
+    "lastBerth": "TECONTPROLONG",
+    "updatedAt": "20/10/2026 18:11"
   },
   {
     "name": "MERCOSUL FORTALEZA",
@@ -70,6 +82,18 @@
     "flag": "ISLE OF MAN",
     "lastBerth": "TECONT1",
     "updatedAt": "18/10/2026 21:05"
+  },
+  {
+    "name": "SEVEN WAVES",
+    "loa": 145.95,
+    "beam": 29.98,
+    "draft": 6.9,
+    "berthingSide": "boreste",
+    "imo": "9649029",
+    "type": "PIPE LAYER",
+    "flag": "ISLE OF MAN",
+    "lastBerth": "TECONT1",
+    "updatedAt": "20/10/2026 18:11"
   },
   {
     "name": "WINDEA CURIE",

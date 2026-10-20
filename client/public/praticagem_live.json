@@ -1,7 +1,7 @@
 {
-  "updatedAt": "20/10/2026 13:08",
+  "updatedAt": "20/10/2026 18:11",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 4,
+  "count": 6,
   "maneuvers": [
     {
       "dateTime": "21/10 07:00",
@@ -16,6 +16,21 @@
       "imo": "9945837",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "HONG KONG, CHINA",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "21/10 14:30",
+      "name": "SEVEN WAVES",
+      "draft": 6.9,
+      "loa": 145.95,
+      "beam": 29.98,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONT1",
+      "berthingSide": "boreste",
+      "imo": "9649029",
+      "type": "PIPE LAYER",
+      "flag": "ISLE OF MAN",
       "terminal": "rio"
     },
     {
@@ -61,6 +76,21 @@
       "imo": "9850525",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "PANAMA",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "11/11 10:00",
+      "name": "KOTA ELOK",
+      "draft": 14.6,
+      "loa": 335.0,
+      "beam": 51.0,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONTPROLONG",
+      "berthingSide": "boreste",
+      "imo": "1081831",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "SINGAPORE",
       "terminal": "rio"
     }
   ]
