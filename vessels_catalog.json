@@ -1,5 +1,17 @@
 [
   {
+    "name": "BOCHEM WALVIS BAY",
+    "loa": 145.0,
+    "beam": 24.26,
+    "draft": 9.5,
+    "berthingSide": "bombordo",
+    "imo": "9725859",
+    "type": "CHEMICAL/PRODUCTS TANKER",
+    "flag": "HONG KONG, CHINA",
+    "lastBerth": "TECONTPROLONG",
+    "updatedAt": "21/10/2026 14:45"
+  },
+  {
     "name": "CMA CGM KRYPTON",
     "loa": 335.23,
     "beam": 51.06,
@@ -9,7 +21,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "21/10/2026 08:59"
+    "updatedAt": "21/10/2026 14:45"
   },
   {
     "name": "COSCO SHIPPING BRAZIL",
@@ -47,7 +59,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "21/10/2026 08:59"
+    "updatedAt": "21/10/2026 14:45"
   },
   {
     "name": "EVER FAITH",
@@ -59,7 +71,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "21/10/2026 08:59"
+    "updatedAt": "21/10/2026 14:45"
   },
   {
     "name": "KOTA ELOK",
@@ -71,7 +83,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "21/10/2026 08:59"
+    "updatedAt": "21/10/2026 14:45"
   },
   {
     "name": "MERCOSUL FORTALEZA",
@@ -84,6 +96,18 @@
     "flag": "BRAZIL",
     "lastBerth": "TECONTPROLONG",
     "updatedAt": "19/10/2026 16:42"
+  },
+  {
+    "name": "NC BRAVO",
+    "loa": 224.0,
+    "beam": 34.89,
+    "draft": 11.0,
+    "berthingSide": "boreste",
+    "imo": "9612791",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "BRAZIL",
+    "lastBerth": "TECONT1",
+    "updatedAt": "21/10/2026 14:45"
   },
   {
     "name": "SEVEN RIO",
@@ -107,7 +131,7 @@
     "type": "PIPE LAYER",
     "flag": "ISLE OF MAN",
     "lastBerth": "TECONT1",
-    "updatedAt": "21/10/2026 08:59"
+    "updatedAt": "21/10/2026 14:45"
   },
   {
     "name": "WINDEA CURIE",
