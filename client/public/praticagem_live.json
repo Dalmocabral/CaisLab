@@ -1,5 +1,5 @@
 {
-  "updatedAt": "20/10/2026 22:49",
+  "updatedAt": "21/10/2026 02:30",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 6,
   "maneuvers": [
@@ -19,7 +19,7 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "21/10 14:30",
+      "dateTime": "21/10 20:00",
       "name": "SEVEN WAVES",
       "draft": 6.9,
       "loa": 145.95,
