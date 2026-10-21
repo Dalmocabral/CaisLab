@@ -1,7 +1,7 @@
 {
-  "updatedAt": "21/10/2026 14:45",
+  "updatedAt": "21/10/2026 19:46",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 7,
+  "count": 8,
   "maneuvers": [
     {
       "dateTime": "21/10 21:00",
@@ -64,7 +64,22 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "04/11 06:30",
+      "dateTime": "03/11 05:30",
+      "name": "CMA CGM COBALT",
+      "draft": 14.4,
+      "loa": 335.23,
+      "beam": 51.06,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONTPROLONG",
+      "berthingSide": "boreste",
+      "imo": "9996680",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "MALTA",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "04/11 07:30",
       "name": "EVER FAIR",
       "draft": 14.8,
       "loa": 333.95,

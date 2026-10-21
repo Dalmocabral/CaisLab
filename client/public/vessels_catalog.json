@@ -9,7 +9,19 @@
     "type": "CHEMICAL/PRODUCTS TANKER",
     "flag": "HONG KONG, CHINA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "21/10/2026 14:45"
+    "updatedAt": "21/10/2026 19:46"
+  },
+  {
+    "name": "CMA CGM COBALT",
+    "loa": 335.23,
+    "beam": 51.06,
+    "draft": 14.4,
+    "berthingSide": "boreste",
+    "imo": "9996680",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "MALTA",
+    "lastBerth": "TECONTPROLONG",
+    "updatedAt": "21/10/2026 19:46"
   },
   {
     "name": "CMA CGM KRYPTON",
@@ -21,7 +33,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "21/10/2026 14:45"
+    "updatedAt": "21/10/2026 19:46"
   },
   {
     "name": "COSCO SHIPPING BRAZIL",
@@ -59,7 +71,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "21/10/2026 14:45"
+    "updatedAt": "21/10/2026 19:46"
   },
   {
     "name": "EVER FAITH",
@@ -71,7 +83,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "21/10/2026 14:45"
+    "updatedAt": "21/10/2026 19:46"
   },
   {
     "name": "KOTA ELOK",
@@ -83,7 +95,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "21/10/2026 14:45"
+    "updatedAt": "21/10/2026 19:46"
   },
   {
     "name": "MERCOSUL FORTALEZA",
@@ -107,7 +119,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "21/10/2026 14:45"
+    "updatedAt": "21/10/2026 19:46"
   },
   {
     "name": "SEVEN RIO",
@@ -131,7 +143,7 @@
     "type": "PIPE LAYER",
     "flag": "ISLE OF MAN",
     "lastBerth": "TECONT1",
-    "updatedAt": "21/10/2026 14:45"
+    "updatedAt": "21/10/2026 19:46"
   },
   {
     "name": "WINDEA CURIE",
