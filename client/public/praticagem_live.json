@@ -1,23 +1,8 @@
 {
-  "updatedAt": "21/10/2026 22:53",
+  "updatedAt": "22/10/2026 02:27",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 8,
+  "count": 7,
   "maneuvers": [
-    {
-      "dateTime": "21/10 21:00",
-      "name": "SEVEN WAVES",
-      "draft": 6.9,
-      "loa": 145.95,
-      "beam": 29.98,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "boreste",
-      "imo": "9649029",
-      "type": "PIPE LAYER",
-      "flag": "ISLE OF MAN",
-      "terminal": "rio"
-    },
     {
       "dateTime": "22/10 14:30",
       "name": "BOCHEM WALVIS BAY",
