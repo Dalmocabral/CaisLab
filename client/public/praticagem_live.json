@@ -1,7 +1,7 @@
 {
-  "updatedAt": "22/10/2026 09:01",
+  "updatedAt": "22/10/2026 14:46",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 7,
+  "count": 9,
   "maneuvers": [
     {
       "dateTime": "22/10 14:30",
@@ -16,6 +16,36 @@
       "imo": "9725859",
       "type": "CHEMICAL/PRODUCTS TANKER",
       "flag": "HONG KONG, CHINA",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "23/10 19:00",
+      "name": "LOG-IN PANTANAL",
+      "draft": 9.0,
+      "loa": 182.47,
+      "beam": 25.2,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONT1",
+      "berthingSide": "boreste",
+      "imo": "9351799",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "BRAZIL",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "24/10 19:00",
+      "name": "APL NEW JERSEY",
+      "draft": 12.6,
+      "loa": 293.18,
+      "beam": 40.0,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONTPROLONG",
+      "berthingSide": "boreste",
+      "imo": "9350020",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "LIBERIA",
       "terminal": "rio"
     },
     {

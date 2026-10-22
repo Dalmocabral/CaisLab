@@ -1,5 +1,17 @@
 [
   {
+    "name": "APL NEW JERSEY",
+    "loa": 293.18,
+    "beam": 40.0,
+    "draft": 12.6,
+    "berthingSide": "boreste",
+    "imo": "9350020",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "LIBERIA",
+    "lastBerth": "TECONTPROLONG",
+    "updatedAt": "22/10/2026 14:46"
+  },
+  {
     "name": "BOCHEM WALVIS BAY",
     "loa": 145.0,
     "beam": 24.26,
@@ -9,7 +21,7 @@
     "type": "CHEMICAL/PRODUCTS TANKER",
     "flag": "HONG KONG, CHINA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "22/10/2026 09:01"
+    "updatedAt": "22/10/2026 14:46"
   },
   {
     "name": "CMA CGM COBALT",
@@ -21,7 +33,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "22/10/2026 09:01"
+    "updatedAt": "22/10/2026 14:46"
   },
   {
     "name": "CMA CGM KRYPTON",
@@ -33,7 +45,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "22/10/2026 09:01"
+    "updatedAt": "22/10/2026 14:46"
   },
   {
     "name": "COSCO SHIPPING BRAZIL",
@@ -71,7 +83,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "22/10/2026 09:01"
+    "updatedAt": "22/10/2026 14:46"
   },
   {
     "name": "EVER FAITH",
@@ -83,7 +95,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "22/10/2026 09:01"
+    "updatedAt": "22/10/2026 14:46"
   },
   {
     "name": "KOTA ELOK",
@@ -95,7 +107,19 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "22/10/2026 09:01"
+    "updatedAt": "22/10/2026 14:46"
+  },
+  {
+    "name": "LOG-IN PANTANAL",
+    "loa": 182.47,
+    "beam": 25.2,
+    "draft": 9.0,
+    "berthingSide": "boreste",
+    "imo": "9351799",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "BRAZIL",
+    "lastBerth": "TECONT1",
+    "updatedAt": "22/10/2026 14:46"
   },
   {
     "name": "MERCOSUL FORTALEZA",
@@ -119,7 +143,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "22/10/2026 09:01"
+    "updatedAt": "22/10/2026 14:46"
   },
   {
     "name": "SEVEN RIO",
