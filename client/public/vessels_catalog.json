@@ -3,13 +3,13 @@
     "name": "APL NEW JERSEY",
     "loa": 293.18,
     "beam": 40.0,
-    "draft": 12.6,
+    "draft": 13.6,
     "berthingSide": "boreste",
     "imo": "9350020",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "22/10/2026 14:46"
+    "updatedAt": "22/10/2026 19:37"
   },
   {
     "name": "BOCHEM WALVIS BAY",
@@ -33,7 +33,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "22/10/2026 14:46"
+    "updatedAt": "22/10/2026 19:37"
   },
   {
     "name": "CMA CGM KRYPTON",
@@ -45,7 +45,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "22/10/2026 14:46"
+    "updatedAt": "22/10/2026 19:37"
   },
   {
     "name": "COSCO SHIPPING BRAZIL",
@@ -74,6 +74,18 @@
     "funnelBayEnd": 64
   },
   {
+    "name": "DUSSELDORF EXPRESS",
+    "loa": 293.97,
+    "beam": 32.3,
+    "draft": 9.3,
+    "berthingSide": "boreste",
+    "imo": "9143556",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "BERMUDA",
+    "lastBerth": "TECONT1",
+    "updatedAt": "22/10/2026 19:37"
+  },
+  {
     "name": "EVER FAIR",
     "loa": 333.95,
     "beam": 48.43,
@@ -83,7 +95,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "22/10/2026 14:46"
+    "updatedAt": "22/10/2026 19:37"
   },
   {
     "name": "EVER FAITH",
@@ -95,7 +107,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "22/10/2026 14:46"
+    "updatedAt": "22/10/2026 19:37"
   },
   {
     "name": "KOTA ELOK",
@@ -107,7 +119,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "22/10/2026 14:46"
+    "updatedAt": "22/10/2026 19:37"
   },
   {
     "name": "LOG-IN PANTANAL",
@@ -119,7 +131,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "22/10/2026 14:46"
+    "updatedAt": "22/10/2026 19:37"
   },
   {
     "name": "MERCOSUL FORTALEZA",
@@ -143,7 +155,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "22/10/2026 14:46"
+    "updatedAt": "22/10/2026 19:37"
   },
   {
     "name": "SEVEN RIO",

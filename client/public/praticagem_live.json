@@ -1,23 +1,8 @@
 {
-  "updatedAt": "22/10/2026 14:46",
+  "updatedAt": "22/10/2026 19:37",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 9,
   "maneuvers": [
-    {
-      "dateTime": "22/10 14:30",
-      "name": "BOCHEM WALVIS BAY",
-      "draft": 9.5,
-      "loa": 145.0,
-      "beam": 24.26,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
-      "berthingSide": "bombordo",
-      "imo": "9725859",
-      "type": "CHEMICAL/PRODUCTS TANKER",
-      "flag": "HONG KONG, CHINA",
-      "terminal": "rio"
-    },
     {
       "dateTime": "23/10 19:00",
       "name": "LOG-IN PANTANAL",
@@ -34,9 +19,24 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "24/10 19:00",
+      "dateTime": "24/10 10:30",
+      "name": "DUSSELDORF EXPRESS",
+      "draft": 9.3,
+      "loa": 293.97,
+      "beam": 32.3,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONT1",
+      "berthingSide": "boreste",
+      "imo": "9143556",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "BERMUDA",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "24/10 17:00",
       "name": "APL NEW JERSEY",
-      "draft": 12.6,
+      "draft": 13.6,
       "loa": 293.18,
       "beam": 40.0,
       "maneuver": "E",
