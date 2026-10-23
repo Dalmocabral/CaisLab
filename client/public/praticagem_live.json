@@ -1,5 +1,5 @@
 {
-  "updatedAt": "23/10/2026 14:32",
+  "updatedAt": "23/10/2026 19:38",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 11,
   "maneuvers": [
@@ -94,7 +94,7 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "27/10 08:00",
+      "dateTime": "26/10 15:00",
       "name": "CMA CGM KRYPTON",
       "draft": 14.1,
       "loa": 335.23,
