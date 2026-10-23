@@ -8,8 +8,8 @@
     "imo": "9350020",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
-    "lastBerth": "TECONTPROLONG",
-    "updatedAt": "23/10/2026 08:56"
+    "lastBerth": "TECONT1",
+    "updatedAt": "23/10/2026 14:32"
   },
   {
     "name": "BOCHEM WALVIS BAY",
@@ -33,7 +33,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "23/10/2026 08:56"
+    "updatedAt": "23/10/2026 14:32"
   },
   {
     "name": "CMA CGM KRYPTON",
@@ -45,7 +45,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "23/10/2026 08:56"
+    "updatedAt": "23/10/2026 14:32"
   },
   {
     "name": "COSCO SHIPPING BRAZIL",
@@ -82,8 +82,8 @@
     "imo": "9143556",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BERMUDA",
-    "lastBerth": "TECONT1",
-    "updatedAt": "23/10/2026 08:56"
+    "lastBerth": "TECONTPROLONG",
+    "updatedAt": "23/10/2026 14:32"
   },
   {
     "name": "EVER FAIR",
@@ -95,7 +95,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "23/10/2026 08:56"
+    "updatedAt": "23/10/2026 14:32"
   },
   {
     "name": "EVER FAITH",
@@ -107,7 +107,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "23/10/2026 08:56"
+    "updatedAt": "23/10/2026 14:32"
   },
   {
     "name": "KOTA ELOK",
@@ -119,7 +119,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "23/10/2026 08:56"
+    "updatedAt": "23/10/2026 14:32"
   },
   {
     "name": "LOG-IN PANTANAL",
@@ -131,7 +131,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "23/10/2026 08:56"
+    "updatedAt": "23/10/2026 14:32"
   },
   {
     "name": "MERCOSUL FORTALEZA",
@@ -146,6 +146,18 @@
     "updatedAt": "19/10/2026 16:42"
   },
   {
+    "name": "MERCOSUL GUARUJA",
+    "loa": 228.15,
+    "beam": 32.2,
+    "draft": 11.0,
+    "berthingSide": "boreste",
+    "imo": "9539494",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "BRAZIL",
+    "lastBerth": "TECONT1",
+    "updatedAt": "23/10/2026 14:32"
+  },
+  {
     "name": "NC BRAVO",
     "loa": 224.0,
     "beam": 34.89,
@@ -155,7 +167,19 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "23/10/2026 08:56"
+    "updatedAt": "23/10/2026 14:32"
+  },
+  {
+    "name": "NYK DIANA",
+    "loa": 294.12,
+    "beam": 32.25,
+    "draft": 10.8,
+    "berthingSide": "boreste",
+    "imo": "9337688",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "PANAMA",
+    "lastBerth": "TECONTPROLONG",
+    "updatedAt": "23/10/2026 14:32"
   },
   {
     "name": "SEVEN RIO",
