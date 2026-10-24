@@ -2,13 +2,13 @@
   {
     "name": "APL NEW JERSEY",
     "loa": 293.18,
-    "beam": 40,
-    "draft": 13.6,
+    "beam": 40.0,
+    "draft": 13.8,
     "berthingSide": "boreste",
     "imo": "9350020",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
-    "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/10/2026 11:13",
+    "lastBerth": "TECONT1",
+    "updatedAt": "24/10/2026 14:48",
     "flag": "LIBERIA"
   },
   {
@@ -32,7 +32,7 @@
     "imo": "9996680",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/10/2026 11:13",
+    "updatedAt": "24/10/2026 14:48",
     "bayCount": 78,
     "bays": 78,
     "bridgePosition": "between-bays",
@@ -69,7 +69,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/10/2026 11:13"
+    "updatedAt": "24/10/2026 14:48"
   },
   {
     "name": "CMA CGM PUCCINI",
@@ -205,7 +205,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/10/2026 11:13"
+    "updatedAt": "24/10/2026 14:48"
   },
   {
     "name": "EVER FAITH",
@@ -217,7 +217,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/10/2026 11:13"
+    "updatedAt": "24/10/2026 14:48"
   },
   {
     "name": "EVER FAME",
@@ -321,15 +321,15 @@
   },
   {
     "name": "KOTA ELOK",
-    "loa": 335,
-    "beam": 51,
+    "loa": 335.0,
+    "beam": 51.0,
     "draft": 14.6,
     "berthingSide": "boreste",
     "imo": "1081831",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/10/2026 11:13"
+    "updatedAt": "24/10/2026 14:48"
   },
   {
     "name": "KOTA PAHLAWAN",
@@ -461,24 +461,24 @@
     "name": "MERCOSUL GUARUJA",
     "loa": 228.15,
     "beam": 32.2,
-    "draft": 11,
+    "draft": 11.0,
     "berthingSide": "boreste",
     "imo": "9539494",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/10/2026 11:13",
+    "updatedAt": "24/10/2026 14:48",
     "flag": "BRAZIL"
   },
   {
     "name": "NC BRAVO",
-    "loa": 224,
+    "loa": 224.0,
     "beam": 34.89,
-    "draft": 11.4,
+    "draft": 11.0,
     "berthingSide": "boreste",
     "imo": "9612791",
-    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONT1",
-    "updatedAt": "24/10/2026 11:13",
+    "updatedAt": "24/10/2026 14:48",
     "flag": "BRAZIL",
     "bayCount": 46,
     "bays": 46
@@ -524,7 +524,7 @@
     "imo": "9337688",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONT1",
-    "updatedAt": "24/10/2026 11:13",
+    "updatedAt": "24/10/2026 14:48",
     "flag": "PANAMA"
   },
   {

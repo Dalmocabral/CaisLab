@@ -1,12 +1,12 @@
 {
-  "updatedAt": "24/10/2026 13:43",
+  "updatedAt": "24/10/2026 14:48",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 9,
   "maneuvers": [
     {
       "dateTime": "24/10 13:00",
       "name": "APL NEW JERSEY",
-      "draft": 13.6,
+      "draft": 13.8,
       "loa": 293.18,
       "beam": 40.0,
       "maneuver": "E",
