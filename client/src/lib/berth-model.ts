@@ -751,9 +751,13 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const beam = Math.max(1, vessel.beam ?? 32);
   const config = resolveVesselSuperstructure(vessel);
   const isFortaleza = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("FORTALEZA");
+  const isDusseldorf = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("DUSSELDORF");
   // No 3D do Fortaleza: 10 escotilhas de 40' bem distribuídas (bays 01 a 39) com vão entre bays
+  // No DUSSELDORF EXPRESS: 35 bays de 20' (01 a 69), com bay 53 isolada de 20' e passadiço entre 57 e 59
   const bays = isFortaleza
     ? Array.from({ length: 20 }, (_, index) => index * 2 + 1)
+    : isDusseldorf
+    ? Array.from({ length: 35 }, (_, index) => index * 2 + 1)
     : bayNumberSequence(vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber, vessel.name);
   const isAllAft = config.bridgePosition === "all-aft";
 
@@ -784,7 +788,9 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const isSeaspanEmpire = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("SEASPAN") && vessel.name.toUpperCase().includes("EMPIRE");
   const idx55 = bays.indexOf(55);
   const idx57 = bays.indexOf(57);
+  const idx59 = bays.indexOf(59);
   const hasSpecialBridge55_57 = (isNykRumina || isSeaspanEmpire) && idx55 !== -1 && idx57 !== -1;
+  const hasDusseldorfBridge = isDusseldorf && idx57 !== -1 && idx59 !== -1;
 
   const isEverFitClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("EVER") && (
     vessel.name.toUpperCase().includes("FIT") ||
@@ -802,8 +808,8 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const hasEverFitBridge = isEverFitClass && idx27 !== -1 && idx29 !== -1;
   const hasEverFitFunnel = isEverFitClass && config.separateFunnel && idx61 !== -1 && idx63 !== -1;
 
-  const num40ftGaps = Math.max(0, Math.floor((bays.length - 1) / 2));
-  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0);
+  const num40ftGaps = isDusseldorf ? 17 : Math.max(0, Math.floor((bays.length - 1) / 2));
+  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0);
   const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + extraSlots);
   const hatchGap = isFortaleza ? 1.6 : (bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0);
   const totalGapsWidth = num40ftGaps * hatchGap;
@@ -811,12 +817,23 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const everFitFunnelSlotW = hasEverFitFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
   const nykBridgeSlotW = hasSpecialBridge55_57 ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const everFitBridgeSlotW = hasEverFitBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
-  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW);
+  const dusseldorfBridgeSlotW = hasDusseldorfBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
+  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - dusseldorfBridgeSlotW);
   const cellWidth = availableBayWidth / Math.max(1, bays.length);
 
   const bayCellFromStern = (index: number) => {
     let gapsBefore = Math.floor(index / 2);
-    if (hasEverFitFunnel && index >= idx63) {
+    if (isDusseldorf) {
+      if (index <= 25) {
+        gapsBefore = Math.floor(index / 2);
+      } else if (index === 26) {
+        gapsBefore = 13;
+      } else if (index <= 28) {
+        gapsBefore = 14;
+      } else {
+        gapsBefore = 15 + Math.floor((index - 29) / 2);
+      }
+    } else if (hasEverFitFunnel && index >= idx63) {
       gapsBefore = Math.floor((index - 1) / 2);
     }
     let xPos = bayAreaRight - ((index + 1) * cellWidth + gapsBefore * hatchGap);
@@ -832,13 +849,16 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     if (hasEverFitBridge && index >= idx29) {
       xPos -= everFitBridgeSlotW;
     }
+    if (hasDusseldorfBridge && index >= idx59) {
+      xPos -= dusseldorfBridgeSlotW;
+    }
     return xPos;
   };
 
   const bridgeIndices: number[] = [];
   const funnelIndices: number[] = [];
 
-  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge) {
+  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasDusseldorfBridge) {
     const targetBridgeBay = config.bridgeBay ?? config.bridgeBayStart ?? 34;
     const occupiedBridgeBays = getOccupiedBayNumbers(
       targetBridgeBay,
@@ -926,6 +946,11 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     const leftOf27 = bayCellFromStern(idx27);
     bridgeCenterFromStern = (rightOf29 + leftOf27) / 2;
     bridgeLength = Math.max(10, everFitBridgeSlotW - 0.4);
+  } else if (hasDusseldorfBridge) {
+    const rightOf59 = bayCellFromStern(idx59) + cellWidth;
+    const leftOf57 = bayCellFromStern(idx57);
+    bridgeCenterFromStern = (rightOf59 + leftOf57) / 2;
+    bridgeLength = Math.max(10, dusseldorfBridgeSlotW - 0.4);
   } else if (bridgeIndices.length > 0) {
     const minX = Math.min(...bridgeIndices.map((idx) => bayCellFromStern(idx)));
     const maxX = Math.max(...bridgeIndices.map((idx) => bayCellFromStern(idx) + cellWidth));
@@ -967,52 +992,149 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const totalHatches = Math.ceil(bays.length / 2);
   const hatches: ContainerHatchPlan[] = [];
 
-  for (let h = 0; h < totalHatches; h++) {
-    const colA = 2 * h;
-    const colB = 2 * h + 1 < bays.length ? 2 * h + 1 : undefined;
-
-    const bay20A = bays[colA];
-    const bay20B = colB !== undefined ? bays[colB] : undefined;
-
-    const cellXA = bayCellFromStern(colA);
-    const fromSternA = cellXA + cellWidth / 2;
-
-    let fromSternB: number | undefined;
-    let centerFromStern: number;
-    let length40: number;
-
-    if (colB !== undefined) {
+  if (isDusseldorf) {
+    // 1. Escotilhas 0 a 12: pares de 40ft (bays 01-03 até 49-51)
+    for (let p = 0; p < 13; p++) {
+      const colA = 2 * p;
+      const colB = colA + 1;
+      const cellXA = bayCellFromStern(colA);
       const cellXB = bayCellFromStern(colB);
-      fromSternB = cellXB + cellWidth / 2;
-      centerFromStern = (cellXB + cellXA + cellWidth) / 2;
-      length40 = (cellXA + cellWidth) - cellXB;
-    } else {
-      centerFromStern = fromSternA;
-      length40 = cellWidth;
+      hatches.push({
+        hatchIndex: p,
+        colA,
+        colB,
+        bay20A: bays[colA],
+        bay20B: bays[colB],
+        fromSternA: cellXA + cellWidth / 2,
+        fromSternB: cellXB + cellWidth / 2,
+        centerFromStern: (cellXB + cellXA + cellWidth) / 2,
+        length40: (cellXA + cellWidth) - cellXB,
+        length20: cellWidth,
+        isBlockedByBridge: false,
+        isBlockedByFunnel: false,
+        colABlocked: false,
+        colBBlocked: false,
+      });
     }
 
-    const colABlocked = isBayBlocked(colA);
-    const colBBlocked = colB !== undefined ? isBayBlocked(colB) : false;
-
-    const isBlockedByBridge = bridgeSet.has(colA) || (colB !== undefined && bridgeSet.has(colB));
-    const isBlockedByFunnel = funnelSet.has(colA) || (colB !== undefined && funnelSet.has(colB));
-
+    // 2. Escotilha 13: Bay 53 (bay de 20ft isolada)
+    const col53 = 26; // bays[26] === 53
+    const cellX53 = bayCellFromStern(col53);
     hatches.push({
-      hatchIndex: h,
-      colA,
-      colB,
-      bay20A,
-      bay20B,
-      fromSternA,
-      fromSternB,
-      centerFromStern,
-      length40,
+      hatchIndex: 13,
+      colA: col53,
+      colB: undefined,
+      bay20A: bays[col53],
+      bay20B: undefined,
+      fromSternA: cellX53 + cellWidth / 2,
+      fromSternB: undefined,
+      centerFromStern: cellX53 + cellWidth / 2,
+      length40: cellWidth,
       length20: cellWidth,
-      isBlockedByBridge,
-      isBlockedByFunnel,
-      colABlocked,
-      colBBlocked,
+      isBlockedByBridge: false,
+      isBlockedByFunnel: false,
+      colABlocked: false,
+      colBBlocked: false,
     });
+
+    // 3. Escotilha 14: Bays 55 e 57 (par de 40ft em frente ao passadiço: 57 55)
+    const col55 = 27;
+    const col57 = 28;
+    const cellX55 = bayCellFromStern(col55);
+    const cellX57 = bayCellFromStern(col57);
+    hatches.push({
+      hatchIndex: 14,
+      colA: col55,
+      colB: col57,
+      bay20A: bays[col55],
+      bay20B: bays[col57],
+      fromSternA: cellX55 + cellWidth / 2,
+      fromSternB: cellX57 + cellWidth / 2,
+      centerFromStern: (cellX57 + cellX55 + cellWidth) / 2,
+      length40: (cellX55 + cellWidth) - cellX57,
+      length20: cellWidth,
+      isBlockedByBridge: false,
+      isBlockedByFunnel: false,
+      colABlocked: false,
+      colBBlocked: false,
+    });
+
+    // [ O passadiço fica situado no vão entre a escotilha 14 (bays 55-57) e a escotilha 15 (bays 59-61) ]
+
+    // 4. Escotilhas 15 a 17: pares de 40ft na ré do passadiço (61 59, 65 63, 69 67)
+    const aftPairs = [
+      { colA: 29, colB: 30 }, // 59, 61
+      { colA: 31, colB: 32 }, // 63, 65
+      { colA: 33, colB: 34 }, // 67, 69 ("ultima bay 69 67")
+    ];
+    aftPairs.forEach((pair, idx) => {
+      const cellXA = bayCellFromStern(pair.colA);
+      const cellXB = bayCellFromStern(pair.colB);
+      hatches.push({
+        hatchIndex: 15 + idx,
+        colA: pair.colA,
+        colB: pair.colB,
+        bay20A: bays[pair.colA],
+        bay20B: bays[pair.colB],
+        fromSternA: cellXA + cellWidth / 2,
+        fromSternB: cellXB + cellWidth / 2,
+        centerFromStern: (cellXB + cellXA + cellWidth) / 2,
+        length40: (cellXA + cellWidth) - cellXB,
+        length20: cellWidth,
+        isBlockedByBridge: false,
+        isBlockedByFunnel: false,
+        colABlocked: false,
+        colBBlocked: false,
+      });
+    });
+  } else {
+    for (let h = 0; h < totalHatches; h++) {
+      const colA = 2 * h;
+      const colB = 2 * h + 1 < bays.length ? 2 * h + 1 : undefined;
+
+      const bay20A = bays[colA];
+      const bay20B = colB !== undefined ? bays[colB] : undefined;
+
+      const cellXA = bayCellFromStern(colA);
+      const fromSternA = cellXA + cellWidth / 2;
+
+      let fromSternB: number | undefined;
+      let centerFromStern: number;
+      let length40: number;
+
+      if (colB !== undefined) {
+        const cellXB = bayCellFromStern(colB);
+        fromSternB = cellXB + cellWidth / 2;
+        centerFromStern = (cellXB + cellXA + cellWidth) / 2;
+        length40 = (cellXA + cellWidth) - cellXB;
+      } else {
+        centerFromStern = fromSternA;
+        length40 = cellWidth;
+      }
+
+      const colABlocked = isBayBlocked(colA);
+      const colBBlocked = colB !== undefined ? isBayBlocked(colB) : false;
+
+      const isBlockedByBridge = bridgeSet.has(colA) || (colB !== undefined && bridgeSet.has(colB));
+      const isBlockedByFunnel = funnelSet.has(colA) || (colB !== undefined && funnelSet.has(colB));
+
+      hatches.push({
+        hatchIndex: h,
+        colA,
+        colB,
+        bay20A,
+        bay20B,
+        fromSternA,
+        fromSternB,
+        centerFromStern,
+        length40,
+        length20: cellWidth,
+        isBlockedByBridge,
+        isBlockedByFunnel,
+        colABlocked,
+        colBBlocked,
+      });
+    }
   }
 
   return {

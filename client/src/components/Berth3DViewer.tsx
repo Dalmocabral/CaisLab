@@ -125,6 +125,95 @@ function createDeckGeometry(THREE: ThreeModule, direction: number, loa: number, 
   return geometry;
 }
 
+function createCoscoEmblemTexture(THREE: ThreeModule) {
+  const canvas = document.createElement("canvas");
+  canvas.width = 256;
+  canvas.height = 256;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return null;
+
+  // Círculo com borda branca
+  ctx.beginPath();
+  ctx.arc(128, 128, 116, 0, Math.PI * 2);
+  ctx.fillStyle = "#ffffff";
+  ctx.fill();
+  ctx.lineWidth = 8;
+  ctx.strokeStyle = "#015ea8";
+  ctx.stroke();
+
+  // Disco azul COSCO interno
+  ctx.beginPath();
+  ctx.arc(128, 128, 102, 0, Math.PI * 2);
+  ctx.fillStyle = "#015ea8";
+  ctx.fill();
+
+  // Tipografia e logo náutico
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "900 38px Arial, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText("COSCO", 128, 105);
+
+  ctx.font = "bold 17px Arial, sans-serif";
+  ctx.fillText("SHIPPING", 128, 142);
+
+  // Arcos náuticos
+  ctx.strokeStyle = "#ffffff";
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.arc(128, 128, 84, 0.25 * Math.PI, 0.75 * Math.PI);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(128, 128, 84, 1.25 * Math.PI, 1.75 * Math.PI);
+  ctx.stroke();
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  return texture;
+}
+
+function addTransomNameplate(
+  THREE: ThreeModule,
+  group: ThreeObject,
+  vessel: Vessel,
+  direction: number,
+  loa: number,
+  beam: number,
+  deckHeight: number,
+) {
+  const canvas = document.createElement("canvas");
+  canvas.width = 512;
+  canvas.height = 256;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const vesselName = (vessel.name || "COSCO SHIPPING BRAZIL").toUpperCase();
+  const isCosco = /cosco/i.test(vesselName);
+  const isDusseldorf = /dusseldorf/i.test(vesselName);
+  const port = isCosco ? "HONG KONG" : isDusseldorf ? "HAMBURG" : "PANAMA";
+
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillStyle = "#ffffff";
+  ctx.font = `900 ${vesselName.length > 20 ? 32 : 40}px Arial, sans-serif`;
+  ctx.fillText(vesselName, 256, 100);
+
+  ctx.font = "bold 26px Arial, sans-serif";
+  ctx.fillStyle = "#e2e8f0";
+  ctx.fillText(port, 256, 160);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  const mat = new THREE.MeshBasicMaterial({ map: texture, transparent: true, side: THREE.FrontSide, depthWrite: false });
+  const w = Math.min(beam * 0.64, 26);
+  const h = w * 0.5;
+  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(w, h), mat);
+  const sternX = direction * (-loa * 0.495);
+  mesh.position.set(sternX, deckHeight * 0.58, 0);
+  mesh.rotation.y = direction > 0 ? -Math.PI / 2 : Math.PI / 2;
+  group.add(mesh);
+}
+
 function addVesselNameplate(
   THREE: ThreeModule,
   group: ThreeObject,
@@ -132,13 +221,15 @@ function addVesselNameplate(
   loa: number,
   beam: number,
   freeboard: number,
+  direction: number = 1,
 ) {
   const canvas = document.createElement("canvas");
   canvas.width = 1024;
   canvas.height = 160;
   const context = canvas.getContext("2d");
   if (!context) return;
-  const text = /cosco/i.test(vessel.name) ? "COSCO SHIPPING" : vessel.name.toUpperCase();
+  const isCosco = /cosco/i.test(vessel.name);
+  const text = isCosco ? "COSCO SHIPPING" : vessel.name.toUpperCase();
   context.textAlign = "center";
   context.textBaseline = "middle";
   context.font = `800 ${text.length > 18 ? 68 : 92}px Arial, sans-serif`;
@@ -161,6 +252,38 @@ function addVesselNameplate(
   labelQuay.rotation.y = Math.PI;
   labelQuay.position.set(0, freeboard * 0.46, -(beam * 0.5 + 0.1));
   group.add(labelQuay);
+
+  // Nome do navio na bochecha de proa (Bow shoulder nameplate em ambos os bordos)
+  if (isCosco) {
+    const bowCanvas = document.createElement("canvas");
+    bowCanvas.width = 512;
+    bowCanvas.height = 96;
+    const bCtx = bowCanvas.getContext("2d");
+    if (bCtx) {
+      bCtx.textAlign = "center";
+      bCtx.textBaseline = "middle";
+      bCtx.font = "bold 42px Arial, sans-serif";
+      bCtx.fillStyle = "#ffffff";
+      bCtx.fillText(vessel.name.toUpperCase(), 256, 48);
+      const bTex = new THREE.CanvasTexture(bowCanvas);
+      bTex.colorSpace = THREE.SRGBColorSpace;
+      const bMat = new THREE.MeshBasicMaterial({ map: bTex, transparent: true, side: THREE.FrontSide, depthWrite: false });
+
+      const bowX = direction * (loa * 0.41);
+      const bowWidth = Math.min(18, loa * 0.055);
+      // Boreste (starboard)
+      const labelStarboard = new THREE.Mesh(new THREE.PlaneGeometry(bowWidth, 2.2), bMat);
+      labelStarboard.position.set(bowX, freeboard * 0.72, beam * 0.46);
+      labelStarboard.rotation.y = direction * -0.28;
+      group.add(labelStarboard);
+
+      // Bombordo (port)
+      const labelPort = new THREE.Mesh(new THREE.PlaneGeometry(bowWidth, 2.2), bMat);
+      labelPort.position.set(bowX, freeboard * 0.72, -beam * 0.46);
+      labelPort.rotation.y = Math.PI + direction * 0.28;
+      group.add(labelPort);
+    }
+  }
 }
 
 export const CONTAINER_SKIN_DEFS = [
@@ -428,11 +551,15 @@ function addVessel(
   );
 
   // Cor do casco:
+  // - COSCO: Azul Royal marítimo oficial (#015ea8) das fotos de referência
   // - Tanker: azul-claro marítimo da foto de referência (#5da8bc)
   // - Offshore / Diving: vermelho vibrante (#dc2626) como DOF/Subsea 7 ou azul marítimo (#0284c7) como MMC/PSV
   // - Research / Survey (ex: OCEAN MERMAID): azul marinho oceanográfico (#1e40af)
   // - Container / Outros: conforme paleta selecionada
-  const hullColor = isTanker
+  const isCosco = typeof vessel.name === "string" && /cosco/i.test(vessel.name);
+  const hullColor = isCosco
+    ? "#015ea8"
+    : isTanker
     ? "#5da8bc"
     : isOffshore
     ? (isPipeLayer ? (vessel.color === "blue" ? "#0284c7" : "#dc2626") : (vessel.color === "orange" ? "#dc2626" : vessel.color === "teal" ? "#0f766e" : "#0284c7"))
@@ -442,16 +569,20 @@ function addVessel(
 
   const hullMaterial = new THREE.MeshStandardMaterial({
     color: hullColor,
-    roughness: 0.58,
-    metalness: 0.12,
+    roughness: isCosco ? 0.50 : 0.58,
+    metalness: isCosco ? 0.16 : 0.12,
     side: THREE.DoubleSide,
   });
   const hull = new THREE.Mesh(createHullGeometry(THREE, direction, loa, beam, draft, deckHeight), hullMaterial);
   group.add(hull);
 
-  // Fundo submerso vermelho antifouling para embarcações offshore e de pesquisa
-  if (isOffshore || isResearch) {
-    addBox(THREE, group, [loa * 0.86, draft * 0.85, beam * 0.88], [0, -draft * 0.55, 0], new THREE.MeshStandardMaterial({ color: "#7f1d1d", roughness: 0.8 }));
+  // Fundo submerso vermelho antifouling e faixa de linha d'água (boot-topping)
+  if (isContainer || isOffshore || isResearch || isTanker) {
+    const bottomMat = new THREE.MeshStandardMaterial({ color: "#7a1d1d", roughness: 0.82 });
+    addBox(THREE, group, [loa * (isContainer ? 0.94 : 0.86), draft * 0.85, beam * (isContainer ? 0.94 : 0.88)], [0, -draft * 0.55, 0], bottomMat);
+    // Linha d'água (faixa preta de boot-topping entre o vermelho submerso e o costado)
+    const bootMat = new THREE.MeshStandardMaterial({ color: "#0f172a", roughness: 0.7 });
+    addBox(THREE, group, [loa * (isContainer ? 0.96 : 0.88), 0.45, beam * (isContainer ? 0.96 : 0.9)], [0, 0.05, 0], bootMat);
 
     if (isOffshore) {
       // Propulsores Azimutais duplos na popa (Azimuth Thruster Pods com hélices em bronze)
@@ -1055,6 +1186,18 @@ function addVessel(
     const roofY = bridgeBottomY + bridgeHeight;
     addBox(THREE, group, [bridgeLength * 1.04, 0.4, beam * 0.76], [bridgeX, roofY + 0.2, 0], houseMaterial);
 
+    if (isCosco) {
+      // Guarda-corpo de segurança em laranja vibrante ao redor do Monkey Island (como nas fotos de referência)
+      const orangeRailMat = new THREE.MeshStandardMaterial({ color: "#ea580c", roughness: 0.4 });
+      const rw = beam * 0.75;
+      const rl = bridgeLength * 1.02;
+      addBox(THREE, group, [0.15, 0.85, rw], [bridgeX + direction * (rl * 0.49), roofY + 0.65, 0], orangeRailMat);
+      addBox(THREE, group, [0.15, 0.85, rw], [bridgeX - direction * (rl * 0.49), roofY + 0.65, 0], orangeRailMat);
+      [-rw * 0.49, rw * 0.49].forEach((rz) => {
+        addBox(THREE, group, [rl, 0.85, 0.15], [bridgeX, roofY + 0.65, rz], orangeRailMat);
+      });
+    }
+
     const mastGeo = new THREE.CylinderGeometry(0.32, 0.65, 8.8, 8);
     const mast = new THREE.Mesh(mastGeo, darkDetailMaterial);
     mast.position.set(bridgeX, roofY + 4.6, 0);
@@ -1073,15 +1216,48 @@ function addVessel(
 
     // 4. Chaminé (Funnel)
     if (hasSeparateFunnel) {
-      // Chaminé SEPARADA (Duas Ilhas - ex: EVER LEADER) posicionada exatamente na funnelBay
-      addBox(THREE, group, [separateFunnelLength, separateFunnelHeight, separateFunnelWidth], [separateFunnelX, deckHeight + separateFunnelHeight / 2, 0], funnelMaterial);
-      [-separateFunnelWidth * 0.22, separateFunnelWidth * 0.22].forEach((pz) => {
-        const pipe = new THREE.Mesh(new THREE.CylinderGeometry(0.65, 0.65, 3.2, 10), darkDetailMaterial);
-        pipe.position.set(separateFunnelX, deckHeight + separateFunnelHeight + 1.5, pz);
-        group.add(pipe);
-      });
-      // Plataforma / chapéu no topo da chaminé
-      addBox(THREE, group, [separateFunnelLength * 1.05, 0.3, separateFunnelWidth * 1.05], [separateFunnelX, deckHeight + separateFunnelHeight + 0.15, 0], darkDetailMaterial);
+      if (isCosco) {
+        // Chaminé COSCO (Duas Ilhas): base branca (36%) e bloco superior azul royal (#015ea8) com emblema COSCO e 6 tubos
+        const baseH = separateFunnelHeight * 0.36;
+        const upperH = separateFunnelHeight * 0.64;
+        addBox(THREE, group, [separateFunnelLength, baseH, separateFunnelWidth], [separateFunnelX, deckHeight + baseH / 2, 0], houseMaterial);
+
+        const coscoFunnelMat = new THREE.MeshStandardMaterial({ color: "#015ea8", roughness: 0.52 });
+        addBox(THREE, group, [separateFunnelLength * 0.98, upperH, separateFunnelWidth * 0.98], [separateFunnelX, deckHeight + baseH + upperH / 2, 0], coscoFunnelMat);
+
+        // Emblema circular COSCO nas laterais de bombordo e boreste da chaminé
+        const coscoEmblemTex = createCoscoEmblemTexture(THREE);
+        if (coscoEmblemTex) {
+          const emblemMat = new THREE.MeshBasicMaterial({ map: coscoEmblemTex, transparent: true, side: THREE.FrontSide });
+          [-separateFunnelWidth * 0.49 - 0.05, separateFunnelWidth * 0.49 + 0.05].forEach((ez, sIdx) => {
+            const emblemMesh = new THREE.Mesh(new THREE.PlaneGeometry(4.2, 4.2), emblemMat);
+            emblemMesh.position.set(separateFunnelX, deckHeight + baseH + upperH * 0.55, ez);
+            emblemMesh.rotation.y = sIdx === 0 ? Math.PI : 0;
+            group.add(emblemMesh);
+          });
+        }
+
+        // Plataforma escura no topo da chaminé
+        addBox(THREE, group, [separateFunnelLength * 1.04, 0.35, separateFunnelWidth * 1.04], [separateFunnelX, deckHeight + separateFunnelHeight + 0.18, 0], darkDetailMaterial);
+
+        // 6 tubos de exaustão dos motores principais e geradores
+        [-separateFunnelWidth * 0.26, 0, separateFunnelWidth * 0.26].forEach((pz) => {
+          [-separateFunnelLength * 0.22, separateFunnelLength * 0.22].forEach((px) => {
+            const pipe = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 2.8, 10), darkDetailMaterial);
+            pipe.position.set(separateFunnelX + px, deckHeight + separateFunnelHeight + 1.4, pz);
+            group.add(pipe);
+          });
+        });
+      } else {
+        // Chaminé SEPARADA padrão
+        addBox(THREE, group, [separateFunnelLength, separateFunnelHeight, separateFunnelWidth], [separateFunnelX, deckHeight + separateFunnelHeight / 2, 0], funnelMaterial);
+        [-separateFunnelWidth * 0.22, separateFunnelWidth * 0.22].forEach((pz) => {
+          const pipe = new THREE.Mesh(new THREE.CylinderGeometry(0.65, 0.65, 3.2, 10), darkDetailMaterial);
+          pipe.position.set(separateFunnelX, deckHeight + separateFunnelHeight + 1.5, pz);
+          group.add(pipe);
+        });
+        addBox(THREE, group, [separateFunnelLength * 1.05, 0.3, separateFunnelWidth * 1.05], [separateFunnelX, deckHeight + separateFunnelHeight + 0.15, 0], darkDetailMaterial);
+      }
     } else {
       // Chaminé integrada na ré da casaria
       const funnelHeight = isTanker ? towerHeight * 0.8 : towerHeight * 0.88;
@@ -1094,6 +1270,115 @@ function addVessel(
         pipe.position.set(funnelX, deckHeight + funnelHeight + 1.2, pz);
         group.add(pipe);
       });
+    }
+
+    // Equipamentos náuticos da Proa / Castelo para navios porta-contêineres
+    if (isContainer) {
+      // 1. Quebra-mar de vante (Breakwater / Wave deflector) em vermelho industrial protegendo a Bay 01
+      const bwColor = isCosco ? "#881337" : "#991b1b";
+      const bwMat = new THREE.MeshStandardMaterial({ color: bwColor, roughness: 0.65 });
+      const bwX = direction * (loa * 0.415);
+      const bwWingSpan = Math.min(beam * 0.82, 42);
+      for (const side of [-1, 1]) {
+        const wing = addBox(THREE, group, [loa * 0.024, 3.4, bwWingSpan * 0.52], [bwX, deckHeight + 1.7, side * (bwWingSpan * 0.26)], bwMat);
+        wing.rotation.y = direction * side * 0.38;
+      }
+      // Parede frontal de reforço central do quebra-mar
+      addBox(THREE, group, [0.75, 3.6, bwWingSpan * 0.36], [bwX + direction * 1.6, deckHeight + 1.8, 0], bwMat);
+
+      // 2. Mastro cilíndrico de proa em amarelo/ocre marítimo (Foremast com cruzetas e radar)
+      const mastColor = isCosco ? "#d97706" : "#ffffff";
+      const fwdMastMat = new THREE.MeshStandardMaterial({ color: mastColor, roughness: 0.5 });
+      const mastX = direction * (loa * 0.468);
+      const mastH = 10.5;
+      const fwdMast = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.52, mastH, 10), fwdMastMat);
+      fwdMast.position.set(mastX, deckHeight + mastH / 2, 0);
+      group.add(fwdMast);
+
+      // Cruzetas do mastro de vante
+      addBox(THREE, group, [0.35, 0.25, 4.4], [mastX, deckHeight + mastH * 0.72, 0], darkDetailMaterial);
+      addBox(THREE, group, [0.3, 0.22, 2.8], [mastX, deckHeight + mastH * 0.92, 0], darkDetailMaterial);
+
+      // Scanner de radar e farolete de vante
+      const fwdRadar = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.28, 0.32), darkDetailMaterial);
+      fwdRadar.position.set(mastX, deckHeight + mastH + 0.35, 0);
+      group.add(fwdRadar);
+      const navLight = new THREE.Mesh(new THREE.SphereGeometry(0.25, 8, 8), new THREE.MeshStandardMaterial({ color: "#facc15", roughness: 0.2 }));
+      navLight.position.set(mastX, deckHeight + mastH + 0.75, 0);
+      group.add(navLight);
+
+      // 3. Guinchos de amarração de proa (Castelo de proa)
+      const fwdWinchX = direction * (loa * 0.442);
+      [-beam * 0.22, beam * 0.22].forEach((wz) => {
+        addBox(THREE, group, [2.8, 0.5, 1.8], [fwdWinchX, deckHeight + 0.25, wz], darkDetailMaterial);
+        const drum = new THREE.Mesh(new THREE.CylinderGeometry(0.65, 0.65, 1.3, 10), darkDetailMaterial);
+        drum.rotation.z = Math.PI / 2;
+        drum.position.set(fwdWinchX, deckHeight + 0.9, wz);
+        group.add(drum);
+      });
+
+      // =======================================================================
+      // ⚓ POPA (STERN): ESPELHO DE POPA, AMURADA, GUINCHOS, LEME E HÉLICE
+      // =======================================================================
+      const sternX = direction * (-loa * 0.493);
+      const sternDeckX = direction * (-loa * 0.468);
+      const sternBulwarkMat = isCosco ? hullMaterial : new THREE.MeshStandardMaterial({ color: hullColor, roughness: 0.6 });
+
+      // Espelho de popa plano com amurada e buzinas embutidas
+      const transomWidth = beam * 0.82;
+      addBox(THREE, group, [1.4, deckHeight + draft * 0.3, transomWidth], [sternX, (deckHeight - draft * 0.3) / 2, 0], sternBulwarkMat);
+      addBox(THREE, group, [1.2, 1.4, transomWidth * 0.98], [sternX, deckHeight + 0.7, 0], sternBulwarkMat);
+
+      // Recortes das buzinas de amarração no espelho
+      [-transomWidth * 0.36, -transomWidth * 0.18, transomWidth * 0.18, transomWidth * 0.36].forEach((fz) => {
+        addBox(THREE, group, [1.3, 0.45, 0.8], [sternX, deckHeight + 0.7, fz], darkDetailMaterial);
+      });
+
+      // Guarda-corpo perimetral de popa (Safety handrails brancos)
+      const railMatWhite = new THREE.MeshStandardMaterial({ color: "#f8fafc", roughness: 0.5 });
+      addBox(THREE, group, [0.15, 1.1, transomWidth * 0.96], [sternX - direction * 0.6, deckHeight + 1.35, 0], railMatWhite);
+
+      // Guinchos de amarração de popa com tambores duplos e cabeços
+      [-transomWidth * 0.30, -transomWidth * 0.11, transomWidth * 0.11, transomWidth * 0.30].forEach((wz) => {
+        addBox(THREE, group, [2.4, 0.45, 1.8], [sternDeckX, deckHeight + 0.23, wz], darkDetailMaterial);
+        const drum1 = new THREE.Mesh(new THREE.CylinderGeometry(0.58, 0.58, 0.7, 10), darkDetailMaterial);
+        drum1.rotation.z = Math.PI / 2;
+        drum1.position.set(sternDeckX, deckHeight + 0.82, wz - 0.42);
+        group.add(drum1);
+        const drum2 = new THREE.Mesh(new THREE.CylinderGeometry(0.58, 0.58, 0.7, 10), darkDetailMaterial);
+        drum2.rotation.z = Math.PI / 2;
+        drum2.position.set(sternDeckX, deckHeight + 0.82, wz + 0.42);
+        group.add(drum2);
+        [-0.9, 0.9].forEach((bz) => {
+          const bollard = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 0.9, 8), darkDetailMaterial);
+          bollard.position.set(sternDeckX - direction * 1.5, deckHeight + 0.45, wz + bz * 0.55);
+          group.add(bollard);
+        });
+      });
+
+      // Placa de popa com nome e porto de registro (Transom nameplate)
+      addTransomNameplate(THREE, group, vessel, direction, loa, beam, deckHeight);
+
+      // Leme semi-compensado submerso em vermelho antifouling
+      const rudderMat = new THREE.MeshStandardMaterial({ color: "#7a1d1d", roughness: 0.75 });
+      const rudderX = direction * (-loa * 0.45);
+      const rudder = addBox(THREE, group, [4.8, draft * 0.82, 0.7], [rudderX, -draft * 0.52, 0], rudderMat);
+      rudder.rotation.y = 0.03;
+
+      // Hélice propulsora de 5 pás em bronze
+      const propHubMat = new THREE.MeshStandardMaterial({ color: "#ca8a04", metalness: 0.85, roughness: 0.28 });
+      const propX = rudderX + direction * 3.6;
+      const propHub = new THREE.Mesh(new THREE.SphereGeometry(1.05, 12, 10), propHubMat);
+      propHub.scale.set(1.4, 1.0, 1.0);
+      propHub.position.set(propX, -draft * 0.58, 0);
+      group.add(propHub);
+      const propBladeGeo = new THREE.BoxGeometry(0.22, draft * 0.44, 0.7);
+      for (let b = 0; b < 5; b += 1) {
+        const blade = new THREE.Mesh(propBladeGeo, propHubMat);
+        blade.rotation.x = (b * Math.PI * 2) / 5;
+        blade.position.set(propX, -draft * 0.58, 0);
+        group.add(blade);
+      }
     }
 
     // Equipamentos náuticos da Proa / Castelo para navios tanque (sem caixas/tampão sobressalente)
@@ -1145,7 +1430,8 @@ function addVessel(
     }
 
     // Bulbo de Proa submerso
-    const bulbMat = new THREE.MeshStandardMaterial({ color: "#0f172a", roughness: 0.6 });
+    const bulbColor = isCosco || isContainer ? "#7a1d1d" : "#0f172a";
+    const bulbMat = new THREE.MeshStandardMaterial({ color: bulbColor, roughness: 0.6 });
     const bulb = new THREE.Mesh(new THREE.SphereGeometry(beam * 0.19, 12, 10), bulbMat);
     bulb.scale.set(1.7, 0.9, 0.85);
     bulb.position.set(direction * (loa * 0.49), -draft * 0.5, 0);
@@ -1278,16 +1564,76 @@ function addVessel(
         (mats) => new THREE.InstancedMesh(containerGeometry40, mats, maxInstances40),
       );
 
-      // Passarelas transversais / coamings entre escotilhas para destacar o vão entre bays
-      if (plan.hatchGap >= 1.0) {
-        const catwalkMat = new THREE.MeshStandardMaterial({ color: "#1e293b", roughness: 0.8 });
-        for (let h = 0; h < plan.hatches.length - 1; h += 1) {
-          const hCurr = plan.hatches[h];
-          const hNext = plan.hatches[h + 1];
-          if (!hCurr.isBlockedByBridge && !hNext.isBlockedByBridge && !hCurr.isBlockedByFunnel && !hNext.isBlockedByFunnel) {
-            const midX = direction * (((hCurr.centerFromStern + hNext.centerFromStern) / 2) - loa / 2);
-            addBox(THREE, group, [0.42, 0.28, usableBeam * 0.98], [midX, deckHeight + 0.14, 0], catwalkMat);
+      // =======================================================================
+      // 🌉 TORRES E VARANDAS DAS BAYS (LASHING BRIDGES MULTI-TIER)
+      // =======================================================================
+      const lashingMat = new THREE.MeshStandardMaterial({
+        color: isCosco ? "#881337" : "#7f1d1d",
+        roughness: 0.62,
+        metalness: 0.15,
+      });
+      const handrailMat = new THREE.MeshStandardMaterial({
+        color: isCosco ? "#991b1b" : "#475569",
+        roughness: 0.5,
+      });
+
+      const addLashingBridge = (bridgeX: number) => {
+        // Altura das varandas: até 3 andares de passarelas de peação (~2.8m, ~5.5m, ~8.2m)
+        const bridgeTiers = Math.min(3, Math.max(1, tiers - 1));
+        const bridgeWidth = usableBeam * 0.98;
+        const bridgeMaxH = bridgeTiers * 2.75;
+
+        // Pilares verticais estruturais da torre de peação
+        const stanchionCount = Math.max(6, Math.min(10, Math.round(bridgeWidth / 4.2)));
+        for (let s = 0; s < stanchionCount; s += 1) {
+          const sz = -bridgeWidth / 2 + (s / (stanchionCount - 1)) * bridgeWidth;
+          addBox(THREE, group, [0.38, bridgeMaxH, 0.38], [bridgeX, deckHeight + bridgeMaxH / 2, sz], lashingMat);
+        }
+
+        // Andares de passarelas horizontais ("varandas")
+        for (let t = 1; t <= bridgeTiers; t += 1) {
+          const walkY = deckHeight + t * 2.75;
+          // Plataforma do piso da varanda
+          addBox(THREE, group, [0.75, 0.16, bridgeWidth], [bridgeX, walkY, 0], lashingMat);
+          // Guarda-corpo de proteção da varanda (lado vante e lado ré)
+          addBox(THREE, group, [0.08, 0.85, bridgeWidth], [bridgeX - 0.34, walkY + 0.45, 0], handrailMat);
+          addBox(THREE, group, [0.08, 0.85, bridgeWidth], [bridgeX + 0.34, walkY + 0.45, 0], handrailMat);
+        }
+
+        // Escadas marinheiras verticais de acesso nas extremidades de bombordo e boreste
+        [-bridgeWidth * 0.49, bridgeWidth * 0.49].forEach((lz) => {
+          for (let step = 1; step <= bridgeTiers * 3; step += 1) {
+            const stepY = deckHeight + step * 0.9;
+            addBox(THREE, group, [0.42, 0.08, 0.55], [bridgeX, stepY, lz], handrailMat);
           }
+        });
+      };
+
+      // Adiciona as torres/varandas entre escotilhas vizinhas
+      for (let h = 0; h < plan.hatches.length - 1; h += 1) {
+        const hCurr = plan.hatches[h];
+        const hNext = plan.hatches[h + 1];
+        if (!hCurr.isBlockedByBridge && !hNext.isBlockedByBridge && !hCurr.isBlockedByFunnel && !hNext.isBlockedByFunnel) {
+          const midX = direction * (((hCurr.centerFromStern + hNext.centerFromStern) / 2) - loa / 2);
+          const isNearHouse = Math.abs(midX - sternHouseX) < houseLength * 0.5 + 1.2;
+          if (!isNearHouse) {
+            addLashingBridge(midX);
+          }
+        }
+      }
+
+      // Varanda frontal (ahead da primeira bay ativa) e posterior (aft da última bay ativa)
+      const activeHatches = plan.hatches.filter(h => !h.isBlockedByBridge && !h.isBlockedByFunnel);
+      if (activeHatches.length > 0) {
+        const aftMost = activeHatches[0];
+        const fwdMost = activeHatches[activeHatches.length - 1];
+        const aftBridgeX = direction * (aftMost.fromSternA - plan.cellWidth * 0.55 - loa / 2);
+        const fwdBridgeX = direction * ((fwdMost.fromSternB ?? fwdMost.fromSternA) + plan.cellWidth * 0.55 - loa / 2);
+        if (Math.abs(aftBridgeX - sternHouseX) >= houseLength * 0.5 + 1.2) {
+          addLashingBridge(aftBridgeX);
+        }
+        if (Math.abs(fwdBridgeX - sternHouseX) >= houseLength * 0.5 + 1.2) {
+          addLashingBridge(fwdBridgeX);
         }
       }
 
@@ -1474,7 +1820,7 @@ function addVessel(
     }
   }
 
-  addVesselNameplate(THREE, group, vessel, loa, beam, deckHeight);
+  addVesselNameplate(THREE, group, vessel, loa, beam, deckHeight, direction);
   return { deckHeight };
 }
 

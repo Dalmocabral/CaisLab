@@ -117,7 +117,10 @@ function renderContainerDeck(
   mirrorText = false,
 ) {
   const config = resolveVesselSuperstructure(vessel);
-  const bays = bayNumberSequence(vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber, vessel.name);
+  const isDusseldorf = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("DUSSELDORF");
+  const bays = isDusseldorf
+    ? Array.from({ length: 35 }, (_, index) => index * 2 + 1)
+    : bayNumberSequence(vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber, vessel.name);
   const rows = rowNumberSequence(vessel.rowCount ?? vessel.rows);
   const effectiveRows = rows.length > 0
     ? rows
@@ -161,7 +164,9 @@ function renderContainerDeck(
   const isSeaspanEmpire = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("SEASPAN") && vessel.name.toUpperCase().includes("EMPIRE");
   const idx55 = bays.indexOf(55);
   const idx57 = bays.indexOf(57);
+  const idx59 = bays.indexOf(59);
   const hasSpecialBridge55_57 = (isNykRumina || isSeaspanEmpire) && idx55 !== -1 && idx57 !== -1;
+  const hasDusseldorfBridge = isDusseldorf && idx57 !== -1 && idx59 !== -1;
 
   const isEverFitClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("EVER") && (
     vessel.name.toUpperCase().includes("FIT") ||
@@ -180,8 +185,8 @@ function renderContainerDeck(
   const hasEverFitFunnel = isEverFitClass && config.separateFunnel && idx61 !== -1 && idx63 !== -1;
 
   // Separação visual entre as bays de 40' (cada par de bays de 20' forma uma bay/hatch de 40')
-  const num40ftGaps = Math.max(0, Math.floor((bays.length - 1) / 2));
-  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0);
+  const num40ftGaps = isDusseldorf ? 17 : Math.max(0, Math.floor((bays.length - 1) / 2));
+  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0);
   const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + extraSlots);
   const hatchGap = bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0;
   const totalGapsWidth = num40ftGaps * hatchGap;
@@ -189,7 +194,8 @@ function renderContainerDeck(
   const everFitFunnelSlotW = hasEverFitFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
   const nykBridgeSlotW = hasSpecialBridge55_57 ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const everFitBridgeSlotW = hasEverFitBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
-  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW);
+  const dusseldorfBridgeSlotW = hasDusseldorfBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
+  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - dusseldorfBridgeSlotW);
   const cellWidth = availableBayWidth / Math.max(1, bays.length);
   const labelSize = bays.length ? Math.max(2.6, Math.min(5.4, cellWidth * 0.54)) : 3.4;
   const rowLabelSize = Math.max(2.0, Math.min(labelSize, cellHeight * 0.72));
@@ -198,7 +204,17 @@ function renderContainerDeck(
   // Posição X da baia considerando o espaço visual entre escotilhas de 40'
   const bayCellX = (index: number) => {
     let gapsBefore = Math.floor(index / 2);
-    if (hasEverFitFunnel && index >= idx63) {
+    if (isDusseldorf) {
+      if (index <= 25) {
+        gapsBefore = Math.floor(index / 2);
+      } else if (index === 26) {
+        gapsBefore = 13;
+      } else if (index <= 28) {
+        gapsBefore = 14;
+      } else {
+        gapsBefore = 15 + Math.floor((index - 29) / 2);
+      }
+    } else if (hasEverFitFunnel && index >= idx63) {
       gapsBefore = Math.floor((index - 1) / 2);
     }
     let xPos = bayAreaRight - ((index + 1) * cellWidth + gapsBefore * hatchGap);
@@ -214,6 +230,9 @@ function renderContainerDeck(
     if (hasEverFitBridge && index >= idx29) {
       xPos -= everFitBridgeSlotW;
     }
+    if (hasDusseldorfBridge && index >= idx59) {
+      xPos -= dusseldorfBridgeSlotW;
+    }
     return xPos;
   };
 
@@ -221,7 +240,7 @@ function renderContainerDeck(
   const bridgeIndices: number[] = [];
   const funnelIndices: number[] = [];
 
-  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge) {
+  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasDusseldorfBridge) {
     const targetBridgeBay = config.bridgeBay ?? config.bridgeBayStart ?? 34;
     const occupiedBridgeBays = getOccupiedBayNumbers(
       targetBridgeBay,
@@ -695,6 +714,53 @@ function renderContainerDeck(
                   stroke={color.stroke}
                   strokeWidth="1.6"
                   strokeLinecap="round"
+                />
+              </>
+            );
+          })()}
+        </g>
+      )}
+
+      {/* 2d. Passadiço Específico do DUSSELDORF EXPRESS (entre as bays 57 e 59: 61 59 [passadiço] 57 55 - 53 - 51 49) */}
+      {!isAllAft && hasDusseldorfBridge && (
+        <g className="superstructure-bridge-island-dusseldorf">
+          {(() => {
+            const rightOf59 = bayCellX(idx59) + cellWidth;
+            const leftOf57 = bayCellX(idx57);
+            const slotW = Math.max(8.0, dusseldorfBridgeSlotW - 0.4);
+            const slotX = (rightOf59 + leftOf57 - slotW) / 2;
+            return (
+              <>
+                <title>Passadiço (entre Bay 57 e Bay 59)</title>
+                <rect
+                  x={slotX}
+                  y={y + 2.5}
+                  width={slotW}
+                  height={vesselHeight - 5}
+                  rx="1.8"
+                  fill={color.fill}
+                  stroke={color.stroke}
+                  strokeWidth="1.2"
+                />
+                {/* Asas do passadiço */}
+                <line
+                  x1={slotX + slotW * 0.55}
+                  y1={y + 0.8}
+                  x2={slotX + slotW * 0.55}
+                  y2={y + vesselHeight - 0.8}
+                  stroke={color.stroke}
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                />
+                {/* Chaminé no próprio passadiço (lado de ré) */}
+                <ellipse
+                  cx={slotX + slotW * 0.25}
+                  cy={y + vesselHeight / 2}
+                  rx={Math.max(2.2, Math.min(4.8, slotW * 0.22))}
+                  ry={Math.max(1.8, Math.min(3.2, vesselHeight * 0.11))}
+                  fill="#1e293b"
+                  stroke="#0f172a"
+                  strokeWidth="0.7"
                 />
               </>
             );
