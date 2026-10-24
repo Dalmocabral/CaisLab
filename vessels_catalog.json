@@ -32,7 +32,7 @@
     "imo": "9996680",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/10/2026 17:05",
+    "updatedAt": "24/10/2026 19:58",
     "bayCount": 78,
     "bays": 78,
     "bridgePosition": "between-bays",
@@ -69,7 +69,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/10/2026 17:05"
+    "updatedAt": "24/10/2026 19:58"
   },
   {
     "name": "CMA CGM PUCCINI",
@@ -205,7 +205,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/10/2026 17:05"
+    "updatedAt": "24/10/2026 19:58"
   },
   {
     "name": "EVER FAITH",
@@ -217,7 +217,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/10/2026 17:05"
+    "updatedAt": "24/10/2026 19:58"
   },
   {
     "name": "EVER FAME",
@@ -329,7 +329,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/10/2026 17:05"
+    "updatedAt": "24/10/2026 19:58"
   },
   {
     "name": "KOTA PAHLAWAN",
@@ -466,7 +466,7 @@
     "imo": "9539494",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONT1",
-    "updatedAt": "24/10/2026 17:05",
+    "updatedAt": "24/10/2026 19:58",
     "flag": "BRAZIL"
   },
   {
@@ -478,7 +478,7 @@
     "imo": "9612791",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONT1",
-    "updatedAt": "24/10/2026 17:05",
+    "updatedAt": "24/10/2026 19:58",
     "flag": "BRAZIL",
     "bayCount": 46,
     "bays": 46
@@ -519,12 +519,12 @@
     "name": "NYK DIANA",
     "loa": 294.12,
     "beam": 32.25,
-    "draft": 10.8,
+    "draft": 12.85,
     "berthingSide": "boreste",
     "imo": "9337688",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/10/2026 17:05",
+    "updatedAt": "24/10/2026 19:58",
     "flag": "PANAMA"
   },
   {

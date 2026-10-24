@@ -1,23 +1,8 @@
 {
-  "updatedAt": "24/10/2026 17:05",
+  "updatedAt": "24/10/2026 19:58",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 9,
+  "count": 8,
   "maneuvers": [
-    {
-      "dateTime": "24/10 13:00",
-      "name": "APL NEW JERSEY",
-      "draft": 13.8,
-      "loa": 293.18,
-      "beam": 40.0,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "boreste",
-      "imo": "9350020",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "LIBERIA",
-      "terminal": "rio"
-    },
     {
       "dateTime": "25/10 04:00",
       "name": "MERCOSUL GUARUJA",
@@ -34,9 +19,9 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "25/10 21:00",
+      "dateTime": "25/10 13:00",
       "name": "NYK DIANA",
-      "draft": 10.8,
+      "draft": 12.85,
       "loa": 294.12,
       "beam": 32.25,
       "maneuver": "E",
