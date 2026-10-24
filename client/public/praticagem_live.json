@@ -1,5 +1,5 @@
 {
-  "updatedAt": "24/10/2026 14:48",
+  "updatedAt": "24/10/2026 17:05",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 9,
   "maneuvers": [
@@ -26,7 +26,7 @@
       "beam": 32.2,
       "maneuver": "E",
       "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
+      "berthTo": "TECONT1",
       "berthingSide": "boreste",
       "imo": "9539494",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
@@ -41,7 +41,7 @@
       "beam": 32.25,
       "maneuver": "E",
       "berthFrom": "",
-      "berthTo": "TECONT1",
+      "berthTo": "TECONTPROLONG",
       "berthingSide": "boreste",
       "imo": "9337688",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
