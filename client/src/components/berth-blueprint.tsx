@@ -2495,8 +2495,10 @@ export default function BerthBlueprint({
                 </text>
               </g>
 
-              {/* Relatório de posicionamento do navio (Cabeços da Proa, Popa, Springs e Lançantes) */}
+              {/* Relatório de posicionamento do navio (Cabeços da Proa, Popa, Springs e Lançantes) - exclusivo da Visualização 2D / Exportação */}
               {(() => {
+                if (!isPresentationMode) return null;
+
                 const getNearestBollardId = (station: number): string => {
                   if (!bollardDisplays || bollardDisplays.length === 0) return "-";
                   let best = bollardDisplays[0];
@@ -2527,11 +2529,11 @@ export default function BerthBlueprint({
 
                 const reportLines = [
                   { label: "Ponta da Proa:", value: bowBollard },
-                  { label: "Ponta Popa:", value: sternBollard },
-                  { label: "Spring proa:", value: springProa },
-                  { label: "Lancante proa:", value: lancanteProa },
-                  { label: "Spring popa:", value: springPopa },
-                  { label: "Lancante popa:", value: lancantePopa },
+                  { label: "Ponta da Popa:", value: sternBollard },
+                  { label: "Spring de Proa:", value: springProa },
+                  { label: "Lançante de Proa:", value: lancanteProa },
+                  { label: "Spring de Popa:", value: springPopa },
+                  { label: "Lançante de Popa:", value: lancantePopa },
                 ];
 
                 const xLeft = Math.min(bowX, sternX);
@@ -2541,6 +2543,17 @@ export default function BerthBlueprint({
 
                 return (
                   <g key={`vessel-report-${vessel.id}`} className="vessel-berth-report" pointerEvents="none">
+                    <rect
+                      x={reportX - 7}
+                      y={reportStartY - 10}
+                      width="122"
+                      height="72"
+                      rx="5"
+                      fill="#ffffff"
+                      fillOpacity="0.88"
+                      stroke="#cbd5e1"
+                      strokeWidth="0.8"
+                    />
                     {reportLines.map((line, idx) => {
                       const lineY = reportStartY + idx * 11;
                       return (
@@ -2556,7 +2569,7 @@ export default function BerthBlueprint({
                             fill: "#1e293b",
                             paintOrder: "stroke",
                             stroke: "#f8fbfc",
-                            strokeWidth: "2.2px",
+                            strokeWidth: "1.8px",
                             strokeLinejoin: "round",
                           }}
                         >
