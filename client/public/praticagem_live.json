@@ -1,12 +1,12 @@
 {
-  "updatedAt": "25/10/2026 04:02",
+  "updatedAt": "25/10/2026 04:29",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 8,
   "maneuvers": [
     {
       "dateTime": "25/10 04:00",
       "name": "MERCOSUL GUARUJA",
-      "draft": 11.0,
+      "draft": 10.2,
       "loa": 228.15,
       "beam": 32.2,
       "maneuver": "E",
