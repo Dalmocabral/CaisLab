@@ -527,23 +527,6 @@ function renderContainerDeck(
         strokeWidth="0.8"
       />
 
-      {/* Convés de manobra de popa (Aft Mooring Deck) até o espelho de popa em x */}
-      {!isAllAft && (
-        <g className="deck-aft-mooring">
-          <path
-            d={`M ${x + 3} ${y + 2} Q ${x + 0.8} ${y + 2} ${x + 0.8} ${y + 4.5} L ${x + 0.8} ${y + vesselHeight - 4.5} Q ${x + 0.8} ${y + vesselHeight - 2} ${x + 3} ${y + vesselHeight - 2} L ${deckLeft - 1} ${y + vesselHeight - 2} L ${deckLeft - 1} ${y + 2} Z`}
-            fill="#e2e8f0"
-            stroke="#94a3b8"
-            strokeWidth="0.6"
-          />
-          {/* Guinchos e cabeços de amarração de popa */}
-          <rect x={x + 1.8} y={y + 3.8} width="2.4" height="1.8" rx="0.4" fill="#475569" stroke="#334155" strokeWidth="0.3" />
-          <rect x={x + 1.8} y={y + vesselHeight - 5.6} width="2.4" height="1.8" rx="0.4" fill="#475569" stroke="#334155" strokeWidth="0.3" />
-          <circle cx={x + 4.8} cy={y + 4.7} r="0.9" fill="#1e293b" />
-          <circle cx={x + 4.8} cy={y + vesselHeight - 4.7} r="0.9" fill="#1e293b" />
-        </g>
-      )}
-
       {/* ESTRUTURAS: */}
       {/* 1. Casaria na Popa Extrema (All-Aft, ex: CMA CGM Veracruz) */}
       {isAllAft && (
@@ -2318,8 +2301,8 @@ export default function BerthBlueprint({
                 </text>
               )}
               <g transform={vessel.berthingSide === "bombordo" ? `translate(${2 * x + vesselWidth}, 0) scale(-1, 1)` : undefined}>
-                {/* Casco exterior hidrodinâmico com espelho de popa na exata estaca inicial (x) e bico da proa em (x + vesselWidth) */}
-                <path d={`M ${x + 3} ${y} Q ${x} ${y} ${x} ${y + 3} L ${x} ${y + vesselHeight - 3} Q ${x} ${y + vesselHeight} ${x + 3} ${y + vesselHeight} L ${x + vesselWidth - bowInset} ${y + vesselHeight} L ${x + vesselWidth} ${y + vesselHeight / 2} L ${x + vesselWidth - bowInset} ${y} Z`} fill="#f7fafb" stroke={isIssue ? "#bd4540" : color.stroke} strokeWidth={isIssue ? 3 : 2} strokeDasharray={isIssue ? "7 4" : undefined} />
+                {/* Casco exterior hidrodinâmico */}
+                <path d={`M ${x + 6} ${y} Q ${x} ${y + vesselHeight / 2} ${x + 6} ${y + vesselHeight} L ${x + vesselWidth - bowInset} ${y + vesselHeight} L ${x + vesselWidth} ${y + vesselHeight / 2} L ${x + vesselWidth - bowInset} ${y} Z`} fill="#f7fafb" stroke={isIssue ? "#bd4540" : color.stroke} strokeWidth={isIssue ? 3 : 2} strokeDasharray={isIssue ? "7 4" : undefined} />
                 
                 {/* Visualização detalhada do convés conforme tipo de navio */}
                 {vesselType === "research-survey"
@@ -2334,7 +2317,7 @@ export default function BerthBlueprint({
                 }
 
                 {/* Faixa de costado junto ao cais */}
-                <line x1={x + 3} y1={y + vesselHeight - 1} x2={x + vesselWidth - bowInset} y2={y + vesselHeight - 1} stroke={vessel.berthingSide === "bombordo" ? "#7566a8" : "#18849a"} strokeWidth="2" />
+                <line x1={x + 7} y1={y + vesselHeight - 1} x2={x + vesselWidth - bowInset} y2={y + vesselHeight - 1} stroke={vessel.berthingSide === "bombordo" ? "#7566a8" : "#18849a"} strokeWidth="2" />
               </g>
               <line x1={x + vesselWidth / 2} y1={y + vesselHeight + 1} x2={x + vesselWidth / 2} y2={QUAY_Y - 4} stroke={isIssue ? "#bd4540" : color.stroke} strokeDasharray="3 4" opacity="0.58" />
               <circle cx={x + vesselWidth / 2} cy={QUAY_Y - 3} r="3.3" fill={isIssue ? "#bd4540" : color.fill} />
@@ -2342,110 +2325,56 @@ export default function BerthBlueprint({
           );
         })}
 
-        {/* Marcações roxas na ponta da proa e na popa indicando o alinhamento no cais */}
+        {/* Marcação roxa na ponta da proa indicando o alinhamento da proa no cais */}
         {sortedVessels.map((vessel) => {
           const vesselHeight = Math.max(20, vessel.beam * scale);
           const y = VESSEL_BERTH_BOTTOM_Y - vesselHeight;
-
           const bowStation = vessel.berthingSide === "bombordo" ? vessel.position : vessel.position + vessel.loa;
           const bowX = trackStart + bowStation * scale;
           const bowY = y + vesselHeight / 2;
-
-          const sternStation = vessel.berthingSide === "bombordo" ? vessel.position + vessel.loa : vessel.position;
-          const sternX = trackStart + sternStation * scale;
-          const sternY = y + vesselHeight / 2;
-
           return (
-            <g key={`vessel-markers-${vessel.id}`} pointerEvents="none">
-              {/* Marcação da Popa */}
-              <g key={`stern-marker-${vessel.id}`}>
-                <title>{vessel.name} · Espelho da popa na estação {sternStation.toFixed(1)} m no cais</title>
-                <line
-                  x1={sternX}
-                  y1={sternY + 2}
-                  x2={sternX}
-                  y2={QUAY_Y - 3}
-                  stroke="#7566a8"
-                  strokeWidth="2"
-                  strokeDasharray="4 3"
-                  opacity="0.88"
-                />
-                <path
-                  d={`M ${sternX - 4.5} ${sternY + 10} L ${sternX} ${sternY + 2} L ${sternX + 4.5} ${sternY + 10} Z`}
-                  fill="#7566a8"
-                  stroke="#fff"
-                  strokeWidth="1"
-                />
-                <circle
-                  cx={sternX}
-                  cy={QUAY_Y - 3}
-                  r="3.3"
-                  fill="#7566a8"
-                  stroke="#fff"
-                  strokeWidth="1"
-                />
-                <text
-                  x={sternX}
-                  y={QUAY_Y - 7}
-                  textAnchor="middle"
-                  style={{
-                    fill: "#5a4b8a",
-                    fontSize: "5.8px",
-                    fontWeight: 800,
-                    paintOrder: "stroke",
-                    stroke: "#ffffff",
-                    strokeWidth: "2px",
-                    strokeLinejoin: "round",
-                  }}
-                >
-                  POPA {sternStation.toFixed(0)}m
-                </text>
-              </g>
-
-              {/* Marcação da Proa */}
-              <g key={`bow-marker-${vessel.id}`}>
-                <title>{vessel.name} · Bico da proa na estação {bowStation.toFixed(1)} m no cais</title>
-                <line
-                  x1={bowX}
-                  y1={bowY + 2}
-                  x2={bowX}
-                  y2={QUAY_Y - 3}
-                  stroke="#7566a8"
-                  strokeWidth="2"
-                  strokeDasharray="4 3"
-                  opacity="0.88"
-                />
-                <path
-                  d={`M ${bowX - 4.5} ${bowY + 10} L ${bowX} ${bowY + 2} L ${bowX + 4.5} ${bowY + 10} Z`}
-                  fill="#7566a8"
-                  stroke="#fff"
-                  strokeWidth="1"
-                />
-                <circle
-                  cx={bowX}
-                  cy={QUAY_Y - 3}
-                  r="3.3"
-                  fill="#7566a8"
-                  stroke="#fff"
-                  strokeWidth="1"
-                />
-                <text
-                  x={bowX}
-                  y={QUAY_Y - 7}
-                  textAnchor="middle"
-                  style={{
-                    fill: "#5a4b8a",
-                    fontSize: "5.8px",
-                    fontWeight: 800,
-                    paintOrder: "stroke",
-                    stroke: "#ffffff",
-                    strokeWidth: "2px",
-                    strokeLinejoin: "round",
-                  }}
-                >
-                  PROA {bowStation.toFixed(0)}m
-                </text>
-              </g>
+            <g key={`bow-marker-${vessel.id}`} pointerEvents="none">
+              <title>{vessel.name} · Bico da proa na estação {bowStation.toFixed(1)} m no cais</title>
+              <line
+                x1={bowX}
+                y1={bowY + 2}
+                x2={bowX}
+                y2={QUAY_Y - 3}
+                stroke="#7566a8"
+                strokeWidth="2"
+                strokeDasharray="4 3"
+                opacity="0.88"
+              />
+              <path
+                d={`M ${bowX - 4.5} ${bowY + 10} L ${bowX} ${bowY + 2} L ${bowX + 4.5} ${bowY + 10} Z`}
+                fill="#7566a8"
+                stroke="#fff"
+                strokeWidth="1"
+              />
+              <circle
+                cx={bowX}
+                cy={QUAY_Y - 3}
+                r="3.3"
+                fill="#7566a8"
+                stroke="#fff"
+                strokeWidth="1"
+              />
+              <text
+                x={bowX}
+                y={QUAY_Y - 7}
+                textAnchor="middle"
+                style={{
+                  fill: "#5a4b8a",
+                  fontSize: "5.8px",
+                  fontWeight: 800,
+                  paintOrder: "stroke",
+                  stroke: "#ffffff",
+                  strokeWidth: "2px",
+                  strokeLinejoin: "round",
+                }}
+              >
+                PROA {bowStation.toFixed(0)}m
+              </text>
             </g>
           );
         })}
