@@ -1,17 +1,5 @@
 [
   {
-    "name": "CMA CGM AMAZONIA",
-    "loa": 300,
-    "beam": 48.2,
-    "draft": 10.3,
-    "berthingSide": "boreste",
-    "imo": "9894985",
-    "type": "CONTAINER SHIP (FULLY CELLULAR)",
-    "flag": "MALTA",
-    "lastBerth": "TECONTPROLONG",
-    "updatedAt": "25/10/2026 03:41"
-  },
-  {
     "name": "CMA CGM COBALT",
     "loa": 335.23,
     "beam": 51.06,
@@ -21,11 +9,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-<<<<<<< Updated upstream
-    "updatedAt": "25/10/2026 14:23"
-=======
-    "updatedAt": "25/10/2026 11:24"
->>>>>>> Stashed changes
+    "updatedAt": "25/10/2026 14:29"
   },
   {
     "name": "CMA CGM KRYPTON",
@@ -37,11 +21,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-<<<<<<< Updated upstream
-    "updatedAt": "25/10/2026 14:23"
-=======
-    "updatedAt": "25/10/2026 11:24"
->>>>>>> Stashed changes
+    "updatedAt": "25/10/2026 14:29"
   },
   {
     "name": "EVER FAIR",
@@ -53,11 +33,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-<<<<<<< Updated upstream
-    "updatedAt": "25/10/2026 14:23"
-=======
-    "updatedAt": "25/10/2026 11:24"
->>>>>>> Stashed changes
+    "updatedAt": "25/10/2026 14:29"
   },
   {
     "name": "EVER FAITH",
@@ -69,61 +45,43 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-<<<<<<< Updated upstream
-    "updatedAt": "25/10/2026 14:23"
-=======
-    "updatedAt": "25/10/2026 11:24"
->>>>>>> Stashed changes
+    "updatedAt": "25/10/2026 14:29"
   },
   {
     "name": "KOTA ELOK",
-    "loa": 335,
-    "beam": 51,
+    "loa": 335.0,
+    "beam": 51.0,
     "draft": 14.6,
     "berthingSide": "boreste",
     "imo": "1081831",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-<<<<<<< Updated upstream
-    "updatedAt": "25/10/2026 14:23"
-=======
-    "updatedAt": "25/10/2026 11:24"
->>>>>>> Stashed changes
+    "updatedAt": "25/10/2026 14:29"
   },
   {
-    "name": "MERCOSUL GUARUJA",
-    "loa": 228.15,
-    "beam": 32.2,
-    "draft": 10.2,
+    "name": "MAERSK FREEPORT",
+    "loa": 254.94,
+    "beam": 40.0,
+    "draft": 12.6,
     "berthingSide": "boreste",
-    "imo": "9539494",
+    "imo": "9991202",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
-    "flag": "BRAZIL",
-    "lastBerth": "TECONTPROLONG",
-    "updatedAt": "25/10/2026 04:35",
-    "bayCount": 49,
-    "bays": 49,
-    "rowCount": 12,
-    "rows": 12,
-    "tierCount": 5,
-    "tiers": 5,
-    "bridgePosition": "between-bays",
-    "bridgeBay": 42,
-    "bridgeBayStart": 42,
-    "bridgeBayEnd": 42
+    "flag": "PANAMA",
+    "lastBerth": "TECONT1",
+    "updatedAt": "25/10/2026 14:29"
   },
   {
     "name": "NC BRAVO",
-    "loa": 224,
+    "loa": 224.0,
     "beam": 34.89,
-    "draft": 11,
+    "draft": 11.0,
     "berthingSide": "boreste",
     "imo": "9612791",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "25/10/2026 14:23"
+    "updatedAt": "25/10/2026 14:29"
   },
   {
     "name": "NYK DIANA",
@@ -132,19 +90,9 @@
     "draft": 12.8,
     "berthingSide": "boreste",
     "imo": "9337688",
-    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONT1",
-<<<<<<< Updated upstream
-    "updatedAt": "25/10/2026 14:23"
-=======
-    "updatedAt": "25/10/2026 11:26",
-    "bayCount": 70,
-    "bays": 70,
-    "bridgePosition": "between-bays",
-    "bridgeBay": 56,
-    "bridgeBayStart": 56,
-    "bridgeBayEnd": 56
->>>>>>> Stashed changes
+    "updatedAt": "25/10/2026 14:29"
   }
 ]

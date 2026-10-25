@@ -1,7 +1,7 @@
 {
-  "updatedAt": "25/10/2026 14:23",
+  "updatedAt": "25/10/2026 14:29",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 7,
+  "count": 8,
   "maneuvers": [
     {
       "dateTime": "25/10 13:00",
@@ -46,6 +46,21 @@
       "imo": "9996733",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "MALTA",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "26/10 17:30",
+      "name": "MAERSK FREEPORT",
+      "draft": 12.6,
+      "loa": 254.94,
+      "beam": 40.0,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONT1",
+      "berthingSide": "boreste",
+      "imo": "9991202",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "PANAMA",
       "terminal": "rio"
     },
     {
