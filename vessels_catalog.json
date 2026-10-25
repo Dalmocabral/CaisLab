@@ -21,7 +21,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "25/10/2026 04:29"
+    "updatedAt": "25/10/2026 04:35"
   },
   {
     "name": "CMA CGM KRYPTON",
@@ -33,7 +33,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "25/10/2026 04:29"
+    "updatedAt": "25/10/2026 04:35"
   },
   {
     "name": "EVER FAIR",
@@ -45,7 +45,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "25/10/2026 04:29"
+    "updatedAt": "25/10/2026 04:35"
   },
   {
     "name": "EVER FAITH",
@@ -57,7 +57,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "25/10/2026 04:29"
+    "updatedAt": "25/10/2026 04:35"
   },
   {
     "name": "KOTA ELOK",
@@ -69,7 +69,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "25/10/2026 04:29"
+    "updatedAt": "25/10/2026 04:35"
   },
   {
     "name": "MERCOSUL GUARUJA",
@@ -81,7 +81,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "25/10/2026 04:29",
+    "updatedAt": "25/10/2026 04:35",
     "bayCount": 49,
     "bays": 49,
     "rowCount": 12,
@@ -103,7 +103,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "25/10/2026 04:29"
+    "updatedAt": "25/10/2026 04:35"
   },
   {
     "name": "NYK DIANA",
@@ -115,6 +115,6 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONT1",
-    "updatedAt": "25/10/2026 04:29"
+    "updatedAt": "25/10/2026 04:35"
   }
 ]
