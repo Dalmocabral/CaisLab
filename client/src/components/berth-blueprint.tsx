@@ -2763,86 +2763,87 @@ export default function BerthBlueprint({
               );
             })()}
 
-            {/* Limite P6 (Meio entre cabeços 291 e 290) - visível somente se P6 estiver ativo */}
-            {isP6Active && p6LimitX !== null && p6LimitM !== undefined && (() => {
-              const isHighlighted = hoveredPortainerId === "P6" || (dragRef.current?.kind === "portainer" && dragRef.current.id === "P6");
+            {/* Limite P8 | P6 (Meio entre cabeços 291 e 290) - visível se P6 ou P8 estiver ativo */}
+            {(isP6Active || isP8Active) && p6LimitX !== null && p6LimitM !== undefined && (() => {
+              const isHighlighted =
+                hoveredPortainerId === "P6" ||
+                hoveredPortainerId === "P8" ||
+                (dragRef.current?.kind === "portainer" && (dragRef.current.id === "P6" || dragRef.current.id === "P8"));
               return (
                 <g opacity={isHighlighted ? 1 : 0.88} style={{ transition: "opacity 0.2s ease" }}>
-                  <title>{`Limite Operacional Portêiner P06 / P6 · Cabeços 291–290 (estação ${p6LimitM.toFixed(1).replace(".", ",")} m)`}</title>
-                  {/* Linha vertical descendo dos Cabeços 291-290 até o marcador */}
+                  <title>{`Limite Operacional Portêineres P8 | P6 · Cabeços 291–290 (estação ${p6LimitM.toFixed(1).replace(".", ",")} m)`}</title>
+                  {/* Linha vertical descendo dos Cabeços 291-290 até o marcador - dupla cor (P8 laranja / P6 azul) */}
                   <line
-                    x1={p6LimitX}
+                    x1={p6LimitX - 0.75}
                     y1={214}
-                    x2={p6LimitX}
+                    x2={p6LimitX - 0.75}
+                    y2={308}
+                    stroke="#ea580c"
+                    strokeWidth={isHighlighted ? "1.6" : "1.2"}
+                    strokeDasharray="4 3"
+                  />
+                  <line
+                    x1={p6LimitX + 0.75}
+                    y1={214}
+                    x2={p6LimitX + 0.75}
                     y2={308}
                     stroke="#2563eb"
-                    strokeWidth={isHighlighted ? "1.8" : "1.4"}
+                    strokeWidth={isHighlighted ? "1.6" : "1.2"}
                     strokeDasharray="4 3"
                   />
-                  {/* Seta apontando para a esquerda (P06) com base alinhada a 291-290 */}
+                  {/* Metade esquerda / ponta da seta: cor do P8 (Laranja #ea580c) */}
                   <path
-                    d={`M ${p6LimitX} 295 L ${p6LimitX - 21} 295 L ${p6LimitX - 28} 301.5 L ${p6LimitX - 21} 308 L ${p6LimitX} 308 Z`}
-                    fill="#2563eb"
-                    stroke="#1e3a8a"
-                    strokeWidth="0.8"
-                  />
-                  <text
-                    x={p6LimitX - 11}
-                    y={303.6}
-                    textAnchor="middle"
-                    style={{
-                      fill: "#ffffff",
-                      fontSize: "6px",
-                      fontWeight: 900,
-                      letterSpacing: "0.3px",
-                    }}
-                  >
-                    P06
-                  </text>
-                </g>
-              );
-            })()}
-
-            {/* Limite P8 (Cabeço 290) - visível somente se P8 estiver ativo */}
-            {isP8Active && p8LimitX !== null && p8LimitM !== undefined && (() => {
-              const isHighlighted = hoveredPortainerId === "P8" || (dragRef.current?.kind === "portainer" && dragRef.current.id === "P8");
-              const p8OffsetY = isP6Active ? 14 : 0;
-              const p8Y1 = 295 + p8OffsetY;
-              const p8Y2 = 308 + p8OffsetY;
-              const p8YMid = 301.5 + p8OffsetY;
-              const p8TextY = 303.6 + p8OffsetY;
-              return (
-                <g opacity={isHighlighted ? 1 : 0.88} style={{ transition: "opacity 0.2s ease" }}>
-                  <title>{`Limite Operacional Portêiner P08 / P8 · Cabeço 290 (estação ${p8LimitM.toFixed(1).replace(".", ",")} m)`}</title>
-                  {/* Linha vertical descendo do Cabeço 290 até o marcador */}
-                  <line
-                    x1={p8LimitX}
-                    y1={214}
-                    x2={p8LimitX}
-                    y2={p8Y2}
-                    stroke="#ea580c"
-                    strokeWidth={isHighlighted ? "1.8" : "1.4"}
-                    strokeDasharray="4 3"
-                  />
-                  {/* Seta apontando para a esquerda (P08) com base alinhada ao Cabeço 290 */}
-                  <path
-                    d={`M ${p8LimitX} ${p8Y1} L ${p8LimitX - 21} ${p8Y1} L ${p8LimitX - 28} ${p8YMid} L ${p8LimitX - 21} ${p8Y2} L ${p8LimitX} ${p8Y2} Z`}
+                    d={`M ${p6LimitX - 18} 295 L ${p6LimitX - 30} 295 L ${p6LimitX - 38} 301.5 L ${p6LimitX - 30} 308 L ${p6LimitX - 18} 308 Z`}
                     fill="#ea580c"
                     stroke="#9a3412"
                     strokeWidth="0.8"
                   />
+                  {/* Metade direita / base da seta: cor do P6 (Azul #2563eb) */}
+                  <path
+                    d={`M ${p6LimitX} 295 L ${p6LimitX - 18} 295 L ${p6LimitX - 18} 308 L ${p6LimitX} 308 Z`}
+                    fill="#2563eb"
+                    stroke="#1e3a8a"
+                    strokeWidth="0.8"
+                  />
+                  {/* Inscrição "P8 | P6" com P8 na metade laranja e P6 na metade azul */}
                   <text
-                    x={p8LimitX - 11}
-                    y={p8TextY}
+                    x={p6LimitX - 26}
+                    y={303.6}
                     textAnchor="middle"
                     style={{
                       fill: "#ffffff",
-                      fontSize: "6px",
+                      fontSize: "5.8px",
                       fontWeight: 900,
-                      letterSpacing: "0.3px",
+                      letterSpacing: "0.2px",
                     }}
                   >
-                    P08
+                    P8
+                  </text>
+                  <text
+                    x={p6LimitX - 18}
+                    y={303.6}
+                    textAnchor="middle"
+                    style={{
+                      fill: "#ffffff",
+                      fontSize: "5.5px",
+                      fontWeight: 700,
+                      opacity: 0.85,
+                    }}
+                  >
+                    |
+                  </text>
+                  <text
+                    x={p6LimitX - 9}
+                    y={303.6}
+                    textAnchor="middle"
+                    style={{
+                      fill: "#ffffff",
+                      fontSize: "5.8px",
+                      fontWeight: 900,
+                      letterSpacing: "0.2px",
+                    }}
+                  >
+                    P6
                   </text>
                 </g>
               );

@@ -1440,7 +1440,7 @@ export interface PortainerLimit {
   maxLabel?: string;
 }
 
-/** Retorna os limites operacionais de deslocamento dos portêineres (P7 não passa de 309; P8 não passa de 290; P5 não passa de 297-296; P6 não passa de 291-290; P4 não passa de 279). */
+/** Retorna os limites operacionais de deslocamento dos portêineres (P7 não passa de 309; P8 e P6 não passam de 291-290; P5 não passa de 297-296; P4 não passa de 279). */
 export function getPortainerOperationalLimits(bollards: Bollard[]): Record<string, PortainerLimit> {
   const b309 = bollards.find((b) => b.id === "309")?.position ?? 12.0;
 
@@ -1460,8 +1460,8 @@ export function getPortainerOperationalLimits(bollards: Bollard[]): Record<strin
       minLabel: `Cabeço 309 (${b309.toFixed(1).replace(".", ",")} m)`,
     },
     P8: {
-      max: b290,
-      maxLabel: `Cabeço 290 (${b290.toFixed(1).replace(".", ",")} m)`,
+      max: p6Max,
+      maxLabel: `Cabeços 291–290 (${p6Max.toFixed(1).replace(".", ",")} m)`,
     },
     P5: {
       min: p5Min,
