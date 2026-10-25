@@ -2672,44 +2672,44 @@ export default function BerthBlueprint({
           </text>
         </g>
 
-        {/* Marcadores visuais dos Limites Operacionais (aparecem com opacidade leve somente no simulador quando ativo) */}
-        {!isPresentationMode && scenario.showPortainers !== false && (
+        {/* Marcadores visuais dos Limites Operacionais dos Portêineres (setas compactas P04, P05, P06) */}
+        {scenario.showPortainers !== false && (
           <g className="portainer-limit-markers" pointerEvents="none">
             {/* Limite P5 (Meio entre cabeços 297 e 296) - visível somente se P5 estiver ativo */}
             {isP5Active && p5LimitX !== null && p5LimitM !== undefined && (() => {
               const isHighlighted = hoveredPortainerId === "P5" || (dragRef.current?.kind === "portainer" && dragRef.current.id === "P5");
               return (
-                <g opacity={isHighlighted ? 0.95 : 0.42} style={{ transition: "opacity 0.2s ease" }}>
+                <g opacity={isHighlighted ? 1 : 0.88} style={{ transition: "opacity 0.2s ease" }}>
+                  <title>{`Limite Operacional Portêiner P05 / P5 · Cabeços 297–296 (estação ${p5LimitM.toFixed(1).replace(".", ",")} m)`}</title>
+                  {/* Linha vertical descendo dos Cabeços 297-296 até o marcador */}
                   <line
                     x1={p5LimitX}
-                    y1={224}
+                    y1={214}
                     x2={p5LimitX}
-                    y2={276}
+                    y2={308}
                     stroke="#9333ea"
-                    strokeWidth={isHighlighted ? "1.8" : "1.2"}
-                    strokeDasharray="3 3"
+                    strokeWidth={isHighlighted ? "1.8" : "1.4"}
+                    strokeDasharray="4 3"
                   />
-                  <polygon
-                    points={`${p5LimitX},224 ${p5LimitX + 4},219 ${p5LimitX - 4},219`}
-                    fill="#9333ea"
-                  />
-                  <rect
-                    x={p5LimitX - 21}
-                    y={274}
-                    width="42"
-                    height="11"
-                    rx="2.5"
+                  {/* Seta apontando para a direita (P05) com base alinhada a 297-296 */}
+                  <path
+                    d={`M ${p5LimitX} 295 L ${p5LimitX + 21} 295 L ${p5LimitX + 28} 301.5 L ${p5LimitX + 21} 308 L ${p5LimitX} 308 Z`}
                     fill="#9333ea"
                     stroke="#581c87"
-                    strokeWidth="0.6"
+                    strokeWidth="0.8"
                   />
                   <text
-                    x={p5LimitX}
-                    y={282}
+                    x={p5LimitX + 11}
+                    y={303.6}
                     textAnchor="middle"
-                    style={{ fill: "#ffffff", fontSize: "5.2px", fontWeight: 800, letterSpacing: "0.2px" }}
+                    style={{
+                      fill: "#ffffff",
+                      fontSize: "6px",
+                      fontWeight: 900,
+                      letterSpacing: "0.3px",
+                    }}
                   >
-                    ◀ LIM P5 (297–296)
+                    P05
                   </text>
                 </g>
               );
@@ -2719,37 +2719,37 @@ export default function BerthBlueprint({
             {isP6Active && p6LimitX !== null && p6LimitM !== undefined && (() => {
               const isHighlighted = hoveredPortainerId === "P6" || (dragRef.current?.kind === "portainer" && dragRef.current.id === "P6");
               return (
-                <g opacity={isHighlighted ? 0.95 : 0.42} style={{ transition: "opacity 0.2s ease" }}>
+                <g opacity={isHighlighted ? 1 : 0.88} style={{ transition: "opacity 0.2s ease" }}>
+                  <title>{`Limite Operacional Portêiner P06 / P6 · Cabeços 291–290 (estação ${p6LimitM.toFixed(1).replace(".", ",")} m)`}</title>
+                  {/* Linha vertical descendo dos Cabeços 291-290 até o marcador */}
                   <line
                     x1={p6LimitX}
-                    y1={224}
+                    y1={214}
                     x2={p6LimitX}
-                    y2={276}
+                    y2={308}
                     stroke="#2563eb"
-                    strokeWidth={isHighlighted ? "1.8" : "1.2"}
-                    strokeDasharray="3 3"
+                    strokeWidth={isHighlighted ? "1.8" : "1.4"}
+                    strokeDasharray="4 3"
                   />
-                  <polygon
-                    points={`${p6LimitX},224 ${p6LimitX + 4},219 ${p6LimitX - 4},219`}
-                    fill="#2563eb"
-                  />
-                  <rect
-                    x={p6LimitX - 21}
-                    y={274}
-                    width="42"
-                    height="11"
-                    rx="2.5"
+                  {/* Seta apontando para a esquerda (P06) com base alinhada a 291-290 */}
+                  <path
+                    d={`M ${p6LimitX} 295 L ${p6LimitX - 21} 295 L ${p6LimitX - 28} 301.5 L ${p6LimitX - 21} 308 L ${p6LimitX} 308 Z`}
                     fill="#2563eb"
                     stroke="#1e3a8a"
-                    strokeWidth="0.6"
+                    strokeWidth="0.8"
                   />
                   <text
-                    x={p6LimitX}
-                    y={282}
+                    x={p6LimitX - 11}
+                    y={303.6}
                     textAnchor="middle"
-                    style={{ fill: "#ffffff", fontSize: "5.2px", fontWeight: 800, letterSpacing: "0.2px" }}
+                    style={{
+                      fill: "#ffffff",
+                      fontSize: "6px",
+                      fontWeight: 900,
+                      letterSpacing: "0.3px",
+                    }}
                   >
-                    LIM P6 (291–290) ▶
+                    P06
                   </text>
                 </g>
               );
