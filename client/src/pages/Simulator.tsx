@@ -741,7 +741,7 @@ export default function Simulator() {
               <span className="inline-flex items-center gap-1.5"><i style={{ display: "inline-block", width: 8, height: 12, background: "#3d4529", borderRadius: 2 }} /> Alto antigo</span>
               <span><i className="legend-line legend-line-lancante" /> Lançante</span>
               <span><i className="legend-line legend-line-spring" /> Spring</span>
-              <span><i className="legend-gangway" /> Marcação da proa</span>
+              <span><i className="legend-gangway" /> Marcações Proa / Popa</span>
               <span className="drag-hint">Arraste navios, portêineres e pontas amarelas; use ← → no navio ou no cabo selecionado</span>
             </div>
           </article>
@@ -1022,15 +1022,15 @@ export default function Simulator() {
 
                 <div className="field-row gangway-field-row">
                   <div>
-                    <span className="field-label">Estação da Popa</span>
-                    <div className="gangway-station"><strong className="text-xs">{metres(selectedVessel.berthingSide === "bombordo" ? selectedVessel.position + selectedVessel.loa : selectedVessel.position)}</strong></div>
+                    <span className="field-label">Estação da Popa (Seta Roxa)</span>
+                    <div className="gangway-station" style={{ borderColor: "#d5ceed", background: "#f5f3fa" }}><strong style={{ color: "#5a4b8a" }}>{metres(selectedVessel.berthingSide === "bombordo" ? selectedVessel.position + selectedVessel.loa : selectedVessel.position)}</strong></div>
                   </div>
                   <div>
                     <span className="field-label">Estação da Proa (Seta Roxa)</span>
                     <div className="gangway-station" style={{ borderColor: "#d5ceed", background: "#f5f3fa" }}><strong style={{ color: "#5a4b8a" }}>{metres(selectedVessel.berthingSide === "bombordo" ? selectedVessel.position : selectedVessel.position + selectedVessel.loa)}</strong></div>
                   </div>
                 </div>
-                <p className="form-hint">A seta roxa marca o bico da proa da embarcação projetado sobre o cais.</p>
+                <p className="form-hint">As setas roxas marcam o bico da proa e o espelho da popa da embarcação projetados sobre o cais.</p>
 
                 <section className="mooring-editor" aria-label="Amarrações do navio">
                   <div className="mooring-editor-heading">
