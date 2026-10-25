@@ -32,7 +32,7 @@
     "imo": "9996680",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/10/2026 22:14",
+    "updatedAt": "25/10/2026 02:17",
     "bayCount": 78,
     "bays": 78,
     "bridgePosition": "between-bays",
@@ -69,7 +69,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/10/2026 22:14"
+    "updatedAt": "25/10/2026 02:17"
   },
   {
     "name": "CMA CGM PUCCINI",
@@ -205,7 +205,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/10/2026 22:14"
+    "updatedAt": "25/10/2026 02:17"
   },
   {
     "name": "EVER FAITH",
@@ -217,7 +217,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/10/2026 22:14"
+    "updatedAt": "25/10/2026 02:17"
   },
   {
     "name": "EVER FAME",
@@ -329,7 +329,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/10/2026 22:14"
+    "updatedAt": "25/10/2026 02:17"
   },
   {
     "name": "KOTA PAHLAWAN",
@@ -465,8 +465,8 @@
     "berthingSide": "boreste",
     "imo": "9539494",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
-    "lastBerth": "TECONT1",
-    "updatedAt": "24/10/2026 22:14",
+    "lastBerth": "TECONTPROLONG",
+    "updatedAt": "25/10/2026 02:17",
     "flag": "BRAZIL"
   },
   {
@@ -477,8 +477,8 @@
     "berthingSide": "boreste",
     "imo": "9612791",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
-    "lastBerth": "TECONT1",
-    "updatedAt": "24/10/2026 22:14",
+    "lastBerth": "TECONTPROLONG",
+    "updatedAt": "25/10/2026 02:17",
     "flag": "BRAZIL",
     "bayCount": 46,
     "bays": 46
@@ -523,8 +523,8 @@
     "berthingSide": "boreste",
     "imo": "9337688",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
-    "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/10/2026 22:14",
+    "lastBerth": "TECONT1",
+    "updatedAt": "25/10/2026 02:17",
     "flag": "PANAMA"
   },
   {

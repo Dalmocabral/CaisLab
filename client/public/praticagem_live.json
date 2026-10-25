@@ -1,5 +1,5 @@
 {
-  "updatedAt": "24/10/2026 22:14",
+  "updatedAt": "25/10/2026 02:17",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 8,
   "maneuvers": [
@@ -11,7 +11,7 @@
       "beam": 32.2,
       "maneuver": "E",
       "berthFrom": "",
-      "berthTo": "TECONT1",
+      "berthTo": "TECONTPROLONG",
       "berthingSide": "boreste",
       "imo": "9539494",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
@@ -26,7 +26,7 @@
       "beam": 32.25,
       "maneuver": "E",
       "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
+      "berthTo": "TECONT1",
       "berthingSide": "boreste",
       "imo": "9337688",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
@@ -34,14 +34,14 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "26/10 05:00",
+      "dateTime": "26/10 04:00",
       "name": "NC BRAVO",
       "draft": 11.0,
       "loa": 224.0,
       "beam": 34.89,
       "maneuver": "E",
       "berthFrom": "",
-      "berthTo": "TECONT1",
+      "berthTo": "TECONTPROLONG",
       "berthingSide": "boreste",
       "imo": "9612791",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
@@ -49,7 +49,7 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "26/10 15:00",
+      "dateTime": "26/10 15:30",
       "name": "CMA CGM KRYPTON",
       "draft": 14.1,
       "loa": 335.23,
