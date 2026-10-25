@@ -2494,6 +2494,82 @@ export default function BerthBlueprint({
                   PROA {bowStation.toFixed(0)}m
                 </text>
               </g>
+
+              {/* Relatório de posicionamento do navio (Cabeços da Proa, Popa, Springs e Lançantes) */}
+              {(() => {
+                const getNearestBollardId = (station: number): string => {
+                  if (!bollardDisplays || bollardDisplays.length === 0) return "-";
+                  let best = bollardDisplays[0];
+                  let minDiff = Math.abs(best.position - station);
+                  for (let i = 1; i < bollardDisplays.length; i++) {
+                    const b = bollardDisplays[i];
+                    const diff = Math.abs(b.position - station);
+                    if (diff < minDiff) {
+                      minDiff = diff;
+                      best = b;
+                    }
+                  }
+                  return best.id;
+                };
+
+                const getMooringLineBollardId = (type: MooringLineType): string => {
+                  const lines = vessel.mooringLines?.filter((l) => l.type === type && l.bollardId) ?? [];
+                  if (lines.length === 0) return "-";
+                  return lines.map((l) => l.bollardId).join(", ");
+                };
+
+                const bowBollard = getNearestBollardId(bowStation);
+                const sternBollard = getNearestBollardId(sternStation);
+                const springProa = getMooringLineBollardId("spring-proa");
+                const lancanteProa = getMooringLineBollardId("lancante-proa");
+                const springPopa = getMooringLineBollardId("spring-popa");
+                const lancantePopa = getMooringLineBollardId("lancante-popa");
+
+                const reportLines = [
+                  { label: "Ponta da Proa:", value: bowBollard },
+                  { label: "Ponta Popa:", value: sternBollard },
+                  { label: "Spring proa:", value: springProa },
+                  { label: "Lancante proa:", value: lancanteProa },
+                  { label: "Spring popa:", value: springPopa },
+                  { label: "Lancante popa:", value: lancantePopa },
+                ];
+
+                const xLeft = Math.min(bowX, sternX);
+                const vesselWidth = vessel.loa * scale;
+                const reportX = Math.max(trackStart + 16, Math.min(trackEnd - 130, xLeft + vesselWidth * 0.35));
+                const reportStartY = Math.max(42, y - 98);
+
+                return (
+                  <g key={`vessel-report-${vessel.id}`} className="vessel-berth-report" pointerEvents="none">
+                    {reportLines.map((line, idx) => {
+                      const lineY = reportStartY + idx * 11;
+                      return (
+                        <text
+                          key={`report-line-${vessel.id}-${idx}`}
+                          x={reportX}
+                          y={lineY}
+                          textAnchor="start"
+                          style={{
+                            fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+                            fontSize: "8.2px",
+                            fontWeight: 700,
+                            fill: "#1e293b",
+                            paintOrder: "stroke",
+                            stroke: "#f8fbfc",
+                            strokeWidth: "2.2px",
+                            strokeLinejoin: "round",
+                          }}
+                        >
+                          <tspan fill="#334155" fontWeight="600">{line.label} </tspan>
+                          <tspan fill={line.value === "-" ? "#94a3b8" : "#0f172a"} fontWeight="800">
+                            {line.value}
+                          </tspan>
+                        </text>
+                      );
+                    })}
+                  </g>
+                );
+              })()}
             </g>
           );
         })}
