@@ -578,16 +578,8 @@ function addVessel(
   const hull = new THREE.Mesh(createHullGeometry(THREE, direction, loa, beam, draft, deckHeight), hullMaterial);
   group.add(hull);
 
-  // Fundo submerso vermelho antifouling e faixa de linha d'água (boot-topping)
-  if (isContainer || isOffshore || isResearch || isTanker) {
-    const bottomMat = new THREE.MeshStandardMaterial({ color: "#7a1d1d", roughness: 0.82 });
-    addBox(THREE, group, [loa * (isContainer ? 0.94 : 0.86), draft * 0.85, beam * (isContainer ? 0.94 : 0.88)], [0, -draft * 0.55, 0], bottomMat);
-    // Linha d'água (faixa preta de boot-topping entre o vermelho submerso e o costado)
-    const bootMat = new THREE.MeshStandardMaterial({ color: "#0f172a", roughness: 0.7 });
-    addBox(THREE, group, [loa * (isContainer ? 0.96 : 0.88), 0.45, beam * (isContainer ? 0.96 : 0.9)], [0, 0.05, 0], bootMat);
-
-    if (isOffshore) {
-      // Propulsores Azimutais duplos na popa (Azimuth Thruster Pods com hélices em bronze)
+  if (isOffshore) {
+    // Propulsores Azimutais duplos na popa (Azimuth Thruster Pods com hélices em bronze)
       const thrusterX = -direction * (loa * 0.43);
       [-beam * 0.22, beam * 0.22].forEach((tz) => {
         const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, draft * 0.55, 8), new THREE.MeshStandardMaterial({ color: "#1e293b" }));
@@ -601,7 +593,6 @@ function addVessel(
         hub.position.set(thrusterX, -draft * 0.88, tz);
         group.add(hub);
       });
-    }
   }
 
   const deckColor = isTanker ? "#94a3b8" : isOffshore ? "#9a5b32" : isResearch ? "#334155" : "#314957";
