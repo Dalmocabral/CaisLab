@@ -1,23 +1,8 @@
 {
-  "updatedAt": "25/10/2026 04:35",
+  "updatedAt": "25/10/2026 08:49",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 8,
+  "count": 7,
   "maneuvers": [
-    {
-      "dateTime": "25/10 04:00",
-      "name": "MERCOSUL GUARUJA",
-      "draft": 10.2,
-      "loa": 228.15,
-      "beam": 32.2,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
-      "berthingSide": "boreste",
-      "imo": "9539494",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "BRAZIL",
-      "terminal": "rio"
-    },
     {
       "dateTime": "25/10 13:00",
       "name": "NYK DIANA",
