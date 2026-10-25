@@ -752,12 +752,35 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const config = resolveVesselSuperstructure(vessel);
   const isFortaleza = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("FORTALEZA");
   const isDusseldorf = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("DUSSELDORF");
+  const isAplNewJersey = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("APL") && vessel.name.toUpperCase().includes("NEW JERSEY");
   // No 3D do Fortaleza: 10 escotilhas de 40' bem distribuídas (bays 01 a 39) com vão entre bays
   // No DUSSELDORF EXPRESS: 35 bays de 20' (01 a 69), com bay 53 isolada de 20' e passadiço entre 57 e 59
+  // No APL NEW JERSEY: bay 01 isolada na proa, 13 pares de 40' até 53, passadiço entre 53 e 55, 4 pares de 40' até bay 68 na popa
   const bays = isFortaleza
     ? Array.from({ length: 20 }, (_, index) => index * 2 + 1)
     : isDusseldorf
     ? Array.from({ length: 35 }, (_, index) => index * 2 + 1)
+    : isAplNewJersey
+    ? [
+        1,
+        3, 5,
+        7, 9,
+        11, 13,
+        15, 17,
+        19, 21,
+        23, 25,
+        27, 29,
+        31, 33,
+        35, 37,
+        39, 41,
+        43, 45,
+        47, 49,
+        51, 53,
+        55, 57,
+        59, 61,
+        63, 65,
+        67, 68,
+      ]
     : bayNumberSequence(vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber, vessel.name);
   const isAllAft = config.bridgePosition === "all-aft";
 
@@ -786,11 +809,13 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
 
   const isNykRumina = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("NYK") && vessel.name.toUpperCase().includes("RUMINA");
   const isSeaspanEmpire = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("SEASPAN") && vessel.name.toUpperCase().includes("EMPIRE");
+  const idx53 = bays.indexOf(53);
   const idx55 = bays.indexOf(55);
   const idx57 = bays.indexOf(57);
   const idx59 = bays.indexOf(59);
   const hasSpecialBridge55_57 = (isNykRumina || isSeaspanEmpire) && idx55 !== -1 && idx57 !== -1;
   const hasDusseldorfBridge = isDusseldorf && idx57 !== -1 && idx59 !== -1;
+  const hasAplBridge = isAplNewJersey && idx53 !== -1 && idx55 !== -1;
 
   const isEverFitClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("EVER") && (
     vessel.name.toUpperCase().includes("FIT") ||
@@ -808,8 +833,8 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const hasEverFitBridge = isEverFitClass && idx27 !== -1 && idx29 !== -1;
   const hasEverFitFunnel = isEverFitClass && config.separateFunnel && idx61 !== -1 && idx63 !== -1;
 
-  const num40ftGaps = isDusseldorf ? 17 : Math.max(0, Math.floor((bays.length - 1) / 2));
-  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0);
+  const num40ftGaps = isDusseldorf ? 17 : isAplNewJersey ? 16 : Math.max(0, Math.floor((bays.length - 1) / 2));
+  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0) + (hasAplBridge ? 2.0 : 0);
   const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + extraSlots);
   const hatchGap = isFortaleza ? 1.6 : (bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0);
   const totalGapsWidth = num40ftGaps * hatchGap;
@@ -818,12 +843,21 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const nykBridgeSlotW = hasSpecialBridge55_57 ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const everFitBridgeSlotW = hasEverFitBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const dusseldorfBridgeSlotW = hasDusseldorfBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
-  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - dusseldorfBridgeSlotW);
+  const aplBridgeSlotW = hasAplBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
+  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - dusseldorfBridgeSlotW - aplBridgeSlotW);
   const cellWidth = availableBayWidth / Math.max(1, bays.length);
 
   const bayCellFromStern = (index: number) => {
     let gapsBefore = Math.floor(index / 2);
-    if (isDusseldorf) {
+    if (isAplNewJersey) {
+      if (index === 0) {
+        gapsBefore = 0;
+      } else if (index <= 26) {
+        gapsBefore = 1 + Math.floor((index - 1) / 2);
+      } else {
+        gapsBefore = 13 + Math.floor((index - 27) / 2);
+      }
+    } else if (isDusseldorf) {
       if (index <= 25) {
         gapsBefore = Math.floor(index / 2);
       } else if (index === 26) {
@@ -852,13 +886,16 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     if (hasDusseldorfBridge && index >= idx59) {
       xPos -= dusseldorfBridgeSlotW;
     }
+    if (hasAplBridge && index >= idx55) {
+      xPos -= aplBridgeSlotW;
+    }
     return xPos;
   };
 
   const bridgeIndices: number[] = [];
   const funnelIndices: number[] = [];
 
-  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasDusseldorfBridge) {
+  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasDusseldorfBridge && !hasAplBridge) {
     const targetBridgeBay = config.bridgeBay ?? config.bridgeBayStart ?? 34;
     const occupiedBridgeBays = getOccupiedBayNumbers(
       targetBridgeBay,
@@ -951,6 +988,11 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     const leftOf57 = bayCellFromStern(idx57);
     bridgeCenterFromStern = (rightOf59 + leftOf57) / 2;
     bridgeLength = Math.max(10, dusseldorfBridgeSlotW - 0.4);
+  } else if (hasAplBridge) {
+    const rightOf55 = bayCellFromStern(idx55) + cellWidth;
+    const leftOf53 = bayCellFromStern(idx53);
+    bridgeCenterFromStern = (rightOf55 + leftOf53) / 2;
+    bridgeLength = Math.max(10, aplBridgeSlotW - 0.4);
   } else if (bridgeIndices.length > 0) {
     const minX = Math.min(...bridgeIndices.map((idx) => bayCellFromStern(idx)));
     const maxX = Math.max(...bridgeIndices.map((idx) => bayCellFromStern(idx) + cellWidth));
@@ -992,7 +1034,81 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const totalHatches = Math.ceil(bays.length / 2);
   const hatches: ContainerHatchPlan[] = [];
 
-  if (isDusseldorf) {
+  if (isAplNewJersey) {
+    // 1. Escotilha 0: Bay 01 (bay de 20ft isolada na proa: "05 03 | 01 na proa so tem uma bay de 20 que e 01")
+    const col01 = 0;
+    const cellX01 = bayCellFromStern(col01);
+    hatches.push({
+      hatchIndex: 0,
+      colA: col01,
+      colB: undefined,
+      bay20A: bays[col01],
+      bay20B: undefined,
+      fromSternA: cellX01 + cellWidth / 2,
+      fromSternB: undefined,
+      centerFromStern: cellX01 + cellWidth / 2,
+      length40: cellWidth,
+      length20: cellWidth,
+      isBlockedByBridge: false,
+      isBlockedByFunnel: false,
+      colABlocked: false,
+      colBBlocked: false,
+    });
+
+    // 2. Escotilhas 1 a 13: pares de 40ft em frente ao passadiço (bays 03-05 até 51-53)
+    for (let p = 0; p < 13; p++) {
+      const colA = 1 + 2 * p;
+      const colB = colA + 1;
+      const cellXA = bayCellFromStern(colA);
+      const cellXB = bayCellFromStern(colB);
+      hatches.push({
+        hatchIndex: 1 + p,
+        colA,
+        colB,
+        bay20A: bays[colA],
+        bay20B: bays[colB],
+        fromSternA: cellXA + cellWidth / 2,
+        fromSternB: cellXB + cellWidth / 2,
+        centerFromStern: (cellXB + cellXA + cellWidth) / 2,
+        length40: (cellXA + cellWidth) - cellXB,
+        length20: cellWidth,
+        isBlockedByBridge: false,
+        isBlockedByFunnel: false,
+        colABlocked: false,
+        colBBlocked: false,
+      });
+    }
+
+    // [ O passadiço fica situado no vão entre a escotilha 13 (bays 51-53) e a escotilha 14 (bays 55-57) ]
+
+    // 3. Escotilhas 14 a 17: pares de 40ft na ré do passadiço (55 57, 59 61, 63 65, 67 68 "a ultima bay e 68 |")
+    const aftPairs = [
+      { colA: 27, colB: 28 }, // 55, 57
+      { colA: 29, colB: 30 }, // 59, 61
+      { colA: 31, colB: 32 }, // 63, 65
+      { colA: 33, colB: 34 }, // 67, 68
+    ];
+    aftPairs.forEach((pair, idx) => {
+      const cellXA = bayCellFromStern(pair.colA);
+      const cellXB = bayCellFromStern(pair.colB);
+      hatches.push({
+        hatchIndex: 14 + idx,
+        colA: pair.colA,
+        colB: pair.colB,
+        bay20A: bays[pair.colA],
+        bay20B: bays[pair.colB],
+        fromSternA: cellXA + cellWidth / 2,
+        fromSternB: cellXB + cellWidth / 2,
+        centerFromStern: (cellXB + cellXA + cellWidth) / 2,
+        length40: (cellXA + cellWidth) - cellXB,
+        length20: cellWidth,
+        isBlockedByBridge: false,
+        isBlockedByFunnel: false,
+        colABlocked: false,
+        colBBlocked: false,
+      });
+    });
+  } else if (isDusseldorf) {
     // 1. Escotilhas 0 a 12: pares de 40ft (bays 01-03 até 49-51)
     for (let p = 0; p < 13; p++) {
       const colA = 2 * p;

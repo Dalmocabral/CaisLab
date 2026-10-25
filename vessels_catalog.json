@@ -8,8 +8,18 @@
     "imo": "9350020",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONT1",
-    "updatedAt": "24/10/2026 17:05",
-    "flag": "LIBERIA"
+    "updatedAt": "25/10/2026 00:14",
+    "flag": "LIBERIA",
+    "bayCount": 68,
+    "bays": 68,
+    "bridgePosition": "between-bays",
+    "bridgeBay": 54,
+    "bridgeBayStart": 54,
+    "bridgeBayEnd": 54,
+    "rowCount": 16,
+    "rows": 16,
+    "tierCount": 5,
+    "tiers": 5
   },
   {
     "name": "BOCHEM WALVIS BAY",

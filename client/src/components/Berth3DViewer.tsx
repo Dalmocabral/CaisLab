@@ -190,7 +190,8 @@ function addTransomNameplate(
   const vesselName = (vessel.name || "COSCO SHIPPING BRAZIL").toUpperCase();
   const isCosco = /cosco/i.test(vesselName);
   const isDusseldorf = /dusseldorf/i.test(vesselName);
-  const port = isCosco ? "HONG KONG" : isDusseldorf ? "HAMBURG" : "PANAMA";
+  const isApl = /apl\s*new\s*jersey/i.test(vesselName);
+  const port = isCosco ? "HONG KONG" : isDusseldorf ? "HAMBURG" : isApl ? "MONROVIA" : "PANAMA";
 
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";

@@ -2,14 +2,24 @@
   {
     "name": "APL NEW JERSEY",
     "loa": 293.18,
-    "beam": 40.0,
+    "beam": 40,
     "draft": 13.8,
     "berthingSide": "boreste",
     "imo": "9350020",
-    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "lastBerth": "TECONT1",
-    "updatedAt": "24/10/2026 17:05",
-    "flag": "LIBERIA"
+    "updatedAt": "25/10/2026 00:14",
+    "flag": "LIBERIA",
+    "bayCount": 68,
+    "bays": 68,
+    "bridgePosition": "between-bays",
+    "bridgeBay": 54,
+    "bridgeBayStart": 54,
+    "bridgeBayEnd": 54,
+    "rowCount": 16,
+    "rows": 16,
+    "tierCount": 5,
+    "tiers": 5
   },
   {
     "name": "BOCHEM WALVIS BAY",
@@ -32,7 +42,11 @@
     "imo": "9996680",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
+<<<<<<< HEAD
     "updatedAt": "25/10/2026 02:17",
+=======
+    "updatedAt": "25/10/2026 00:07",
+>>>>>>> 5f76a8c (feat(vessel): configurar bays e passadico manualmente para APL NEW JERSEY)
     "bayCount": 78,
     "bays": 78,
     "bridgePosition": "between-bays",
@@ -69,7 +83,11 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
+<<<<<<< HEAD
     "updatedAt": "25/10/2026 02:17"
+=======
+    "updatedAt": "25/10/2026 00:07"
+>>>>>>> 5f76a8c (feat(vessel): configurar bays e passadico manualmente para APL NEW JERSEY)
   },
   {
     "name": "CMA CGM PUCCINI",
@@ -205,7 +223,11 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
+<<<<<<< HEAD
     "updatedAt": "25/10/2026 02:17"
+=======
+    "updatedAt": "25/10/2026 00:07"
+>>>>>>> 5f76a8c (feat(vessel): configurar bays e passadico manualmente para APL NEW JERSEY)
   },
   {
     "name": "EVER FAITH",
@@ -217,7 +239,11 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
+<<<<<<< HEAD
     "updatedAt": "25/10/2026 02:17"
+=======
+    "updatedAt": "25/10/2026 00:07"
+>>>>>>> 5f76a8c (feat(vessel): configurar bays e passadico manualmente para APL NEW JERSEY)
   },
   {
     "name": "EVER FAME",
@@ -321,15 +347,19 @@
   },
   {
     "name": "KOTA ELOK",
-    "loa": 335.0,
-    "beam": 51.0,
+    "loa": 335,
+    "beam": 51,
     "draft": 14.6,
     "berthingSide": "boreste",
     "imo": "1081831",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
+<<<<<<< HEAD
     "updatedAt": "25/10/2026 02:17"
+=======
+    "updatedAt": "25/10/2026 00:07"
+>>>>>>> 5f76a8c (feat(vessel): configurar bays e passadico manualmente para APL NEW JERSEY)
   },
   {
     "name": "KOTA PAHLAWAN",
@@ -461,24 +491,32 @@
     "name": "MERCOSUL GUARUJA",
     "loa": 228.15,
     "beam": 32.2,
-    "draft": 11.0,
+    "draft": 11,
     "berthingSide": "boreste",
     "imo": "9539494",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
+<<<<<<< HEAD
     "updatedAt": "25/10/2026 02:17",
+=======
+    "updatedAt": "25/10/2026 00:07",
+>>>>>>> 5f76a8c (feat(vessel): configurar bays e passadico manualmente para APL NEW JERSEY)
     "flag": "BRAZIL"
   },
   {
     "name": "NC BRAVO",
-    "loa": 224.0,
+    "loa": 224,
     "beam": 34.89,
-    "draft": 11.0,
+    "draft": 11,
     "berthingSide": "boreste",
     "imo": "9612791",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONTPROLONG",
+<<<<<<< HEAD
     "updatedAt": "25/10/2026 02:17",
+=======
+    "updatedAt": "25/10/2026 00:07",
+>>>>>>> 5f76a8c (feat(vessel): configurar bays e passadico manualmente para APL NEW JERSEY)
     "flag": "BRAZIL",
     "bayCount": 46,
     "bays": 46
@@ -524,7 +562,11 @@
     "imo": "9337688",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONT1",
+<<<<<<< HEAD
     "updatedAt": "25/10/2026 02:17",
+=======
+    "updatedAt": "25/10/2026 00:07",
+>>>>>>> 5f76a8c (feat(vessel): configurar bays e passadico manualmente para APL NEW JERSEY)
     "flag": "PANAMA"
   },
   {

@@ -118,8 +118,30 @@ function renderContainerDeck(
 ) {
   const config = resolveVesselSuperstructure(vessel);
   const isDusseldorf = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("DUSSELDORF");
+  const isAplNewJersey = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("APL") && vessel.name.toUpperCase().includes("NEW JERSEY");
   const bays = isDusseldorf
     ? Array.from({ length: 35 }, (_, index) => index * 2 + 1)
+    : isAplNewJersey
+    ? [
+        1,
+        3, 5,
+        7, 9,
+        11, 13,
+        15, 17,
+        19, 21,
+        23, 25,
+        27, 29,
+        31, 33,
+        35, 37,
+        39, 41,
+        43, 45,
+        47, 49,
+        51, 53,
+        55, 57,
+        59, 61,
+        63, 65,
+        67, 68,
+      ]
     : bayNumberSequence(vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber, vessel.name);
   const rows = rowNumberSequence(vessel.rowCount ?? vessel.rows);
   const effectiveRows = rows.length > 0
@@ -162,11 +184,13 @@ function renderContainerDeck(
 
   const isNykRumina = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("NYK") && vessel.name.toUpperCase().includes("RUMINA");
   const isSeaspanEmpire = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("SEASPAN") && vessel.name.toUpperCase().includes("EMPIRE");
+  const idx53 = bays.indexOf(53);
   const idx55 = bays.indexOf(55);
   const idx57 = bays.indexOf(57);
   const idx59 = bays.indexOf(59);
   const hasSpecialBridge55_57 = (isNykRumina || isSeaspanEmpire) && idx55 !== -1 && idx57 !== -1;
   const hasDusseldorfBridge = isDusseldorf && idx57 !== -1 && idx59 !== -1;
+  const hasAplBridge = isAplNewJersey && idx53 !== -1 && idx55 !== -1;
 
   const isEverFitClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("EVER") && (
     vessel.name.toUpperCase().includes("FIT") ||
@@ -185,8 +209,8 @@ function renderContainerDeck(
   const hasEverFitFunnel = isEverFitClass && config.separateFunnel && idx61 !== -1 && idx63 !== -1;
 
   // Separação visual entre as bays de 40' (cada par de bays de 20' forma uma bay/hatch de 40')
-  const num40ftGaps = isDusseldorf ? 17 : Math.max(0, Math.floor((bays.length - 1) / 2));
-  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0);
+  const num40ftGaps = isDusseldorf ? 17 : isAplNewJersey ? 16 : Math.max(0, Math.floor((bays.length - 1) / 2));
+  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0) + (hasAplBridge ? 2.0 : 0);
   const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + extraSlots);
   const hatchGap = bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0;
   const totalGapsWidth = num40ftGaps * hatchGap;
@@ -195,7 +219,8 @@ function renderContainerDeck(
   const nykBridgeSlotW = hasSpecialBridge55_57 ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const everFitBridgeSlotW = hasEverFitBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const dusseldorfBridgeSlotW = hasDusseldorfBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
-  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - dusseldorfBridgeSlotW);
+  const aplBridgeSlotW = hasAplBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
+  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - dusseldorfBridgeSlotW - aplBridgeSlotW);
   const cellWidth = availableBayWidth / Math.max(1, bays.length);
   const labelSize = bays.length ? Math.max(2.6, Math.min(5.4, cellWidth * 0.54)) : 3.4;
   const rowLabelSize = Math.max(2.0, Math.min(labelSize, cellHeight * 0.72));
@@ -204,7 +229,15 @@ function renderContainerDeck(
   // Posição X da baia considerando o espaço visual entre escotilhas de 40'
   const bayCellX = (index: number) => {
     let gapsBefore = Math.floor(index / 2);
-    if (isDusseldorf) {
+    if (isAplNewJersey) {
+      if (index === 0) {
+        gapsBefore = 0;
+      } else if (index <= 26) {
+        gapsBefore = 1 + Math.floor((index - 1) / 2);
+      } else {
+        gapsBefore = 13 + Math.floor((index - 27) / 2);
+      }
+    } else if (isDusseldorf) {
       if (index <= 25) {
         gapsBefore = Math.floor(index / 2);
       } else if (index === 26) {
@@ -233,6 +266,9 @@ function renderContainerDeck(
     if (hasDusseldorfBridge && index >= idx59) {
       xPos -= dusseldorfBridgeSlotW;
     }
+    if (hasAplBridge && index >= idx55) {
+      xPos -= aplBridgeSlotW;
+    }
     return xPos;
   };
 
@@ -240,7 +276,7 @@ function renderContainerDeck(
   const bridgeIndices: number[] = [];
   const funnelIndices: number[] = [];
 
-  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasDusseldorfBridge) {
+  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasDusseldorfBridge && !hasAplBridge) {
     const targetBridgeBay = config.bridgeBay ?? config.bridgeBayStart ?? 34;
     const occupiedBridgeBays = getOccupiedBayNumbers(
       targetBridgeBay,
@@ -414,6 +450,17 @@ function renderContainerDeck(
               if (idx69 !== -1) {
                 const cellX69 = bayCellX(idx69);
                 centerX = (cellX + cellWidth / 2 + cellX69 + cellWidth / 2) / 2;
+              }
+            }
+
+            // No navio APL NEW JERSEY, remove a bay 67 e deixa a 68 centralizada na última escotilha de 40' ("a ultima bay e 68 |")
+            if (isAplNewJersey && bay === 67) return null;
+
+            if (isAplNewJersey && bay === 68) {
+              const idx67 = bays.indexOf(67);
+              if (idx67 !== -1) {
+                const cellX67 = bayCellX(idx67);
+                centerX = (cellX + cellWidth / 2 + cellX67 + cellWidth / 2) / 2;
               }
             }
 
@@ -732,6 +779,53 @@ function renderContainerDeck(
             return (
               <>
                 <title>Passadiço (entre Bay 57 e Bay 59)</title>
+                <rect
+                  x={slotX}
+                  y={y + 2.5}
+                  width={slotW}
+                  height={vesselHeight - 5}
+                  rx="1.8"
+                  fill={color.fill}
+                  stroke={color.stroke}
+                  strokeWidth="1.2"
+                />
+                {/* Asas do passadiço */}
+                <line
+                  x1={slotX + slotW * 0.55}
+                  y1={y + 0.8}
+                  x2={slotX + slotW * 0.55}
+                  y2={y + vesselHeight - 0.8}
+                  stroke={color.stroke}
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                />
+                {/* Chaminé no próprio passadiço (lado de ré) */}
+                <ellipse
+                  cx={slotX + slotW * 0.25}
+                  cy={y + vesselHeight / 2}
+                  rx={Math.max(2.2, Math.min(4.8, slotW * 0.22))}
+                  ry={Math.max(1.8, Math.min(3.2, vesselHeight * 0.11))}
+                  fill="#1e293b"
+                  stroke="#0f172a"
+                  strokeWidth="0.7"
+                />
+              </>
+            );
+          })()}
+        </g>
+      )}
+
+      {/* 2e. Passadiço Específico do APL NEW JERSEY (entre as bays 53 e 55: 57 55 [passadiço] 53 51) */}
+      {!isAllAft && hasAplBridge && (
+        <g className="superstructure-bridge-island-apl">
+          {(() => {
+            const rightOf55 = bayCellX(idx55) + cellWidth;
+            const leftOf53 = bayCellX(idx53);
+            const slotW = Math.max(8.0, aplBridgeSlotW - 0.4);
+            const slotX = (rightOf55 + leftOf53 - slotW) / 2;
+            return (
+              <>
+                <title>Passadiço (entre Bay 53 e Bay 55)</title>
                 <rect
                   x={slotX}
                   y={y + 2.5}
