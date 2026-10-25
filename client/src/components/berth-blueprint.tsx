@@ -2068,17 +2068,21 @@ export default function BerthBlueprint({
   const issueByVessel = new Map<string, string[]>();
 
   const operationalLimits = getPortainerOperationalLimits(scenario.bollards);
+  const p7LimitM = operationalLimits.P7?.min;
   const p5LimitM = operationalLimits.P5?.min;
   const p6LimitM = operationalLimits.P6?.max;
   const p4LimitM = operationalLimits.P4?.max;
+  const p7LimitX = p7LimitM !== undefined ? trackStart + p7LimitM * scale : null;
   const p5LimitX = p5LimitM !== undefined ? trackStart + p5LimitM * scale : null;
   const p6LimitX = p6LimitM !== undefined ? trackStart + p6LimitM * scale : null;
   const p4LimitX = p4LimitM !== undefined ? trackStart + p4LimitM * scale : null;
 
   const portainersList = scenario.portainers ?? DEFAULT_PORTAINERS;
+  const p7Portainer = portainersList.find((p) => p.id === "P7");
   const p5Portainer = portainersList.find((p) => p.id === "P5");
   const p6Portainer = portainersList.find((p) => p.id === "P6");
   const p4Portainer = portainersList.find((p) => p.id === "P4");
+  const isP7Active = (isPresentationMode || scenario.showPortainers !== false) && (p7Portainer ? (isPresentationMode || p7Portainer.enabled) : true);
   const isP5Active = (isPresentationMode || scenario.showPortainers !== false) && (p5Portainer ? (isPresentationMode || p5Portainer.enabled) : true);
   const isP6Active = (isPresentationMode || scenario.showPortainers !== false) && (p6Portainer ? (isPresentationMode || p6Portainer.enabled) : true);
   const isP4Active = (isPresentationMode || scenario.showPortainers !== false) && (p4Portainer ? (isPresentationMode || p4Portainer.enabled) : true);
@@ -2672,9 +2676,49 @@ export default function BerthBlueprint({
           </text>
         </g>
 
-        {/* Marcadores visuais dos Limites Operacionais dos Portêineres (setas compactas P04, P05, P06) */}
+        {/* Marcadores visuais dos Limites Operacionais dos Portêineres (setas compactas P07, P05, P06, P04) */}
         {scenario.showPortainers !== false && (
           <g className="portainer-limit-markers" pointerEvents="none">
+            {/* Limite P7 (Cabeço 309) - visível somente se P7 estiver ativo */}
+            {isP7Active && p7LimitX !== null && p7LimitM !== undefined && (() => {
+              const isHighlighted = hoveredPortainerId === "P7" || (dragRef.current?.kind === "portainer" && dragRef.current.id === "P7");
+              return (
+                <g opacity={isHighlighted ? 1 : 0.88} style={{ transition: "opacity 0.2s ease" }}>
+                  <title>{`Limite Operacional Portêiner P07 / P7 · Cabeço 309 (estação ${p7LimitM.toFixed(1).replace(".", ",")} m)`}</title>
+                  {/* Linha vertical descendo do Cabeço 309 até o marcador */}
+                  <line
+                    x1={p7LimitX}
+                    y1={214}
+                    x2={p7LimitX}
+                    y2={308}
+                    stroke="#65a30d"
+                    strokeWidth={isHighlighted ? "1.8" : "1.4"}
+                    strokeDasharray="4 3"
+                  />
+                  {/* Seta apontando para a direita (P07) com base alinhada ao Cabeço 309 */}
+                  <path
+                    d={`M ${p7LimitX} 295 L ${p7LimitX + 21} 295 L ${p7LimitX + 28} 301.5 L ${p7LimitX + 21} 308 L ${p7LimitX} 308 Z`}
+                    fill="#65a30d"
+                    stroke="#3f6212"
+                    strokeWidth="0.8"
+                  />
+                  <text
+                    x={p7LimitX + 11}
+                    y={303.6}
+                    textAnchor="middle"
+                    style={{
+                      fill: "#ffffff",
+                      fontSize: "6px",
+                      fontWeight: 900,
+                      letterSpacing: "0.3px",
+                    }}
+                  >
+                    P07
+                  </text>
+                </g>
+              );
+            })()}
+
             {/* Limite P5 (Meio entre cabeços 297 e 296) - visível somente se P5 estiver ativo */}
             {isP5Active && p5LimitX !== null && p5LimitM !== undefined && (() => {
               const isHighlighted = hoveredPortainerId === "P5" || (dragRef.current?.kind === "portainer" && dragRef.current.id === "P5");

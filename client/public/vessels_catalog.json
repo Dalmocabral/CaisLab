@@ -21,7 +21,11 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
+<<<<<<< Updated upstream
     "updatedAt": "25/10/2026 14:23"
+=======
+    "updatedAt": "25/10/2026 11:24"
+>>>>>>> Stashed changes
   },
   {
     "name": "CMA CGM KRYPTON",
@@ -33,7 +37,11 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
+<<<<<<< Updated upstream
     "updatedAt": "25/10/2026 14:23"
+=======
+    "updatedAt": "25/10/2026 11:24"
+>>>>>>> Stashed changes
   },
   {
     "name": "EVER FAIR",
@@ -45,7 +53,11 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
+<<<<<<< Updated upstream
     "updatedAt": "25/10/2026 14:23"
+=======
+    "updatedAt": "25/10/2026 11:24"
+>>>>>>> Stashed changes
   },
   {
     "name": "EVER FAITH",
@@ -57,19 +69,27 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
+<<<<<<< Updated upstream
     "updatedAt": "25/10/2026 14:23"
+=======
+    "updatedAt": "25/10/2026 11:24"
+>>>>>>> Stashed changes
   },
   {
     "name": "KOTA ELOK",
-    "loa": 335.0,
-    "beam": 51.0,
+    "loa": 335,
+    "beam": 51,
     "draft": 14.6,
     "berthingSide": "boreste",
     "imo": "1081831",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
+<<<<<<< Updated upstream
     "updatedAt": "25/10/2026 14:23"
+=======
+    "updatedAt": "25/10/2026 11:24"
+>>>>>>> Stashed changes
   },
   {
     "name": "MERCOSUL GUARUJA",
@@ -95,9 +115,9 @@
   },
   {
     "name": "NC BRAVO",
-    "loa": 224.0,
+    "loa": 224,
     "beam": 34.89,
-    "draft": 11.0,
+    "draft": 11,
     "berthingSide": "boreste",
     "imo": "9612791",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
@@ -112,9 +132,19 @@
     "draft": 12.8,
     "berthingSide": "boreste",
     "imo": "9337688",
-    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "flag": "PANAMA",
     "lastBerth": "TECONT1",
+<<<<<<< Updated upstream
     "updatedAt": "25/10/2026 14:23"
+=======
+    "updatedAt": "25/10/2026 11:26",
+    "bayCount": 70,
+    "bays": 70,
+    "bridgePosition": "between-bays",
+    "bridgeBay": 56,
+    "bridgeBayStart": 56,
+    "bridgeBayEnd": 56
+>>>>>>> Stashed changes
   }
 ]

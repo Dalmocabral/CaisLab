@@ -1402,8 +1402,10 @@ export interface PortainerLimit {
   maxLabel?: string;
 }
 
-/** Retorna os limites operacionais de deslocamento dos portêineres (P5 não passa de 297-296; P6 não passa de 291-290; P4 não passa de 279). */
+/** Retorna os limites operacionais de deslocamento dos portêineres (P7 não passa de 309; P5 não passa de 297-296; P6 não passa de 291-290; P4 não passa de 279). */
 export function getPortainerOperationalLimits(bollards: Bollard[]): Record<string, PortainerLimit> {
+  const b309 = bollards.find((b) => b.id === "309")?.position ?? 12.0;
+
   const b297 = bollards.find((b) => b.id === "297")?.position ?? 276.9;
   const b296 = bollards.find((b) => b.id === "296")?.position ?? 306.9;
   const p5Min = Number(((b297 + b296) / 2).toFixed(1)); // Ponto médio entre 297 e 296
@@ -1415,6 +1417,10 @@ export function getPortainerOperationalLimits(bollards: Bollard[]): Record<strin
   const b279 = bollards.find((b) => b.id === "279")?.position ?? 771.4;
 
   return {
+    P7: {
+      min: b309,
+      minLabel: `Cabeço 309 (${b309.toFixed(1).replace(".", ",")} m)`,
+    },
     P5: {
       min: p5Min,
       minLabel: `Cabeços 297–296 (${p5Min.toFixed(1).replace(".", ",")} m)`,

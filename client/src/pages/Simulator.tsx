@@ -1349,12 +1349,12 @@ export default function Simulator() {
                         <div className="flex items-center gap-1.5 flex-wrap">
                           {ptLimits?.min !== undefined && (
                             <span className="text-[10px] font-bold text-[#7e22ce] bg-[#f3e8ff] px-2 py-0.5 rounded border border-[#d8b4fe] whitespace-nowrap">
-                              Limite mín: {ptLimits.min} m (297–296)
+                              Limite mín: {ptLimits.minLabel ?? `${ptLimits.min} m`}
                             </span>
                           )}
                           {ptLimits?.max !== undefined && (
                             <span className="text-[10px] font-bold text-[#1d4ed8] bg-[#dbeafe] px-2 py-0.5 rounded border border-[#93c5fd] whitespace-nowrap">
-                              Limite máx: {ptLimits.max} m (291–290)
+                              Limite máx: {ptLimits.maxLabel ?? `${ptLimits.max} m`}
                             </span>
                           )}
                         </div>
