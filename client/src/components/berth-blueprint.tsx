@@ -2532,8 +2532,8 @@ export default function BerthBlueprint({
                 const lancantePopa = getMooringLineBollardId("lancante-popa");
 
                 const reportLines = [
-                  { label: "Ponta da Proa:", value: bowBollard },
-                  { label: "Ponta da Popa:", value: sternBollard },
+                  { label: "Espelho de Proa:", value: bowBollard },
+                  { label: "Espelho de Popa:", value: sternBollard },
                   { label: "Spring de Proa:", value: springProa },
                   { label: "Lançante de Proa:", value: lancanteProa },
                   { label: "Spring de Popa:", value: springPopa },
@@ -2550,7 +2550,7 @@ export default function BerthBlueprint({
                     <rect
                       x={reportX - 7}
                       y={reportStartY - 10}
-                      width="122"
+                      width="126"
                       height="72"
                       rx="5"
                       fill="#ffffff"
