@@ -185,7 +185,7 @@ function renderContainerDeck(
   const idx65 = bays.indexOf(65);
   const hasCoscoFunnel = isCoscoClass && config.separateFunnel && idx63 !== -1 && idx65 !== -1;
 
-  const isNykRumina = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("NYK") && vessel.name.toUpperCase().includes("RUMINA");
+  const isNykRumina = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("NYK") && (vessel.name.toUpperCase().includes("RUMINA") || vessel.name.toUpperCase().includes("DIANA"));
   const isSeaspanEmpire = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("SEASPAN") && vessel.name.toUpperCase().includes("EMPIRE");
   const idx41 = bays.indexOf(41);
   const idx43 = bays.indexOf(43);

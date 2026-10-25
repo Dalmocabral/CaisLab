@@ -72,6 +72,28 @@
     "updatedAt": "25/10/2026 14:29"
   },
   {
+    "name": "MERCOSUL GUARUJA",
+    "loa": 228.15,
+    "beam": 32.2,
+    "draft": 10.2,
+    "berthingSide": "boreste",
+    "imo": "9539494",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "BRAZIL",
+    "lastBerth": "TECONTPROLONG",
+    "updatedAt": "25/10/2026 04:35",
+    "bayCount": 49,
+    "bays": 49,
+    "rowCount": 12,
+    "rows": 12,
+    "tierCount": 5,
+    "tiers": 5,
+    "bridgePosition": "between-bays",
+    "bridgeBay": 42,
+    "bridgeBayStart": 42,
+    "bridgeBayEnd": 42
+  },
+  {
     "name": "NC BRAVO",
     "loa": 224.0,
     "beam": 34.89,
@@ -90,9 +112,19 @@
     "draft": 12.8,
     "berthingSide": "boreste",
     "imo": "9337688",
-    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "flag": "PANAMA",
     "lastBerth": "TECONT1",
-    "updatedAt": "25/10/2026 14:29"
+    "updatedAt": "25/10/2026 14:35",
+    "bayCount": 70,
+    "bays": 70,
+    "rowCount": 12,
+    "rows": 12,
+    "tierCount": 4,
+    "tiers": 4,
+    "bridgePosition": "between-bays",
+    "bridgeBay": 56,
+    "bridgeBayStart": 56,
+    "bridgeBayEnd": 56
   }
 ]

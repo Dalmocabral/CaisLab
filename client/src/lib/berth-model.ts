@@ -288,8 +288,10 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "LOG-IN PANTANAL": "container",
   "LONCOMILLA": "container",
   "MALIAKOS": "container",
+  "MERCOSUL GUARUJA": "container",
   "NC BRAVO": "container",
   "NC BREDA": "container",
+  "NYK DIANA": "container",
   "NYK RUMINA": "container",
   "SEASPAN EMPIRE": "container",
   "TOKYO EXPRESS": "container",
@@ -297,6 +299,42 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
 };
 
 export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
+  "NYK DIANA": {
+    name: "NYK DIANA",
+    loa: 294.12,
+    beam: 32.25,
+    draft: 12.8,
+    bayCount: 70,
+    bays: 70,
+    rowCount: 12,
+    rows: 12,
+    tierCount: 4,
+    tiers: 4,
+    bridgePosition: "between-bays",
+    bridgeBay: 56,
+    bridgeBayStart: 56,
+    bridgeBayEnd: 56,
+    separateFunnel: false,
+    vesselType: "container",
+  },
+  "MERCOSUL GUARUJA": {
+    name: "MERCOSUL GUARUJA",
+    loa: 228.15,
+    beam: 32.2,
+    draft: 10.2,
+    bayCount: 49,
+    bays: 49,
+    rowCount: 12,
+    rows: 12,
+    tierCount: 5,
+    tiers: 5,
+    bridgePosition: "between-bays",
+    bridgeBay: 42,
+    bridgeBayStart: 42,
+    bridgeBayEnd: 42,
+    separateFunnel: false,
+    vesselType: "container",
+  },
   "NYK RUMINA": {
     name: "NYK RUMINA",
     loa: 294.12,
@@ -811,7 +849,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const idx65 = bays.indexOf(65);
   const hasCoscoFunnel = isCoscoClass && config.separateFunnel && idx63 !== -1 && idx65 !== -1;
 
-  const isNykRumina = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("NYK") && vessel.name.toUpperCase().includes("RUMINA");
+  const isNykRumina = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("NYK") && (vessel.name.toUpperCase().includes("RUMINA") || vessel.name.toUpperCase().includes("DIANA"));
   const isSeaspanEmpire = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("SEASPAN") && vessel.name.toUpperCase().includes("EMPIRE");
   const idx41 = bays.indexOf(41);
   const idx43 = bays.indexOf(43);
