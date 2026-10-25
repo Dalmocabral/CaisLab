@@ -191,7 +191,8 @@ function addTransomNameplate(
   const isCosco = /cosco/i.test(vesselName);
   const isDusseldorf = /dusseldorf/i.test(vesselName);
   const isApl = /apl\s*new\s*jersey/i.test(vesselName);
-  const port = isCosco ? "HONG KONG" : isDusseldorf ? "HAMBURG" : isApl ? "MONROVIA" : "PANAMA";
+  const isGuaruja = /guaruja/i.test(vesselName);
+  const port = isCosco ? "HONG KONG" : isDusseldorf ? "HAMBURG" : isApl ? "MONROVIA" : isGuaruja ? "ITAJAÍ" : "PANAMA";
 
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
