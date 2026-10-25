@@ -2069,20 +2069,24 @@ export default function BerthBlueprint({
 
   const operationalLimits = getPortainerOperationalLimits(scenario.bollards);
   const p7LimitM = operationalLimits.P7?.min;
+  const p8LimitM = operationalLimits.P8?.max;
   const p5LimitM = operationalLimits.P5?.min;
   const p6LimitM = operationalLimits.P6?.max;
   const p4LimitM = operationalLimits.P4?.max;
   const p7LimitX = p7LimitM !== undefined ? trackStart + p7LimitM * scale : null;
+  const p8LimitX = p8LimitM !== undefined ? trackStart + p8LimitM * scale : null;
   const p5LimitX = p5LimitM !== undefined ? trackStart + p5LimitM * scale : null;
   const p6LimitX = p6LimitM !== undefined ? trackStart + p6LimitM * scale : null;
   const p4LimitX = p4LimitM !== undefined ? trackStart + p4LimitM * scale : null;
 
   const portainersList = scenario.portainers ?? DEFAULT_PORTAINERS;
   const p7Portainer = portainersList.find((p) => p.id === "P7");
+  const p8Portainer = portainersList.find((p) => p.id === "P8");
   const p5Portainer = portainersList.find((p) => p.id === "P5");
   const p6Portainer = portainersList.find((p) => p.id === "P6");
   const p4Portainer = portainersList.find((p) => p.id === "P4");
   const isP7Active = (isPresentationMode || scenario.showPortainers !== false) && (p7Portainer ? (isPresentationMode || p7Portainer.enabled) : true);
+  const isP8Active = (isPresentationMode || scenario.showPortainers !== false) && (p8Portainer ? (isPresentationMode || p8Portainer.enabled) : true);
   const isP5Active = (isPresentationMode || scenario.showPortainers !== false) && (p5Portainer ? (isPresentationMode || p5Portainer.enabled) : true);
   const isP6Active = (isPresentationMode || scenario.showPortainers !== false) && (p6Portainer ? (isPresentationMode || p6Portainer.enabled) : true);
   const isP4Active = (isPresentationMode || scenario.showPortainers !== false) && (p4Portainer ? (isPresentationMode || p4Portainer.enabled) : true);
@@ -2794,6 +2798,51 @@ export default function BerthBlueprint({
                     }}
                   >
                     P06
+                  </text>
+                </g>
+              );
+            })()}
+
+            {/* Limite P8 (Cabeço 290) - visível somente se P8 estiver ativo */}
+            {isP8Active && p8LimitX !== null && p8LimitM !== undefined && (() => {
+              const isHighlighted = hoveredPortainerId === "P8" || (dragRef.current?.kind === "portainer" && dragRef.current.id === "P8");
+              const p8OffsetY = isP6Active ? 14 : 0;
+              const p8Y1 = 295 + p8OffsetY;
+              const p8Y2 = 308 + p8OffsetY;
+              const p8YMid = 301.5 + p8OffsetY;
+              const p8TextY = 303.6 + p8OffsetY;
+              return (
+                <g opacity={isHighlighted ? 1 : 0.88} style={{ transition: "opacity 0.2s ease" }}>
+                  <title>{`Limite Operacional Portêiner P08 / P8 · Cabeço 290 (estação ${p8LimitM.toFixed(1).replace(".", ",")} m)`}</title>
+                  {/* Linha vertical descendo do Cabeço 290 até o marcador */}
+                  <line
+                    x1={p8LimitX}
+                    y1={214}
+                    x2={p8LimitX}
+                    y2={p8Y2}
+                    stroke="#ea580c"
+                    strokeWidth={isHighlighted ? "1.8" : "1.4"}
+                    strokeDasharray="4 3"
+                  />
+                  {/* Seta apontando para a esquerda (P08) com base alinhada ao Cabeço 290 */}
+                  <path
+                    d={`M ${p8LimitX} ${p8Y1} L ${p8LimitX - 21} ${p8Y1} L ${p8LimitX - 28} ${p8YMid} L ${p8LimitX - 21} ${p8Y2} L ${p8LimitX} ${p8Y2} Z`}
+                    fill="#ea580c"
+                    stroke="#9a3412"
+                    strokeWidth="0.8"
+                  />
+                  <text
+                    x={p8LimitX - 11}
+                    y={p8TextY}
+                    textAnchor="middle"
+                    style={{
+                      fill: "#ffffff",
+                      fontSize: "6px",
+                      fontWeight: 900,
+                      letterSpacing: "0.3px",
+                    }}
+                  >
+                    P08
                   </text>
                 </g>
               );
