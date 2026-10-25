@@ -1,23 +1,8 @@
 {
-  "updatedAt": "25/10/2026 15:29",
+  "updatedAt": "25/10/2026 18:37",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 8,
+  "count": 7,
   "maneuvers": [
-    {
-      "dateTime": "25/10 13:00",
-      "name": "NYK DIANA",
-      "draft": 12.8,
-      "loa": 294.12,
-      "beam": 32.25,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "boreste",
-      "imo": "9337688",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "PANAMA",
-      "terminal": "rio"
-    },
     {
       "dateTime": "26/10 04:00",
       "name": "NC BRAVO",
