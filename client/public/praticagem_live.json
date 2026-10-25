@@ -1,17 +1,17 @@
 {
-  "updatedAt": "25/10/2026 18:37",
+  "updatedAt": "25/10/2026 22:10",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 7,
   "maneuvers": [
     {
-      "dateTime": "26/10 04:00",
+      "dateTime": "26/10 13:30",
       "name": "NC BRAVO",
       "draft": 11.0,
       "loa": 224.0,
       "beam": 34.89,
       "maneuver": "E",
       "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
+      "berthTo": "TECONT1",
       "berthingSide": "boreste",
       "imo": "9612791",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
@@ -34,7 +34,7 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "26/10 17:30",
+      "dateTime": "26/10 23:00",
       "name": "MAERSK FREEPORT",
       "draft": 12.6,
       "loa": 254.94,
