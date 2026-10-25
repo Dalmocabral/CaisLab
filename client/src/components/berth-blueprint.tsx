@@ -2687,7 +2687,7 @@ export default function BerthBlueprint({
             {isP7Active && p7LimitX !== null && p7LimitM !== undefined && (() => {
               const isHighlighted = hoveredPortainerId === "P7" || (dragRef.current?.kind === "portainer" && dragRef.current.id === "P7");
               return (
-                <g opacity={isHighlighted ? 1 : 0.88} style={{ transition: "opacity 0.2s ease" }}>
+                <g opacity={isPresentationMode ? (isHighlighted ? 0.85 : 0.22) : (isHighlighted ? 1 : 0.88)} style={{ transition: "opacity 0.2s ease" }}>
                   <title>{`Limite Operacional Portêiner P07 / P7 · Cabeço 309 (estação ${p7LimitM.toFixed(1).replace(".", ",")} m)`}</title>
                   {/* Linha vertical descendo do Cabeço 309 até o marcador */}
                   <line
@@ -2727,7 +2727,7 @@ export default function BerthBlueprint({
             {isP5Active && p5LimitX !== null && p5LimitM !== undefined && (() => {
               const isHighlighted = hoveredPortainerId === "P5" || (dragRef.current?.kind === "portainer" && dragRef.current.id === "P5");
               return (
-                <g opacity={isHighlighted ? 1 : 0.88} style={{ transition: "opacity 0.2s ease" }}>
+                <g opacity={isPresentationMode ? (isHighlighted ? 0.85 : 0.22) : (isHighlighted ? 1 : 0.88)} style={{ transition: "opacity 0.2s ease" }}>
                   <title>{`Limite Operacional Portêiner P05 / P5 · Cabeços 297–296 (estação ${p5LimitM.toFixed(1).replace(".", ",")} m)`}</title>
                   {/* Linha vertical descendo dos Cabeços 297-296 até o marcador */}
                   <line
@@ -2770,7 +2770,7 @@ export default function BerthBlueprint({
                 hoveredPortainerId === "P8" ||
                 (dragRef.current?.kind === "portainer" && (dragRef.current.id === "P6" || dragRef.current.id === "P8"));
               return (
-                <g opacity={isHighlighted ? 1 : 0.88} style={{ transition: "opacity 0.2s ease" }}>
+                <g opacity={isPresentationMode ? (isHighlighted ? 0.85 : 0.22) : (isHighlighted ? 1 : 0.88)} style={{ transition: "opacity 0.2s ease" }}>
                   <title>{`Limite Operacional Portêineres P8 | P6 · Cabeços 291–290 (estação ${p6LimitM.toFixed(1).replace(".", ",")} m)`}</title>
                   {/* Linha vertical descendo dos Cabeços 291-290 até o marcador - dupla cor (P8 laranja / P6 azul) */}
                   <line
@@ -2853,7 +2853,7 @@ export default function BerthBlueprint({
             {isP4Active && p4LimitX !== null && p4LimitM !== undefined && (() => {
               const isHighlighted = hoveredPortainerId === "P4" || (dragRef.current?.kind === "portainer" && dragRef.current.id === "P4");
               return (
-                <g opacity={isHighlighted ? 1 : 0.88} style={{ transition: "opacity 0.2s ease" }}>
+                <g opacity={isPresentationMode ? (isHighlighted ? 0.85 : 0.22) : (isHighlighted ? 1 : 0.88)} style={{ transition: "opacity 0.2s ease" }}>
                   <title>{`Limite Operacional Portêiner P04 / P4 · Cabeço 279 (estação ${p4LimitM.toFixed(1).replace(".", ",")} m)`}</title>
                   {/* Linha vertical descendo do Cabeço 279 até o marcador */}
                   <line
