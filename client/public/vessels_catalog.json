@@ -9,7 +9,7 @@
     "type": "GENERAL CARGO SHIP",
     "flag": "ANTIGUA & BARBUDA",
     "lastBerth": "TECONT1",
-    "updatedAt": "26/10/2026 16:22"
+    "updatedAt": "26/10/2026 17:36"
   },
   {
     "name": "CMA CGM COBALT",
@@ -21,7 +21,22 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 16:22"
+    "updatedAt": "26/10/2026 17:36",
+    "bayCount": 79,
+    "bays": 79,
+    "bridgePosition": "between-bays",
+    "separateFunnel": true,
+    "funnelBay": 64,
+    "funnelBayStart": 64,
+    "funnelBayEnd": 64,
+    "bridgeBay": 28,
+    "bridgeBayStart": 28,
+    "bridgeBayEnd": 28,
+    "rowCount": 20,
+    "rows": 20,
+    "tierCount": 6,
+    "tiers": 6,
+    "isManualLayout": true
   },
   {
     "name": "CMA CGM IRON",
@@ -33,7 +48,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 16:22"
+    "updatedAt": "26/10/2026 17:36"
   },
   {
     "name": "CMA CGM KRYPTON",
@@ -45,7 +60,22 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 16:22"
+    "updatedAt": "26/10/2026 17:36",
+    "bayCount": 79,
+    "bays": 79,
+    "bridgePosition": "between-bays",
+    "separateFunnel": true,
+    "funnelBay": 64,
+    "funnelBayStart": 64,
+    "funnelBayEnd": 64,
+    "bridgeBay": 28,
+    "bridgeBayStart": 28,
+    "bridgeBayEnd": 28,
+    "rowCount": 20,
+    "rows": 20,
+    "tierCount": 6,
+    "tiers": 6,
+    "isManualLayout": true
   },
   {
     "name": "EVER FAIR",
@@ -57,7 +87,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 16:22"
+    "updatedAt": "26/10/2026 17:36"
   },
   {
     "name": "EVER FAITH",
@@ -69,31 +99,31 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 16:22"
+    "updatedAt": "26/10/2026 17:36"
   },
   {
     "name": "KOTA ELOK",
-    "loa": 335.0,
-    "beam": 51.0,
+    "loa": 335,
+    "beam": 51,
     "draft": 14.6,
     "berthingSide": "boreste",
     "imo": "1081831",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 16:22"
+    "updatedAt": "26/10/2026 17:36"
   },
   {
     "name": "MAERSK FREEPORT",
     "loa": 254.94,
-    "beam": 40.0,
+    "beam": 40,
     "draft": 12.6,
     "berthingSide": "boreste",
     "imo": "9991202",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONT1",
-    "updatedAt": "26/10/2026 16:22"
+    "updatedAt": "26/10/2026 17:36"
   },
   {
     "name": "MERCOSUL GUARUJA",
@@ -115,11 +145,12 @@
     "bridgePosition": "between-bays",
     "bridgeBay": 42,
     "bridgeBayStart": 42,
-    "bridgeBayEnd": 42
+    "bridgeBayEnd": 42,
+    "isManualLayout": true
   },
   {
     "name": "NC BRAVO",
-    "loa": 224.0,
+    "loa": 224,
     "beam": 34.89,
     "draft": 9.0,
     "berthingSide": "boreste",
@@ -149,6 +180,7 @@
     "bridgePosition": "between-bays",
     "bridgeBay": 56,
     "bridgeBayStart": 56,
-    "bridgeBayEnd": 56
+    "bridgeBayEnd": 56,
+    "isManualLayout": true
   }
 ]

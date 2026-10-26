@@ -181,9 +181,13 @@ function renderContainerDeck(
     vessel.name.toUpperCase().includes("ARGENTINA") ||
     vessel.name.toUpperCase().includes("URUGUAY")
   );
+  const isCmaCgmClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("CMA CGM") && (
+    vessel.name.toUpperCase().includes("KRYPTON") ||
+    vessel.name.toUpperCase().includes("COBALT")
+  );
   const idx63 = bays.indexOf(63);
   const idx65 = bays.indexOf(65);
-  const hasCoscoFunnel = isCoscoClass && config.separateFunnel && idx63 !== -1 && idx65 !== -1;
+  const hasCoscoFunnel = (isCoscoClass || isCmaCgmClass) && config.separateFunnel && idx63 !== -1 && idx65 !== -1;
 
   const isNykRumina = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("NYK") && (vessel.name.toUpperCase().includes("RUMINA") || vessel.name.toUpperCase().includes("DIANA"));
   const isSeaspanEmpire = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("SEASPAN") && vessel.name.toUpperCase().includes("EMPIRE");
@@ -211,7 +215,7 @@ function renderContainerDeck(
   const idx27 = bays.indexOf(27);
   const idx29 = bays.indexOf(29);
   const idx61 = bays.indexOf(61);
-  const hasEverFitBridge = isEverFitClass && idx27 !== -1 && idx29 !== -1;
+  const hasEverFitBridge = (isEverFitClass || isCmaCgmClass) && idx27 !== -1 && idx29 !== -1;
   const hasEverFitFunnel = isEverFitClass && config.separateFunnel && idx61 !== -1 && idx63 !== -1;
 
   // Separação visual entre as bays de 40' (cada par de bays de 20' forma uma bay/hatch de 40')

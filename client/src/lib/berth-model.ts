@@ -274,7 +274,9 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "SEVEN CRUZEIRO": "offshore",
   "SEVEN WAVES": "offshore",
   "SEVEN SUN": "offshore",
+  "CMA CGM COBALT": "container",
   "CMA CGM IRON": "container",
+  "CMA CGM KRYPTON": "container",
   "CMA CGM PUCCINI": "container",
   "CMA CGM VERACRUZ": "container",
   "COSCO SHIPPING ARGENTINA": "container",
@@ -484,6 +486,48 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     funnelBayEnd: 46,
     vesselType: "container",
   },
+  "CMA CGM KRYPTON": {
+    name: "CMA CGM KRYPTON",
+    loa: 335.23,
+    beam: 51.06,
+    draft: 14.2,
+    bayCount: 79,
+    bays: 79,
+    rowCount: 20,
+    rows: 20,
+    tierCount: 6,
+    tiers: 6,
+    bridgePosition: "between-bays",
+    bridgeBay: 28,
+    bridgeBayStart: 28,
+    bridgeBayEnd: 28,
+    separateFunnel: true,
+    funnelBay: 64,
+    funnelBayStart: 64,
+    funnelBayEnd: 64,
+    vesselType: "container",
+  },
+  "CMA CGM COBALT": {
+    name: "CMA CGM COBALT",
+    loa: 335.23,
+    beam: 51.06,
+    draft: 14.4,
+    bayCount: 79,
+    bays: 79,
+    rowCount: 20,
+    rows: 20,
+    tierCount: 6,
+    tiers: 6,
+    bridgePosition: "between-bays",
+    bridgeBay: 28,
+    bridgeBayStart: 28,
+    bridgeBayEnd: 28,
+    separateFunnel: true,
+    funnelBay: 64,
+    funnelBayStart: 64,
+    funnelBayEnd: 64,
+    vesselType: "container",
+  },
   "MERCOSUL FORTALEZA": {
     name: "MERCOSUL FORTALEZA",
     loa: 185.97,
@@ -575,6 +619,65 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     vesselType: "container",
   },
 };
+
+/**
+ * Identifica se a embarcação teve seu layout de convés (bays, passadiço, chaminé) configurado manualmente.
+ * Exibe o ícone 🛠️ no catálogo para que o usuário identifique os navios já prontos e quais ainda faltam.
+ */
+export function isManuallyConfiguredVessel(vessel?: {
+  name?: string | null;
+  bayCount?: number;
+  bays?: number;
+  bridgePosition?: string;
+  separateFunnel?: boolean;
+  bridgeBay?: number;
+  isManualLayout?: boolean;
+} | null): boolean {
+  if (!vessel) return false;
+  if (vessel.isManualLayout) return true;
+
+  const rawName = (vessel.name ?? "").trim().toUpperCase();
+  if (!rawName) return false;
+
+  const MANUAL_VESSEL_NAMES = [
+    "CMA CGM KRYPTON",
+    "CMA CGM COBALT",
+    "CMA CGM VERACRUZ",
+    "NYK DIANA",
+    "NYK RUMINA",
+    "MERCOSUL GUARUJA",
+    "SEASPAN EMPIRE",
+    "COSCO SHIPPING CHILE",
+    "COSCO SHIPPING BRAZIL",
+    "COSCO SHIPPING ARGENTINA",
+    "EVER FIT",
+    "EVER LEADER",
+    "MERCOSUL FORTALEZA",
+    "MAERSK FORTALEZA",
+    "LOG-IN PANTANAL",
+    "NC BRISA",
+    "SPYROS V",
+    "DUSSELDORF EXPRESS",
+    "APL NEW JERSEY",
+  ];
+
+  if (MANUAL_VESSEL_NAMES.some((m) => rawName.includes(m))) {
+    return true;
+  }
+
+  // Se o objeto possui campos de layout de baias e casaria explicitamente salvos
+  if (
+    (typeof vessel.bayCount === "number" && vessel.bayCount > 0) ||
+    (typeof vessel.bays === "number" && vessel.bays > 0) ||
+    Boolean(vessel.bridgePosition) ||
+    Boolean(vessel.separateFunnel) ||
+    typeof vessel.bridgeBay === "number"
+  ) {
+    return true;
+  }
+
+  return false;
+}
 
 export function normalizeVesselType(raw?: string | null, vesselName?: string | null): VesselType {
   const upper = (raw ?? "").toUpperCase().trim();
@@ -845,9 +948,13 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     vessel.name.toUpperCase().includes("ARGENTINA") ||
     vessel.name.toUpperCase().includes("URUGUAY")
   );
+  const isCmaCgmClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("CMA CGM") && (
+    vessel.name.toUpperCase().includes("KRYPTON") ||
+    vessel.name.toUpperCase().includes("COBALT")
+  );
   const idx63 = bays.indexOf(63);
   const idx65 = bays.indexOf(65);
-  const hasCoscoFunnel = isCoscoClass && config.separateFunnel && idx63 !== -1 && idx65 !== -1;
+  const hasCoscoFunnel = (isCoscoClass || isCmaCgmClass) && config.separateFunnel && idx63 !== -1 && idx65 !== -1;
 
   const isNykRumina = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("NYK") && (vessel.name.toUpperCase().includes("RUMINA") || vessel.name.toUpperCase().includes("DIANA"));
   const isSeaspanEmpire = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("SEASPAN") && vessel.name.toUpperCase().includes("EMPIRE");
@@ -875,7 +982,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const idx27 = bays.indexOf(27);
   const idx29 = bays.indexOf(29);
   const idx61 = bays.indexOf(61);
-  const hasEverFitBridge = isEverFitClass && idx27 !== -1 && idx29 !== -1;
+  const hasEverFitBridge = (isEverFitClass || isCmaCgmClass) && idx27 !== -1 && idx29 !== -1;
   const hasEverFitFunnel = isEverFitClass && config.separateFunnel && idx61 !== -1 && idx63 !== -1;
 
   const num40ftGaps = isDusseldorf ? 17 : isAplNewJersey ? 16 : isMercosulGuaruja ? 11 : Math.max(0, Math.floor((bays.length - 1) / 2));

@@ -79,6 +79,7 @@ import {
   normalizeRowCount,
   MAX_TIER_COUNT,
   normalizeTierCount,
+  isManuallyConfiguredVessel,
 } from "@/lib/berth-model";
 import { saveVesselToCatalog } from "@/lib/vessel-catalog";
 
@@ -775,7 +776,12 @@ export default function Simulator() {
                   <button key={vessel.id} type="button" className={`vessel-list-item ${selected ? "vessel-list-item-selected" : ""}`} onClick={() => setSelectedVesselId(vessel.id)}>
                     <span className="vessel-color-chip" style={{ background: VESSEL_COLORS[vessel.color].fill }} />
                     <span className="vessel-list-copy">
-                      <strong>{vessel.name || "Navio sem nome"}</strong>
+                      <strong>
+                        {vessel.name || "Navio sem nome"}
+                        {isManuallyConfiguredVessel(vessel) && (
+                          <span title="Layout configurado manualmente" className="ml-1 text-xs select-none">🛠️</span>
+                        )}
+                      </strong>
                       <small>{Math.round(vessel.loa)} m LOA <span>·</span> <span className="font-semibold text-[#16869a]">{typeLabel}</span> <span>·</span> {vesselSectionName(vessel, scenario.segments)}</small>
                     </span>
                     {vesselIssues.length > 0 && <span className="list-warning-dot" title={vesselIssues[0].message}><AlertTriangle size={15} /></span>}

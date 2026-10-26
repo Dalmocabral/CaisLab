@@ -50,6 +50,7 @@ import {
   makeId,
   normalizeMooringOffset,
   KNOWN_VESSEL_DEFAULTS,
+  isManuallyConfiguredVessel,
 } from "@/lib/berth-model";
 
 interface AddVesselModalProps {
@@ -671,6 +672,14 @@ export default function AddVesselModal({
                             <span className="font-bold text-[#102d40] text-base tracking-tight">
                               {m.name}
                             </span>
+                            {isManuallyConfiguredVessel({ name: m.name }) && (
+                              <span
+                                title="Layout de baias e casaria configurado manualmente"
+                                className="text-xs select-none inline-flex items-center cursor-help"
+                              >
+                                🛠️
+                              </span>
+                            )}
                             {/* Maneuver badge */}
                             <span
                               className={`text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${
@@ -827,6 +836,14 @@ export default function AddVesselModal({
                           <span className="font-bold text-[#102d40] text-sm tracking-tight truncate">
                             {v.name}
                           </span>
+                          {isManuallyConfiguredVessel(v) && (
+                            <span
+                              title="Layout de baias e casaria configurado manualmente"
+                              className="text-xs select-none inline-flex items-center cursor-help"
+                            >
+                              🛠️
+                            </span>
+                          )}
                           {v.type && (
                             <span className="bg-[#f0f4f7] text-[#2c4c5a] border border-[#d8e2e6] text-[10px] font-semibold px-2 py-0.5 rounded-md">
                               {v.type}
