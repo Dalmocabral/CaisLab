@@ -1,12 +1,12 @@
 {
-  "updatedAt": "26/10/2026 09:29",
+  "updatedAt": "26/10/2026 16:22",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 7,
+  "count": 9,
   "maneuvers": [
     {
       "dateTime": "26/10 13:30",
       "name": "NC BRAVO",
-      "draft": 11.0,
+      "draft": 9.0,
       "loa": 224.0,
       "beam": 34.89,
       "maneuver": "E",
@@ -19,9 +19,9 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "26/10 15:30",
+      "dateTime": "26/10 15:00",
       "name": "CMA CGM KRYPTON",
-      "draft": 14.1,
+      "draft": 14.2,
       "loa": 335.23,
       "beam": 51.06,
       "maneuver": "E",
@@ -46,6 +46,36 @@
       "imo": "9991202",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "PANAMA",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "28/10 08:00",
+      "name": "CMA CGM IRON",
+      "draft": 13.5,
+      "loa": 335.23,
+      "beam": 51.06,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONTPROLONG",
+      "berthingSide": "boreste",
+      "imo": "9996678",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "MALTA",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "28/10 16:00",
+      "name": "BBC AMBER",
+      "draft": 6.8,
+      "loa": 153.44,
+      "beam": 23.45,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONT1",
+      "berthingSide": "boreste",
+      "imo": "9563706",
+      "type": "GENERAL CARGO SHIP",
+      "flag": "ANTIGUA & BARBUDA",
       "terminal": "rio"
     },
     {

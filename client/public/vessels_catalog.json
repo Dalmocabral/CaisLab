@@ -1,5 +1,17 @@
 [
   {
+    "name": "BBC AMBER",
+    "loa": 153.44,
+    "beam": 23.45,
+    "draft": 6.8,
+    "berthingSide": "boreste",
+    "imo": "9563706",
+    "type": "GENERAL CARGO SHIP",
+    "flag": "ANTIGUA & BARBUDA",
+    "lastBerth": "TECONT1",
+    "updatedAt": "26/10/2026 16:22"
+  },
+  {
     "name": "CMA CGM COBALT",
     "loa": 335.23,
     "beam": 51.06,
@@ -9,19 +21,31 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 09:29"
+    "updatedAt": "26/10/2026 16:22"
+  },
+  {
+    "name": "CMA CGM IRON",
+    "loa": 335.23,
+    "beam": 51.06,
+    "draft": 13.5,
+    "berthingSide": "boreste",
+    "imo": "9996678",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "MALTA",
+    "lastBerth": "TECONTPROLONG",
+    "updatedAt": "26/10/2026 16:22"
   },
   {
     "name": "CMA CGM KRYPTON",
     "loa": 335.23,
     "beam": 51.06,
-    "draft": 14.1,
+    "draft": 14.2,
     "berthingSide": "boreste",
     "imo": "9996733",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 09:29"
+    "updatedAt": "26/10/2026 16:22"
   },
   {
     "name": "EVER FAIR",
@@ -33,7 +57,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 09:29"
+    "updatedAt": "26/10/2026 16:22"
   },
   {
     "name": "EVER FAITH",
@@ -45,7 +69,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 09:29"
+    "updatedAt": "26/10/2026 16:22"
   },
   {
     "name": "KOTA ELOK",
@@ -57,7 +81,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 09:29"
+    "updatedAt": "26/10/2026 16:22"
   },
   {
     "name": "MAERSK FREEPORT",
@@ -69,7 +93,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONT1",
-    "updatedAt": "26/10/2026 09:29"
+    "updatedAt": "26/10/2026 16:22"
   },
   {
     "name": "MERCOSUL GUARUJA",
@@ -97,13 +121,13 @@
     "name": "NC BRAVO",
     "loa": 224.0,
     "beam": 34.89,
-    "draft": 11.0,
+    "draft": 9.0,
     "berthingSide": "boreste",
     "imo": "9612791",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "26/10/2026 09:29"
+    "updatedAt": "26/10/2026 16:22"
   },
   {
     "name": "NYK DIANA",
