@@ -1,23 +1,8 @@
 {
-  "updatedAt": "26/10/2026 16:22",
+  "updatedAt": "26/10/2026 21:01",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 9,
+  "count": 8,
   "maneuvers": [
-    {
-      "dateTime": "26/10 13:30",
-      "name": "NC BRAVO",
-      "draft": 9.0,
-      "loa": 224.0,
-      "beam": 34.89,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "boreste",
-      "imo": "9612791",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "BRAZIL",
-      "terminal": "rio"
-    },
     {
       "dateTime": "26/10 15:00",
       "name": "CMA CGM KRYPTON",
@@ -49,7 +34,7 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "28/10 08:00",
+      "dateTime": "28/10 10:00",
       "name": "CMA CGM IRON",
       "draft": 13.5,
       "loa": 335.23,
