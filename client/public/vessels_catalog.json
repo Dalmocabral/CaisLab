@@ -9,7 +9,7 @@
     "type": "GENERAL CARGO SHIP",
     "flag": "ANTIGUA & BARBUDA",
     "lastBerth": "TECONT1",
-    "updatedAt": "26/10/2026 18:03"
+    "updatedAt": "26/10/2026 21:15"
   },
   {
     "name": "CMA CGM COBALT",
@@ -21,7 +21,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 18:03",
+    "updatedAt": "26/10/2026 21:15",
     "bayCount": 79,
     "bays": 79,
     "bridgePosition": "between-bays",
@@ -48,7 +48,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 18:03"
+    "updatedAt": "26/10/2026 21:15"
   },
   {
     "name": "CMA CGM KRYPTON",
@@ -60,7 +60,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 18:03",
+    "updatedAt": "26/10/2026 21:15",
     "bayCount": 79,
     "bays": 79,
     "bridgePosition": "between-bays",
@@ -87,7 +87,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 18:03"
+    "updatedAt": "26/10/2026 21:15"
   },
   {
     "name": "EVER FAITH",
@@ -99,31 +99,31 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 18:03"
+    "updatedAt": "26/10/2026 21:15"
   },
   {
     "name": "KOTA ELOK",
-    "loa": 335,
-    "beam": 51,
+    "loa": 335.0,
+    "beam": 51.0,
     "draft": 14.6,
     "berthingSide": "boreste",
     "imo": "1081831",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 18:03"
+    "updatedAt": "26/10/2026 21:15"
   },
   {
     "name": "MAERSK FREEPORT",
     "loa": 254.94,
-    "beam": 40,
+    "beam": 40.0,
     "draft": 12.6,
     "berthingSide": "boreste",
     "imo": "9991202",
-    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONT1",
-    "updatedAt": "26/10/2026 18:07",
+    "updatedAt": "26/10/2026 21:15",
     "bridgePosition": "between-bays",
     "bridgeBay": 48,
     "bridgeBayStart": 48,
