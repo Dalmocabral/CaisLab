@@ -10,7 +10,7 @@
     "vesselType": "general-cargo",
     "flag": "ANTIGUA & BARBUDA",
     "lastBerth": "TECONT1",
-    "updatedAt": "26/10/2026 21:23"
+    "updatedAt": "26/10/2026 21:46"
   },
   {
     "name": "CMA CGM COBALT",
@@ -22,7 +22,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 21:23",
+    "updatedAt": "26/10/2026 21:46",
     "bayCount": 79,
     "bays": 79,
     "bridgePosition": "between-bays",
@@ -45,11 +45,11 @@
     "beam": 51.06,
     "draft": 13.5,
     "berthingSide": "boreste",
-    "imo": "9996692",
+    "imo": "9996678",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 21:23",
+    "updatedAt": "26/10/2026 21:46",
     "bayCount": 79,
     "bays": 79,
     "bridgePosition": "between-bays",
@@ -99,11 +99,11 @@
     "beam": 48.43,
     "draft": 14.8,
     "berthingSide": "boreste",
-    "imo": "9629108",
+    "imo": "9850886",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 21:23"
+    "updatedAt": "26/10/2026 21:46"
   },
   {
     "name": "EVER FAITH",
@@ -115,7 +115,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 21:23"
+    "updatedAt": "26/10/2026 21:46"
   },
   {
     "name": "KOTA ELOK",
@@ -127,7 +127,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 21:23",
+    "updatedAt": "26/10/2026 21:46",
     "bayCount": 79,
     "bays": 79,
     "rowCount": 20,
@@ -154,7 +154,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONT1",
-    "updatedAt": "26/10/2026 21:23",
+    "updatedAt": "26/10/2026 21:46",
     "bridgePosition": "between-bays",
     "bridgeBay": 48,
     "bridgeBayStart": 48,
