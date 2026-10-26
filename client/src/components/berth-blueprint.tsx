@@ -21,6 +21,7 @@ import {
   VESSEL_TYPE_LABELS,
   type Portainer,
   DEFAULT_PORTAINERS,
+  getPortainerOperationalLimits,
   clampPortainerPosition,
   normalizeVesselType,
   resolveVesselSuperstructure,
@@ -2171,6 +2172,30 @@ export default function BerthBlueprint({
   const hoveredBollard = hoveredBollardId ? bollardById.get(hoveredBollardId) : null;
   const issueByVessel = new Map<string, string[]>();
 
+  const operationalLimits = getPortainerOperationalLimits(scenario.bollards);
+  const p7LimitM = operationalLimits.P7?.min;
+  const p8LimitM = operationalLimits.P8?.max;
+  const p5LimitM = operationalLimits.P5?.min;
+  const p6LimitM = operationalLimits.P6?.max;
+  const p4LimitM = operationalLimits.P4?.max;
+  const p7LimitX = p7LimitM !== undefined ? trackStart + p7LimitM * scale : null;
+  const p8LimitX = p8LimitM !== undefined ? trackStart + p8LimitM * scale : null;
+  const p5LimitX = p5LimitM !== undefined ? trackStart + p5LimitM * scale : null;
+  const p6LimitX = p6LimitM !== undefined ? trackStart + p6LimitM * scale : null;
+  const p4LimitX = p4LimitM !== undefined ? trackStart + p4LimitM * scale : null;
+
+  const portainersList = scenario.portainers ?? DEFAULT_PORTAINERS;
+  const p7Portainer = portainersList.find((p) => p.id === "P7");
+  const p8Portainer = portainersList.find((p) => p.id === "P8");
+  const p5Portainer = portainersList.find((p) => p.id === "P5");
+  const p6Portainer = portainersList.find((p) => p.id === "P6");
+  const p4Portainer = portainersList.find((p) => p.id === "P4");
+  const isP7Active = !isPresentationMode && scenario.showPortainers !== false && (p7Portainer ? p7Portainer.enabled : true);
+  const isP8Active = !isPresentationMode && scenario.showPortainers !== false && (p8Portainer ? p8Portainer.enabled : true);
+  const isP5Active = !isPresentationMode && scenario.showPortainers !== false && (p5Portainer ? p5Portainer.enabled : true);
+  const isP6Active = !isPresentationMode && scenario.showPortainers !== false && (p6Portainer ? p6Portainer.enabled : true);
+  const isP4Active = !isPresentationMode && scenario.showPortainers !== false && (p4Portainer ? p4Portainer.enabled : true);
+
   const b297 = scenario.bollards.find((b) => b.id === "297")?.position ?? 276.9;
   const b296 = scenario.bollards.find((b) => b.id === "296")?.position ?? 306.9;
   const b294 = scenario.bollards.find((b) => b.id === "294")?.position ?? 362.9;
@@ -2760,7 +2785,216 @@ export default function BerthBlueprint({
           </text>
         </g>
 
+        {/* Marcadores visuais dos Limites Operacionais dos Portêineres (setas compactas P07, P05, P06, P04) - visíveis apenas no modo de planejamento */}
+        {!isPresentationMode && scenario.showPortainers !== false && (
+          <g className="portainer-limit-markers" pointerEvents="none">
+            {/* Limite P7 (Cabeço 309) - visível somente se P7 estiver ativo */}
+            {isP7Active && p7LimitX !== null && p7LimitM !== undefined && (() => {
+              const isHighlighted = hoveredPortainerId === "P7" || (dragRef.current?.kind === "portainer" && dragRef.current.id === "P7");
+              return (
+                <g opacity={isHighlighted ? 1 : 0.88} style={{ transition: "opacity 0.2s ease" }}>
+                  <title>{`Limite Operacional Portêiner P07 / P7 · Cabeço 309 (estação ${p7LimitM.toFixed(1).replace(".", ",")} m)`}</title>
+                  {/* Linha vertical descendo do Cabeço 309 até o marcador */}
+                  <line
+                    x1={p7LimitX}
+                    y1={214}
+                    x2={p7LimitX}
+                    y2={308}
+                    stroke="#65a30d"
+                    strokeWidth={isHighlighted ? "1.8" : "1.4"}
+                    strokeDasharray="4 3"
+                  />
+                  {/* Seta apontando para a direita (P07) com base alinhada ao Cabeço 309 */}
+                  <path
+                    d={`M ${p7LimitX} 295 L ${p7LimitX + 21} 295 L ${p7LimitX + 28} 301.5 L ${p7LimitX + 21} 308 L ${p7LimitX} 308 Z`}
+                    fill="#65a30d"
+                    stroke="#3f6212"
+                    strokeWidth="0.8"
+                  />
+                  <text
+                    x={p7LimitX + 11}
+                    y={303.6}
+                    textAnchor="middle"
+                    style={{
+                      fill: "#ffffff",
+                      fontSize: "6px",
+                      fontWeight: 900,
+                      letterSpacing: "0.3px",
+                    }}
+                  >
+                    P07
+                  </text>
+                </g>
+              );
+            })()}
 
+            {/* Limite P5 (Meio entre cabeços 297 e 296) - visível somente se P5 estiver ativo */}
+            {isP5Active && p5LimitX !== null && p5LimitM !== undefined && (() => {
+              const isHighlighted = hoveredPortainerId === "P5" || (dragRef.current?.kind === "portainer" && dragRef.current.id === "P5");
+              return (
+                <g opacity={isHighlighted ? 1 : 0.88} style={{ transition: "opacity 0.2s ease" }}>
+                  <title>{`Limite Operacional Portêiner P05 / P5 · Cabeços 297–296 (estação ${p5LimitM.toFixed(1).replace(".", ",")} m)`}</title>
+                  {/* Linha vertical descendo dos Cabeços 297-296 até o marcador */}
+                  <line
+                    x1={p5LimitX}
+                    y1={214}
+                    x2={p5LimitX}
+                    y2={308}
+                    stroke="#9333ea"
+                    strokeWidth={isHighlighted ? "1.8" : "1.4"}
+                    strokeDasharray="4 3"
+                  />
+                  {/* Seta apontando para a direita (P05) com base alinhada a 297-296 */}
+                  <path
+                    d={`M ${p5LimitX} 295 L ${p5LimitX + 21} 295 L ${p5LimitX + 28} 301.5 L ${p5LimitX + 21} 308 L ${p5LimitX} 308 Z`}
+                    fill="#9333ea"
+                    stroke="#581c87"
+                    strokeWidth="0.8"
+                  />
+                  <text
+                    x={p5LimitX + 11}
+                    y={303.6}
+                    textAnchor="middle"
+                    style={{
+                      fill: "#ffffff",
+                      fontSize: "6px",
+                      fontWeight: 900,
+                      letterSpacing: "0.3px",
+                    }}
+                  >
+                    P05
+                  </text>
+                </g>
+              );
+            })()}
+
+            {/* Limite P8 | P6 (Meio entre cabeços 291 e 290) - visível se P6 ou P8 estiver ativo */}
+            {(isP6Active || isP8Active) && p6LimitX !== null && p6LimitM !== undefined && (() => {
+              const isHighlighted =
+                hoveredPortainerId === "P6" ||
+                hoveredPortainerId === "P8" ||
+                (dragRef.current?.kind === "portainer" && (dragRef.current.id === "P6" || dragRef.current.id === "P8"));
+              return (
+                <g opacity={isHighlighted ? 1 : 0.88} style={{ transition: "opacity 0.2s ease" }}>
+                  <title>{`Limite Operacional Portêineres P8 | P6 · Cabeços 291–290 (estação ${p6LimitM.toFixed(1).replace(".", ",")} m)`}</title>
+                  {/* Linha vertical descendo dos Cabeços 291-290 até o marcador - dupla cor (P8 laranja / P6 azul) */}
+                  <line
+                    x1={p6LimitX - 0.75}
+                    y1={214}
+                    x2={p6LimitX - 0.75}
+                    y2={308}
+                    stroke="#ea580c"
+                    strokeWidth={isHighlighted ? "1.6" : "1.2"}
+                    strokeDasharray="4 3"
+                  />
+                  <line
+                    x1={p6LimitX + 0.75}
+                    y1={214}
+                    x2={p6LimitX + 0.75}
+                    y2={308}
+                    stroke="#2563eb"
+                    strokeWidth={isHighlighted ? "1.6" : "1.2"}
+                    strokeDasharray="4 3"
+                  />
+                  {/* Metade esquerda / ponta da seta: cor do P8 (Laranja #ea580c) */}
+                  <path
+                    d={`M ${p6LimitX - 18} 295 L ${p6LimitX - 30} 295 L ${p6LimitX - 38} 301.5 L ${p6LimitX - 30} 308 L ${p6LimitX - 18} 308 Z`}
+                    fill="#ea580c"
+                    stroke="#9a3412"
+                    strokeWidth="0.8"
+                  />
+                  {/* Metade direita / base da seta: cor do P6 (Azul #2563eb) */}
+                  <path
+                    d={`M ${p6LimitX} 295 L ${p6LimitX - 18} 295 L ${p6LimitX - 18} 308 L ${p6LimitX} 308 Z`}
+                    fill="#2563eb"
+                    stroke="#1e3a8a"
+                    strokeWidth="0.8"
+                  />
+                  {/* Inscrição "P8 | P6" com P8 na metade laranja e P6 na metade azul */}
+                  <text
+                    x={p6LimitX - 26}
+                    y={303.6}
+                    textAnchor="middle"
+                    style={{
+                      fill: "#ffffff",
+                      fontSize: "5.8px",
+                      fontWeight: 900,
+                      letterSpacing: "0.2px",
+                    }}
+                  >
+                    P8
+                  </text>
+                  <text
+                    x={p6LimitX - 18}
+                    y={303.6}
+                    textAnchor="middle"
+                    style={{
+                      fill: "#ffffff",
+                      fontSize: "5.5px",
+                      fontWeight: 700,
+                      opacity: 0.85,
+                    }}
+                  >
+                    |
+                  </text>
+                  <text
+                    x={p6LimitX - 9}
+                    y={303.6}
+                    textAnchor="middle"
+                    style={{
+                      fill: "#ffffff",
+                      fontSize: "5.8px",
+                      fontWeight: 900,
+                      letterSpacing: "0.2px",
+                    }}
+                  >
+                    P6
+                  </text>
+                </g>
+              );
+            })()}
+
+            {/* Limite P4 (Cabeço 279) - visível se P4 estiver ativo */}
+            {isP4Active && p4LimitX !== null && p4LimitM !== undefined && (() => {
+              const isHighlighted = hoveredPortainerId === "P4" || (dragRef.current?.kind === "portainer" && dragRef.current.id === "P4");
+              return (
+                <g opacity={isHighlighted ? 1 : 0.88} style={{ transition: "opacity 0.2s ease" }}>
+                  <title>{`Limite Operacional Portêiner P04 / P4 · Cabeço 279 (estação ${p4LimitM.toFixed(1).replace(".", ",")} m)`}</title>
+                  {/* Linha vertical descendo do Cabeço 279 até o marcador */}
+                  <line
+                    x1={p4LimitX}
+                    y1={214}
+                    x2={p4LimitX}
+                    y2={308}
+                    stroke="#78350f"
+                    strokeWidth={isHighlighted ? "1.8" : "1.4"}
+                    strokeDasharray="4 3"
+                  />
+                  {/* Seta apontando para a esquerda (P04) com base alinhada ao Cabeço 279 */}
+                  <path
+                    d={`M ${p4LimitX} 295 L ${p4LimitX - 21} 295 L ${p4LimitX - 28} 301.5 L ${p4LimitX - 21} 308 L ${p4LimitX} 308 Z`}
+                    fill="#78350f"
+                    stroke="#451a03"
+                    strokeWidth="0.8"
+                  />
+                  <text
+                    x={p4LimitX - 11}
+                    y={303.6}
+                    textAnchor="middle"
+                    style={{
+                      fill: "#ffffff",
+                      fontSize: "6px",
+                      fontWeight: 900,
+                      letterSpacing: "0.3px",
+                    }}
+                  >
+                    P04
+                  </text>
+                </g>
+              );
+            })()}
+          </g>
+        )}
 
         {/* Estruturas de Manifolds (centralizadores de tubulações e válvulas para granéis químicos / líquidos) */}
         <g className="shore-manifolds-layer">
