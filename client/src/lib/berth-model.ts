@@ -529,6 +529,27 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     funnelBayEnd: 64,
     vesselType: "container",
   },
+  "CMA CGM IRON": {
+    name: "CMA CGM IRON",
+    loa: 335.23,
+    beam: 51.06,
+    draft: 13.5,
+    bayCount: 79,
+    bays: 79,
+    rowCount: 20,
+    rows: 20,
+    tierCount: 9,
+    tiers: 9,
+    bridgePosition: "between-bays",
+    bridgeBay: 28,
+    bridgeBayStart: 28,
+    bridgeBayEnd: 28,
+    separateFunnel: true,
+    funnelBay: 64,
+    funnelBayStart: 64,
+    funnelBayEnd: 64,
+    vesselType: "container",
+  },
   "MERCOSUL FORTALEZA": {
     name: "MERCOSUL FORTALEZA",
     loa: 185.97,
@@ -661,6 +682,7 @@ export function isManuallyConfiguredVessel(vessel?: {
   const MANUAL_VESSEL_NAMES = [
     "CMA CGM KRYPTON",
     "CMA CGM COBALT",
+    "CMA CGM IRON",
     "CMA CGM VERACRUZ",
     "NYK DIANA",
     "NYK RUMINA",
@@ -970,7 +992,8 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   );
   const isCmaCgmClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("CMA CGM") && (
     vessel.name.toUpperCase().includes("KRYPTON") ||
-    vessel.name.toUpperCase().includes("COBALT")
+    vessel.name.toUpperCase().includes("COBALT") ||
+    vessel.name.toUpperCase().includes("IRON")
   );
   const idx63 = bays.indexOf(63);
   const idx65 = bays.indexOf(65);

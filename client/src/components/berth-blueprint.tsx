@@ -183,7 +183,8 @@ function renderContainerDeck(
   );
   const isCmaCgmClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("CMA CGM") && (
     vessel.name.toUpperCase().includes("KRYPTON") ||
-    vessel.name.toUpperCase().includes("COBALT")
+    vessel.name.toUpperCase().includes("COBALT") ||
+    vessel.name.toUpperCase().includes("IRON")
   );
   const idx63 = bays.indexOf(63);
   const idx65 = bays.indexOf(65);
