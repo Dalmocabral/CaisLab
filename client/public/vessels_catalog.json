@@ -9,7 +9,7 @@
     "type": "GENERAL CARGO SHIP",
     "flag": "ANTIGUA & BARBUDA",
     "lastBerth": "TECONT1",
-    "updatedAt": "26/10/2026 21:01"
+    "updatedAt": "26/10/2026 18:03"
   },
   {
     "name": "CMA CGM COBALT",
@@ -21,7 +21,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 21:01",
+    "updatedAt": "26/10/2026 18:03",
     "bayCount": 79,
     "bays": 79,
     "bridgePosition": "between-bays",
@@ -48,7 +48,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 21:01"
+    "updatedAt": "26/10/2026 18:03"
   },
   {
     "name": "CMA CGM KRYPTON",
@@ -60,7 +60,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 21:01",
+    "updatedAt": "26/10/2026 18:03",
     "bayCount": 79,
     "bays": 79,
     "bridgePosition": "between-bays",
@@ -73,8 +73,8 @@
     "bridgeBayEnd": 28,
     "rowCount": 20,
     "rows": 20,
-    "tierCount": 6,
-    "tiers": 6,
+    "tierCount": 9,
+    "tiers": 9,
     "isManualLayout": true
   },
   {
@@ -87,7 +87,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 21:01"
+    "updatedAt": "26/10/2026 18:03"
   },
   {
     "name": "EVER FAITH",
@@ -99,31 +99,43 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 21:01"
+    "updatedAt": "26/10/2026 18:03"
   },
   {
     "name": "KOTA ELOK",
-    "loa": 335.0,
-    "beam": 51.0,
+    "loa": 335,
+    "beam": 51,
     "draft": 14.6,
     "berthingSide": "boreste",
     "imo": "1081831",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "26/10/2026 21:01"
+    "updatedAt": "26/10/2026 18:03"
   },
   {
     "name": "MAERSK FREEPORT",
     "loa": 254.94,
-    "beam": 40.0,
+    "beam": 40,
     "draft": 12.6,
     "berthingSide": "boreste",
     "imo": "9991202",
-    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "flag": "PANAMA",
     "lastBerth": "TECONT1",
-    "updatedAt": "26/10/2026 21:01"
+    "updatedAt": "26/10/2026 18:07",
+    "bridgePosition": "between-bays",
+    "bridgeBay": 48,
+    "bridgeBayStart": 48,
+    "bridgeBayEnd": 48,
+    "separateFunnel": false,
+    "bayCount": 59,
+    "bays": 59,
+    "rowCount": 14,
+    "rows": 14,
+    "tierCount": 5,
+    "tiers": 5,
+    "isManualLayout": true
   },
   {
     "name": "MERCOSUL GUARUJA",
@@ -152,7 +164,7 @@
     "name": "NC BRAVO",
     "loa": 224,
     "beam": 34.89,
-    "draft": 9.0,
+    "draft": 9,
     "berthingSide": "boreste",
     "imo": "9612791",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",

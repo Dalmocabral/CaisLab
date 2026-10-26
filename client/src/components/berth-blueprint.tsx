@@ -191,13 +191,17 @@ function renderContainerDeck(
 
   const isNykRumina = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("NYK") && (vessel.name.toUpperCase().includes("RUMINA") || vessel.name.toUpperCase().includes("DIANA"));
   const isSeaspanEmpire = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("SEASPAN") && vessel.name.toUpperCase().includes("EMPIRE");
+  const isMaerskFreeport = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("MAERSK") && vessel.name.toUpperCase().includes("FREEPORT");
   const idx41 = bays.indexOf(41);
   const idx43 = bays.indexOf(43);
+  const idx47 = bays.indexOf(47);
+  const idx49 = bays.indexOf(49);
   const idx53 = bays.indexOf(53);
   const idx55 = bays.indexOf(55);
   const idx57 = bays.indexOf(57);
   const idx59 = bays.indexOf(59);
   const hasSpecialBridge55_57 = (isNykRumina || isSeaspanEmpire) && idx55 !== -1 && idx57 !== -1;
+  const hasFreeportBridge = isMaerskFreeport && idx47 !== -1 && idx49 !== -1;
   const hasDusseldorfBridge = isDusseldorf && idx57 !== -1 && idx59 !== -1;
   const hasAplBridge = isAplNewJersey && idx53 !== -1 && idx55 !== -1;
   const hasGuarujaBridge = isMercosulGuaruja && idx41 !== -1 && idx43 !== -1;
@@ -220,7 +224,7 @@ function renderContainerDeck(
 
   // Separação visual entre as bays de 40' (cada par de bays de 20' forma uma bay/hatch de 40')
   const num40ftGaps = isDusseldorf ? 17 : isAplNewJersey ? 16 : isMercosulGuaruja ? 11 : Math.max(0, Math.floor((bays.length - 1) / 2));
-  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0) + (hasAplBridge ? 2.0 : 0) + (hasGuarujaBridge ? 2.0 : 0);
+  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasFreeportBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0) + (hasAplBridge ? 2.0 : 0) + (hasGuarujaBridge ? 2.0 : 0);
   const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + extraSlots);
   const hatchGap = bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0;
   const totalGapsWidth = num40ftGaps * hatchGap;
@@ -228,10 +232,11 @@ function renderContainerDeck(
   const everFitFunnelSlotW = hasEverFitFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
   const nykBridgeSlotW = hasSpecialBridge55_57 ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const everFitBridgeSlotW = hasEverFitBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
+  const freeportBridgeSlotW = hasFreeportBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const dusseldorfBridgeSlotW = hasDusseldorfBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const aplBridgeSlotW = hasAplBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const guarujaBridgeSlotW = hasGuarujaBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
-  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - dusseldorfBridgeSlotW - aplBridgeSlotW - guarujaBridgeSlotW);
+  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - freeportBridgeSlotW - dusseldorfBridgeSlotW - aplBridgeSlotW - guarujaBridgeSlotW);
   const cellWidth = availableBayWidth / Math.max(1, bays.length);
   const labelSize = bays.length ? Math.max(2.6, Math.min(5.4, cellWidth * 0.54)) : 3.4;
   const rowLabelSize = Math.max(2.0, Math.min(labelSize, cellHeight * 0.72));
@@ -282,6 +287,9 @@ function renderContainerDeck(
     if (hasEverFitBridge && index >= idx29) {
       xPos -= everFitBridgeSlotW;
     }
+    if (hasFreeportBridge && index >= idx49) {
+      xPos -= freeportBridgeSlotW;
+    }
     if (hasDusseldorfBridge && index >= idx59) {
       xPos -= dusseldorfBridgeSlotW;
     }
@@ -298,7 +306,7 @@ function renderContainerDeck(
   const bridgeIndices: number[] = [];
   const funnelIndices: number[] = [];
 
-  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasDusseldorfBridge && !hasAplBridge && !hasGuarujaBridge) {
+  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasFreeportBridge && !hasDusseldorfBridge && !hasAplBridge && !hasGuarujaBridge) {
     const targetBridgeBay = config.bridgeBay ?? config.bridgeBayStart ?? 34;
     const occupiedBridgeBays = getOccupiedBayNumbers(
       targetBridgeBay,
@@ -895,6 +903,53 @@ function renderContainerDeck(
             return (
               <>
                 <title>Passadiço (entre Bay 41 e Bay 43)</title>
+                <rect
+                  x={slotX}
+                  y={y + 2.5}
+                  width={slotW}
+                  height={vesselHeight - 5}
+                  rx="1.8"
+                  fill={color.fill}
+                  stroke={color.stroke}
+                  strokeWidth="1.2"
+                />
+                {/* Asas do passadiço */}
+                <line
+                  x1={slotX + slotW * 0.55}
+                  y1={y + 0.8}
+                  x2={slotX + slotW * 0.55}
+                  y2={y + vesselHeight - 0.8}
+                  stroke={color.stroke}
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                />
+                {/* Chaminé no próprio passadiço (lado de ré) */}
+                <ellipse
+                  cx={slotX + slotW * 0.25}
+                  cy={y + vesselHeight / 2}
+                  rx={Math.max(2.2, Math.min(4.8, slotW * 0.22))}
+                  ry={Math.max(1.8, Math.min(3.2, vesselHeight * 0.11))}
+                  fill="#1e293b"
+                  stroke="#0f172a"
+                  strokeWidth="0.7"
+                />
+              </>
+            );
+          })()}
+        </g>
+      )}
+
+      {/* 2g. Passadiço Específico do MAERSK FREEPORT (entre as bays 47 e 49: 51 49 [passadiço] 47 45) */}
+      {!isAllAft && hasFreeportBridge && (
+        <g className="superstructure-bridge-island-freeport">
+          {(() => {
+            const rightOf49 = bayCellX(idx49) + cellWidth;
+            const leftOf47 = bayCellX(idx47);
+            const slotW = Math.max(8.0, freeportBridgeSlotW - 0.4);
+            const slotX = (rightOf49 + leftOf47 - slotW) / 2;
+            return (
+              <>
+                <title>Passadiço (entre Bay 47 e Bay 49)</title>
                 <rect
                   x={slotX}
                   y={y + 2.5}

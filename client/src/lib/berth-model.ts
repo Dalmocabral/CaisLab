@@ -289,6 +289,7 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "KOTA PAHLAWAN": "container",
   "LOG-IN PANTANAL": "container",
   "LONCOMILLA": "container",
+  "MAERSK FREEPORT": "container",
   "MALIAKOS": "container",
   "MERCOSUL GUARUJA": "container",
   "NC BRAVO": "container",
@@ -564,6 +565,24 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     separateFunnel: false,
     vesselType: "container",
   },
+  "MAERSK FREEPORT": {
+    name: "MAERSK FREEPORT",
+    loa: 254.94,
+    beam: 40.0,
+    draft: 12.6,
+    bayCount: 59,
+    bays: 59,
+    rowCount: 14,
+    rows: 14,
+    tierCount: 5,
+    tiers: 5,
+    bridgePosition: "between-bays",
+    bridgeBay: 48,
+    bridgeBayStart: 48,
+    bridgeBayEnd: 48,
+    separateFunnel: false,
+    vesselType: "container",
+  },
   "LOG-IN PANTANAL": {
     name: "LOG-IN PANTANAL",
     loa: 182.47,
@@ -654,6 +673,7 @@ export function isManuallyConfiguredVessel(vessel?: {
     "EVER LEADER",
     "MERCOSUL FORTALEZA",
     "MAERSK FORTALEZA",
+    "MAERSK FREEPORT",
     "LOG-IN PANTANAL",
     "NC BRISA",
     "SPYROS V",
@@ -958,13 +978,17 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
 
   const isNykRumina = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("NYK") && (vessel.name.toUpperCase().includes("RUMINA") || vessel.name.toUpperCase().includes("DIANA"));
   const isSeaspanEmpire = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("SEASPAN") && vessel.name.toUpperCase().includes("EMPIRE");
+  const isMaerskFreeport = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("MAERSK") && vessel.name.toUpperCase().includes("FREEPORT");
   const idx41 = bays.indexOf(41);
   const idx43 = bays.indexOf(43);
+  const idx47 = bays.indexOf(47);
+  const idx49 = bays.indexOf(49);
   const idx53 = bays.indexOf(53);
   const idx55 = bays.indexOf(55);
   const idx57 = bays.indexOf(57);
   const idx59 = bays.indexOf(59);
   const hasSpecialBridge55_57 = (isNykRumina || isSeaspanEmpire) && idx55 !== -1 && idx57 !== -1;
+  const hasFreeportBridge = isMaerskFreeport && idx47 !== -1 && idx49 !== -1;
   const hasDusseldorfBridge = isDusseldorf && idx57 !== -1 && idx59 !== -1;
   const hasAplBridge = isAplNewJersey && idx53 !== -1 && idx55 !== -1;
   const hasGuarujaBridge = isMercosulGuaruja && idx41 !== -1 && idx43 !== -1;
@@ -986,7 +1010,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const hasEverFitFunnel = isEverFitClass && config.separateFunnel && idx61 !== -1 && idx63 !== -1;
 
   const num40ftGaps = isDusseldorf ? 17 : isAplNewJersey ? 16 : isMercosulGuaruja ? 11 : Math.max(0, Math.floor((bays.length - 1) / 2));
-  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0) + (hasAplBridge ? 2.0 : 0) + (hasGuarujaBridge ? 2.0 : 0);
+  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasFreeportBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0) + (hasAplBridge ? 2.0 : 0) + (hasGuarujaBridge ? 2.0 : 0);
   const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + extraSlots);
   const hatchGap = isFortaleza ? 1.6 : (bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0);
   const totalGapsWidth = num40ftGaps * hatchGap;
@@ -994,10 +1018,11 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const everFitFunnelSlotW = hasEverFitFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
   const nykBridgeSlotW = hasSpecialBridge55_57 ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const everFitBridgeSlotW = hasEverFitBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
+  const freeportBridgeSlotW = hasFreeportBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const dusseldorfBridgeSlotW = hasDusseldorfBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const aplBridgeSlotW = hasAplBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const guarujaBridgeSlotW = hasGuarujaBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
-  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - dusseldorfBridgeSlotW - aplBridgeSlotW - guarujaBridgeSlotW);
+  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - freeportBridgeSlotW - dusseldorfBridgeSlotW - aplBridgeSlotW - guarujaBridgeSlotW);
   const cellWidth = availableBayWidth / Math.max(1, bays.length);
 
   const bayCellFromStern = (index: number) => {
@@ -1044,6 +1069,9 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     if (hasEverFitBridge && index >= idx29) {
       xPos -= everFitBridgeSlotW;
     }
+    if (hasFreeportBridge && index >= idx49) {
+      xPos -= freeportBridgeSlotW;
+    }
     if (hasDusseldorfBridge && index >= idx59) {
       xPos -= dusseldorfBridgeSlotW;
     }
@@ -1059,7 +1087,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const bridgeIndices: number[] = [];
   const funnelIndices: number[] = [];
 
-  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasDusseldorfBridge && !hasAplBridge && !hasGuarujaBridge) {
+  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasFreeportBridge && !hasDusseldorfBridge && !hasAplBridge && !hasGuarujaBridge) {
     const targetBridgeBay = config.bridgeBay ?? config.bridgeBayStart ?? 34;
     const occupiedBridgeBays = getOccupiedBayNumbers(
       targetBridgeBay,
@@ -1147,6 +1175,11 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     const leftOf27 = bayCellFromStern(idx27);
     bridgeCenterFromStern = (rightOf29 + leftOf27) / 2;
     bridgeLength = Math.max(10, everFitBridgeSlotW - 0.4);
+  } else if (hasFreeportBridge) {
+    const rightOf49 = bayCellFromStern(idx49) + cellWidth;
+    const leftOf47 = bayCellFromStern(idx47);
+    bridgeCenterFromStern = (rightOf49 + leftOf47) / 2;
+    bridgeLength = Math.max(10, freeportBridgeSlotW - 0.4);
   } else if (hasDusseldorfBridge) {
     const rightOf59 = bayCellFromStern(idx59) + cellWidth;
     const leftOf57 = bayCellFromStern(idx57);
