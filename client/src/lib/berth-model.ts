@@ -269,6 +269,7 @@ export function defaultTierCountForBeam(beam: number): number {
 }
 
 export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
+  "BBC AMBER": "general-cargo",
   "OCEAN MERMAID": "research-survey",
   "SEVEN RIO": "offshore",
   "SEVEN CRUZEIRO": "offshore",
@@ -286,6 +287,7 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "EVER FAR": "container",
   "EVER FASHION": "container",
   "EVER LEADER": "container",
+  "KOTA ELOK": "container",
   "KOTA PAHLAWAN": "container",
   "LOG-IN PANTANAL": "container",
   "LONCOMILLA": "container",
@@ -658,6 +660,35 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     separateFunnel: false,
     vesselType: "container",
   },
+  "KOTA ELOK": {
+    name: "KOTA ELOK",
+    loa: 335,
+    beam: 51,
+    draft: 14.6,
+    bayCount: 79,
+    bays: 79,
+    rowCount: 20,
+    rows: 20,
+    tierCount: 6,
+    tiers: 6,
+    bridgePosition: "between-bays",
+    bridgeBay: 24,
+    bridgeBayStart: 24,
+    bridgeBayEnd: 24,
+    separateFunnel: true,
+    funnelBay: 64,
+    funnelBayStart: 64,
+    funnelBayEnd: 64,
+    vesselType: "container",
+  },
+  "BBC AMBER": {
+    name: "BBC AMBER",
+    loa: 153.44,
+    beam: 23.45,
+    draft: 6.8,
+    vesselType: "general-cargo",
+    color: "blue",
+  },
 };
 
 /**
@@ -672,6 +703,8 @@ export function isManuallyConfiguredVessel(vessel?: {
   separateFunnel?: boolean;
   bridgeBay?: number;
   isManualLayout?: boolean;
+  vesselType?: string | null;
+  type?: string | null;
 } | null): boolean {
   if (!vessel) return false;
   if (vessel.isManualLayout) return true;
@@ -683,6 +716,7 @@ export function isManuallyConfiguredVessel(vessel?: {
     "CMA CGM KRYPTON",
     "CMA CGM COBALT",
     "CMA CGM IRON",
+    "KOTA ELOK",
     "CMA CGM VERACRUZ",
     "NYK DIANA",
     "NYK RUMINA",
@@ -707,6 +741,10 @@ export function isManuallyConfiguredVessel(vessel?: {
     return true;
   }
 
+  // Apenas navios porta-contêineres utilizam o layout manual de baias/casaria
+  const vType = normalizeVesselType(vessel.vesselType ?? vessel.type, vessel.name);
+  if (vType !== "container") return false;
+
   // Se o objeto possui campos de layout de baias e casaria explicitamente salvos
   if (
     (typeof vessel.bayCount === "number" && vessel.bayCount > 0) ||
@@ -725,12 +763,45 @@ export function normalizeVesselType(raw?: string | null, vesselName?: string | n
   const upper = (raw ?? "").toUpperCase().trim();
   const upperName = (vesselName ?? "").toUpperCase().trim();
 
-  // 0. Reconhecimento direto pelo nome do navio no catálogo ou padrões de nomenclatura
+  // 0. Reconhecimento direto pelo dicionário de navios conhecidos (máxima prioridade)
   if (upperName && KNOWN_VESSEL_TYPES[upperName]) {
     return KNOWN_VESSEL_TYPES[upperName];
   }
+
+  // 1. Reconhecimento inteligente baseado na frota mundial e padrões de nomenclatura do navio:
+  // a) General Cargo / Carga Geral / Multipurpose / Heavy Lift (ex: BBC Chartering, AAL, Thorco, Chipolbrok, BigLift)
+  if (
+    upperName.startsWith("BBC ") ||
+    upperName.includes("BBC AMBER") ||
+    upperName.startsWith("AAL ") ||
+    upperName.startsWith("THORCO ") ||
+    upperName.includes("CHIPOLBROK") ||
+    upperName.includes("BIGLIFT") ||
+    upperName.includes("BIGROLL") ||
+    upperName.includes("SPLIETHOFF") ||
+    upperName.includes("GENERAL CARGO") ||
+    upperName.includes("CARGA GERAL")
+  ) {
+    return "general-cargo";
+  }
+
+  // b) Apoio Offshore / PLSV / PSV / AHTS (ex: Subsea 7, DOF, Siem, Solstad, Bourbon)
+  if (
+    upperName.startsWith("SEVEN ") ||
+    upperName.startsWith("SKANDI ") ||
+    upperName.startsWith("SIEM ") ||
+    upperName.startsWith("NORMAND ") ||
+    upperName.startsWith("BOURBON ") ||
+    upperName.includes("C-INNOVATION") ||
+    upperName.includes("EDISON CHOUEST")
+  ) {
+    return "offshore";
+  }
+
+  // c) Pesquisa / Survey / Hidrográfico / Oceanográfico (ex: OCEAN MERMAID, Fugro)
   if (
     upperName.includes("OCEAN MERMAID") ||
+    upperName.includes("FUGRO") ||
     upperName.includes("SURVEY") ||
     upperName.includes("RESEARCH") ||
     upperName.includes("HIDROGRAF") ||
@@ -739,31 +810,67 @@ export function normalizeVesselType(raw?: string | null, vesselName?: string | n
     return "research-survey";
   }
 
-  // 1. Pesquisa / Survey (específico)
+  // d) Navios Tanque Químicos por operadora (Stolt, Odfjell)
   if (
-    upper.includes("RESEARCH") ||
-    upper.includes("SURVEY") ||
-    upper.includes("HIDROGRAF") ||
-    upper.includes("PESQUISA") ||
-    upper.includes("OCEANOGRAF")
-  ) {
-    return "research-survey";
-  }
-
-  // 2. Chemical Tanker (específico)
-  if (
-    upper.includes("CHEMICAL") ||
-    upper.includes("QUÍMICO") ||
-    upper.includes("QUIMICO") ||
-    upperName.includes("CHEM") ||
-    upperName.includes("STOLT") ||
-    upperName.includes("ODFJELL")
+    upperName.startsWith("STOLT ") ||
+    upperName.startsWith("ODFJELL ") ||
+    upperName.startsWith("BOW ")
   ) {
     return "chemical-tanker";
   }
 
-  // 3. Product Tanker (específico)
+  // 2. Classificação robusta pelo campo de tipo técnico (raw) vindo do AIS, Praticagem, IMO ou Catálogo:
+  // a) Pesquisa / Survey
   if (
+    upper === "research-survey" ||
+    upper.includes("RESEARCH") ||
+    upper.includes("SURVEY") ||
+    upper.includes("HIDROGRAF") ||
+    upper.includes("PESQUISA") ||
+    upper.includes("OCEANOGRAF") ||
+    upper.includes("SEISMIC") ||
+    upper.includes("SCIENTIFIC")
+  ) {
+    return "research-survey";
+  }
+
+  // b) Carga Geral / Multiuso / Graneleiro / Heavy Lift (GENERAL CARGO SHIP, BULK, etc.)
+  if (
+    upper === "general-cargo" ||
+    upper.includes("GENERAL CARGO") ||
+    upper.includes("CARGO SHIP") ||
+    upper.includes("CARGA GERAL") ||
+    upper.includes("MULTIPURPOSE") ||
+    upper.includes("MULTI-PURPOSE") ||
+    upper.includes("MPV") ||
+    upper.includes("HEAVY LIFT") ||
+    upper.includes("PROJECT CARGO") ||
+    upper.includes("BREAK BULK") ||
+    upper.includes("BREAKBULK") ||
+    upper.includes("BULK") ||
+    upper.includes("GRANELEIRO") ||
+    upper.includes("ORE CARRIER") ||
+    upper.includes("CEMENT") ||
+    upper.includes("CIMENTO") ||
+    upper.includes("GRAIN") ||
+    upper.includes("CARRIER")
+  ) {
+    return "general-cargo";
+  }
+
+  // c) Químico (Chemical Tanker)
+  if (
+    upper === "chemical-tanker" ||
+    upper.includes("CHEMICAL") ||
+    upper.includes("QUÍMICO") ||
+    upper.includes("QUIMICO")
+  ) {
+    return "chemical-tanker";
+  }
+
+  // d) Produtos Claros (Product Tanker)
+  if (
+    upper === "product-tanker" ||
     upper.includes("PRODUCT") ||
     upper.includes("PRODUTO") ||
     upper.includes("CLEAN")
@@ -771,25 +878,25 @@ export function normalizeVesselType(raw?: string | null, vesselName?: string | n
     return "product-tanker";
   }
 
-  // 4. Tanker geral (petroleiro, óleo, gás)
+  // e) Petroleiro / Óleo / Gás / Tanker geral
   if (
     upper === "tanker" ||
     upper.includes("TANKER") ||
     upper.includes("OIL") ||
     upper.includes("PETROLEIRO") ||
     upper.includes("GAS") ||
+    upper.includes("GÁS") ||
     upper.includes("LPG") ||
     upper.includes("LNG") ||
     upper.includes("BITUMEN") ||
-    upper.includes("ASPHALT") ||
-    upperName.includes("TANKER") ||
-    upperName.includes("PETRO")
+    upper.includes("ASPHALT")
   ) {
     return "tanker";
   }
 
-  // 5. Apoio a Mergulho / DSV / Subsea
+  // f) Apoio a Mergulho (DSV)
   if (
+    upper === "diving-support" ||
     upper.includes("DIVING") ||
     upper.includes("MERGULHO") ||
     upper.includes("DSV")
@@ -797,7 +904,7 @@ export function normalizeVesselType(raw?: string | null, vesselName?: string | n
     return "diving-support";
   }
 
-  // 6. Apoio Offshore / Pipe Layer (PLSV) / PSV / Supply
+  // g) Apoio Offshore / Pipe Layer / PSV / AHTS / Rebocador
   if (
     upper === "offshore" ||
     upper.includes("OFFSHORE") ||
@@ -816,33 +923,39 @@ export function normalizeVesselType(raw?: string | null, vesselName?: string | n
     upper.includes("SUPPLY") ||
     upper.includes("TUG") ||
     upper.includes("REBOCADOR") ||
-    upper.includes("OSRV") ||
-    upperName.includes("SEVEN") ||
-    upperName.includes("SUPPLY") ||
-    upperName.includes("AHTS") ||
-    upperName.includes("SKANDI") ||
-    upperName.includes("SIEM") ||
-    upperName.includes("NORMAND") ||
-    upperName.includes("BOURBON")
+    upper.includes("EMPURRADOR") ||
+    upper.includes("OSRV")
   ) {
     return "offshore";
   }
 
-  // 7. Carga Geral / Graneleiro
+  // h) Porta-Contêineres
   if (
-    upper === "general-cargo" ||
-    upper.includes("GENERAL CARGO") ||
-    upper.includes("CARGO SHIP") ||
-    upper.includes("CARGA GERAL") ||
-    upper.includes("BULK") ||
-    upper.includes("GRANELEIRO") ||
-    upper.includes("ORE CARRIER") ||
-    upper.includes("CARRIER")
+    upper === "container" ||
+    upper.includes("CONTAINER") ||
+    upper.includes("CONTÊINER") ||
+    upper.includes("CONTEINER") ||
+    upper.includes("FULLY CELLULAR")
   ) {
-    return "general-cargo";
+    return "container";
   }
 
-  if (upper === "container" || upper.includes("CONTAINER")) {
+  // 3. Fallback inteligente baseado em operadoras globais de porta-contêineres:
+  if (
+    upperName.startsWith("CMA CGM") ||
+    upperName.startsWith("MSC ") ||
+    upperName.startsWith("MAERSK ") ||
+    upperName.startsWith("COSCO") ||
+    upperName.startsWith("EVER ") ||
+    upperName.startsWith("ONE ") ||
+    upperName.startsWith("HAPAG") ||
+    upperName.startsWith("ZIM ") ||
+    upperName.startsWith("LOG-IN") ||
+    upperName.startsWith("MERCOSUL") ||
+    upperName.startsWith("KOTA ") ||
+    upperName.startsWith("NYK ") ||
+    upperName.startsWith("NC ")
+  ) {
     return "container";
   }
 
@@ -995,13 +1108,16 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     vessel.name.toUpperCase().includes("COBALT") ||
     vessel.name.toUpperCase().includes("IRON")
   );
+  const isKotaElok = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("ELOK");
   const idx63 = bays.indexOf(63);
   const idx65 = bays.indexOf(65);
-  const hasCoscoFunnel = (isCoscoClass || isCmaCgmClass) && config.separateFunnel && idx63 !== -1 && idx65 !== -1;
+  const hasCoscoFunnel = (isCoscoClass || isCmaCgmClass || isKotaElok) && config.separateFunnel && idx63 !== -1 && idx65 !== -1;
 
   const isNykRumina = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("NYK") && (vessel.name.toUpperCase().includes("RUMINA") || vessel.name.toUpperCase().includes("DIANA"));
   const isSeaspanEmpire = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("SEASPAN") && vessel.name.toUpperCase().includes("EMPIRE");
   const isMaerskFreeport = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("MAERSK") && vessel.name.toUpperCase().includes("FREEPORT");
+  const idx23 = bays.indexOf(23);
+  const idx25 = bays.indexOf(25);
   const idx41 = bays.indexOf(41);
   const idx43 = bays.indexOf(43);
   const idx47 = bays.indexOf(47);
@@ -1011,6 +1127,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const idx57 = bays.indexOf(57);
   const idx59 = bays.indexOf(59);
   const hasSpecialBridge55_57 = (isNykRumina || isSeaspanEmpire) && idx55 !== -1 && idx57 !== -1;
+  const hasKotaElokBridge = isKotaElok && idx23 !== -1 && idx25 !== -1;
   const hasFreeportBridge = isMaerskFreeport && idx47 !== -1 && idx49 !== -1;
   const hasDusseldorfBridge = isDusseldorf && idx57 !== -1 && idx59 !== -1;
   const hasAplBridge = isAplNewJersey && idx53 !== -1 && idx55 !== -1;
@@ -1033,7 +1150,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const hasEverFitFunnel = isEverFitClass && config.separateFunnel && idx61 !== -1 && idx63 !== -1;
 
   const num40ftGaps = isDusseldorf ? 17 : isAplNewJersey ? 16 : isMercosulGuaruja ? 11 : Math.max(0, Math.floor((bays.length - 1) / 2));
-  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasFreeportBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0) + (hasAplBridge ? 2.0 : 0) + (hasGuarujaBridge ? 2.0 : 0);
+  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasKotaElokBridge ? 2.0 : 0) + (hasFreeportBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0) + (hasAplBridge ? 2.0 : 0) + (hasGuarujaBridge ? 2.0 : 0);
   const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + extraSlots);
   const hatchGap = isFortaleza ? 1.6 : (bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0);
   const totalGapsWidth = num40ftGaps * hatchGap;
@@ -1041,11 +1158,12 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const everFitFunnelSlotW = hasEverFitFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
   const nykBridgeSlotW = hasSpecialBridge55_57 ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const everFitBridgeSlotW = hasEverFitBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
+  const kotaElokBridgeSlotW = hasKotaElokBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const freeportBridgeSlotW = hasFreeportBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const dusseldorfBridgeSlotW = hasDusseldorfBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const aplBridgeSlotW = hasAplBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const guarujaBridgeSlotW = hasGuarujaBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
-  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - freeportBridgeSlotW - dusseldorfBridgeSlotW - aplBridgeSlotW - guarujaBridgeSlotW);
+  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - kotaElokBridgeSlotW - freeportBridgeSlotW - dusseldorfBridgeSlotW - aplBridgeSlotW - guarujaBridgeSlotW);
   const cellWidth = availableBayWidth / Math.max(1, bays.length);
 
   const bayCellFromStern = (index: number) => {
@@ -1092,6 +1210,9 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     if (hasEverFitBridge && index >= idx29) {
       xPos -= everFitBridgeSlotW;
     }
+    if (hasKotaElokBridge && index >= idx25) {
+      xPos -= kotaElokBridgeSlotW;
+    }
     if (hasFreeportBridge && index >= idx49) {
       xPos -= freeportBridgeSlotW;
     }
@@ -1110,7 +1231,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const bridgeIndices: number[] = [];
   const funnelIndices: number[] = [];
 
-  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasFreeportBridge && !hasDusseldorfBridge && !hasAplBridge && !hasGuarujaBridge) {
+  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasKotaElokBridge && !hasFreeportBridge && !hasDusseldorfBridge && !hasAplBridge && !hasGuarujaBridge) {
     const targetBridgeBay = config.bridgeBay ?? config.bridgeBayStart ?? 34;
     const occupiedBridgeBays = getOccupiedBayNumbers(
       targetBridgeBay,
@@ -1198,6 +1319,11 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     const leftOf27 = bayCellFromStern(idx27);
     bridgeCenterFromStern = (rightOf29 + leftOf27) / 2;
     bridgeLength = Math.max(10, everFitBridgeSlotW - 0.4);
+  } else if (hasKotaElokBridge) {
+    const rightOf25 = bayCellFromStern(idx25) + cellWidth;
+    const leftOf23 = bayCellFromStern(idx23);
+    bridgeCenterFromStern = (rightOf25 + leftOf23) / 2;
+    bridgeLength = Math.max(10, kotaElokBridgeSlotW - 0.4);
   } else if (hasFreeportBridge) {
     const rightOf49 = bayCellFromStern(idx49) + cellWidth;
     const leftOf47 = bayCellFromStern(idx47);
