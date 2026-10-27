@@ -119,6 +119,23 @@ export default function Simulator() {
   useEffect(() => {
     // Pré-carrega as texturas dos contêineres 3D em background para exibição imediata na primeira abertura
     void preloadContainerTextures();
+
+    // Sincroniza padronização de cores dos portêineres (P4-P7 verdes, P8-P9 laranjas)
+    setScenario((curr) => {
+      let changed = false;
+      const updatedPortainers = (curr.portainers ?? DEFAULT_PORTAINERS).map((p) => {
+        const isOrange = p.id === "P8" || p.id === "P9";
+        const targetColor = isOrange ? "#ea580c" : "#65a30d";
+        const targetBadge = isOrange ? "#c2410c" : "#4d7c0f";
+        if (p.color !== targetColor || p.badgeColor !== targetBadge) {
+          changed = true;
+          return { ...p, color: targetColor, badgeColor: targetBadge };
+        }
+        return p;
+      });
+      if (!changed) return curr;
+      return { ...curr, portainers: updatedPortainers };
+    });
   }, []);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const [storageError, setStorageError] = useState(false);
@@ -731,7 +748,8 @@ export default function Simulator() {
               <span><i className="legend-ship" /> Porta-contêineres</span>
               <span className="inline-flex items-center gap-1.5"><i style={{ display: "inline-block", width: 10, height: 7, background: "#4f6277", border: "1px solid #1e293b", borderRadius: 1 }} /> Carga Geral</span>
               <span className="inline-flex items-center gap-1.5"><i style={{ display: "inline-block", width: 10, height: 7, background: "#fef08a", border: "1px solid #ca8a04", borderRadius: 1 }} /> Petroleiro</span>
-              <span className="inline-flex items-center gap-1.5"><i style={{ display: "inline-block", width: 14, height: 8, background: "#4d7c0f", border: "1px solid #1e293b", borderRadius: 2 }} /> Portêineres (P4 a P9)</span>
+              <span className="inline-flex items-center gap-1.5"><i style={{ display: "inline-block", width: 12, height: 8, background: "#4d7c0f", border: "1px solid #1e293b", borderRadius: 2 }} /> PTs (P4–P7)</span>
+              <span className="inline-flex items-center gap-1.5"><i style={{ display: "inline-block", width: 12, height: 8, background: "#c2410c", border: "1px solid #1e293b", borderRadius: 2 }} /> PTs (P8–P9)</span>
               <span className="inline-flex items-center gap-1.5"><i style={{ display: "inline-block", width: 11, height: 7, background: "#f8fafc", border: "1.5px solid #b91c1c", borderRadius: 1 }} /> Manifolds químicos</span>
               <span><i className="legend-quay" /> Trecho de cais</span>
               <span><i className="legend-gap" /> Afastamento</span>

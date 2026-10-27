@@ -1810,6 +1810,10 @@ function renderPortainerSvg({
   const numRungs = Math.max(6, Math.floor((seaRailY - boomTipY) / 8));
   const trolleyY = (VESSEL_BERTH_BOTTOM_Y + boomTipY) / 2;
 
+  const isOrangeGroup = portainer.id === "P8" || portainer.id === "P9";
+  const portainerColor = isOrangeGroup ? "#ea580c" : (["P4", "P5", "P6", "P7"].includes(portainer.id) ? "#65a30d" : (portainer.color || "#65a30d"));
+  const portainerBadgeColor = isOrangeGroup ? "#c2410c" : (["P4", "P5", "P6", "P7"].includes(portainer.id) ? "#4d7c0f" : (portainer.badgeColor || "#4d7c0f"));
+
   return (
     <g
       key={`portainer-${portainer.id}`}
@@ -1834,7 +1838,7 @@ function renderPortainerSvg({
         y1={boomTipY}
         x2={cx}
         y2={284}
-        stroke={portainer.color}
+        stroke={portainerColor}
         strokeWidth="0.8"
         strokeDasharray="3 3"
         opacity="0.4"
@@ -1847,7 +1851,7 @@ function renderPortainerSvg({
         y1={boomTipY}
         x2={girderLeftX}
         y2={landRailY}
-        stroke={portainer.color}
+        stroke={portainerColor}
         strokeWidth="2.2"
       />
       <line
@@ -1855,7 +1859,7 @@ function renderPortainerSvg({
         y1={boomTipY}
         x2={girderRightX}
         y2={landRailY}
-        stroke={portainer.color}
+        stroke={portainerColor}
         strokeWidth="2.2"
       />
 
@@ -1879,7 +1883,7 @@ function renderPortainerSvg({
         height="6.8"
         rx="1.5"
         fill="#0f172a"
-        stroke={portainer.color}
+        stroke={portainerColor}
         strokeWidth="0.6"
         opacity={isHovered ? 1 : 0.85}
       />
@@ -1911,7 +1915,7 @@ function renderPortainerSvg({
               y1={yRung}
               x2={girderRightX}
               y2={yRung}
-              stroke={portainer.color}
+              stroke={portainerColor}
               strokeWidth="0.9"
               opacity="0.8"
             />
@@ -1920,7 +1924,7 @@ function renderPortainerSvg({
               y1={yRung}
               x2={girderRightX}
               y2={yRung + 8}
-              stroke={portainer.color}
+              stroke={portainerColor}
               strokeWidth="0.6"
               opacity="0.55"
             />
@@ -1978,7 +1982,7 @@ function renderPortainerSvg({
         y1={seaRailY - 1}
         x2={sillLeftX}
         y2={landRailY + 1}
-        stroke={portainer.color}
+        stroke={portainerColor}
         strokeWidth="3.2"
         strokeLinecap="round"
       />
@@ -1987,7 +1991,7 @@ function renderPortainerSvg({
         y1={seaRailY - 1}
         x2={sillRightX}
         y2={landRailY + 1}
-        stroke={portainer.color}
+        stroke={portainerColor}
         strokeWidth="3.2"
         strokeLinecap="round"
       />
@@ -1998,7 +2002,7 @@ function renderPortainerSvg({
         y1={seaRailY + 3}
         x2={sillRightX}
         y2={seaRailY + 3}
-        stroke={portainer.color}
+        stroke={portainerColor}
         strokeWidth="2.2"
       />
       <line
@@ -2006,7 +2010,7 @@ function renderPortainerSvg({
         y1={landRailY - 3}
         x2={sillRightX}
         y2={landRailY - 3}
-        stroke={portainer.color}
+        stroke={portainerColor}
         strokeWidth="2.2"
       />
 
@@ -2016,7 +2020,7 @@ function renderPortainerSvg({
         y1={seaRailY + 4}
         x2={sillRightX - 1}
         y2={landRailY - 4}
-        stroke={portainer.color}
+        stroke={portainerColor}
         strokeWidth="1.2"
         opacity="0.8"
       />
@@ -2025,7 +2029,7 @@ function renderPortainerSvg({
         y1={seaRailY + 4}
         x2={sillLeftX + 1}
         y2={landRailY - 4}
-        stroke={portainer.color}
+        stroke={portainerColor}
         strokeWidth="1.2"
         opacity="0.8"
       />
@@ -2056,7 +2060,7 @@ function renderPortainerSvg({
         width="15"
         height="9"
         rx="1.5"
-        fill={portainer.color}
+        fill={portainerColor}
         stroke="#0f172a"
         strokeWidth="1"
       />
@@ -2087,7 +2091,7 @@ function renderPortainerSvg({
           width="30"
           height="16"
           rx="3.5"
-          fill={portainer.badgeColor}
+          fill={portainerBadgeColor}
           stroke={isHovered ? "#facc15" : "#ffffff"}
           strokeWidth={isHovered ? "1.8" : "1.2"}
           filter={isHovered || isDragging ? "drop-shadow(0 2px 5px rgba(0,0,0,0.35))" : "drop-shadow(0 1px 2px rgba(0,0,0,0.2))"}

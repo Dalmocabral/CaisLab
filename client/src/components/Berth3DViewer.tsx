@@ -2083,7 +2083,11 @@ function addPortainer(
   const group = new THREE.Group();
   group.position.x = stationToX(portainer.position, total);
 
-  const craneColor = new THREE.Color(portainer.color || "#15803d");
+  const isOrangeGroup = portainer.id === "P8" || portainer.id === "P9";
+  const effectiveColorHex = isOrangeGroup ? "#ea580c" : (["P4", "P5", "P6", "P7"].includes(portainer.id) ? "#65a30d" : (portainer.color || "#65a30d"));
+  const effectiveBadgeHex = isOrangeGroup ? "#c2410c" : (["P4", "P5", "P6", "P7"].includes(portainer.id) ? "#4d7c0f" : (portainer.badgeColor || "#4d7c0f"));
+
+  const craneColor = new THREE.Color(effectiveColorHex);
   const braceColor = craneColor.clone().lerp(new THREE.Color("#eef2f3"), 0.38);
   const frameMaterial = new THREE.MeshStandardMaterial({ color: craneColor, roughness: 0.58, metalness: 0.28 });
   const braceMaterial = new THREE.MeshStandardMaterial({ color: braceColor, roughness: 0.65, metalness: 0.2 });
@@ -2439,7 +2443,7 @@ function addPortainer(
   addBox(THREE, group, [machWidth + 0.7, 0.2, machLength + 0.7], [0, machY + machHeight / 2 + 0.1, machZ], frameMaterial);
 
   // Placas laterais com logotipo Rio Brasil Terminais e ID do portêiner
-  const logoMaterial = createPortainerLogoMaterial(THREE, portainer.id, isSuperPostPanamax, portainer.badgeColor || portainer.color);
+  const logoMaterial = createPortainerLogoMaterial(THREE, portainer.id, isSuperPostPanamax, effectiveBadgeHex);
   const logoPlateGeo = new THREE.PlaneGeometry(machLength * 0.72, machHeight * 0.68);
   const plateRight = new THREE.Mesh(logoPlateGeo, logoMaterial);
   plateRight.position.set(machWidth / 2 + 0.08, machY, machZ);
