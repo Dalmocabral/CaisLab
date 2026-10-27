@@ -1715,11 +1715,11 @@ export interface Portainer {
 
 export const DEFAULT_PORTAINERS: Portainer[] = [
   { id: "P7", name: "P7", manufacturer: "ZPMC", category: "post-panamax", position: 175, color: "#65a30d", badgeColor: "#4d7c0f", enabled: true, boomOutreach: 60, boomHeight: 44 },
-  { id: "P6", name: "P6", manufacturer: "ZPMC", category: "post-panamax", position: 215, color: "#2563eb", badgeColor: "#1d4ed8", enabled: true, boomOutreach: 60, boomHeight: 44 },
+  { id: "P6", name: "P6", manufacturer: "ZPMC", category: "post-panamax", position: 215, color: "#65a30d", badgeColor: "#4d7c0f", enabled: true, boomOutreach: 60, boomHeight: 44 },
   { id: "P9", name: "P9", manufacturer: "ZPMC", category: "super-post-panamax", position: 255, color: "#be123c", badgeColor: "#9f1239", enabled: true, boomOutreach: 65, boomHeight: 48 },
   { id: "P8", name: "P8", manufacturer: "ZPMC", category: "super-post-panamax", position: 295, color: "#ea580c", badgeColor: "#c2410c", enabled: true, boomOutreach: 65, boomHeight: 48 },
-  { id: "P5", name: "P5", manufacturer: "ZPMC", category: "post-panamax", position: 640, color: "#9333ea", badgeColor: "#7e22ce", enabled: true, boomOutreach: 52, boomHeight: 40 },
-  { id: "P4", name: "P4", manufacturer: "ZPMC", category: "post-panamax", position: 695, color: "#78350f", badgeColor: "#58250b", enabled: true, boomOutreach: 52, boomHeight: 40 },
+  { id: "P5", name: "P5", manufacturer: "ZPMC", category: "post-panamax", position: 640, color: "#65a30d", badgeColor: "#4d7c0f", enabled: true, boomOutreach: 52, boomHeight: 40 },
+  { id: "P4", name: "P4", manufacturer: "ZPMC", category: "post-panamax", position: 695, color: "#65a30d", badgeColor: "#4d7c0f", enabled: true, boomOutreach: 52, boomHeight: 40 },
 ];
 
 export interface PortainerLimit {
@@ -2266,8 +2266,8 @@ export function normalizeScenario(value: unknown): Scenario | null {
           manufacturer,
           category,
           position: pos,
-          color: typeof raw.color === "string" ? raw.color : (def?.color ?? "#2563eb"),
-          badgeColor: typeof raw.badgeColor === "string" ? raw.badgeColor : (def?.badgeColor ?? "#1d4ed8"),
+          color: typeof raw.color === "string" && !["#2563eb", "#9333ea", "#78350f"].includes(raw.color) ? raw.color : (def?.color ?? "#65a30d"),
+          badgeColor: typeof raw.badgeColor === "string" && !["#1d4ed8", "#7e22ce", "#58250b"].includes(raw.badgeColor) ? raw.badgeColor : (def?.badgeColor ?? "#4d7c0f"),
           enabled: typeof raw.enabled === "boolean" ? raw.enabled : true,
           boomOutreach,
           boomHeight,

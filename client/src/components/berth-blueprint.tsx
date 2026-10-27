@@ -2840,15 +2840,15 @@ export default function BerthBlueprint({
                     y1={214}
                     x2={p5LimitX}
                     y2={308}
-                    stroke="#9333ea"
+                    stroke="#65a30d"
                     strokeWidth={isHighlighted ? "1.8" : "1.4"}
                     strokeDasharray="4 3"
                   />
                   {/* Seta apontando para a direita (P05) com base alinhada a 297-296 */}
                   <path
                     d={`M ${p5LimitX} 295 L ${p5LimitX + 21} 295 L ${p5LimitX + 28} 301.5 L ${p5LimitX + 21} 308 L ${p5LimitX} 308 Z`}
-                    fill="#9333ea"
-                    stroke="#581c87"
+                    fill="#65a30d"
+                    stroke="#3f6212"
                     strokeWidth="0.8"
                   />
                   <text
@@ -2877,7 +2877,7 @@ export default function BerthBlueprint({
               return (
                 <g opacity={isHighlighted ? 1 : 0.88} style={{ transition: "opacity 0.2s ease" }}>
                   <title>{`Limite Operacional Portêineres P8 | P6 · Cabeços 291–290 (estação ${p6LimitM.toFixed(1).replace(".", ",")} m)`}</title>
-                  {/* Linha vertical descendo dos Cabeços 291-290 até o marcador - dupla cor (P8 laranja / P6 azul) */}
+                  {/* Linha vertical descendo dos Cabeços 291-290 até o marcador - dupla cor (P8 laranja / P6 verde) */}
                   <line
                     x1={p6LimitX - 0.75}
                     y1={214}
@@ -2892,7 +2892,7 @@ export default function BerthBlueprint({
                     y1={214}
                     x2={p6LimitX + 0.75}
                     y2={308}
-                    stroke="#2563eb"
+                    stroke="#65a30d"
                     strokeWidth={isHighlighted ? "1.6" : "1.2"}
                     strokeDasharray="4 3"
                   />
@@ -2903,14 +2903,14 @@ export default function BerthBlueprint({
                     stroke="#9a3412"
                     strokeWidth="0.8"
                   />
-                  {/* Metade direita / base da seta: cor do P6 (Azul #2563eb) */}
+                  {/* Metade direita / base da seta: cor do P6 (Verde #65a30d) */}
                   <path
                     d={`M ${p6LimitX} 295 L ${p6LimitX - 18} 295 L ${p6LimitX - 18} 308 L ${p6LimitX} 308 Z`}
-                    fill="#2563eb"
-                    stroke="#1e3a8a"
+                    fill="#65a30d"
+                    stroke="#3f6212"
                     strokeWidth="0.8"
                   />
-                  {/* Inscrição "P8 | P6" com P8 na metade laranja e P6 na metade azul */}
+                  {/* Inscrição "P8 | P6" com P8 na metade laranja e P6 na metade verde */}
                   <text
                     x={p6LimitX - 26}
                     y={303.6}
@@ -2966,15 +2966,15 @@ export default function BerthBlueprint({
                     y1={214}
                     x2={p4LimitX}
                     y2={308}
-                    stroke="#78350f"
+                    stroke="#65a30d"
                     strokeWidth={isHighlighted ? "1.8" : "1.4"}
                     strokeDasharray="4 3"
                   />
                   {/* Seta apontando para a esquerda (P04) com base alinhada ao Cabeço 279 */}
                   <path
                     d={`M ${p4LimitX} 295 L ${p4LimitX - 21} 295 L ${p4LimitX - 28} 301.5 L ${p4LimitX - 21} 308 L ${p4LimitX} 308 Z`}
-                    fill="#78350f"
-                    stroke="#451a03"
+                    fill="#65a30d"
+                    stroke="#3f6212"
                     strokeWidth="0.8"
                   />
                   <text
