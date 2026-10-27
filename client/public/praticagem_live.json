@@ -1,23 +1,8 @@
 {
-  "updatedAt": "27/10/2026 02:53",
+  "updatedAt": "27/10/2026 09:26",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 7,
+  "count": 6,
   "maneuvers": [
-    {
-      "dateTime": "26/10 23:00",
-      "name": "MAERSK FREEPORT",
-      "draft": 12.6,
-      "loa": 254.94,
-      "beam": 40.0,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "boreste",
-      "imo": "9991202",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "PANAMA",
-      "terminal": "rio"
-    },
     {
       "dateTime": "28/10 10:00",
       "name": "CMA CGM IRON",
