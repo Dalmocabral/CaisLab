@@ -1,5 +1,5 @@
 {
-  "updatedAt": "27/10/2026 15:37",
+  "updatedAt": "27/10/2026 20:18",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 7,
   "maneuvers": [
@@ -27,7 +27,7 @@
       "maneuver": "E",
       "berthFrom": "",
       "berthTo": "TECONT1",
-      "berthingSide": "boreste",
+      "berthingSide": "bombordo",
       "imo": "9563706",
       "type": "GENERAL CARGO SHIP",
       "flag": "ANTIGUA & BARBUDA",
