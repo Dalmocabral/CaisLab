@@ -1,7 +1,7 @@
 {
-  "updatedAt": "27/10/2026 09:26",
+  "updatedAt": "27/10/2026 15:37",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 6,
+  "count": 7,
   "maneuvers": [
     {
       "dateTime": "28/10 10:00",
@@ -31,6 +31,21 @@
       "imo": "9563706",
       "type": "GENERAL CARGO SHIP",
       "flag": "ANTIGUA & BARBUDA",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "29/10 18:00",
+      "name": "KOTA SINGA",
+      "draft": 9.2,
+      "loa": 228.0,
+      "beam": 37.38,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONTPROLONG",
+      "berthingSide": "boreste",
+      "imo": "9681314",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "SINGAPORE",
       "terminal": "rio"
     },
     {
