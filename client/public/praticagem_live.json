@@ -1,7 +1,7 @@
 {
-  "updatedAt": "28/10/2026 07:43",
+  "updatedAt": "28/10/2026 14:41",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 7,
+  "count": 10,
   "maneuvers": [
     {
       "dateTime": "28/10 10:00",
@@ -19,7 +19,7 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "28/10 16:00",
+      "dateTime": "28/10 18:00",
       "name": "BBC AMBER",
       "draft": 6.8,
       "loa": 153.44,
@@ -46,6 +46,36 @@
       "imo": "9681314",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "SINGAPORE",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "30/10 09:00",
+      "name": "BOCHEM WALVIS BAY",
+      "draft": 8.0,
+      "loa": 145.0,
+      "beam": 24.26,
+      "maneuver": "M",
+      "berthFrom": "WPT 61",
+      "berthTo": "TECONTPROLONG",
+      "berthingSide": "boreste",
+      "imo": "9725859",
+      "type": "CHEMICAL/PRODUCTS TANKER",
+      "flag": "HONG KONG, CHINA",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "31/10 14:30",
+      "name": "CARDIFF",
+      "draft": 14.1,
+      "loa": 270.9,
+      "beam": 42.8,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONTPROLONG",
+      "berthingSide": "boreste",
+      "imo": "9629457",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "LIBERIA",
       "terminal": "rio"
     },
     {
@@ -106,6 +136,21 @@
       "imo": "1081831",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "SINGAPORE",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "17/11 08:00",
+      "name": "COSCO SHIPPING MEXICO",
+      "draft": 12.5,
+      "loa": 335.9,
+      "beam": 51.0,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONTPROLONG",
+      "berthingSide": "boreste",
+      "imo": "9945863",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "HONG KONG, CHINA",
       "terminal": "rio"
     }
   ]
