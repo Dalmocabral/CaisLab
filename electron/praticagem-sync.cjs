@@ -19,6 +19,83 @@ function isTerminalBerth(berth) {
   return b.includes("TECONTPROLONG") || b.includes("TECONT1") || b.includes("TECON 1") || b.includes("PROLONG");
 }
 
+async function ensureVesselPhoto(vessel, vesselsDir) {
+  const name = (vessel.name || "").trim();
+  const imo = String(vessel.imo || "").trim();
+  const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+  const localFile = path.join(vesselsDir, `${slug}.jpg`);
+  const relUrl = `/vessels/${slug}.jpg`;
+
+  if (!vessel.marineTrafficUrl && imo) {
+    vessel.marineTrafficUrl = `https://www.marinetraffic.com/en/ais/details/ships/imo:${imo}`;
+  }
+
+  // Se já existe com tamanho válido, preserva
+  if (fs.existsSync(localFile)) {
+    try {
+      const stats = fs.statSync(localFile);
+      if (stats.size > 3000) {
+        vessel.imageUrl = relUrl;
+        return;
+      }
+    } catch {}
+  }
+
+  if (!imo) return;
+
+  try {
+    const pageUrl = `https://www.vesselfinder.com/vessels/details/${imo}`;
+    const pageRes = await fetch(pageUrl, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+        Referer: "https://www.vesselfinder.com/",
+        Accept:
+          "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+      },
+      signal: AbortSignal.timeout(6000),
+    });
+
+    if (pageRes.ok) {
+      const pageHtml = await pageRes.text();
+      const match = pageHtml.match(
+        /src="((?:https:)?\/\/(?:static|media)\.vesselfinder\.net\/ship-photo\/[^"]+)"/
+      );
+      if (match) {
+        let photoUrl = match[1];
+        if (photoUrl.startsWith("//")) photoUrl = "https:" + photoUrl;
+        const imgRes = await fetch(photoUrl, {
+          headers: {
+            "User-Agent":
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+            Referer: "https://www.vesselfinder.com/",
+          },
+          signal: AbortSignal.timeout(8000),
+        });
+        if (imgRes.ok) {
+          const arrayBuffer = await imgRes.arrayBuffer();
+          const buf = Buffer.from(arrayBuffer);
+          if (buf.length > 3000) {
+            if (!fs.existsSync(vesselsDir)) {
+              fs.mkdirSync(vesselsDir, { recursive: true });
+            }
+            fs.writeFileSync(localFile, buf);
+            vessel.imageUrl = relUrl;
+            console.log(
+              `[Praticagem Sync] Foto baixada com sucesso para ${name} (${buf.length} bytes) -> ${localFile}`
+            );
+          }
+        }
+      }
+    }
+  } catch (err) {
+    console.warn(
+      `[Praticagem Sync] Não foi possível baixar foto para ${name} (IMO ${imo}):`,
+      err.message
+    );
+  }
+}
+
 /**
  * Raspador nativo direto de https://www.praticagem-rj.com.br/
  * Independe de Python, virtualenv ou bibliotecas externas.
@@ -263,7 +340,21 @@ async function syncPraticagem(dataDir, rootDir, onProgress) {
         }
       }
 
-      if (catalogUpdated) {
+      // Baixar e garantir fotos reais para todos os navios do catálogo
+      const vesselsDir = (publicDir && fs.existsSync(publicDir))
+        ? path.join(publicDir, "vessels")
+        : (projectRoot && fs.existsSync(path.join(projectRoot, "client", "public")))
+        ? path.join(projectRoot, "client", "public", "vessels")
+        : null;
+
+      if (vesselsDir) {
+        if (onProgress) onProgress("Atualizando fotografias reais dos navios...", 75);
+        for (const v of catalog) {
+          await ensureVesselPhoto(v, vesselsDir);
+        }
+      }
+
+      if (catalogUpdated || vesselsDir) {
         fs.writeFileSync(catalogPath, JSON.stringify(catalog, null, 2), "utf-8");
         if (publicDir && fs.existsSync(publicDir)) {
           try {

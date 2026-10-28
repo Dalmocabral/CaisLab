@@ -37,6 +37,7 @@ import BerthBlueprint from "@/components/berth-blueprint";
 import AddVesselModal from "@/components/AddVesselModal";
 import BerthViewModal from "@/components/BerthViewModal";
 import Berth3DModal from "@/components/Berth3DModal";
+import SystemIntegrityModal from "@/components/SystemIntegrityModal";
 import { preloadContainerTextures } from "@/components/Berth3DViewer";
 import {
   calculateIssues,
@@ -121,6 +122,38 @@ export default function Simulator() {
       localStorage.setItem("caislab:blueprint_zoom", String(zoom));
     } catch {}
   }, [zoom]);
+
+  // Verificação de integridade e autoria do software (gatilhos secretos)
+  const [isSystemIntegrityModalOpen, setIsSystemIntegrityModalOpen] = useState(false);
+  const logoClickCountRef = useRef(0);
+  const logoClickTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleLogoClick = () => {
+    logoClickCountRef.current += 1;
+    if (logoClickTimerRef.current) clearTimeout(logoClickTimerRef.current);
+
+    if (logoClickCountRef.current >= 5) {
+      logoClickCountRef.current = 0;
+      setIsSystemIntegrityModalOpen(true);
+      return;
+    }
+
+    logoClickTimerRef.current = setTimeout(() => {
+      logoClickCountRef.current = 0;
+    }, 2500);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Atalho secreto de verificação pericial: Ctrl + Shift + D
+      if (e.ctrlKey && e.shiftKey && (e.key === "D" || e.key === "d")) {
+        e.preventDefault();
+        setIsSystemIntegrityModalOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   useEffect(() => {
     // Pré-carrega as texturas dos contêineres 3D em background para exibição imediata na primeira abertura
@@ -567,9 +600,13 @@ export default function Simulator() {
   return (
     <div className="app-shell">
       <header className="topbar">
-        <div className="brand-lockup">
-          <img src={getAssetUrl("favicon.svg")} alt="" className="brand-mark" />
-          <div className="brand-copy">
+        <div
+          className="brand-lockup cursor-pointer select-none transition-opacity active:opacity-80"
+          onClick={handleLogoClick}
+          title="CaisLab — Planejamento Operacional de Atracação"
+        >
+          <img src={getAssetUrl("favicon.svg")} alt="" className="brand-mark pointer-events-none" />
+          <div className="brand-copy pointer-events-none">
             <span className="brand-name">CaisLab</span>
             <span className="brand-caption">PLANEJAMENTO DE ATRACAÇÃO</span>
           </div>
@@ -1607,6 +1644,12 @@ export default function Simulator() {
           isOpen={isBerth3DModalOpen}
           onClose={() => setIsBerth3DModalOpen(false)}
           scenario={scenario}
+        />
+
+        {/* Modal Secreto de Integridade e Autoria Digital */}
+        <SystemIntegrityModal
+          isOpen={isSystemIntegrityModalOpen}
+          onClose={() => setIsSystemIntegrityModalOpen(false)}
         />
       </main>
     </div>

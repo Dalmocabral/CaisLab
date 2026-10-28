@@ -43,7 +43,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add client/public/praticagem_live.json client/public/vessels_catalog.json vessels_catalog.json || true
+          git add client/public/praticagem_live.json client/public/vessels_catalog.json vessels_catalog.json client/public/vessels/ || true
           git commit -m "chore(praticagem): atualizar manobras ao vivo [skip ci]" || echo "Nenhuma alteração nos dados da praticagem"
           git push origin main || echo "Push ignorado"
         continue-on-error: true
