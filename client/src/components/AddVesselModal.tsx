@@ -51,6 +51,7 @@ import {
   normalizeMooringOffset,
   KNOWN_VESSEL_DEFAULTS,
   isManuallyConfiguredVessel,
+  getAssetUrl,
 } from "@/lib/berth-model";
 
 interface AddVesselModalProps {
@@ -229,6 +230,10 @@ export default function AddVesselModal({
     const separateFunnel = isContainer ? (savedVessel?.separateFunnel ?? knownDefault?.separateFunnel) : undefined;
     const funnelBay = isContainer ? (savedVessel?.funnelBay ?? knownDefault?.funnelBay) : undefined;
 
+    const vesselSlug = m.name.trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+    const imageUrl = savedVessel?.imageUrl ?? (m.imo ? `/vessels/${vesselSlug}.jpg` : undefined);
+    const marineTrafficUrl = savedVessel?.marineTrafficUrl ?? (m.imo ? `https://www.marinetraffic.com/en/ais/details/ships/imo:${m.imo}` : undefined);
+
     const newVessel: Vessel = {
       id,
       name: m.name,
@@ -251,6 +256,8 @@ export default function AddVesselModal({
       bridgeBay,
       separateFunnel,
       funnelBay,
+      imageUrl,
+      marineTrafficUrl,
     };
 
     // Auto save to persistent catalog
@@ -274,6 +281,8 @@ export default function AddVesselModal({
       type: m.type || VESSEL_TYPE_LABELS[vesselType],
       flag: m.flag,
       lastBerth: m.berthTo || m.berthFrom || "",
+      imageUrl,
+      marineTrafficUrl,
     };
     await saveVesselToCatalog(catalogEntry);
     await loadCatalog();
@@ -312,6 +321,10 @@ export default function AddVesselModal({
     const separateFunnel = isContainer ? (v.separateFunnel ?? knownDefault?.separateFunnel) : undefined;
     const funnelBay = isContainer ? (v.funnelBay ?? knownDefault?.funnelBay) : undefined;
 
+    const vesselSlug = v.name.trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+    const imageUrl = v.imageUrl ?? `/vessels/${vesselSlug}.jpg`;
+    const marineTrafficUrl = v.marineTrafficUrl ?? (v.imo ? `https://www.marinetraffic.com/en/ais/details/ships/imo:${v.imo}` : undefined);
+
     const newVessel: Vessel = {
       id,
       name: v.name,
@@ -334,6 +347,8 @@ export default function AddVesselModal({
       bridgeBay,
       separateFunnel,
       funnelBay,
+      imageUrl,
+      marineTrafficUrl,
     };
 
     onAddVessel(
@@ -358,6 +373,10 @@ export default function AddVesselModal({
     const bridgeBay = manualType === "container" && manualBridgePosition === "between-bays" ? manualBridgeBay : undefined;
     const separateFunnel = manualType === "container" && manualBridgePosition === "between-bays" ? manualSeparateFunnel : undefined;
     const funnelBay = manualType === "container" && manualBridgePosition === "between-bays" && manualSeparateFunnel ? manualFunnelBay : undefined;
+    const vesselSlug = cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+    const isBbc = cleanName.toUpperCase().startsWith("BBC");
+    const imageUrl = isBbc ? "/vessels/bbc_amber.jpg" : `/vessels/${vesselSlug}.jpg`;
+    const marineTrafficUrl = `https://www.marinetraffic.com/en/ais/index/ships/all/keyword:${encodeURIComponent(cleanName)}`;
     const position = calculateNextPosition(loa);
 
     const newVessel: Vessel = {
@@ -382,6 +401,8 @@ export default function AddVesselModal({
       bridgeBay,
       separateFunnel,
       funnelBay,
+      imageUrl,
+      marineTrafficUrl,
     };
 
     if (saveToCatalog) {
@@ -402,6 +423,8 @@ export default function AddVesselModal({
         separateFunnel,
         funnelBay,
         type: VESSEL_TYPE_LABELS[manualType],
+        imageUrl,
+        marineTrafficUrl,
       });
       await loadCatalog();
     }

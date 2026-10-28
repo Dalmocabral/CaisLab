@@ -605,6 +605,8 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     bridgeBayEnd: 48,
     separateFunnel: false,
     vesselType: "container",
+    imageUrl: "/vessels/maersk_freeport.jpg",
+    marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/shipid:8941589",
   },
   "LOG-IN PANTANAL": {
     name: "LOG-IN PANTANAL",
@@ -1002,6 +1004,10 @@ export interface Vessel {
   funnelBay?: number;
   funnelBayStart?: number;
   funnelBayEnd?: number;
+  /** URL ou caminho da foto da embarcação (ex.: foto do MarineTraffic). */
+  imageUrl?: string;
+  /** Link direto para a página do navio no MarineTraffic (ex.: shipid). */
+  marineTrafficUrl?: string;
 }
 
 export interface ContainerHatchPlan {
@@ -1859,6 +1865,61 @@ export function clampPortainerPosition(
   return { position: Number(position.toFixed(1)), hitLimit, message };
 }
 
+export const QUAY_CRANE_SETBACK = 4.0; // Recuo operacional do cais + defensas marítimas + folga offshore (~3,5 a 4,0 m)
+
+export interface PortainerIncompatibility {
+  portainer: Portainer;
+  vessel: Vessel;
+  deficit: number;
+  boomOutreach: number;
+  vesselBeam: number;
+  heightDeficit?: number;
+  requiredHeight?: number;
+  boomHeight?: number;
+  message: string;
+}
+
+/** Verifica se um portêiner posicionado sobre um navio possui lança curta ou altura insuficiente */
+export function checkPortainerIncompatibility(
+  portainer: Portainer,
+  vessels: Vessel[]
+): PortainerIncompatibility | null {
+  const boomOutreach = portainer.boomOutreach ?? 55;
+  for (const vessel of vessels) {
+    const vesselEnd = vessel.position + vessel.loa;
+    // Verifica se o portêiner está posicionado sobre a extensão do navio
+    if (portainer.position >= vessel.position && portainer.position <= vesselEnd) {
+      const requiredReach = Number((vessel.beam + QUAY_CRANE_SETBACK).toFixed(1));
+
+      // Incompatível se a lança não cobrir a boca considerando o recuo do cais e defensas
+      if (vessel.beam > 0 && (boomOutreach < requiredReach || boomOutreach <= vessel.beam)) {
+        const rawDeficit = Math.max(vessel.beam - boomOutreach, requiredReach - boomOutreach);
+        const deficit = Number(rawDeficit.toFixed(1));
+        const tiers = normalizeTierCount(vessel.tierCount ?? vessel.tiers) ?? defaultTierCountForBeam(vessel.beam);
+        const estimatedDraft = vessel.draft > 0 ? vessel.draft : 10;
+        const deckHeightAboveQuay = Math.max(7, estimatedDraft * 0.9 - 1);
+        const requiredHeight = deckHeightAboveQuay + tiers * 2.6 + 3.8;
+        const heightDeficit = portainer.boomHeight && portainer.boomHeight < requiredHeight
+          ? Number((requiredHeight - portainer.boomHeight).toFixed(1))
+          : undefined;
+
+        return {
+          portainer,
+          vessel,
+          deficit,
+          boomOutreach,
+          vesselBeam: vessel.beam,
+          heightDeficit,
+          requiredHeight,
+          boomHeight: portainer.boomHeight,
+          message: `Lança curta: faltam ${deficit.toFixed(1)} m na boca (${vessel.name})`,
+        };
+      }
+    }
+  }
+  return null;
+}
+
 export interface Scenario {
   name: string;
   clearance: number;
@@ -2216,6 +2277,8 @@ export function normalizeScenario(value: unknown): Scenario | null {
       funnelBay,
       funnelBayStart,
       funnelBayEnd,
+      imageUrl: typeof (raw as any).imageUrl === "string" ? (raw as any).imageUrl : (raw.name?.trim().toUpperCase() === "MAERSK FREEPORT" ? "/vessels/maersk_freeport.jpg" : (knownDefault as any)?.imageUrl),
+      marineTrafficUrl: typeof (raw as any).marineTrafficUrl === "string" ? (raw as any).marineTrafficUrl : (raw.name?.trim().toUpperCase() === "MAERSK FREEPORT" ? "https://www.marinetraffic.com/en/ais/details/ships/shipid:8941589" : (knownDefault as any)?.marineTrafficUrl),
     });
   }
 
@@ -2402,11 +2465,12 @@ export function calculateIssues(scenario: Scenario): BerthIssue[] {
             });
           }
 
-          if (portainer.boomOutreach && vessel.beam > 0 && portainer.boomOutreach < vessel.beam) {
+          if (portainer.boomOutreach && vessel.beam > 0 && (portainer.boomOutreach < (vessel.beam + QUAY_CRANE_SETBACK) || portainer.boomOutreach <= vessel.beam)) {
+            const deficit = Number(Math.max(vessel.beam - portainer.boomOutreach, vessel.beam + QUAY_CRANE_SETBACK - portainer.boomOutreach).toFixed(1));
             issues.push({
               vesselId: vessel.id,
               kind: "equipment",
-              message: `Portêiner ${portainer.name} (alcance ${portainer.boomOutreach} m) não cobre a boca total do ${vessel.name} (${vessel.beam.toFixed(1)} m)`,
+              message: `Portêiner ${portainer.name} com lança curta para o ${vessel.name} (faltam ${deficit.toFixed(1)} m na boca)`,
             });
           }
         }

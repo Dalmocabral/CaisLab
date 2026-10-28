@@ -230,6 +230,7 @@ async function syncPraticagem(dataDir, rootDir, onProgress) {
       for (const m of liveData.maneuvers) {
         if (!m.name) continue;
         const idx = catalog.findIndex((v) => v.name.toUpperCase() === m.name.toUpperCase());
+        const cleanSlug = m.name.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
         if (idx >= 0) {
           if (m.loa > 0) catalog[idx].loa = m.loa;
           if (m.beam > 0) catalog[idx].beam = m.beam;
@@ -237,6 +238,11 @@ async function syncPraticagem(dataDir, rootDir, onProgress) {
           if (m.berthingSide) catalog[idx].berthingSide = m.berthingSide;
           if (m.berthTo) catalog[idx].lastBerth = m.berthTo;
           if (m.type) catalog[idx].type = m.type;
+          if (m.imo) catalog[idx].imo = m.imo;
+          if (!catalog[idx].imageUrl) catalog[idx].imageUrl = `/vessels/${cleanSlug}.jpg`;
+          if (!catalog[idx].marineTrafficUrl && (m.imo || catalog[idx].imo)) {
+            catalog[idx].marineTrafficUrl = `https://www.marinetraffic.com/en/ais/details/ships/imo:${m.imo || catalog[idx].imo}`;
+          }
           catalog[idx].updatedAt = nowStr;
           catalogUpdated = true;
         } else {
@@ -249,6 +255,8 @@ async function syncPraticagem(dataDir, rootDir, onProgress) {
             imo: m.imo || "",
             type: m.type || "CONTAINER SHIP",
             lastBerth: m.berthTo || "TECONTPROLONG",
+            imageUrl: `/vessels/${cleanSlug}.jpg`,
+            marineTrafficUrl: m.imo ? `https://www.marinetraffic.com/en/ais/details/ships/imo:${m.imo}` : undefined,
             updatedAt: nowStr,
           });
           catalogUpdated = true;

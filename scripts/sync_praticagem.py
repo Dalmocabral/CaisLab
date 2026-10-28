@@ -46,6 +46,44 @@ def is_terminal_berth(berth):
     b = str(berth).strip().upper()
     return "TECONTPROLONG" in b or "TECONT1" in b
 
+def ensure_vessel_photo(v, vessels_dir):
+    name = v.get("name", "").strip()
+    imo = str(v.get("imo") or "").strip()
+    slug = re.sub(r'[^a-zA-Z0-9]+', '_', name.lower()).strip('_')
+    rel_url = f"/vessels/{slug}.jpg"
+    local_path = os.path.join(vessels_dir, f"{slug}.jpg")
+
+    if not v.get("marineTrafficUrl") and imo:
+        v["marineTrafficUrl"] = f"https://www.marinetraffic.com/en/ais/details/ships/imo:{imo}"
+
+    if os.path.exists(local_path) and os.path.getsize(local_path) > 3000:
+        v["imageUrl"] = rel_url
+        return
+
+    if not imo:
+        return
+
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+        'Referer': 'https://www.vesselfinder.com/'
+    }
+    try:
+        vf_url = f"https://www.vesselfinder.com/vessels/details/{imo}"
+        r = requests.get(vf_url, headers=headers, timeout=6)
+        if r.status_code == 200:
+            imgs = re.findall(r'src="(https://static\.vesselfinder\.net/ship-photo/[^"]+)"', r.text)
+            if not imgs:
+                imgs = re.findall(r'src="(https://media\.vesselfinder\.net/[^"]+)"', r.text)
+            if imgs:
+                img_res = requests.get(imgs[0], headers=headers, timeout=8)
+                if img_res.status_code == 200 and len(img_res.content) > 3000:
+                    os.makedirs(vessels_dir, exist_ok=True)
+                    with open(local_path, "wb") as f:
+                        f.write(img_res.content)
+                    v["imageUrl"] = rel_url
+    except Exception:
+        pass
+
 def run_sync():
     workspace_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     public_dir = os.path.join(workspace_root, "client", "public")
@@ -236,7 +274,11 @@ def run_sync():
             "maneuvers": live_maneuvers
         }, f, ensure_ascii=False, indent=2)
 
-    # 5. Salvar vessels_catalog.json (Navios Salvos do Terminal)
+    # 5. Salvar vessels_catalog.json (Navios Salvos do Terminal) com fotos atualizadas
+    vessels_dir = os.path.join(public_dir, "vessels")
+    for v in catalog.values():
+        ensure_vessel_photo(v, vessels_dir)
+
     sorted_catalog = sorted(list(catalog.values()), key=lambda x: x["name"])
     with open(catalog_path, "w", encoding="utf-8") as f:
         json.dump(sorted_catalog, f, ensure_ascii=False, indent=2)

@@ -32,6 +32,8 @@ export interface CatalogVessel {
   funnelBay?: number;
   funnelBayStart?: number;
   funnelBayEnd?: number;
+  imageUrl?: string;
+  marineTrafficUrl?: string;
 }
 
 export interface PraticagemManeuver {
@@ -153,6 +155,8 @@ export async function fetchVesselCatalog(): Promise<CatalogVessel[]> {
             map.set(key, {
               ...existing,
               ...v,
+              imageUrl: v.imageUrl || existing.imageUrl,
+              marineTrafficUrl: v.marineTrafficUrl || existing.marineTrafficUrl,
               bayCount: v.bayCount ?? v.bays ?? existing.bayCount ?? existing.bays,
               bays: v.bayCount ?? v.bays ?? existing.bayCount ?? existing.bays,
               rowCount: v.rowCount ?? v.rows ?? existing.rowCount ?? existing.rows,
@@ -178,7 +182,17 @@ export async function fetchVesselCatalog(): Promise<CatalogVessel[]> {
     console.warn("Erro ao ler navios salvos do localStorage:", e);
   }
 
-  const list = Array.from(map.values()).sort((a, b) => a.name.localeCompare(b.name));
+  const list = Array.from(map.values()).map((v) => {
+    const cleanName = v.name.trim().toUpperCase();
+    const slug = cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+    const isBbc = cleanName.startsWith("BBC");
+    const defaultImg = isBbc ? "/vessels/bbc_amber.jpg" : `/vessels/${slug}.jpg`;
+    return {
+      ...v,
+      imageUrl: v.imageUrl || defaultImg,
+      marineTrafficUrl: v.marineTrafficUrl || (v.imo ? `https://www.marinetraffic.com/en/ais/details/ships/imo:${v.imo}` : `https://www.marinetraffic.com/en/ais/index/ships/all/keyword:${encodeURIComponent(v.name)}`),
+    };
+  }).sort((a, b) => a.name.localeCompare(b.name));
   return list;
 }
 
@@ -227,6 +241,8 @@ export async function saveVesselToCatalog(vessel: CatalogVessel): Promise<Catalo
       tierCount: entry.tierCount,
       tiers: entry.tierCount,
       berthingSide: entry.berthingSide,
+      imageUrl: entry.imageUrl ?? existing?.imageUrl,
+      marineTrafficUrl: entry.marineTrafficUrl ?? existing?.marineTrafficUrl,
     };
     map.set(cleanName, savedEntry);
     const updatedList = Array.from(map.values()).sort((a, b) => a.name.localeCompare(b.name));

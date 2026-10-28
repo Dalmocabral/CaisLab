@@ -10,7 +10,9 @@
     "vesselType": "general-cargo",
     "flag": "ANTIGUA & BARBUDA",
     "lastBerth": "TECONT1",
-    "updatedAt": "28/10/2026 00:49"
+    "updatedAt": "27/10/2026 19:07",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9563706",
+    "imageUrl": "/vessels/bbc_amber.jpg"
   },
   {
     "name": "CMA CGM COBALT",
@@ -22,7 +24,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "28/10/2026 00:49",
+    "updatedAt": "27/10/2026 19:07",
     "bayCount": 79,
     "bays": 79,
     "bridgePosition": "between-bays",
@@ -37,7 +39,9 @@
     "rows": 20,
     "tierCount": 9,
     "tiers": 9,
-    "isManualLayout": true
+    "isManualLayout": true,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996680",
+    "imageUrl": "/vessels/cma_cgm_cobalt.jpg"
   },
   {
     "name": "CMA CGM IRON",
@@ -49,9 +53,9 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "28/10/2026 00:49",
-    "bayCount": 79,
-    "bays": 79,
+    "updatedAt": "27/10/2026 19:07",
+    "bayCount": 78,
+    "bays": 78,
     "bridgePosition": "between-bays",
     "bridgeBay": 28,
     "bridgeBayStart": 28,
@@ -64,7 +68,9 @@
     "funnelBay": 64,
     "funnelBayStart": 64,
     "funnelBayEnd": 64,
-    "isManualLayout": true
+    "isManualLayout": true,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996678",
+    "imageUrl": "/vessels/cma_cgm_iron.jpg"
   },
   {
     "name": "CMA CGM KRYPTON",
@@ -91,7 +97,9 @@
     "rows": 20,
     "tierCount": 9,
     "tiers": 9,
-    "isManualLayout": true
+    "isManualLayout": true,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996733",
+    "imageUrl": "/vessels/cma_cgm_krypton.jpg"
   },
   {
     "name": "EVER FAIR",
@@ -103,7 +111,9 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "28/10/2026 00:49"
+    "updatedAt": "27/10/2026 19:07",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850886",
+    "imageUrl": "/vessels/ever_fair.jpg"
   },
   {
     "name": "EVER FAITH",
@@ -115,19 +125,21 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "28/10/2026 00:49"
+    "updatedAt": "27/10/2026 19:07",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850525",
+    "imageUrl": "/vessels/ever_faith.jpg"
   },
   {
     "name": "KOTA ELOK",
-    "loa": 335.0,
-    "beam": 51.0,
+    "loa": 335,
+    "beam": 51,
     "draft": 14.6,
     "berthingSide": "boreste",
     "imo": "1081831",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "28/10/2026 00:49",
+    "updatedAt": "27/10/2026 19:07",
     "bayCount": 79,
     "bays": 79,
     "rowCount": 20,
@@ -142,11 +154,13 @@
     "funnelBay": 64,
     "funnelBayStart": 64,
     "funnelBayEnd": 64,
-    "isManualLayout": true
+    "isManualLayout": true,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:1081831",
+    "imageUrl": "/vessels/kota_elok.jpg"
   },
   {
     "name": "KOTA SINGA",
-    "loa": 228.0,
+    "loa": 228,
     "beam": 37.38,
     "draft": 9.2,
     "berthingSide": "boreste",
@@ -154,7 +168,19 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "28/10/2026 00:49"
+    "updatedAt": "27/10/2026 19:07",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9681314",
+    "imageUrl": "/vessels/kota_singa.jpg",
+    "bridgePosition": "between-bays",
+    "bridgeBay": 46,
+    "bridgeBayStart": 46,
+    "bridgeBayEnd": 46,
+    "bayCount": 52,
+    "bays": 52,
+    "rowCount": 14,
+    "rows": 14,
+    "tierCount": 6,
+    "tiers": 6
   },
   {
     "name": "MAERSK FREEPORT",
@@ -178,7 +204,9 @@
     "rows": 14,
     "tierCount": 5,
     "tiers": 5,
-    "isManualLayout": true
+    "isManualLayout": true,
+    "imageUrl": "/vessels/maersk_freeport.jpg",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/shipid:8941589"
   },
   {
     "name": "MERCOSUL GUARUJA",
@@ -201,7 +229,9 @@
     "bridgeBay": 42,
     "bridgeBayStart": 42,
     "bridgeBayEnd": 42,
-    "isManualLayout": true
+    "isManualLayout": true,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9539494",
+    "imageUrl": "/vessels/mercosul_guaruja.jpg"
   },
   {
     "name": "NC BRAVO",
@@ -213,7 +243,9 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "26/10/2026 16:22"
+    "updatedAt": "26/10/2026 16:22",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9612791",
+    "imageUrl": "/vessels/nc_bravo.jpg"
   },
   {
     "name": "NYK DIANA",
@@ -236,6 +268,8 @@
     "bridgeBay": 56,
     "bridgeBayStart": 56,
     "bridgeBayEnd": 56,
-    "isManualLayout": true
+    "isManualLayout": true,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9337688",
+    "imageUrl": "/vessels/nyk_diana.jpg"
   }
 ]

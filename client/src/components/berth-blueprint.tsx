@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   calculateIssues,
   berthwiseOffsetFromStern,
@@ -29,6 +29,8 @@ import {
   getOccupiedBayNumbers,
   type Vessel,
   type MooringLineType,
+  type PortainerIncompatibility,
+  checkPortainerIncompatibility,
 } from "@/lib/berth-model";
 
 import {
@@ -38,6 +40,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import PortainerAlertModal from "./PortainerAlertModal";
 
 interface BerthBlueprintProps {
   scenario: Scenario;
@@ -49,6 +52,7 @@ interface BerthBlueprintProps {
   onUpdateBollard?: (id: string, patch: { id?: string; position?: number | null; type?: BollardType }) => void;
   onMovePortainer?: (id: string, position: number) => void;
   onPortainerLimitHit?: (message: string) => void;
+  onPortainerIncompatibilityAlert?: (incompatibility: PortainerIncompatibility) => void;
   isPresentationMode?: boolean;
 }
 
@@ -1775,6 +1779,8 @@ function renderPortainerSvg({
   isHovered,
   isDragging,
   isPresentationMode = false,
+  incompatibility = null,
+  onIncompatibilityClick,
   onPointerDown,
   onPointerEnter,
   onPointerLeave,
@@ -1785,6 +1791,8 @@ function renderPortainerSvg({
   isHovered: boolean;
   isDragging: boolean;
   isPresentationMode?: boolean;
+  incompatibility?: PortainerIncompatibility | null;
+  onIncompatibilityClick?: (incompatibility: PortainerIncompatibility) => void;
   onPointerDown: (e: React.PointerEvent<SVGGElement>) => void;
   onPointerEnter: () => void;
   onPointerLeave: () => void;
@@ -1876,33 +1884,115 @@ function renderPortainerSvg({
       <circle cx={girderRightX} cy={boomTipY} r="1.4" fill="#f8fafc" stroke="#0f172a" strokeWidth="0.6" />
 
       {/* Etiqueta na ponta com a metragem da lança (permite conferir visualmente a cobertura da boca) */}
-      <rect
-        x={cx - 11}
-        y={boomTipY - 8.5}
-        width="22"
-        height="6.8"
-        rx="1.5"
-        fill="#0f172a"
-        stroke={portainerColor}
-        strokeWidth="0.6"
-        opacity={isHovered ? 1 : 0.85}
-      />
-      <text
-        x={cx}
-        y={boomTipY - 4.8}
-        textAnchor="middle"
-        dominantBaseline="central"
-        style={{
-          fill: "#ffffff",
-          fontSize: "4.8px",
-          fontWeight: 900,
-          letterSpacing: "0.2px",
-          userSelect: "none",
-          pointerEvents: "none",
-        }}
-      >
-        {boomOutreach}m
-      </text>
+      {incompatibility ? (
+        <g
+          className="cursor-pointer"
+          onPointerDown={(e) => {
+            e.stopPropagation();
+            onIncompatibilityClick?.(incompatibility);
+          }}
+          onClick={(e) => {
+            e.stopPropagation();
+            onIncompatibilityClick?.(incompatibility);
+          }}
+          role="button"
+          tabIndex={0}
+        >
+          <title>{`⚠️ ATENÇÃO: Lança curta!\nFaltam ${incompatibility.deficit.toFixed(1)} m na boca do navio ${incompatibility.vessel.name}.\nClique para abrir o alerta operacional.`}</title>
+
+          {/* Pulso / Halo externo suave em vermelho */}
+          <rect
+            x={cx - 15}
+            y={boomTipY - 10.2}
+            width="30"
+            height="10.2"
+            rx="2.5"
+            fill="#ef4444"
+            opacity="0.35"
+          >
+            <animate attributeName="opacity" values="0.75;0.12;0.75" dur="0.85s" repeatCount="indefinite" />
+          </rect>
+
+          {/* Badge piscando em vermelho vivo */}
+          <rect
+            x={cx - 13.5}
+            y={boomTipY - 9.2}
+            width="27"
+            height="8.2"
+            rx="2"
+            fill="#dc2626"
+            stroke="#ffffff"
+            strokeWidth="1.2"
+            style={{
+              filter: "drop-shadow(0 0 4px rgba(239, 68, 68, 0.95))",
+            }}
+          >
+            <animate
+              attributeName="fill"
+              values="#dc2626;#7f1d1d;#dc2626"
+              dur="0.85s"
+              repeatCount="indefinite"
+            />
+            <animate
+              attributeName="stroke"
+              values="#ffffff;#fecaca;#ffffff"
+              dur="0.85s"
+              repeatCount="indefinite"
+            />
+          </rect>
+
+          {/* Texto com ⚠ e metragem da lança */}
+          <text
+            x={cx}
+            y={boomTipY - 5.1}
+            textAnchor="middle"
+            dominantBaseline="central"
+            style={{
+              fill: "#ffffff",
+              fontSize: "4.8px",
+              fontWeight: 900,
+              letterSpacing: "0.2px",
+              userSelect: "none",
+              pointerEvents: "none",
+              paintOrder: "stroke",
+              stroke: "#7f1d1d",
+              strokeWidth: "0.5px",
+            }}
+          >
+            ⚠ {boomOutreach}m
+          </text>
+        </g>
+      ) : (
+        <g>
+          <rect
+            x={cx - 11}
+            y={boomTipY - 8.5}
+            width="22"
+            height="6.8"
+            rx="1.5"
+            fill="#0f172a"
+            stroke={portainerColor}
+            strokeWidth="0.6"
+            opacity={isHovered ? 1 : 0.85}
+          />
+          <text
+            x={cx}
+            y={boomTipY - 4.8}
+            textAnchor="middle"
+            dominantBaseline="central"
+            style={{
+              fill: "#ffffff",
+              fontSize: "4.8px",
+              fontWeight: 900,
+              letterSpacing: "0.2px",
+              userSelect: "none",
+              pointerEvents: "none",
+            }}
+          >
+            {boomOutreach}m
+          </text>
+        </g>
+      )}
 
       {/* Tirantes e treliças diagonais da lança (Lattice rungs) */}
       {Array.from({ length: numRungs }, (_, i) => {
@@ -2144,6 +2234,7 @@ export default function BerthBlueprint({
   onUpdateBollard,
   onMovePortainer,
   onPortainerLimitHit,
+  onPortainerIncompatibilityAlert,
   isPresentationMode = false,
 }: BerthBlueprintProps) {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -2161,6 +2252,35 @@ export default function BerthBlueprint({
   const [lineDragPoint, setLineDragPoint] = useState<{ x: number; y: number } | null>(null);
   const [hoveredBollardId, setHoveredBollardId] = useState<string | null>(null);
   const [hoveredPortainerId, setHoveredPortainerId] = useState<string | null>(null);
+  const [alertIncompatibility, setAlertIncompatibility] = useState<PortainerIncompatibility | null>(null);
+  // Armazena os pares portêiner:navio já confirmados pelo usuário ("Entendido/Ciente") para não reabrir o popup
+  const [acknowledgedAlerts, setAcknowledgedAlerts] = useState<Set<string>>(() => new Set());
+
+  function handleDismissAlert(incomp: PortainerIncompatibility) {
+    const pairKey = `${incomp.portainer.id}:${incomp.vessel.id}`;
+    setAcknowledgedAlerts((prev) => new Set(prev).add(pairKey));
+    setAlertIncompatibility(null);
+  }
+
+  // Auto-detecta incompatibilidade apenas uma única vez na inicialização (se já houver navio e portêiner no cais)
+  const initialCheckDoneRef = useRef(false);
+  useEffect(() => {
+    if (initialCheckDoneRef.current || isPresentationMode || scenario.showPortainers === false) return;
+    if (!scenario.vessels || scenario.vessels.length === 0) return;
+    initialCheckDoneRef.current = true;
+    const activePortainers = (scenario.portainers ?? DEFAULT_PORTAINERS).filter((p) => p.enabled);
+    for (const pt of activePortainers) {
+      const incomp = checkPortainerIncompatibility(pt, scenario.vessels);
+      if (incomp) {
+        const pairKey = `${incomp.portainer.id}:${incomp.vessel.id}`;
+        if (!acknowledgedAlerts.has(pairKey)) {
+          setAlertIncompatibility(incomp);
+          onPortainerIncompatibilityAlert?.(incomp);
+        }
+        break;
+      }
+    }
+  }, [scenario.vessels, scenario.portainers, isPresentationMode]);
   const total = scenario.segments.reduce((sum, segment) => sum + Math.max(0, segment.length), 0);
   const scale = Math.max(0.68, 900 / Math.max(total, 1));
   const width = total * scale + PAD * 2;
@@ -2320,6 +2440,41 @@ export default function BerthBlueprint({
         setActiveBollardId(target.id);
       }
       setLineDragPoint(null);
+    } else if (drag?.kind === "portainer") {
+      const rawPos = positionAt(event.clientX) - drag.grabOffset;
+      const portainersList = scenario.portainers ?? DEFAULT_PORTAINERS;
+      const clamped = clampPortainerPosition(drag.id, rawPos, scenario.bollards, total, portainersList);
+      const pt = portainersList.find((p) => p.id === drag.id);
+      if (pt) {
+        const droppedPt = { ...pt, position: clamped.position };
+        const incomp = checkPortainerIncompatibility(droppedPt, scenario.vessels);
+        if (incomp) {
+          const pairKey = `${incomp.portainer.id}:${incomp.vessel.id}`;
+          if (!acknowledgedAlerts.has(pairKey)) {
+            setAlertIncompatibility(incomp);
+            onPortainerIncompatibilityAlert?.(incomp);
+          }
+        }
+      }
+    } else if (drag?.kind === "vessel") {
+      const rawPos = positionAt(event.clientX) - drag.grabOffset;
+      const nextPos = Math.round(rawPos * 10) / 10;
+      const vessel = scenario.vessels.find((v) => v.id === drag.id);
+      if (vessel) {
+        const droppedVessel = { ...vessel, position: nextPos };
+        const currentPortainers = (scenario.portainers ?? DEFAULT_PORTAINERS).filter((p) => p.enabled);
+        for (const pt of currentPortainers) {
+          const incomp = checkPortainerIncompatibility(pt, [droppedVessel]);
+          if (incomp) {
+            const pairKey = `${incomp.portainer.id}:${incomp.vessel.id}`;
+            if (!acknowledgedAlerts.has(pairKey)) {
+              setAlertIncompatibility(incomp);
+              onPortainerIncompatibilityAlert?.(incomp);
+            }
+            break;
+          }
+        }
+      }
     }
     dragRef.current = null;
     if (svgRef.current?.hasPointerCapture(event.pointerId)) svgRef.current.releasePointerCapture(event.pointerId);
@@ -3266,6 +3421,7 @@ export default function BerthBlueprint({
             .map((portainer) => {
               const isDragging = dragRef.current?.kind === "portainer" && dragRef.current.id === portainer.id;
               const isHovered = hoveredPortainerId === portainer.id;
+              const incomp = checkPortainerIncompatibility(portainer, scenario.vessels);
               return renderPortainerSvg({
                 portainer,
                 scale,
@@ -3273,6 +3429,11 @@ export default function BerthBlueprint({
                 isHovered,
                 isDragging,
                 isPresentationMode,
+                incompatibility: incomp,
+                onIncompatibilityClick: (incompatibility) => {
+                  setAlertIncompatibility(incompatibility);
+                  onPortainerIncompatibilityAlert?.(incompatibility);
+                },
                 onPointerDown: (event) => onPortainerPointerDown(event, portainer.id, portainer.position),
                 onPointerEnter: () => setHoveredPortainerId(portainer.id),
                 onPointerLeave: () => setHoveredPortainerId((curr) => (curr === portainer.id ? null : curr)),
@@ -3572,6 +3733,18 @@ export default function BerthBlueprint({
           </DialogContent>
         </Dialog>
       )}
+
+      <PortainerAlertModal
+        isOpen={!!alertIncompatibility}
+        onClose={() => {
+          if (alertIncompatibility) {
+            handleDismissAlert(alertIncompatibility);
+          } else {
+            setAlertIncompatibility(null);
+          }
+        }}
+        incompatibility={alertIncompatibility}
+      />
     </div>
   );
 }

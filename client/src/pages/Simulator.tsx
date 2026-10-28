@@ -21,6 +21,9 @@ import {
   Maximize2,
   Box,
   Layers,
+  Camera,
+  ExternalLink,
+  Image as ImageIcon,
 } from "lucide-react";
 import {
   Dialog,
@@ -80,8 +83,9 @@ import {
   MAX_TIER_COUNT,
   normalizeTierCount,
   isManuallyConfiguredVessel,
+  KNOWN_VESSEL_DEFAULTS,
 } from "@/lib/berth-model";
-import { saveVesselToCatalog } from "@/lib/vessel-catalog";
+import { saveVesselToCatalog, fetchVesselCatalog, type CatalogVessel } from "@/lib/vessel-catalog";
 
 function metres(value: number) {
   return `${new Intl.NumberFormat("pt-BR", { maximumFractionDigits: 1 }).format(value)} m`;
@@ -99,6 +103,8 @@ function safeWriteScenario(scenario: Scenario) {
 export default function Simulator() {
   const [scenario, setScenario] = useState<Scenario>(() => readScenario());
   const [selectedVesselId, setSelectedVesselId] = useState<string | null>(() => readScenario().vessels[0]?.id ?? null);
+  const [catalogVessels, setCatalogVessels] = useState<CatalogVessel[]>([]);
+  const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
   const [zoom, setZoom] = useState<number>(() => {
     try {
       const saved = localStorage.getItem("caislab:blueprint_zoom");
@@ -133,8 +139,36 @@ export default function Simulator() {
         }
         return p;
       });
+
       if (!changed) return curr;
       return { ...curr, portainers: updatedPortainers };
+    });
+
+    // Carrega catálogo e sincroniza fotos reais e URLs MarineTraffic para todos os navios no cenário
+    void fetchVesselCatalog().then((list) => {
+      setCatalogVessels(list);
+      setScenario((curr) => {
+        let changed = false;
+        const updatedVessels = curr.vessels.map((v) => {
+          const cleanName = v.name.trim().toUpperCase();
+          const inCat = list.find((c) => c.name.trim().toUpperCase() === cleanName);
+          const def = KNOWN_VESSEL_DEFAULTS[cleanName];
+          const vesselSlug = cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+          const targetImg = v.imageUrl || inCat?.imageUrl || def?.imageUrl || `/vessels/${vesselSlug}.jpg`;
+          const targetMt = v.marineTrafficUrl || inCat?.marineTrafficUrl || def?.marineTrafficUrl || (inCat?.imo ? `https://www.marinetraffic.com/en/ais/details/ships/imo:${inCat.imo}` : undefined);
+          if (targetImg !== v.imageUrl || targetMt !== v.marineTrafficUrl) {
+            changed = true;
+            return {
+              ...v,
+              imageUrl: targetImg,
+              marineTrafficUrl: targetMt,
+            };
+          }
+          return v;
+        });
+        if (!changed) return curr;
+        return { ...curr, vessels: updatedVessels };
+      });
     });
   }, []);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
@@ -292,7 +326,9 @@ export default function Simulator() {
         funnelBayStart: mergedVessel.funnelBayStart ?? mergedVessel.funnelBay,
         funnelBayEnd: mergedVessel.funnelBayEnd ?? mergedVessel.funnelBay,
         type: VESSEL_TYPE_LABELS[normalizeVesselType(mergedVessel.vesselType, mergedVessel.name)],
-      }).then(() => setNotice(`${mergedVessel.name}: Layout e casaria salvos no catálogo com sucesso.`));
+        imageUrl: mergedVessel.imageUrl,
+        marineTrafficUrl: mergedVessel.marineTrafficUrl,
+      }).then(() => setNotice(`${mergedVessel.name}: Dados salvos no catálogo com sucesso.`));
     }, 500);
 
     baySaveTimersRef.current.set(vessel.id, timer);
@@ -935,113 +971,143 @@ export default function Simulator() {
                         </div>
                       </div>
                     </div>
-                    <p className="form-hint">
-                      Bays no comprimento, Rows na boca e Tiers sobre o convés (valida altura da lança dos portêineres). Salvo no catálogo.
-                    </p>
+                  </>
+                )}
 
-                    {/* Layout da Superestrutura (Passadiço & Chaminé) */}
-                    <div className="mt-3 pt-3 border-t border-[#edf1f2] space-y-2.5">
-                      <div>
-                        <label className="field-label" htmlFor="vessel-bridge-position">Posição do Passadiço</label>
-                        <select
-                          id="vessel-bridge-position"
-                          className="side-select"
-                          value={selectedVessel.bridgePosition ?? "all-aft"}
-                          onChange={(event) => {
-                            const bridgePosition = event.target.value as "all-aft" | "between-bays";
-                            patchVessel(selectedVessel.id, { bridgePosition });
-                            scheduleContainerLayoutCatalogSave(selectedVessel, undefined, undefined, { bridgePosition });
-                          }}
-                        >
-                          <option value="all-aft">Na Popa Extrema (All Aft - Ex: CMA CGM Veracruz)</option>
-                          <option value="between-bays">Entre as Bays (Meio / Ilha de comando)</option>
-                        </select>
-                      </div>
+                {/* Foto da Embarcação (Exibida para QUALQUER tipo de navio: Carga Geral / BBC, Porta-Contêineres, Petroleiro, etc.) */}
+                {(() => {
+                  const cleanName = selectedVessel.name.trim().toUpperCase();
+                  const vesselSlug = cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+                  const inCat = catalogVessels.find((c) => c.name.trim().toUpperCase() === cleanName);
+                  const effectiveImageUrl = selectedVessel.imageUrl || inCat?.imageUrl || (cleanName.startsWith("BBC") && !inCat ? "/vessels/bbc_amber.jpg" : `/vessels/${vesselSlug}.jpg`);
+                  const effectiveMtUrl = selectedVessel.marineTrafficUrl || inCat?.marineTrafficUrl || (inCat?.imo ? `https://www.marinetraffic.com/en/ais/details/ships/imo:${inCat.imo}` : `https://www.marinetraffic.com/en/ais/index/ships/all/keyword:${encodeURIComponent(selectedVessel.name)}`);
+                  const hasImage = Boolean(effectiveImageUrl && !failedImages[effectiveImageUrl]);
 
-                      {selectedVessel.bridgePosition === "between-bays" && (
-                        <div className="space-y-2.5 bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                  if (!hasImage) return null;
+
+                  return (
+                    <div className="mt-3 pt-3 border-t border-[#edf1f2]">
+                      <a
+                        href={effectiveMtUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block rounded-xl overflow-hidden border border-slate-200 shadow-xs bg-slate-900 group cursor-pointer"
+                        title={`Ver ${selectedVessel.name} no MarineTraffic`}
+                      >
+                        <img
+                          src={getAssetUrl(effectiveImageUrl)}
+                          alt={selectedVessel.name}
+                          onError={() => setFailedImages((prev) => ({ ...prev, [effectiveImageUrl]: true }))}
+                          className="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                      </a>
+                    </div>
+                  );
+                })()}
+
+                {/* Layout da Superestrutura (Posição do Passadiço & Chaminé - colocado abaixo da imagem) */}
+                {normalizeVesselType(selectedVessel.vesselType, selectedVessel.name) === "container" && (
+                  <div className="mt-3 pt-3 border-t border-[#edf1f2] space-y-2.5">
+                    <div>
+                      <label className="field-label" htmlFor="vessel-bridge-position">Posição do Passadiço</label>
+                      <select
+                        id="vessel-bridge-position"
+                        className="side-select"
+                        value={selectedVessel.bridgePosition ?? "all-aft"}
+                        onChange={(event) => {
+                          const bridgePosition = event.target.value as "all-aft" | "between-bays";
+                          patchVessel(selectedVessel.id, { bridgePosition });
+                          scheduleContainerLayoutCatalogSave(selectedVessel, undefined, undefined, { bridgePosition });
+                        }}
+                      >
+                        <option value="all-aft">Na Popa Extrema (All Aft - Ex: CMA CGM Veracruz)</option>
+                        <option value="between-bays">Entre as Bays (Meio / Ilha de comando)</option>
+                      </select>
+                    </div>
+
+                    {selectedVessel.bridgePosition === "between-bays" && (
+                      <div className="space-y-2.5 bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                        <div>
+                          <label className="field-label" htmlFor="vessel-bridge-bay">Bay do Passadiço (onde morre a bay)</label>
+                          <div className="unit-input">
+                            <input
+                              id="vessel-bridge-bay"
+                              type="number"
+                              min="1"
+                              max={MAX_BAY_COUNT}
+                              step="1"
+                              placeholder="34"
+                              value={selectedVessel.bridgeBay !== undefined && selectedVessel.bridgeBay !== null ? selectedVessel.bridgeBay : ""}
+                              onChange={(event) => {
+                                const raw = event.target.value;
+                                const bridgeBay = raw === "" ? undefined : Math.max(1, Math.min(MAX_BAY_COUNT, Number(raw)));
+                                patchVessel(selectedVessel.id, {
+                                  bridgeBay,
+                                  bridgeBayStart: bridgeBay,
+                                  bridgeBayEnd: bridgeBay,
+                                });
+                                scheduleContainerLayoutCatalogSave(selectedVessel, undefined, undefined, {
+                                  bridgeBay,
+                                  bridgeBayStart: bridgeBay,
+                                  bridgeBayEnd: bridgeBay,
+                                });
+                              }}
+                            />
+                            <span>Bay</span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2 pt-1">
+                          <input
+                            id="vessel-separate-funnel"
+                            type="checkbox"
+                            className="rounded border-slate-300 text-teal-600 focus:ring-teal-500"
+                            checked={Boolean(selectedVessel.separateFunnel)}
+                            onChange={(event) => {
+                              const separateFunnel = event.target.checked;
+                              patchVessel(selectedVessel.id, { separateFunnel });
+                              scheduleContainerLayoutCatalogSave(selectedVessel, undefined, undefined, { separateFunnel });
+                            }}
+                          />
+                          <label htmlFor="vessel-separate-funnel" className="text-xs font-semibold text-[#2d4b58] cursor-pointer">
+                            Chaminé separada do passadiço (Duas Ilhas)
+                          </label>
+                        </div>
+
+                        {selectedVessel.separateFunnel && (
                           <div>
-                            <label className="field-label" htmlFor="vessel-bridge-bay">Bay do Passadiço (onde morre a bay)</label>
+                            <label className="field-label" htmlFor="vessel-funnel-bay">Bay da Chaminé (onde morre a bay)</label>
                             <div className="unit-input">
                               <input
-                                id="vessel-bridge-bay"
+                                id="vessel-funnel-bay"
                                 type="number"
                                 min="1"
                                 max={MAX_BAY_COUNT}
                                 step="1"
-                                placeholder="34"
-                                value={selectedVessel.bridgeBay !== undefined && selectedVessel.bridgeBay !== null ? selectedVessel.bridgeBay : ""}
+                                placeholder="54"
+                                value={selectedVessel.funnelBay !== undefined && selectedVessel.funnelBay !== null ? selectedVessel.funnelBay : ""}
                                 onChange={(event) => {
                                   const raw = event.target.value;
-                                  const bridgeBay = raw === "" ? undefined : Math.max(1, Math.min(MAX_BAY_COUNT, Number(raw)));
+                                  const funnelBay = raw === "" ? undefined : Math.max(1, Math.min(MAX_BAY_COUNT, Number(raw)));
                                   patchVessel(selectedVessel.id, {
-                                    bridgeBay,
-                                    bridgeBayStart: bridgeBay,
-                                    bridgeBayEnd: bridgeBay,
+                                    funnelBay,
+                                    funnelBayStart: funnelBay,
+                                    funnelBayEnd: funnelBay,
                                   });
                                   scheduleContainerLayoutCatalogSave(selectedVessel, undefined, undefined, {
-                                    bridgeBay,
-                                    bridgeBayStart: bridgeBay,
-                                    bridgeBayEnd: bridgeBay,
+                                    funnelBay,
+                                    funnelBayStart: funnelBay,
+                                    funnelBayEnd: funnelBay,
                                   });
                                 }}
                               />
                               <span>Bay</span>
                             </div>
                           </div>
-
-                          <div className="flex items-center gap-2 pt-1">
-                            <input
-                              id="vessel-separate-funnel"
-                              type="checkbox"
-                              className="rounded border-slate-300 text-teal-600 focus:ring-teal-500"
-                              checked={Boolean(selectedVessel.separateFunnel)}
-                              onChange={(event) => {
-                                const separateFunnel = event.target.checked;
-                                patchVessel(selectedVessel.id, { separateFunnel });
-                                scheduleContainerLayoutCatalogSave(selectedVessel, undefined, undefined, { separateFunnel });
-                              }}
-                            />
-                            <label htmlFor="vessel-separate-funnel" className="text-xs font-semibold text-[#2d4b58] cursor-pointer">
-                              Chaminé separada do passadiço (Duas Ilhas)
-                            </label>
-                          </div>
-
-                          {selectedVessel.separateFunnel && (
-                            <div>
-                              <label className="field-label" htmlFor="vessel-funnel-bay">Bay da Chaminé (onde morre a bay)</label>
-                              <div className="unit-input">
-                                <input
-                                  id="vessel-funnel-bay"
-                                  type="number"
-                                  min="1"
-                                  max={MAX_BAY_COUNT}
-                                  step="1"
-                                  placeholder="54"
-                                  value={selectedVessel.funnelBay !== undefined && selectedVessel.funnelBay !== null ? selectedVessel.funnelBay : ""}
-                                  onChange={(event) => {
-                                    const raw = event.target.value;
-                                    const funnelBay = raw === "" ? undefined : Math.max(1, Math.min(MAX_BAY_COUNT, Number(raw)));
-                                    patchVessel(selectedVessel.id, {
-                                      funnelBay,
-                                      funnelBayStart: funnelBay,
-                                      funnelBayEnd: funnelBay,
-                                    });
-                                    scheduleContainerLayoutCatalogSave(selectedVessel, undefined, undefined, {
-                                      funnelBay,
-                                      funnelBayStart: funnelBay,
-                                      funnelBayEnd: funnelBay,
-                                    });
-                                  }}
-                                />
-                                <span>Bay</span>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  </>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 )}
 
                 <div className="field-row gangway-field-row">
