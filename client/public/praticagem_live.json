@@ -1,5 +1,5 @@
 {
-  "updatedAt": "27/10/2026 20:34",
+  "updatedAt": "28/10/2026 01:05",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 7,
   "maneuvers": [
@@ -37,7 +37,7 @@
       "dateTime": "29/10 13:00",
       "name": "KOTA SINGA",
       "draft": 9.2,
-      "loa": 228,
+      "loa": 228.0,
       "beam": 37.38,
       "maneuver": "E",
       "berthFrom": "",
@@ -97,8 +97,8 @@
       "dateTime": "11/11 10:00",
       "name": "KOTA ELOK",
       "draft": 14.6,
-      "loa": 335,
-      "beam": 51,
+      "loa": 335.0,
+      "beam": 51.0,
       "maneuver": "E",
       "berthFrom": "",
       "berthTo": "TECONTPROLONG",
