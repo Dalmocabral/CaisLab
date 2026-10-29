@@ -1,7 +1,7 @@
 {
-  "updatedAt": "28/10/2026 21:13",
+  "updatedAt": "29/10/2026 00:03",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 12,
+  "count": 13,
   "maneuvers": [
     {
       "dateTime": "28/10 18:00",
@@ -91,6 +91,21 @@
       "imo": "9629457",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "LIBERIA",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "02/11 19:00",
+      "name": "NC BRUMA",
+      "draft": 10.0,
+      "loa": 223.91,
+      "beam": 34.88,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONT1",
+      "berthingSide": "boreste",
+      "imo": "9612777",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "BRAZIL",
       "terminal": "rio"
     },
     {
