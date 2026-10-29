@@ -9,7 +9,9 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "22/10/2026 22:52"
+    "updatedAt": "22/10/2026 22:52",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9350020",
+    "imageUrl": "/vessels/apl_new_jersey.jpg"
   },
   {
     "name": "BBC AMBER",
@@ -28,15 +30,15 @@
   },
   {
     "name": "BOCHEM WALVIS BAY",
-    "loa": 145,
+    "loa": 145.0,
     "beam": 24.26,
-    "draft": 8,
+    "draft": 8.0,
     "berthingSide": "boreste",
     "imo": "9725859",
     "type": "CHEMICAL/PRODUCTS TANKER",
     "flag": "HONG KONG, CHINA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "29/10/2026 20:44",
+    "updatedAt": "29/10/2026 21:35",
     "imageUrl": "/vessels/bochem_walvis_bay.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9725859"
   },
@@ -51,7 +53,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cardiff.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9629457",
-    "updatedAt": "29/10/2026 20:44",
+    "updatedAt": "29/10/2026 21:35",
     "flag": "LIBERIA"
   },
   {
@@ -64,7 +66,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "29/10/2026 20:44",
+    "updatedAt": "29/10/2026 21:35",
     "bayCount": 78,
     "bays": 78,
     "bridgePosition": "between-bays",
@@ -151,7 +153,9 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONT1",
-    "updatedAt": "01/10/2026 23:23"
+    "updatedAt": "01/10/2026 23:23",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9280627",
+    "imageUrl": "/vessels/cma_cgm_puccini.jpg"
   },
   {
     "name": "CMA CGM THORIUM",
@@ -164,7 +168,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cma_cgm_thorium.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996745",
-    "updatedAt": "29/10/2026 20:44",
+    "updatedAt": "29/10/2026 21:35",
     "flag": "MALTA"
   },
   {
@@ -191,7 +195,9 @@
     "bridgeBayEnd": 50,
     "separateFunnel": false,
     "funnelBayStart": 44,
-    "funnelBayEnd": 46
+    "funnelBayEnd": 46,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9418377",
+    "imageUrl": "/vessels/cma_cgm_veracruz.jpg"
   },
   {
     "name": "COSCO SHIPPING ARGENTINA",
@@ -205,7 +211,9 @@
     "lastBerth": "TECONT1",
     "updatedAt": "06/10/2026 09:13",
     "bayCount": 50,
-    "bays": 50
+    "bays": 50,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9945849",
+    "imageUrl": "/vessels/cosco_shipping_argentina.jpg"
   },
   {
     "name": "COSCO SHIPPING BRAZIL",
@@ -231,7 +239,9 @@
     "separateFunnel": true,
     "funnelBay": 64,
     "funnelBayStart": 64,
-    "funnelBayEnd": 64
+    "funnelBayEnd": 64,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9945837",
+    "imageUrl": "/vessels/cosco_shipping_brazil.jpg"
   },
   {
     "name": "COSCO SHIPPING CHILE",
@@ -257,12 +267,14 @@
     "separateFunnel": true,
     "funnelBay": 64,
     "funnelBayStart": 64,
-    "funnelBayEnd": 64
+    "funnelBayEnd": 64,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9945887",
+    "imageUrl": "/vessels/cosco_shipping_chile.jpg"
   },
   {
     "name": "COSCO SHIPPING MEXICO",
     "loa": 335.9,
-    "beam": 51,
+    "beam": 51.0,
     "draft": 12.5,
     "berthingSide": "boreste",
     "imo": "9945863",
@@ -270,7 +282,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cosco_shipping_mexico.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9945863",
-    "updatedAt": "29/10/2026 20:44",
+    "updatedAt": "29/10/2026 21:35",
     "flag": "HONG KONG, CHINA"
   },
   {
@@ -283,7 +295,9 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BERMUDA",
     "lastBerth": "TECONT1",
-    "updatedAt": "22/10/2026 22:52"
+    "updatedAt": "22/10/2026 22:52",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9143556",
+    "imageUrl": "/vessels/dusseldorf_express.jpg"
   },
   {
     "name": "EVER FAIR",
@@ -295,7 +309,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "29/10/2026 20:44",
+    "updatedAt": "29/10/2026 21:35",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850886",
     "imageUrl": "/vessels/ever_fair.jpg"
   },
@@ -309,7 +323,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "29/10/2026 20:44",
+    "updatedAt": "29/10/2026 21:35",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850525",
     "imageUrl": "/vessels/ever_faith.jpg"
   },
@@ -323,7 +337,9 @@
     "type": "CONTAINER SHIP",
     "flag": "",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "2026-10-01"
+    "updatedAt": "2026-10-01",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850800",
+    "imageUrl": "/vessels/ever_fame.jpg"
   },
   {
     "name": "EVER FAR",
@@ -337,7 +353,9 @@
     "lastBerth": "TECONTPROLONG",
     "updatedAt": "06/10/2026 23:11",
     "bayCount": 76,
-    "bays": 76
+    "bays": 76,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850862",
+    "imageUrl": "/vessels/ever_far.jpg"
   },
   {
     "name": "EVER FASHION",
@@ -349,7 +367,9 @@
     "type": "CONTAINER SHIP",
     "flag": "",
     "lastBerth": "TECONT1",
-    "updatedAt": "2026-10-01"
+    "updatedAt": "2026-10-01",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850836",
+    "imageUrl": "/vessels/ever_fashion.jpg"
   },
   {
     "name": "EVER FIT",
@@ -375,7 +395,9 @@
     "funnelBayStart": 62,
     "funnelBayEnd": 62,
     "tierCount": 7,
-    "tiers": 7
+    "tiers": 7,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850795",
+    "imageUrl": "/vessels/ever_fit.jpg"
   },
   {
     "name": "EVER LEADER",
@@ -395,7 +417,9 @@
     "separateFunnel": false,
     "rowCount": 14,
     "rows": 14,
-    "funnelBay": 40
+    "funnelBay": 40,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9595503",
+    "imageUrl": "/vessels/ever_leader.jpg"
   },
   {
     "name": "FELIXSTOWE",
@@ -411,7 +435,9 @@
     "bayCount": 57,
     "bays": 57,
     "rowCount": 12,
-    "rows": 12
+    "rows": 12,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9227039",
+    "imageUrl": "/vessels/felixstowe.jpg"
   },
   {
     "name": "KOTA ELOK",
@@ -423,7 +449,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "29/10/2026 20:44",
+    "updatedAt": "29/10/2026 21:35",
     "bayCount": 78,
     "bays": 78,
     "rowCount": 20,
@@ -456,7 +482,9 @@
     "bayCount": 77,
     "bays": 77,
     "rowCount": 15,
-    "rows": 15
+    "rows": 15,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9786712",
+    "imageUrl": "/vessels/kota_pahlawan.jpg"
   },
   {
     "name": "KOTA SINGA",
@@ -488,13 +516,13 @@
     "name": "LOG-IN PANTANAL",
     "loa": 182.47,
     "beam": 25.2,
-    "draft": 9,
+    "draft": 9.0,
     "berthingSide": "boreste",
     "imo": "9351799",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "29/10/2026 20:44",
+    "updatedAt": "29/10/2026 21:35",
     "bayCount": 40,
     "bays": 40,
     "rowCount": 10,
@@ -517,11 +545,13 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "2026-10-01 22:32"
+    "updatedAt": "2026-10-01 22:32",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9437385",
+    "imageUrl": "/vessels/loncomilla.jpg"
   },
   {
     "name": "LORI",
-    "loa": 228,
+    "loa": 228.0,
     "beam": 37.32,
     "draft": 11.5,
     "berthingSide": "boreste",
@@ -530,7 +560,7 @@
     "lastBerth": "TECONT1",
     "imageUrl": "/vessels/lori.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9631125",
-    "updatedAt": "29/10/2026 20:44",
+    "updatedAt": "29/10/2026 21:35",
     "flag": "LIBERIA"
   },
   {
@@ -542,7 +572,9 @@
     "imo": "9786152",
     "type": "CHEMICAL/PRODUCTS TANKER",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "07/10/2026 23:53"
+    "updatedAt": "07/10/2026 23:53",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9786152",
+    "imageUrl": "/vessels/maersk_callao.jpg"
   },
   {
     "name": "MAERSK FORTALEZA",
@@ -574,7 +606,9 @@
     "bridgeBay": 42,
     "separateFunnel": false,
     "bridgeBayStart": 42,
-    "bridgeBayEnd": 42
+    "bridgeBayEnd": 42,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9969065",
+    "imageUrl": "/vessels/maersk_frankfurt.jpg"
   },
   {
     "name": "MAERSK FREEPORT",
@@ -612,7 +646,9 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "02/10/2026 11:12"
+    "updatedAt": "02/10/2026 11:12",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9464247",
+    "imageUrl": "/vessels/maliakos.jpg"
   },
   {
     "name": "MERCOSUL FORTALEZA",
@@ -624,7 +660,9 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "18/10/2026 17:53"
+    "updatedAt": "18/10/2026 17:53",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9784661",
+    "imageUrl": "/vessels/mercosul_fortaleza.jpg"
   },
   {
     "name": "MERCOSUL GUARUJA",
@@ -679,7 +717,9 @@
     "lastBerth": "TECONT1",
     "updatedAt": "06/10/2026 23:13",
     "bayCount": 58,
-    "bays": 58
+    "bays": 58,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9612765",
+    "imageUrl": "/vessels/nc_breda.jpg"
   },
   {
     "name": "NC BRISA",
@@ -697,19 +737,21 @@
     "rowCount": 11,
     "rows": 11,
     "tierCount": 5,
-    "tiers": 5
+    "tiers": 5,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9612789",
+    "imageUrl": "/vessels/nc_brisa.jpg"
   },
   {
     "name": "NC BRUMA",
     "loa": 223.91,
     "beam": 34.88,
-    "draft": 10,
+    "draft": 10.0,
     "berthingSide": "boreste",
     "imo": "9612777",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "29/10/2026 20:44",
+    "updatedAt": "29/10/2026 21:35",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9612777",
     "imageUrl": "/vessels/nc_bruma.jpg"
   },
@@ -759,7 +801,9 @@
     "rows": 12,
     "tierCount": 6,
     "tiers": 6,
-    "separateFunnel": false
+    "separateFunnel": false,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9416991",
+    "imageUrl": "/vessels/nyk_rumina.jpg"
   },
   {
     "name": "OCEAN MERMAID",
@@ -771,7 +815,9 @@
     "type": "RESEARCH SURVEY VESSEL",
     "flag": "BAHAMAS",
     "lastBerth": "TECONT1",
-    "updatedAt": "05/10/2026 08:25"
+    "updatedAt": "05/10/2026 08:25",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9742443",
+    "imageUrl": "/vessels/ocean_mermaid.jpg"
   },
   {
     "name": "SEASPAN EMPIRE",
@@ -794,7 +840,9 @@
     "rows": 13,
     "tierCount": 5,
     "tiers": 5,
-    "separateFunnel": false
+    "separateFunnel": false,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9407160",
+    "imageUrl": "/vessels/seaspan_empire.jpg"
   },
   {
     "name": "SEVEN RIO",
@@ -807,7 +855,9 @@
     "flag": "ISLE OF MAN",
     "lastBerth": "TECONT1",
     "updatedAt": "18/10/2026 20:28",
-    "vesselType": "offshore"
+    "vesselType": "offshore",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9710878",
+    "imageUrl": "/vessels/seven_rio.jpg"
   },
   {
     "name": "SEVEN WAVES",
@@ -819,7 +869,9 @@
     "type": "PIPE LAYER",
     "flag": "ISLE OF MAN",
     "lastBerth": "TECONT1",
-    "updatedAt": "21/10/2026 09:33"
+    "updatedAt": "21/10/2026 09:33",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9649029",
+    "imageUrl": "/vessels/seven_waves.jpg"
   },
   {
     "name": "SPYROS V",
@@ -837,7 +889,9 @@
     "rowCount": 10,
     "rows": 10,
     "bayCount": 50,
-    "bays": 50
+    "bays": 50,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9453365",
+    "imageUrl": "/vessels/spyros_v.jpg"
   },
   {
     "name": "TOKYO EXPRESS",
@@ -851,7 +905,9 @@
     "lastBerth": "TECONTPROLONG",
     "updatedAt": "06/10/2026 09:38",
     "bayCount": 57,
-    "bays": 57
+    "bays": 57,
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9193290",
+    "imageUrl": "/vessels/tokyo_express.jpg"
   },
   {
     "name": "WINDEA CURIE",
@@ -863,7 +919,9 @@
     "type": "COMMISSIONING SERVICE OPERATION VESSEL",
     "flag": "PORTUGAL (MAR)",
     "lastBerth": "TECONT1",
-    "updatedAt": "20/10/2026 06:51"
+    "updatedAt": "20/10/2026 06:51",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:1025124",
+    "imageUrl": "/vessels/windea_curie.jpg"
   },
   {
     "name": "XIN WEI HAI",
@@ -875,7 +933,9 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "CHINA, PEOPLE'S REPUBLIC OF",
     "lastBerth": "TECONT1",
-    "updatedAt": "17/10/2026 10:42"
+    "updatedAt": "17/10/2026 10:42",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9312573",
+    "imageUrl": "/vessels/xin_wei_hai.jpg"
   },
   {
     "name": "ZIM BALTIMORE",
@@ -887,6 +947,8 @@
     "type": "CONTAINER SHIP",
     "flag": "",
     "lastBerth": "TECONT1",
-    "updatedAt": "2026-10-01"
+    "updatedAt": "2026-10-01",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9395953",
+    "imageUrl": "/vessels/zim_baltimore.jpg"
   }
 ]
