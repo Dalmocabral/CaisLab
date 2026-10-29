@@ -189,12 +189,49 @@ export default function Simulator() {
           const vesselSlug = cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
           const targetImg = v.imageUrl || inCat?.imageUrl || def?.imageUrl || `/vessels/${vesselSlug}.jpg`;
           const targetMt = v.marineTrafficUrl || inCat?.marineTrafficUrl || def?.marineTrafficUrl || (inCat?.imo ? `https://www.marinetraffic.com/en/ais/details/ships/imo:${inCat.imo}` : undefined);
-          if (targetImg !== v.imageUrl || targetMt !== v.marineTrafficUrl) {
+
+          // Sincroniza layout de baias e superestrutura caso o catálogo oficial defina (ex: CMA CGM IRON com 78 bays)
+          const shouldSyncLayout = inCat?.isManualLayout || Boolean(def);
+          const targetBays = inCat?.bayCount ?? inCat?.bays ?? def?.bayCount;
+          const targetRows = inCat?.rowCount ?? inCat?.rows ?? def?.rowCount;
+          const targetTiers = inCat?.tierCount ?? inCat?.tiers ?? def?.tierCount;
+          const targetBridgePos = inCat?.bridgePosition ?? def?.bridgePosition;
+          const targetBridgeBay = inCat?.bridgeBay ?? def?.bridgeBay;
+          const targetSeparateFunnel = inCat?.separateFunnel ?? def?.separateFunnel;
+          const targetFunnelBay = inCat?.funnelBay ?? def?.funnelBay;
+
+          const layoutDiffers = shouldSyncLayout && (
+            (targetBays !== undefined && v.bayCount !== targetBays) ||
+            (targetRows !== undefined && v.rowCount !== targetRows) ||
+            (targetTiers !== undefined && v.tierCount !== targetTiers) ||
+            (targetBridgePos !== undefined && v.bridgePosition !== targetBridgePos) ||
+            (targetBridgeBay !== undefined && v.bridgeBay !== targetBridgeBay) ||
+            (targetSeparateFunnel !== undefined && v.separateFunnel !== targetSeparateFunnel) ||
+            (targetFunnelBay !== undefined && v.funnelBay !== targetFunnelBay)
+          );
+
+          if (targetImg !== v.imageUrl || targetMt !== v.marineTrafficUrl || layoutDiffers) {
             changed = true;
             return {
               ...v,
               imageUrl: targetImg,
               marineTrafficUrl: targetMt,
+              ...(layoutDiffers ? {
+                bayCount: targetBays ?? v.bayCount,
+                bays: targetBays ?? v.bays,
+                rowCount: targetRows ?? v.rowCount,
+                rows: targetRows ?? v.rows,
+                tierCount: targetTiers ?? v.tierCount,
+                tiers: targetTiers ?? v.tiers,
+                bridgePosition: targetBridgePos ?? v.bridgePosition,
+                bridgeBay: targetBridgeBay ?? v.bridgeBay,
+                bridgeBayStart: targetBridgeBay ?? v.bridgeBayStart,
+                bridgeBayEnd: targetBridgeBay ?? v.bridgeBayEnd,
+                separateFunnel: targetSeparateFunnel ?? v.separateFunnel,
+                funnelBay: targetFunnelBay ?? v.funnelBay,
+                funnelBayStart: targetFunnelBay ?? v.funnelBayStart,
+                funnelBayEnd: targetFunnelBay ?? v.funnelBayEnd,
+              } : {}),
             };
           }
           return v;

@@ -34,6 +34,7 @@ export interface CatalogVessel {
   funnelBayEnd?: number;
   imageUrl?: string;
   marineTrafficUrl?: string;
+  isManualLayout?: boolean;
 }
 
 export interface PraticagemManeuver {
@@ -151,27 +152,36 @@ export async function fetchVesselCatalog(): Promise<CatalogVessel[]> {
           const key = v.name.trim().toUpperCase();
           const existing = map.get(key);
           if (existing) {
-            // Preserva bays/rows/tiers do catálogo JSON caso o localStorage não os tenha
-            map.set(key, {
-              ...existing,
-              ...v,
-              imageUrl: v.imageUrl || existing.imageUrl,
-              marineTrafficUrl: v.marineTrafficUrl || existing.marineTrafficUrl,
-              bayCount: v.bayCount ?? v.bays ?? existing.bayCount ?? existing.bays,
-              bays: v.bayCount ?? v.bays ?? existing.bayCount ?? existing.bays,
-              rowCount: v.rowCount ?? v.rows ?? existing.rowCount ?? existing.rows,
-              rows: v.rowCount ?? v.rows ?? existing.rowCount ?? existing.rows,
-              tierCount: v.tierCount ?? v.tiers ?? existing.tierCount ?? existing.tiers,
-              tiers: v.tierCount ?? v.tiers ?? existing.tierCount ?? existing.tiers,
-              bridgePosition: v.bridgePosition ?? existing.bridgePosition,
-              bridgeBay: v.bridgeBay ?? existing.bridgeBay,
-              bridgeBayStart: v.bridgeBayStart ?? existing.bridgeBayStart,
-              bridgeBayEnd: v.bridgeBayEnd ?? existing.bridgeBayEnd,
-              separateFunnel: v.separateFunnel ?? existing.separateFunnel,
-              funnelBay: v.funnelBay ?? existing.funnelBay,
-              funnelBayStart: v.funnelBayStart ?? existing.funnelBayStart,
-              funnelBayEnd: v.funnelBayEnd ?? existing.funnelBayEnd,
-            });
+            // Se o navio tiver layout manual calibrado no catálogo JSON oficial (ex: CMA CGM IRON), o catálogo oficial sempre prevalece sobre cache antigo
+            if (existing.isManualLayout) {
+              map.set(key, {
+                ...v,
+                ...existing,
+                imageUrl: existing.imageUrl || v.imageUrl,
+                marineTrafficUrl: existing.marineTrafficUrl || v.marineTrafficUrl,
+              });
+            } else {
+              map.set(key, {
+                ...existing,
+                ...v,
+                imageUrl: v.imageUrl || existing.imageUrl,
+                marineTrafficUrl: v.marineTrafficUrl || existing.marineTrafficUrl,
+                bayCount: v.bayCount ?? v.bays ?? existing.bayCount ?? existing.bays,
+                bays: v.bayCount ?? v.bays ?? existing.bayCount ?? existing.bays,
+                rowCount: v.rowCount ?? v.rows ?? existing.rowCount ?? existing.rows,
+                rows: v.rowCount ?? v.rows ?? existing.rowCount ?? existing.rows,
+                tierCount: v.tierCount ?? v.tiers ?? existing.tierCount ?? existing.tiers,
+                tiers: v.tierCount ?? v.tiers ?? existing.tierCount ?? existing.tiers,
+                bridgePosition: v.bridgePosition ?? existing.bridgePosition,
+                bridgeBay: v.bridgeBay ?? existing.bridgeBay,
+                bridgeBayStart: v.bridgeBayStart ?? existing.bridgeBayStart,
+                bridgeBayEnd: v.bridgeBayEnd ?? existing.bridgeBayEnd,
+                separateFunnel: v.separateFunnel ?? existing.separateFunnel,
+                funnelBay: v.funnelBay ?? existing.funnelBay,
+                funnelBayStart: v.funnelBayStart ?? existing.funnelBayStart,
+                funnelBayEnd: v.funnelBayEnd ?? existing.funnelBayEnd,
+              });
+            }
           } else {
             map.set(key, v);
           }
