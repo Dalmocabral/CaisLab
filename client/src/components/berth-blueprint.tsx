@@ -414,21 +414,27 @@ function renderContainerDeck(
               const cellY = containerTop + rIdx * cellHeight;
               const cellH = Math.max(0.6, cellHeight - 0.35);
               const cellW = Math.max(0.6, cellWidth - 0.35);
-              return (
-                <rect
-                  key={`bay-cell-${bay}-${rowLabel}`}
-                  x={cellX + 0.18}
-                  y={cellY + 0.18}
-                  width={cellW}
-                  height={cellH}
-                  rx="0.4"
-                  fill={CONTAINER_COLORS[(index * 3 + rIdx * 2) % CONTAINER_COLORS.length]}
-                  stroke="#ffffff"
-                  strokeWidth="0.25"
-                >
-                  <title>{`Bay ${bay} · Row ${rowLabel}`}</title>
-                </rect>
+              const isCmaCgmIronCell = typeof vessel.name === "string" && (
+                vessel.name.toUpperCase().includes("IRON") ||
+                (vessel.name.toUpperCase().includes("CMA CGM") && vessel.name.toUpperCase().includes("COBALT"))
               );
+              const is78CenteredCell = isCoscoClass || isCmaCgmIronCell;
+              const displayBay = is78CenteredCell && bay === 77 ? 78 : bay;
+              return (
+                  <rect
+                    key={`bay-cell-${bay}-${rowLabel}`}
+                    x={cellX + 0.18}
+                    y={cellY + 0.18}
+                    width={cellW}
+                    height={cellH}
+                    rx="0.4"
+                    fill={CONTAINER_COLORS[(index * 3 + rIdx * 2) % CONTAINER_COLORS.length]}
+                    stroke="#ffffff"
+                    strokeWidth="0.25"
+                  >
+                    <title>{`Bay ${displayBay} · Row ${rowLabel}`}</title>
+                  </rect>
+                );
             })}
           </g>
         );
@@ -452,8 +458,14 @@ function renderContainerDeck(
             // No navio Veracruz, remove a bay 49 e deixa a 50 centralizada entre a divisão dos contêineres de 20'
             if (isVeracruz && bay === 49) return null;
 
-            // No navio Cosco, remove a bay 77 e deixa a 78 centralizada entre a divisão dos contêineres de 20'
-            if (isCoscoClass && bay === 77) return null;
+            const isCmaCgmIron = typeof vessel.name === "string" && (
+              vessel.name.toUpperCase().includes("IRON") ||
+              (vessel.name.toUpperCase().includes("CMA CGM") && vessel.name.toUpperCase().includes("COBALT"))
+            );
+            const is78Centered = isCoscoClass || isCmaCgmIron;
+
+            // No navio Cosco e CMA CGM IRON (e COBALT), remove a bay 77 e deixa a 78 centralizada entre a divisão dos contêineres de 20' (_ 78 _ | 75 73)
+            if (is78Centered && bay === 77) return null;
 
             const cellX = bayCellX(index);
             let centerX = cellX + cellWidth / 2;
@@ -466,7 +478,7 @@ function renderContainerDeck(
               }
             }
 
-            if (isCoscoClass && bay === 78) {
+            if (is78Centered && bay === 78) {
               const idx77 = bays.indexOf(77);
               if (idx77 !== -1) {
                 const cellX77 = bayCellX(idx77);
