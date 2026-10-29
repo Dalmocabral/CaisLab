@@ -247,6 +247,7 @@ function vitePluginPraticagemApi(): Plugin {
               map.set(vesselName, { ...existing, ...newVessel, name: vesselName });
               const updated = Array.from(map.values()).sort((a: any, b: any) => a.name.localeCompare(b.name));
               fs.writeFileSync(catalogPath, JSON.stringify(updated, null, 2), "utf-8");
+              try { fs.writeFileSync(path.resolve(PROJECT_ROOT, "vessels_catalog.json"), JSON.stringify(updated, null, 2), "utf-8"); } catch {}
               res.setHeader("Content-Type", "application/json");
               res.end(JSON.stringify(updated));
             } catch (e) {
@@ -273,6 +274,7 @@ function vitePluginPraticagemApi(): Plugin {
           }
           const updated = list.filter((v: any) => v.name.toUpperCase() !== nameToDelete);
           fs.writeFileSync(catalogPath, JSON.stringify(updated, null, 2), "utf-8");
+              try { fs.writeFileSync(path.resolve(PROJECT_ROOT, "vessels_catalog.json"), JSON.stringify(updated, null, 2), "utf-8"); } catch {}
           res.setHeader("Content-Type", "application/json");
           res.end(JSON.stringify(updated));
           return;

@@ -92,22 +92,26 @@ def run_sync():
     root_catalog_path = os.path.join(workspace_root, "vessels_catalog.json")
     live_path = os.path.join(public_dir, "praticagem_live.json")
 
-    # 1. Carregar lista existente de navios salvos, mantendo EXCLUSIVAMENTE navios do Terminal
+    # 1. Carregar lista existente de navios salvos (PRESERVA SEMPRE TODOS OS NAVIOS)
     catalog = {}
-    if os.path.exists(catalog_path):
-        try:
-            with open(catalog_path, "r", encoding="utf-8") as f:
-                saved = json.load(f)
-                for v in saved:
-                    name = v.get("name", "").strip().upper()
-                    if not name:
-                        continue
-                    last_berth = v.get("lastBerth", "")
-                    # Filtra estritamente: Somente navios com atracação no Terminal (TECONTPROLONG ou TECONT1) ou criados manualmente
-                    if is_terminal_berth(last_berth) or (not last_berth and v.get("loa", 0) > 0):
-                        catalog[name] = v
-        except Exception as e:
-            print(f"Aviso ao carregar navios salvos: {e}", file=sys.stderr)
+    for p in [catalog_path, root_catalog_path]:
+        if os.path.exists(p):
+            try:
+                with open(p, "r", encoding="utf-8") as f:
+                    saved = json.load(f)
+                    for v in saved:
+                        name = v.get("name", "").strip().upper()
+                        if not name:
+                            continue
+                        if name not in catalog:
+                            catalog[name] = v
+                        else:
+                            # Se já existir, preserva layout manual e mescla novos dados
+                            for k, val in v.items():
+                                if val is not None and (k not in catalog[name] or catalog[name][k] is None):
+                                    catalog[name][k] = val
+            except Exception as e:
+                print(f"Aviso ao carregar navios salvos ({p}): {e}", file=sys.stderr)
 
     # 2. Carregar navios do praticagem_dashboard local (somente terminal Rio)
     dash_path = r"D:\Programação\praticagem_dashboard\public\data.json"
@@ -252,13 +256,15 @@ def run_sync():
                         }
                     else:
                         existing = catalog[name_clean]
-                        if n_loa > 0: existing["loa"] = n_loa
-                        if n_beam > 0: existing["beam"] = n_beam
+                        # Preserva navios calibrados manualmente
+                        if not existing.get("isManualLayout"):
+                            if n_loa > 0: existing["loa"] = n_loa
+                            if n_beam > 0: existing["beam"] = n_beam
                         if n_draft > 0: existing["draft"] = n_draft
                         if side: existing["berthingSide"] = side
                         if imo: existing["imo"] = imo
-                        if tipo: existing["type"] = tipo
-                        if bandeira: existing["flag"] = bandeira
+                        if tipo and not existing.get("type"): existing["type"] = tipo
+                        if bandeira and not existing.get("flag"): existing["flag"] = bandeira
                         if destination_berth: existing["lastBerth"] = destination_berth
                         existing["updatedAt"] = datetime.now().strftime("%d/%m/%Y %H:%M")
     except Exception as e:
