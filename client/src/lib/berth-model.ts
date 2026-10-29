@@ -2211,47 +2211,73 @@ export function normalizeScenario(value: unknown): Scenario | null {
       upperName.includes("BRISA") ? KNOWN_VESSEL_DEFAULTS["NC BRISA"] :
       upperName.includes("SPYROS") ? KNOWN_VESSEL_DEFAULTS["SPYROS V"] : undefined);
 
-    const rawBayCount = (raw as any).bayCount ?? (raw as any).maxBayNumber ?? raw.bays;
+    // Para navios com layout calibrado manualmente (isManualLayout), os valores do knownDefault
+    // sempre prevalecem sobre dados salvos em cache (sessionStorage), garantindo que correções no
+    // catálogo sejam aplicadas imediatamente sem precisar limpar o cache do navegador.
+    const isManualLayoutVessel = Boolean((knownDefault as any)?.isManualLayout) || Boolean(knownDefault?.bayCount);
+    const rawBayCount = isManualLayoutVessel && knownDefault?.bayCount
+      ? knownDefault.bayCount
+      : (raw as any).bayCount ?? (raw as any).maxBayNumber ?? raw.bays;
     const bayCount = normalizeBayCount(rawBayCount !== undefined ? rawBayCount : knownDefault?.bayCount);
-    const rawRowCount = (raw as any).rowCount ?? raw.rows;
+    const rawRowCount = isManualLayoutVessel && knownDefault?.rowCount
+      ? knownDefault.rowCount
+      : (raw as any).rowCount ?? raw.rows;
     const rowCount = isFortaleza
       ? 14
       : normalizeRowCount(rawRowCount !== undefined ? rawRowCount : knownDefault?.rowCount);
-    const rawTierCount = (raw as any).tierCount ?? raw.tiers;
+    const rawTierCount = isManualLayoutVessel && knownDefault?.tierCount
+      ? knownDefault.tierCount
+      : (raw as any).tierCount ?? raw.tiers;
     const tierCount = isFortaleza
       ? 5
       : normalizeTierCount(rawTierCount !== undefined ? rawTierCount : knownDefault?.tierCount);
     const hasExplicitBridge = typeof (raw as any).bridgeBay === "number" || typeof (raw as any).bridgeBayStart === "number";
     const bridgePosition = isFortaleza
       ? "all-aft"
-      : ((raw as any).bridgePosition === "between-bays"
+      : (isManualLayoutVessel && knownDefault?.bridgePosition
+      ? knownDefault.bridgePosition
+      : (raw as any).bridgePosition === "between-bays"
       ? "between-bays"
       : hasExplicitBridge
       ? ((raw as any).bridgePosition ?? "all-aft")
       : (knownDefault?.bridgePosition ?? (raw as any).bridgePosition ?? "all-aft"));
-    const bridgeBay = typeof (raw as any).bridgeBay === "number"
+    const bridgeBay = (isManualLayoutVessel && knownDefault?.bridgeBay !== undefined)
+      ? knownDefault.bridgeBay
+      : typeof (raw as any).bridgeBay === "number"
       ? (raw as any).bridgeBay
       : typeof (raw as any).bridgeBayStart === "number"
       ? (raw as any).bridgeBayStart
       : knownDefault?.bridgeBay;
-    const bridgeBayStart = typeof (raw as any).bridgeBayStart === "number"
+    const bridgeBayStart = (isManualLayoutVessel && knownDefault?.bridgeBayStart !== undefined)
+      ? knownDefault.bridgeBayStart
+      : typeof (raw as any).bridgeBayStart === "number"
       ? (raw as any).bridgeBayStart
       : bridgeBay ?? knownDefault?.bridgeBayStart;
-    const bridgeBayEnd = typeof (raw as any).bridgeBayEnd === "number"
+    const bridgeBayEnd = (isManualLayoutVessel && knownDefault?.bridgeBayEnd !== undefined)
+      ? knownDefault.bridgeBayEnd
+      : typeof (raw as any).bridgeBayEnd === "number"
       ? (raw as any).bridgeBayEnd
       : bridgeBay ?? knownDefault?.bridgeBayEnd;
-    const separateFunnel = (raw as any).separateFunnel !== undefined
+    const separateFunnel = isManualLayoutVessel && knownDefault?.separateFunnel !== undefined
+      ? Boolean(knownDefault.separateFunnel)
+      : (raw as any).separateFunnel !== undefined
       ? Boolean((raw as any).separateFunnel)
       : Boolean(knownDefault?.separateFunnel);
-    const funnelBay = typeof (raw as any).funnelBay === "number"
+    const funnelBay = (isManualLayoutVessel && knownDefault?.funnelBay !== undefined)
+      ? knownDefault.funnelBay
+      : typeof (raw as any).funnelBay === "number"
       ? (raw as any).funnelBay
       : typeof (raw as any).funnelBayStart === "number"
       ? (raw as any).funnelBayStart
       : knownDefault?.funnelBay;
-    const funnelBayStart = typeof (raw as any).funnelBayStart === "number"
+    const funnelBayStart = (isManualLayoutVessel && knownDefault?.funnelBayStart !== undefined)
+      ? knownDefault.funnelBayStart
+      : typeof (raw as any).funnelBayStart === "number"
       ? (raw as any).funnelBayStart
       : funnelBay ?? knownDefault?.funnelBayStart;
-    const funnelBayEnd = typeof (raw as any).funnelBayEnd === "number"
+    const funnelBayEnd = (isManualLayoutVessel && knownDefault?.funnelBayEnd !== undefined)
+      ? knownDefault.funnelBayEnd
+      : typeof (raw as any).funnelBayEnd === "number"
       ? (raw as any).funnelBayEnd
       : funnelBay ?? knownDefault?.funnelBayEnd;
 
