@@ -1,23 +1,8 @@
 {
-  "updatedAt": "29/10/2026 00:40",
+  "updatedAt": "29/10/2026 01:23",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 13,
+  "count": 12,
   "maneuvers": [
-    {
-      "dateTime": "28/10 18:00",
-      "name": "BBC AMBER",
-      "draft": 6.9,
-      "loa": 153.44,
-      "beam": 23.45,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "bombordo",
-      "imo": "9563706",
-      "type": "GENERAL CARGO SHIP",
-      "flag": "ANTIGUA & BARBUDA",
-      "terminal": "rio"
-    },
     {
       "dateTime": "29/10 13:00",
       "name": "KOTA SINGA",
