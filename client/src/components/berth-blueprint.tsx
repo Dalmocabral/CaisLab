@@ -418,8 +418,11 @@ function renderContainerDeck(
                 vessel.name.toUpperCase().includes("IRON") ||
                 (vessel.name.toUpperCase().includes("CMA CGM") && vessel.name.toUpperCase().includes("COBALT"))
               );
+              const isVeracruzCell = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("VERACRUZ");
+              const isKotaSingaCell = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("SINGA");
               const is78CenteredCell = isCoscoClass || isCmaCgmIronCell;
-              const displayBay = is78CenteredCell && bay === 77 ? 78 : bay;
+              const is50CenteredCell = isVeracruzCell || isKotaSingaCell;
+              const displayBay = is78CenteredCell && bay === 77 ? 78 : (is50CenteredCell && bay === 49 ? 50 : bay);
               return (
                   <rect
                     key={`bay-cell-${bay}-${rowLabel}`}
@@ -447,6 +450,8 @@ function renderContainerDeck(
             if (isBayOccupied(index)) return null;
 
             const isVeracruz = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("VERACRUZ");
+            const isKotaSinga = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("SINGA");
+            const is50Centered = isVeracruz || isKotaSinga;
             const isCoscoClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("COSCO") && (
               vessel.name.toUpperCase().includes("CHILE") ||
               vessel.name.toUpperCase().includes("BRAZIL") ||
@@ -455,8 +460,8 @@ function renderContainerDeck(
               vessel.name.toUpperCase().includes("URUGUAY")
             );
 
-            // No navio Veracruz, remove a bay 49 e deixa a 50 centralizada entre a divisão dos contêineres de 20'
-            if (isVeracruz && bay === 49) return null;
+            // No navio Veracruz e KOTA SINGA, remove a bay 49 e deixa a 50 centralizada entre a divisão dos contêineres de 20' (_ 50 _ | passadiço)
+            if (is50Centered && bay === 49) return null;
 
             const isCmaCgmIron = typeof vessel.name === "string" && (
               vessel.name.toUpperCase().includes("IRON") ||
@@ -470,7 +475,7 @@ function renderContainerDeck(
             const cellX = bayCellX(index);
             let centerX = cellX + cellWidth / 2;
 
-            if (isVeracruz && bay === 50) {
+            if (is50Centered && bay === 50) {
               const idx49 = bays.indexOf(49);
               if (idx49 !== -1) {
                 const cellX49 = bayCellX(idx49);
