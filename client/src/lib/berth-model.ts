@@ -184,11 +184,23 @@ export interface VesselSuperstructure {
 }
 
 export function resolveVesselSuperstructure(vessel: Partial<Vessel>): VesselSuperstructure {
-  const bridgePos: BridgePositionType = vessel.bridgePosition === "between-bays" ? "between-bays" : "all-aft";
+  const upperName = (vessel.name ?? "").toUpperCase().trim();
+  const isAplNewJersey = upperName.includes("APL") && upperName.includes("NEW JERSEY");
+  const isDusseldorf = upperName.includes("DUSSELDORF");
+  const isGuaruja = upperName.includes("GUARUJA");
+  const hasIslandBridge = isAplNewJersey || isDusseldorf || isGuaruja;
+
+  const bridgePos: BridgePositionType = (vessel.bridgePosition === "between-bays" || hasIslandBridge) ? "between-bays" : "all-aft";
   const bBay = typeof vessel.bridgeBay === "number"
     ? vessel.bridgeBay
     : typeof vessel.bridgeBayStart === "number"
     ? vessel.bridgeBayStart
+    : isAplNewJersey
+    ? 54
+    : isDusseldorf
+    ? 58
+    : isGuaruja
+    ? 42
     : bridgePos === "between-bays"
     ? 34
     : undefined;
@@ -275,6 +287,8 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "SEVEN CRUZEIRO": "offshore",
   "SEVEN WAVES": "offshore",
   "SEVEN SUN": "offshore",
+  "APL NEW JERSEY": "container",
+  "DUSSELDORF EXPRESS": "container",
   "CMA CGM COBALT": "container",
   "CMA CGM IRON": "container",
   "CMA CGM KRYPTON": "container",
@@ -708,6 +722,48 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     imageUrl: "/vessels/kota_singa.jpg",
     marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9681314",
   },
+  "APL NEW JERSEY": {
+    name: "APL NEW JERSEY",
+    loa: 293.18,
+    beam: 40.0,
+    draft: 13.6,
+    bayCount: 68,
+    bays: 68,
+    rowCount: 16,
+    rows: 16,
+    tierCount: 7,
+    tiers: 7,
+    bridgePosition: "between-bays",
+    bridgeBay: 54,
+    bridgeBayStart: 53,
+    bridgeBayEnd: 55,
+    separateFunnel: false,
+    vesselType: "container",
+    isManualLayout: true,
+    imageUrl: "/vessels/apl_new_jersey.jpg",
+    marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9350020",
+  },
+  "DUSSELDORF EXPRESS": {
+    name: "DUSSELDORF EXPRESS",
+    loa: 293.97,
+    beam: 32.3,
+    draft: 9.3,
+    bayCount: 69,
+    bays: 69,
+    rowCount: 13,
+    rows: 13,
+    tierCount: 5,
+    tiers: 5,
+    bridgePosition: "between-bays",
+    bridgeBay: 58,
+    bridgeBayStart: 57,
+    bridgeBayEnd: 59,
+    separateFunnel: false,
+    vesselType: "container",
+    isManualLayout: true,
+    imageUrl: "/vessels/dusseldorf_express.jpg",
+    marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9143556",
+  },
   "BBC AMBER": {
     name: "BBC AMBER",
     loa: 153.44,
@@ -1034,6 +1090,7 @@ export interface Vessel {
   imageUrl?: string;
   /** Link direto para a página do navio no MarineTraffic (ex.: shipid). */
   marineTrafficUrl?: string;
+  isManualLayout?: boolean;
 }
 
 export interface ContainerHatchPlan {
@@ -1114,7 +1171,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     : isMercosulGuaruja
     ? Array.from({ length: 25 }, (_, index) => index * 2 + 1)
     : bayNumberSequence(vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber, vessel.name);
-  const isAllAft = config.bridgePosition === "all-aft";
+  const isAllAft = config.bridgePosition === "all-aft" && !isAplNewJersey && !isDusseldorf && !isMercosulGuaruja;
 
   const bowInset = isFortaleza ? Math.min(16, loa * 0.09) : Math.min(23, loa * 0.16);
   const aftHouseW = isFortaleza ? 13.5 : Math.max(12, Math.min(24, loa * 0.065));
@@ -2231,7 +2288,7 @@ export function normalizeScenario(value: unknown): Scenario | null {
       (upperName.includes("EVER") && (upperName.includes("FIT") || upperName.includes("FAR") || upperName.includes("FAME") || upperName.includes("FASHION") || upperName.includes("FORTUNE"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["EVER FIT"]) :
       upperName.includes("PANTANAL") ? KNOWN_VESSEL_DEFAULTS["LOG-IN PANTANAL"] :
       upperName.includes("BRISA") ? KNOWN_VESSEL_DEFAULTS["NC BRISA"] :
-      upperName.includes("SPYROS") ? KNOWN_VESSEL_DEFAULTS["SPYROS V"] : undefined);
+      upperName.includes("SPYROS") ? KNOWN_VESSEL_DEFAULTS["SPYROS V"] : (upperName.includes("APL") && upperName.includes("NEW JERSEY")) ? KNOWN_VESSEL_DEFAULTS["APL NEW JERSEY"] : upperName.includes("DUSSELDORF") ? KNOWN_VESSEL_DEFAULTS["DUSSELDORF EXPRESS"] : undefined);
 
     // Para navios com layout calibrado manualmente (isManualLayout), os valores do knownDefault
     // sempre prevalecem sobre dados salvos em cache (sessionStorage), garantindo que correções no

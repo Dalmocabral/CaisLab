@@ -161,7 +161,7 @@ function renderContainerDeck(
   const cellHeight = containerHeight / Math.max(1, activeRowCount);
 
   // Modo 1: Casaria 100% na popa (All-Aft, como CMA CGM Veracruz)
-  const isAllAft = config.bridgePosition === "all-aft";
+  const isAllAft = config.bridgePosition === "all-aft" && !isAplNewJersey && !isDusseldorf && !isMercosulGuaruja;
 
   const aftHouseW = Math.max(12, Math.min(24, vesselWidth * 0.065));
   const aftHouseH = Math.max(14, containerHeight * 0.88);
@@ -866,7 +866,7 @@ function renderContainerDeck(
       )}
 
       {/* 2d. Passadiço Específico do DUSSELDORF EXPRESS (entre as bays 57 e 59: 61 59 [passadiço] 57 55 - 53 - 51 49) */}
-      {!isAllAft && hasDusseldorfBridge && (
+      {hasDusseldorfBridge && (
         <g className="superstructure-bridge-island-dusseldorf">
           {(() => {
             const rightOf59 = bayCellX(idx59) + cellWidth;
@@ -913,7 +913,7 @@ function renderContainerDeck(
       )}
 
       {/* 2e. Passadiço Específico do APL NEW JERSEY (entre as bays 53 e 55: 57 55 [passadiço] 53 51) */}
-      {!isAllAft && hasAplBridge && (
+      {hasAplBridge && (
         <g className="superstructure-bridge-island-apl">
           {(() => {
             const rightOf55 = bayCellX(idx55) + cellWidth;
