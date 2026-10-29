@@ -10,7 +10,7 @@
     "vesselType": "general-cargo",
     "flag": "ANTIGUA & BARBUDA",
     "lastBerth": "TECONT1",
-    "updatedAt": "29/10/2026 00:18",
+    "updatedAt": "29/10/2026 00:23",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9563706",
     "imageUrl": "/vessels/bbc_amber.jpg"
   },
@@ -25,7 +25,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/bochem_walvis_bay.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9725859",
-    "updatedAt": "29/10/2026 00:18",
+    "updatedAt": "29/10/2026 00:23",
     "flag": "HONG KONG, CHINA"
   },
   {
@@ -39,7 +39,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cardiff.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9629457",
-    "updatedAt": "29/10/2026 00:18",
+    "updatedAt": "29/10/2026 00:23",
     "flag": "LIBERIA"
   },
   {
@@ -52,7 +52,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "29/10/2026 00:18",
+    "updatedAt": "29/10/2026 00:23",
     "bayCount": 78,
     "bays": 78,
     "bridgePosition": "between-bays",
@@ -82,8 +82,8 @@
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
     "updatedAt": "27/10/2026 21:40",
-    "bayCount": 78,
-    "bays": 78,
+    "bayCount": 79,
+    "bays": 79,
     "bridgePosition": "between-bays",
     "bridgeBay": 28,
     "bridgeBayStart": 28,
@@ -140,7 +140,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cma_cgm_thorium.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996745",
-    "updatedAt": "29/10/2026 00:18",
+    "updatedAt": "29/10/2026 00:23",
     "flag": "MALTA"
   },
   {
@@ -154,7 +154,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cosco_shipping_mexico.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9945863",
-    "updatedAt": "29/10/2026 00:18",
+    "updatedAt": "29/10/2026 00:23",
     "flag": "HONG KONG, CHINA"
   },
   {
@@ -167,7 +167,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "29/10/2026 00:18",
+    "updatedAt": "29/10/2026 00:23",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850886",
     "imageUrl": "/vessels/ever_fair.jpg"
   },
@@ -181,7 +181,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "29/10/2026 00:18",
+    "updatedAt": "29/10/2026 00:23",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850525",
     "imageUrl": "/vessels/ever_faith.jpg"
   },
@@ -195,7 +195,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "29/10/2026 00:18",
+    "updatedAt": "29/10/2026 00:23",
     "bayCount": 78,
     "bays": 78,
     "rowCount": 20,
@@ -224,7 +224,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "29/10/2026 00:18",
+    "updatedAt": "29/10/2026 00:23",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9681314",
     "imageUrl": "/vessels/kota_singa.jpg",
     "bridgePosition": "between-bays",
@@ -250,7 +250,7 @@
     "lastBerth": "TECONT1",
     "imageUrl": "/vessels/log_in_pantanal.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9351799",
-    "updatedAt": "29/10/2026 00:18",
+    "updatedAt": "29/10/2026 00:23",
     "flag": "BRAZIL",
     "bayCount": 40,
     "bays": 40,
@@ -273,7 +273,7 @@
     "lastBerth": "TECONT1",
     "imageUrl": "/vessels/lori.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9631125",
-    "updatedAt": "29/10/2026 00:18",
+    "updatedAt": "29/10/2026 00:23",
     "flag": "LIBERIA"
   },
   {
@@ -351,7 +351,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "29/10/2026 00:18",
+    "updatedAt": "29/10/2026 00:23",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9612777",
     "imageUrl": "/vessels/nc_bruma.jpg"
   },
