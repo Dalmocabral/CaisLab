@@ -1,25 +1,10 @@
 {
-  "updatedAt": "29/10/2026 14:46",
+  "updatedAt": "29/10/2026 20:44",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 12,
+  "count": 11,
   "maneuvers": [
     {
-      "dateTime": "29/10 13:00",
-      "name": "KOTA SINGA",
-      "draft": 9.2,
-      "loa": 228.0,
-      "beam": 37.38,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
-      "berthingSide": "boreste",
-      "imo": "9681314",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "SINGAPORE",
-      "terminal": "rio"
-    },
-    {
-      "dateTime": "30/10 09:00",
+      "dateTime": "30/10 07:00",
       "name": "BOCHEM WALVIS BAY",
       "draft": 8.0,
       "loa": 145.0,
