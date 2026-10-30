@@ -1,12 +1,12 @@
 {
-  "updatedAt": "30/10/2026 01:26",
+  "updatedAt": "30/10/2026 07:53",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 11,
   "maneuvers": [
     {
       "dateTime": "30/10 07:00",
       "name": "BOCHEM WALVIS BAY",
-      "draft": 8.0,
+      "draft": 6.7,
       "loa": 145.0,
       "beam": 24.26,
       "maneuver": "M",
