@@ -1,12 +1,12 @@
 {
-  "updatedAt": "30/10/2026 20:15",
+  "updatedAt": "30/10/2026 20:47",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 11,
+  "count": 12,
   "maneuvers": [
     {
       "dateTime": "30/10 23:00",
       "name": "LOG-IN PANTANAL",
-      "draft": 9.0,
+      "draft": 9,
       "loa": 182.47,
       "beam": 25.2,
       "maneuver": "E",
@@ -19,10 +19,10 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "31/10 09:30",
+      "dateTime": "31/10 07:30",
       "name": "LORI",
       "draft": 11.5,
-      "loa": 228.0,
+      "loa": 228,
       "beam": 37.32,
       "maneuver": "E",
       "berthFrom": "",
@@ -49,6 +49,21 @@
       "terminal": "rio"
     },
     {
+      "dateTime": "01/11 05:00",
+      "name": "CMA CGM SANTOS",
+      "draft": 10.5,
+      "loa": 228,
+      "beam": 37.37,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONT1",
+      "berthingSide": "boreste",
+      "imo": "9649835",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "BRAZIL",
+      "terminal": "rio"
+    },
+    {
       "dateTime": "01/11 09:00",
       "name": "ZIM WILMINGTON",
       "draft": 10.5,
@@ -66,7 +81,7 @@
     {
       "dateTime": "02/11 19:00",
       "name": "NC BRUMA",
-      "draft": 10.0,
+      "draft": 10,
       "loa": 223.91,
       "beam": 34.88,
       "maneuver": "E",
@@ -142,8 +157,8 @@
       "dateTime": "11/11 10:00",
       "name": "KOTA ELOK",
       "draft": 14.6,
-      "loa": 335.0,
-      "beam": 51.0,
+      "loa": 335,
+      "beam": 51,
       "maneuver": "E",
       "berthFrom": "",
       "berthTo": "TECONTPROLONG",
@@ -158,7 +173,7 @@
       "name": "COSCO SHIPPING MEXICO",
       "draft": 12.5,
       "loa": 335.9,
-      "beam": 51.0,
+      "beam": 51,
       "maneuver": "E",
       "berthFrom": "",
       "berthTo": "TECONTPROLONG",

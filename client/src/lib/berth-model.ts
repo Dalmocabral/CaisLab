@@ -188,7 +188,8 @@ export function resolveVesselSuperstructure(vessel: Partial<Vessel>): VesselSupe
   const isAplNewJersey = upperName.includes("APL") && upperName.includes("NEW JERSEY");
   const isDusseldorf = upperName.includes("DUSSELDORF");
   const isGuaruja = upperName.includes("GUARUJA");
-  const hasIslandBridge = isAplNewJersey || isDusseldorf || isGuaruja;
+  const isKotaSinga = upperName.includes("KOTA") && upperName.includes("SINGA");
+  const hasIslandBridge = isAplNewJersey || isDusseldorf || isGuaruja || isKotaSinga;
 
   const bridgePos: BridgePositionType = (vessel.bridgePosition === "between-bays" || hasIslandBridge) ? "between-bays" : "all-aft";
   const bBay = typeof vessel.bridgeBay === "number"
@@ -201,6 +202,8 @@ export function resolveVesselSuperstructure(vessel: Partial<Vessel>): VesselSupe
     ? 58
     : isGuaruja
     ? 42
+    : isKotaSinga
+    ? 44
     : bridgePos === "between-bays"
     ? 34
     : undefined;
@@ -714,11 +717,12 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     tierCount: 5,
     tiers: 5,
     bridgePosition: "between-bays",
-    bridgeBay: 46,
-    bridgeBayStart: 45,
-    bridgeBayEnd: 47,
+    bridgeBay: 44,
+    bridgeBayStart: 43,
+    bridgeBayEnd: 45,
     separateFunnel: false,
     vesselType: "container",
+    isManualLayout: true,
     imageUrl: "/vessels/kota_singa.jpg",
     marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9681314",
   },
@@ -1139,6 +1143,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const isDusseldorf = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("DUSSELDORF");
   const isAplNewJersey = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("APL") && vessel.name.toUpperCase().includes("NEW JERSEY");
   const isMercosulGuaruja = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("GUARUJA");
+  const isKotaSinga = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("SINGA");
   // No 3D do Fortaleza: 10 escotilhas de 40' bem distribuídas (bays 01 a 39) com vão entre bays
   // No DUSSELDORF EXPRESS: 35 bays de 20' (01 a 69), com bay 53 isolada de 20' e passadiço entre 57 e 59
   // No APL NEW JERSEY: bay 01 isolada na proa, 13 pares de 40' até 53, passadiço entre 53 e 55, 4 pares de 40' até bay 68 na popa
@@ -1171,7 +1176,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     : isMercosulGuaruja
     ? Array.from({ length: 25 }, (_, index) => index * 2 + 1)
     : bayNumberSequence(vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber, vessel.name);
-  const isAllAft = config.bridgePosition === "all-aft" && !isAplNewJersey && !isDusseldorf && !isMercosulGuaruja;
+  const isAllAft = config.bridgePosition === "all-aft" && !isAplNewJersey && !isDusseldorf && !isMercosulGuaruja && !isKotaSinga;
 
   const bowInset = isFortaleza ? Math.min(16, loa * 0.09) : Math.min(23, loa * 0.16);
   const aftHouseW = isFortaleza ? 13.5 : Math.max(12, Math.min(24, loa * 0.065));
@@ -1221,6 +1226,8 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const hasDusseldorfBridge = isDusseldorf && idx57 !== -1 && idx59 !== -1;
   const hasAplBridge = isAplNewJersey && idx53 !== -1 && idx55 !== -1;
   const hasGuarujaBridge = isMercosulGuaruja && idx41 !== -1 && idx43 !== -1;
+  const idx45 = bays.indexOf(45);
+  const hasKotaSingaBridge = isKotaSinga && idx43 !== -1 && idx45 !== -1;
 
   const isEverFitClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("EVER") && (
     vessel.name.toUpperCase().includes("FIT") ||
@@ -1239,7 +1246,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const hasEverFitFunnel = isEverFitClass && config.separateFunnel && idx61 !== -1 && idx63 !== -1;
 
   const num40ftGaps = isDusseldorf ? 17 : isAplNewJersey ? 16 : isMercosulGuaruja ? 11 : Math.max(0, Math.floor((bays.length - 1) / 2));
-  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasKotaElokBridge ? 2.0 : 0) + (hasFreeportBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0) + (hasAplBridge ? 2.0 : 0) + (hasGuarujaBridge ? 2.0 : 0);
+  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasKotaElokBridge ? 2.0 : 0) + (hasFreeportBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0) + (hasAplBridge ? 2.0 : 0) + (hasGuarujaBridge ? 2.0 : 0) + (hasKotaSingaBridge ? 2.0 : 0);
   const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + extraSlots);
   const hatchGap = isFortaleza ? 1.6 : (bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0);
   const totalGapsWidth = num40ftGaps * hatchGap;
@@ -1252,7 +1259,8 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const dusseldorfBridgeSlotW = hasDusseldorfBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const aplBridgeSlotW = hasAplBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const guarujaBridgeSlotW = hasGuarujaBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
-  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - kotaElokBridgeSlotW - freeportBridgeSlotW - dusseldorfBridgeSlotW - aplBridgeSlotW - guarujaBridgeSlotW);
+  const kotaSingaBridgeSlotW = hasKotaSingaBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
+  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - kotaElokBridgeSlotW - freeportBridgeSlotW - dusseldorfBridgeSlotW - aplBridgeSlotW - guarujaBridgeSlotW - kotaSingaBridgeSlotW);
   const cellWidth = availableBayWidth / Math.max(1, bays.length);
 
   const bayCellFromStern = (index: number) => {
@@ -1314,13 +1322,16 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     if (hasGuarujaBridge && index >= idx43) {
       xPos -= guarujaBridgeSlotW;
     }
+    if (hasKotaSingaBridge && index >= idx45) {
+      xPos -= kotaSingaBridgeSlotW;
+    }
     return xPos;
   };
 
   const bridgeIndices: number[] = [];
   const funnelIndices: number[] = [];
 
-  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasKotaElokBridge && !hasFreeportBridge && !hasDusseldorfBridge && !hasAplBridge && !hasGuarujaBridge) {
+  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasKotaElokBridge && !hasFreeportBridge && !hasDusseldorfBridge && !hasAplBridge && !hasGuarujaBridge && !hasKotaSingaBridge) {
     const targetBridgeBay = config.bridgeBay ?? config.bridgeBayStart ?? 34;
     const occupiedBridgeBays = getOccupiedBayNumbers(
       targetBridgeBay,
@@ -1433,6 +1444,11 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     const leftOf41 = bayCellFromStern(idx41);
     bridgeCenterFromStern = (rightOf43 + leftOf41) / 2;
     bridgeLength = Math.max(10, guarujaBridgeSlotW - 0.4);
+  } else if (hasKotaSingaBridge) {
+    const rightOf45 = bayCellFromStern(idx45) + cellWidth;
+    const leftOf43 = bayCellFromStern(idx43);
+    bridgeCenterFromStern = (rightOf45 + leftOf43) / 2;
+    bridgeLength = Math.max(10, kotaSingaBridgeSlotW - 0.4);
   } else if (bridgeIndices.length > 0) {
     const minX = Math.min(...bridgeIndices.map((idx) => bayCellFromStern(idx)));
     const maxX = Math.max(...bridgeIndices.map((idx) => bayCellFromStern(idx) + cellWidth));
