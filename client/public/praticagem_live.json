@@ -1,17 +1,17 @@
 {
-  "updatedAt": "30/10/2026 14:41",
+  "updatedAt": "30/10/2026 20:15",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 10,
+  "count": 11,
   "maneuvers": [
     {
-      "dateTime": "30/10 20:00",
+      "dateTime": "30/10 23:00",
       "name": "LOG-IN PANTANAL",
       "draft": 9.0,
       "loa": 182.47,
       "beam": 25.2,
       "maneuver": "E",
       "berthFrom": "",
-      "berthTo": "TECONT1",
+      "berthTo": "TECONTPROLONG",
       "berthingSide": "boreste",
       "imo": "9351799",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
@@ -46,6 +46,21 @@
       "imo": "9629457",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "LIBERIA",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "01/11 09:00",
+      "name": "ZIM WILMINGTON",
+      "draft": 10.5,
+      "loa": 299.92,
+      "beam": 48.26,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONTPROLONG",
+      "berthingSide": "boreste",
+      "imo": "9699115",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "SINGAPORE",
       "terminal": "rio"
     },
     {
