@@ -1,12 +1,12 @@
 {
-  "updatedAt": "30/10/2026 23:59",
+  "updatedAt": "31/10/2026 01:14",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 12,
   "maneuvers": [
     {
       "dateTime": "30/10 23:00",
       "name": "LOG-IN PANTANAL",
-      "draft": 9.0,
+      "draft": 8.9,
       "loa": 182.47,
       "beam": 25.2,
       "maneuver": "E",
