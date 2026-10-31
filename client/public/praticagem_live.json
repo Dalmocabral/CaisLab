@@ -1,23 +1,8 @@
 {
-  "updatedAt": "31/10/2026 07:44",
+  "updatedAt": "31/10/2026 13:49",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 11,
+  "count": 10,
   "maneuvers": [
-    {
-      "dateTime": "31/10 07:30",
-      "name": "LORI",
-      "draft": 10.0,
-      "loa": 228.0,
-      "beam": 37.32,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "boreste",
-      "imo": "9631125",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "LIBERIA",
-      "terminal": "rio"
-    },
     {
       "dateTime": "31/10 14:30",
       "name": "CARDIFF",
