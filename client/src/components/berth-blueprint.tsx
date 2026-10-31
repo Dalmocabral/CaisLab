@@ -124,7 +124,11 @@ function renderContainerDeck(
   const isDusseldorf = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("DUSSELDORF");
   const isAplNewJersey = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("APL") && vessel.name.toUpperCase().includes("NEW JERSEY");
   const isMercosulGuaruja = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("GUARUJA");
-  const isKotaSinga = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("SINGA");
+  const isKotaSinga = typeof vessel.name === "string" && (
+    (vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("SINGA")) ||
+    vessel.name.toUpperCase().includes("LORI")
+  );
+  const isCardiff = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("CARDIFF");
   const bays = isDusseldorf
     ? Array.from({ length: 35 }, (_, index) => index * 2 + 1)
     : isAplNewJersey
@@ -162,7 +166,7 @@ function renderContainerDeck(
   const cellHeight = containerHeight / Math.max(1, activeRowCount);
 
   // Modo 1: Casaria 100% na popa (All-Aft, como CMA CGM Veracruz)
-  const isAllAft = config.bridgePosition === "all-aft" && !isAplNewJersey && !isDusseldorf && !isMercosulGuaruja && !isKotaSinga;
+  const isAllAft = config.bridgePosition === "all-aft" && !isAplNewJersey && !isDusseldorf && !isMercosulGuaruja && !isKotaSinga && !isCardiff;
 
   const aftHouseW = Math.max(12, Math.min(24, vesselWidth * 0.065));
   const aftHouseH = Math.max(14, containerHeight * 0.88);
@@ -198,7 +202,10 @@ function renderContainerDeck(
 
   const isNykRumina = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("NYK") && (vessel.name.toUpperCase().includes("RUMINA") || vessel.name.toUpperCase().includes("DIANA"));
   const isSeaspanEmpire = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("SEASPAN") && vessel.name.toUpperCase().includes("EMPIRE");
-  const isMaerskFreeport = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("MAERSK") && vessel.name.toUpperCase().includes("FREEPORT");
+  const isMaerskFreeport = typeof vessel.name === "string" && (
+    (vessel.name.toUpperCase().includes("MAERSK") && vessel.name.toUpperCase().includes("FREEPORT")) ||
+    vessel.name.toUpperCase().includes("CARDIFF")
+  );
   const idx23 = bays.indexOf(23);
   const idx25 = bays.indexOf(25);
   const idx41 = bays.indexOf(41);
@@ -426,7 +433,10 @@ function renderContainerDeck(
                 (vessel.name.toUpperCase().includes("CMA CGM") && vessel.name.toUpperCase().includes("COBALT"))
               );
               const isVeracruzCell = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("VERACRUZ");
-              const isKotaSingaCell = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("SINGA");
+              const isKotaSingaCell = typeof vessel.name === "string" && (
+                (vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("SINGA")) ||
+                vessel.name.toUpperCase().includes("LORI")
+              );
               const is78CenteredCell = isCoscoClass || isCmaCgmIronCell;
               const is50CenteredCell = isVeracruzCell || isKotaSingaCell;
               const displayBay = is78CenteredCell && bay === 77 ? 78 : (is50CenteredCell && bay === 49 ? 50 : bay);
@@ -457,7 +467,10 @@ function renderContainerDeck(
             if (isBayOccupied(index)) return null;
 
             const isVeracruz = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("VERACRUZ");
-            const isKotaSinga = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("SINGA");
+            const isKotaSinga = typeof vessel.name === "string" && (
+              (vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("SINGA")) ||
+              vessel.name.toUpperCase().includes("LORI")
+            );
             const is50Centered = isVeracruz || isKotaSinga;
             const isCoscoClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("COSCO") && (
               vessel.name.toUpperCase().includes("CHILE") ||

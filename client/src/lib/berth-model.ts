@@ -188,8 +188,9 @@ export function resolveVesselSuperstructure(vessel: Partial<Vessel>): VesselSupe
   const isAplNewJersey = upperName.includes("APL") && upperName.includes("NEW JERSEY");
   const isDusseldorf = upperName.includes("DUSSELDORF");
   const isGuaruja = upperName.includes("GUARUJA");
-  const isKotaSinga = upperName.includes("KOTA") && upperName.includes("SINGA");
-  const hasIslandBridge = isAplNewJersey || isDusseldorf || isGuaruja || isKotaSinga;
+  const isKotaSinga = (upperName.includes("KOTA") && upperName.includes("SINGA")) || upperName.includes("LORI");
+  const isCardiff = upperName.includes("CARDIFF");
+  const hasIslandBridge = isAplNewJersey || isDusseldorf || isGuaruja || isKotaSinga || isCardiff;
 
   const bridgePos: BridgePositionType = (vessel.bridgePosition === "between-bays" || hasIslandBridge) ? "between-bays" : "all-aft";
   const bBay = typeof vessel.bridgeBay === "number"
@@ -204,6 +205,8 @@ export function resolveVesselSuperstructure(vessel: Partial<Vessel>): VesselSupe
     ? 42
     : isKotaSinga
     ? 44
+    : isCardiff
+    ? 48
     : bridgePos === "between-bays"
     ? 34
     : undefined;
@@ -292,6 +295,7 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "SEVEN SUN": "offshore",
   "APL NEW JERSEY": "container",
   "DUSSELDORF EXPRESS": "container",
+  "CARDIFF": "container",
   "CMA CGM COBALT": "container",
   "CMA CGM IRON": "container",
   "CMA CGM KRYPTON": "container",
@@ -307,6 +311,7 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "KOTA ELOK": "container",
   "KOTA PAHLAWAN": "container",
   "KOTA SINGA": "container",
+  "LORI": "container",
   "LOG-IN PANTANAL": "container",
   "LONCOMILLA": "container",
   "MAERSK FREEPORT": "container",
@@ -528,6 +533,27 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     funnelBayEnd: 64,
     vesselType: "container",
   },
+  "CARDIFF": {
+    name: "CARDIFF",
+    loa: 270.9,
+    beam: 42.8,
+    draft: 14.1,
+    bayCount: 63,
+    bays: 63,
+    rowCount: 17,
+    rows: 17,
+    tierCount: 6,
+    tiers: 6,
+    bridgePosition: "between-bays",
+    bridgeBay: 48,
+    bridgeBayStart: 47,
+    bridgeBayEnd: 49,
+    separateFunnel: false,
+    vesselType: "container",
+    isManualLayout: true,
+    imageUrl: "/vessels/cardiff.jpg",
+    marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9629457",
+  },
   "CMA CGM COBALT": {
     name: "CMA CGM COBALT",
     loa: 335.23,
@@ -705,6 +731,27 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     funnelBayEnd: 64,
     vesselType: "container",
   },
+  "LORI": {
+    name: "LORI",
+    loa: 228.0,
+    beam: 37.32,
+    draft: 10.0,
+    bayCount: 50,
+    bays: 50,
+    rowCount: 14,
+    rows: 14,
+    tierCount: 5,
+    tiers: 5,
+    bridgePosition: "between-bays",
+    bridgeBay: 44,
+    bridgeBayStart: 43,
+    bridgeBayEnd: 45,
+    separateFunnel: false,
+    vesselType: "container",
+    isManualLayout: true,
+    imageUrl: "/vessels/lori.jpg",
+    marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9631125",
+  },
   "KOTA SINGA": {
     name: "KOTA SINGA",
     loa: 228.0,
@@ -801,9 +848,11 @@ export function isManuallyConfiguredVessel(vessel?: {
 
   const MANUAL_VESSEL_NAMES = [
     "CMA CGM KRYPTON",
+    "CARDIFF",
     "CMA CGM COBALT",
     "CMA CGM IRON",
     "KOTA ELOK",
+    "LORI",
     "KOTA SINGA",
     "CMA CGM VERACRUZ",
     "NYK DIANA",
@@ -1143,7 +1192,11 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const isDusseldorf = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("DUSSELDORF");
   const isAplNewJersey = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("APL") && vessel.name.toUpperCase().includes("NEW JERSEY");
   const isMercosulGuaruja = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("GUARUJA");
-  const isKotaSinga = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("SINGA");
+  const isKotaSinga = typeof vessel.name === "string" && (
+    (vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("SINGA")) ||
+    vessel.name.toUpperCase().includes("LORI")
+  );
+  const isCardiff = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("CARDIFF");
   // No 3D do Fortaleza: 10 escotilhas de 40' bem distribuídas (bays 01 a 39) com vão entre bays
   // No DUSSELDORF EXPRESS: 35 bays de 20' (01 a 69), com bay 53 isolada de 20' e passadiço entre 57 e 59
   // No APL NEW JERSEY: bay 01 isolada na proa, 13 pares de 40' até 53, passadiço entre 53 e 55, 4 pares de 40' até bay 68 na popa
@@ -1176,7 +1229,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     : isMercosulGuaruja
     ? Array.from({ length: 25 }, (_, index) => index * 2 + 1)
     : bayNumberSequence(vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber, vessel.name);
-  const isAllAft = config.bridgePosition === "all-aft" && !isAplNewJersey && !isDusseldorf && !isMercosulGuaruja && !isKotaSinga;
+  const isAllAft = config.bridgePosition === "all-aft" && !isAplNewJersey && !isDusseldorf && !isMercosulGuaruja && !isKotaSinga && !isCardiff;
 
   const bowInset = isFortaleza ? Math.min(16, loa * 0.09) : Math.min(23, loa * 0.16);
   const aftHouseW = isFortaleza ? 13.5 : Math.max(12, Math.min(24, loa * 0.065));
@@ -1209,7 +1262,10 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
 
   const isNykRumina = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("NYK") && (vessel.name.toUpperCase().includes("RUMINA") || vessel.name.toUpperCase().includes("DIANA"));
   const isSeaspanEmpire = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("SEASPAN") && vessel.name.toUpperCase().includes("EMPIRE");
-  const isMaerskFreeport = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("MAERSK") && vessel.name.toUpperCase().includes("FREEPORT");
+  const isMaerskFreeport = typeof vessel.name === "string" && (
+    (vessel.name.toUpperCase().includes("MAERSK") && vessel.name.toUpperCase().includes("FREEPORT")) ||
+    vessel.name.toUpperCase().includes("CARDIFF")
+  );
   const idx23 = bays.indexOf(23);
   const idx25 = bays.indexOf(25);
   const idx41 = bays.indexOf(41);
