@@ -1,27 +1,12 @@
 {
-  "updatedAt": "31/10/2026 01:36",
+  "updatedAt": "31/10/2026 07:44",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 12,
+  "count": 11,
   "maneuvers": [
-    {
-      "dateTime": "30/10 23:00",
-      "name": "LOG-IN PANTANAL",
-      "draft": 8.9,
-      "loa": 182.47,
-      "beam": 25.2,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
-      "berthingSide": "boreste",
-      "imo": "9351799",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "BRAZIL",
-      "terminal": "rio"
-    },
     {
       "dateTime": "31/10 07:30",
       "name": "LORI",
-      "draft": 11.5,
+      "draft": 10.0,
       "loa": 228.0,
       "beam": 37.32,
       "maneuver": "E",
