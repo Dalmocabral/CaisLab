@@ -1,23 +1,8 @@
 {
-  "updatedAt": "31/10/2026 17:02",
+  "updatedAt": "31/10/2026 19:37",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 10,
   "maneuvers": [
-    {
-      "dateTime": "31/10 14:30",
-      "name": "CARDIFF",
-      "draft": 14.1,
-      "loa": 270.9,
-      "beam": 42.8,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
-      "berthingSide": "boreste",
-      "imo": "9629457",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "LIBERIA",
-      "terminal": "rio"
-    },
     {
       "dateTime": "01/11 05:00",
       "name": "CMA CGM SANTOS",
@@ -49,6 +34,21 @@
       "terminal": "rio"
     },
     {
+      "dateTime": "02/11 16:00",
+      "name": "EVER FAME",
+      "draft": 12.3,
+      "loa": 333.95,
+      "beam": 48.43,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONTPROLONG",
+      "berthingSide": "boreste",
+      "imo": "9850800",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "PANAMA",
+      "terminal": "rio"
+    },
+    {
       "dateTime": "02/11 19:00",
       "name": "NC BRUMA",
       "draft": 10.0,
@@ -64,7 +64,7 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "03/11 05:30",
+      "dateTime": "03/11 08:30",
       "name": "CMA CGM COBALT",
       "draft": 14.4,
       "loa": 335.23,
