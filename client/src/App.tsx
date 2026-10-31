@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
@@ -6,6 +7,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Simulator";
 import BerthStandaloneView from "./pages/BerthStandaloneView";
+import { logVisitorAccess } from "./lib/telemetry";
 
 const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, "");
 
@@ -29,6 +31,10 @@ function AppRoutes() {
 // - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
 
 function App() {
+  useEffect(() => {
+    logVisitorAccess();
+  }, []);
+
   return (
     <ErrorBoundary>
       <ThemeProvider
