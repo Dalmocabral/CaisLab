@@ -1,12 +1,12 @@
 {
-  "updatedAt": "01/11/2026 03:13",
+  "updatedAt": "01/11/2026 10:53",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 10,
   "maneuvers": [
     {
       "dateTime": "01/11 05:00",
       "name": "CMA CGM SANTOS",
-      "draft": 10.5,
+      "draft": 9.8,
       "loa": 228.0,
       "beam": 37.37,
       "maneuver": "E",
@@ -21,7 +21,7 @@
     {
       "dateTime": "01/11 09:00",
       "name": "ZIM WILMINGTON",
-      "draft": 10.5,
+      "draft": 10.3,
       "loa": 299.92,
       "beam": 48.26,
       "maneuver": "E",
