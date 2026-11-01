@@ -126,9 +126,11 @@ function renderContainerDeck(
   const isMercosulGuaruja = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("GUARUJA");
   const isKotaSinga = typeof vessel.name === "string" && (
     (vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("SINGA")) ||
-    vessel.name.toUpperCase().includes("LORI")
+    vessel.name.toUpperCase().includes("LORI") ||
+    vessel.name.toUpperCase().includes("SANTOS")
   );
   const isCardiff = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("CARDIFF");
+  const isZimWilmington = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("ZIM") && vessel.name.toUpperCase().includes("WILMINGTON");
   const bays = isDusseldorf
     ? Array.from({ length: 35 }, (_, index) => index * 2 + 1)
     : isAplNewJersey
@@ -166,7 +168,7 @@ function renderContainerDeck(
   const cellHeight = containerHeight / Math.max(1, activeRowCount);
 
   // Modo 1: Casaria 100% na popa (All-Aft, como CMA CGM Veracruz)
-  const isAllAft = config.bridgePosition === "all-aft" && !isAplNewJersey && !isDusseldorf && !isMercosulGuaruja && !isKotaSinga && !isCardiff;
+  const isAllAft = config.bridgePosition === "all-aft" && !isAplNewJersey && !isDusseldorf && !isMercosulGuaruja && !isKotaSinga && !isCardiff && !isZimWilmington;
 
   const aftHouseW = Math.max(12, Math.min(24, vesselWidth * 0.065));
   const aftHouseH = Math.max(14, containerHeight * 0.88);
@@ -216,7 +218,7 @@ function renderContainerDeck(
   const idx55 = bays.indexOf(55);
   const idx57 = bays.indexOf(57);
   const idx59 = bays.indexOf(59);
-  const hasSpecialBridge55_57 = (isNykRumina || isSeaspanEmpire) && idx55 !== -1 && idx57 !== -1;
+  const hasSpecialBridge55_57 = (isNykRumina || isSeaspanEmpire || isZimWilmington) && idx55 !== -1 && idx57 !== -1;
   const hasKotaElokBridge = isKotaElok && idx23 !== -1 && idx25 !== -1;
   const hasFreeportBridge = isMaerskFreeport && idx47 !== -1 && idx49 !== -1;
   const hasDusseldorfBridge = isDusseldorf && idx57 !== -1 && idx59 !== -1;
@@ -435,7 +437,8 @@ function renderContainerDeck(
               const isVeracruzCell = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("VERACRUZ");
               const isKotaSingaCell = typeof vessel.name === "string" && (
                 (vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("SINGA")) ||
-                vessel.name.toUpperCase().includes("LORI")
+                vessel.name.toUpperCase().includes("LORI") ||
+                vessel.name.toUpperCase().includes("SANTOS")
               );
               const is78CenteredCell = isCoscoClass || isCmaCgmIronCell;
               const is50CenteredCell = isVeracruzCell || isKotaSingaCell;
@@ -469,7 +472,8 @@ function renderContainerDeck(
             const isVeracruz = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("VERACRUZ");
             const isKotaSinga = typeof vessel.name === "string" && (
               (vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("SINGA")) ||
-              vessel.name.toUpperCase().includes("LORI")
+              vessel.name.toUpperCase().includes("LORI") ||
+              vessel.name.toUpperCase().includes("SANTOS")
             );
             const is50Centered = isVeracruz || isKotaSinga;
             const isCoscoClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("COSCO") && (

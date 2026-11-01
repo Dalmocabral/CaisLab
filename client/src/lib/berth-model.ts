@@ -188,9 +188,10 @@ export function resolveVesselSuperstructure(vessel: Partial<Vessel>): VesselSupe
   const isAplNewJersey = upperName.includes("APL") && upperName.includes("NEW JERSEY");
   const isDusseldorf = upperName.includes("DUSSELDORF");
   const isGuaruja = upperName.includes("GUARUJA");
-  const isKotaSinga = (upperName.includes("KOTA") && upperName.includes("SINGA")) || upperName.includes("LORI");
+  const isKotaSinga = (upperName.includes("KOTA") && upperName.includes("SINGA")) || upperName.includes("LORI") || upperName.includes("SANTOS");
   const isCardiff = upperName.includes("CARDIFF");
-  const hasIslandBridge = isAplNewJersey || isDusseldorf || isGuaruja || isKotaSinga || isCardiff;
+  const isZimWilmington = upperName.includes("ZIM") && upperName.includes("WILMINGTON");
+  const hasIslandBridge = isAplNewJersey || isDusseldorf || isGuaruja || isKotaSinga || isCardiff || isZimWilmington;
 
   const bridgePos: BridgePositionType = (vessel.bridgePosition === "between-bays" || hasIslandBridge) ? "between-bays" : "all-aft";
   const bBay = typeof vessel.bridgeBay === "number"
@@ -300,6 +301,7 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "CMA CGM IRON": "container",
   "CMA CGM KRYPTON": "container",
   "CMA CGM PUCCINI": "container",
+  "CMA CGM SANTOS": "container",
   "CMA CGM VERACRUZ": "container",
   "COSCO SHIPPING ARGENTINA": "container",
   "COSCO SHIPPING BRAZIL": "container",
@@ -324,6 +326,7 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "SEASPAN EMPIRE": "container",
   "TOKYO EXPRESS": "container",
   "ZIM BALTIMORE": "container",
+  "ZIM WILMINGTON": "container",
 };
 
 export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
@@ -380,6 +383,27 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     bridgeBayEnd: 56,
     separateFunnel: false,
     vesselType: "container",
+  },
+  "ZIM WILMINGTON": {
+    name: "ZIM WILMINGTON",
+    loa: 299.92,
+    beam: 48.26,
+    draft: 10.3,
+    bayCount: 71,
+    bays: 71,
+    rowCount: 19,
+    rows: 19,
+    tierCount: 5,
+    tiers: 5,
+    bridgePosition: "between-bays",
+    bridgeBay: 56,
+    bridgeBayStart: 55,
+    bridgeBayEnd: 57,
+    separateFunnel: false,
+    vesselType: "container",
+    isManualLayout: true,
+    imageUrl: "/vessels/zim_wilmington.jpg",
+    marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9699115",
   },
   "SEASPAN EMPIRE": {
     name: "SEASPAN EMPIRE",
@@ -491,6 +515,27 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     funnelBayStart: 62,
     funnelBayEnd: 62,
     vesselType: "container",
+  },
+  "CMA CGM SANTOS": {
+    name: "CMA CGM SANTOS",
+    loa: 228.0,
+    beam: 37.37,
+    draft: 9.8,
+    bayCount: 50,
+    bays: 50,
+    rowCount: 14,
+    rows: 14,
+    tierCount: 5,
+    tiers: 5,
+    bridgePosition: "between-bays",
+    bridgeBay: 44,
+    bridgeBayStart: 43,
+    bridgeBayEnd: 45,
+    separateFunnel: false,
+    vesselType: "container",
+    isManualLayout: true,
+    imageUrl: "/vessels/cma_cgm_santos.jpg",
+    marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9649835",
   },
   "CMA CGM VERACRUZ": {
     name: "CMA CGM VERACRUZ",
@@ -854,6 +899,8 @@ export function isManuallyConfiguredVessel(vessel?: {
     "KOTA ELOK",
     "LORI",
     "KOTA SINGA",
+    "CMA CGM SANTOS",
+    "ZIM WILMINGTON",
     "CMA CGM VERACRUZ",
     "NYK DIANA",
     "NYK RUMINA",
@@ -1194,9 +1241,11 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const isMercosulGuaruja = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("GUARUJA");
   const isKotaSinga = typeof vessel.name === "string" && (
     (vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("SINGA")) ||
-    vessel.name.toUpperCase().includes("LORI")
+    vessel.name.toUpperCase().includes("LORI") ||
+    vessel.name.toUpperCase().includes("SANTOS")
   );
   const isCardiff = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("CARDIFF");
+  const isZimWilmington = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("ZIM") && vessel.name.toUpperCase().includes("WILMINGTON");
   // No 3D do Fortaleza: 10 escotilhas de 40' bem distribuídas (bays 01 a 39) com vão entre bays
   // No DUSSELDORF EXPRESS: 35 bays de 20' (01 a 69), com bay 53 isolada de 20' e passadiço entre 57 e 59
   // No APL NEW JERSEY: bay 01 isolada na proa, 13 pares de 40' até 53, passadiço entre 53 e 55, 4 pares de 40' até bay 68 na popa
@@ -1229,7 +1278,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     : isMercosulGuaruja
     ? Array.from({ length: 25 }, (_, index) => index * 2 + 1)
     : bayNumberSequence(vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber, vessel.name);
-  const isAllAft = config.bridgePosition === "all-aft" && !isAplNewJersey && !isDusseldorf && !isMercosulGuaruja && !isKotaSinga && !isCardiff;
+  const isAllAft = config.bridgePosition === "all-aft" && !isAplNewJersey && !isDusseldorf && !isMercosulGuaruja && !isKotaSinga && !isCardiff && !isZimWilmington;
 
   const bowInset = isFortaleza ? Math.min(16, loa * 0.09) : Math.min(23, loa * 0.16);
   const aftHouseW = isFortaleza ? 13.5 : Math.max(12, Math.min(24, loa * 0.065));
@@ -1276,7 +1325,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const idx55 = bays.indexOf(55);
   const idx57 = bays.indexOf(57);
   const idx59 = bays.indexOf(59);
-  const hasSpecialBridge55_57 = (isNykRumina || isSeaspanEmpire) && idx55 !== -1 && idx57 !== -1;
+  const hasSpecialBridge55_57 = (isNykRumina || isSeaspanEmpire || isZimWilmington) && idx55 !== -1 && idx57 !== -1;
   const hasKotaElokBridge = isKotaElok && idx23 !== -1 && idx25 !== -1;
   const hasFreeportBridge = isMaerskFreeport && idx47 !== -1 && idx49 !== -1;
   const hasDusseldorfBridge = isDusseldorf && idx57 !== -1 && idx59 !== -1;
