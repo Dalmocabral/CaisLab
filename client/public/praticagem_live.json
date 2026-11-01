@@ -1,5 +1,5 @@
 {
-  "updatedAt": "31/10/2026 22:55",
+  "updatedAt": "01/11/2026 00:36",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 10,
   "maneuvers": [
@@ -34,7 +34,7 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "02/11 16:00",
+      "dateTime": "02/11 17:00",
       "name": "EVER FAME",
       "draft": 12.3,
       "loa": 333.95,
@@ -64,7 +64,7 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "03/11 08:30",
+      "dateTime": "03/11 17:00",
       "name": "CMA CGM COBALT",
       "draft": 14.4,
       "loa": 335.23,
@@ -79,7 +79,7 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "04/11 07:30",
+      "dateTime": "04/11 16:30",
       "name": "EVER FAIR",
       "draft": 14.8,
       "loa": 333.95,
