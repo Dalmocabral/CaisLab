@@ -92,7 +92,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "01/11/2026 10:53",
+    "updatedAt": "01/11/2026 15:16",
     "bayCount": 78,
     "bays": 78,
     "bridgePosition": "between-bays",
@@ -221,7 +221,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cma_cgm_thorium.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996745",
-    "updatedAt": "01/11/2026 10:53",
+    "updatedAt": "01/11/2026 15:16",
     "flag": "MALTA"
   },
   {
@@ -327,7 +327,7 @@
   {
     "name": "COSCO SHIPPING MEXICO",
     "loa": 335.9,
-    "beam": 51,
+    "beam": 51.0,
     "draft": 12.5,
     "berthingSide": "boreste",
     "imo": "9945863",
@@ -335,7 +335,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cosco_shipping_mexico.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9945863",
-    "updatedAt": "01/11/2026 10:53",
+    "updatedAt": "01/11/2026 15:16",
     "flag": "HONG KONG, CHINA"
   },
   {
@@ -375,7 +375,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "01/11/2026 10:53",
+    "updatedAt": "01/11/2026 15:16",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850886",
     "imageUrl": "/vessels/ever_fair.jpg"
   },
@@ -389,7 +389,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "01/11/2026 10:53",
+    "updatedAt": "01/11/2026 15:16",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850525",
     "imageUrl": "/vessels/ever_faith.jpg"
   },
@@ -403,7 +403,7 @@
     "type": "CONTAINER SHIP",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "01/11/2026 10:53",
+    "updatedAt": "01/11/2026 15:16",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850800",
     "imageUrl": "/vessels/ever_fame.jpg"
   },
@@ -515,7 +515,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "01/11/2026 10:53",
+    "updatedAt": "01/11/2026 15:16",
     "bayCount": 78,
     "bays": 78,
     "rowCount": 20,
@@ -825,13 +825,13 @@
     "name": "NC BRUMA",
     "loa": 223.91,
     "beam": 34.88,
-    "draft": 10,
+    "draft": 10.0,
     "berthingSide": "boreste",
     "imo": "9612777",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "01/11/2026 10:53",
+    "updatedAt": "01/11/2026 15:16",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9612777",
     "imageUrl": "/vessels/nc_bruma.jpg"
   },
