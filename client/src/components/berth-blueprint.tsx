@@ -231,6 +231,8 @@ function renderContainerDeck(
     vessel.name.toUpperCase().includes("FIT") ||
     vessel.name.toUpperCase().includes("FAR") ||
     vessel.name.toUpperCase().includes("FAME") ||
+      vessel.name.toUpperCase().includes("FAIR") ||
+      vessel.name.toUpperCase().includes("FAITH") ||
     vessel.name.toUpperCase().includes("FASHION") ||
     vessel.name.toUpperCase().includes("FORTUNE") ||
     vessel.name.toUpperCase().includes("FAST") ||

@@ -306,6 +306,7 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "COSCO SHIPPING ARGENTINA": "container",
   "COSCO SHIPPING BRAZIL": "container",
   "COSCO SHIPPING CHILE": "container",
+  "EVER FAIR": "container",
   "EVER FAME": "container",
   "EVER FAR": "container",
   "EVER FASHION": "container",
@@ -494,6 +495,54 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     funnelBayStart: 64,
     funnelBayEnd: 64,
     vesselType: "container",
+  },
+  "EVER FAIR": {
+    name: "EVER FAIR",
+    loa: 333.95,
+    beam: 48.43,
+    draft: 14.8,
+    bayCount: 76,
+    bays: 76,
+    rowCount: 20,
+    rows: 20,
+    tierCount: 7,
+    tiers: 7,
+    bridgePosition: "between-bays",
+    bridgeBay: 28,
+    bridgeBayStart: 28,
+    bridgeBayEnd: 28,
+    separateFunnel: true,
+    funnelBay: 62,
+    funnelBayStart: 62,
+    funnelBayEnd: 62,
+    vesselType: "container",
+    isManualLayout: true,
+    imageUrl: "/vessels/ever_fair.jpg",
+    marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9850886",
+  },
+  "EVER FAME": {
+    name: "EVER FAME",
+    loa: 333.95,
+    beam: 48.43,
+    draft: 12.3,
+    bayCount: 76,
+    bays: 76,
+    rowCount: 20,
+    rows: 20,
+    tierCount: 7,
+    tiers: 7,
+    bridgePosition: "between-bays",
+    bridgeBay: 28,
+    bridgeBayStart: 28,
+    bridgeBayEnd: 28,
+    separateFunnel: true,
+    funnelBay: 62,
+    funnelBayStart: 62,
+    funnelBayEnd: 62,
+    vesselType: "container",
+    isManualLayout: true,
+    imageUrl: "/vessels/ever_fame.jpg",
+    marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9850800",
   },
   "EVER FIT": {
     name: "EVER FIT",
@@ -910,6 +959,7 @@ export function isManuallyConfiguredVessel(vessel?: {
     "COSCO SHIPPING BRAZIL",
     "COSCO SHIPPING ARGENTINA",
     "EVER FIT",
+    "EVER FAME",
     "EVER LEADER",
     "MERCOSUL FORTALEZA",
     "MAERSK FORTALEZA",
@@ -1338,6 +1388,8 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     vessel.name.toUpperCase().includes("FIT") ||
     vessel.name.toUpperCase().includes("FAR") ||
     vessel.name.toUpperCase().includes("FAME") ||
+      vessel.name.toUpperCase().includes("FAIR") ||
+      vessel.name.toUpperCase().includes("FAITH") ||
     vessel.name.toUpperCase().includes("FASHION") ||
     vessel.name.toUpperCase().includes("FORTUNE") ||
     vessel.name.toUpperCase().includes("FAST") ||
@@ -2406,7 +2458,7 @@ export function normalizeScenario(value: unknown): Scenario | null {
       (upperName.includes("VERACRUZ") ? KNOWN_VESSEL_DEFAULTS["CMA CGM VERACRUZ"] :
       isFortaleza ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["MERCOSUL FORTALEZA"]) :
       (upperName.includes("COSCO") && (upperName.includes("CHILE") || upperName.includes("BRAZIL") || upperName.includes("BRASIL") || upperName.includes("ARGENTINA") || upperName.includes("URUGUAY"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["COSCO SHIPPING BRAZIL"]) :
-      (upperName.includes("EVER") && (upperName.includes("FIT") || upperName.includes("FAR") || upperName.includes("FAME") || upperName.includes("FASHION") || upperName.includes("FORTUNE"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["EVER FIT"]) :
+      (upperName.includes("EVER") && (upperName.includes("FIT") || upperName.includes("FAR") || upperName.includes("FAME") || upperName.includes("FAIR") || upperName.includes("FAITH") || upperName.includes("FASHION") || upperName.includes("FORTUNE"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["EVER FIT"]) :
       upperName.includes("PANTANAL") ? KNOWN_VESSEL_DEFAULTS["LOG-IN PANTANAL"] :
       upperName.includes("BRISA") ? KNOWN_VESSEL_DEFAULTS["NC BRISA"] :
       upperName.includes("SPYROS") ? KNOWN_VESSEL_DEFAULTS["SPYROS V"] : (upperName.includes("APL") && upperName.includes("NEW JERSEY")) ? KNOWN_VESSEL_DEFAULTS["APL NEW JERSEY"] : upperName.includes("DUSSELDORF") ? KNOWN_VESSEL_DEFAULTS["DUSSELDORF EXPRESS"] : undefined);

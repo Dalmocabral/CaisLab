@@ -1,10 +1,10 @@
 {
-  "updatedAt": "02/11/2026 08:37",
+  "updatedAt": "02/11/2026 10:10",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 8,
   "maneuvers": [
     {
-      "dateTime": "02/11 17:30",
+      "dateTime": "02/11 16:00",
       "name": "EVER FAME",
       "draft": 12.3,
       "loa": 333.95,
@@ -21,7 +21,7 @@
     {
       "dateTime": "02/11 19:00",
       "name": "NC BRUMA",
-      "draft": 10.0,
+      "draft": 10,
       "loa": 223.91,
       "beam": 34.88,
       "maneuver": "E",
@@ -97,8 +97,8 @@
       "dateTime": "11/11 10:00",
       "name": "KOTA ELOK",
       "draft": 14.6,
-      "loa": 335.0,
-      "beam": 51.0,
+      "loa": 335,
+      "beam": 51,
       "maneuver": "E",
       "berthFrom": "",
       "berthTo": "TECONTPROLONG",
@@ -113,7 +113,7 @@
       "name": "COSCO SHIPPING MEXICO",
       "draft": 12.5,
       "loa": 335.9,
-      "beam": 51.0,
+      "beam": 51,
       "maneuver": "E",
       "berthFrom": "",
       "berthTo": "TECONTPROLONG",
