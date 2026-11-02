@@ -1105,7 +1105,8 @@ function addVessel(
       ? (!isAllAft ? Math.max(12.5, Math.min(loa * 0.048, 15.5)) : Math.max(8, Math.min(loa * 0.045, 14)))
       : Math.max(16, Math.min(loa * 0.12, 38));
     const houseMaterial = new THREE.MeshStandardMaterial({ color: "#f1f5f9", roughness: 0.62 });
-    const funnelColor = isTanker ? "#ea580c" : (VESSEL_COLORS[vessel.color]?.stroke ?? "#285a78");
+    const isEvergreen = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("EVER");
+    const funnelColor = isTanker ? "#ea580c" : isEvergreen ? "#064e3b" : (VESSEL_COLORS[vessel.color]?.stroke ?? "#285a78");
     const funnelMaterial = new THREE.MeshStandardMaterial({ color: funnelColor, roughness: 0.65 });
 
     let sternHouseX: number;
@@ -1130,14 +1131,14 @@ function addVessel(
     let separateFunnelLength: number;
     if (deckPlan?.funnelCenterFromStern !== undefined) {
       separateFunnelX = direction * (deckPlan.funnelCenterFromStern - loa / 2);
-      separateFunnelLength = Math.max(6, Math.min(deckPlan.funnelLength ?? 12, 14));
+      separateFunnelLength = Math.max(5, Math.min(deckPlan.funnelLength ?? 10, isEvergreen ? 8.0 : 14));
     } else {
       const targetFunnelBay = vessel.funnelBay ?? 40;
       const funnelBayRatio = Math.max(0.05, Math.min(0.95, 1 - (targetFunnelBay / Math.max(1, totalBays))));
       separateFunnelX = direction * (loa * funnelBayRatio - loa / 2);
       separateFunnelLength = Math.max(10, Math.min(loa * 0.045, 14));
     }
-    const separateFunnelWidth = beam * 0.36;
+    const separateFunnelWidth = isEvergreen ? beam * 0.28 : beam * 0.36;
     const separateFunnelHeight = towerHeight * 0.92;
 
     // 1. Bloco de Acomodações Multi-andares

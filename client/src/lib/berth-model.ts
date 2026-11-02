@@ -1628,7 +1628,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     const rightOf63 = bayCellFromStern(idx63) + cellWidth;
     const leftOf61 = bayCellFromStern(idx61);
     funnelCenterFromStern = (rightOf63 + leftOf61) / 2;
-    funnelLength = Math.max(6, everFitFunnelSlotW);
+    funnelLength = Math.max(5.0, Math.min(everFitFunnelSlotW - 1.0, 7.0));
   } else if (config.separateFunnel && funnelIndices.length > 0) {
     const minX = Math.min(...funnelIndices.map((idx) => bayCellFromStern(idx)));
     const maxX = Math.max(...funnelIndices.map((idx) => bayCellFromStern(idx) + cellWidth));
@@ -1888,6 +1888,131 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
         colBBlocked: false,
       });
     });
+  } else if (hasEverFitFunnel && idx61 !== -1 && idx63 !== -1) {
+    // 1. Escotilhas 0 a 6: pares de 40ft (bays 01-03 até 25-27)
+    for (let p = 0; p < 7; p++) {
+      const colA = 2 * p;
+      const colB = colA + 1;
+      const cellXA = bayCellFromStern(colA);
+      const cellXB = bayCellFromStern(colB);
+      hatches.push({
+        hatchIndex: p,
+        colA,
+        colB,
+        bay20A: bays[colA],
+        bay20B: bays[colB],
+        fromSternA: cellXA + cellWidth / 2,
+        fromSternB: cellXB + cellWidth / 2,
+        centerFromStern: (cellXB + cellXA + cellWidth) / 2,
+        length40: (cellXA + cellWidth) - cellXB,
+        length20: cellWidth,
+        isBlockedByBridge: false,
+        isBlockedByFunnel: false,
+        colABlocked: false,
+        colBBlocked: false,
+      });
+    }
+
+    // [ O passadiço / Island Bridge fica situado no vão entre bay 27 e bay 29 ]
+
+    // 2. Escotilhas 7 a 14: pares de 40ft (bays 29-31 até 57-59)
+    for (let p = 7; p <= 14; p++) {
+      const colA = 2 * p;
+      const colB = colA + 1;
+      const cellXA = bayCellFromStern(colA);
+      const cellXB = bayCellFromStern(colB);
+      hatches.push({
+        hatchIndex: p,
+        colA,
+        colB,
+        bay20A: bays[colA],
+        bay20B: bays[colB],
+        fromSternA: cellXA + cellWidth / 2,
+        fromSternB: cellXB + cellWidth / 2,
+        centerFromStern: (cellXB + cellXA + cellWidth) / 2,
+        length40: (cellXA + cellWidth) - cellXB,
+        length20: cellWidth,
+        isBlockedByBridge: false,
+        isBlockedByFunnel: false,
+        colABlocked: false,
+        colBBlocked: false,
+      });
+    }
+
+    // 3. Escotilha 15: Bay 61 isolada de 20ft em frente à chaminé
+    const col61 = idx61;
+    const cellX61 = bayCellFromStern(col61);
+    hatches.push({
+      hatchIndex: 15,
+      colA: col61,
+      colB: undefined,
+      bay20A: bays[col61],
+      bay20B: undefined,
+      fromSternA: cellX61 + cellWidth / 2,
+      fromSternB: undefined,
+      centerFromStern: cellX61 + cellWidth / 2,
+      length40: cellWidth,
+      length20: cellWidth,
+      isBlockedByBridge: false,
+      isBlockedByFunnel: false,
+      colABlocked: false,
+      colBBlocked: false,
+    });
+
+    // [ A chaminé / Funnel fica situada no vão dedicado entre a Bay 61 e a Bay 63 ]
+
+    // 4. Escotilhas 16 a 18: pares de 40ft na ré da chaminé (bays 63-65, 67-69, 71-73)
+    const aftPairs = [
+      { colA: idx63, colB: idx63 + 1 }, // 63, 65
+      { colA: idx63 + 2, colB: idx63 + 3 }, // 67, 69
+      { colA: idx63 + 4, colB: idx63 + 5 }, // 71, 73
+    ];
+    aftPairs.forEach((pair, idx) => {
+      const cellXA = bayCellFromStern(pair.colA);
+      const cellXB = bayCellFromStern(pair.colB);
+      hatches.push({
+        hatchIndex: 16 + idx,
+        colA: pair.colA,
+        colB: pair.colB,
+        bay20A: bays[pair.colA],
+        bay20B: bays[pair.colB],
+        fromSternA: cellXA + cellWidth / 2,
+        fromSternB: cellXB + cellWidth / 2,
+        centerFromStern: (cellXB + cellXA + cellWidth) / 2,
+        length40: (cellXA + cellWidth) - cellXB,
+        length20: cellWidth,
+        isBlockedByBridge: false,
+        isBlockedByFunnel: false,
+        colABlocked: false,
+        colBBlocked: false,
+      });
+    });
+
+    // 5. Escotilha 19: Bay 76 centralizada na popa (substitui bay 75)
+    const col75 = bays.indexOf(75);
+    const col76 = bays.indexOf(76);
+    if (col76 !== -1) {
+      const cellX76 = bayCellFromStern(col76);
+      const cellX75 = col75 !== -1 ? bayCellFromStern(col75) : cellX76;
+      const center76 = col75 !== -1 ? (cellX76 + cellX75 + cellWidth) / 2 : cellX76 + cellWidth / 2;
+      const len40_76 = col75 !== -1 ? (cellX75 + cellWidth) - cellX76 : cellWidth;
+      hatches.push({
+        hatchIndex: 19,
+        colA: col76,
+        colB: col75 !== -1 ? col75 : undefined,
+        bay20A: 76,
+        bay20B: undefined,
+        fromSternA: center76,
+        fromSternB: undefined,
+        centerFromStern: center76,
+        length40: len40_76,
+        length20: cellWidth,
+        isBlockedByBridge: false,
+        isBlockedByFunnel: false,
+        colABlocked: false,
+        colBBlocked: false,
+      });
+    }
   } else {
     for (let h = 0; h < totalHatches; h++) {
       const colA = 2 * h;
