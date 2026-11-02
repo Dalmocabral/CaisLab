@@ -1,12 +1,12 @@
 {
-  "updatedAt": "02/11/2026 13:35",
+  "updatedAt": "02/11/2026 19:53",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 8,
+  "count": 9,
   "maneuvers": [
     {
       "dateTime": "02/11 16:00",
       "name": "EVER FAME",
-      "draft": 12.3,
+      "draft": 12.2,
       "loa": 333.95,
       "beam": 48.43,
       "maneuver": "E",
@@ -21,7 +21,7 @@
     {
       "dateTime": "02/11 19:00",
       "name": "NC BRUMA",
-      "draft": 10.0,
+      "draft": 8.4,
       "loa": 223.91,
       "beam": 34.88,
       "maneuver": "E",
@@ -59,6 +59,21 @@
       "berthTo": "TECONTPROLONG",
       "berthingSide": "boreste",
       "imo": "9850886",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "LIBERIA",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "05/11 18:00",
+      "name": "DALIAN EXPRESS",
+      "draft": 10.6,
+      "loa": 320.58,
+      "beam": 42.88,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONTPROLONG",
+      "berthingSide": "boreste",
+      "imo": "9229829",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "LIBERIA",
       "terminal": "rio"
