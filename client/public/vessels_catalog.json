@@ -221,7 +221,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cma_cgm_thorium.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996745",
-    "updatedAt": "03/11/2026 17:25",
+    "updatedAt": "03/11/2026 22:41",
     "flag": "MALTA"
   },
   {
@@ -335,7 +335,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cosco_shipping_mexico.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9945863",
-    "updatedAt": "03/11/2026 17:26",
+    "updatedAt": "03/11/2026 22:41",
     "flag": "HONG KONG, CHINA"
   },
   {
@@ -348,7 +348,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "03/11/2026 17:25",
+    "updatedAt": "03/11/2026 22:41",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9229829",
     "imageUrl": "/vessels/dalian_express.jpg"
   },
@@ -389,7 +389,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "03/11/2026 17:25",
+    "updatedAt": "03/11/2026 22:41",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850886",
     "imageUrl": "/vessels/ever_fair.jpg",
     "bayCount": 76,
@@ -419,7 +419,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "03/11/2026 17:25",
+    "updatedAt": "03/11/2026 22:41",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850525",
     "imageUrl": "/vessels/ever_faith.jpg"
   },
@@ -555,13 +555,13 @@
     "name": "FINCH ARROW",
     "loa": 210.0,
     "beam": 36.0,
-    "draft": 11.7,
+    "draft": 11.5,
     "berthingSide": "boreste",
     "imo": "9574860",
     "type": "GENERAL CARGO SHIP (OPEN HATCH)",
     "flag": "PANAMA",
     "lastBerth": "TECONT1",
-    "updatedAt": "03/11/2026 17:25",
+    "updatedAt": "03/11/2026 22:41",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9574860",
     "imageUrl": "/vessels/finch_arrow.jpg"
   },
@@ -575,7 +575,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "03/11/2026 17:25",
+    "updatedAt": "03/11/2026 22:41",
     "bayCount": 78,
     "bays": 78,
     "rowCount": 20,
