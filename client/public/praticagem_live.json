@@ -1,5 +1,5 @@
 {
-  "updatedAt": "03/11/2026 09:01",
+  "updatedAt": "03/11/2026 12:28",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 7,
   "maneuvers": [
@@ -82,8 +82,8 @@
       "dateTime": "11/11 10:00",
       "name": "KOTA ELOK",
       "draft": 14.6,
-      "loa": 335,
-      "beam": 51,
+      "loa": 335.0,
+      "beam": 51.0,
       "maneuver": "E",
       "berthFrom": "",
       "berthTo": "TECONTPROLONG",
@@ -98,7 +98,7 @@
       "name": "COSCO SHIPPING MEXICO",
       "draft": 12.5,
       "loa": 335.9,
-      "beam": 51,
+      "beam": 51.0,
       "maneuver": "E",
       "berthFrom": "",
       "berthTo": "TECONTPROLONG",

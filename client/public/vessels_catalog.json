@@ -92,7 +92,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "03/11/2026 09:01",
+    "updatedAt": "03/11/2026 12:28",
     "bayCount": 78,
     "bays": 78,
     "bridgePosition": "between-bays",
@@ -221,7 +221,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cma_cgm_thorium.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996745",
-    "updatedAt": "03/11/2026 09:01",
+    "updatedAt": "03/11/2026 12:28",
     "flag": "MALTA"
   },
   {
@@ -327,7 +327,7 @@
   {
     "name": "COSCO SHIPPING MEXICO",
     "loa": 335.9,
-    "beam": 51,
+    "beam": 51.0,
     "draft": 12.5,
     "berthingSide": "boreste",
     "imo": "9945863",
@@ -335,7 +335,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cosco_shipping_mexico.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9945863",
-    "updatedAt": "03/11/2026 09:01",
+    "updatedAt": "03/11/2026 12:28",
     "flag": "HONG KONG, CHINA"
   },
   {
@@ -348,7 +348,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "03/11/2026 09:01",
+    "updatedAt": "03/11/2026 12:28",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9229829",
     "imageUrl": "/vessels/dalian_express.jpg"
   },
@@ -389,7 +389,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "03/11/2026 09:01",
+    "updatedAt": "03/11/2026 12:28",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850886",
     "imageUrl": "/vessels/ever_fair.jpg",
     "bayCount": 76,
@@ -419,7 +419,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "03/11/2026 09:01",
+    "updatedAt": "03/11/2026 12:28",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850525",
     "imageUrl": "/vessels/ever_faith.jpg"
   },
@@ -561,7 +561,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "03/11/2026 09:01",
+    "updatedAt": "03/11/2026 12:28",
     "bayCount": 78,
     "bays": 78,
     "rowCount": 20,
