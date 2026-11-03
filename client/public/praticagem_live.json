@@ -1,38 +1,8 @@
 {
-  "updatedAt": "02/11/2026 20:56",
+  "updatedAt": "03/11/2026 01:55",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 9,
+  "count": 7,
   "maneuvers": [
-    {
-      "dateTime": "02/11 16:00",
-      "name": "EVER FAME",
-      "draft": 12.2,
-      "loa": 333.95,
-      "beam": 48.43,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
-      "berthingSide": "boreste",
-      "imo": "9850800",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "PANAMA",
-      "terminal": "rio"
-    },
-    {
-      "dateTime": "02/11 19:00",
-      "name": "NC BRUMA",
-      "draft": 8.4,
-      "loa": 223.91,
-      "beam": 34.88,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "boreste",
-      "imo": "9612777",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "BRAZIL",
-      "terminal": "rio"
-    },
     {
       "dateTime": "03/11 17:00",
       "name": "CMA CGM COBALT",
