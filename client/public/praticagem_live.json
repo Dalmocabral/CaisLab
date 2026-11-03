@@ -1,12 +1,12 @@
 {
-  "updatedAt": "03/11/2026 12:28",
+  "updatedAt": "03/11/2026 17:26",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 7,
+  "count": 8,
   "maneuvers": [
     {
-      "dateTime": "03/11 17:00",
+      "dateTime": "03/11 15:00",
       "name": "CMA CGM COBALT",
-      "draft": 14.4,
+      "draft": 14.3,
       "loa": 335.23,
       "beam": 51.06,
       "maneuver": "E",
@@ -31,6 +31,21 @@
       "imo": "9850886",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "LIBERIA",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "05/11 05:30",
+      "name": "FINCH ARROW",
+      "draft": 11.7,
+      "loa": 210.0,
+      "beam": 36.0,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONT1",
+      "berthingSide": "boreste",
+      "imo": "9574860",
+      "type": "GENERAL CARGO SHIP (OPEN HATCH)",
+      "flag": "PANAMA",
       "terminal": "rio"
     },
     {
