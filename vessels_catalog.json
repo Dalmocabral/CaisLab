@@ -221,7 +221,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cma_cgm_thorium.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996745",
-    "updatedAt": "04/11/2026 02:29",
+    "updatedAt": "04/11/2026 03:53",
     "flag": "MALTA"
   },
   {
@@ -335,7 +335,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cosco_shipping_mexico.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9945863",
-    "updatedAt": "04/11/2026 02:29",
+    "updatedAt": "04/11/2026 03:53",
     "flag": "HONG KONG, CHINA"
   },
   {
@@ -348,7 +348,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "04/11/2026 02:29",
+    "updatedAt": "04/11/2026 03:53",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9229829",
     "imageUrl": "/vessels/dalian_express.jpg"
   },
@@ -389,7 +389,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "04/11/2026 02:29",
+    "updatedAt": "04/11/2026 03:53",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850886",
     "imageUrl": "/vessels/ever_fair.jpg",
     "bayCount": 76,
@@ -419,7 +419,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "04/11/2026 02:29",
+    "updatedAt": "04/11/2026 03:53",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850525",
     "imageUrl": "/vessels/ever_faith.jpg",
     "bayCount": 76,
@@ -577,7 +577,7 @@
     "type": "GENERAL CARGO SHIP (OPEN HATCH)",
     "flag": "PANAMA",
     "lastBerth": "TECONT1",
-    "updatedAt": "04/11/2026 02:29",
+    "updatedAt": "04/11/2026 03:53",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9574860",
     "imageUrl": "/vessels/finch_arrow.jpg",
     "vesselType": "general-cargo"
@@ -592,7 +592,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "04/11/2026 02:29",
+    "updatedAt": "04/11/2026 03:53",
     "bayCount": 78,
     "bays": 78,
     "rowCount": 20,
@@ -1039,7 +1039,7 @@
     "type": "PIPE LAYER",
     "flag": "ISLE OF MAN",
     "lastBerth": "TECONT1",
-    "updatedAt": "04/11/2026 02:29",
+    "updatedAt": "04/11/2026 03:53",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9710969",
     "imageUrl": "/vessels/seven_sun.jpg"
   },
