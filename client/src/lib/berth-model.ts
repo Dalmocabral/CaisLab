@@ -289,6 +289,7 @@ export function defaultTierCountForBeam(beam: number): number {
 
 export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "BBC AMBER": "general-cargo",
+  "FINCH ARROW": "general-cargo",
   "OCEAN MERMAID": "research-survey",
   "SEVEN RIO": "offshore",
   "SEVEN CRUZEIRO": "offshore",
@@ -307,6 +308,7 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "COSCO SHIPPING BRAZIL": "container",
   "COSCO SHIPPING CHILE": "container",
   "EVER FAIR": "container",
+  "EVER FAITH": "container",
   "EVER FAME": "container",
   "EVER FAR": "container",
   "EVER FASHION": "container",
@@ -520,6 +522,30 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     isManualLayout: true,
     imageUrl: "/vessels/ever_fair.jpg",
     marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9850886",
+  },
+  "EVER FAITH": {
+    name: "EVER FAITH",
+    loa: 333.96,
+    beam: 48.52,
+    draft: 14.5,
+    bayCount: 76,
+    bays: 76,
+    rowCount: 20,
+    rows: 20,
+    tierCount: 9,
+    tiers: 9,
+    bridgePosition: "between-bays",
+    bridgeBay: 28,
+    bridgeBayStart: 28,
+    bridgeBayEnd: 28,
+    separateFunnel: true,
+    funnelBay: 62,
+    funnelBayStart: 62,
+    funnelBayEnd: 62,
+    vesselType: "container",
+    isManualLayout: true,
+    imageUrl: "/vessels/ever_faith.jpg",
+    marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9850525",
   },
   "EVER FAME": {
     name: "EVER FAME",
@@ -931,6 +957,16 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     imageUrl: "/vessels/dusseldorf_express.jpg",
     marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9143556",
   },
+  "FINCH ARROW": {
+    name: "FINCH ARROW",
+    loa: 210.0,
+    beam: 36.0,
+    draft: 11.5,
+    vesselType: "general-cargo",
+    color: "blue",
+    imageUrl: "/vessels/finch_arrow.jpg",
+    marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9574860",
+  },
   "BBC AMBER": {
     name: "BBC AMBER",
     loa: 153.44,
@@ -981,6 +1017,8 @@ export function isManuallyConfiguredVessel(vessel?: {
     "COSCO SHIPPING BRAZIL",
     "COSCO SHIPPING ARGENTINA",
     "EVER FIT",
+    "EVER FAIR",
+    "EVER FAITH",
     "EVER FAME",
     "EVER LEADER",
     "MERCOSUL FORTALEZA",
@@ -1027,6 +1065,11 @@ export function normalizeVesselType(raw?: string | null, vesselName?: string | n
   // 1. Reconhecimento inteligente baseado na frota mundial e padrões de nomenclatura do navio:
   // a) General Cargo / Carga Geral / Multipurpose / Heavy Lift (ex: BBC Chartering, AAL, Thorco, Chipolbrok, BigLift)
   if (
+    upperName.endsWith(" ARROW") ||
+    upperName.includes(" ARROW") ||
+    upperName.startsWith("ARROW ") ||
+    upperName.includes("GEARBULK") ||
+    upperName.includes("GRIEG") ||
     upperName.startsWith("BBC ") ||
     upperName.includes("BBC AMBER") ||
     upperName.startsWith("AAL ") ||
@@ -2614,6 +2657,7 @@ export function normalizeScenario(value: unknown): Scenario | null {
     // sempre prevalecem sobre dados salvos em cache (sessionStorage), garantindo que correções no
     // catálogo sejam aplicadas imediatamente sem precisar limpar o cache do navegador.
     const isManualLayoutVessel = Boolean((knownDefault as any)?.isManualLayout) || Boolean(knownDefault?.bayCount);
+    const isContainer = vesselType === "container";
     const rawBayCount = isManualLayoutVessel && knownDefault?.bayCount
       ? knownDefault.bayCount
       : (raw as any).bayCount ?? (raw as any).maxBayNumber ?? raw.bays;
@@ -2692,20 +2736,20 @@ export function normalizeScenario(value: unknown): Scenario | null {
       mooringLines,
       color,
       vesselType,
-      bayCount,
-      bays: bayCount,
-      rowCount,
-      rows: rowCount,
-      tierCount,
-      tiers: tierCount,
-      bridgePosition,
-      bridgeBay,
-      bridgeBayStart,
-      bridgeBayEnd,
-      separateFunnel,
-      funnelBay,
-      funnelBayStart,
-      funnelBayEnd,
+      bayCount: isContainer ? bayCount : undefined,
+      bays: isContainer ? bayCount : undefined,
+      rowCount: isContainer ? rowCount : undefined,
+      rows: isContainer ? rowCount : undefined,
+      tierCount: isContainer ? tierCount : undefined,
+      tiers: isContainer ? tierCount : undefined,
+      bridgePosition: isContainer ? bridgePosition : undefined,
+      bridgeBay: isContainer ? bridgeBay : undefined,
+      bridgeBayStart: isContainer ? bridgeBayStart : undefined,
+      bridgeBayEnd: isContainer ? bridgeBayEnd : undefined,
+      separateFunnel: isContainer ? separateFunnel : undefined,
+      funnelBay: isContainer ? funnelBay : undefined,
+      funnelBayStart: isContainer ? funnelBayStart : undefined,
+      funnelBayEnd: isContainer ? funnelBayEnd : undefined,
       imageUrl: typeof (raw as any).imageUrl === "string" ? (raw as any).imageUrl : (raw.name?.trim().toUpperCase() === "MAERSK FREEPORT" ? "/vessels/maersk_freeport.jpg" : (knownDefault as any)?.imageUrl),
       marineTrafficUrl: typeof (raw as any).marineTrafficUrl === "string" ? (raw as any).marineTrafficUrl : (raw.name?.trim().toUpperCase() === "MAERSK FREEPORT" ? "https://www.marinetraffic.com/en/ais/details/ships/shipid:8941589" : (knownDefault as any)?.marineTrafficUrl),
     });

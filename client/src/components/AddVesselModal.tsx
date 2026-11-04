@@ -279,6 +279,7 @@ export default function AddVesselModal({
       funnelBay,
       imo: m.imo,
       type: m.type || VESSEL_TYPE_LABELS[vesselType],
+      vesselType,
       flag: m.flag,
       lastBerth: m.berthTo || m.berthFrom || "",
       imageUrl,
@@ -423,6 +424,7 @@ export default function AddVesselModal({
         separateFunnel,
         funnelBay,
         type: VESSEL_TYPE_LABELS[manualType],
+        vesselType: manualType,
         imageUrl,
         marineTrafficUrl,
       });

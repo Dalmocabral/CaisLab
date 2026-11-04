@@ -539,7 +539,7 @@ function addVessel(
   group.userData.vesselName = vessel.name;
   scene.add(group);
 
-  const vType = normalizeVesselType(vessel.vesselType, vessel.name);
+  const vType = normalizeVesselType(vessel.vesselType ?? (vessel as any).type, vessel.name);
   const isTanker = vType === "chemical-tanker" || vType === "product-tanker" || vType === "tanker";
   const isContainer = vType === "container";
   const isOffshore = vType === "offshore" || vType === "diving-support";

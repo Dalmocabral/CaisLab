@@ -1,4 +1,4 @@
-import { normalizeBayCount, normalizeRowCount, normalizeTierCount, type BridgePositionType } from "./berth-model";
+import { normalizeBayCount, normalizeRowCount, normalizeTierCount, type BridgePositionType, type VesselType } from "./berth-model";
 
 export interface CatalogVessel {
   name: string;
@@ -20,6 +20,7 @@ export interface CatalogVessel {
   berthingSide: "boreste" | "bombordo";
   imo?: string;
   type?: string;
+  vesselType?: VesselType;
   flag?: string;
   lastBerth?: string;
   updatedAt?: string;
@@ -49,6 +50,7 @@ export interface PraticagemManeuver {
   berthingSide: "boreste" | "bombordo";
   imo?: string;
   type?: string;
+  vesselType?: VesselType;
   flag?: string;
 }
 

@@ -2670,7 +2670,7 @@ export default function BerthBlueprint({
           const messages = issueByVessel.get(vessel.id) ?? [];
           const isIssue = messages.length > 0;
           const isSelected = selectedVesselId === vessel.id;
-          const vesselType = normalizeVesselType(vessel.vesselType, vessel.name);
+          const vesselType = normalizeVesselType(vessel.vesselType ?? (vessel as any).type, vessel.name);
 
           return (
             <g

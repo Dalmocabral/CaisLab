@@ -395,7 +395,8 @@ export default function Simulator() {
         funnelBay: mergedVessel.funnelBay,
         funnelBayStart: mergedVessel.funnelBayStart ?? mergedVessel.funnelBay,
         funnelBayEnd: mergedVessel.funnelBayEnd ?? mergedVessel.funnelBay,
-        type: VESSEL_TYPE_LABELS[normalizeVesselType(mergedVessel.vesselType, mergedVessel.name)],
+        vesselType: normalizeVesselType(mergedVessel.vesselType ?? (mergedVessel as any).type, mergedVessel.name),
+        type: VESSEL_TYPE_LABELS[normalizeVesselType(mergedVessel.vesselType ?? (mergedVessel as any).type, mergedVessel.name)],
         imageUrl: mergedVessel.imageUrl,
         marineTrafficUrl: mergedVessel.marineTrafficUrl,
       }).then(() => setNotice(`${mergedVessel.name}: Dados salvos no catálogo com sucesso.`));
@@ -898,7 +899,7 @@ export default function Simulator() {
               {scenario.vessels.map((vessel) => {
                 const selected = selectedVesselId === vessel.id;
                 const vesselIssues = issues.filter((issue) => issue.vesselId === vessel.id);
-                const resolvedType = normalizeVesselType(vessel.vesselType, vessel.name);
+                const resolvedType = normalizeVesselType(vessel.vesselType ?? (vessel as any).type, vessel.name);
                 const typeLabel = VESSEL_TYPE_LABELS[resolvedType] || "Contêiner";
                 return (
                   <button key={vessel.id} type="button" className={`vessel-list-item ${selected ? "vessel-list-item-selected" : ""}`} onClick={() => setSelectedVesselId(vessel.id)}>
@@ -964,7 +965,7 @@ export default function Simulator() {
                     <select
                       id="vessel-type-select"
                       className="side-select"
-                      value={normalizeVesselType(selectedVessel.vesselType, selectedVessel.name)}
+                      value={normalizeVesselType(selectedVessel.vesselType ?? (selectedVessel as any).type, selectedVessel.name)}
                       onChange={(event) => patchVessel(selectedVessel.id, { vesselType: event.target.value as VesselType })}
                     >
                       <option value="container">Porta-Contêineres</option>
@@ -978,7 +979,7 @@ export default function Simulator() {
                     </select>
                   </div>
                 </div>
-                {normalizeVesselType(selectedVessel.vesselType, selectedVessel.name) === "container" && (
+                {normalizeVesselType(selectedVessel.vesselType ?? (selectedVessel as any).type, selectedVessel.name) === "container" && (
                   <>
                     <div className="field-row" style={{ gridTemplateColumns: "1fr 1fr 1fr" }}>
                       <div>
@@ -1080,7 +1081,7 @@ export default function Simulator() {
                 })()}
 
                 {/* Layout da Superestrutura (Posição do Passadiço & Chaminé - colocado abaixo da imagem) */}
-                {normalizeVesselType(selectedVessel.vesselType, selectedVessel.name) === "container" && (
+                {normalizeVesselType(selectedVessel.vesselType ?? (selectedVessel as any).type, selectedVessel.name) === "container" && (
                   <div className="mt-3 pt-3 border-t border-[#edf1f2] space-y-2.5">
                     <div>
                       <label className="field-label" htmlFor="vessel-bridge-position">Posição do Passadiço</label>

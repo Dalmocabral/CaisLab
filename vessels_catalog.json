@@ -327,7 +327,7 @@
   {
     "name": "COSCO SHIPPING MEXICO",
     "loa": 335.9,
-    "beam": 51.0,
+    "beam": 51,
     "draft": 12.5,
     "berthingSide": "boreste",
     "imo": "9945863",
@@ -421,7 +421,23 @@
     "lastBerth": "TECONTPROLONG",
     "updatedAt": "03/11/2026 22:41",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850525",
-    "imageUrl": "/vessels/ever_faith.jpg"
+    "imageUrl": "/vessels/ever_faith.jpg",
+    "bayCount": 76,
+    "bays": 76,
+    "rowCount": 20,
+    "rows": 20,
+    "tierCount": 9,
+    "tiers": 9,
+    "bridgePosition": "between-bays",
+    "bridgeBay": 28,
+    "bridgeBayStart": 28,
+    "bridgeBayEnd": 28,
+    "separateFunnel": true,
+    "funnelBay": 62,
+    "funnelBayStart": 62,
+    "funnelBayEnd": 62,
+    "vesselType": "container",
+    "isManualLayout": true
   },
   {
     "name": "EVER FAME",
@@ -553,17 +569,18 @@
   },
   {
     "name": "FINCH ARROW",
-    "loa": 210.0,
-    "beam": 36.0,
+    "loa": 210,
+    "beam": 36,
     "draft": 11.5,
     "berthingSide": "boreste",
     "imo": "9574860",
     "type": "GENERAL CARGO SHIP (OPEN HATCH)",
     "flag": "PANAMA",
     "lastBerth": "TECONT1",
-    "updatedAt": "03/11/2026 22:41",
+    "updatedAt": "03/11/2026 23:28",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9574860",
-    "imageUrl": "/vessels/finch_arrow.jpg"
+    "imageUrl": "/vessels/finch_arrow.jpg",
+    "vesselType": "general-cargo"
   },
   {
     "name": "KOTA ELOK",
