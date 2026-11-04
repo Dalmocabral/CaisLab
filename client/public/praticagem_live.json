@@ -1,25 +1,10 @@
 {
-  "updatedAt": "04/11/2026 03:53",
+  "updatedAt": "04/11/2026 11:44",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 8,
+  "count": 7,
   "maneuvers": [
     {
-      "dateTime": "04/11 00:00",
-      "name": "SEVEN SUN",
-      "draft": 6.8,
-      "loa": 145.95,
-      "beam": 29.98,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "boreste",
-      "imo": "9710969",
-      "type": "PIPE LAYER",
-      "flag": "ISLE OF MAN",
-      "terminal": "rio"
-    },
-    {
-      "dateTime": "04/11 16:30",
+      "dateTime": "04/11 15:30",
       "name": "EVER FAIR",
       "draft": 14.8,
       "loa": 333.95,
