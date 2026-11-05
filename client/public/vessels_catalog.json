@@ -221,7 +221,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cma_cgm_thorium.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996745",
-    "updatedAt": "05/11/2026 08:43",
+    "updatedAt": "05/11/2026 17:45",
     "flag": "MALTA"
   },
   {
@@ -335,7 +335,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cosco_shipping_mexico.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9945863",
-    "updatedAt": "05/11/2026 08:43",
+    "updatedAt": "05/11/2026 17:45",
     "flag": "HONG KONG, CHINA"
   },
   {
@@ -348,7 +348,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "05/11/2026 08:43",
+    "updatedAt": "05/11/2026 17:45",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9229829",
     "imageUrl": "/vessels/dalian_express.jpg"
   },
@@ -419,7 +419,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "05/11/2026 08:43",
+    "updatedAt": "05/11/2026 17:45",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850525",
     "imageUrl": "/vessels/ever_faith.jpg",
     "bayCount": 76,
@@ -592,7 +592,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "05/11/2026 08:43",
+    "updatedAt": "05/11/2026 17:45",
     "bayCount": 78,
     "bays": 78,
     "rowCount": 20,
@@ -666,7 +666,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "05/11/2026 08:43",
+    "updatedAt": "05/11/2026 17:45",
     "bayCount": 40,
     "bays": 40,
     "rowCount": 10,
@@ -792,6 +792,20 @@
     "isManualLayout": true,
     "imageUrl": "/vessels/maersk_freeport.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/shipid:8941589"
+  },
+  {
+    "name": "MAERSK REDWOOD",
+    "loa": 200.0,
+    "beam": 36.4,
+    "draft": 9.4,
+    "berthingSide": "boreste",
+    "imo": "9943085",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "SINGAPORE",
+    "lastBerth": "TECONT1",
+    "updatedAt": "05/11/2026 17:45",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9943085",
+    "imageUrl": "/vessels/maersk_redwood.jpg"
   },
   {
     "name": "MALIAKOS",
@@ -1076,6 +1090,20 @@
     "bays": 50,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9453365",
     "imageUrl": "/vessels/spyros_v.jpg"
+  },
+  {
+    "name": "SWANSEA",
+    "loa": 270.9,
+    "beam": 42.8,
+    "draft": 14.1,
+    "berthingSide": "boreste",
+    "imo": "9629469",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "LIBERIA",
+    "lastBerth": "TECONTPROLONG",
+    "updatedAt": "05/11/2026 17:45",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9629469",
+    "imageUrl": "/vessels/swansea.jpg"
   },
   {
     "name": "TOKYO EXPRESS",

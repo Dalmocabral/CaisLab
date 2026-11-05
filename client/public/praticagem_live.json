@@ -1,10 +1,10 @@
 {
-  "updatedAt": "05/11/2026 08:43",
+  "updatedAt": "05/11/2026 17:45",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 6,
+  "count": 8,
   "maneuvers": [
     {
-      "dateTime": "05/11 18:30",
+      "dateTime": "05/11 17:30",
       "name": "DALIAN EXPRESS",
       "draft": 10.6,
       "loa": 320.58,
@@ -31,6 +31,36 @@
       "imo": "9351799",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "BRAZIL",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "07/11 06:00",
+      "name": "MAERSK REDWOOD",
+      "draft": 9.4,
+      "loa": 200.0,
+      "beam": 36.4,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONT1",
+      "berthingSide": "boreste",
+      "imo": "9943085",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "SINGAPORE",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "07/11 13:30",
+      "name": "SWANSEA",
+      "draft": 14.1,
+      "loa": 270.9,
+      "beam": 42.8,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONTPROLONG",
+      "berthingSide": "boreste",
+      "imo": "9629469",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "LIBERIA",
       "terminal": "rio"
     },
     {
