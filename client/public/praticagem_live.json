@@ -1,23 +1,8 @@
 {
-  "updatedAt": "05/11/2026 00:38",
+  "updatedAt": "05/11/2026 08:43",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 7,
+  "count": 6,
   "maneuvers": [
-    {
-      "dateTime": "05/11 01:30",
-      "name": "FINCH ARROW",
-      "draft": 11.5,
-      "loa": 210.0,
-      "beam": 36.0,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "boreste",
-      "imo": "9574860",
-      "type": "GENERAL CARGO SHIP (OPEN HATCH)",
-      "flag": "PANAMA",
-      "terminal": "rio"
-    },
     {
       "dateTime": "05/11 18:30",
       "name": "DALIAN EXPRESS",
