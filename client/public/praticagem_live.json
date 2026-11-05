@@ -1,23 +1,8 @@
 {
-  "updatedAt": "04/11/2026 19:04",
+  "updatedAt": "05/11/2026 00:38",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 7,
   "maneuvers": [
-    {
-      "dateTime": "04/11 15:00",
-      "name": "EVER FAIR",
-      "draft": 14.8,
-      "loa": 333.95,
-      "beam": 48.43,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
-      "berthingSide": "boreste",
-      "imo": "9850886",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "LIBERIA",
-      "terminal": "rio"
-    },
     {
       "dateTime": "05/11 01:30",
       "name": "FINCH ARROW",
@@ -34,7 +19,7 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "05/11 18:00",
+      "dateTime": "05/11 18:30",
       "name": "DALIAN EXPRESS",
       "draft": 10.6,
       "loa": 320.58,
@@ -46,6 +31,21 @@
       "imo": "9229829",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "LIBERIA",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "06/11 12:00",
+      "name": "LOG-IN PANTANAL",
+      "draft": 8.7,
+      "loa": 182.47,
+      "beam": 25.2,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONT1",
+      "berthingSide": "boreste",
+      "imo": "9351799",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "BRAZIL",
       "terminal": "rio"
     },
     {
