@@ -296,6 +296,7 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "SEVEN WAVES": "offshore",
   "SEVEN SUN": "offshore",
   "APL NEW JERSEY": "container",
+  "DALIAN EXPRESS": "container",
   "DUSSELDORF EXPRESS": "container",
   "CARDIFF": "container",
   "CMA CGM COBALT": "container",
@@ -936,6 +937,27 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     imageUrl: "/vessels/apl_new_jersey.jpg",
     marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9350020",
   },
+  "DALIAN EXPRESS": {
+    name: "DALIAN EXPRESS",
+    loa: 320.58,
+    beam: 42.88,
+    draft: 10.6,
+    bayCount: 75,
+    bays: 75,
+    rowCount: 17,
+    rows: 17,
+    tierCount: 7,
+    tiers: 7,
+    bridgePosition: "between-bays",
+    bridgeBay: 60,
+    bridgeBayStart: 60,
+    bridgeBayEnd: 60,
+    separateFunnel: false,
+    vesselType: "container",
+    isManualLayout: true,
+    imageUrl: "/vessels/dalian_express.jpg",
+    marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9229829",
+  },
   "DUSSELDORF EXPRESS": {
     name: "DUSSELDORF EXPRESS",
     loa: 293.97,
@@ -1027,6 +1049,7 @@ export function isManuallyConfiguredVessel(vessel?: {
     "LOG-IN PANTANAL",
     "NC BRISA",
     "SPYROS V",
+    "DALIAN EXPRESS",
     "DUSSELDORF EXPRESS",
     "APL NEW JERSEY",
   ];
@@ -1361,12 +1384,16 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   );
   const isCardiff = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("CARDIFF");
   const isZimWilmington = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("ZIM") && vessel.name.toUpperCase().includes("WILMINGTON");
+  const isDalianExpress = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("DALIAN") && vessel.name.toUpperCase().includes("EXPRESS");
   // No 3D do Fortaleza: 10 escotilhas de 40' bem distribuídas (bays 01 a 39) com vão entre bays
   // No DUSSELDORF EXPRESS: 35 bays de 20' (01 a 69), com bay 53 isolada de 20' e passadiço entre 57 e 59
   // No APL NEW JERSEY: bay 01 isolada na proa, 13 pares de 40' até 53, passadiço entre 53 e 55, 4 pares de 40' até bay 68 na popa
   // No MERCOSUL GUARUJA: bay 01 isolada na proa, 10 pares de 40' até 41, passadiço entre 41 e 43, 2 pares de 40' na ré (43-45 e 47-49)
+  // No DALIAN EXPRESS: 38 bays de 20' (01 a 75), bay 01 isolada, 7 pares até 29, bay 31 isolada, 7 pares até 59, passadiço entre 59 e 61, 4 pares até 75
   const bays = isFortaleza
     ? Array.from({ length: 20 }, (_, index) => index * 2 + 1)
+    : isDalianExpress
+    ? Array.from({ length: 38 }, (_, index) => index * 2 + 1)
     : isDusseldorf
     ? Array.from({ length: 35 }, (_, index) => index * 2 + 1)
     : isAplNewJersey
@@ -1393,7 +1420,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     : isMercosulGuaruja
     ? Array.from({ length: 25 }, (_, index) => index * 2 + 1)
     : bayNumberSequence(vessel.bayCount ?? vessel.bays ?? vessel.maxBayNumber, vessel.name);
-  const isAllAft = config.bridgePosition === "all-aft" && !isAplNewJersey && !isDusseldorf && !isMercosulGuaruja && !isKotaSinga && !isCardiff && !isZimWilmington;
+  const isAllAft = config.bridgePosition === "all-aft" && !isAplNewJersey && !isDusseldorf && !isMercosulGuaruja && !isKotaSinga && !isCardiff && !isZimWilmington && !isDalianExpress;
 
   const bowInset = isFortaleza ? Math.min(16, loa * 0.09) : Math.min(23, loa * 0.16);
   const aftHouseW = isFortaleza ? 13.5 : Math.max(12, Math.min(24, loa * 0.065));
@@ -1440,6 +1467,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const idx55 = bays.indexOf(55);
   const idx57 = bays.indexOf(57);
   const idx59 = bays.indexOf(59);
+  const idx61 = bays.indexOf(61);
   const hasSpecialBridge55_57 = (isNykRumina || isSeaspanEmpire || isZimWilmington) && idx55 !== -1 && idx57 !== -1;
   const hasKotaElokBridge = isKotaElok && idx23 !== -1 && idx25 !== -1;
   const hasFreeportBridge = isMaerskFreeport && idx47 !== -1 && idx49 !== -1;
@@ -1448,6 +1476,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const hasGuarujaBridge = isMercosulGuaruja && idx41 !== -1 && idx43 !== -1;
   const idx45 = bays.indexOf(45);
   const hasKotaSingaBridge = isKotaSinga && idx43 !== -1 && idx45 !== -1;
+  const hasDalianBridge = isDalianExpress && idx59 !== -1 && idx61 !== -1;
 
   const isEverFitClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("EVER") && (
     vessel.name.toUpperCase().includes("FIT") ||
@@ -1463,12 +1492,11 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   );
   const idx27 = bays.indexOf(27);
   const idx29 = bays.indexOf(29);
-  const idx61 = bays.indexOf(61);
   const hasEverFitBridge = (isEverFitClass || isCmaCgmClass) && idx27 !== -1 && idx29 !== -1;
   const hasEverFitFunnel = isEverFitClass && config.separateFunnel && idx61 !== -1 && idx63 !== -1;
 
-  const num40ftGaps = isDusseldorf ? 17 : isAplNewJersey ? 16 : isMercosulGuaruja ? 11 : Math.max(0, Math.floor((bays.length - 1) / 2));
-  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasKotaElokBridge ? 2.0 : 0) + (hasFreeportBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0) + (hasAplBridge ? 2.0 : 0) + (hasGuarujaBridge ? 2.0 : 0) + (hasKotaSingaBridge ? 2.0 : 0);
+  const num40ftGaps = isDalianExpress ? 18 : isDusseldorf ? 17 : isAplNewJersey ? 16 : isMercosulGuaruja ? 11 : Math.max(0, Math.floor((bays.length - 1) / 2));
+  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasKotaElokBridge ? 2.0 : 0) + (hasFreeportBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0) + (hasAplBridge ? 2.0 : 0) + (hasGuarujaBridge ? 2.0 : 0) + (hasKotaSingaBridge ? 2.0 : 0) + (hasDalianBridge ? 2.0 : 0);
   const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + extraSlots);
   const hatchGap = isFortaleza ? 1.6 : (bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0);
   const totalGapsWidth = num40ftGaps * hatchGap;
@@ -1482,12 +1510,25 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const aplBridgeSlotW = hasAplBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const guarujaBridgeSlotW = hasGuarujaBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const kotaSingaBridgeSlotW = hasKotaSingaBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
-  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - kotaElokBridgeSlotW - freeportBridgeSlotW - dusseldorfBridgeSlotW - aplBridgeSlotW - guarujaBridgeSlotW - kotaSingaBridgeSlotW);
+  const dalianBridgeSlotW = hasDalianBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
+  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - kotaElokBridgeSlotW - freeportBridgeSlotW - dusseldorfBridgeSlotW - aplBridgeSlotW - guarujaBridgeSlotW - kotaSingaBridgeSlotW - dalianBridgeSlotW);
   const cellWidth = availableBayWidth / Math.max(1, bays.length);
 
   const bayCellFromStern = (index: number) => {
     let gapsBefore = Math.floor(index / 2);
-    if (isMercosulGuaruja) {
+    if (isDalianExpress) {
+      if (index === 0) {
+        gapsBefore = 0;
+      } else if (index <= 14) {
+        gapsBefore = 1 + Math.floor((index - 1) / 2);
+      } else if (index === 15) {
+        gapsBefore = 8;
+      } else if (index <= 29) {
+        gapsBefore = 9 + Math.floor((index - 16) / 2);
+      } else {
+        gapsBefore = 15 + Math.floor((index - 30) / 2);
+      }
+    } else if (isMercosulGuaruja) {
       if (index === 0) {
         gapsBefore = 0;
       } else if (index <= 20) {
@@ -1547,13 +1588,16 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     if (hasKotaSingaBridge && index >= idx45) {
       xPos -= kotaSingaBridgeSlotW;
     }
+    if (hasDalianBridge && index >= idx61) {
+      xPos -= dalianBridgeSlotW;
+    }
     return xPos;
   };
 
   const bridgeIndices: number[] = [];
   const funnelIndices: number[] = [];
 
-  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasKotaElokBridge && !hasFreeportBridge && !hasDusseldorfBridge && !hasAplBridge && !hasGuarujaBridge && !hasKotaSingaBridge) {
+  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasKotaElokBridge && !hasFreeportBridge && !hasDusseldorfBridge && !hasAplBridge && !hasGuarujaBridge && !hasKotaSingaBridge && !hasDalianBridge) {
     const targetBridgeBay = config.bridgeBay ?? config.bridgeBayStart ?? 34;
     const occupiedBridgeBays = getOccupiedBayNumbers(
       targetBridgeBay,
@@ -1671,6 +1715,11 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     const leftOf43 = bayCellFromStern(idx43);
     bridgeCenterFromStern = (rightOf45 + leftOf43) / 2;
     bridgeLength = Math.max(10, kotaSingaBridgeSlotW - 0.4);
+  } else if (hasDalianBridge) {
+    const rightOf61 = bayCellFromStern(idx61) + cellWidth;
+    const leftOf59 = bayCellFromStern(idx59);
+    bridgeCenterFromStern = (rightOf61 + leftOf59) / 2;
+    bridgeLength = Math.max(10, dalianBridgeSlotW - 0.4);
   } else if (bridgeIndices.length > 0) {
     const minX = Math.min(...bridgeIndices.map((idx) => bayCellFromStern(idx)));
     const maxX = Math.max(...bridgeIndices.map((idx) => bayCellFromStern(idx) + cellWidth));
@@ -1712,7 +1761,125 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const totalHatches = Math.ceil(bays.length / 2);
   const hatches: ContainerHatchPlan[] = [];
 
-  if (isMercosulGuaruja) {
+  if (isDalianExpress) {
+    // 1. Escotilha 0: Bay 01 (bay de 20ft isolada na proa: "05 03 | 01")
+    const col01 = 0;
+    const cellX01 = bayCellFromStern(col01);
+    hatches.push({
+      hatchIndex: 0,
+      colA: col01,
+      colB: undefined,
+      bay20A: bays[col01],
+      bay20B: undefined,
+      fromSternA: cellX01 + cellWidth / 2,
+      fromSternB: undefined,
+      centerFromStern: cellX01 + cellWidth / 2,
+      length40: cellWidth,
+      length20: cellWidth,
+      isBlockedByBridge: false,
+      isBlockedByFunnel: false,
+      colABlocked: false,
+      colBBlocked: false,
+    });
+
+    // 2. Escotilhas 1 a 7: pares de 40ft (bays 03-05 até 27-29)
+    for (let p = 0; p < 7; p++) {
+      const colA = 1 + 2 * p;
+      const colB = colA + 1;
+      const cellXA = bayCellFromStern(colA);
+      const cellXB = bayCellFromStern(colB);
+      hatches.push({
+        hatchIndex: 1 + p,
+        colA,
+        colB,
+        bay20A: bays[colA],
+        bay20B: bays[colB],
+        fromSternA: cellXA + cellWidth / 2,
+        fromSternB: cellXB + cellWidth / 2,
+        centerFromStern: (cellXB + cellXA + cellWidth) / 2,
+        length40: (cellXA + cellWidth) - cellXB,
+        length20: cellWidth,
+        isBlockedByBridge: false,
+        isBlockedByFunnel: false,
+        colABlocked: false,
+        colBBlocked: false,
+      });
+    }
+
+    // 3. Escotilha 8: Bay 31 (bay de 20ft isolada: "| 35 33 | 31 | 29 27 |")
+    const col31 = 15; // bays[15] === 31
+    const cellX31 = bayCellFromStern(col31);
+    hatches.push({
+      hatchIndex: 8,
+      colA: col31,
+      colB: undefined,
+      bay20A: bays[col31],
+      bay20B: undefined,
+      fromSternA: cellX31 + cellWidth / 2,
+      fromSternB: undefined,
+      centerFromStern: cellX31 + cellWidth / 2,
+      length40: cellWidth,
+      length20: cellWidth,
+      isBlockedByBridge: false,
+      isBlockedByFunnel: false,
+      colABlocked: false,
+      colBBlocked: false,
+    });
+
+    // 4. Escotilhas 9 a 15: pares de 40ft (bays 33-35 até 57-59 em frente ao passadiço)
+    for (let p = 0; p < 7; p++) {
+      const colA = 16 + 2 * p;
+      const colB = colA + 1;
+      const cellXA = bayCellFromStern(colA);
+      const cellXB = bayCellFromStern(colB);
+      hatches.push({
+        hatchIndex: 9 + p,
+        colA,
+        colB,
+        bay20A: bays[colA],
+        bay20B: bays[colB],
+        fromSternA: cellXA + cellWidth / 2,
+        fromSternB: cellXB + cellWidth / 2,
+        centerFromStern: (cellXB + cellXA + cellWidth) / 2,
+        length40: (cellXA + cellWidth) - cellXB,
+        length20: cellWidth,
+        isBlockedByBridge: false,
+        isBlockedByFunnel: false,
+        colABlocked: false,
+        colBBlocked: false,
+      });
+    }
+
+    // [ O passadiço fica situado no vão entre a escotilha 15 (bays 57-59) e a escotilha 16 (bays 61-63) ]
+
+    // 5. Escotilhas 16 a 19: pares de 40ft na ré do passadiço (61 63, 65 67, 69 71, 73 75: "75 73 | 71 69 | 67 65 | 63 61 passadisso 59 57")
+    const aftPairs = [
+      { colA: 30, colB: 31 }, // 61, 63
+      { colA: 32, colB: 33 }, // 65, 67
+      { colA: 34, colB: 35 }, // 69, 71
+      { colA: 36, colB: 37 }, // 73, 75
+    ];
+    aftPairs.forEach((pair, idx) => {
+      const cellXA = bayCellFromStern(pair.colA);
+      const cellXB = bayCellFromStern(pair.colB);
+      hatches.push({
+        hatchIndex: 16 + idx,
+        colA: pair.colA,
+        colB: pair.colB,
+        bay20A: bays[pair.colA],
+        bay20B: bays[pair.colB],
+        fromSternA: cellXA + cellWidth / 2,
+        fromSternB: cellXB + cellWidth / 2,
+        centerFromStern: (cellXB + cellXA + cellWidth) / 2,
+        length40: (cellXA + cellWidth) - cellXB,
+        length20: cellWidth,
+        isBlockedByBridge: false,
+        isBlockedByFunnel: false,
+        colABlocked: false,
+        colBBlocked: false,
+      });
+    });
+  } else if (isMercosulGuaruja) {
     // 1. Escotilha 0: Bay 01 (bay de 20ft isolada na proa)
     const col01 = 0;
     const cellX01 = bayCellFromStern(col01);
@@ -2651,7 +2818,7 @@ export function normalizeScenario(value: unknown): Scenario | null {
       (upperName.includes("EVER") && (upperName.includes("FIT") || upperName.includes("FAR") || upperName.includes("FAME") || upperName.includes("FAIR") || upperName.includes("FAITH") || upperName.includes("FASHION") || upperName.includes("FORTUNE"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["EVER FIT"]) :
       upperName.includes("PANTANAL") ? KNOWN_VESSEL_DEFAULTS["LOG-IN PANTANAL"] :
       upperName.includes("BRISA") ? KNOWN_VESSEL_DEFAULTS["NC BRISA"] :
-      upperName.includes("SPYROS") ? KNOWN_VESSEL_DEFAULTS["SPYROS V"] : (upperName.includes("APL") && upperName.includes("NEW JERSEY")) ? KNOWN_VESSEL_DEFAULTS["APL NEW JERSEY"] : upperName.includes("DUSSELDORF") ? KNOWN_VESSEL_DEFAULTS["DUSSELDORF EXPRESS"] : undefined);
+      upperName.includes("SPYROS") ? KNOWN_VESSEL_DEFAULTS["SPYROS V"] : (upperName.includes("APL") && upperName.includes("NEW JERSEY")) ? KNOWN_VESSEL_DEFAULTS["APL NEW JERSEY"] : upperName.includes("DUSSELDORF") ? KNOWN_VESSEL_DEFAULTS["DUSSELDORF EXPRESS"] : upperName.includes("DALIAN") ? KNOWN_VESSEL_DEFAULTS["DALIAN EXPRESS"] : undefined);
 
     // Para navios com layout calibrado manualmente (isManualLayout), os valores do knownDefault
     // sempre prevalecem sobre dados salvos em cache (sessionStorage), garantindo que correções no

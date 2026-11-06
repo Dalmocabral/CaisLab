@@ -228,7 +228,7 @@
     "name": "CMA CGM VERACRUZ",
     "loa": 228.62,
     "beam": 32.22,
-    "draft": 11.0,
+    "draft": 11,
     "berthingSide": "boreste",
     "imo": "9418377",
     "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
@@ -327,7 +327,7 @@
   {
     "name": "COSCO SHIPPING MEXICO",
     "loa": 335.9,
-    "beam": 51.0,
+    "beam": 51,
     "draft": 12.5,
     "berthingSide": "boreste",
     "imo": "9945863",
@@ -350,7 +350,20 @@
     "lastBerth": "TECONTPROLONG",
     "updatedAt": "05/11/2026 17:45",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9229829",
-    "imageUrl": "/vessels/dalian_express.jpg"
+    "imageUrl": "/vessels/dalian_express.jpg",
+    "bayCount": 75,
+    "bays": 75,
+    "rowCount": 17,
+    "rows": 17,
+    "tierCount": 7,
+    "tiers": 7,
+    "bridgePosition": "between-bays",
+    "bridgeBay": 60,
+    "bridgeBayStart": 60,
+    "bridgeBayEnd": 60,
+    "separateFunnel": false,
+    "vesselType": "container",
+    "isManualLayout": true
   },
   {
     "name": "DUSSELDORF EXPRESS",
@@ -569,8 +582,8 @@
   },
   {
     "name": "FINCH ARROW",
-    "loa": 210.0,
-    "beam": 36.0,
+    "loa": 210,
+    "beam": 36,
     "draft": 11.5,
     "berthingSide": "boreste",
     "imo": "9574860",
@@ -666,7 +679,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "05/11/2026 23:01",
+    "updatedAt": "06/11/2026 00:18",
     "bayCount": 40,
     "bays": 40,
     "rowCount": 10,
@@ -677,7 +690,8 @@
     "separateFunnel": false,
     "bridgeBay": 40,
     "imageUrl": "/vessels/log_in_pantanal.jpg",
-    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9351799"
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9351799",
+    "vesselType": "container"
   },
   {
     "name": "LONCOMILLA",
@@ -795,7 +809,7 @@
   },
   {
     "name": "MAERSK REDWOOD",
-    "loa": 200.0,
+    "loa": 200,
     "beam": 36.4,
     "draft": 9.4,
     "berthingSide": "boreste",

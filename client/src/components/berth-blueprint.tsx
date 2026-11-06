@@ -131,7 +131,10 @@ function renderContainerDeck(
   );
   const isCardiff = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("CARDIFF");
   const isZimWilmington = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("ZIM") && vessel.name.toUpperCase().includes("WILMINGTON");
-  const bays = isDusseldorf
+  const isDalianExpress = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("DALIAN") && vessel.name.toUpperCase().includes("EXPRESS");
+  const bays = isDalianExpress
+    ? Array.from({ length: 38 }, (_, index) => index * 2 + 1)
+    : isDusseldorf
     ? Array.from({ length: 35 }, (_, index) => index * 2 + 1)
     : isAplNewJersey
     ? [
@@ -168,7 +171,7 @@ function renderContainerDeck(
   const cellHeight = containerHeight / Math.max(1, activeRowCount);
 
   // Modo 1: Casaria 100% na popa (All-Aft, como CMA CGM Veracruz)
-  const isAllAft = config.bridgePosition === "all-aft" && !isAplNewJersey && !isDusseldorf && !isMercosulGuaruja && !isKotaSinga && !isCardiff && !isZimWilmington;
+  const isAllAft = config.bridgePosition === "all-aft" && !isAplNewJersey && !isDusseldorf && !isMercosulGuaruja && !isKotaSinga && !isCardiff && !isZimWilmington && !isDalianExpress;
 
   const aftHouseW = Math.max(12, Math.min(24, vesselWidth * 0.065));
   const aftHouseH = Math.max(14, containerHeight * 0.88);
@@ -218,6 +221,7 @@ function renderContainerDeck(
   const idx55 = bays.indexOf(55);
   const idx57 = bays.indexOf(57);
   const idx59 = bays.indexOf(59);
+  const idx61 = bays.indexOf(61);
   const hasSpecialBridge55_57 = (isNykRumina || isSeaspanEmpire || isZimWilmington) && idx55 !== -1 && idx57 !== -1;
   const hasKotaElokBridge = isKotaElok && idx23 !== -1 && idx25 !== -1;
   const hasFreeportBridge = isMaerskFreeport && idx47 !== -1 && idx49 !== -1;
@@ -226,6 +230,7 @@ function renderContainerDeck(
   const hasGuarujaBridge = isMercosulGuaruja && idx41 !== -1 && idx43 !== -1;
   const idx45 = bays.indexOf(45);
   const hasKotaSingaBridge = isKotaSinga && idx43 !== -1 && idx45 !== -1;
+  const hasDalianBridge = isDalianExpress && idx59 !== -1 && idx61 !== -1;
 
   const isEverFitClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("EVER") && (
     vessel.name.toUpperCase().includes("FIT") ||
@@ -241,13 +246,12 @@ function renderContainerDeck(
   );
   const idx27 = bays.indexOf(27);
   const idx29 = bays.indexOf(29);
-  const idx61 = bays.indexOf(61);
   const hasEverFitBridge = (isEverFitClass || isCmaCgmClass) && idx27 !== -1 && idx29 !== -1;
   const hasEverFitFunnel = isEverFitClass && config.separateFunnel && idx61 !== -1 && idx63 !== -1;
 
   // Separação visual entre as bays de 40' (cada par de bays de 20' forma uma bay/hatch de 40')
-  const num40ftGaps = isDusseldorf ? 17 : isAplNewJersey ? 16 : isMercosulGuaruja ? 11 : Math.max(0, Math.floor((bays.length - 1) / 2));
-  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasKotaElokBridge ? 2.0 : 0) + (hasFreeportBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0) + (hasAplBridge ? 2.0 : 0) + (hasGuarujaBridge ? 2.0 : 0) + (hasKotaSingaBridge ? 2.0 : 0);
+  const num40ftGaps = isDalianExpress ? 18 : isDusseldorf ? 17 : isAplNewJersey ? 16 : isMercosulGuaruja ? 11 : Math.max(0, Math.floor((bays.length - 1) / 2));
+  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasKotaElokBridge ? 2.0 : 0) + (hasFreeportBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0) + (hasAplBridge ? 2.0 : 0) + (hasGuarujaBridge ? 2.0 : 0) + (hasKotaSingaBridge ? 2.0 : 0) + (hasDalianBridge ? 2.0 : 0);
   const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + extraSlots);
   const hatchGap = bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0;
   const totalGapsWidth = num40ftGaps * hatchGap;
@@ -261,7 +265,8 @@ function renderContainerDeck(
   const aplBridgeSlotW = hasAplBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const guarujaBridgeSlotW = hasGuarujaBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const kotaSingaBridgeSlotW = hasKotaSingaBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
-  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - kotaElokBridgeSlotW - freeportBridgeSlotW - dusseldorfBridgeSlotW - aplBridgeSlotW - guarujaBridgeSlotW - kotaSingaBridgeSlotW);
+  const dalianBridgeSlotW = hasDalianBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
+  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - kotaElokBridgeSlotW - freeportBridgeSlotW - dusseldorfBridgeSlotW - aplBridgeSlotW - guarujaBridgeSlotW - kotaSingaBridgeSlotW - dalianBridgeSlotW);
   const cellWidth = availableBayWidth / Math.max(1, bays.length);
   const labelSize = bays.length ? Math.max(2.6, Math.min(5.4, cellWidth * 0.54)) : 3.4;
   const rowLabelSize = Math.max(2.0, Math.min(labelSize, cellHeight * 0.72));
@@ -270,7 +275,19 @@ function renderContainerDeck(
   // Posição X da baia considerando o espaço visual entre escotilhas de 40'
   const bayCellX = (index: number) => {
     let gapsBefore = Math.floor(index / 2);
-    if (isMercosulGuaruja) {
+    if (isDalianExpress) {
+      if (index === 0) {
+        gapsBefore = 0;
+      } else if (index <= 14) {
+        gapsBefore = 1 + Math.floor((index - 1) / 2);
+      } else if (index === 15) {
+        gapsBefore = 8;
+      } else if (index <= 29) {
+        gapsBefore = 9 + Math.floor((index - 16) / 2);
+      } else {
+        gapsBefore = 15 + Math.floor((index - 30) / 2);
+      }
+    } else if (isMercosulGuaruja) {
       if (index === 0) {
         gapsBefore = 0;
       } else if (index <= 20) {
@@ -330,6 +347,9 @@ function renderContainerDeck(
     if (hasKotaSingaBridge && index >= idx45) {
       xPos -= kotaSingaBridgeSlotW;
     }
+    if (hasDalianBridge && index >= idx61) {
+      xPos -= dalianBridgeSlotW;
+    }
     return xPos;
   };
 
@@ -337,7 +357,7 @@ function renderContainerDeck(
   const bridgeIndices: number[] = [];
   const funnelIndices: number[] = [];
 
-  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasKotaElokBridge && !hasFreeportBridge && !hasDusseldorfBridge && !hasAplBridge && !hasGuarujaBridge && !hasKotaSingaBridge) {
+  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasKotaElokBridge && !hasFreeportBridge && !hasDusseldorfBridge && !hasAplBridge && !hasGuarujaBridge && !hasKotaSingaBridge && !hasDalianBridge) {
     const targetBridgeBay = config.bridgeBay ?? config.bridgeBayStart ?? 34;
     const occupiedBridgeBays = getOccupiedBayNumbers(
       targetBridgeBay,
@@ -996,6 +1016,53 @@ function renderContainerDeck(
             return (
               <>
                 <title>Passadiço (entre Bay 43 e Bay 45)</title>
+                <rect
+                  x={slotX}
+                  y={y + 2.5}
+                  width={slotW}
+                  height={vesselHeight - 5}
+                  rx="1.8"
+                  fill={color.fill}
+                  stroke={color.stroke}
+                  strokeWidth="1.2"
+                />
+                {/* Asas do passadiço */}
+                <line
+                  x1={slotX + slotW * 0.55}
+                  y1={y + 0.8}
+                  x2={slotX + slotW * 0.55}
+                  y2={y + vesselHeight - 0.8}
+                  stroke={color.stroke}
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                />
+                {/* Chaminé no próprio passadiço (lado de ré) */}
+                <ellipse
+                  cx={slotX + slotW * 0.25}
+                  cy={y + vesselHeight / 2}
+                  rx={Math.max(2.2, Math.min(4.8, slotW * 0.22))}
+                  ry={Math.max(1.8, Math.min(3.2, vesselHeight * 0.11))}
+                  fill="#1e293b"
+                  stroke="#0f172a"
+                  strokeWidth="0.7"
+                />
+              </>
+            );
+          })()}
+        </g>
+      )}
+
+      {/* 2f-3. Passadiço Específico do DALIAN EXPRESS (entre as bays 59 e 61: 63 61 [passadiço] 59 57) */}
+      {!isAllAft && hasDalianBridge && (
+        <g className="superstructure-bridge-island-dalian">
+          {(() => {
+            const rightOf61 = bayCellX(idx61) + cellWidth;
+            const leftOf59 = bayCellX(idx59);
+            const slotW = Math.max(8.0, dalianBridgeSlotW - 0.4);
+            const slotX = (rightOf61 + leftOf59 - slotW) / 2;
+            return (
+              <>
+                <title>Passadiço (entre Bay 59 e Bay 61)</title>
                 <rect
                   x={slotX}
                   y={y + 2.5}
