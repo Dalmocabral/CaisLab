@@ -221,7 +221,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cma_cgm_thorium.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996745",
-    "updatedAt": "06/11/2026 03:26",
+    "updatedAt": "06/11/2026 04:11",
     "flag": "MALTA"
   },
   {
@@ -233,7 +233,7 @@
     "imo": "9418377",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONT1",
-    "updatedAt": "06/11/2026 03:26",
+    "updatedAt": "06/11/2026 04:11",
     "flag": "BRAZIL",
     "bayCount": 50,
     "bays": 50,
@@ -335,7 +335,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cosco_shipping_mexico.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9945863",
-    "updatedAt": "06/11/2026 03:26",
+    "updatedAt": "06/11/2026 04:11",
     "flag": "HONG KONG, CHINA"
   },
   {
@@ -432,7 +432,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "06/11/2026 03:26",
+    "updatedAt": "06/11/2026 04:11",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850525",
     "imageUrl": "/vessels/ever_faith.jpg",
     "bayCount": 76,
@@ -605,7 +605,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "06/11/2026 03:26",
+    "updatedAt": "06/11/2026 04:11",
     "bayCount": 78,
     "bays": 78,
     "rowCount": 20,
@@ -679,7 +679,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "06/11/2026 03:26",
+    "updatedAt": "06/11/2026 04:11",
     "bayCount": 40,
     "bays": 40,
     "rowCount": 10,
@@ -817,7 +817,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONT1",
-    "updatedAt": "06/11/2026 03:26",
+    "updatedAt": "06/11/2026 04:11",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9943085",
     "imageUrl": "/vessels/maersk_redwood.jpg"
   },
@@ -1115,7 +1115,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "06/11/2026 03:26",
+    "updatedAt": "06/11/2026 04:11",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9629469",
     "imageUrl": "/vessels/swansea.jpg"
   },
