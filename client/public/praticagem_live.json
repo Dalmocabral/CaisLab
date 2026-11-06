@@ -1,18 +1,18 @@
 {
-  "updatedAt": "06/11/2026 13:26",
+  "updatedAt": "06/11/2026 20:09",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 8,
+  "count": 10,
   "maneuvers": [
     {
-      "dateTime": "06/11 21:00",
+      "dateTime": "07/11 02:30",
       "name": "LOG-IN PANTANAL",
-      "draft": 8.7,
+      "draft": 9.0,
       "loa": 182.47,
       "beam": 25.2,
-      "maneuver": "E",
-      "berthFrom": "",
+      "maneuver": "M",
+      "berthFrom": "TECONT2",
       "berthTo": "TECONT1",
-      "berthingSide": "boreste",
+      "berthingSide": "bombordo",
       "imo": "9351799",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "BRAZIL",
@@ -49,6 +49,21 @@
       "terminal": "rio"
     },
     {
+      "dateTime": "07/11 20:30",
+      "name": "XIN CHONG QING",
+      "draft": 11.6,
+      "loa": 263.23,
+      "beam": 32.2,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONT1",
+      "berthingSide": "boreste",
+      "imo": "9262118",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "CHINA, PEOPLE'S REPUBLIC OF",
+      "terminal": "rio"
+    },
+    {
       "dateTime": "08/11 05:00",
       "name": "CMA CGM VERACRUZ",
       "draft": 11.0,
@@ -61,6 +76,21 @@
       "imo": "9418377",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "BRAZIL",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "08/11 10:00",
+      "name": "PATMOS EXPRESS",
+      "draft": 10.0,
+      "loa": 272.0,
+      "beam": 42.8,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONTPROLONG",
+      "berthingSide": "boreste",
+      "imo": "1053573",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "MALTA",
       "terminal": "rio"
     },
     {
@@ -80,21 +110,6 @@
     },
     {
       "dateTime": "11/11 10:00",
-      "name": "KOTA ELOK",
-      "draft": 14.6,
-      "loa": 335.0,
-      "beam": 51.0,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
-      "berthingSide": "boreste",
-      "imo": "1081831",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "SINGAPORE",
-      "terminal": "rio"
-    },
-    {
-      "dateTime": "12/11 15:00",
       "name": "EVER FAITH",
       "draft": 14.5,
       "loa": 333.96,
@@ -106,6 +121,21 @@
       "imo": "9850525",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "PANAMA",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "12/11 15:00",
+      "name": "KOTA ELOK",
+      "draft": 14.6,
+      "loa": 335.0,
+      "beam": 51.0,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONTPROLONG",
+      "berthingSide": "boreste",
+      "imo": "1081831",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "SINGAPORE",
       "terminal": "rio"
     },
     {
