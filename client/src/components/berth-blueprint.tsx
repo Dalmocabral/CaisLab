@@ -129,7 +129,10 @@ function renderContainerDeck(
     vessel.name.toUpperCase().includes("LORI") ||
     vessel.name.toUpperCase().includes("SANTOS")
   );
-  const isCardiff = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("CARDIFF");
+  const isCardiff = typeof vessel.name === "string" && (
+    vessel.name.toUpperCase().includes("CARDIFF") ||
+    vessel.name.toUpperCase().includes("SWANSEA")
+  );
   const isZimWilmington = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("ZIM") && vessel.name.toUpperCase().includes("WILMINGTON");
   const isDalianExpress = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("DALIAN") && vessel.name.toUpperCase().includes("EXPRESS");
   const bays = isDalianExpress
@@ -209,7 +212,8 @@ function renderContainerDeck(
   const isSeaspanEmpire = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("SEASPAN") && vessel.name.toUpperCase().includes("EMPIRE");
   const isMaerskFreeport = typeof vessel.name === "string" && (
     (vessel.name.toUpperCase().includes("MAERSK") && vessel.name.toUpperCase().includes("FREEPORT")) ||
-    vessel.name.toUpperCase().includes("CARDIFF")
+    vessel.name.toUpperCase().includes("CARDIFF") ||
+    vessel.name.toUpperCase().includes("SWANSEA")
   );
   const idx23 = bays.indexOf(23);
   const idx25 = bays.indexOf(25);

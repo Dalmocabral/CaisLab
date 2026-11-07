@@ -189,7 +189,7 @@ export function resolveVesselSuperstructure(vessel: Partial<Vessel>): VesselSupe
   const isDusseldorf = upperName.includes("DUSSELDORF");
   const isGuaruja = upperName.includes("GUARUJA");
   const isKotaSinga = (upperName.includes("KOTA") && upperName.includes("SINGA")) || upperName.includes("LORI") || upperName.includes("SANTOS");
-  const isCardiff = upperName.includes("CARDIFF");
+  const isCardiff = upperName.includes("CARDIFF") || upperName.includes("SWANSEA");
   const isZimWilmington = upperName.includes("ZIM") && upperName.includes("WILMINGTON");
   const hasIslandBridge = isAplNewJersey || isDusseldorf || isGuaruja || isKotaSinga || isCardiff || isZimWilmington;
 
@@ -299,6 +299,7 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "DALIAN EXPRESS": "container",
   "DUSSELDORF EXPRESS": "container",
   "CARDIFF": "container",
+  "SWANSEA": "container",
   "CMA CGM COBALT": "container",
   "CMA CGM IRON": "container",
   "CMA CGM KRYPTON": "container",
@@ -997,6 +998,27 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     vesselType: "general-cargo",
     color: "blue",
   },
+  "SWANSEA": {
+    name: "SWANSEA",
+    loa: 270.9,
+    beam: 42.8,
+    draft: 14.1,
+    bayCount: 63,
+    bays: 63,
+    rowCount: 17,
+    rows: 17,
+    tierCount: 6,
+    tiers: 6,
+    bridgePosition: "between-bays",
+    bridgeBay: 48,
+    bridgeBayStart: 47,
+    bridgeBayEnd: 49,
+    separateFunnel: false,
+    vesselType: "container",
+    isManualLayout: true,
+    imageUrl: "/vessels/swansea.jpg",
+    marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9629469",
+  },
 };
 
 /**
@@ -1052,6 +1074,7 @@ export function isManuallyConfiguredVessel(vessel?: {
     "DALIAN EXPRESS",
     "DUSSELDORF EXPRESS",
     "APL NEW JERSEY",
+    "SWANSEA",
   ];
 
   if (MANUAL_VESSEL_NAMES.some((m) => rawName.includes(m))) {
@@ -1382,7 +1405,10 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     vessel.name.toUpperCase().includes("LORI") ||
     vessel.name.toUpperCase().includes("SANTOS")
   );
-  const isCardiff = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("CARDIFF");
+  const isCardiff = typeof vessel.name === "string" && (
+    vessel.name.toUpperCase().includes("CARDIFF") ||
+    vessel.name.toUpperCase().includes("SWANSEA")
+  );
   const isZimWilmington = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("ZIM") && vessel.name.toUpperCase().includes("WILMINGTON");
   const isDalianExpress = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("DALIAN") && vessel.name.toUpperCase().includes("EXPRESS");
   // No 3D do Fortaleza: 10 escotilhas de 40' bem distribuídas (bays 01 a 39) com vão entre bays
@@ -1455,7 +1481,8 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const isSeaspanEmpire = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("SEASPAN") && vessel.name.toUpperCase().includes("EMPIRE");
   const isMaerskFreeport = typeof vessel.name === "string" && (
     (vessel.name.toUpperCase().includes("MAERSK") && vessel.name.toUpperCase().includes("FREEPORT")) ||
-    vessel.name.toUpperCase().includes("CARDIFF")
+    vessel.name.toUpperCase().includes("CARDIFF") ||
+    vessel.name.toUpperCase().includes("SWANSEA")
   );
   const idx23 = bays.indexOf(23);
   const idx25 = bays.indexOf(25);
@@ -2818,7 +2845,7 @@ export function normalizeScenario(value: unknown): Scenario | null {
       (upperName.includes("EVER") && (upperName.includes("FIT") || upperName.includes("FAR") || upperName.includes("FAME") || upperName.includes("FAIR") || upperName.includes("FAITH") || upperName.includes("FASHION") || upperName.includes("FORTUNE"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["EVER FIT"]) :
       upperName.includes("PANTANAL") ? KNOWN_VESSEL_DEFAULTS["LOG-IN PANTANAL"] :
       upperName.includes("BRISA") ? KNOWN_VESSEL_DEFAULTS["NC BRISA"] :
-      upperName.includes("SPYROS") ? KNOWN_VESSEL_DEFAULTS["SPYROS V"] : (upperName.includes("APL") && upperName.includes("NEW JERSEY")) ? KNOWN_VESSEL_DEFAULTS["APL NEW JERSEY"] : upperName.includes("DUSSELDORF") ? KNOWN_VESSEL_DEFAULTS["DUSSELDORF EXPRESS"] : upperName.includes("DALIAN") ? KNOWN_VESSEL_DEFAULTS["DALIAN EXPRESS"] : undefined);
+      upperName.includes("SPYROS") ? KNOWN_VESSEL_DEFAULTS["SPYROS V"] : (upperName.includes("APL") && upperName.includes("NEW JERSEY")) ? KNOWN_VESSEL_DEFAULTS["APL NEW JERSEY"] : upperName.includes("DUSSELDORF") ? KNOWN_VESSEL_DEFAULTS["DUSSELDORF EXPRESS"] : upperName.includes("DALIAN") ? KNOWN_VESSEL_DEFAULTS["DALIAN EXPRESS"] : upperName.includes("SWANSEA") ? KNOWN_VESSEL_DEFAULTS["SWANSEA"] : upperName.includes("CARDIFF") ? KNOWN_VESSEL_DEFAULTS["CARDIFF"] : undefined);
 
     // Para navios com layout calibrado manualmente (isManualLayout), os valores do knownDefault
     // sempre prevalecem sobre dados salvos em cache (sessionStorage), garantindo que correções no
