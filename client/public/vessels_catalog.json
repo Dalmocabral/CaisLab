@@ -221,8 +221,9 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cma_cgm_thorium.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996745",
-    "updatedAt": "06/11/2026 22:15",
-    "flag": "MALTA"
+    "updatedAt": "06/11/2026 23:24",
+    "flag": "MALTA",
+    "vesselType": "container"
   },
   {
     "name": "CMA CGM VERACRUZ",
@@ -233,7 +234,7 @@
     "imo": "9418377",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "lastBerth": "TECONT1",
-    "updatedAt": "06/11/2026 22:15",
+    "updatedAt": "06/11/2026 23:24",
     "flag": "BRAZIL",
     "bayCount": 50,
     "bays": 50,
@@ -250,7 +251,8 @@
     "funnelBayStart": 44,
     "funnelBayEnd": 46,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9418377",
-    "imageUrl": "/vessels/cma_cgm_veracruz.jpg"
+    "imageUrl": "/vessels/cma_cgm_veracruz.jpg",
+    "vesselType": "container"
   },
   {
     "name": "COSCO SHIPPING ARGENTINA",
@@ -335,7 +337,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cosco_shipping_mexico.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9945863",
-    "updatedAt": "06/11/2026 22:15",
+    "updatedAt": "06/11/2026 23:24",
     "flag": "HONG KONG, CHINA"
   },
   {
@@ -432,7 +434,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "06/11/2026 22:15",
+    "updatedAt": "06/11/2026 23:24",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850525",
     "imageUrl": "/vessels/ever_faith.jpg",
     "bayCount": 76,
@@ -605,7 +607,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "06/11/2026 22:15",
+    "updatedAt": "06/11/2026 23:24",
     "bayCount": 78,
     "bays": 78,
     "rowCount": 20,
@@ -679,7 +681,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "06/11/2026 22:15",
+    "updatedAt": "06/11/2026 23:24",
     "bayCount": 40,
     "bays": 40,
     "rowCount": 10,
@@ -817,7 +819,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONT1",
-    "updatedAt": "06/11/2026 22:49",
+    "updatedAt": "06/11/2026 23:24",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9943085",
     "imageUrl": "/vessels/maersk_redwood.jpg",
     "vesselType": "container",
@@ -1035,7 +1037,9 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/patmos_express.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:1053573",
-    "updatedAt": "06/11/2026 22:15"
+    "updatedAt": "06/11/2026 23:24",
+    "vesselType": "container",
+    "flag": "MALTA"
   },
   {
     "name": "SEASPAN EMPIRE",
@@ -1132,10 +1136,10 @@
     "draft": 14.1,
     "berthingSide": "boreste",
     "imo": "9629469",
-    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "06/11/2026 22:45",
+    "updatedAt": "06/11/2026 23:24",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9629469",
     "imageUrl": "/vessels/swansea.jpg",
     "vesselType": "container",
@@ -1193,9 +1197,21 @@
     "lastBerth": "TECONT1",
     "imageUrl": "/vessels/xin_chong_qing.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9262118",
-    "updatedAt": "06/11/2026 22:50",
+    "updatedAt": "06/11/2026 23:24",
     "vesselType": "container",
-    "flag": "CHINA, PEOPLE'S REPUBLIC OF"
+    "flag": "CHINA, PEOPLE'S REPUBLIC OF",
+    "bayCount": 63,
+    "bays": 63,
+    "rowCount": 13,
+    "rows": 13,
+    "tierCount": 5,
+    "tiers": 5,
+    "bridgePosition": "between-bays",
+    "bridgeBay": 48,
+    "bridgeBayStart": 47,
+    "bridgeBayEnd": 49,
+    "separateFunnel": false,
+    "isManualLayout": true
   },
   {
     "name": "XIN WEI HAI",
