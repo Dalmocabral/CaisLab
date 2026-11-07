@@ -1,5 +1,5 @@
 {
-  "updatedAt": "07/11/2026 12:11",
+  "updatedAt": "07/11/2026 14:43",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 9,
   "maneuvers": [
@@ -109,7 +109,7 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "12/11 15:00",
+      "dateTime": "12/11 16:00",
       "name": "KOTA ELOK",
       "draft": 14.6,
       "loa": 335.0,
