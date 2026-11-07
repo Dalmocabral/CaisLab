@@ -202,7 +202,8 @@ function renderContainerDeck(
   const isCmaCgmClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("CMA CGM") && (
     vessel.name.toUpperCase().includes("KRYPTON") ||
     vessel.name.toUpperCase().includes("COBALT") ||
-    vessel.name.toUpperCase().includes("IRON")
+    vessel.name.toUpperCase().includes("IRON") ||
+    vessel.name.toUpperCase().includes("THORIUM")
   );
   const isKotaElok = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("ELOK");
   const idx63 = bays.indexOf(63);
@@ -460,7 +461,11 @@ function renderContainerDeck(
               const cellW = Math.max(0.6, cellWidth - 0.35);
               const isCmaCgmIronCell = typeof vessel.name === "string" && (
                 vessel.name.toUpperCase().includes("IRON") ||
-                (vessel.name.toUpperCase().includes("CMA CGM") && vessel.name.toUpperCase().includes("COBALT"))
+                (vessel.name.toUpperCase().includes("CMA CGM") && (
+                  vessel.name.toUpperCase().includes("COBALT") ||
+                  vessel.name.toUpperCase().includes("KRYPTON") ||
+                  vessel.name.toUpperCase().includes("THORIUM")
+                ))
               );
               const isVeracruzCell = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("VERACRUZ");
               const isKotaSingaCell = typeof vessel.name === "string" && (
@@ -517,7 +522,11 @@ function renderContainerDeck(
 
             const isCmaCgmIron = typeof vessel.name === "string" && (
               vessel.name.toUpperCase().includes("IRON") ||
-              (vessel.name.toUpperCase().includes("CMA CGM") && vessel.name.toUpperCase().includes("COBALT"))
+              (vessel.name.toUpperCase().includes("CMA CGM") && (
+                vessel.name.toUpperCase().includes("COBALT") ||
+                vessel.name.toUpperCase().includes("KRYPTON") ||
+                vessel.name.toUpperCase().includes("THORIUM")
+              ))
             );
             const is78Centered = isCoscoClass || isCmaCgmIron;
 

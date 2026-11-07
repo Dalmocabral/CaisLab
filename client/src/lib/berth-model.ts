@@ -304,6 +304,7 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "CMA CGM COBALT": "container",
   "CMA CGM IRON": "container",
   "CMA CGM KRYPTON": "container",
+  "CMA CGM THORIUM": "container",
   "CMA CGM PUCCINI": "container",
   "CMA CGM SANTOS": "container",
   "CMA CGM VERACRUZ": "container",
@@ -645,8 +646,8 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     bays: 79,
     rowCount: 20,
     rows: 20,
-    tierCount: 6,
-    tiers: 6,
+    tierCount: 9,
+    tiers: 9,
     bridgePosition: "between-bays",
     bridgeBay: 28,
     bridgeBayStart: 28,
@@ -656,6 +657,32 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     funnelBayStart: 64,
     funnelBayEnd: 64,
     vesselType: "container",
+    isManualLayout: true,
+    imageUrl: "/vessels/cma_cgm_krypton.jpg",
+  },
+  "CMA CGM THORIUM": {
+    name: "CMA CGM THORIUM",
+    loa: 335.23,
+    beam: 51.06,
+    draft: 14.6,
+    bayCount: 79,
+    bays: 79,
+    rowCount: 20,
+    rows: 20,
+    tierCount: 9,
+    tiers: 9,
+    bridgePosition: "between-bays",
+    bridgeBay: 28,
+    bridgeBayStart: 28,
+    bridgeBayEnd: 28,
+    separateFunnel: true,
+    funnelBay: 64,
+    funnelBayStart: 64,
+    funnelBayEnd: 64,
+    vesselType: "container",
+    isManualLayout: true,
+    imageUrl: "/vessels/cma_cgm_thorium.jpg",
+    marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9996745",
   },
   "CARDIFF": {
     name: "CARDIFF",
@@ -1066,6 +1093,7 @@ export function isManuallyConfiguredVessel(vessel?: {
 
   const MANUAL_VESSEL_NAMES = [
     "CMA CGM KRYPTON",
+    "CMA CGM THORIUM",
     "CARDIFF",
     "CMA CGM COBALT",
     "CMA CGM IRON",
@@ -1494,7 +1522,8 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const isCmaCgmClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("CMA CGM") && (
     vessel.name.toUpperCase().includes("KRYPTON") ||
     vessel.name.toUpperCase().includes("COBALT") ||
-    vessel.name.toUpperCase().includes("IRON")
+    vessel.name.toUpperCase().includes("IRON") ||
+    vessel.name.toUpperCase().includes("THORIUM")
   );
   const isKotaElok = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("ELOK");
   const idx63 = bays.indexOf(63);
@@ -2870,7 +2899,7 @@ export function normalizeScenario(value: unknown): Scenario | null {
       (upperName.includes("EVER") && (upperName.includes("FIT") || upperName.includes("FAR") || upperName.includes("FAME") || upperName.includes("FAIR") || upperName.includes("FAITH") || upperName.includes("FASHION") || upperName.includes("FORTUNE"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["EVER FIT"]) :
       upperName.includes("PANTANAL") ? KNOWN_VESSEL_DEFAULTS["LOG-IN PANTANAL"] :
       upperName.includes("BRISA") ? KNOWN_VESSEL_DEFAULTS["NC BRISA"] :
-      upperName.includes("SPYROS") ? KNOWN_VESSEL_DEFAULTS["SPYROS V"] : (upperName.includes("APL") && upperName.includes("NEW JERSEY")) ? KNOWN_VESSEL_DEFAULTS["APL NEW JERSEY"] : upperName.includes("DUSSELDORF") ? KNOWN_VESSEL_DEFAULTS["DUSSELDORF EXPRESS"] : upperName.includes("DALIAN") ? KNOWN_VESSEL_DEFAULTS["DALIAN EXPRESS"] : upperName.includes("SWANSEA") ? KNOWN_VESSEL_DEFAULTS["SWANSEA"] : upperName.includes("CHONG QING") ? KNOWN_VESSEL_DEFAULTS["XIN CHONG QING"] : upperName.includes("CARDIFF") ? KNOWN_VESSEL_DEFAULTS["CARDIFF"] : undefined);
+      upperName.includes("SPYROS") ? KNOWN_VESSEL_DEFAULTS["SPYROS V"] : (upperName.includes("APL") && upperName.includes("NEW JERSEY")) ? KNOWN_VESSEL_DEFAULTS["APL NEW JERSEY"] : upperName.includes("DUSSELDORF") ? KNOWN_VESSEL_DEFAULTS["DUSSELDORF EXPRESS"] : upperName.includes("DALIAN") ? KNOWN_VESSEL_DEFAULTS["DALIAN EXPRESS"] : upperName.includes("SWANSEA") ? KNOWN_VESSEL_DEFAULTS["SWANSEA"] : upperName.includes("CHONG QING") ? KNOWN_VESSEL_DEFAULTS["XIN CHONG QING"] : upperName.includes("CARDIFF") ? KNOWN_VESSEL_DEFAULTS["CARDIFF"] : upperName.includes("THORIUM") ? KNOWN_VESSEL_DEFAULTS["CMA CGM THORIUM"] : upperName.includes("KRYPTON") ? KNOWN_VESSEL_DEFAULTS["CMA CGM KRYPTON"] : undefined);
 
     // Para navios com layout calibrado manualmente (isManualLayout), os valores do knownDefault
     // sempre prevalecem sobre dados salvos em cache (sessionStorage), garantindo que correções no
