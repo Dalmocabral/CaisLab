@@ -162,7 +162,7 @@ export default function AddVesselModal({
     const isProlong = (berthTo || "").toUpperCase().includes("PROLONG");
 
     // Preferred berth station range:
-    // Expansão: 0-85m | Prolongamento: 85-515m | Tecon 1: 515-900m
+    // Expansão: 0-85m | Prolongamento: 85-515m | Tecon 1: 515-850m
     let preferredStart = quayClearance;
     if (isProlong) {
       preferredStart = 85 + quayClearance;

@@ -2835,7 +2835,7 @@ export function createDemoScenario(): Scenario {
     segments: [
       { id: "segment-expansao", name: "Expansão", length: 85 },
       { id: "segment-prolongamento", name: "Prolongamento", length: 430 },
-      { id: "segment-tecon", name: "Tecon 1", length: 385 },
+      { id: "segment-tecon", name: "Tecon 1", length: 335 },
     ],
     vessels: [],
     bollards: createBollardInventory(),
@@ -3090,6 +3090,14 @@ export function readScenario(): Scenario {
     if (!raw) return createDemoScenario();
     const scenario = normalizeScenario(JSON.parse(raw));
     if (!scenario) return createDemoScenario();
+    // Migrar trechos padrão antigos de 900m (85 + 430 + 385) para 850m (85 + 430 + 335)
+    const isOldDefault900 = scenario.segments.length === 3 &&
+      scenario.segments[0].id === "segment-expansao" && scenario.segments[0].length === 85 &&
+      scenario.segments[1].id === "segment-prolongamento" && scenario.segments[1].length === 430 &&
+      scenario.segments[2].id === "segment-tecon" && scenario.segments[2].length === 385;
+    if (isOldDefault900) {
+      scenario.segments[2].length = 335;
+    }
     // Ensure bollards match the 33 bollards with exact measurements and types from the port plan
     const b277 = scenario.bollards.find((b) => b.id === "277");
     const b288 = scenario.bollards.find((b) => b.id === "288");

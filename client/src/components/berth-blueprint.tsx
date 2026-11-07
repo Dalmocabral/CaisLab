@@ -2454,7 +2454,7 @@ export default function BerthBlueprint({
     }
   }, [scenario.vessels, scenario.portainers, isPresentationMode]);
   const total = scenario.segments.reduce((sum, segment) => sum + Math.max(0, segment.length), 0);
-  const scale = Math.max(0.68, 900 / Math.max(total, 1));
+  const scale = Math.max(0.68, 850 / Math.max(total, 1));
   const width = total * scale + PAD * 2;
   const trackStart = PAD;
   const trackEnd = PAD + total * scale;

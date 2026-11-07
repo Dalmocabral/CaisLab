@@ -61,7 +61,7 @@ export default function BerthStandaloneView() {
     if (!containerRef.current) return;
     const containerWidth = containerRef.current.clientWidth;
     const total = scenario.segments.reduce((sum, seg) => sum + Math.max(0, seg.length), 0);
-    const scale = Math.max(0.68, 900 / Math.max(total, 1));
+    const scale = Math.max(0.68, 850 / Math.max(total, 1));
     const blueprintBaseWidth = total * scale + 108;
     if (blueprintBaseWidth > 0 && containerWidth > 0) {
       const targetZoom = Number(((containerWidth - 24) / blueprintBaseWidth).toFixed(2));

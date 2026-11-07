@@ -9,7 +9,7 @@
 
 ## Sumário Executivo
 
-O **CaisLab** consolidou-se como uma ferramenta de alta fidelidade visual para o cais do Tecon Rio (900 m de cais, 33 cabeços reais, portêineres P4 a P9 e plantas de convés de navios porta-contêineres e tanques). 
+O **CaisLab** consolidou-se como uma ferramenta de alta fidelidade visual para o cais do Tecon Rio (850 m de cais, 33 cabeços reais, portêineres P4 a P9 e plantas de convés de navios porta-contêineres e tanques). 
 
 O desafio atual é **evoluir de uma representação estática ("foto de um instante") para uma plataforma de apoio à decisão operacional dinâmica**, permitindo ao usuário planejar, visualizar, comparar e reproduzir cenários de atracação e operação de guindastes no tempo, **sem tornar a ferramenta pesada, lenta ou complexa demais para o dia a dia**.
 
