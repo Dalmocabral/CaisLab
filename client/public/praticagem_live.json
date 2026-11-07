@@ -1,23 +1,8 @@
 {
-  "updatedAt": "07/11/2026 14:43",
+  "updatedAt": "07/11/2026 17:41",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 9,
+  "count": 10,
   "maneuvers": [
-    {
-      "dateTime": "07/11 13:30",
-      "name": "LOG-IN PANTANAL",
-      "draft": 9.2,
-      "loa": 182.47,
-      "beam": 25.2,
-      "maneuver": "M",
-      "berthFrom": "TECONT5",
-      "berthTo": "TECONT1",
-      "berthingSide": "bombordo",
-      "imo": "9351799",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "BRAZIL",
-      "terminal": "rio"
-    },
     {
       "dateTime": "07/11 17:30",
       "name": "SWANSEA",
@@ -49,7 +34,7 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "08/11 05:00",
+      "dateTime": "08/11 10:00",
       "name": "CMA CGM VERACRUZ",
       "draft": 11.0,
       "loa": 228.62,
@@ -64,7 +49,22 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "08/11 10:00",
+      "dateTime": "08/11 11:30",
+      "name": "XIN CHONG QING",
+      "draft": 11.7,
+      "loa": 263.23,
+      "beam": 32.2,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONTPROLONG",
+      "berthingSide": "boreste",
+      "imo": "9262118",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "CHINA, PEOPLE'S REPUBLIC OF",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "09/11 10:00",
       "name": "PATMOS EXPRESS",
       "draft": 10.0,
       "loa": 272.0,
@@ -79,7 +79,7 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "10/11 06:30",
+      "dateTime": "10/11 13:00",
       "name": "CMA CGM THORIUM",
       "draft": 14.6,
       "loa": 335.23,
@@ -94,7 +94,22 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "11/11 10:00",
+      "dateTime": "11/11 07:00",
+      "name": "DEEP ORIENT",
+      "draft": 6.5,
+      "loa": 132.44,
+      "beam": 31.4,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONT1",
+      "berthingSide": "bombordo",
+      "imo": "9644330",
+      "type": "OFFSHORE SUPPORT VESSEL",
+      "flag": "BAHAMAS",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "11/11 16:00",
       "name": "EVER FAITH",
       "draft": 14.5,
       "loa": 333.96,
