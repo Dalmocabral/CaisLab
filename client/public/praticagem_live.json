@@ -1,38 +1,8 @@
 {
-  "updatedAt": "08/11/2026 10:53",
+  "updatedAt": "08/11/2026 17:23",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 8,
+  "count": 6,
   "maneuvers": [
-    {
-      "dateTime": "08/11 10:00",
-      "name": "CMA CGM VERACRUZ",
-      "draft": 11.0,
-      "loa": 228.62,
-      "beam": 32.22,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "boreste",
-      "imo": "9418377",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "BRAZIL",
-      "terminal": "rio"
-    },
-    {
-      "dateTime": "08/11 11:30",
-      "name": "XIN CHONG QING",
-      "draft": 11.7,
-      "loa": 263.23,
-      "beam": 32.2,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
-      "berthingSide": "boreste",
-      "imo": "9262118",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "CHINA, PEOPLE'S REPUBLIC OF",
-      "terminal": "rio"
-    },
     {
       "dateTime": "09/11 10:00",
       "name": "PATMOS EXPRESS",
