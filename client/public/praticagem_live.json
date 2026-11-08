@@ -1,23 +1,8 @@
 {
-  "updatedAt": "07/11/2026 23:14",
+  "updatedAt": "08/11/2026 03:20",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 9,
+  "count": 8,
   "maneuvers": [
-    {
-      "dateTime": "07/11 19:30",
-      "name": "MAERSK REDWOOD",
-      "draft": 9.4,
-      "loa": 200.0,
-      "beam": 36.4,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "bombordo",
-      "imo": "9943085",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "SINGAPORE",
-      "terminal": "rio"
-    },
     {
       "dateTime": "08/11 10:00",
       "name": "CMA CGM VERACRUZ",
