@@ -1,7 +1,7 @@
 {
-  "updatedAt": "08/11/2026 17:23",
+  "updatedAt": "08/11/2026 21:29",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 6,
+  "count": 7,
   "maneuvers": [
     {
       "dateTime": "09/11 10:00",
@@ -16,6 +16,21 @@
       "imo": "1053573",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "MALTA",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "09/11 20:00",
+      "name": "MAERSK MONTE ALEGRE",
+      "draft": 12.4,
+      "loa": 272.05,
+      "beam": 40.0,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONT1",
+      "berthingSide": "boreste",
+      "imo": "9348065",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "SINGAPORE",
       "terminal": "rio"
     },
     {
