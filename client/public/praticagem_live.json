@@ -1,25 +1,25 @@
 {
-  "updatedAt": "09/11/2026 08:51",
+  "updatedAt": "09/11/2026 20:16",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 9,
+  "count": 8,
   "maneuvers": [
     {
-      "dateTime": "09/11 16:00",
-      "name": "PATMOS EXPRESS",
-      "draft": 10.0,
-      "loa": 272.0,
-      "beam": 42.8,
+      "dateTime": "09/11 19:00",
+      "name": "NC BREDA",
+      "draft": 8.4,
+      "loa": 223.98,
+      "beam": 34.88,
       "maneuver": "E",
       "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
+      "berthTo": "TECONT1",
       "berthingSide": "boreste",
-      "imo": "1053573",
+      "imo": "9612765",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "MALTA",
+      "flag": "BRAZIL",
       "terminal": "rio"
     },
     {
-      "dateTime": "09/11 20:00",
+      "dateTime": "10/11 12:00",
       "name": "MAERSK MONTE ALEGRE",
       "draft": 12.4,
       "loa": 272.05,
@@ -34,7 +34,7 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "10/11 13:00",
+      "dateTime": "10/11 17:00",
       "name": "CMA CGM THORIUM",
       "draft": 14.6,
       "loa": 335.23,
@@ -46,21 +46,6 @@
       "imo": "9996745",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "MALTA",
-      "terminal": "rio"
-    },
-    {
-      "dateTime": "10/11 17:00",
-      "name": "NC BREDA",
-      "draft": 8.6,
-      "loa": 223.98,
-      "beam": 34.88,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "boreste",
-      "imo": "9612765",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "BRAZIL",
       "terminal": "rio"
     },
     {
