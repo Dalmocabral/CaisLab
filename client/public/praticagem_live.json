@@ -1,7 +1,7 @@
 {
-  "updatedAt": "08/11/2026 21:29",
+  "updatedAt": "09/11/2026 01:19",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 7,
+  "count": 9,
   "maneuvers": [
     {
       "dateTime": "09/11 10:00",
@@ -49,6 +49,21 @@
       "terminal": "rio"
     },
     {
+      "dateTime": "10/11 17:00",
+      "name": "NC BREDA",
+      "draft": 8.6,
+      "loa": 223.98,
+      "beam": 34.88,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONT1",
+      "berthingSide": "boreste",
+      "imo": "9612765",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "BRAZIL",
+      "terminal": "rio"
+    },
+    {
       "dateTime": "11/11 07:00",
       "name": "DEEP ORIENT",
       "draft": 6.5,
@@ -61,6 +76,21 @@
       "imo": "9644330",
       "type": "OFFSHORE SUPPORT VESSEL",
       "flag": "BAHAMAS",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "11/11 12:00",
+      "name": "TINOS EXPRESS",
+      "draft": 11.0,
+      "loa": 272.08,
+      "beam": 42.8,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONT1",
+      "berthingSide": "boreste",
+      "imo": "1053585",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "MALTA",
       "terminal": "rio"
     },
     {
