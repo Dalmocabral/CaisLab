@@ -1,25 +1,10 @@
 {
-  "updatedAt": "09/11/2026 20:16",
+  "updatedAt": "10/11/2026 03:53",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 8,
+  "count": 7,
   "maneuvers": [
     {
-      "dateTime": "09/11 19:00",
-      "name": "NC BREDA",
-      "draft": 8.4,
-      "loa": 223.98,
-      "beam": 34.88,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "boreste",
-      "imo": "9612765",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "BRAZIL",
-      "terminal": "rio"
-    },
-    {
-      "dateTime": "10/11 12:00",
+      "dateTime": "10/11 06:30",
       "name": "MAERSK MONTE ALEGRE",
       "draft": 12.4,
       "loa": 272.05,
