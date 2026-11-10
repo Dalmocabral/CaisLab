@@ -1,16 +1,16 @@
 {
-  "updatedAt": "10/11/2026 11:56",
+  "updatedAt": "10/11/2026 19:12",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 6,
+  "count": 5,
   "maneuvers": [
     {
-      "dateTime": "10/11 17:00",
+      "dateTime": "11/11 00:00",
       "name": "CMA CGM THORIUM",
       "draft": 14.6,
       "loa": 335.23,
       "beam": 51.06,
-      "maneuver": "E",
-      "berthFrom": "",
+      "maneuver": "M",
+      "berthFrom": "VISITA",
       "berthTo": "TECONTPROLONG",
       "berthingSide": "boreste",
       "imo": "9996745",
@@ -61,21 +61,6 @@
       "imo": "9850525",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "PANAMA",
-      "terminal": "rio"
-    },
-    {
-      "dateTime": "12/11 16:00",
-      "name": "KOTA ELOK",
-      "draft": 14.6,
-      "loa": 335.0,
-      "beam": 51.0,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
-      "berthingSide": "boreste",
-      "imo": "1081831",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "SINGAPORE",
       "terminal": "rio"
     },
     {
