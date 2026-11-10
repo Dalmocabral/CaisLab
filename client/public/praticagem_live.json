@@ -1,23 +1,8 @@
 {
-  "updatedAt": "10/11/2026 03:53",
+  "updatedAt": "10/11/2026 11:56",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 7,
+  "count": 6,
   "maneuvers": [
-    {
-      "dateTime": "10/11 06:30",
-      "name": "MAERSK MONTE ALEGRE",
-      "draft": 12.4,
-      "loa": 272.05,
-      "beam": 40.0,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "boreste",
-      "imo": "9348065",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "SINGAPORE",
-      "terminal": "rio"
-    },
     {
       "dateTime": "10/11 17:00",
       "name": "CMA CGM THORIUM",
