@@ -1,5 +1,5 @@
 {
-  "updatedAt": "10/11/2026 23:44",
+  "updatedAt": "11/11/2026 02:50",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 5,
   "maneuvers": [
@@ -51,7 +51,7 @@
     {
       "dateTime": "12/11 16:00",
       "name": "TINOS EXPRESS",
-      "draft": 11,
+      "draft": 11.0,
       "loa": 272.08,
       "beam": 42.8,
       "maneuver": "E",
@@ -68,7 +68,7 @@
       "name": "COSCO SHIPPING MEXICO",
       "draft": 12.5,
       "loa": 335.9,
-      "beam": 51,
+      "beam": 51.0,
       "maneuver": "E",
       "berthFrom": "",
       "berthTo": "TECONTPROLONG",
