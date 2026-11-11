@@ -169,6 +169,20 @@ export default function AnalyticsPage() {
     return vesselTypeData.reduce((acc, curr) => acc + curr.value, 0);
   }, [vesselTypeData]);
 
+  // Contagem estrita de navios realizados (concluídos ou em operação)
+  const currentMonthRealizados = useMemo(() => {
+    if (!data?.monthlyStats) return 0;
+    const now = new Date();
+    const curMonthKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+    const m = data.monthlyStats.find((s) => s.month === curMonthKey);
+    return m ? m.realizados : 0;
+  }, [data]);
+
+  const totalYearRealizados = useMemo(() => {
+    if (!data?.monthlyStats) return 0;
+    return data.monthlyStats.reduce((acc, m) => acc + (m.realizados || 0), 0);
+  }, [data]);
+
   return (
     <div className="min-h-screen bg-[#f3f7f9] text-[#132c38] flex flex-col font-sans">
       {/* Top Header */}
@@ -233,13 +247,13 @@ export default function AnalyticsPage() {
           </div>
         )}
 
-        {/* 1. Summary Cards (KPIs) - Total de Navios do Mês e do Ano */}
+        {/* 1. Summary Cards (KPIs) - Total de Navios do Mês e do Ano (Realizados) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {/* Card 1: Navios do Mês */}
+          {/* Card 1: Navios Realizados no Mês */}
           <div className="bg-white p-6 rounded-2xl border border-[#dce6eb] shadow-xs hover:border-teal-300 transition-colors">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-[#627680] uppercase tracking-wider">
-                Total de Navios no Mês
+                Navios Realizados no Mês
               </span>
               <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
                 <Calendar className="w-5 h-5" />
@@ -247,22 +261,22 @@ export default function AnalyticsPage() {
             </div>
             <div className="mt-3 flex items-baseline gap-2.5">
               <span className="text-4xl font-extrabold text-[#102d40]">
-                {loading ? "…" : data?.totalMonth || 0}
+                {loading ? "…" : currentMonthRealizados}
               </span>
               <span className="text-xs text-emerald-700 font-bold bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
                 Mês Atual ({new Date().toLocaleString("pt-BR", { month: "long" })})
               </span>
             </div>
             <p className="mt-2 text-xs text-[#71858e]">
-              Atracações programadas e realizadas no terminal durante o mês corrente
+              Atracações efetivamente realizadas no terminal no mês corrente
             </p>
           </div>
 
-          {/* Card 2: Total Navios do Ano */}
+          {/* Card 2: Navios Realizados no Ano */}
           <div className="bg-white p-6 rounded-2xl border border-[#dce6eb] shadow-xs hover:border-teal-300 transition-colors">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-[#627680] uppercase tracking-wider">
-                Total de Navios no Ano
+                Navios Realizados no Ano
               </span>
               <div className="w-9 h-9 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center">
                 <Ship className="w-5 h-5" />
@@ -270,14 +284,14 @@ export default function AnalyticsPage() {
             </div>
             <div className="mt-3 flex items-baseline gap-2.5">
               <span className="text-4xl font-extrabold text-[#102d40]">
-                {loading ? "…" : data?.totalYear || 0}
+                {loading ? "…" : totalYearRealizados}
               </span>
               <span className="text-xs text-teal-700 font-bold bg-teal-50 px-2.5 py-0.5 rounded-full border border-teal-200">
                 Ano {new Date().getFullYear()}
               </span>
             </div>
             <p className="mt-2 text-xs text-[#71858e]">
-              Volume total acumulado de navios atracados no cais em {new Date().getFullYear()}
+              Atracações concluídas e em operação no terminal em {new Date().getFullYear()}
             </p>
           </div>
         </div>
@@ -482,7 +496,21 @@ export default function AnalyticsPage() {
                   const maxCount = data.serviceStats[0]?.count || 1;
                   const barWidth = Math.max(8, Math.round((svc.count / maxCount) * 100));
 
-                  return (
+                  // Contagem estrita de navios realizados (concluídos ou em operação)
+  const currentMonthRealizados = useMemo(() => {
+    if (!data?.monthlyStats) return 0;
+    const now = new Date();
+    const curMonthKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+    const m = data.monthlyStats.find((s) => s.month === curMonthKey);
+    return m ? m.realizados : 0;
+  }, [data]);
+
+  const totalYearRealizados = useMemo(() => {
+    if (!data?.monthlyStats) return 0;
+    return data.monthlyStats.reduce((acc, m) => acc + (m.realizados || 0), 0);
+  }, [data]);
+
+  return (
                     <div key={svc.service} className="space-y-1">
                       <div className="flex items-center justify-between text-xs">
                         <div className="flex items-center gap-2 min-w-0">
@@ -559,7 +587,21 @@ export default function AnalyticsPage() {
                   ) : data?.vesselRanking && data.vesselRanking.length > 0 ? (
                     data.vesselRanking.map((v, idx) => {
                       const badgeColor = getServiceBadgeColor(v.service);
-                      return (
+                      // Contagem estrita de navios realizados (concluídos ou em operação)
+  const currentMonthRealizados = useMemo(() => {
+    if (!data?.monthlyStats) return 0;
+    const now = new Date();
+    const curMonthKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+    const m = data.monthlyStats.find((s) => s.month === curMonthKey);
+    return m ? m.realizados : 0;
+  }, [data]);
+
+  const totalYearRealizados = useMemo(() => {
+    if (!data?.monthlyStats) return 0;
+    return data.monthlyStats.reduce((acc, m) => acc + (m.realizados || 0), 0);
+  }, [data]);
+
+  return (
                         <tr key={v.name} className="hover:bg-[#f8fafb] transition-colors">
                           <td className="py-2.5 px-3 font-bold text-[#869aa3]">
                             {idx + 1}º
