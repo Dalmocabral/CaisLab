@@ -197,7 +197,8 @@ function renderContainerDeck(
     vessel.name.toUpperCase().includes("BRAZIL") ||
     vessel.name.toUpperCase().includes("BRASIL") ||
     vessel.name.toUpperCase().includes("ARGENTINA") ||
-    vessel.name.toUpperCase().includes("URUGUAY")
+    vessel.name.toUpperCase().includes("URUGUAY") ||
+    vessel.name.toUpperCase().includes("MEXICO")
   );
   const isCmaCgmClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("CMA CGM") && (
     vessel.name.toUpperCase().includes("KRYPTON") ||
@@ -218,7 +219,7 @@ function renderContainerDeck(
     vessel.name.toUpperCase().includes("SWANSEA") ||
     vessel.name.toUpperCase().includes("CHONG QING")
   );
-  const isPatmosExpress = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("PATMOS");
+  const isPatmosExpress = typeof vessel.name === "string" && (vessel.name.toUpperCase().includes("PATMOS") || vessel.name.toUpperCase().includes("TINOS"));
   const isMonteAlegre = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("MONTE") && vessel.name.toUpperCase().includes("ALEGRE");
   const idx19 = bays.indexOf(19);
   const idx21 = bays.indexOf(21);
@@ -534,7 +535,8 @@ function renderContainerDeck(
               vessel.name.toUpperCase().includes("BRAZIL") ||
               vessel.name.toUpperCase().includes("BRASIL") ||
               vessel.name.toUpperCase().includes("ARGENTINA") ||
-              vessel.name.toUpperCase().includes("URUGUAY")
+              vessel.name.toUpperCase().includes("URUGUAY") ||
+              vessel.name.toUpperCase().includes("MEXICO")
             );
 
             // No navio Veracruz e KOTA SINGA, remove a bay 49 e deixa a 50 centralizada entre a divisão dos contêineres de 20' (_ 50 _ | passadiço)

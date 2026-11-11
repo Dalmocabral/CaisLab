@@ -367,7 +367,23 @@
     "imageUrl": "/vessels/cosco_shipping_mexico.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9945863",
     "updatedAt": "11/11/2026 02:50",
-    "flag": "HONG KONG, CHINA"
+    "flag": "HONG KONG, CHINA",
+    "bayCount": 78,
+    "bays": 78,
+    "rowCount": 20,
+    "rows": 20,
+    "tierCount": 9,
+    "tiers": 9,
+    "bridgePosition": "between-bays",
+    "bridgeBay": 22,
+    "bridgeBayStart": 22,
+    "bridgeBayEnd": 22,
+    "separateFunnel": true,
+    "funnelBay": 64,
+    "funnelBayStart": 64,
+    "funnelBayEnd": 64,
+    "isManualLayout": true,
+    "vesselType": "container"
   },
   {
     "name": "DALIAN EXPRESS",
@@ -408,7 +424,8 @@
     "lastBerth": "TECONT1",
     "updatedAt": "11/11/2026 02:50",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9644330",
-    "imageUrl": "/vessels/deep_orient.jpg"
+    "imageUrl": "/vessels/deep_orient.jpg",
+    "vesselType": "offshore"
   },
   {
     "name": "DUSSELDORF EXPRESS",
@@ -1266,7 +1283,22 @@
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:1053585",
     "updatedAt": "11/11/2026 02:50",
     "flag": "MALTA",
-    "vesselType": "container"
+    "vesselType": "container",
+    "bayCount": 63,
+    "bays": 63,
+    "rowCount": 17,
+    "rows": 17,
+    "tierCount": 6,
+    "tiers": 6,
+    "bridgePosition": "between-bays",
+    "bridgeBay": 20,
+    "bridgeBayStart": 19,
+    "bridgeBayEnd": 21,
+    "separateFunnel": true,
+    "funnelBay": 48,
+    "funnelBayStart": 47,
+    "funnelBayEnd": 49,
+    "isManualLayout": true
   },
   {
     "name": "TOKYO EXPRESS",

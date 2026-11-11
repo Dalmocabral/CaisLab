@@ -191,7 +191,7 @@ export function resolveVesselSuperstructure(vessel: Partial<Vessel>): VesselSupe
   const isKotaSinga = (upperName.includes("KOTA") && upperName.includes("SINGA")) || upperName.includes("LORI") || upperName.includes("SANTOS");
   const isCardiff = upperName.includes("CARDIFF") || upperName.includes("SWANSEA") || upperName.includes("CHONG QING");
   const isZimWilmington = upperName.includes("ZIM") && upperName.includes("WILMINGTON");
-  const isPatmos = upperName.includes("PATMOS");
+  const isPatmos = upperName.includes("PATMOS") || upperName.includes("TINOS");
   const isMonteAlegre = upperName.includes("MONTE") && upperName.includes("ALEGRE");
   const hasIslandBridge = isAplNewJersey || isDusseldorf || isGuaruja || isKotaSinga || isCardiff || isZimWilmington || isPatmos || isMonteAlegre;
 
@@ -310,6 +310,7 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "SWANSEA": "container",
   "XIN CHONG QING": "container",
   "PATMOS EXPRESS": "container",
+  "TINOS EXPRESS": "container",
   "MAERSK MONTE ALEGRE": "container",
   "MONTE ALEGRE": "container",
   "CMA CGM COBALT": "container",
@@ -322,6 +323,7 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "COSCO SHIPPING ARGENTINA": "container",
   "COSCO SHIPPING BRAZIL": "container",
   "COSCO SHIPPING CHILE": "container",
+  "COSCO SHIPPING MEXICO": "container",
   "EVER FAIR": "container",
   "EVER FAITH": "container",
   "EVER FAME": "container",
@@ -471,6 +473,30 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     funnelBayStart: 64,
     funnelBayEnd: 64,
     vesselType: "container",
+  },
+  "COSCO SHIPPING MEXICO": {
+    name: "COSCO SHIPPING MEXICO",
+    loa: 335.9,
+    beam: 51.0,
+    draft: 12.5,
+    bayCount: 78,
+    bays: 78,
+    rowCount: 20,
+    rows: 20,
+    tierCount: 5,
+    tiers: 5,
+    bridgePosition: "between-bays",
+    bridgeBay: 22,
+    bridgeBayStart: 22,
+    bridgeBayEnd: 22,
+    separateFunnel: true,
+    funnelBay: 64,
+    funnelBayStart: 64,
+    funnelBayEnd: 64,
+    vesselType: "container",
+    isManualLayout: true,
+    imageUrl: "/vessels/cosco_shipping_mexico.jpg",
+    marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9731937",
   },
   "COSCO SHIPPING BRAZIL": {
     name: "COSCO SHIPPING BRAZIL",
@@ -1103,6 +1129,30 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     imageUrl: "/vessels/patmos_express.jpg",
     marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:1053573",
   },
+  "TINOS EXPRESS": {
+    name: "TINOS EXPRESS",
+    loa: 272.08,
+    beam: 42.8,
+    draft: 11,
+    bayCount: 63,
+    bays: 63,
+    rowCount: 17,
+    rows: 17,
+    tierCount: 6,
+    tiers: 6,
+    bridgePosition: "between-bays",
+    bridgeBay: 20,
+    bridgeBayStart: 19,
+    bridgeBayEnd: 21,
+    separateFunnel: true,
+    funnelBay: 48,
+    funnelBayStart: 47,
+    funnelBayEnd: 49,
+    vesselType: "container",
+    isManualLayout: true,
+    imageUrl: "/vessels/tinos_express.jpg",
+    marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:1053585",
+  },
   "MAERSK MONTE ALEGRE": {
     name: "MAERSK MONTE ALEGRE",
     loa: 272.05,
@@ -1187,6 +1237,7 @@ export function isManuallyConfiguredVessel(vessel?: {
     "COSCO SHIPPING CHILE",
     "COSCO SHIPPING BRAZIL",
     "COSCO SHIPPING ARGENTINA",
+    "COSCO SHIPPING MEXICO",
     "EVER FIT",
     "EVER FAIR",
     "EVER FAITH",
@@ -1204,6 +1255,7 @@ export function isManuallyConfiguredVessel(vessel?: {
     "SWANSEA",
     "XIN CHONG QING",
     "PATMOS EXPRESS",
+    "TINOS EXPRESS",
     "MAERSK MONTE ALEGRE",
     "MONTE ALEGRE",
   ];
@@ -1597,7 +1649,8 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     vessel.name.toUpperCase().includes("BRAZIL") ||
     vessel.name.toUpperCase().includes("BRASIL") ||
     vessel.name.toUpperCase().includes("ARGENTINA") ||
-    vessel.name.toUpperCase().includes("URUGUAY")
+    vessel.name.toUpperCase().includes("URUGUAY") ||
+    vessel.name.toUpperCase().includes("MEXICO")
   );
   const isCmaCgmClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("CMA CGM") && (
     vessel.name.toUpperCase().includes("KRYPTON") ||
@@ -1618,7 +1671,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     vessel.name.toUpperCase().includes("SWANSEA") ||
     vessel.name.toUpperCase().includes("CHONG QING")
   );
-  const isPatmosExpress = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("PATMOS");
+  const isPatmosExpress = typeof vessel.name === "string" && (vessel.name.toUpperCase().includes("PATMOS") || vessel.name.toUpperCase().includes("TINOS"));
   const isMonteAlegre = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("MONTE") && vessel.name.toUpperCase().includes("ALEGRE");
   const idx19 = bays.indexOf(19);
   const idx21 = bays.indexOf(21);
@@ -3010,11 +3063,12 @@ export function normalizeScenario(value: unknown): Scenario | null {
     const knownDefault = KNOWN_VESSEL_DEFAULTS[upperName] ??
       (upperName.includes("VERACRUZ") ? KNOWN_VESSEL_DEFAULTS["CMA CGM VERACRUZ"] :
       isFortaleza ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["MERCOSUL FORTALEZA"]) :
-      (upperName.includes("COSCO") && (upperName.includes("CHILE") || upperName.includes("BRAZIL") || upperName.includes("BRASIL") || upperName.includes("ARGENTINA") || upperName.includes("URUGUAY"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["COSCO SHIPPING BRAZIL"]) :
+      (upperName.includes("COSCO") && (upperName.includes("CHILE") || upperName.includes("BRAZIL") || upperName.includes("BRASIL") || upperName.includes("ARGENTINA") || upperName.includes("URUGUAY") || upperName.includes("MEXICO"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["COSCO SHIPPING BRAZIL"]) :
       (upperName.includes("EVER") && (upperName.includes("FIT") || upperName.includes("FAR") || upperName.includes("FAME") || upperName.includes("FAIR") || upperName.includes("FAITH") || upperName.includes("FASHION") || upperName.includes("FORTUNE"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["EVER FIT"]) :
       upperName.includes("PANTANAL") ? KNOWN_VESSEL_DEFAULTS["LOG-IN PANTANAL"] :
       upperName.includes("BRISA") ? KNOWN_VESSEL_DEFAULTS["NC BRISA"] :
       upperName.includes("PATMOS") ? KNOWN_VESSEL_DEFAULTS["PATMOS EXPRESS"] :
+      upperName.includes("TINOS") ? KNOWN_VESSEL_DEFAULTS["TINOS EXPRESS"] :
       (upperName.includes("MONTE") && upperName.includes("ALEGRE")) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["MAERSK MONTE ALEGRE"]) :
       upperName.includes("SPYROS") ? KNOWN_VESSEL_DEFAULTS["SPYROS V"] : (upperName.includes("APL") && upperName.includes("NEW JERSEY")) ? KNOWN_VESSEL_DEFAULTS["APL NEW JERSEY"] : upperName.includes("DUSSELDORF") ? KNOWN_VESSEL_DEFAULTS["DUSSELDORF EXPRESS"] : upperName.includes("DALIAN") ? KNOWN_VESSEL_DEFAULTS["DALIAN EXPRESS"] : upperName.includes("SWANSEA") ? KNOWN_VESSEL_DEFAULTS["SWANSEA"] : upperName.includes("CHONG QING") ? KNOWN_VESSEL_DEFAULTS["XIN CHONG QING"] : upperName.includes("CARDIFF") ? KNOWN_VESSEL_DEFAULTS["CARDIFF"] : upperName.includes("THORIUM") ? KNOWN_VESSEL_DEFAULTS["CMA CGM THORIUM"] : upperName.includes("KRYPTON") ? KNOWN_VESSEL_DEFAULTS["CMA CGM KRYPTON"] : undefined);
 
