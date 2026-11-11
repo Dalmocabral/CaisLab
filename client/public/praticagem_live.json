@@ -1,10 +1,10 @@
 {
-  "updatedAt": "11/11/2026 08:38",
+  "updatedAt": "11/11/2026 11:58",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 4,
+  "count": 5,
   "maneuvers": [
     {
-      "dateTime": "11/11 12:00",
+      "dateTime": "11/11 11:30",
       "name": "DEEP ORIENT",
       "draft": 6.5,
       "loa": 132.44,
@@ -34,7 +34,22 @@
       "terminal": "rio"
     },
     {
-      "dateTime": "12/11 16:00",
+      "dateTime": "12/11 10:00",
+      "name": "FRIO MARATHON",
+      "draft": 6.7,
+      "loa": 146.29,
+      "beam": 18.5,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONT1",
+      "berthingSide": "boreste",
+      "imo": "8916229",
+      "type": "REFRIGERATED CARGO SHIP",
+      "flag": "BAHAMAS",
+      "terminal": "rio"
+    },
+    {
+      "dateTime": "12/11 18:00",
       "name": "TINOS EXPRESS",
       "draft": 11.0,
       "loa": 272.08,
