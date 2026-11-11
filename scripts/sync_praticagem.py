@@ -294,6 +294,12 @@ def run_sync():
     except Exception:
         pass
 
+    try:
+        from sync_lineup import run_sync_lineup
+        run_sync_lineup()
+    except Exception as e:
+        print(f"Aviso ao sincronizar Lineup oficial: {e}", file=sys.stderr)
+
     print(json.dumps({
         "status": "success",
         "terminal": "rio",

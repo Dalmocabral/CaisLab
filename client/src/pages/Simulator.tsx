@@ -1,3 +1,4 @@
+import { Link } from "wouter";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Anchor,
@@ -21,6 +22,7 @@ import {
   Maximize2,
   Box,
   Layers,
+  TrendingUp,
   Camera,
   ExternalLink,
   Image as ImageIcon,
@@ -675,6 +677,15 @@ export default function Simulator() {
             <Box size={14} className="text-[#0d9488]" /> <span>Visualização 3D</span>
           </button>
 
+          {/* 3. Analytics & Lineup Oficial */}
+          <Link
+            href="/analytics"
+            className="button button-quiet text-[#4f46e5] hover:text-[#4338ca] hover:bg-indigo-50 border border-indigo-200/90 shadow-xs font-semibold inline-flex items-center gap-1.5"
+            title="Abrir Dashboard de Estatísticas, volume de navios do mês e do ano, ranking e serviços do Tecon Rio"
+          >
+            <TrendingUp size={14} className="text-[#4f46e5]" /> <span>Lineup & Gráficos</span>
+          </Link>
+
           {/* 3. Configurações */}
           <Dialog>
             <DialogTrigger asChild>
@@ -911,7 +922,7 @@ export default function Simulator() {
                           <span title="Layout configurado manualmente" className="ml-1 text-xs select-none">🛠️</span>
                         )}
                       </strong>
-                      <small>{Math.round(vessel.loa)} m LOA <span>·</span> <span className="font-semibold text-[#16869a]">{typeLabel}</span> <span>·</span> {vesselSectionName(vessel, scenario.segments)}</small>
+                      <small>{Math.round(vessel.loa)} m LOA <span>·</span> <span className="font-semibold text-[#16869a]">{typeLabel}</span> <span>·</span> {vesselSectionName(vessel, scenario.segments)}{vessel.service && vessel.service !== "OUTROS" && <span className="ml-1 text-[10px] font-bold px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200">Serviço: {vessel.service}</span>}</small>
                     </span>
                     {vesselIssues.length > 0 && <span className="list-warning-dot" title={vesselIssues[0].message}><AlertTriangle size={15} /></span>}
                     {vesselIssues.length === 0 && <span className="list-check-dot"><CheckCircle2 size={15} /></span>}
@@ -929,6 +940,21 @@ export default function Simulator() {
                 </div>
                 <label className="field-label" htmlFor="vessel-name">Nome do navio</label>
                 <input id="vessel-name" className="text-input" value={selectedVessel.name} onChange={(event) => patchVessel(selectedVessel.id, { name: event.target.value })} placeholder="Ex.: Navio Alvorada" maxLength={54} />
+
+                {selectedVessel.service && selectedVessel.service !== "OUTROS" && (
+                  <div className="mb-3 p-2.5 rounded-lg bg-indigo-50/70 border border-indigo-200/90 text-xs flex items-center justify-between">
+                    <div>
+                      <span className="font-bold text-indigo-900">Serviço: {selectedVessel.service}</span>
+                      {selectedVessel.voyage && <span className="text-indigo-600 font-mono text-[11px] ml-1.5">({selectedVessel.voyage})</span>}
+                      {selectedVessel.consorcio && <span className="text-[10px] text-indigo-500 block">{selectedVessel.consorcio}</span>}
+                    </div>
+                    {selectedVessel.operator && (
+                      <span className="text-[10px] font-bold text-indigo-700 bg-white px-2 py-0.5 rounded border border-indigo-200">
+                        {selectedVessel.operator}
+                      </span>
+                    )}
+                  </div>
+                )}
 
                 <div className="field-row">
                   <div>

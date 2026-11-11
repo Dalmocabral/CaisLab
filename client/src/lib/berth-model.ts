@@ -1209,6 +1209,12 @@ export function isManuallyConfiguredVessel(vessel?: {
   separateFunnel?: boolean;
   bridgeBay?: number;
   isManualLayout?: boolean;
+  service?: string;
+  serviceFull?: string;
+  consorcio?: string;
+  voyage?: string;
+  operator?: string;
+  deadline?: string;
   vesselType?: string | null;
   type?: string | null;
 } | null): boolean {
@@ -1535,6 +1541,12 @@ export interface Vessel {
   /** Link direto para a página do navio no MarineTraffic (ex.: shipid). */
   marineTrafficUrl?: string;
   isManualLayout?: boolean;
+  service?: string;
+  serviceFull?: string;
+  consorcio?: string;
+  voyage?: string;
+  operator?: string;
+  deadline?: string;
 }
 
 export interface ContainerHatchPlan {

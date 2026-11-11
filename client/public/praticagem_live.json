@@ -1,8 +1,31 @@
 {
-  "updatedAt": "11/11/2026 08:38",
+  "updatedAt": "11/11/2026 08:45",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 4,
+  "count": 5,
   "maneuvers": [
+    {
+      "dateTime": "10/11 23:30",
+      "name": "CMA CGM THORIUM",
+      "draft": 14.4,
+      "loa": 335.23,
+      "beam": 51.06,
+      "maneuver": "M",
+      "berthFrom": "VISITA",
+      "berthTo": "TECONTPROLONG",
+      "berthingSide": "boreste",
+      "imo": "9996745",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "MALTA",
+      "terminal": "rio",
+      "service": "SEAS 2",
+      "serviceFull": "SEAS 2 SUL",
+      "consorcio": "CMA CGM / COSCO / Evergreen / PIL / Yang Ming",
+      "voyage": "0BDPJW1MA",
+      "operator": "CMA",
+      "deadline": "09/11/26 12:00",
+      "gateOpening": "04/11/26 00:01",
+      "lineupBerth": "PROLONGAM"
+    },
     {
       "dateTime": "11/11 12:00",
       "name": "DEEP ORIENT",
@@ -16,7 +39,15 @@
       "imo": "9644330",
       "type": "OFFSHORE SUPPORT VESSEL",
       "flag": "BAHAMAS",
-      "terminal": "rio"
+      "terminal": "rio",
+      "service": "OUTROS",
+      "serviceFull": "Serviço Não Informado",
+      "consorcio": "",
+      "voyage": "001",
+      "operator": "GEN",
+      "deadline": "13/11/26 17:00",
+      "gateOpening": "09/11/26 01:00",
+      "lineupBerth": "TECON1.2"
     },
     {
       "dateTime": "11/11 16:00",
@@ -31,7 +62,15 @@
       "imo": "9850525",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "PANAMA",
-      "terminal": "rio"
+      "terminal": "rio",
+      "service": "SEAS 1",
+      "serviceFull": "SEAS 1",
+      "consorcio": "CMA CGM / Evergreen / COSCO / PIL",
+      "voyage": "1714-037W",
+      "operator": "EMC",
+      "deadline": "06/11/26 12:00",
+      "gateOpening": "02/11/26 00:01",
+      "lineupBerth": "PROLONGAM"
     },
     {
       "dateTime": "12/11 16:00",
@@ -46,7 +85,15 @@
       "imo": "1053585",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "MALTA",
-      "terminal": "rio"
+      "terminal": "rio",
+      "service": "EXTRA CALL",
+      "serviceFull": "EXTRA CALL",
+      "consorcio": "Chamada Extra / Oportunidade",
+      "voyage": "2639N",
+      "operator": "HLC",
+      "deadline": "13/11/26 12:00",
+      "gateOpening": "05/11/26 00:01",
+      "lineupBerth": "TECON1.2"
     },
     {
       "dateTime": "17/11 16:00",
@@ -61,7 +108,15 @@
       "imo": "9945863",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "HONG KONG, CHINA",
-      "terminal": "rio"
+      "terminal": "rio",
+      "service": "SEAS 2",
+      "serviceFull": "SEAS 2 SUL",
+      "consorcio": "CMA CGM / COSCO / Evergreen / PIL / Yang Ming",
+      "voyage": "010W",
+      "operator": "COS",
+      "deadline": "13/11/26 12:00",
+      "gateOpening": "10/11/26 08:00",
+      "lineupBerth": ""
     }
   ]
 }
