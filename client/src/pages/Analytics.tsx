@@ -289,13 +289,16 @@ export default function AnalyticsPage() {
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h2 className="text-base font-bold text-[#102d40] flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-teal-600" />
-                  <span>Volume Mensal de Navios</span>
+                  <Calendar className="w-4 h-4 text-emerald-600" />
+                  <span>Volume Mensal de Navios (Realizados)</span>
                 </h2>
                 <p className="text-xs text-[#71858e]">
-                  Evolução mês a mês das atracações no cais
+                  Atracações efetivamente realizadas no cais mês a mês
                 </p>
               </div>
+              <span className="text-xs font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full">
+                Navios Realizados
+              </span>
             </div>
 
             <div className="h-[290px] w-full mt-2">
@@ -310,10 +313,7 @@ export default function AnalyticsPage() {
                     <XAxis dataKey="label" tick={{ fontSize: 11, fill: "#637882" }} axisLine={{ stroke: "#e2eaed" }} />
                     <YAxis tick={{ fontSize: 11, fill: "#637882" }} axisLine={{ stroke: "#e2eaed" }} />
                     <Tooltip
-                      formatter={(val: any, name: any) => [
-                        `${val} navios`,
-                        name === "realizados" ? "Realizados" : "Esperados",
-                      ]}
+                      formatter={(val: any) => [`${val} navios realizados`, "Realizados"]}
                       labelFormatter={(label) => `Mês: ${label}`}
                       contentStyle={{
                         borderRadius: "8px",
@@ -322,16 +322,7 @@ export default function AnalyticsPage() {
                         boxShadow: "0 4px 12px rgba(0,0,0,0.06)",
                       }}
                     />
-                    <Legend
-                      verticalAlign="top"
-                      align="right"
-                      iconType="circle"
-                      iconSize={8}
-                      wrapperStyle={{ fontSize: "11px", paddingBottom: "10px" }}
-                      formatter={(value) => (value === "realizados" ? "Realizados" : "Esperados")}
-                    />
-                    <Bar dataKey="realizados" fill="#10b981" radius={[4, 4, 0, 0]} stackId="a" />
-                    <Bar dataKey="esperados" fill="#0284c7" radius={[4, 4, 0, 0]} stackId="a" />
+                    <Bar dataKey="realizados" fill="#10b981" radius={[6, 6, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               ) : (
