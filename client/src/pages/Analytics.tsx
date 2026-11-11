@@ -496,21 +496,7 @@ export default function AnalyticsPage() {
                   const maxCount = data.serviceStats[0]?.count || 1;
                   const barWidth = Math.max(8, Math.round((svc.count / maxCount) * 100));
 
-                  // Contagem estrita de navios realizados (concluídos ou em operação)
-  const currentMonthRealizados = useMemo(() => {
-    if (!data?.monthlyStats) return 0;
-    const now = new Date();
-    const curMonthKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
-    const m = data.monthlyStats.find((s) => s.month === curMonthKey);
-    return m ? m.realizados : 0;
-  }, [data]);
-
-  const totalYearRealizados = useMemo(() => {
-    if (!data?.monthlyStats) return 0;
-    return data.monthlyStats.reduce((acc, m) => acc + (m.realizados || 0), 0);
-  }, [data]);
-
-  return (
+                  return (
                     <div key={svc.service} className="space-y-1">
                       <div className="flex items-center justify-between text-xs">
                         <div className="flex items-center gap-2 min-w-0">
@@ -587,21 +573,7 @@ export default function AnalyticsPage() {
                   ) : data?.vesselRanking && data.vesselRanking.length > 0 ? (
                     data.vesselRanking.map((v, idx) => {
                       const badgeColor = getServiceBadgeColor(v.service);
-                      // Contagem estrita de navios realizados (concluídos ou em operação)
-  const currentMonthRealizados = useMemo(() => {
-    if (!data?.monthlyStats) return 0;
-    const now = new Date();
-    const curMonthKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
-    const m = data.monthlyStats.find((s) => s.month === curMonthKey);
-    return m ? m.realizados : 0;
-  }, [data]);
-
-  const totalYearRealizados = useMemo(() => {
-    if (!data?.monthlyStats) return 0;
-    return data.monthlyStats.reduce((acc, m) => acc + (m.realizados || 0), 0);
-  }, [data]);
-
-  return (
+                      return (
                         <tr key={v.name} className="hover:bg-[#f8fafb] transition-colors">
                           <td className="py-2.5 px-3 font-bold text-[#869aa3]">
                             {idx + 1}º
