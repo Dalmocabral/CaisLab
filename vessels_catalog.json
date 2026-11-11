@@ -221,7 +221,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cma_cgm_thorium.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996745",
-    "updatedAt": "10/11/2026 19:12",
+    "updatedAt": "11/11/2026 00:19",
     "flag": "MALTA",
     "vesselType": "container",
     "bayCount": 79,
@@ -352,7 +352,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cosco_shipping_mexico.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9945863",
-    "updatedAt": "10/11/2026 19:12",
+    "updatedAt": "11/11/2026 00:19",
     "flag": "HONG KONG, CHINA"
   },
   {
@@ -392,7 +392,7 @@
     "type": "OFFSHORE SUPPORT VESSEL",
     "flag": "BAHAMAS",
     "lastBerth": "TECONT1",
-    "updatedAt": "10/11/2026 19:12",
+    "updatedAt": "11/11/2026 00:19",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9644330",
     "imageUrl": "/vessels/deep_orient.jpg"
   },
@@ -463,7 +463,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "10/11/2026 19:12",
+    "updatedAt": "11/11/2026 00:19",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850525",
     "imageUrl": "/vessels/ever_faith.jpg",
     "bayCount": 76,
@@ -1208,8 +1208,8 @@
     "imo": "1053585",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
-    "lastBerth": "TECONT1",
-    "updatedAt": "10/11/2026 19:12",
+    "lastBerth": "TECONTPROLONG",
+    "updatedAt": "11/11/2026 00:19",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:1053585"
   },
   {
