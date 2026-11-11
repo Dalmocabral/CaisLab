@@ -271,7 +271,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cma_cgm_thorium.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996745",
-    "updatedAt": "11/11/2026 03:02",
+    "updatedAt": "11/11/2026 08:52",
     "flag": "MALTA",
     "vesselType": "container",
     "bayCount": 78,
@@ -290,9 +290,10 @@
     "funnelBayEnd": 64,
     "isManualLayout": true,
     "service": "SEAS 2",
-    "serviceFull": "SEAS 2 NORTE",
+    "serviceFull": "SEAS 2 SUL",
     "consorcio": "CMA CGM / COSCO / Evergreen / PIL / Yang Ming",
-    "operator": "CMA"
+    "operator": "CMA",
+    "voyage": "0BDPJW1MA"
   },
   {
     "name": "CMA CGM VERACRUZ",
@@ -414,7 +415,7 @@
   {
     "name": "COSCO SHIPPING MEXICO",
     "loa": 335.9,
-    "beam": 51.0,
+    "beam": 51,
     "draft": 12.5,
     "berthingSide": "boreste",
     "imo": "9945863",
@@ -570,7 +571,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "11/11/2026 08:38",
+    "updatedAt": "11/11/2026 08:53",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850525",
     "imageUrl": "/vessels/ever_faith.jpg",
     "bayCount": 76,
@@ -592,7 +593,8 @@
     "service": "SEAS 1",
     "serviceFull": "SEAS 1",
     "consorcio": "CMA CGM / Evergreen / COSCO / PIL",
-    "operator": "EMC"
+    "operator": "EMC",
+    "voyage": "1714-037W"
   },
   {
     "name": "EVER FAME",
@@ -1494,7 +1496,7 @@
     "name": "TINOS EXPRESS",
     "loa": 272.08,
     "beam": 42.8,
-    "draft": 11.0,
+    "draft": 11,
     "berthingSide": "boreste",
     "imo": "1053585",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
