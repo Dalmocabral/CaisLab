@@ -113,7 +113,22 @@ export default function AnalyticsPage() {
     setSyncing(false);
   }
 
-  // Agrupamento por Tipo de Navio (Mensal / Anual)
+  // Contagem estrita de navios realizados no mês corrente
+  const currentMonthRealizados = useMemo(() => {
+    if (!data?.monthlyStats) return 0;
+    const now = new Date();
+    const curMonthKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+    const m = data.monthlyStats.find((s) => s.month === curMonthKey);
+    return m ? m.realizados : 0;
+  }, [data]);
+
+  // Contagem estrita de navios realizados no ano todo
+  const totalYearRealizados = useMemo(() => {
+    if (!data?.monthlyStats) return 0;
+    return data.monthlyStats.reduce((acc, m) => acc + (m.realizados || 0), 0);
+  }, [data]);
+
+  // Agrupamento por Tipo de Navio estritamente para navios REALIZADOS (Mensal / Anual)
   const vesselTypeData = useMemo(() => {
     if (!data?.items) return [];
 
@@ -130,7 +145,11 @@ export default function AnalyticsPage() {
     };
 
     data.items.forEach((item) => {
-      // Filtro de mês
+      // Considerar apenas navios que foram efetivamente realizados
+      const isRealizado = Boolean(item.atracacao) || item.estado === "FECHADO" || item.estado === "EM OPERACAO";
+      if (!isRealizado) return;
+
+      // Filtro de mês se selecionado "mensal"
       if (typePeriod === "mensal") {
         const dt = item.atracacao || item.previsaoAtracacao || item.chegada || item.previsaoChegada || "";
         if (!dt.includes(monthPattern) && !dt.includes(`/${curMonth}/`) && !dt.includes(`-${curMonth}-`)) {
@@ -169,18 +188,58 @@ export default function AnalyticsPage() {
     return vesselTypeData.reduce((acc, curr) => acc + curr.value, 0);
   }, [vesselTypeData]);
 
-  // Contagem estrita de navios realizados (concluídos ou em operação)
-  const currentMonthRealizados = useMemo(() => {
-    if (!data?.monthlyStats) return 0;
-    const now = new Date();
-    const curMonthKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
-    const m = data.monthlyStats.find((s) => s.month === curMonthKey);
-    return m ? m.realizados : 0;
+  // Ranking de serviços estritamente para navios REALIZADOS
+  const realizedServiceStats = useMemo(() => {
+    if (!data?.items) return [];
+    const counts: Record<string, { service: string; count: number; consorcio?: string }> = {};
+    let total = 0;
+
+    data.items.forEach((item) => {
+      const isRealizado = Boolean(item.atracacao) || item.estado === "FECHADO" || item.estado === "EM OPERACAO";
+      if (!isRealizado) return;
+
+      const svc = item.servico || "OUTROS";
+      if (!counts[svc]) {
+        counts[svc] = { service: svc, count: 0, consorcio: item.consorcio };
+      }
+      counts[svc].count += 1;
+      total += 1;
+    });
+
+    return Object.values(counts)
+      .sort((a, b) => b.count - a.count)
+      .map((s) => ({
+        ...s,
+        percentage: total > 0 ? Number(((s.count / total) * 100).toFixed(1)) : 0,
+      }));
   }, [data]);
 
-  const totalYearRealizados = useMemo(() => {
-    if (!data?.monthlyStats) return 0;
-    return data.monthlyStats.reduce((acc, m) => acc + (m.realizados || 0), 0);
+  // Ranking de navios mais frequentes estritamente para navios REALIZADOS
+  const realizedVesselRanking = useMemo(() => {
+    if (!data?.items) return [];
+    const counts: Record<string, { name: string; count: number; service?: string; lastDate?: string }> = {};
+
+    data.items.forEach((item) => {
+      const isRealizado = Boolean(item.atracacao) || item.estado === "FECHADO" || item.estado === "EM OPERACAO";
+      if (!isRealizado) return;
+
+      const name = (item.navio || "").trim().toUpperCase();
+      if (!name) return;
+
+      if (!counts[name]) {
+        counts[name] = {
+          name,
+          count: 0,
+          service: item.servico,
+          lastDate: item.atracacao || item.previsaoAtracacao || item.chegada || "",
+        };
+      }
+      counts[name].count += 1;
+      if (item.atracacao) counts[name].lastDate = item.atracacao;
+      if (item.servico && item.servico !== "OUTROS") counts[name].service = item.servico;
+    });
+
+    return Object.values(counts).sort((a, b) => b.count - a.count);
   }, [data]);
 
   return (
@@ -356,7 +415,7 @@ export default function AnalyticsPage() {
                   <span>Distribuição por Tipo de Navio</span>
                 </h2>
                 <p className="text-xs text-[#71858e]">
-                  Porta-contêineres, carga geral, químico e apoio
+                  Navios realizados por categoria operacional
                 </p>
               </div>
 
@@ -473,7 +532,7 @@ export default function AnalyticsPage() {
 
         {/* 3. Row 2: Quais Serviços têm Mais Quantidade + Ranking de Frequência de Navios */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Chart 3: Quais Serviços têm Mais Quantidade (5 cols) */}
+          {/* Chart 3: Quais Serviços têm Mais Quantidade (Realizados) (5 cols) */}
           <div className="lg:col-span-5 bg-white p-6 rounded-2xl border border-[#dce6eb] shadow-xs flex flex-col">
             <div className="flex items-center justify-between mb-3">
               <div>
@@ -482,7 +541,7 @@ export default function AnalyticsPage() {
                   <span>Quais Serviços têm Mais Quantidade</span>
                 </h2>
                 <p className="text-xs text-[#71858e]">
-                  Ranking e volume de escalas por linha/serviço
+                  Ranking de escalas realizadas por linha/serviço
                 </p>
               </div>
             </div>
@@ -490,10 +549,10 @@ export default function AnalyticsPage() {
             <div className="flex-1 overflow-y-auto max-h-[380px] pr-2 space-y-3 mt-2">
               {loading ? (
                 <div className="p-8 text-center text-xs text-gray-400">Carregando serviços...</div>
-              ) : data?.serviceStats && data.serviceStats.length > 0 ? (
-                data.serviceStats.map((svc, idx) => {
+              ) : realizedServiceStats.length > 0 ? (
+                realizedServiceStats.map((svc, idx) => {
                   const badgeColor = getServiceBadgeColor(svc.service);
-                  const maxCount = data.serviceStats[0]?.count || 1;
+                  const maxCount = realizedServiceStats[0]?.count || 1;
                   const barWidth = Math.max(8, Math.round((svc.count / maxCount) * 100));
 
                   return (
@@ -535,7 +594,7 @@ export default function AnalyticsPage() {
             </div>
           </div>
 
-          {/* Ranking de Frequência de Navios (7 cols) */}
+          {/* Ranking de Frequência de Navios (Realizados) (7 cols) */}
           <div className="lg:col-span-7 bg-white p-6 rounded-2xl border border-[#dce6eb] shadow-xs flex flex-col">
             <div className="flex items-center justify-between mb-4">
               <div>
@@ -544,11 +603,11 @@ export default function AnalyticsPage() {
                   <span>Quantas Vezes Cada Navio Aparece</span>
                 </h2>
                 <p className="text-xs text-[#71858e]">
-                  Frequência de escalas por embarcação no terminal
+                  Frequência de atracações realizadas no terminal
                 </p>
               </div>
               <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-                {data?.vesselRanking?.length || 0} navios
+                {realizedVesselRanking.length} navios operados
               </span>
             </div>
 
@@ -570,8 +629,8 @@ export default function AnalyticsPage() {
                         Carregando ranking de navios...
                       </td>
                     </tr>
-                  ) : data?.vesselRanking && data.vesselRanking.length > 0 ? (
-                    data.vesselRanking.map((v, idx) => {
+                  ) : realizedVesselRanking.length > 0 ? (
+                    realizedVesselRanking.map((v, idx) => {
                       const badgeColor = getServiceBadgeColor(v.service);
                       return (
                         <tr key={v.name} className="hover:bg-[#f8fafb] transition-colors">
