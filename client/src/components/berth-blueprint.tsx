@@ -218,12 +218,17 @@ function renderContainerDeck(
     vessel.name.toUpperCase().includes("SWANSEA") ||
     vessel.name.toUpperCase().includes("CHONG QING")
   );
+  const isPatmosExpress = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("PATMOS");
+  const isMonteAlegre = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("MONTE") && vessel.name.toUpperCase().includes("ALEGRE");
+  const idx19 = bays.indexOf(19);
+  const idx21 = bays.indexOf(21);
   const idx23 = bays.indexOf(23);
   const idx25 = bays.indexOf(25);
   const idx41 = bays.indexOf(41);
   const idx43 = bays.indexOf(43);
   const idx47 = bays.indexOf(47);
   const idx49 = bays.indexOf(49);
+  const idx51 = bays.indexOf(51);
   const idx53 = bays.indexOf(53);
   const idx55 = bays.indexOf(55);
   const idx57 = bays.indexOf(57);
@@ -232,6 +237,9 @@ function renderContainerDeck(
   const hasSpecialBridge55_57 = (isNykRumina || isSeaspanEmpire || isZimWilmington) && idx55 !== -1 && idx57 !== -1;
   const hasKotaElokBridge = isKotaElok && idx23 !== -1 && idx25 !== -1;
   const hasFreeportBridge = isMaerskFreeport && idx47 !== -1 && idx49 !== -1;
+  const hasPatmosBridge = isPatmosExpress && idx19 !== -1 && idx21 !== -1;
+  const hasPatmosFunnel = isPatmosExpress && config.separateFunnel && idx47 !== -1 && idx49 !== -1;
+  const hasMonteAlegreBridge = isMonteAlegre && idx51 !== -1 && idx53 !== -1;
   const hasDusseldorfBridge = isDusseldorf && idx57 !== -1 && idx59 !== -1;
   const hasAplBridge = isAplNewJersey && idx53 !== -1 && idx55 !== -1;
   const hasGuarujaBridge = isMercosulGuaruja && idx41 !== -1 && idx43 !== -1;
@@ -258,22 +266,25 @@ function renderContainerDeck(
 
   // Separação visual entre as bays de 40' (cada par de bays de 20' forma uma bay/hatch de 40')
   const num40ftGaps = isDalianExpress ? 18 : isDusseldorf ? 17 : isAplNewJersey ? 16 : isMercosulGuaruja ? 11 : Math.max(0, Math.floor((bays.length - 1) / 2));
-  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasKotaElokBridge ? 2.0 : 0) + (hasFreeportBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0) + (hasAplBridge ? 2.0 : 0) + (hasGuarujaBridge ? 2.0 : 0) + (hasKotaSingaBridge ? 2.0 : 0) + (hasDalianBridge ? 2.0 : 0);
+  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasPatmosFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasKotaElokBridge ? 2.0 : 0) + (hasFreeportBridge ? 2.0 : 0) + (hasPatmosBridge ? 2.0 : 0) + (hasMonteAlegreBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0) + (hasAplBridge ? 2.0 : 0) + (hasGuarujaBridge ? 2.0 : 0) + (hasKotaSingaBridge ? 2.0 : 0) + (hasDalianBridge ? 2.0 : 0);
   const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + extraSlots);
   const hatchGap = bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0;
   const totalGapsWidth = num40ftGaps * hatchGap;
   const coscoFunnelSlotW = hasCoscoFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
   const everFitFunnelSlotW = hasEverFitFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
+  const patmosFunnelSlotW = hasPatmosFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
   const nykBridgeSlotW = hasSpecialBridge55_57 ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const everFitBridgeSlotW = hasEverFitBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const kotaElokBridgeSlotW = hasKotaElokBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const freeportBridgeSlotW = hasFreeportBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
+  const patmosBridgeSlotW = hasPatmosBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
+  const monteAlegreBridgeSlotW = hasMonteAlegreBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const dusseldorfBridgeSlotW = hasDusseldorfBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const aplBridgeSlotW = hasAplBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const guarujaBridgeSlotW = hasGuarujaBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const kotaSingaBridgeSlotW = hasKotaSingaBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const dalianBridgeSlotW = hasDalianBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
-  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - kotaElokBridgeSlotW - freeportBridgeSlotW - dusseldorfBridgeSlotW - aplBridgeSlotW - guarujaBridgeSlotW - kotaSingaBridgeSlotW - dalianBridgeSlotW);
+  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - patmosFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - kotaElokBridgeSlotW - freeportBridgeSlotW - patmosBridgeSlotW - monteAlegreBridgeSlotW - dusseldorfBridgeSlotW - aplBridgeSlotW - guarujaBridgeSlotW - kotaSingaBridgeSlotW - dalianBridgeSlotW);
   const cellWidth = availableBayWidth / Math.max(1, bays.length);
   const labelSize = bays.length ? Math.max(2.6, Math.min(5.4, cellWidth * 0.54)) : 3.4;
   const rowLabelSize = Math.max(2.0, Math.min(labelSize, cellHeight * 0.72));
@@ -330,6 +341,9 @@ function renderContainerDeck(
     if (hasEverFitFunnel && index >= idx63) {
       xPos -= everFitFunnelSlotW;
     }
+    if (hasPatmosFunnel && index >= idx49) {
+      xPos -= patmosFunnelSlotW;
+    }
     if (hasSpecialBridge55_57 && index >= idx57) {
       xPos -= nykBridgeSlotW;
     }
@@ -341,6 +355,12 @@ function renderContainerDeck(
     }
     if (hasFreeportBridge && index >= idx49) {
       xPos -= freeportBridgeSlotW;
+    }
+    if (hasPatmosBridge && index >= idx21) {
+      xPos -= patmosBridgeSlotW;
+    }
+    if (hasMonteAlegreBridge && index >= idx53) {
+      xPos -= monteAlegreBridgeSlotW;
     }
     if (hasDusseldorfBridge && index >= idx59) {
       xPos -= dusseldorfBridgeSlotW;
@@ -364,7 +384,7 @@ function renderContainerDeck(
   const bridgeIndices: number[] = [];
   const funnelIndices: number[] = [];
 
-  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasKotaElokBridge && !hasFreeportBridge && !hasDusseldorfBridge && !hasAplBridge && !hasGuarujaBridge && !hasKotaSingaBridge && !hasDalianBridge) {
+  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasKotaElokBridge && !hasFreeportBridge && !hasPatmosBridge && !hasMonteAlegreBridge && !hasDusseldorfBridge && !hasAplBridge && !hasGuarujaBridge && !hasKotaSingaBridge && !hasDalianBridge) {
     const targetBridgeBay = config.bridgeBay ?? config.bridgeBayStart ?? 34;
     const occupiedBridgeBays = getOccupiedBayNumbers(
       targetBridgeBay,
@@ -400,7 +420,7 @@ function renderContainerDeck(
       }
     }
 
-    if (config.separateFunnel && !hasCoscoFunnel && !hasEverFitFunnel) {
+    if (config.separateFunnel && !hasCoscoFunnel && !hasEverFitFunnel && !hasPatmosFunnel) {
       const targetFunnelBay = config.funnelBay ?? config.funnelBayStart ?? 54;
       const occupiedFunnelBays = getOccupiedBayNumbers(
         targetFunnelBay,
@@ -1238,6 +1258,127 @@ function renderContainerDeck(
                   fill="#052e16"
                   stroke="#ffffff"
                   strokeWidth="0.5"
+                />
+              </>
+            );
+          })()}
+        </g>
+      )}
+
+      {/* 2h. Passadiço Específico do PATMOS EXPRESS (entre as bays 19 e 21: 23 21 [passadiço] 19 17) */}
+      {!isAllAft && hasPatmosBridge && (
+        <g className="superstructure-bridge-island-patmos">
+          {(() => {
+            const rightOf21 = bayCellX(idx21) + cellWidth;
+            const leftOf19 = bayCellX(idx19);
+            const slotW = Math.max(8.0, patmosBridgeSlotW - 0.4);
+            const slotX = (rightOf21 + leftOf19 - slotW) / 2;
+            return (
+              <>
+                <title>Passadiço (entre Bay 19 e Bay 21)</title>
+                <rect
+                  x={slotX}
+                  y={y + 2.5}
+                  width={slotW}
+                  height={vesselHeight - 5}
+                  rx="1.8"
+                  fill={color.fill}
+                  stroke={color.stroke}
+                  strokeWidth="1.2"
+                />
+                {/* Asas do passadiço */}
+                <line
+                  x1={slotX + slotW * 0.55}
+                  y1={y + 0.8}
+                  x2={slotX + slotW * 0.55}
+                  y2={y + vesselHeight - 0.8}
+                  stroke={color.stroke}
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                />
+              </>
+            );
+          })()}
+        </g>
+      )}
+
+      {/* 3d. Chaminé Separada Específica do PATMOS EXPRESS (entre as bays 47 e 49: 51 49 [chaminé] 47 45) */}
+      {!isAllAft && hasPatmosFunnel && (
+        <g className="superstructure-funnel-island-patmos">
+          {(() => {
+            const rightOf49 = bayCellX(idx49) + cellWidth;
+            const leftOf47 = bayCellX(idx47);
+            const slotW = Math.max(1.6, patmosFunnelSlotW - 0.35);
+            const slotX = (rightOf49 + leftOf47 - slotW) / 2;
+            const centerFunnelX = slotX + slotW / 2;
+            return (
+              <>
+                <title>Chaminé (entre Bay 47 e Bay 49)</title>
+                <rect
+                  x={slotX}
+                  y={y + 3.2}
+                  width={slotW}
+                  height={vesselHeight - 6.4}
+                  rx="1.6"
+                  fill="#1e293b"
+                  stroke="#0f172a"
+                  strokeWidth="0.8"
+                />
+                <ellipse
+                  cx={centerFunnelX}
+                  cy={y + vesselHeight / 2}
+                  rx={Math.max(1.5, Math.min(3.2, slotW * 0.4))}
+                  ry={Math.max(2.2, Math.min(5.5, vesselHeight * 0.16))}
+                  fill="#dc2626"
+                  stroke="#ffffff"
+                  strokeWidth="0.5"
+                />
+              </>
+            );
+          })()}
+        </g>
+      )}
+
+      {/* 2i. Passadiço Específico do MAERSK MONTE ALEGRE (entre as bays 51 e 53: 55 53 [passadiço] 51 49) */}
+      {!isAllAft && hasMonteAlegreBridge && (
+        <g className="superstructure-bridge-island-monte-alegre">
+          {(() => {
+            const rightOf53 = bayCellX(idx53) + cellWidth;
+            const leftOf51 = bayCellX(idx51);
+            const slotW = Math.max(8.0, monteAlegreBridgeSlotW - 0.4);
+            const slotX = (rightOf53 + leftOf51 - slotW) / 2;
+            return (
+              <>
+                <title>Passadiço (entre Bay 51 e Bay 53)</title>
+                <rect
+                  x={slotX}
+                  y={y + 2.5}
+                  width={slotW}
+                  height={vesselHeight - 5}
+                  rx="1.8"
+                  fill={color.fill}
+                  stroke={color.stroke}
+                  strokeWidth="1.2"
+                />
+                {/* Asas do passadiço */}
+                <line
+                  x1={slotX + slotW * 0.55}
+                  y1={y + 0.8}
+                  x2={slotX + slotW * 0.55}
+                  y2={y + vesselHeight - 0.8}
+                  stroke={color.stroke}
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                />
+                {/* Chaminé no próprio passadiço (lado de ré) */}
+                <ellipse
+                  cx={slotX + slotW * 0.25}
+                  cy={y + vesselHeight / 2}
+                  rx={Math.max(2.2, Math.min(4.8, slotW * 0.22))}
+                  ry={Math.max(1.8, Math.min(3.2, vesselHeight * 0.11))}
+                  fill="#1e293b"
+                  stroke="#0f172a"
+                  strokeWidth="0.7"
                 />
               </>
             );

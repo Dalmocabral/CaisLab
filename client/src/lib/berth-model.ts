@@ -191,7 +191,9 @@ export function resolveVesselSuperstructure(vessel: Partial<Vessel>): VesselSupe
   const isKotaSinga = (upperName.includes("KOTA") && upperName.includes("SINGA")) || upperName.includes("LORI") || upperName.includes("SANTOS");
   const isCardiff = upperName.includes("CARDIFF") || upperName.includes("SWANSEA") || upperName.includes("CHONG QING");
   const isZimWilmington = upperName.includes("ZIM") && upperName.includes("WILMINGTON");
-  const hasIslandBridge = isAplNewJersey || isDusseldorf || isGuaruja || isKotaSinga || isCardiff || isZimWilmington;
+  const isPatmos = upperName.includes("PATMOS");
+  const isMonteAlegre = upperName.includes("MONTE") && upperName.includes("ALEGRE");
+  const hasIslandBridge = isAplNewJersey || isDusseldorf || isGuaruja || isKotaSinga || isCardiff || isZimWilmington || isPatmos || isMonteAlegre;
 
   const bridgePos: BridgePositionType = (vessel.bridgePosition === "between-bays" || hasIslandBridge) ? "between-bays" : "all-aft";
   const bBay = typeof vessel.bridgeBay === "number"
@@ -208,14 +210,20 @@ export function resolveVesselSuperstructure(vessel: Partial<Vessel>): VesselSupe
     ? 44
     : isCardiff
     ? 48
+    : isPatmos
+    ? 20
+    : isMonteAlegre
+    ? 52
     : bridgePos === "between-bays"
     ? 34
     : undefined;
-  const sepFunnel = Boolean(vessel.separateFunnel);
+  const sepFunnel = Boolean(vessel.separateFunnel) || isPatmos;
   const fBay = typeof vessel.funnelBay === "number"
     ? vessel.funnelBay
     : typeof vessel.funnelBayStart === "number"
     ? vessel.funnelBayStart
+    : isPatmos
+    ? 48
     : sepFunnel
     ? 54
     : undefined;
@@ -301,6 +309,9 @@ export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "CARDIFF": "container",
   "SWANSEA": "container",
   "XIN CHONG QING": "container",
+  "PATMOS EXPRESS": "container",
+  "MAERSK MONTE ALEGRE": "container",
+  "MONTE ALEGRE": "container",
   "CMA CGM COBALT": "container",
   "CMA CGM IRON": "container",
   "CMA CGM KRYPTON": "container",
@@ -1068,6 +1079,72 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     imageUrl: "/vessels/xin_chong_qing.jpg",
     marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9262118",
   },
+  "PATMOS EXPRESS": {
+    name: "PATMOS EXPRESS",
+    loa: 272,
+    beam: 42.8,
+    draft: 10,
+    bayCount: 63,
+    bays: 63,
+    rowCount: 17,
+    rows: 17,
+    tierCount: 6,
+    tiers: 6,
+    bridgePosition: "between-bays",
+    bridgeBay: 20,
+    bridgeBayStart: 19,
+    bridgeBayEnd: 21,
+    separateFunnel: true,
+    funnelBay: 48,
+    funnelBayStart: 47,
+    funnelBayEnd: 49,
+    vesselType: "container",
+    isManualLayout: true,
+    imageUrl: "/vessels/patmos_express.jpg",
+    marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:1053573",
+  },
+  "MAERSK MONTE ALEGRE": {
+    name: "MAERSK MONTE ALEGRE",
+    loa: 272.05,
+    beam: 40,
+    draft: 12.4,
+    bayCount: 63,
+    bays: 63,
+    rowCount: 16,
+    rows: 16,
+    tierCount: 6,
+    tiers: 6,
+    bridgePosition: "between-bays",
+    bridgeBay: 52,
+    bridgeBayStart: 51,
+    bridgeBayEnd: 53,
+    separateFunnel: false,
+    vesselType: "container",
+    isManualLayout: true,
+    imageUrl: "/vessels/maersk_monte_alegre.jpg",
+    marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9348065",
+  },
+  "MONTE ALEGRE": {
+    name: "MONTE ALEGRE",
+    loa: 272.05,
+    beam: 40,
+    draft: 12.4,
+    bayCount: 63,
+    bays: 63,
+    rowCount: 16,
+    rows: 16,
+    tierCount: 6,
+    tiers: 6,
+    bridgePosition: "between-bays",
+    bridgeBay: 52,
+    bridgeBayStart: 51,
+    bridgeBayEnd: 53,
+    separateFunnel: false,
+    vesselType: "container",
+    isManualLayout: true,
+    imageUrl: "/vessels/maersk_monte_alegre.jpg",
+    marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9348065",
+  },
 };
 
 /**
@@ -1126,6 +1203,9 @@ export function isManuallyConfiguredVessel(vessel?: {
     "APL NEW JERSEY",
     "SWANSEA",
     "XIN CHONG QING",
+    "PATMOS EXPRESS",
+    "MAERSK MONTE ALEGRE",
+    "MONTE ALEGRE",
   ];
 
   if (MANUAL_VESSEL_NAMES.some((m) => rawName.includes(m))) {
@@ -1538,12 +1618,17 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     vessel.name.toUpperCase().includes("SWANSEA") ||
     vessel.name.toUpperCase().includes("CHONG QING")
   );
+  const isPatmosExpress = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("PATMOS");
+  const isMonteAlegre = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("MONTE") && vessel.name.toUpperCase().includes("ALEGRE");
+  const idx19 = bays.indexOf(19);
+  const idx21 = bays.indexOf(21);
   const idx23 = bays.indexOf(23);
   const idx25 = bays.indexOf(25);
   const idx41 = bays.indexOf(41);
   const idx43 = bays.indexOf(43);
   const idx47 = bays.indexOf(47);
   const idx49 = bays.indexOf(49);
+  const idx51 = bays.indexOf(51);
   const idx53 = bays.indexOf(53);
   const idx55 = bays.indexOf(55);
   const idx57 = bays.indexOf(57);
@@ -1552,6 +1637,9 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const hasSpecialBridge55_57 = (isNykRumina || isSeaspanEmpire || isZimWilmington) && idx55 !== -1 && idx57 !== -1;
   const hasKotaElokBridge = isKotaElok && idx23 !== -1 && idx25 !== -1;
   const hasFreeportBridge = isMaerskFreeport && idx47 !== -1 && idx49 !== -1;
+  const hasPatmosBridge = isPatmosExpress && idx19 !== -1 && idx21 !== -1;
+  const hasPatmosFunnel = isPatmosExpress && config.separateFunnel && idx47 !== -1 && idx49 !== -1;
+  const hasMonteAlegreBridge = isMonteAlegre && idx51 !== -1 && idx53 !== -1;
   const hasDusseldorfBridge = isDusseldorf && idx57 !== -1 && idx59 !== -1;
   const hasAplBridge = isAplNewJersey && idx53 !== -1 && idx55 !== -1;
   const hasGuarujaBridge = isMercosulGuaruja && idx41 !== -1 && idx43 !== -1;
@@ -1577,22 +1665,25 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const hasEverFitFunnel = isEverFitClass && config.separateFunnel && idx61 !== -1 && idx63 !== -1;
 
   const num40ftGaps = isDalianExpress ? 18 : isDusseldorf ? 17 : isAplNewJersey ? 16 : isMercosulGuaruja ? 11 : Math.max(0, Math.floor((bays.length - 1) / 2));
-  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasKotaElokBridge ? 2.0 : 0) + (hasFreeportBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0) + (hasAplBridge ? 2.0 : 0) + (hasGuarujaBridge ? 2.0 : 0) + (hasKotaSingaBridge ? 2.0 : 0) + (hasDalianBridge ? 2.0 : 0);
+  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasPatmosFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasKotaElokBridge ? 2.0 : 0) + (hasFreeportBridge ? 2.0 : 0) + (hasPatmosBridge ? 2.0 : 0) + (hasMonteAlegreBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0) + (hasAplBridge ? 2.0 : 0) + (hasGuarujaBridge ? 2.0 : 0) + (hasKotaSingaBridge ? 2.0 : 0) + (hasDalianBridge ? 2.0 : 0);
   const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + extraSlots);
   const hatchGap = isFortaleza ? 1.6 : (bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0);
   const totalGapsWidth = num40ftGaps * hatchGap;
   const coscoFunnelSlotW = hasCoscoFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
   const everFitFunnelSlotW = hasEverFitFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
+  const patmosFunnelSlotW = hasPatmosFunnel ? Math.max(2.4, Math.min(8.0, rawBayWidth * 1.35)) : 0;
   const nykBridgeSlotW = hasSpecialBridge55_57 ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const everFitBridgeSlotW = hasEverFitBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const kotaElokBridgeSlotW = hasKotaElokBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const freeportBridgeSlotW = hasFreeportBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
+  const patmosBridgeSlotW = hasPatmosBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
+  const monteAlegreBridgeSlotW = hasMonteAlegreBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const dusseldorfBridgeSlotW = hasDusseldorfBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const aplBridgeSlotW = hasAplBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const guarujaBridgeSlotW = hasGuarujaBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const kotaSingaBridgeSlotW = hasKotaSingaBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const dalianBridgeSlotW = hasDalianBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
-  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - kotaElokBridgeSlotW - freeportBridgeSlotW - dusseldorfBridgeSlotW - aplBridgeSlotW - guarujaBridgeSlotW - kotaSingaBridgeSlotW - dalianBridgeSlotW);
+  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - patmosFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - kotaElokBridgeSlotW - freeportBridgeSlotW - patmosBridgeSlotW - monteAlegreBridgeSlotW - dusseldorfBridgeSlotW - aplBridgeSlotW - guarujaBridgeSlotW - kotaSingaBridgeSlotW - dalianBridgeSlotW);
   const cellWidth = availableBayWidth / Math.max(1, bays.length);
 
   const bayCellFromStern = (index: number) => {
@@ -1645,6 +1736,9 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     if (hasEverFitFunnel && index >= idx63) {
       xPos -= everFitFunnelSlotW;
     }
+    if (hasPatmosFunnel && index >= idx49) {
+      xPos -= patmosFunnelSlotW;
+    }
     if (hasSpecialBridge55_57 && index >= idx57) {
       xPos -= nykBridgeSlotW;
     }
@@ -1656,6 +1750,12 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     }
     if (hasFreeportBridge && index >= idx49) {
       xPos -= freeportBridgeSlotW;
+    }
+    if (hasPatmosBridge && index >= idx21) {
+      xPos -= patmosBridgeSlotW;
+    }
+    if (hasMonteAlegreBridge && index >= idx53) {
+      xPos -= monteAlegreBridgeSlotW;
     }
     if (hasDusseldorfBridge && index >= idx59) {
       xPos -= dusseldorfBridgeSlotW;
@@ -1678,7 +1778,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const bridgeIndices: number[] = [];
   const funnelIndices: number[] = [];
 
-  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasKotaElokBridge && !hasFreeportBridge && !hasDusseldorfBridge && !hasAplBridge && !hasGuarujaBridge && !hasKotaSingaBridge && !hasDalianBridge) {
+  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasKotaElokBridge && !hasFreeportBridge && !hasPatmosBridge && !hasMonteAlegreBridge && !hasDusseldorfBridge && !hasAplBridge && !hasGuarujaBridge && !hasKotaSingaBridge && !hasDalianBridge) {
     const targetBridgeBay = config.bridgeBay ?? config.bridgeBayStart ?? 34;
     const occupiedBridgeBays = getOccupiedBayNumbers(
       targetBridgeBay,
@@ -1713,7 +1813,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
       }
     }
 
-    if (config.separateFunnel && !hasCoscoFunnel && !hasEverFitFunnel) {
+    if (config.separateFunnel && !hasCoscoFunnel && !hasEverFitFunnel && !hasPatmosFunnel) {
       const targetFunnelBay = config.funnelBay ?? config.funnelBayStart ?? 54;
       const occupiedFunnelBays = getOccupiedBayNumbers(
         targetFunnelBay,
@@ -1776,6 +1876,16 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     const leftOf47 = bayCellFromStern(idx47);
     bridgeCenterFromStern = (rightOf49 + leftOf47) / 2;
     bridgeLength = Math.max(10, freeportBridgeSlotW - 0.4);
+  } else if (hasPatmosBridge) {
+    const rightOf21 = bayCellFromStern(idx21) + cellWidth;
+    const leftOf19 = bayCellFromStern(idx19);
+    bridgeCenterFromStern = (rightOf21 + leftOf19) / 2;
+    bridgeLength = Math.max(10, patmosBridgeSlotW - 0.4);
+  } else if (hasMonteAlegreBridge) {
+    const rightOf53 = bayCellFromStern(idx53) + cellWidth;
+    const leftOf51 = bayCellFromStern(idx51);
+    bridgeCenterFromStern = (rightOf53 + leftOf51) / 2;
+    bridgeLength = Math.max(10, monteAlegreBridgeSlotW - 0.4);
   } else if (hasDusseldorfBridge) {
     const rightOf59 = bayCellFromStern(idx59) + cellWidth;
     const leftOf57 = bayCellFromStern(idx57);
@@ -1824,6 +1934,11 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
     const leftOf61 = bayCellFromStern(idx61);
     funnelCenterFromStern = (rightOf63 + leftOf61) / 2;
     funnelLength = Math.max(5.0, Math.min(everFitFunnelSlotW - 1.0, 7.0));
+  } else if (hasPatmosFunnel) {
+    const rightOf49 = bayCellFromStern(idx49) + cellWidth;
+    const leftOf47 = bayCellFromStern(idx47);
+    funnelCenterFromStern = (rightOf49 + leftOf47) / 2;
+    funnelLength = Math.max(5.0, Math.min(patmosFunnelSlotW - 0.5, 7.5));
   } else if (config.separateFunnel && funnelIndices.length > 0) {
     const minX = Math.min(...funnelIndices.map((idx) => bayCellFromStern(idx)));
     const maxX = Math.max(...funnelIndices.map((idx) => bayCellFromStern(idx) + cellWidth));
@@ -2899,6 +3014,8 @@ export function normalizeScenario(value: unknown): Scenario | null {
       (upperName.includes("EVER") && (upperName.includes("FIT") || upperName.includes("FAR") || upperName.includes("FAME") || upperName.includes("FAIR") || upperName.includes("FAITH") || upperName.includes("FASHION") || upperName.includes("FORTUNE"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["EVER FIT"]) :
       upperName.includes("PANTANAL") ? KNOWN_VESSEL_DEFAULTS["LOG-IN PANTANAL"] :
       upperName.includes("BRISA") ? KNOWN_VESSEL_DEFAULTS["NC BRISA"] :
+      upperName.includes("PATMOS") ? KNOWN_VESSEL_DEFAULTS["PATMOS EXPRESS"] :
+      (upperName.includes("MONTE") && upperName.includes("ALEGRE")) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["MAERSK MONTE ALEGRE"]) :
       upperName.includes("SPYROS") ? KNOWN_VESSEL_DEFAULTS["SPYROS V"] : (upperName.includes("APL") && upperName.includes("NEW JERSEY")) ? KNOWN_VESSEL_DEFAULTS["APL NEW JERSEY"] : upperName.includes("DUSSELDORF") ? KNOWN_VESSEL_DEFAULTS["DUSSELDORF EXPRESS"] : upperName.includes("DALIAN") ? KNOWN_VESSEL_DEFAULTS["DALIAN EXPRESS"] : upperName.includes("SWANSEA") ? KNOWN_VESSEL_DEFAULTS["SWANSEA"] : upperName.includes("CHONG QING") ? KNOWN_VESSEL_DEFAULTS["XIN CHONG QING"] : upperName.includes("CARDIFF") ? KNOWN_VESSEL_DEFAULTS["CARDIFF"] : upperName.includes("THORIUM") ? KNOWN_VESSEL_DEFAULTS["CMA CGM THORIUM"] : upperName.includes("KRYPTON") ? KNOWN_VESSEL_DEFAULTS["CMA CGM KRYPTON"] : undefined);
 
     // Para navios com layout calibrado manualmente (isManualLayout), os valores do knownDefault
