@@ -261,9 +261,7 @@ export default function AddVesselModal({
       service: m.service,
       serviceFull: m.serviceFull,
       consorcio: m.consorcio,
-      voyage: m.voyage,
       operator: m.operator,
-      deadline: m.deadline,
     };
 
     // Auto save to persistent catalog
@@ -290,11 +288,6 @@ export default function AddVesselModal({
       lastBerth: m.berthTo || m.berthFrom || "",
       imageUrl,
       marineTrafficUrl,
-      service: m.service,
-      serviceFull: m.serviceFull,
-      consorcio: m.consorcio,
-      voyage: m.voyage,
-      operator: m.operator,
     };
     await saveVesselToCatalog(catalogEntry);
     await loadCatalog();
@@ -361,11 +354,6 @@ export default function AddVesselModal({
       funnelBay,
       imageUrl,
       marineTrafficUrl,
-      service: v.service,
-      serviceFull: v.serviceFull,
-      consorcio: v.consorcio,
-      voyage: v.voyage,
-      operator: v.operator,
     };
 
     onAddVessel(
@@ -754,7 +742,6 @@ export default function AddVesselModal({
                               >
                                 <Compass className="w-3 h-3 text-indigo-600" />
                                 <span>Serviço: {m.service}</span>
-                                {m.voyage && <span className="text-indigo-400 font-mono text-[10px]">({m.voyage})</span>}
                               </span>
                             )}
 
@@ -762,13 +749,6 @@ export default function AddVesselModal({
                             {m.operator && (
                               <span className="bg-slate-100 text-slate-700 border border-slate-200 text-[10px] font-bold px-2 py-0.5 rounded-md">
                                 {m.operator}
-                              </span>
-                            )}
-
-                            {/* Deadline Gate */}
-                            {m.deadline && (
-                              <span className="bg-amber-50 text-amber-800 border border-amber-200 text-[10px] font-medium px-2 py-0.5 rounded-md" title="Deadline de Entrada de Gate">
-                                Deadline: {m.deadline}
                               </span>
                             )}
                           </div>
@@ -923,12 +903,7 @@ export default function AddVesselModal({
                             </span>
                           )}
 
-                          {v.service && v.service !== "OUTROS" && (
-                            <span className="bg-indigo-50 text-indigo-700 border border-indigo-200 text-[10px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
-                              <Compass className="w-2.5 h-2.5 text-indigo-600" />
-                              <span>Serviço: {v.service}</span>
-                            </span>
-                          )}
+
                         </div>
 
                         <div className="flex items-center gap-3 mt-1.5 text-[11px] text-[#556972] flex-wrap">

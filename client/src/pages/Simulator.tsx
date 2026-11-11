@@ -945,7 +945,6 @@ export default function Simulator() {
                   <div className="mb-3 p-2.5 rounded-lg bg-indigo-50/70 border border-indigo-200/90 text-xs flex items-center justify-between">
                     <div>
                       <span className="font-bold text-indigo-900">Serviço: {selectedVessel.service}</span>
-                      {selectedVessel.voyage && <span className="text-indigo-600 font-mono text-[11px] ml-1.5">({selectedVessel.voyage})</span>}
                       {selectedVessel.consorcio && <span className="text-[10px] text-indigo-500 block">{selectedVessel.consorcio}</span>}
                     </div>
                     {selectedVessel.operator && (

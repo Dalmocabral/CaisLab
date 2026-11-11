@@ -24,11 +24,7 @@
     "bridgeBayEnd": 55,
     "separateFunnel": false,
     "isManualLayout": true,
-    "vesselType": "container",
-    "service": "BRAZEX",
-    "serviceFull": "BRAZEX",
-    "consorcio": "CMA CGM / COSCO (Slot Maersk - ONE)",
-    "operator": "CMA"
+    "vesselType": "container"
   },
   {
     "name": "BBC AMBER",
@@ -43,11 +39,7 @@
     "lastBerth": "TECONT1",
     "updatedAt": "10/11/2026 23:25",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9563706",
-    "imageUrl": "/vessels/bbc_amber.jpg",
-    "service": "BREAK BULK",
-    "serviceFull": "BREAK BULK",
-    "consorcio": "Carga Geral / Breakbulk",
-    "operator": "BBC"
+    "imageUrl": "/vessels/bbc_amber.jpg"
   },
   {
     "name": "BOCHEM WALVIS BAY",
@@ -61,11 +53,7 @@
     "lastBerth": "TECONTPROLONG",
     "updatedAt": "10/11/2026 23:25",
     "imageUrl": "/vessels/bochem_walvis_bay.jpg",
-    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9725859",
-    "service": "QUIMICO",
-    "serviceFull": "QUIMICO",
-    "consorcio": "Navio Tanque Químico",
-    "operator": "GEN"
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9725859"
   },
   {
     "name": "CARDIFF",
@@ -92,11 +80,7 @@
     "bridgeBayEnd": 48,
     "separateFunnel": false,
     "isManualLayout": true,
-    "vesselType": "container",
-    "service": "BRAZEX",
-    "serviceFull": "BRAZEX",
-    "consorcio": "CMA CGM / COSCO (Slot Maersk - ONE)",
-    "operator": "CMA"
+    "vesselType": "container"
   },
   {
     "name": "CMA CGM AMAZONIA",
@@ -139,11 +123,7 @@
     "tiers": 6,
     "isManualLayout": true,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996680",
-    "imageUrl": "/vessels/cma_cgm_cobalt.jpg",
-    "service": "SEAS 2",
-    "serviceFull": "SEAS 2 NORTE",
-    "consorcio": "CMA CGM / COSCO / Evergreen / PIL / Yang Ming",
-    "operator": "CMA"
+    "imageUrl": "/vessels/cma_cgm_cobalt.jpg"
   },
   {
     "name": "CMA CGM IRON",
@@ -172,11 +152,7 @@
     "funnelBayEnd": 64,
     "isManualLayout": true,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996678",
-    "imageUrl": "/vessels/cma_cgm_iron.jpg",
-    "service": "SEAS 2",
-    "serviceFull": "SEAS 2 NORTE",
-    "consorcio": "CMA CGM / COSCO / Evergreen / PIL / Yang Ming",
-    "operator": "CMA"
+    "imageUrl": "/vessels/cma_cgm_iron.jpg"
   },
   {
     "name": "CMA CGM KRYPTON",
@@ -205,11 +181,7 @@
     "tiers": 9,
     "isManualLayout": true,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996733",
-    "imageUrl": "/vessels/cma_cgm_krypton.jpg",
-    "service": "SEAS 2",
-    "serviceFull": "SEAS 2 NORTE",
-    "consorcio": "CMA CGM / COSCO / Evergreen / PIL / Yang Ming",
-    "operator": "CMA"
+    "imageUrl": "/vessels/cma_cgm_krypton.jpg"
   },
   {
     "name": "CMA CGM PUCCINI",
@@ -223,11 +195,7 @@
     "lastBerth": "TECONT1",
     "updatedAt": "10/11/2026 23:25",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9280627",
-    "imageUrl": "/vessels/cma_cgm_puccini.jpg",
-    "service": "BRAZEX",
-    "serviceFull": "BRAZEX",
-    "consorcio": "CMA CGM / COSCO (Slot Maersk - ONE)",
-    "operator": "CMA"
+    "imageUrl": "/vessels/cma_cgm_puccini.jpg"
   },
   {
     "name": "CMA CGM SANTOS",
@@ -254,11 +222,7 @@
     "bridgeBayEnd": 45,
     "separateFunnel": false,
     "isManualLayout": true,
-    "vesselType": "container",
-    "service": "BRACO",
-    "serviceFull": "BRACO",
-    "consorcio": "Mercosul (Slot LOG-IN)",
-    "operator": "MER"
+    "vesselType": "container"
   },
   {
     "name": "CMA CGM THORIUM",
@@ -271,7 +235,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cma_cgm_thorium.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996745",
-    "updatedAt": "11/11/2026 08:52",
+    "updatedAt": "11/11/2026 09:08",
     "flag": "MALTA",
     "vesselType": "container",
     "bayCount": 78,
@@ -322,11 +286,7 @@
     "funnelBayEnd": 46,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9418377",
     "imageUrl": "/vessels/cma_cgm_veracruz.jpg",
-    "vesselType": "container",
-    "service": "BRACO",
-    "serviceFull": "BRACO",
-    "consorcio": "Mercosul (Slot LOG-IN)",
-    "operator": "MER"
+    "vesselType": "container"
   },
   {
     "name": "COSCO SHIPPING ARGENTINA",
@@ -342,11 +302,7 @@
     "bayCount": 50,
     "bays": 50,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9945849",
-    "imageUrl": "/vessels/cosco_shipping_argentina.jpg",
-    "service": "SEAS 2",
-    "serviceFull": "SEAS 2 NORTE",
-    "consorcio": "CMA CGM / COSCO / Evergreen / PIL / Yang Ming",
-    "operator": "COS"
+    "imageUrl": "/vessels/cosco_shipping_argentina.jpg"
   },
   {
     "name": "COSCO SHIPPING BRAZIL",
@@ -374,11 +330,7 @@
     "funnelBayStart": 64,
     "funnelBayEnd": 64,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9945837",
-    "imageUrl": "/vessels/cosco_shipping_brazil.jpg",
-    "service": "SEAS 2",
-    "serviceFull": "SEAS 2 NORTE",
-    "consorcio": "CMA CGM / COSCO / Evergreen / PIL / Yang Ming",
-    "operator": "COS"
+    "imageUrl": "/vessels/cosco_shipping_brazil.jpg"
   },
   {
     "name": "COSCO SHIPPING CHILE",
@@ -406,11 +358,7 @@
     "funnelBayStart": 64,
     "funnelBayEnd": 64,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9945887",
-    "imageUrl": "/vessels/cosco_shipping_chile.jpg",
-    "service": "SEAS 2",
-    "serviceFull": "SEAS 2 NORTE",
-    "consorcio": "CMA CGM / COSCO / Evergreen / PIL / Yang Ming",
-    "operator": "COS"
+    "imageUrl": "/vessels/cosco_shipping_chile.jpg"
   },
   {
     "name": "COSCO SHIPPING MEXICO",
@@ -440,11 +388,7 @@
     "funnelBayStart": 64,
     "funnelBayEnd": 64,
     "isManualLayout": true,
-    "vesselType": "container",
-    "service": "SEAS 2",
-    "serviceFull": "SEAS 2 NORTE",
-    "consorcio": "CMA CGM / COSCO / Evergreen / PIL / Yang Ming",
-    "operator": "COS"
+    "vesselType": "container"
   },
   {
     "name": "DALIAN EXPRESS",
@@ -471,11 +415,7 @@
     "bridgeBayEnd": 60,
     "separateFunnel": false,
     "vesselType": "container",
-    "isManualLayout": true,
-    "service": "FALCON",
-    "serviceFull": "FALCON",
-    "consorcio": "MSC / Hapag-Lloyd",
-    "operator": "HLC"
+    "isManualLayout": true
   },
   {
     "name": "DEEP ORIENT",
@@ -490,11 +430,7 @@
     "updatedAt": "11/11/2026 08:38",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9644330",
     "imageUrl": "/vessels/deep_orient.jpg",
-    "vesselType": "offshore",
-    "service": "OUTROS",
-    "serviceFull": "Serviço Não Informado",
-    "consorcio": "",
-    "operator": "GEN"
+    "vesselType": "offshore"
   },
   {
     "name": "DUSSELDORF EXPRESS",
@@ -521,11 +457,7 @@
     "bridgeBayEnd": 59,
     "separateFunnel": false,
     "isManualLayout": true,
-    "vesselType": "container",
-    "service": "CONOSUR",
-    "serviceFull": "ABAC CONOSUR",
-    "consorcio": "Maersk / Sealand / Hapag-Lloyd",
-    "operator": "HLC"
+    "vesselType": "container"
   },
   {
     "name": "EVER FAIR",
@@ -555,11 +487,7 @@
     "funnelBayStart": 62,
     "funnelBayEnd": 62,
     "vesselType": "container",
-    "isManualLayout": true,
-    "service": "SEAS 1",
-    "serviceFull": "SEAS 1",
-    "consorcio": "CMA CGM / Evergreen / COSCO / PIL",
-    "operator": "EMC"
+    "isManualLayout": true
   },
   {
     "name": "EVER FAITH",
@@ -589,12 +517,7 @@
     "funnelBayStart": 62,
     "funnelBayEnd": 62,
     "vesselType": "container",
-    "isManualLayout": true,
-    "service": "SEAS 1",
-    "serviceFull": "SEAS 1",
-    "consorcio": "CMA CGM / Evergreen / COSCO / PIL",
-    "operator": "EMC",
-    "voyage": "1714-037W"
+    "isManualLayout": true
   },
   {
     "name": "EVER FAME",
@@ -624,11 +547,7 @@
     "funnelBayStart": 62,
     "funnelBayEnd": 62,
     "vesselType": "container",
-    "isManualLayout": true,
-    "service": "SEAS 1",
-    "serviceFull": "SEAS 1",
-    "consorcio": "CMA CGM / Evergreen / COSCO / PIL",
-    "operator": "EMC"
+    "isManualLayout": true
   },
   {
     "name": "EVER FAR",
@@ -644,11 +563,7 @@
     "bayCount": 76,
     "bays": 76,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850862",
-    "imageUrl": "/vessels/ever_far.jpg",
-    "service": "SEAS 1",
-    "serviceFull": "SEAS 1",
-    "consorcio": "CMA CGM / Evergreen / COSCO / PIL",
-    "operator": "EMC"
+    "imageUrl": "/vessels/ever_far.jpg"
   },
   {
     "name": "EVER FASHION",
@@ -690,11 +605,7 @@
     "tierCount": 7,
     "tiers": 7,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850795",
-    "imageUrl": "/vessels/ever_fit.jpg",
-    "service": "SEAS 1",
-    "serviceFull": "SEAS 1",
-    "consorcio": "CMA CGM / Evergreen / COSCO / PIL",
-    "operator": "EMC"
+    "imageUrl": "/vessels/ever_fit.jpg"
   },
   {
     "name": "EVER LEADER",
@@ -716,11 +627,7 @@
     "rows": 14,
     "funnelBay": 40,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9595503",
-    "imageUrl": "/vessels/ever_leader.jpg",
-    "service": "EXTRA CALL",
-    "serviceFull": "EXTRA CALL",
-    "consorcio": "Chamada Extra / Oportunidade",
-    "operator": "EMC"
+    "imageUrl": "/vessels/ever_leader.jpg"
   },
   {
     "name": "FELIXSTOWE",
@@ -738,11 +645,7 @@
     "rowCount": 12,
     "rows": 12,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9227039",
-    "imageUrl": "/vessels/felixstowe.jpg",
-    "service": "ZIM GULF TOUCAN",
-    "serviceFull": "ZIM GULF TOUCAN",
-    "consorcio": "ZIM",
-    "operator": "ZIM"
+    "imageUrl": "/vessels/felixstowe.jpg"
   },
   {
     "name": "FINCH ARROW",
@@ -757,11 +660,7 @@
     "updatedAt": "10/11/2026 23:25",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9574860",
     "imageUrl": "/vessels/finch_arrow.jpg",
-    "vesselType": "general-cargo",
-    "service": "BREAK BULK",
-    "serviceFull": "BREAK BULK",
-    "consorcio": "Carga Geral / Breakbulk",
-    "operator": "G2 "
+    "vesselType": "general-cargo"
   },
   {
     "name": "KOTA ELOK",
@@ -790,11 +689,7 @@
     "funnelBayEnd": 64,
     "isManualLayout": true,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:1081831",
-    "imageUrl": "/vessels/kota_elok.jpg",
-    "service": "SEAS 1",
-    "serviceFull": "SEAS 1",
-    "consorcio": "CMA CGM / Evergreen / COSCO / PIL",
-    "operator": "PIL"
+    "imageUrl": "/vessels/kota_elok.jpg"
   },
   {
     "name": "KOTA PAHLAWAN",
@@ -818,11 +713,7 @@
     "bridgeBayEnd": 40,
     "separateFunnel": true,
     "funnelBayStart": 66,
-    "funnelBayEnd": 68,
-    "service": "SEAS 1",
-    "serviceFull": "SEAS 1",
-    "consorcio": "CMA CGM / Evergreen / COSCO / PIL",
-    "operator": "PIL"
+    "funnelBayEnd": 68
   },
   {
     "name": "KOTA SINGA",
@@ -849,11 +740,7 @@
     "tiers": 5,
     "separateFunnel": false,
     "isManualLayout": true,
-    "vesselType": "container",
-    "service": "EXTRA CALL",
-    "serviceFull": "EXTRA CALL",
-    "consorcio": "Chamada Extra / Oportunidade",
-    "operator": "PIL"
+    "vesselType": "container"
   },
   {
     "name": "LOG-IN PANTANAL",
@@ -877,11 +764,7 @@
     "bridgeBay": 40,
     "imageUrl": "/vessels/log_in_pantanal.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9351799",
-    "vesselType": "container",
-    "service": "FEEDER",
-    "serviceFull": "FEEDER",
-    "consorcio": "Log-In / Maersk / CMA CGM / Mercosul / ZIM",
-    "operator": "LOG"
+    "vesselType": "container"
   },
   {
     "name": "LONCOMILLA",
@@ -895,11 +778,7 @@
     "lastBerth": "TECONTPROLONG",
     "updatedAt": "10/11/2026 23:25",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9437385",
-    "imageUrl": "/vessels/loncomilla.jpg",
-    "service": "ZIM GULF TOUCAN",
-    "serviceFull": "ZIM GULF TOUCAN",
-    "consorcio": "ZIM",
-    "operator": "ZIM"
+    "imageUrl": "/vessels/loncomilla.jpg"
   },
   {
     "name": "LORI",
@@ -926,11 +805,7 @@
     "tiers": 5,
     "separateFunnel": false,
     "isManualLayout": true,
-    "vesselType": "container",
-    "service": "CONOSUR",
-    "serviceFull": "ABAC CONOSUR",
-    "consorcio": "Maersk / Sealand / Hapag-Lloyd",
-    "operator": "HLC"
+    "vesselType": "container"
   },
   {
     "name": "MAERSK CALLAO",
@@ -943,11 +818,7 @@
     "lastBerth": "TECONTPROLONG",
     "updatedAt": "10/11/2026 23:25",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9786152",
-    "imageUrl": "/vessels/maersk_callao.jpg",
-    "service": "QUIMICO",
-    "serviceFull": "QUIMICO",
-    "consorcio": "Navio Tanque Químico",
-    "operator": "MSK"
+    "imageUrl": "/vessels/maersk_callao.jpg"
   },
   {
     "name": "MAERSK FORTALEZA",
@@ -960,11 +831,7 @@
     "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "updatedAt": "10/11/2026 23:25",
     "imageUrl": "/vessels/maersk_fortaleza.jpg",
-    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/index/ships/all/keyword:MAERSK%20FORTALEZA",
-    "service": "TANGO",
-    "serviceFull": "TANGO NB - ECNA TANGO",
-    "consorcio": "Hapag-Lloyd / Maersk",
-    "operator": "MSK"
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/index/ships/all/keyword:MAERSK%20FORTALEZA"
   },
   {
     "name": "MAERSK FRANKFURT",
@@ -987,11 +854,7 @@
     "bridgeBayStart": 42,
     "bridgeBayEnd": 42,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9969065",
-    "imageUrl": "/vessels/maersk_frankfurt.jpg",
-    "service": "TANGO",
-    "serviceFull": "TANGO NB - ECNA TANGO",
-    "consorcio": "Hapag-Lloyd / Maersk",
-    "operator": "MSK"
+    "imageUrl": "/vessels/maersk_frankfurt.jpg"
   },
   {
     "name": "MAERSK FREEPORT",
@@ -1017,11 +880,7 @@
     "tiers": 5,
     "isManualLayout": true,
     "imageUrl": "/vessels/maersk_freeport.jpg",
-    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/shipid:8941589",
-    "service": "TANGO",
-    "serviceFull": "TANGO NB - ECNA TANGO",
-    "consorcio": "Hapag-Lloyd / Maersk",
-    "operator": "MSK"
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/shipid:8941589"
   },
   {
     "name": "MAERSK MONTE ALEGRE",
@@ -1048,11 +907,7 @@
     "bridgeBayEnd": 53,
     "separateFunnel": false,
     "vesselType": "container",
-    "isManualLayout": true,
-    "service": "TANGO",
-    "serviceFull": "TANGO NB - ECNA TANGO",
-    "consorcio": "Hapag-Lloyd / Maersk",
-    "operator": "MSK"
+    "isManualLayout": true
   },
   {
     "name": "MAERSK REDWOOD",
@@ -1073,11 +928,7 @@
     "tierCount": 5,
     "tiers": 5,
     "rowCount": 14,
-    "rows": 14,
-    "service": "CONOSUR",
-    "serviceFull": "ABAC CONOSUR",
-    "consorcio": "Maersk / Sealand / Hapag-Lloyd",
-    "operator": "MSK"
+    "rows": 14
   },
   {
     "name": "MALIAKOS",
@@ -1091,11 +942,7 @@
     "lastBerth": "TECONTPROLONG",
     "updatedAt": "10/11/2026 23:25",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9464247",
-    "imageUrl": "/vessels/maliakos.jpg",
-    "service": "CONOSUR",
-    "serviceFull": "ABAC CONOSUR",
-    "consorcio": "Maersk / Sealand / Hapag-Lloyd",
-    "operator": "HLC"
+    "imageUrl": "/vessels/maliakos.jpg"
   },
   {
     "name": "MERCOSUL FORTALEZA",
@@ -1113,11 +960,7 @@
     "bridgePosition": "all-aft",
     "bridgeBay": 48,
     "bridgeBayStart": 48,
-    "bridgeBayEnd": 48,
-    "service": "BRACO",
-    "serviceFull": "BRACO",
-    "consorcio": "Mercosul (Slot LOG-IN)",
-    "operator": "MER"
+    "bridgeBayEnd": 48
   },
   {
     "name": "MERCOSUL GUARUJA",
@@ -1142,11 +985,7 @@
     "bridgeBayEnd": 42,
     "isManualLayout": true,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9539494",
-    "imageUrl": "/vessels/mercosul_guaruja.jpg",
-    "service": "BRACO",
-    "serviceFull": "BRACO",
-    "consorcio": "Mercosul (Slot LOG-IN)",
-    "operator": "MER"
+    "imageUrl": "/vessels/mercosul_guaruja.jpg"
   },
   {
     "name": "NC BRAVO",
@@ -1162,11 +1001,7 @@
     "bayCount": 46,
     "bays": 46,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9612791",
-    "imageUrl": "/vessels/nc_bravo.jpg",
-    "service": "NORCOAST",
-    "serviceFull": "NORCOAST",
-    "consorcio": "Norcoast",
-    "operator": "NCO"
+    "imageUrl": "/vessels/nc_bravo.jpg"
   },
   {
     "name": "NC BREDA",
@@ -1182,11 +1017,7 @@
     "bayCount": 58,
     "bays": 58,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9612765",
-    "imageUrl": "/vessels/nc_breda.jpg",
-    "service": "NORCOAST",
-    "serviceFull": "NORCOAST",
-    "consorcio": "Norcoast",
-    "operator": "NCO"
+    "imageUrl": "/vessels/nc_breda.jpg"
   },
   {
     "name": "NC BRISA",
@@ -1206,11 +1037,7 @@
     "tierCount": 5,
     "tiers": 5,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9612789",
-    "imageUrl": "/vessels/nc_brisa.jpg",
-    "service": "NORCOAST",
-    "serviceFull": "NORCOAST",
-    "consorcio": "Norcoast",
-    "operator": "NCO"
+    "imageUrl": "/vessels/nc_brisa.jpg"
   },
   {
     "name": "NC BRUMA",
@@ -1237,11 +1064,7 @@
     "bridgeBayEnd": 47,
     "separateFunnel": false,
     "vesselType": "container",
-    "isManualLayout": true,
-    "service": "NORCOAST",
-    "serviceFull": "NORCOAST",
-    "consorcio": "Norcoast",
-    "operator": "NCO"
+    "isManualLayout": true
   },
   {
     "name": "NYK DIANA",
@@ -1266,11 +1089,7 @@
     "bridgeBayEnd": 56,
     "isManualLayout": true,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9337688",
-    "imageUrl": "/vessels/nyk_diana.jpg",
-    "service": "LUX",
-    "serviceFull": "LUX",
-    "consorcio": "COSCO / ONE / OOCL",
-    "operator": "ONE"
+    "imageUrl": "/vessels/nyk_diana.jpg"
   },
   {
     "name": "NYK RUMINA",
@@ -1295,11 +1114,7 @@
     "tiers": 6,
     "separateFunnel": false,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9416991",
-    "imageUrl": "/vessels/nyk_rumina.jpg",
-    "service": "LUX",
-    "serviceFull": "LUX",
-    "consorcio": "COSCO / ONE / OOCL",
-    "operator": "ONE"
+    "imageUrl": "/vessels/nyk_rumina.jpg"
   },
   {
     "name": "OCEAN MERMAID",
@@ -1313,11 +1128,7 @@
     "lastBerth": "TECONT1",
     "updatedAt": "10/11/2026 23:25",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9742443",
-    "imageUrl": "/vessels/ocean_mermaid.jpg",
-    "service": "GENERIC",
-    "serviceFull": "GENERIC",
-    "consorcio": "",
-    "operator": "GEN"
+    "imageUrl": "/vessels/ocean_mermaid.jpg"
   },
   {
     "name": "PATMOS EXPRESS",
@@ -1347,11 +1158,7 @@
     "funnelBay": 48,
     "funnelBayStart": 47,
     "funnelBayEnd": 49,
-    "isManualLayout": true,
-    "service": "FALCON",
-    "serviceFull": "FALCON",
-    "consorcio": "MSC / Hapag-Lloyd",
-    "operator": "HLC"
+    "isManualLayout": true
   },
   {
     "name": "SEASPAN EMPIRE",
@@ -1376,11 +1183,7 @@
     "tiers": 5,
     "separateFunnel": false,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9407160",
-    "imageUrl": "/vessels/seaspan_empire.jpg",
-    "service": "CONOSUR",
-    "serviceFull": "ABAC CONOSUR",
-    "consorcio": "Maersk / Sealand / Hapag-Lloyd",
-    "operator": "HLC"
+    "imageUrl": "/vessels/seaspan_empire.jpg"
   },
   {
     "name": "SEVEN RIO",
@@ -1395,11 +1198,7 @@
     "updatedAt": "10/11/2026 23:25",
     "vesselType": "offshore",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9710878",
-    "imageUrl": "/vessels/seven_rio.jpg",
-    "service": "GENERIC",
-    "serviceFull": "GENERIC",
-    "consorcio": "",
-    "operator": "GEN"
+    "imageUrl": "/vessels/seven_rio.jpg"
   },
   {
     "name": "SEVEN SUN",
@@ -1413,11 +1212,7 @@
     "lastBerth": "TECONT1",
     "updatedAt": "10/11/2026 23:25",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9710969",
-    "imageUrl": "/vessels/seven_sun.jpg",
-    "service": "GENERIC",
-    "serviceFull": "GENERIC",
-    "consorcio": "",
-    "operator": "GEN"
+    "imageUrl": "/vessels/seven_sun.jpg"
   },
   {
     "name": "SEVEN WAVES",
@@ -1431,11 +1226,7 @@
     "lastBerth": "TECONT1",
     "updatedAt": "10/11/2026 23:25",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9649029",
-    "imageUrl": "/vessels/seven_waves.jpg",
-    "service": "SUPPLY BOAT",
-    "serviceFull": "SUPPLY BOAT",
-    "consorcio": "",
-    "operator": "GEN"
+    "imageUrl": "/vessels/seven_waves.jpg"
   },
   {
     "name": "SPYROS V",
@@ -1455,11 +1246,7 @@
     "bayCount": 50,
     "bays": 50,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9453365",
-    "imageUrl": "/vessels/spyros_v.jpg",
-    "service": "ZIM GULF TOUCAN",
-    "serviceFull": "ZIM GULF TOUCAN",
-    "consorcio": "ZIM",
-    "operator": "ZIM"
+    "imageUrl": "/vessels/spyros_v.jpg"
   },
   {
     "name": "SWANSEA",
@@ -1486,11 +1273,7 @@
     "tierCount": 6,
     "tiers": 6,
     "separateFunnel": false,
-    "isManualLayout": true,
-    "service": "BRAZEX",
-    "serviceFull": "BRAZEX",
-    "consorcio": "CMA CGM / COSCO (Slot Maersk - ONE)",
-    "operator": "CMA"
+    "isManualLayout": true
   },
   {
     "name": "TINOS EXPRESS",
@@ -1520,11 +1303,7 @@
     "funnelBay": 48,
     "funnelBayStart": 47,
     "funnelBayEnd": 49,
-    "isManualLayout": true,
-    "service": "EXTRA CALL",
-    "serviceFull": "EXTRA CALL",
-    "consorcio": "Chamada Extra / Oportunidade",
-    "operator": "HLC"
+    "isManualLayout": true
   },
   {
     "name": "TOKYO EXPRESS",
@@ -1540,11 +1319,7 @@
     "bayCount": 57,
     "bays": 57,
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9193290",
-    "imageUrl": "/vessels/tokyo_express.jpg",
-    "service": "CONOSUR",
-    "serviceFull": "ABAC CONOSUR",
-    "consorcio": "Maersk / Sealand / Hapag-Lloyd",
-    "operator": "HLC"
+    "imageUrl": "/vessels/tokyo_express.jpg"
   },
   {
     "name": "WINDEA CURIE",
@@ -1558,11 +1333,7 @@
     "lastBerth": "TECONT1",
     "updatedAt": "10/11/2026 23:25",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:1025124",
-    "imageUrl": "/vessels/windea_curie.jpg",
-    "service": "GENERIC",
-    "serviceFull": "GENERIC",
-    "consorcio": "",
-    "operator": "GEN"
+    "imageUrl": "/vessels/windea_curie.jpg"
   },
   {
     "name": "XIN CHONG QING",
@@ -1589,11 +1360,7 @@
     "bridgeBayStart": 47,
     "bridgeBayEnd": 49,
     "separateFunnel": false,
-    "isManualLayout": true,
-    "service": "LUX",
-    "serviceFull": "LUX",
-    "consorcio": "COSCO / ONE / OOCL",
-    "operator": "COS"
+    "isManualLayout": true
   },
   {
     "name": "XIN WEI HAI",
@@ -1607,11 +1374,7 @@
     "lastBerth": "TECONT1",
     "updatedAt": "10/11/2026 23:25",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9312573",
-    "imageUrl": "/vessels/xin_wei_hai.jpg",
-    "service": "LUX",
-    "serviceFull": "LUX",
-    "consorcio": "COSCO / ONE / OOCL",
-    "operator": "COS"
+    "imageUrl": "/vessels/xin_wei_hai.jpg"
   },
   {
     "name": "ZIM BALTIMORE",
@@ -1625,11 +1388,7 @@
     "lastBerth": "TECONT1",
     "updatedAt": "10/11/2026 23:25",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9395953",
-    "imageUrl": "/vessels/zim_baltimore.jpg",
-    "service": "ZIM GULF TOUCAN",
-    "serviceFull": "ZIM GULF TOUCAN",
-    "consorcio": "ZIM",
-    "operator": "ZIM"
+    "imageUrl": "/vessels/zim_baltimore.jpg"
   },
   {
     "name": "ZIM WILMINGTON",
@@ -1656,10 +1415,6 @@
     "bridgeBayEnd": 56,
     "separateFunnel": false,
     "vesselType": "container",
-    "isManualLayout": true,
-    "service": "FALCON",
-    "serviceFull": "FALCON",
-    "consorcio": "MSC / Hapag-Lloyd",
-    "operator": "ZIM"
+    "isManualLayout": true
   }
 ]

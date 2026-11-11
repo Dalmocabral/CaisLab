@@ -373,28 +373,10 @@ def run_sync_lineup():
         except Exception as e:
             print(f"Erro ao enriquecer praticagem_live.json: {e}", file=sys.stderr)
 
-    # 9. Cruzar com vessels_catalog.json
-    if os.path.exists(catalog_path):
-        try:
-            with open(catalog_path, "r", encoding="utf-8") as f:
-                catalog = json.load(f)
-            
-            for v in catalog:
-                c_name = clean_vessel_name(v.get("name"))
-                matches = items_by_vessel.get(c_name, [])
-                if matches:
-                    best = matches[-1]
-                    if not v.get("service") or v.get("service") == "OUTROS":
-                        v["service"] = best.get("servico")
-                        v["serviceFull"] = best.get("servicoCompleto")
-                        v["consorcio"] = best.get("consorcio")
-                    if not v.get("operator") and best.get("operador"):
-                        v["operator"] = best.get("operador")
-
-            with open(catalog_path, "w", encoding="utf-8") as f:
-                json.dump(catalog, f, ensure_ascii=False, indent=2)
-        except Exception as e:
-            print(f"Erro ao enriquecer catálogo de navios: {e}", file=sys.stderr)
+    # Navios Salvos (catálogo permanente) não armazenam serviço fixo,
+    # pois o mesmo navio altera de serviço entre diferentes viagens/afretamentos.
+    # O serviço é mantido exclusivamente nas escalas ativas (Praticagem RJ / Lineup)
+    # para cálculo dos gráficos e analytics.
 
     print(json.dumps({
         "status": "success",
