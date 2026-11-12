@@ -122,6 +122,12 @@ export function bayNumberSequence(value: unknown, vesselName?: string): number[]
     );
   }
 
+  // No MAERSK ACADIA: casaria/passadiço na popa (bays 41-43), 20 baias de contêineres na proa (01 a 39)
+  const isMaerskAcadia = typeof vesselName === "string" && vesselName.trim().toUpperCase().includes("ACADIA");
+  if (isMaerskAcadia) {
+    return Array.from({ length: 20 }, (_, index) => index * 2 + 1);
+  }
+
   return seq;
 }
 
@@ -187,19 +193,24 @@ export function resolveVesselSuperstructure(vessel: Partial<Vessel>): VesselSupe
   const upperName = (vessel.name ?? "").toUpperCase().trim();
   const isAplNewJersey = upperName.includes("APL") && upperName.includes("NEW JERSEY");
   const isDusseldorf = upperName.includes("DUSSELDORF");
-  const isGuaruja = upperName.includes("GUARUJA") || upperName.includes("ACADIA");
+  const isGuaruja = upperName.includes("GUARUJA");
+  const isMaerskAcadia = upperName.includes("ACADIA");
   const isKotaSinga = (upperName.includes("KOTA") && upperName.includes("SINGA")) || upperName.includes("LORI") || upperName.includes("SANTOS");
   const isCardiff = upperName.includes("CARDIFF") || upperName.includes("SWANSEA") || upperName.includes("CHONG QING");
   const isZimWilmington = upperName.includes("ZIM") && upperName.includes("WILMINGTON");
   const isPatmos = upperName.includes("PATMOS") || upperName.includes("TINOS");
   const isMonteAlegre = upperName.includes("MONTE") && upperName.includes("ALEGRE");
-  const hasIslandBridge = isAplNewJersey || isDusseldorf || isGuaruja || isKotaSinga || isCardiff || isZimWilmington || isPatmos || isMonteAlegre;
+  const hasIslandBridge = !isMaerskAcadia && (isAplNewJersey || isDusseldorf || isGuaruja || isKotaSinga || isCardiff || isZimWilmington || isPatmos || isMonteAlegre);
 
-  const bridgePos: BridgePositionType = (vessel.bridgePosition === "between-bays" || hasIslandBridge) ? "between-bays" : "all-aft";
+  const bridgePos: BridgePositionType = isMaerskAcadia
+    ? "all-aft"
+    : (vessel.bridgePosition === "between-bays" || hasIslandBridge) ? "between-bays" : "all-aft";
   const bBay = typeof vessel.bridgeBay === "number"
     ? vessel.bridgeBay
     : typeof vessel.bridgeBayStart === "number"
     ? vessel.bridgeBayStart
+    : isMaerskAcadia
+    ? 42
     : isAplNewJersey
     ? 54
     : isDusseldorf
@@ -850,13 +861,13 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     loa: 200.0,
     beam: 36.4,
     draft: 11.5,
-    bayCount: 49,
-    bays: 49,
+    bayCount: 40,
+    bays: 40,
     rowCount: 14,
     rows: 14,
     tierCount: 6,
     tiers: 6,
-    bridgePosition: "between-bays",
+    bridgePosition: "all-aft",
     bridgeBay: 42,
     bridgeBayStart: 41,
     bridgeBayEnd: 43,
@@ -1632,10 +1643,7 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const isFortaleza = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("FORTALEZA");
   const isDusseldorf = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("DUSSELDORF");
   const isAplNewJersey = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("APL") && vessel.name.toUpperCase().includes("NEW JERSEY");
-  const isMercosulGuaruja = typeof vessel.name === "string" && (
-    vessel.name.toUpperCase().includes("GUARUJA") ||
-    vessel.name.toUpperCase().includes("ACADIA")
-  );
+  const isMercosulGuaruja = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("GUARUJA");
   const isKotaSinga = typeof vessel.name === "string" && (
     (vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("SINGA")) ||
     vessel.name.toUpperCase().includes("LORI") ||

@@ -123,10 +123,7 @@ function renderContainerDeck(
   const config = resolveVesselSuperstructure(vessel);
   const isDusseldorf = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("DUSSELDORF");
   const isAplNewJersey = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("APL") && vessel.name.toUpperCase().includes("NEW JERSEY");
-  const isMercosulGuaruja = typeof vessel.name === "string" && (
-    vessel.name.toUpperCase().includes("GUARUJA") ||
-    vessel.name.toUpperCase().includes("ACADIA")
-  );
+  const isMercosulGuaruja = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("GUARUJA");
   const isKotaSinga = typeof vessel.name === "string" && (
     (vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("SINGA")) ||
     vessel.name.toUpperCase().includes("LORI") ||
@@ -674,9 +671,10 @@ function renderContainerDeck(
       />
 
       {/* ESTRUTURAS: */}
-      {/* 1. Casaria na Popa Extrema (All-Aft, ex: CMA CGM Veracruz) */}
+      {/* 1. Casaria na Popa Extrema (All-Aft, ex: CMA CGM Veracruz, Maersk Acadia) */}
       {isAllAft && (
         <g className="superstructure-all-aft">
+          <title>{typeof vessel.name === "string" && vessel.name.toUpperCase().includes("ACADIA") ? "Passadiço na popa (Bays 41-43)" : "Superestrutura / Passadiço na popa"}</title>
           <rect
             x={aftHouseX}
             y={aftHouseY}
@@ -707,6 +705,29 @@ function renderContainerDeck(
             stroke="#0f172a"
             strokeWidth="0.8"
           />
+          {/* Rótulo das Bays do Passadiço na popa (ex: 41-43 para Maersk Acadia) */}
+          {(Boolean(vessel.bridgeBayStart) || (typeof vessel.name === "string" && vessel.name.toUpperCase().includes("ACADIA"))) && (
+            <text
+              transform={textTransform(aftHouseX + aftHouseW / 2)}
+              x={aftHouseX + aftHouseW / 2}
+              y={y - 3.2}
+              textAnchor="middle"
+              dominantBaseline="middle"
+              fontSize={labelSize}
+              fontWeight="800"
+              fill="#0284c7"
+              paintOrder="stroke"
+              stroke="#f8fbfc"
+              strokeWidth="0.7"
+              strokeLinejoin="round"
+            >
+              {typeof vessel.name === "string" && vessel.name.toUpperCase().includes("ACADIA")
+                ? "41-43"
+                : (vessel.bridgeBayEnd && vessel.bridgeBayEnd !== vessel.bridgeBayStart
+                    ? `${String(vessel.bridgeBayStart).padStart(2, "0")}-${String(vessel.bridgeBayEnd).padStart(2, "0")}`
+                    : String(vessel.bridgeBayStart).padStart(2, "0"))}
+            </text>
+          )}
         </g>
       )}
 
