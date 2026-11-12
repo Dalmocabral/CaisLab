@@ -231,14 +231,15 @@ function addVesselNameplate(
   const context = canvas.getContext("2d");
   if (!context) return;
   const isCosco = /cosco/i.test(vessel.name);
+  const isFrioMarathon = /frio\s*marathon/i.test(vessel.name);
   const text = isCosco ? "COSCO SHIPPING" : vessel.name.toUpperCase();
   context.textAlign = "center";
   context.textBaseline = "middle";
   context.font = `800 ${text.length > 18 ? 68 : 92}px Arial, sans-serif`;
   context.lineWidth = 8;
-  context.strokeStyle = "rgba(7, 31, 55, 0.7)";
+  context.strokeStyle = isFrioMarathon ? "rgba(255, 255, 255, 0.85)" : "rgba(7, 31, 55, 0.7)";
   context.strokeText(text, canvas.width / 2, canvas.height / 2, canvas.width - 36);
-  context.fillStyle = "#ffffff";
+  context.fillStyle = isFrioMarathon ? "#0f172a" : "#ffffff";
   context.fillText(text, canvas.width / 2, canvas.height / 2, canvas.width - 36);
 
   const texture = new THREE.CanvasTexture(canvas);
@@ -553,13 +554,17 @@ function addVessel(
   );
 
   // Cor do casco:
+  // - FRIO MARATHON: Branco puro marítimo (#f8fafc) com fundo e linha d'água vermelho vinho (#881337)
   // - COSCO: Azul Royal marítimo oficial (#015ea8) das fotos de referência
   // - Tanker: azul-claro marítimo da foto de referência (#5da8bc)
   // - Offshore / Diving: vermelho vibrante (#dc2626) como DOF/Subsea 7 ou azul marítimo (#0284c7) como MMC/PSV
   // - Research / Survey (ex: OCEAN MERMAID): azul marinho oceanográfico (#1e40af)
   // - Container / Outros: conforme paleta selecionada
   const isCosco = typeof vessel.name === "string" && /cosco/i.test(vessel.name);
-  const hullColor = isCosco
+  const isFrioMarathon = typeof vessel.name === "string" && /frio\s*marathon/i.test(vessel.name);
+  const hullColor = isFrioMarathon
+    ? "#f8fafc"
+    : isCosco
     ? "#015ea8"
     : isTanker
     ? "#5da8bc"
@@ -571,12 +576,23 @@ function addVessel(
 
   const hullMaterial = new THREE.MeshStandardMaterial({
     color: hullColor,
-    roughness: isCosco ? 0.50 : 0.58,
+    roughness: isFrioMarathon ? 0.42 : isCosco ? 0.50 : 0.58,
     metalness: isCosco ? 0.16 : 0.12,
     side: THREE.DoubleSide,
   });
   const hull = new THREE.Mesh(createHullGeometry(THREE, direction, loa, beam, draft, deckHeight), hullMaterial);
   group.add(hull);
+
+  if (isFrioMarathon) {
+    // Fundo submerso e linha d'água em vermelho vinho naval (#881337 / boot-topping) característico do Frio Marathon
+    const redBottomMat = new THREE.MeshStandardMaterial({ color: "#881337", roughness: 0.65 });
+    const bootTop = addBox(THREE, group, [loa * 0.94, draft * 0.95, beam * 0.95], [0, -draft * 0.48, 0], redBottomMat);
+    const bulbMat = new THREE.MeshStandardMaterial({ color: "#881337", roughness: 0.65 });
+    const bulb = new THREE.Mesh(new THREE.SphereGeometry(beam * 0.22, 12, 10), bulbMat);
+    bulb.scale.set(1.6, 0.9, 0.85);
+    bulb.position.set(direction * (loa * 0.49), -draft * 0.55, 0);
+    group.add(bulb);
+  }
 
   if (isOffshore) {
     // Propulsores Azimutais duplos na popa (Azimuth Thruster Pods com hélices em bronze)
@@ -595,7 +611,7 @@ function addVessel(
       });
   }
 
-  const deckColor = isTanker ? "#94a3b8" : isOffshore ? "#9a5b32" : isResearch ? "#334155" : "#314957";
+  const deckColor = isFrioMarathon ? "#cbd5e1" : isTanker ? "#94a3b8" : isOffshore ? "#9a5b32" : isResearch ? "#334155" : "#314957";
   const deckMaterial = new THREE.MeshStandardMaterial({
     color: deckColor,
     roughness: 0.86,
@@ -1094,23 +1110,27 @@ function addVessel(
     // =========================================================================
     const tiers = normalizeTierCount(vessel.tierCount ?? vessel.tiers) ?? defaultTierCountForBeam(beam);
     const topContainerY = deckHeight + 1.38 + tiers * 2.68;
-    const towerHeight = isContainer ? Math.max(15.2, topContainerY - deckHeight + 4.2) : 13.5;
+    const towerHeight = isFrioMarathon ? 14.2 : isContainer ? Math.max(15.2, topContainerY - deckHeight + 4.2) : 13.5;
     const deckPlan = isContainer ? getVesselContainerDeckPlan(vessel) : null;
-    const isAllAft = deckPlan ? deckPlan.isAllAft : (vessel.bridgePosition !== "between-bays");
+    const isAllAft = isFrioMarathon ? true : (deckPlan ? deckPlan.isAllAft : (vessel.bridgePosition !== "between-bays"));
     const totalBays = vessel.bayCount ?? vessel.bays ?? 50;
     const hasSeparateFunnel = deckPlan ? deckPlan.hasSeparateFunnel : (isContainer && !isAllAft && Boolean(vessel.separateFunnel));
-    const houseLength = deckPlan
+    const houseLength = isFrioMarathon
+      ? 15.5
+      : deckPlan
       ? deckPlan.bridgeLength
       : isContainer
       ? (!isAllAft ? Math.max(12.5, Math.min(loa * 0.048, 15.5)) : Math.max(8, Math.min(loa * 0.045, 14)))
       : Math.max(16, Math.min(loa * 0.12, 38));
-    const houseMaterial = new THREE.MeshStandardMaterial({ color: "#f1f5f9", roughness: 0.62 });
+    const houseMaterial = new THREE.MeshStandardMaterial({ color: isFrioMarathon ? "#ffffff" : "#f1f5f9", roughness: 0.55 });
     const isEvergreen = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("EVER");
-    const funnelColor = isTanker ? "#ea580c" : isEvergreen ? "#064e3b" : (VESSEL_COLORS[vessel.color]?.stroke ?? "#285a78");
+    const funnelColor = isFrioMarathon ? "#1e3a8a" : isTanker ? "#ea580c" : isEvergreen ? "#064e3b" : (VESSEL_COLORS[vessel.color]?.stroke ?? "#285a78");
     const funnelMaterial = new THREE.MeshStandardMaterial({ color: funnelColor, roughness: 0.65 });
 
     let sternHouseX: number;
-    if (deckPlan) {
+    if (isFrioMarathon) {
+      sternHouseX = direction * (-loa * 0.44 + houseLength * 0.5);
+    } else if (deckPlan) {
       sternHouseX = direction * (deckPlan.bridgeCenterFromStern - loa / 2);
     } else if (isContainer) {
       if (isAllAft) {
@@ -1258,12 +1278,36 @@ function addVessel(
       const funnelWidth = beam * 0.24;
       const funnelLength = houseLength * 0.38;
       const funnelX = sternHouseX - direction * (houseLength * 0.38);
-      addBox(THREE, group, [funnelLength, funnelHeight, funnelWidth], [funnelX, deckHeight + funnelHeight / 2, 0], funnelMaterial);
-      [-funnelWidth * 0.24, funnelWidth * 0.24].forEach((pz) => {
-        const pipe = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 2.6, 8), darkDetailMaterial);
-        pipe.position.set(funnelX, deckHeight + funnelHeight + 1.2, pz);
+
+      if (isFrioMarathon) {
+        // Chaminé oficial FRIO MARATHON:
+        // Corpo azul royal (#1e3a8a) com faixa branca (#ffffff) e topo preto com tubo de exaustão
+        const baseH = funnelHeight * 0.62;
+        const stripeH = funnelHeight * 0.26;
+        const topH = funnelHeight * 0.12;
+        const fBlue = new THREE.MeshStandardMaterial({ color: "#1e3a8a", roughness: 0.5 });
+        const fWhite = new THREE.MeshStandardMaterial({ color: "#ffffff", roughness: 0.4 });
+        const fBlack = new THREE.MeshStandardMaterial({ color: "#0f172a", roughness: 0.7 });
+        addBox(THREE, group, [funnelLength, baseH, funnelWidth], [funnelX, deckHeight + baseH / 2, 0], fBlue);
+        addBox(THREE, group, [funnelLength * 0.98, stripeH, funnelWidth * 0.98], [funnelX, deckHeight + baseH + stripeH / 2, 0], fWhite);
+        addBox(THREE, group, [funnelLength * 0.94, topH, funnelWidth * 0.94], [funnelX, deckHeight + baseH + stripeH + topH / 2, 0], fBlack);
+        const pipe = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 2.2, 8), darkDetailMaterial);
+        pipe.position.set(funnelX, deckHeight + funnelHeight + 1.1, 0);
         group.add(pipe);
-      });
+
+        // Botes salva-vidas fechados em laranja nas laterais da casaria
+        const lbMat = new THREE.MeshStandardMaterial({ color: "#ea580c", roughness: 0.35 });
+        [-beam * 0.41, beam * 0.41].forEach((lz) => {
+          addBox(THREE, group, [5.4, 1.9, 1.8], [sternHouseX, deckHeight + towerHeight * 0.45, lz], lbMat);
+        });
+      } else {
+        addBox(THREE, group, [funnelLength, funnelHeight, funnelWidth], [funnelX, deckHeight + funnelHeight / 2, 0], funnelMaterial);
+        [-funnelWidth * 0.24, funnelWidth * 0.24].forEach((pz) => {
+          const pipe = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 2.6, 8), darkDetailMaterial);
+          pipe.position.set(funnelX, deckHeight + funnelHeight + 1.2, pz);
+          group.add(pipe);
+        });
+      }
     }
 
     // Equipamentos náuticos da Proa / Castelo para navios porta-contêineres
@@ -1784,6 +1828,107 @@ function addVessel(
       cornerPosts.count = cornerIndex;
       cornerPosts.instanceMatrix.needsUpdate = true;
       group.add(cornerPosts);
+    } else if (isFrioMarathon) {
+      // 🧊 MODELO 3D ESPECÍFICO: FRIO MARATHON (Refrigerated Cargo Ship)
+      // Fielmente calibrado com a foto real de referência:
+      // - 4 escotilhas frigoríficas (Holds 1 a 4) com braçolas de aço e tampas brancas/cinza-claras
+      // - 2 Torres de Guindastes Gêmeas em Portal (Twin-boom Derrick Masts) com lanças tubulares brancas em V
+      //   (Mastro 1 entre Hold 1 e Hold 2; Mastro 2 entre Hold 3 e Hold 4)
+      // - Castelo de proa elevado com mastro de vante inclinado e farolete
+      const coamingMat = new THREE.MeshStandardMaterial({ color: "#334155", roughness: 0.85 });
+      const hatchCoverMat = new THREE.MeshStandardMaterial({ color: "#e2e8f0", roughness: 0.5 });
+      const whiteMastMat = new THREE.MeshStandardMaterial({ color: "#ffffff", roughness: 0.35 });
+      const darkSteelMat = new THREE.MeshStandardMaterial({ color: "#1e293b", roughness: 0.7 });
+
+      // 1. Castelo de proa com quebra-mar e mastro de vante
+      const bowForecastlex = direction * (loa * 0.44);
+      addBox(THREE, group, [loa * 0.10, 1.8, beam * 0.76], [bowForecastlex, deckHeight + 0.9, 0], whiteMastMat);
+      
+      // Mastro de vante (foremast) inclinado na proa
+      const fwdMast = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.28, 7.5, 8), whiteMastMat);
+      fwdMast.position.set(direction * (loa * 0.465), deckHeight + 4.8, 0);
+      fwdMast.rotation.z = -direction * 0.12;
+      group.add(fwdMast);
+      const navLight = new THREE.Mesh(new THREE.SphereGeometry(0.25, 8, 8), new THREE.MeshStandardMaterial({ color: "#facc15", roughness: 0.2 }));
+      navLight.position.set(direction * (loa * 0.465) + direction * 0.5, deckHeight + 8.4, 0);
+      group.add(navLight);
+
+      // Guinchos de proa
+      [-beam * 0.22, beam * 0.22].forEach((wz) => {
+        addBox(THREE, group, [2.2, 0.45, 1.4], [direction * (loa * 0.43), deckHeight + 2.0, wz], darkSteelMat);
+        const drum = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 1.0, 8), darkSteelMat);
+        drum.rotation.z = Math.PI / 2;
+        drum.position.set(direction * (loa * 0.43), deckHeight + 2.6, wz);
+        group.add(drum);
+      });
+
+      // 2. 4 Porões / Escotilhas Frigoríficas (H1 vante, H2, H3, H4 ré)
+      const hatchPositions = [
+        { name: "H1", x: direction * 35.5, len: 12.0, width: beam * 0.62 },
+        { name: "H2", x: direction * 8.5, len: 13.5, width: beam * 0.68 },
+        { name: "H3", x: -direction * 8.5, len: 13.5, width: beam * 0.68 },
+        { name: "H4", x: -direction * 35.5, len: 13.5, width: beam * 0.68 },
+      ];
+
+      hatchPositions.forEach((h) => {
+        // Braçola de aço do porão
+        addBox(THREE, group, [h.len, 2.0, h.width], [h.x, deckHeight + 1.0, 0], coamingMat);
+        // Tampa de escotilha frigorífica branca/cinza clara isolada
+        addBox(THREE, group, [h.len - 0.6, 0.6, h.width - 0.6], [h.x, deckHeight + 2.1, 0], hatchCoverMat);
+        // Friso central de vedação
+        addBox(THREE, group, [h.len - 0.5, 0.15, 0.2], [h.x, deckHeight + 2.45, 0], darkSteelMat);
+      });
+
+      // 3. 2 Torres de Guindastes Gêmeas em Portal (Twin-boom Derrick Masts)
+      const mastPositions = [
+        direction * 22.0,   // Entre H1 e H2
+        -direction * 22.0,  // Entre H3 e H4
+      ];
+
+      mastPositions.forEach((mX) => {
+        // Casa de máquinas/guinchos na base
+        addBox(THREE, group, [3.8, 2.2, beam * 0.72], [mX, deckHeight + 1.1, 0], whiteMastMat);
+
+        // Duas colunas verticais brancas (portal frame)
+        const colH = 9.8;
+        const colZ = beam * 0.26;
+        [-colZ, colZ].forEach((cz) => {
+          const colMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.38, 0.48, colH, 10), whiteMastMat);
+          colMesh.position.set(mX, deckHeight + 2.2 + colH / 2, cz);
+          group.add(colMesh);
+        });
+
+        // Travessa superior conectando as duas colunas
+        addBox(THREE, group, [0.75, 0.75, colZ * 2.2], [mX, deckHeight + 2.2 + colH, 0], whiteMastMat);
+
+        // Topo / plataforma de manobra da torre
+        addBox(THREE, group, [1.4, 0.45, 1.4], [mX, deckHeight + 2.2 + colH + 0.4, 0], darkSteelMat);
+
+        // Duas lanças brancas compridas em V (Twin Booms)
+        const boomLen = 14.8;
+        const boomTilt = 0.58; // Ângulo característico elevado (~57° da horizontal)
+        
+        // Boom Fwd (voltado para vante)
+        const boomFwd = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.26, boomLen, 8), whiteMastMat);
+        boomFwd.position.set(mX + direction * (boomLen * 0.42), deckHeight + 4.0 + (boomLen * 0.38), -colZ * 0.4);
+        boomFwd.rotation.z = -direction * (Math.PI / 2 - boomTilt);
+        boomFwd.rotation.y = direction * 0.08;
+        group.add(boomFwd);
+
+        // Boom Aft (voltado para ré)
+        const boomAft = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.26, boomLen, 8), whiteMastMat);
+        boomAft.position.set(mX - direction * (boomLen * 0.42), deckHeight + 4.0 + (boomLen * 0.38), colZ * 0.4);
+        boomAft.rotation.z = direction * (Math.PI / 2 - boomTilt);
+        boomAft.rotation.y = -direction * 0.08;
+        group.add(boomAft);
+
+        // Moitões e blocos de topo
+        [-colZ * 0.4, colZ * 0.4].forEach((bz) => {
+          const block = new THREE.Mesh(new THREE.SphereGeometry(0.32, 6, 6), darkSteelMat);
+          block.position.set(mX, deckHeight + 2.2 + colH + 0.6, bz);
+          group.add(block);
+        });
+      });
     } else {
       // 📦 Carga Geral / Graneleiro: braçolas, escotilhas e guindastes de convés
       const hatchMaterial = new THREE.MeshStandardMaterial({ color: "#596a7a", roughness: 0.9 });

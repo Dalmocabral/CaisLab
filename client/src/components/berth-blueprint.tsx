@@ -1391,16 +1391,369 @@ function renderContainerDeck(
   );
 }
 
-/** Renderiza o convés de um Navio de Carga Geral (General Cargo Ship / Bulk Carrier) com porões, escotilhas e guindastes */
+/** Renderiza o convés de um Navio de Carga Geral (General Cargo Ship / Bulk Carrier / Reefer) com porões, escotilhas e guindastes */
 function renderGeneralCargoDeck(
   x: number,
   y: number,
   vesselWidth: number,
   vesselHeight: number,
   bowInset: number,
-  color: { fill: string; stroke: string }
+  color: { fill: string; stroke: string },
+  vesselName?: string
 ) {
-  // Superestrutura de ré e chaminé
+  const isFrioMarathon = Boolean(vesselName && /frio\s*marathon/i.test(vesselName));
+
+  if (isFrioMarathon) {
+    // 🧊 MODELO ESPECÍFICO: FRIO MARATHON (Navio Frigorífico / Reefer)
+    // Características fiéis à foto real:
+    // - Casaria toda à ré branca com passadiço e botes salva-vidas
+    // - Chaminé na ré: azul marinho (#1e3a8a) com faixa branca (#ffffff) e topo preto
+    // - 4 escotilhas frigoríficas brancas/cinza-claras com braçolas de aço escuro
+    // - 2 mastros de guindastes gêmeos (Twin-boom Derricks) brancos em portal (entre P1-P2 e entre P3-P4)
+    // - Mastro de vante inclinado no castelo de proa
+    const houseW = Math.max(22, Math.min(38, vesselWidth * 0.17));
+    const houseH = Math.max(12, vesselHeight * 0.74);
+    const houseX = x + 7;
+    const houseY = y + (vesselHeight - houseH) / 2;
+
+    const cargoStartX = houseX + houseW + 4;
+    const cargoEndX = x + vesselWidth - bowInset - 6;
+    const cargoLength = Math.max(20, cargoEndX - cargoStartX);
+
+    // 4 porões frigoríficos
+    // P1 (vante), Mastro 1, P2, P3, Mastro 2, P4 (ré)
+    const holdCount = 4;
+    const craneSpace = cargoLength * 0.11; // Espaço para as 2 torres de guindastes duplos
+    const holdW = (cargoLength - 2 * craneSpace) / holdCount;
+    const holdH = Math.max(10, vesselHeight * 0.62);
+    const holdY = y + (vesselHeight - holdH) / 2;
+
+    // Posições X das escotilhas e dos 2 mastros de guindastes
+    // Sequência de ré para vante:
+    // P4 -> Mastro 2 -> P3 -> P2 -> Mastro 1 -> P1
+    const p4X = cargoStartX;
+    const mast2X = p4X + holdW + craneSpace / 2;
+    const p3X = p4X + holdW + craneSpace;
+    const p2X = p3X + holdW;
+    const mast1X = p2X + holdW + craneSpace / 2;
+    const p1X = p2X + holdW + craneSpace;
+
+    const holds = [
+      { id: "P4", x: p4X, w: holdW },
+      { id: "P3", x: p3X, w: holdW },
+      { id: "P2", x: p2X, w: holdW },
+      { id: "P1", x: p1X, w: Math.max(10, holdW * 0.92) },
+    ];
+
+    const masts = [
+      { id: "M2", x: mast2X },
+      { id: "M1", x: mast1X },
+    ];
+
+    return (
+      <g className="deck-frio-marathon">
+        {/* Chapa base de aço do convés frigorífico */}
+        <rect
+          x={cargoStartX - 2}
+          y={y + 3}
+          width={cargoLength + 4}
+          height={vesselHeight - 6}
+          fill="#e2e8f0"
+          opacity="0.85"
+        />
+
+        {/* 4 Porões Frigoríficos com Tampas de Escotilha Brancas Isoladas */}
+        {holds.map((h, i) => (
+          <g key={h.id}>
+            {/* Braçola externa escura (Hatch Coaming) */}
+            <rect
+              x={h.x}
+              y={holdY}
+              width={h.w}
+              height={holdH}
+              rx="1.5"
+              fill="#334155"
+              stroke="#0f172a"
+              strokeWidth="1.1"
+            />
+            {/* Painéis da tampa de escotilha frigorífica branca/cinza clara */}
+            <rect
+              x={h.x + 1.2}
+              y={holdY + 1.2}
+              width={Math.max(2, h.w - 2.4)}
+              height={holdH - 2.4}
+              rx="1"
+              fill="#f8fafc"
+              stroke="#94a3b8"
+              strokeWidth="0.7"
+            />
+            {/* Divisórias transversais da tampa */}
+            <line
+              x1={h.x + h.w * 0.33}
+              y1={holdY + 1.2}
+              x2={h.x + h.w * 0.33}
+              y2={holdY + holdH - 1.2}
+              stroke="#cbd5e1"
+              strokeWidth="0.6"
+            />
+            <line
+              x1={h.x + h.w * 0.67}
+              y1={holdY + 1.2}
+              x2={h.x + h.w * 0.67}
+              y2={holdY + holdH - 1.2}
+              stroke="#cbd5e1"
+              strokeWidth="0.6"
+            />
+            {/* Vinco longitudinal central */}
+            <line
+              x1={h.x + 1.2}
+              y1={holdY + holdH / 2}
+              x2={h.x + h.w - 1.2}
+              y2={holdY + holdH / 2}
+              stroke="#cbd5e1"
+              strokeWidth="0.7"
+            />
+            {/* Etiqueta do Porão */}
+            <text
+              x={h.x + h.w / 2}
+              y={holdY + holdH / 2 + 2.5}
+              textAnchor="middle"
+              fontSize="5.2px"
+              fontWeight="800"
+              fill="#475569"
+              style={{ pointerEvents: "none", userSelect: "none" }}
+            >
+              P{4 - i}
+            </text>
+          </g>
+        ))}
+
+        {/* 2 Torres de Guindastes Gêmeos em Portal (Twin-boom Derricks) com lanças brancas */}
+        {masts.map((m) => {
+          const boomLen = Math.min(holdW * 0.95, 22);
+          const colOffset = vesselHeight * 0.22;
+          return (
+            <g key={m.id}>
+              {/* Casaria/plataforma de base do guincho */}
+              <rect
+                x={m.x - 3.5}
+                y={y + (vesselHeight - holdH * 0.95) / 2}
+                width="7"
+                height={holdH * 0.95}
+                rx="1"
+                fill="#f1f5f9"
+                stroke="#64748b"
+                strokeWidth="0.8"
+              />
+              {/* Coluna / mastro de boreste */}
+              <circle
+                cx={m.x}
+                cy={y + vesselHeight / 2 - colOffset}
+                r="2.2"
+                fill="#ffffff"
+                stroke="#0f172a"
+                strokeWidth="0.9"
+              />
+              {/* Coluna / mastro de bombordo */}
+              <circle
+                cx={m.x}
+                cy={y + vesselHeight / 2 + colOffset}
+                r="2.2"
+                fill="#ffffff"
+                stroke="#0f172a"
+                strokeWidth="0.9"
+              />
+              {/* Travessa superior do portal */}
+              <line
+                x1={m.x}
+                y1={y + vesselHeight / 2 - colOffset}
+                x2={m.x}
+                y2={y + vesselHeight / 2 + colOffset}
+                stroke="#0f172a"
+                strokeWidth="1.2"
+              />
+              {/* Lança branca de vante (Boom 1 apontada para vante) */}
+              <line
+                x1={m.x}
+                y1={y + vesselHeight / 2 - colOffset * 0.6}
+                x2={m.x + boomLen}
+                y2={y + vesselHeight / 2 - colOffset * 1.1}
+                stroke="#ffffff"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+              />
+              <line
+                x1={m.x}
+                y1={y + vesselHeight / 2 - colOffset * 0.6}
+                x2={m.x + boomLen}
+                y2={y + vesselHeight / 2 - colOffset * 1.1}
+                stroke="#64748b"
+                strokeWidth="0.8"
+              />
+              <circle
+                cx={m.x + boomLen}
+                cy={y + vesselHeight / 2 - colOffset * 1.1}
+                r="1.2"
+                fill="#0f172a"
+              />
+
+              {/* Lança branca de ré (Boom 2 apontada para ré) */}
+              <line
+                x1={m.x}
+                y1={y + vesselHeight / 2 + colOffset * 0.6}
+                x2={m.x - boomLen}
+                y2={y + vesselHeight / 2 + colOffset * 1.1}
+                stroke="#ffffff"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+              />
+              <line
+                x1={m.x}
+                y1={y + vesselHeight / 2 + colOffset * 0.6}
+                x2={m.x - boomLen}
+                y2={y + vesselHeight / 2 + colOffset * 1.1}
+                stroke="#64748b"
+                strokeWidth="0.8"
+              />
+              <circle
+                cx={m.x - boomLen}
+                cy={y + vesselHeight / 2 + colOffset * 1.1}
+                r="1.2"
+                fill="#0f172a"
+              />
+            </g>
+          );
+        })}
+
+        {/* Castelo de Proa com mastro inclinado e respiros */}
+        <path
+          d={`M ${x + vesselWidth - bowInset} ${y + 3} L ${x + vesselWidth - 5} ${y + vesselHeight / 2} L ${x + vesselWidth - bowInset} ${y + vesselHeight - 3} Z`}
+          fill="#f8fafc"
+          stroke="#64748b"
+          strokeWidth="0.8"
+        />
+        {/* Mastro de vante branco */}
+        <circle
+          cx={x + vesselWidth - bowInset / 2}
+          cy={y + vesselHeight / 2}
+          r="1.8"
+          fill="#ffffff"
+          stroke="#0f172a"
+          strokeWidth="0.8"
+        />
+        <circle
+          cx={x + vesselWidth - bowInset / 2}
+          cy={y + vesselHeight / 2}
+          r="0.7"
+          fill="#facc15"
+        />
+
+        {/* Superestrutura de Ré Branca (All-Aft Accommodation Block) */}
+        <rect
+          x={houseX}
+          y={houseY}
+          width={houseW}
+          height={houseH}
+          rx="2"
+          fill="#ffffff"
+          stroke="#334155"
+          strokeWidth="1.2"
+        />
+
+        {/* Asas do passadiço estendidas até as bordas */}
+        <line
+          x1={houseX + houseW * 0.72}
+          y1={y + 2}
+          x2={houseX + houseW * 0.72}
+          y2={y + vesselHeight - 2}
+          stroke="#334155"
+          strokeWidth="1.5"
+        />
+        <rect
+          x={houseX + houseW * 0.68}
+          y={y + 1.5}
+          width="2.2"
+          height="3"
+          fill="#ffffff"
+          stroke="#334155"
+          strokeWidth="0.6"
+        />
+        <rect
+          x={houseX + houseW * 0.68}
+          y={y + vesselHeight - 4.5}
+          width="2.2"
+          height="3"
+          fill="#ffffff"
+          stroke="#334155"
+          strokeWidth="0.6"
+        />
+
+        {/* Faixa de janelas panorâmicas do passadiço */}
+        <rect
+          x={houseX + houseW * 0.7}
+          y={houseY + 2}
+          width="1.8"
+          height={houseH - 4}
+          fill="#0f2331"
+        />
+
+        {/* Chaminé característica Frio Marathon na ré do passadiço:
+            Corpo azul marinho (#1e3a8a) + Faixa branca central (#ffffff) + Topo preto (#0f172a) */}
+        <g>
+          {/* Base / corpo azul marinho */}
+          <rect
+            x={houseX + 2.5}
+            y={y + vesselHeight / 2 - 3.5}
+            width={Math.max(5, houseW * 0.28)}
+            height="7"
+            rx="1.8"
+            fill="#1e3a8a"
+            stroke="#0f172a"
+            strokeWidth="0.7"
+          />
+          {/* Faixa branca central característica */}
+          <rect
+            x={houseX + 2.5 + Math.max(5, houseW * 0.28) * 0.45}
+            y={y + vesselHeight / 2 - 3.2}
+            width={Math.max(2.2, houseW * 0.12)}
+            height="6.4"
+            fill="#ffffff"
+          />
+          {/* Topo do tubo de exaustão preto */}
+          <circle
+            cx={houseX + 2.5 + Math.max(5, houseW * 0.28) * 0.25}
+            cy={y + vesselHeight / 2}
+            r="1.2"
+            fill="#0f172a"
+          />
+        </g>
+
+        {/* Botes salva-vidas fechados em laranja nas laterais de boreste e bombordo */}
+        <rect
+          x={houseX + 3}
+          y={y + 1.2}
+          width={Math.max(6, houseW * 0.32)}
+          height="2.5"
+          rx="1"
+          fill="#ea580c"
+          stroke="#9a3412"
+          strokeWidth="0.6"
+        />
+        <rect
+          x={houseX + 3}
+          y={y + vesselHeight - 3.7}
+          width={Math.max(6, houseW * 0.32)}
+          height="2.5"
+          rx="1"
+          fill="#ea580c"
+          stroke="#9a3412"
+          strokeWidth="0.6"
+        />
+      </g>
+    );
+  }
+
+  // Superestrutura de ré e chaminé padrão para outros navios de carga geral
   const houseX = x + 7;
   const houseW = Math.max(20, Math.min(48, vesselWidth * 0.15));
   const houseH = Math.max(12, vesselHeight * 0.72);
@@ -2954,7 +3307,22 @@ export default function BerthBlueprint({
               )}
               <g transform={vessel.berthingSide === "bombordo" ? `translate(${2 * x + vesselWidth}, 0) scale(-1, 1)` : undefined}>
                 {/* Casco exterior hidrodinâmico */}
-                <path d={`M ${x + 6} ${y} Q ${x} ${y + vesselHeight / 2} ${x + 6} ${y + vesselHeight} L ${x + vesselWidth - bowInset} ${y + vesselHeight} L ${x + vesselWidth} ${y + vesselHeight / 2} L ${x + vesselWidth - bowInset} ${y} Z`} fill="#f7fafb" stroke={isIssue ? "#bd4540" : color.stroke} strokeWidth={isIssue ? 3 : 2} strokeDasharray={isIssue ? "7 4" : undefined} />
+                <path
+                  d={`M ${x + 6} ${y} Q ${x} ${y + vesselHeight / 2} ${x + 6} ${y + vesselHeight} L ${x + vesselWidth - bowInset} ${y + vesselHeight} L ${x + vesselWidth} ${y + vesselHeight / 2} L ${x + vesselWidth - bowInset} ${y} Z`}
+                  fill={Boolean(vessel.name && /frio\s*marathon/i.test(vessel.name)) ? "#ffffff" : "#f7fafb"}
+                  stroke={isIssue ? "#bd4540" : (Boolean(vessel.name && /frio\s*marathon/i.test(vessel.name)) ? "#0f172a" : color.stroke)}
+                  strokeWidth={isIssue ? 3 : 2}
+                  strokeDasharray={isIssue ? "7 4" : undefined}
+                />
+                {/* Linha d'água / fundo vermelho vinho para o Frio Marathon */}
+                {Boolean(vessel.name && /frio\s*marathon/i.test(vessel.name)) && (
+                  <path
+                    d={`M ${x + 8} ${y + vesselHeight - 2.5} L ${x + vesselWidth - bowInset} ${y + vesselHeight - 2.5}`}
+                    stroke="#991b1b"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+                )}
                 
                 {/* Visualização detalhada do convés conforme tipo de navio */}
                 {vesselType === "research-survey"
@@ -2962,7 +3330,7 @@ export default function BerthBlueprint({
                   : (vesselType === "offshore" || vesselType === "diving-support")
                   ? renderOffshoreDeck(x, y, vesselWidth, vesselHeight, bowInset, color, vessel.name)
                   : vesselType === "general-cargo"
-                  ? renderGeneralCargoDeck(x, y, vesselWidth, vesselHeight, bowInset, color)
+                  ? renderGeneralCargoDeck(x, y, vesselWidth, vesselHeight, bowInset, color, vessel.name)
                   : (vesselType === "tanker" || vesselType === "chemical-tanker" || vesselType === "product-tanker")
                   ? renderTankerDeck(x, y, vesselWidth, vesselHeight, bowInset, color)
                   : renderContainerDeck(x, y, vesselWidth, vesselHeight, bowInset, color, vessel, vessel.berthingSide === "bombordo")
