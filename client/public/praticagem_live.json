@@ -1,5 +1,5 @@
 {
-  "updatedAt": "12/11/2026 09:47",
+  "updatedAt": "12/11/2026 13:09",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 8,
   "maneuvers": [
@@ -29,7 +29,7 @@
     {
       "dateTime": "12/11 18:00",
       "name": "TINOS EXPRESS",
-      "draft": 11,
+      "draft": 11.0,
       "loa": 272.08,
       "beam": 42.8,
       "maneuver": "E",
@@ -45,15 +45,15 @@
       "consorcio": "Chamada Extra / Oportunidade",
       "voyage": "2639N",
       "operator": "HLC",
-      "deadline": "13/11/26 12:00",
-      "gateOpening": "05/11/26 00:01",
-      "lineupBerth": "TECON1.2"
+      "deadline": "18/11/26 12:00",
+      "gateOpening": "16/11/26 00:01",
+      "lineupBerth": ""
     },
     {
       "dateTime": "14/11 08:00",
       "name": "MAERSK ACADIA",
       "draft": 11.5,
-      "loa": 200,
+      "loa": 200.0,
       "beam": 36.4,
       "maneuver": "E",
       "berthFrom": "",
@@ -122,8 +122,8 @@
       "dateTime": "15/11 18:00",
       "name": "KOTA ELOK",
       "draft": 12.6,
-      "loa": 335,
-      "beam": 51,
+      "loa": 335.0,
+      "beam": 51.0,
       "maneuver": "E",
       "berthFrom": "",
       "berthTo": "TECONTPROLONG",
@@ -144,7 +144,7 @@
     {
       "dateTime": "16/11 07:00",
       "name": "XIN CHANG SHA",
-      "draft": 12,
+      "draft": 12.0,
       "loa": 263.23,
       "beam": 32.3,
       "maneuver": "E",
@@ -169,7 +169,7 @@
       "name": "COSCO SHIPPING MEXICO",
       "draft": 12.5,
       "loa": 335.9,
-      "beam": 51,
+      "beam": 51.0,
       "maneuver": "E",
       "berthFrom": "",
       "berthTo": "TECONTPROLONG",

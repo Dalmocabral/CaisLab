@@ -1,5 +1,5 @@
 {
-  "updatedAt": "12/11/2026 09:47",
+  "updatedAt": "12/11/2026 13:09",
   "totalYear": 188,
   "totalMonth": 57,
   "totalAllTime": 211,
@@ -685,7 +685,7 @@
       "count": 2,
       "service": "EXTRA CALL",
       "operator": "HLC",
-      "lastBerth": "TECON1.2",
+      "lastBerth": "",
       "lastDate": "12/11/26 18:00"
     },
     {
@@ -1203,7 +1203,7 @@
       "remocoes": 66,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 2,
@@ -1230,7 +1230,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 3,
@@ -1257,7 +1257,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 4,
@@ -1284,7 +1284,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 5,
@@ -1311,7 +1311,7 @@
       "remocoes": 8,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 6,
@@ -1338,7 +1338,7 @@
       "remocoes": 34,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 7,
@@ -1365,7 +1365,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 8,
@@ -1392,7 +1392,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 9,
@@ -1419,7 +1419,7 @@
       "remocoes": 2,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 10,
@@ -1446,7 +1446,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 11,
@@ -1473,7 +1473,7 @@
       "remocoes": 16,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 12,
@@ -1500,7 +1500,7 @@
       "remocoes": 14,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 13,
@@ -1527,7 +1527,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 14,
@@ -1554,7 +1554,7 @@
       "remocoes": 52,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 15,
@@ -1581,7 +1581,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 16,
@@ -1608,7 +1608,7 @@
       "remocoes": 372,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 17,
@@ -1635,7 +1635,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 18,
@@ -1662,7 +1662,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 19,
@@ -1689,7 +1689,7 @@
       "remocoes": 42,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 20,
@@ -1716,7 +1716,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 21,
@@ -1743,7 +1743,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 22,
@@ -1770,7 +1770,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 23,
@@ -1797,7 +1797,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 24,
@@ -1824,7 +1824,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 25,
@@ -1851,7 +1851,7 @@
       "remocoes": 210,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 26,
@@ -1878,10 +1878,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 138,
+      "rowNum": 139,
       "navio": "NAVIOS VERMILION",
       "viagem": "165N",
       "joint": "LUX",
@@ -1905,7 +1905,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 28,
@@ -1932,7 +1932,7 @@
       "remocoes": 28,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 29,
@@ -1959,7 +1959,7 @@
       "remocoes": 41,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 30,
@@ -1986,7 +1986,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 31,
@@ -2013,7 +2013,7 @@
       "remocoes": 6,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 32,
@@ -2040,7 +2040,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 33,
@@ -2067,7 +2067,7 @@
       "remocoes": 4,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 34,
@@ -2094,7 +2094,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 35,
@@ -2121,7 +2121,7 @@
       "remocoes": 14,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 36,
@@ -2148,7 +2148,7 @@
       "remocoes": 57,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 37,
@@ -2175,7 +2175,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 55,
@@ -2202,7 +2202,7 @@
       "remocoes": 2,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 39,
@@ -2229,7 +2229,7 @@
       "remocoes": 132,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 40,
@@ -2256,7 +2256,7 @@
       "remocoes": 512,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 41,
@@ -2283,7 +2283,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 42,
@@ -2310,7 +2310,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 43,
@@ -2337,7 +2337,7 @@
       "remocoes": 4,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 44,
@@ -2364,7 +2364,7 @@
       "remocoes": 10,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 45,
@@ -2391,7 +2391,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 46,
@@ -2418,7 +2418,7 @@
       "remocoes": 8,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 49,
@@ -2445,7 +2445,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 48,
@@ -2472,7 +2472,7 @@
       "remocoes": 218,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 50,
@@ -2499,7 +2499,7 @@
       "remocoes": 6,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 51,
@@ -2526,7 +2526,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 52,
@@ -2553,7 +2553,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 53,
@@ -2580,7 +2580,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 54,
@@ -2607,7 +2607,7 @@
       "remocoes": 26,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 56,
@@ -2634,7 +2634,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 57,
@@ -2661,7 +2661,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 58,
@@ -2688,7 +2688,7 @@
       "remocoes": 14,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 59,
@@ -2715,7 +2715,7 @@
       "remocoes": 8,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 60,
@@ -2742,7 +2742,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 61,
@@ -2769,7 +2769,7 @@
       "remocoes": 14,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 62,
@@ -2796,7 +2796,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 63,
@@ -2823,7 +2823,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 64,
@@ -2850,7 +2850,7 @@
       "remocoes": 488,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 65,
@@ -2877,7 +2877,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 66,
@@ -2904,7 +2904,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 67,
@@ -2931,7 +2931,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 68,
@@ -2958,7 +2958,7 @@
       "remocoes": 2,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 69,
@@ -2985,7 +2985,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 70,
@@ -3012,7 +3012,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 71,
@@ -3039,7 +3039,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 72,
@@ -3066,7 +3066,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 73,
@@ -3093,7 +3093,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 74,
@@ -3120,7 +3120,7 @@
       "remocoes": 6,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 75,
@@ -3147,7 +3147,7 @@
       "remocoes": 14,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 76,
@@ -3174,7 +3174,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 77,
@@ -3201,7 +3201,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 78,
@@ -3228,7 +3228,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 79,
@@ -3255,7 +3255,7 @@
       "remocoes": 352,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 80,
@@ -3282,7 +3282,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 81,
@@ -3309,7 +3309,7 @@
       "remocoes": 503,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 82,
@@ -3336,7 +3336,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 83,
@@ -3363,7 +3363,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 84,
@@ -3390,7 +3390,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 85,
@@ -3417,7 +3417,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 86,
@@ -3444,7 +3444,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 87,
@@ -3471,7 +3471,7 @@
       "remocoes": 2,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 88,
@@ -3498,7 +3498,7 @@
       "remocoes": 86,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 89,
@@ -3525,7 +3525,7 @@
       "remocoes": 4,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 90,
@@ -3552,7 +3552,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 91,
@@ -3579,7 +3579,7 @@
       "remocoes": 692,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 92,
@@ -3606,7 +3606,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 93,
@@ -3633,7 +3633,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 94,
@@ -3660,7 +3660,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 95,
@@ -3687,7 +3687,7 @@
       "remocoes": 464,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 96,
@@ -3714,7 +3714,7 @@
       "remocoes": 712,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 97,
@@ -3741,7 +3741,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 98,
@@ -3768,7 +3768,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 99,
@@ -3795,7 +3795,7 @@
       "remocoes": 208,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 100,
@@ -3822,7 +3822,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 101,
@@ -3849,7 +3849,7 @@
       "remocoes": 86,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 102,
@@ -3876,7 +3876,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 103,
@@ -3903,7 +3903,7 @@
       "remocoes": 8,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 104,
@@ -3930,7 +3930,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 110,
@@ -3957,7 +3957,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 106,
@@ -3984,7 +3984,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 107,
@@ -4011,7 +4011,7 @@
       "remocoes": 32,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 108,
@@ -4038,7 +4038,7 @@
       "remocoes": 162,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 109,
@@ -4065,7 +4065,7 @@
       "remocoes": 0,
       "estado": "EM OPERACAO",
       "tipoItemLineup": 1,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 113,
@@ -4115,11 +4115,11 @@
       "previsaoSaida": "12/11/26 16:00",
       "saida": "",
       "cargas": 0,
-      "descargas": 418,
+      "descargas": 421,
       "remocoes": 598,
       "estado": "EM OPERACAO",
       "tipoItemLineup": 1,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 111,
@@ -4146,10 +4146,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 117,
+      "rowNum": 128,
       "navio": "TINOS EXPRESS",
       "viagem": "2639N",
       "joint": "TRP",
@@ -4157,23 +4157,23 @@
       "servicoCompleto": "EXTRA CALL",
       "consorcio": "Chamada Extra / Oportunidade",
       "operador": "HLC",
-      "berco": "TECON1.2",
-      "aberturaGate": "05/11/26 00:01",
-      "deadline": "13/11/26 12:00",
-      "previsaoChegada": "12/11/26 18:00",
+      "berco": "",
+      "aberturaGate": "16/11/26 00:01",
+      "deadline": "18/11/26 12:00",
+      "previsaoChegada": "19/11/26 23:00",
       "chegada": "",
-      "previsaoAtracacao": "12/11/26 19:00",
+      "previsaoAtracacao": "",
       "atracacao": "",
       "inicioOperacao": "",
       "termino": "",
-      "previsaoSaida": "13/11/26 16:00",
+      "previsaoSaida": "",
       "saida": "",
       "cargas": 0,
       "descargas": 0,
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "11/11/2026 09:07"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 118,
@@ -4227,7 +4227,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 116,
@@ -4254,7 +4254,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 118,
@@ -4281,7 +4281,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 117,
@@ -4308,7 +4308,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 119,
@@ -4335,7 +4335,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 120,
@@ -4362,7 +4362,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 121,
@@ -4389,7 +4389,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 122,
@@ -4416,7 +4416,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 124,
@@ -4443,7 +4443,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 125,
@@ -4470,7 +4470,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 126,
@@ -4497,7 +4497,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 127,
@@ -4524,10 +4524,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 128,
+      "rowNum": 129,
       "navio": "LOGIN PANTANAL",
       "viagem": "625S",
       "joint": "FED",
@@ -4551,10 +4551,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 129,
+      "rowNum": 130,
       "navio": "SEASPAN EMISSARY",
       "viagem": "647W",
       "joint": "COS",
@@ -4578,10 +4578,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 130,
+      "rowNum": 131,
       "navio": "CMA CGM RABELAIS",
       "viagem": "0GBGXN1MA",
       "joint": "BZX",
@@ -4605,10 +4605,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 131,
+      "rowNum": 132,
       "navio": "MERCOSUL GUARUJA",
       "viagem": "BRA0B0N99",
       "joint": "BCO",
@@ -4632,10 +4632,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 132,
+      "rowNum": 133,
       "navio": "NAVIOS DOMINO",
       "viagem": "026N",
       "joint": "LUX",
@@ -4659,10 +4659,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 133,
+      "rowNum": 134,
       "navio": "CMA CGM THORIUM",
       "viagem": "0BDPKE1MA",
       "joint": "S2N",
@@ -4686,10 +4686,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 134,
+      "rowNum": 135,
       "navio": "MAERSK FORTALEZA",
       "viagem": "646N",
       "joint": "TGO",
@@ -4713,10 +4713,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 135,
+      "rowNum": 136,
       "navio": "NC BRISA",
       "viagem": "031N",
       "joint": "NCS",
@@ -4740,10 +4740,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 137,
+      "rowNum": 138,
       "navio": "MAERSK EVERGLADES",
       "viagem": "648W",
       "joint": "COS",
@@ -4767,10 +4767,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 139,
+      "rowNum": 140,
       "navio": "CMA CGM SANTOS",
       "viagem": "BRA0D0N99",
       "joint": "BCO",
@@ -4794,10 +4794,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 140,
+      "rowNum": 141,
       "navio": "EVER FINE",
       "viagem": "1717-029W",
       "joint": "SE1",
@@ -4821,10 +4821,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 141,
+      "rowNum": 142,
       "navio": "COSCO SHIPPING MEXICO",
       "viagem": "010E",
       "joint": "S2N",
@@ -4848,10 +4848,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 142,
+      "rowNum": 143,
       "navio": "CMA CGM SILVER",
       "viagem": "0BDPNW1MA",
       "joint": "S2S",
@@ -4875,10 +4875,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 143,
+      "rowNum": 144,
       "navio": "MAERSK FRANKFURT",
       "viagem": "647N",
       "joint": "TGO",
@@ -4902,10 +4902,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 144,
+      "rowNum": 145,
       "navio": "NC BRAVO",
       "viagem": "030N",
       "joint": "NCS",
@@ -4929,10 +4929,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 145,
+      "rowNum": 146,
       "navio": "COSCO SHIPPING URUGUAY",
       "viagem": "011W",
       "joint": "S2S",
@@ -4956,10 +4956,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 146,
+      "rowNum": 147,
       "navio": "NC BRUMA",
       "viagem": "030S",
       "joint": "NCS",
@@ -4983,10 +4983,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 148,
+      "rowNum": 149,
       "navio": "FELIXSTOWE",
       "viagem": "531N",
       "joint": "ZGT",
@@ -5010,10 +5010,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 149,
+      "rowNum": 150,
       "navio": "KOTA EMBUN",
       "viagem": "0008W",
       "joint": "SE1",
@@ -5037,10 +5037,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 151,
+      "rowNum": 152,
       "navio": "SEASPAN EMPIRE",
       "viagem": "649W",
       "joint": "COS",
@@ -5064,10 +5064,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 152,
+      "rowNum": 153,
       "navio": "CMA CGM PUCCINI",
       "viagem": "0GBH1N1MA",
       "joint": "BZX",
@@ -5091,10 +5091,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 153,
+      "rowNum": 154,
       "navio": "GARNET",
       "viagem": "1E",
       "joint": "ZFS",
@@ -5118,10 +5118,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 154,
+      "rowNum": 155,
       "navio": "CMA CGM VERACRUZ",
       "viagem": "BRA150N99",
       "joint": "BCO",
@@ -5145,10 +5145,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 155,
+      "rowNum": 156,
       "navio": "ANDROUSA",
       "viagem": "371N",
       "joint": "LUX",
@@ -5172,10 +5172,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 156,
+      "rowNum": 157,
       "navio": "COSCO SHIPPING PERU",
       "viagem": "010W",
       "joint": "S2S",
@@ -5199,10 +5199,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 158,
+      "rowNum": 159,
       "navio": "TENO",
       "viagem": "22E",
       "joint": "ZFS",
@@ -5226,10 +5226,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 159,
+      "rowNum": 160,
       "navio": "ALESSIA",
       "viagem": "042N",
       "joint": "BZX",
@@ -5253,10 +5253,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 160,
+      "rowNum": 161,
       "navio": "DUSSELDORF EXPRESS",
       "viagem": "650W",
       "joint": "COS",
@@ -5280,10 +5280,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 161,
+      "rowNum": 162,
       "navio": "CMA CGM SILVER",
       "viagem": "0BDPOE1MA",
       "joint": "S2N",
@@ -5307,10 +5307,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 162,
+      "rowNum": 163,
       "navio": "MERCOSUL FORTALEZA",
       "viagem": "131226",
       "joint": "BCO",
@@ -5334,10 +5334,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 163,
+      "rowNum": 164,
       "navio": "NYK RUMINA",
       "viagem": "079N",
       "joint": "LUX",
@@ -5361,10 +5361,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 164,
+      "rowNum": 165,
       "navio": "COSCO SHIPPING URUGUAY",
       "viagem": "011E",
       "joint": "S2N",
@@ -5388,10 +5388,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 165,
+      "rowNum": 166,
       "navio": "MAERSK FREEPORT",
       "viagem": "649N",
       "joint": "TGO",
@@ -5415,10 +5415,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 166,
+      "rowNum": 167,
       "navio": "NC BREDA",
       "viagem": "031N",
       "joint": "NCS",
@@ -5442,10 +5442,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 167,
+      "rowNum": 168,
       "navio": "SPYROS V",
       "viagem": "46N",
       "joint": "ZGT",
@@ -5469,10 +5469,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 168,
+      "rowNum": 169,
       "navio": "COSCO SHIPPING RHINE",
       "viagem": "043W",
       "joint": "SE1",
@@ -5496,10 +5496,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 169,
+      "rowNum": 170,
       "navio": "CMA CGM OSMIUM",
       "viagem": "0BDPVW1MA",
       "joint": "S2S",
@@ -5523,10 +5523,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 170,
+      "rowNum": 171,
       "navio": "LORI",
       "viagem": "651W",
       "joint": "COS",
@@ -5550,10 +5550,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 171,
+      "rowNum": 172,
       "navio": "CMA CGM FRANCOISE SAGAN",
       "viagem": "0GBH3N1MA",
       "joint": "BZX",
@@ -5577,10 +5577,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 172,
+      "rowNum": 173,
       "navio": "MERCOSUL GUARUJA",
       "viagem": "201226",
       "joint": "BCO",
@@ -5604,10 +5604,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 173,
+      "rowNum": 174,
       "navio": "XIN WEI HAI",
       "viagem": "174N",
       "joint": "LUX",
@@ -5631,10 +5631,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 174,
+      "rowNum": 175,
       "navio": "COSCO SHIPPING PERU",
       "viagem": "010E",
       "joint": "S2N",
@@ -5658,10 +5658,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 175,
+      "rowNum": 176,
       "navio": "MAERSK MONTE AZUL",
       "viagem": "650N",
       "joint": "TGO",
@@ -5685,10 +5685,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 176,
+      "rowNum": 177,
       "navio": "NC BRISA",
       "viagem": "032N",
       "joint": "NCS",
@@ -5712,10 +5712,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 177,
+      "rowNum": 178,
       "navio": "COSCO SHIPPING CHILE",
       "viagem": "009W",
       "joint": "S2S",
@@ -5739,10 +5739,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 178,
+      "rowNum": 179,
       "navio": "KOTA ELAN",
       "viagem": "0002W",
       "joint": "SE1",
@@ -5766,10 +5766,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 179,
+      "rowNum": 180,
       "navio": "MAERSK REDWOOD",
       "viagem": "652W",
       "joint": "COS",
@@ -5793,10 +5793,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 180,
+      "rowNum": 181,
       "navio": "APL NEW JERSEY",
       "viagem": "0GBH5N1MA",
       "joint": "BZX",
@@ -5820,10 +5820,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 181,
+      "rowNum": 182,
       "navio": "NYK DIANA",
       "viagem": "026N",
       "joint": "LUX",
@@ -5847,10 +5847,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 182,
+      "rowNum": 183,
       "navio": "CMA CGM SANTOS",
       "viagem": "281226",
       "joint": "BCO",
@@ -5874,10 +5874,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 183,
+      "rowNum": 184,
       "navio": "MAERSK MONTE ALEGRE",
       "viagem": "651N",
       "joint": "TGO",
@@ -5901,10 +5901,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 184,
+      "rowNum": 185,
       "navio": "COSCO SHIPPING ARGENTINA",
       "viagem": "012W",
       "joint": "S2S",
@@ -5928,10 +5928,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 185,
+      "rowNum": 186,
       "navio": "CMA CGM OSMIUM",
       "viagem": "0BDPWE1MA",
       "joint": "S2N",
@@ -5955,10 +5955,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 186,
+      "rowNum": 187,
       "navio": "EVER FAR",
       "viagem": "1723-033W",
       "joint": "SE1",
@@ -5982,10 +5982,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 187,
+      "rowNum": 188,
       "navio": "MAERSK ACADIA",
       "viagem": "653W",
       "joint": "COS",
@@ -6009,10 +6009,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 188,
+      "rowNum": 189,
       "navio": "CARDIFF",
       "viagem": "0GBH7N1MA",
       "joint": "BZX",
@@ -6036,10 +6036,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 189,
+      "rowNum": 190,
       "navio": "CMA CGM VERACRUZ",
       "viagem": "030127",
       "joint": "BCO",
@@ -6063,10 +6063,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 190,
+      "rowNum": 191,
       "navio": "COSCO SHIPPING CHILE",
       "viagem": "009E",
       "joint": "S2N",
@@ -6090,10 +6090,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 191,
+      "rowNum": 192,
       "navio": "NC BRAVO",
       "viagem": "031N",
       "joint": "NCS",
@@ -6117,10 +6117,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 192,
+      "rowNum": 193,
       "navio": "MERCOSUL FORTALEZA",
       "viagem": "100127",
       "joint": "BCO",
@@ -6144,10 +6144,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 193,
+      "rowNum": 194,
       "navio": "XIN CHONG QING",
       "viagem": "188N",
       "joint": "LUX",
@@ -6171,10 +6171,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 194,
+      "rowNum": 195,
       "navio": "COSCO SHIPPING ARGENTINA",
       "viagem": "012E",
       "joint": "S2N",
@@ -6198,10 +6198,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 195,
+      "rowNum": 196,
       "navio": "MAERSK FORTALEZA",
       "viagem": "653N",
       "joint": "TGO",
@@ -6225,10 +6225,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 196,
+      "rowNum": 197,
       "navio": "NC BRUMA",
       "viagem": "031N",
       "joint": "NCS",
@@ -6252,10 +6252,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 197,
+      "rowNum": 198,
       "navio": "COSCO SHIPPING BRAZIL",
       "viagem": "013E",
       "joint": "S2N",
@@ -6279,10 +6279,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 198,
+      "rowNum": 199,
       "navio": "EVER FIT",
       "viagem": "1725-028W",
       "joint": "SE1",
@@ -6306,10 +6306,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 199,
+      "rowNum": 200,
       "navio": "ZIM WILMINGTON",
       "viagem": "29E",
       "joint": "ZFS",
@@ -6333,10 +6333,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 200,
+      "rowNum": 201,
       "navio": "MAERSK EVERGLADES",
       "viagem": "702W",
       "joint": "COS",
@@ -6360,10 +6360,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 201,
+      "rowNum": 202,
       "navio": "MERCOSUL GUARUJA",
       "viagem": "170127",
       "joint": "BCO",
@@ -6387,10 +6387,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 202,
+      "rowNum": 203,
       "navio": "XIN CHANG SHA",
       "viagem": "416N",
       "joint": "LUX",
@@ -6414,10 +6414,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 203,
+      "rowNum": 204,
       "navio": "MAERSK FRANKFURT",
       "viagem": "701N",
       "joint": "TGO",
@@ -6441,10 +6441,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 204,
+      "rowNum": 205,
       "navio": "EVER FAME",
       "viagem": "1726-031W",
       "joint": "SE1",
@@ -6468,10 +6468,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 205,
+      "rowNum": 206,
       "navio": "SEASPAN EMPIRE",
       "viagem": "704W",
       "joint": "COS",
@@ -6495,10 +6495,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 206,
+      "rowNum": 207,
       "navio": "NAVIOS DOMINO",
       "viagem": "027N",
       "joint": "LUX",
@@ -6522,10 +6522,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 207,
+      "rowNum": 208,
       "navio": "DANUBE",
       "viagem": "26W",
       "joint": "ZFS",
@@ -6549,10 +6549,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 208,
+      "rowNum": 209,
       "navio": "NAVIOS VERMILION",
       "viagem": "166N",
       "joint": "LUX",
@@ -6576,10 +6576,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 209,
+      "rowNum": 210,
       "navio": "ANDROUSA",
       "viagem": "372N",
       "joint": "LUX",
@@ -6603,10 +6603,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 147,
+      "rowNum": 148,
       "navio": "CMA CGM LISA MARIE",
       "viagem": "1AAF1W1MA",
       "joint": "SE1",
@@ -6630,7 +6630,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 113,
@@ -6657,7 +6657,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 114,
@@ -6684,7 +6684,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
       "rowNum": 123,
@@ -6711,10 +6711,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 136,
+      "rowNum": 137,
       "navio": "LOGIN PANTANAL",
       "viagem": "626S",
       "joint": "FED",
@@ -6738,10 +6738,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 150,
+      "rowNum": 151,
       "navio": "LOGIN PANTANAL",
       "viagem": "627S",
       "joint": "FED",
@@ -6765,10 +6765,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     },
     {
-      "rowNum": 157,
+      "rowNum": 158,
       "navio": "COSCO MALAYSIA",
       "viagem": "111W",
       "joint": "SE1",
@@ -6792,7 +6792,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "12/11/2026 09:47"
+      "updatedAt": "12/11/2026 13:09"
     }
   ]
 }
