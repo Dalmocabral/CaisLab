@@ -844,11 +844,15 @@
     "draft": 11.5,
     "berthingSide": "boreste",
     "imo": "9928188",
-    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "lastBerth": "TECONT1",
     "imageUrl": "/vessels/maersk_acadia.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9928188",
-    "updatedAt": "12/11/2026 09:44"
+    "updatedAt": "12/11/2026 10:07",
+    "vesselType": "container",
+    "flag": "PANAMA",
+    "bayCount": 42,
+    "bays": 42
   },
   {
     "name": "MAERSK CALLAO",
@@ -1329,7 +1333,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/tinos_express.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:1053585",
-    "updatedAt": "12/11/2026 09:44",
+    "updatedAt": "12/11/2026 10:05",
     "flag": "MALTA",
     "vesselType": "container",
     "bayCount": 63,
