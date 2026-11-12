@@ -123,7 +123,10 @@ function renderContainerDeck(
   const config = resolveVesselSuperstructure(vessel);
   const isDusseldorf = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("DUSSELDORF");
   const isAplNewJersey = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("APL") && vessel.name.toUpperCase().includes("NEW JERSEY");
-  const isMercosulGuaruja = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("GUARUJA");
+  const isMercosulGuaruja = typeof vessel.name === "string" && (
+    vessel.name.toUpperCase().includes("GUARUJA") ||
+    vessel.name.toUpperCase().includes("ACADIA")
+  );
   const isKotaSinga = typeof vessel.name === "string" && (
     (vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("SINGA")) ||
     vessel.name.toUpperCase().includes("LORI") ||

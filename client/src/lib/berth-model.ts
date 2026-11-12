@@ -187,7 +187,7 @@ export function resolveVesselSuperstructure(vessel: Partial<Vessel>): VesselSupe
   const upperName = (vessel.name ?? "").toUpperCase().trim();
   const isAplNewJersey = upperName.includes("APL") && upperName.includes("NEW JERSEY");
   const isDusseldorf = upperName.includes("DUSSELDORF");
-  const isGuaruja = upperName.includes("GUARUJA");
+  const isGuaruja = upperName.includes("GUARUJA") || upperName.includes("ACADIA");
   const isKotaSinga = (upperName.includes("KOTA") && upperName.includes("SINGA")) || upperName.includes("LORI") || upperName.includes("SANTOS");
   const isCardiff = upperName.includes("CARDIFF") || upperName.includes("SWANSEA") || upperName.includes("CHONG QING");
   const isZimWilmington = upperName.includes("ZIM") && upperName.includes("WILMINGTON");
@@ -844,6 +844,28 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     vesselType: "container",
     imageUrl: "/vessels/maersk_freeport.jpg",
     marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/shipid:8941589",
+  },
+  "MAERSK ACADIA": {
+    name: "MAERSK ACADIA",
+    loa: 200.0,
+    beam: 36.4,
+    draft: 11.5,
+    bayCount: 49,
+    bays: 49,
+    rowCount: 14,
+    rows: 14,
+    tierCount: 6,
+    tiers: 6,
+    bridgePosition: "between-bays",
+    bridgeBay: 42,
+    bridgeBayStart: 41,
+    bridgeBayEnd: 43,
+    separateFunnel: false,
+    vesselType: "container",
+    color: "blue",
+    imageUrl: "/vessels/maersk_acadia.jpg",
+    marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:9928188",
+    isManualLayout: true,
   },
   "LOG-IN PANTANAL": {
     name: "LOG-IN PANTANAL",
@@ -1610,7 +1632,10 @@ export function getVesselContainerDeckPlan(vessel: Partial<Vessel>): VesselConta
   const isFortaleza = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("FORTALEZA");
   const isDusseldorf = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("DUSSELDORF");
   const isAplNewJersey = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("APL") && vessel.name.toUpperCase().includes("NEW JERSEY");
-  const isMercosulGuaruja = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("GUARUJA");
+  const isMercosulGuaruja = typeof vessel.name === "string" && (
+    vessel.name.toUpperCase().includes("GUARUJA") ||
+    vessel.name.toUpperCase().includes("ACADIA")
+  );
   const isKotaSinga = typeof vessel.name === "string" && (
     (vessel.name.toUpperCase().includes("KOTA") && vessel.name.toUpperCase().includes("SINGA")) ||
     vessel.name.toUpperCase().includes("LORI") ||
@@ -3093,6 +3118,7 @@ export function normalizeScenario(value: unknown): Scenario | null {
       isFortaleza ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["MERCOSUL FORTALEZA"]) :
       (upperName.includes("COSCO") && (upperName.includes("CHILE") || upperName.includes("BRAZIL") || upperName.includes("BRASIL") || upperName.includes("ARGENTINA") || upperName.includes("URUGUAY") || upperName.includes("MEXICO"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["COSCO SHIPPING BRAZIL"]) :
       (upperName.includes("EVER") && (upperName.includes("FIT") || upperName.includes("FAR") || upperName.includes("FAME") || upperName.includes("FAIR") || upperName.includes("FAITH") || upperName.includes("FASHION") || upperName.includes("FORTUNE"))) ? (KNOWN_VESSEL_DEFAULTS[upperName] ?? KNOWN_VESSEL_DEFAULTS["EVER FIT"]) :
+      upperName.includes("ACADIA") ? KNOWN_VESSEL_DEFAULTS["MAERSK ACADIA"] :
       upperName.includes("PANTANAL") ? KNOWN_VESSEL_DEFAULTS["LOG-IN PANTANAL"] :
       upperName.includes("BRISA") ? KNOWN_VESSEL_DEFAULTS["NC BRISA"] :
       upperName.includes("PATMOS") ? KNOWN_VESSEL_DEFAULTS["PATMOS EXPRESS"] :
