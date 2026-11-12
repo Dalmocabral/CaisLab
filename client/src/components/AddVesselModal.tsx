@@ -32,6 +32,7 @@ import {
   deleteVesselFromCatalog,
   syncPraticagemNow,
   exportCatalogJson,
+  getServiceBadgeColor,
 } from "@/lib/vessel-catalog";
 import {
   type BerthingSide,
@@ -258,6 +259,10 @@ export default function AddVesselModal({
       funnelBay,
       imageUrl,
       marineTrafficUrl,
+      service: m.service,
+      serviceFull: m.serviceFull,
+      consorcio: m.consorcio,
+      operator: m.operator,
     };
 
     // Auto save to persistent catalog
@@ -729,6 +734,24 @@ export default function AddVesselModal({
                               <Clock className="w-3 h-3 text-[#8799a1]" />
                               {m.dateTime}
                             </span>
+
+                            {/* Service badge (Lineup Oficial Santos Brasil / Tecon Rio) */}
+                            {m.service && (
+                              <span
+                                className={`text-[11px] font-bold px-2.5 py-0.5 rounded-md flex items-center gap-1.5 shadow-xs border ${getServiceBadgeColor(m.service).bg} ${getServiceBadgeColor(m.service).text} ${getServiceBadgeColor(m.service).border}`}
+                                title={m.consorcio ? `Consórcio: ${m.consorcio} | Armador: ${m.operator || '—'}` : `Serviço: ${m.serviceFull || m.service}`}
+                              >
+                                <Compass className="w-3 h-3 shrink-0" />
+                                <span>Serviço: {m.service}</span>
+                              </span>
+                            )}
+
+                            {/* Armador / Operador */}
+                            {m.operator && (
+                              <span className="bg-slate-100 text-slate-700 border border-slate-200 text-[10px] font-bold px-2 py-0.5 rounded-md">
+                                {m.operator}
+                              </span>
+                            )}
                           </div>
 
                           {/* Technical measurements */}
@@ -880,6 +903,8 @@ export default function AddVesselModal({
                               Último: {v.lastBerth}
                             </span>
                           )}
+
+
                         </div>
 
                         <div className="flex items-center gap-3 mt-1.5 text-[11px] text-[#556972] flex-wrap">

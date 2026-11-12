@@ -36,6 +36,11 @@ export interface CatalogVessel {
   imageUrl?: string;
   marineTrafficUrl?: string;
   isManualLayout?: boolean;
+  service?: string;
+  serviceFull?: string;
+  consorcio?: string;
+  voyage?: string;
+  operator?: string;
 }
 
 export interface PraticagemManeuver {
@@ -52,6 +57,86 @@ export interface PraticagemManeuver {
   type?: string;
   vesselType?: VesselType;
   flag?: string;
+  service?: string;
+  serviceFull?: string;
+  consorcio?: string;
+  voyage?: string;
+  operator?: string;
+  deadline?: string;
+  gateOpening?: string;
+  lineupBerth?: string;
+}
+
+export interface LineupItem {
+  rowNum?: number;
+  navio: string;
+  viagem: string;
+  joint?: string;
+  servico: string;
+  servicoCompleto?: string;
+  consorcio?: string;
+  operador?: string;
+  berco?: string;
+  aberturaGate?: string;
+  deadline?: string;
+  previsaoChegada?: string;
+  chegada?: string;
+  previsaoAtracacao?: string;
+  atracacao?: string;
+  inicioOperacao?: string;
+  termino?: string;
+  previsaoSaida?: string;
+  saida?: string;
+  cargas?: number;
+  descargas?: number;
+  remocoes?: number;
+  estado: string;
+  tipoItemLineup?: number;
+  updatedAt?: string;
+}
+
+export interface MonthlyStat {
+  month: string;
+  label: string;
+  total: number;
+  realizados: number;
+  esperados: number;
+}
+
+export interface ServiceStat {
+  service: string;
+  count: number;
+  percentage: number;
+  consorcio?: string;
+  operators: string[];
+  vesselsCount: number;
+}
+
+export interface VesselRankingItem {
+  name: string;
+  count: number;
+  service?: string;
+  operator?: string;
+  lastBerth?: string;
+  lastDate?: string;
+}
+
+export interface OperatorStat {
+  operator: string;
+  count: number;
+}
+
+export interface LineupLiveResponse {
+  updatedAt: string;
+  totalYear: number;
+  totalMonth: number;
+  totalAllTime: number;
+  monthlyStats: MonthlyStat[];
+  serviceStats: ServiceStat[];
+  vesselRanking: VesselRankingItem[];
+  operatorStats: OperatorStat[];
+  activeCount: number;
+  items: LineupItem[];
 }
 
 export interface PraticagemLiveResponse {
@@ -304,29 +389,74 @@ export async function deleteVesselFromCatalog(name: string): Promise<CatalogVess
 }
 
 /**
- * Carrega a lista de manobras ativas/programadas da Praticagem RJ.
+ * Carrega a lista de manobras ativas/programadas da Praticagem RJ,
+ * enriquecendo automaticamente em tempo de execução com os serviços e armadores
+ * do Lineup Oficial Santos Brasil / Tecon Rio.
  */
 export async function fetchPraticagemLive(): Promise<PraticagemLiveResponse> {
+  let result: PraticagemLiveResponse = { updatedAt: "", count: 0, maneuvers: [] };
+
   try {
     const res = await fetch("/api/praticagem/live", { cache: "no-store" });
     if (res.ok) {
-      return await res.json();
+      result = await res.json();
     }
   } catch {
     // fallback
   }
 
-  try {
-    const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
-    const fallbackRes = await fetch(`${basePath}/praticagem_live.json`, { cache: "no-store" });
-    if (fallbackRes.ok) {
-      return await fallbackRes.json();
+  if (!result.maneuvers || result.maneuvers.length === 0) {
+    try {
+      const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+      const fallbackRes = await fetch(`${basePath}/praticagem_live.json?t=${Date.now()}`, { cache: "no-store" });
+      if (fallbackRes.ok) {
+        result = await fallbackRes.json();
+      }
+    } catch {
+      // ignore
     }
-  } catch {
-    // ignore
   }
 
-  return { updatedAt: "", count: 0, maneuvers: [] };
+  // Enriquecimento resiliente com Lineup Oficial (serviço, consórcio, armador, deadline)
+  try {
+    const lineup = await fetchLineupLive();
+    if (lineup?.items?.length && result.maneuvers?.length) {
+      const clean = (s?: string) => (s || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+      
+      const lineupByVessel = new Map<string, LineupItem>();
+      lineup.items.forEach((item) => {
+        const key = clean(item.navio);
+        if (key) {
+          const existing = lineupByVessel.get(key);
+          if (!existing || item.estado === "EM OPERACAO" || item.estado === "ABERTO") {
+            lineupByVessel.set(key, item);
+          }
+        }
+      });
+
+      result.maneuvers = result.maneuvers.map((m) => {
+        const key = clean(m.name);
+        const match = lineupByVessel.get(key);
+        if (match) {
+          return {
+            ...m,
+            service: m.service || match.servico,
+            serviceFull: m.serviceFull || match.servicoCompleto,
+            consorcio: m.consorcio || match.consorcio,
+            voyage: m.voyage || match.viagem,
+            operator: m.operator || match.operador,
+            deadline: m.deadline || match.deadline,
+            lineupBerth: m.lineupBerth || match.berco,
+          };
+        }
+        return m;
+      });
+    }
+  } catch (err) {
+    console.warn("Aviso ao cruzar manobras com lineup no cliente:", err);
+  }
+
+  return result;
 }
 
 /**
@@ -359,4 +489,80 @@ export function exportCatalogJson(catalog: CatalogVessel[]) {
   document.body.appendChild(downloadAnchor);
   downloadAnchor.click();
   downloadAnchor.remove();
+}
+
+/**
+ * Retorna uma cor de destaque visual consistente para cada serviço de navegação.
+ */
+export function getServiceBadgeColor(serviceName?: string): { bg: string; text: string; border: string } {
+  if (!serviceName) {
+    return { bg: "bg-slate-100", text: "text-slate-700", border: "border-slate-300" };
+  }
+  const s = serviceName.trim().toUpperCase();
+  if (s.includes("SEAS 2") || s.includes("SX2")) {
+    return { bg: "bg-emerald-50", text: "text-emerald-700", border: "border-emerald-300" };
+  }
+  if (s.includes("SEAS 1")) {
+    return { bg: "bg-teal-50", text: "text-teal-700", border: "border-teal-300" };
+  }
+  if (s.includes("TANGO")) {
+    return { bg: "bg-amber-50", text: "text-amber-800", border: "border-amber-300" };
+  }
+  if (s.includes("BRAZEX")) {
+    return { bg: "bg-blue-50", text: "text-blue-700", border: "border-blue-300" };
+  }
+  if (s.includes("BRACO")) {
+    return { bg: "bg-indigo-50", text: "text-indigo-700", border: "border-indigo-300" };
+  }
+  if (s.includes("CONOSUR") || s.includes("ABAC")) {
+    return { bg: "bg-purple-50", text: "text-purple-700", border: "border-purple-300" };
+  }
+  if (s.includes("LUX")) {
+    return { bg: "bg-cyan-50", text: "text-cyan-800", border: "border-cyan-300" };
+  }
+  if (s.includes("NORCOAST")) {
+    return { bg: "bg-orange-50", text: "text-orange-800", border: "border-orange-300" };
+  }
+  if (s.includes("FEEDER")) {
+    return { bg: "bg-violet-50", text: "text-violet-700", border: "border-violet-300" };
+  }
+  if (s.includes("FALCON")) {
+    return { bg: "bg-rose-50", text: "text-rose-700", border: "border-rose-300" };
+  }
+  if (s.includes("EXTRA")) {
+    return { bg: "bg-amber-100/70", text: "text-amber-900", border: "border-amber-400" };
+  }
+  return { bg: "bg-sky-50", text: "text-sky-700", border: "border-sky-300" };
+}
+
+/**
+ * Carrega as estatísticas, rankings e dados consolidados do Lineup oficial.
+ */
+export async function fetchLineupLive(): Promise<LineupLiveResponse> {
+  const fallbackEmpty: LineupLiveResponse = {
+    updatedAt: "",
+    totalYear: 0,
+    totalMonth: 0,
+    totalAllTime: 0,
+    monthlyStats: [],
+    serviceStats: [],
+    vesselRanking: [],
+    operatorStats: [],
+    activeCount: 0,
+    items: [],
+  };
+
+  try {
+    const basePath = (typeof import.meta !== "undefined" && import.meta.env?.BASE_URL)
+      ? import.meta.env.BASE_URL.replace(/\/$/, "")
+      : "";
+    const res = await fetch(`${basePath}/lineup_live.json`, { cache: "no-store" });
+    if (res.ok) {
+      return await res.json();
+    }
+  } catch (err) {
+    console.warn("Aviso ao ler lineup_live.json local:", err);
+  }
+
+  return fallbackEmpty;
 }

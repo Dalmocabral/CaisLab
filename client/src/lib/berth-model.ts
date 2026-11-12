@@ -298,6 +298,7 @@ export function defaultTierCountForBeam(beam: number): number {
 export const KNOWN_VESSEL_TYPES: Record<string, VesselType> = {
   "BBC AMBER": "general-cargo",
   "FINCH ARROW": "general-cargo",
+  "FRIO MARATHON": "general-cargo",
   "OCEAN MERMAID": "research-survey",
   "SEVEN RIO": "offshore",
   "SEVEN CRUZEIRO": "offshore",
@@ -1063,6 +1064,17 @@ export const KNOWN_VESSEL_DEFAULTS: Record<string, Partial<Vessel>> = {
     vesselType: "general-cargo",
     color: "blue",
   },
+  "FRIO MARATHON": {
+    name: "FRIO MARATHON",
+    loa: 146.29,
+    beam: 18.5,
+    draft: 7.45,
+    vesselType: "general-cargo",
+    color: "blue",
+    imageUrl: "/vessels/frio_marathon.jpg",
+    marineTrafficUrl: "https://www.marinetraffic.com/en/ais/details/ships/imo:8916229",
+    bridgePosition: "all-aft",
+  },
   "SWANSEA": {
     name: "SWANSEA",
     loa: 270.9,
@@ -1209,6 +1221,12 @@ export function isManuallyConfiguredVessel(vessel?: {
   separateFunnel?: boolean;
   bridgeBay?: number;
   isManualLayout?: boolean;
+  service?: string;
+  serviceFull?: string;
+  consorcio?: string;
+  voyage?: string;
+  operator?: string;
+  deadline?: string;
   vesselType?: string | null;
   type?: string | null;
 } | null): boolean {
@@ -1308,7 +1326,11 @@ export function normalizeVesselType(raw?: string | null, vesselName?: string | n
     upperName.includes("BIGROLL") ||
     upperName.includes("SPLIETHOFF") ||
     upperName.includes("GENERAL CARGO") ||
-    upperName.includes("CARGA GERAL")
+    upperName.includes("CARGA GERAL") ||
+    upperName.startsWith("FRIO ") ||
+    upperName.includes("FRIO MARATHON") ||
+    upperName.includes("REEFER") ||
+    upperName.includes("FRIGORIFICO")
   ) {
     return "general-cargo";
   }
@@ -1535,6 +1557,12 @@ export interface Vessel {
   /** Link direto para a página do navio no MarineTraffic (ex.: shipid). */
   marineTrafficUrl?: string;
   isManualLayout?: boolean;
+  service?: string;
+  serviceFull?: string;
+  consorcio?: string;
+  voyage?: string;
+  operator?: string;
+  deadline?: string;
 }
 
 export interface ContainerHatchPlan {
