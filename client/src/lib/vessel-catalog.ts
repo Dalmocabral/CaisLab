@@ -389,29 +389,74 @@ export async function deleteVesselFromCatalog(name: string): Promise<CatalogVess
 }
 
 /**
- * Carrega a lista de manobras ativas/programadas da Praticagem RJ.
+ * Carrega a lista de manobras ativas/programadas da Praticagem RJ,
+ * enriquecendo automaticamente em tempo de execução com os serviços e armadores
+ * do Lineup Oficial Santos Brasil / Tecon Rio.
  */
 export async function fetchPraticagemLive(): Promise<PraticagemLiveResponse> {
+  let result: PraticagemLiveResponse = { updatedAt: "", count: 0, maneuvers: [] };
+
   try {
     const res = await fetch("/api/praticagem/live", { cache: "no-store" });
     if (res.ok) {
-      return await res.json();
+      result = await res.json();
     }
   } catch {
     // fallback
   }
 
-  try {
-    const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
-    const fallbackRes = await fetch(`${basePath}/praticagem_live.json`, { cache: "no-store" });
-    if (fallbackRes.ok) {
-      return await fallbackRes.json();
+  if (!result.maneuvers || result.maneuvers.length === 0) {
+    try {
+      const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+      const fallbackRes = await fetch(`${basePath}/praticagem_live.json?t=${Date.now()}`, { cache: "no-store" });
+      if (fallbackRes.ok) {
+        result = await fallbackRes.json();
+      }
+    } catch {
+      // ignore
     }
-  } catch {
-    // ignore
   }
 
-  return { updatedAt: "", count: 0, maneuvers: [] };
+  // Enriquecimento resiliente com Lineup Oficial (serviço, consórcio, armador, deadline)
+  try {
+    const lineup = await fetchLineupLive();
+    if (lineup?.items?.length && result.maneuvers?.length) {
+      const clean = (s?: string) => (s || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+      
+      const lineupByVessel = new Map<string, LineupItem>();
+      lineup.items.forEach((item) => {
+        const key = clean(item.navio);
+        if (key) {
+          const existing = lineupByVessel.get(key);
+          if (!existing || item.estado === "EM OPERACAO" || item.estado === "ABERTO") {
+            lineupByVessel.set(key, item);
+          }
+        }
+      });
+
+      result.maneuvers = result.maneuvers.map((m) => {
+        const key = clean(m.name);
+        const match = lineupByVessel.get(key);
+        if (match) {
+          return {
+            ...m,
+            service: m.service || match.servico,
+            serviceFull: m.serviceFull || match.servicoCompleto,
+            consorcio: m.consorcio || match.consorcio,
+            voyage: m.voyage || match.viagem,
+            operator: m.operator || match.operador,
+            deadline: m.deadline || match.deadline,
+            lineupBerth: m.lineupBerth || match.berco,
+          };
+        }
+        return m;
+      });
+    }
+  } catch (err) {
+    console.warn("Aviso ao cruzar manobras com lineup no cliente:", err);
+  }
+
+  return result;
 }
 
 /**

@@ -32,6 +32,7 @@ import {
   deleteVesselFromCatalog,
   syncPraticagemNow,
   exportCatalogJson,
+  getServiceBadgeColor,
 } from "@/lib/vessel-catalog";
 import {
   type BerthingSide,
@@ -735,12 +736,12 @@ export default function AddVesselModal({
                             </span>
 
                             {/* Service badge (Lineup Oficial Santos Brasil / Tecon Rio) */}
-                            {m.service && m.service !== "OUTROS" && (
+                            {m.service && (
                               <span
-                                className="bg-indigo-50 text-indigo-700 border border-indigo-200 text-[11px] font-bold px-2.5 py-0.5 rounded-md flex items-center gap-1.5 shadow-xs"
+                                className={`text-[11px] font-bold px-2.5 py-0.5 rounded-md flex items-center gap-1.5 shadow-xs border ${getServiceBadgeColor(m.service).bg} ${getServiceBadgeColor(m.service).text} ${getServiceBadgeColor(m.service).border}`}
                                 title={m.consorcio ? `Consórcio: ${m.consorcio} | Armador: ${m.operator || '—'}` : `Serviço: ${m.serviceFull || m.service}`}
                               >
-                                <Compass className="w-3 h-3 text-indigo-600" />
+                                <Compass className="w-3 h-3 shrink-0" />
                                 <span>Serviço: {m.service}</span>
                               </span>
                             )}

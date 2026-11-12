@@ -299,7 +299,7 @@
     "lastBerth": "TECONT1",
     "imageUrl": "/vessels/cma_cgm_xiamen.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9400069",
-    "updatedAt": "12/11/2026 00:43"
+    "updatedAt": "12/11/2026 09:44"
   },
   {
     "name": "COSCO SHIPPING ARGENTINA",
@@ -384,7 +384,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/cosco_shipping_mexico.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9945863",
-    "updatedAt": "12/11/2026 00:43",
+    "updatedAt": "12/11/2026 09:44",
     "flag": "HONG KONG, CHINA",
     "bayCount": 78,
     "bays": 78,
@@ -679,14 +679,14 @@
     "name": "FRIO MARATHON",
     "loa": 146.29,
     "beam": 18.5,
-    "draft": 7.45,
+    "draft": 6.7,
     "berthingSide": "boreste",
     "imo": "8916229",
     "type": "REFRIGERATED CARGO SHIP",
     "lastBerth": "TECONT1",
     "imageUrl": "/vessels/frio_marathon.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:8916229",
-    "updatedAt": "12/11/2026 00:44",
+    "updatedAt": "12/11/2026 09:44",
     "vesselType": "general-cargo",
     "flag": "BAHAMAS",
     "isManualLayout": true,
@@ -702,7 +702,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "12/11/2026 00:43",
+    "updatedAt": "12/11/2026 09:44",
     "bayCount": 78,
     "bays": 78,
     "rowCount": 20,
@@ -848,7 +848,7 @@
     "lastBerth": "TECONT1",
     "imageUrl": "/vessels/maersk_acadia.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9928188",
-    "updatedAt": "12/11/2026 00:43"
+    "updatedAt": "12/11/2026 09:44"
   },
   {
     "name": "MAERSK CALLAO",
@@ -997,7 +997,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "12/11/2026 00:43",
+    "updatedAt": "12/11/2026 09:44",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9784661",
     "imageUrl": "/vessels/mercosul_fortaleza.jpg",
     "bridgePosition": "all-aft",
@@ -1329,7 +1329,7 @@
     "lastBerth": "TECONTPROLONG",
     "imageUrl": "/vessels/tinos_express.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:1053585",
-    "updatedAt": "12/11/2026 00:43",
+    "updatedAt": "12/11/2026 09:44",
     "flag": "MALTA",
     "vesselType": "container",
     "bayCount": 63,
@@ -1389,7 +1389,7 @@
     "lastBerth": "TECONT1",
     "imageUrl": "/vessels/xin_chang_sha.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9312559",
-    "updatedAt": "12/11/2026 00:43"
+    "updatedAt": "12/11/2026 09:44"
   },
   {
     "name": "XIN CHONG QING",
