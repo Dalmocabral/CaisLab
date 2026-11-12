@@ -22,7 +22,6 @@ import {
   Maximize2,
   Box,
   Layers,
-  TrendingUp,
   Camera,
   ExternalLink,
   Image as ImageIcon,
@@ -676,15 +675,6 @@ export default function Simulator() {
           >
             <Box size={14} className="text-[#0d9488]" /> <span>Visualização 3D</span>
           </button>
-
-          {/* 3. Analytics & Lineup Oficial */}
-          <Link
-            href="/analytics"
-            className="button button-quiet text-[#4f46e5] hover:text-[#4338ca] hover:bg-indigo-50 border border-indigo-200/90 shadow-xs font-semibold inline-flex items-center gap-1.5"
-            title="Abrir Dashboard de Estatísticas, volume de navios do mês e do ano, ranking e serviços do Tecon Rio"
-          >
-            <TrendingUp size={14} className="text-[#4f46e5]" /> <span>Lineup & Gráficos</span>
-          </Link>
 
           {/* 3. Configurações */}
           <Dialog>

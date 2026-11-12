@@ -7,7 +7,6 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Simulator";
 import BerthStandaloneView from "./pages/BerthStandaloneView";
-import AnalyticsPage from "./pages/Analytics";
 import { logVisitorAccess } from "./lib/telemetry";
 
 const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -18,9 +17,6 @@ function AppRoutes() {
       <Switch>
         <Route path={"/"} component={Home} />
         <Route path={"/view"} component={BerthStandaloneView} />
-        <Route path={"/analytics"} component={AnalyticsPage} />
-        <Route path={"/estatisticas"} component={AnalyticsPage} />
-        <Route path={"/lineup"} component={AnalyticsPage} />
         <Route path={"/404"} component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />
