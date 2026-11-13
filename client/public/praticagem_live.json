@@ -1,31 +1,8 @@
 {
-  "updatedAt": "12/11/2026 21:58",
+  "updatedAt": "13/11/2026 02:22",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 9,
+  "count": 8,
   "maneuvers": [
-    {
-      "dateTime": "12/11 18:00",
-      "name": "TINOS EXPRESS",
-      "draft": 10.7,
-      "loa": 272.08,
-      "beam": 42.8,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
-      "berthingSide": "boreste",
-      "imo": "1053585",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "MALTA",
-      "terminal": "rio",
-      "service": "EXTRA CALL",
-      "serviceFull": "EXTRA CALL",
-      "consorcio": "Chamada Extra / Oportunidade",
-      "voyage": "2639N",
-      "operator": "HLC",
-      "deadline": "18/11/26 12:00",
-      "gateOpening": "16/11/26 00:01",
-      "lineupBerth": ""
-    },
     {
       "dateTime": "14/11 08:00",
       "name": "MAERSK ACADIA",
@@ -185,7 +162,7 @@
       "operator": "COS",
       "deadline": "13/11/26 17:00",
       "gateOpening": "10/11/26 01:00",
-      "lineupBerth": ""
+      "lineupBerth": "TECON1.2"
     },
     {
       "dateTime": "17/11 16:00",
