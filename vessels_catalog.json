@@ -301,7 +301,20 @@
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9400069",
     "updatedAt": "13/11/2026 18:56",
     "vesselType": "container",
-    "flag": "MALTA"
+    "flag": "MALTA",
+    "bayCount": 69,
+    "bays": 69,
+    "tierCount": 6,
+    "tiers": 6,
+    "rowCount": 16,
+    "rows": 16,
+    "bridgePosition": "between-bays",
+    "bridgeBay": 53,
+    "bridgeBayStart": 53,
+    "bridgeBayEnd": 53,
+    "separateFunnel": false,
+    "isManualLayout": true,
+    "color": "blue"
   },
   {
     "name": "COSCO SHIPPING ARGENTINA",

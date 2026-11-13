@@ -136,6 +136,7 @@ function renderContainerDeck(
   );
   const isZimWilmington = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("ZIM") && vessel.name.toUpperCase().includes("WILMINGTON");
   const isDalianExpress = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("DALIAN") && vessel.name.toUpperCase().includes("EXPRESS");
+  const isCmaCgmXiamen = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("XIAMEN");
   const bays = isDalianExpress
     ? Array.from({ length: 38 }, (_, index) => index * 2 + 1)
     : isDusseldorf
@@ -160,6 +161,26 @@ function renderContainerDeck(
         59, 61,
         63, 65,
         67, 68,
+      ]
+    : isCmaCgmXiamen
+    ? [
+        1, 3,
+        5, 7,
+        9, 11,
+        13, 15,
+        17, 19,
+        21, 23,
+        25, 27,
+        29, 31,
+        33, 35,
+        37, 39,
+        41, 43,
+        45, 47,
+        49, 51,
+        55, 57,
+        59, 61,
+        63, 65,
+        67, 69,
       ]
     : isMercosulGuaruja
     ? Array.from({ length: 25 }, (_, index) => index * 2 + 1)
@@ -247,6 +268,7 @@ function renderContainerDeck(
   const idx45 = bays.indexOf(45);
   const hasKotaSingaBridge = isKotaSinga && idx43 !== -1 && idx45 !== -1;
   const hasDalianBridge = isDalianExpress && idx59 !== -1 && idx61 !== -1;
+  const hasXiamenBridge = isCmaCgmXiamen && idx51 !== -1 && idx55 !== -1;
 
   const isEverFitClass = typeof vessel.name === "string" && vessel.name.toUpperCase().includes("EVER") && (
     vessel.name.toUpperCase().includes("FIT") ||
@@ -266,8 +288,8 @@ function renderContainerDeck(
   const hasEverFitFunnel = isEverFitClass && config.separateFunnel && idx61 !== -1 && idx63 !== -1;
 
   // Separação visual entre as bays de 40' (cada par de bays de 20' forma uma bay/hatch de 40')
-  const num40ftGaps = isDalianExpress ? 18 : isDusseldorf ? 17 : isAplNewJersey ? 16 : isMercosulGuaruja ? 11 : Math.max(0, Math.floor((bays.length - 1) / 2));
-  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasPatmosFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasKotaElokBridge ? 2.0 : 0) + (hasFreeportBridge ? 2.0 : 0) + (hasPatmosBridge ? 2.0 : 0) + (hasMonteAlegreBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0) + (hasAplBridge ? 2.0 : 0) + (hasGuarujaBridge ? 2.0 : 0) + (hasKotaSingaBridge ? 2.0 : 0) + (hasDalianBridge ? 2.0 : 0);
+  const num40ftGaps = isDalianExpress ? 18 : isDusseldorf ? 17 : isAplNewJersey ? 16 : isCmaCgmXiamen ? 16 : isMercosulGuaruja ? 11 : Math.max(0, Math.floor((bays.length - 1) / 2));
+  const extraSlots = (hasCoscoFunnel ? 1.4 : 0) + (hasEverFitFunnel ? 1.4 : 0) + (hasPatmosFunnel ? 1.4 : 0) + (hasSpecialBridge55_57 ? 2.0 : 0) + (hasEverFitBridge ? 2.0 : 0) + (hasKotaElokBridge ? 2.0 : 0) + (hasFreeportBridge ? 2.0 : 0) + (hasPatmosBridge ? 2.0 : 0) + (hasMonteAlegreBridge ? 2.0 : 0) + (hasDusseldorfBridge ? 2.0 : 0) + (hasAplBridge ? 2.0 : 0) + (hasGuarujaBridge ? 2.0 : 0) + (hasKotaSingaBridge ? 2.0 : 0) + (hasDalianBridge ? 2.0 : 0) + (hasXiamenBridge ? 2.0 : 0);
   const rawBayWidth = bayAreaWidth / Math.max(1, bays.length + extraSlots);
   const hatchGap = bays.length > 2 ? Math.max(1.4, Math.min(3.8, rawBayWidth * 0.32)) : 0;
   const totalGapsWidth = num40ftGaps * hatchGap;
@@ -285,7 +307,8 @@ function renderContainerDeck(
   const guarujaBridgeSlotW = hasGuarujaBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const kotaSingaBridgeSlotW = hasKotaSingaBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
   const dalianBridgeSlotW = hasDalianBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
-  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - patmosFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - kotaElokBridgeSlotW - freeportBridgeSlotW - patmosBridgeSlotW - monteAlegreBridgeSlotW - dusseldorfBridgeSlotW - aplBridgeSlotW - guarujaBridgeSlotW - kotaSingaBridgeSlotW - dalianBridgeSlotW);
+  const xiamenBridgeSlotW = hasXiamenBridge ? Math.max(10.0, Math.min(16.0, rawBayWidth * 2.0)) : 0;
+  const availableBayWidth = Math.max(1, bayAreaWidth - totalGapsWidth - coscoFunnelSlotW - everFitFunnelSlotW - patmosFunnelSlotW - nykBridgeSlotW - everFitBridgeSlotW - kotaElokBridgeSlotW - freeportBridgeSlotW - patmosBridgeSlotW - monteAlegreBridgeSlotW - dusseldorfBridgeSlotW - aplBridgeSlotW - guarujaBridgeSlotW - kotaSingaBridgeSlotW - dalianBridgeSlotW - xiamenBridgeSlotW);
   const cellWidth = availableBayWidth / Math.max(1, bays.length);
   const labelSize = bays.length ? Math.max(2.6, Math.min(5.4, cellWidth * 0.54)) : 3.4;
   const rowLabelSize = Math.max(2.0, Math.min(labelSize, cellHeight * 0.72));
@@ -378,6 +401,9 @@ function renderContainerDeck(
     if (hasDalianBridge && index >= idx61) {
       xPos -= dalianBridgeSlotW;
     }
+    if (hasXiamenBridge && index >= idx55) {
+      xPos -= xiamenBridgeSlotW;
+    }
     return xPos;
   };
 
@@ -385,7 +411,7 @@ function renderContainerDeck(
   const bridgeIndices: number[] = [];
   const funnelIndices: number[] = [];
 
-  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasKotaElokBridge && !hasFreeportBridge && !hasPatmosBridge && !hasMonteAlegreBridge && !hasDusseldorfBridge && !hasAplBridge && !hasGuarujaBridge && !hasKotaSingaBridge && !hasDalianBridge) {
+  if (!isAllAft && bays.length > 0 && !hasSpecialBridge55_57 && !hasEverFitBridge && !hasKotaElokBridge && !hasFreeportBridge && !hasPatmosBridge && !hasMonteAlegreBridge && !hasDusseldorfBridge && !hasAplBridge && !hasGuarujaBridge && !hasKotaSingaBridge && !hasDalianBridge && !hasXiamenBridge) {
     const targetBridgeBay = config.bridgeBay ?? config.bridgeBayStart ?? 34;
     const occupiedBridgeBays = getOccupiedBayNumbers(
       targetBridgeBay,
@@ -1060,6 +1086,70 @@ function renderContainerDeck(
                   stroke="#0f172a"
                   strokeWidth="0.7"
                 />
+              </>
+            );
+          })()}
+        </g>
+      )}
+
+      {/* 2e-2. Passadiço Específico do CMA CGM XIAMEN (57 55 [passadiço 53] 51 49) */}
+      {hasXiamenBridge && (
+        <g className="superstructure-bridge-island-xiamen">
+          {(() => {
+            const rightOf55 = bayCellX(idx55) + cellWidth;
+            const leftOf51 = bayCellX(idx51);
+            const slotW = Math.max(8.0, xiamenBridgeSlotW - 0.4);
+            const slotX = (rightOf55 + leftOf51 - slotW) / 2;
+            return (
+              <>
+                <title>Passadiço (entre Bay 51 e Bay 55 / Bay 53)</title>
+                <rect
+                  x={slotX}
+                  y={y + 2.5}
+                  width={slotW}
+                  height={vesselHeight - 5}
+                  rx="1.8"
+                  fill={color.fill}
+                  stroke={color.stroke}
+                  strokeWidth="1.2"
+                />
+                {/* Asas do passadiço */}
+                <line
+                  x1={slotX + slotW * 0.55}
+                  y1={y + 0.8}
+                  x2={slotX + slotW * 0.55}
+                  y2={y + vesselHeight - 0.8}
+                  stroke={color.stroke}
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                />
+                {/* Chaminé no próprio passadiço (lado de ré) */}
+                <ellipse
+                  cx={slotX + slotW * 0.25}
+                  cy={y + vesselHeight / 2}
+                  rx={Math.max(2.2, Math.min(4.8, slotW * 0.22))}
+                  ry={Math.max(1.8, Math.min(3.2, vesselHeight * 0.11))}
+                  fill="#1e293b"
+                  stroke="#0f172a"
+                  strokeWidth="0.7"
+                />
+                {/* Rótulo superior da baia 53 onde fica o passadiço */}
+                <text
+                  transform={textTransform(slotX + slotW / 2)}
+                  x={slotX + slotW / 2}
+                  y={y - 3.2}
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  fontSize={labelSize}
+                  fontWeight="800"
+                  fill="#0284c7"
+                  paintOrder="stroke"
+                  stroke="#f8fbfc"
+                  strokeWidth="0.7"
+                  strokeLinejoin="round"
+                >
+                  53
+                </text>
               </>
             );
           })()}
