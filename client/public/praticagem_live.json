@@ -1,7 +1,7 @@
 {
-  "updatedAt": "13/11/2026 11:42",
+  "updatedAt": "13/11/2026 18:56",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 8,
+  "count": 7,
   "maneuvers": [
     {
       "dateTime": "14/11 08:00",
@@ -27,7 +27,7 @@
       "lineupBerth": "TECON1.2"
     },
     {
-      "dateTime": "14/11 12:00",
+      "dateTime": "14/11 13:00",
       "name": "PALENA",
       "draft": 10.7,
       "loa": 304.14,
@@ -35,7 +35,7 @@
       "maneuver": "E",
       "berthFrom": "",
       "berthTo": "TECONTPROLONG",
-      "berthingSide": "bombordo",
+      "berthingSide": "boreste",
       "imo": "9306196",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "LIBERIA",
@@ -71,29 +71,6 @@
       "deadline": "13/11/26 12:00",
       "gateOpening": "08/11/26 16:00",
       "lineupBerth": "TECON1.2"
-    },
-    {
-      "dateTime": "14/11 22:30",
-      "name": "DANUBE",
-      "draft": 11.0,
-      "loa": 255.0,
-      "beam": 37.37,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
-      "berthingSide": "boreste",
-      "imo": "9954151",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "PORTUGAL (MAR)",
-      "terminal": "rio",
-      "service": "FALCON",
-      "serviceFull": "FALCON",
-      "consorcio": "MSC / Hapag-Lloyd",
-      "voyage": "25E",
-      "operator": "ZIM",
-      "deadline": "13/11/26 12:00",
-      "gateOpening": "08/11/26 00:01",
-      "lineupBerth": "PROLONGAM"
     },
     {
       "dateTime": "15/11 07:00",
