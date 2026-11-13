@@ -1,8 +1,31 @@
 {
-  "updatedAt": "13/11/2026 18:56",
+  "updatedAt": "13/11/2026 22:15",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 7,
+  "count": 8,
   "maneuvers": [
+    {
+      "dateTime": "14/11 05:00",
+      "name": "LOG-IN PANTANAL",
+      "draft": 8.5,
+      "loa": 182.47,
+      "beam": 25.2,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONT1",
+      "berthingSide": "boreste",
+      "imo": "9351799",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "BRAZIL",
+      "terminal": "rio",
+      "service": "FEEDER",
+      "serviceFull": "FEEDER",
+      "consorcio": "Log-In / Maersk / CMA CGM / Mercosul / ZIM",
+      "voyage": "624S",
+      "operator": "LOG",
+      "deadline": "12/11/26 17:00",
+      "gateOpening": "06/11/26 05:59",
+      "lineupBerth": "TECON1.2"
+    },
     {
       "dateTime": "14/11 08:00",
       "name": "MAERSK ACADIA",
@@ -50,7 +73,7 @@
       "lineupBerth": ""
     },
     {
-      "dateTime": "14/11 18:30",
+      "dateTime": "14/11 23:30",
       "name": "CMA CGM XIAMEN",
       "draft": 12.6,
       "loa": 305.6,
