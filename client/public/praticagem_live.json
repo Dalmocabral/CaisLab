@@ -1,31 +1,8 @@
 {
-  "updatedAt": "14/11/2026 16:14",
+  "updatedAt": "14/11/2026 21:48",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 6,
   "maneuvers": [
-    {
-      "dateTime": "14/11 13:00",
-      "name": "CMA CGM XIAMEN",
-      "draft": 14.2,
-      "loa": 305.6,
-      "beam": 40.06,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
-      "berthingSide": "boreste",
-      "imo": "9400069",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "MALTA",
-      "terminal": "rio",
-      "service": "BRAZEX",
-      "serviceFull": "BRAZEX",
-      "consorcio": "CMA CGM / COSCO (Slot Maersk - ONE)",
-      "voyage": "0GBGTN1MA",
-      "operator": "CMA",
-      "deadline": "13/11/26 12:00",
-      "gateOpening": "08/11/26 16:00",
-      "lineupBerth": "TECON1.2"
-    },
     {
       "dateTime": "15/11 02:30",
       "name": "DANUBE",
@@ -50,7 +27,7 @@
       "lineupBerth": "PROLONGAM"
     },
     {
-      "dateTime": "15/11 13:00",
+      "dateTime": "15/11 13:30",
       "name": "MERCOSUL FORTALEZA",
       "draft": 10.1,
       "loa": 185.97,
@@ -73,7 +50,7 @@
       "lineupBerth": "TECON1.2"
     },
     {
-      "dateTime": "16/11 07:00",
+      "dateTime": "15/11 20:00",
       "name": "XIN CHANG SHA",
       "draft": 12.0,
       "loa": 263.23,
@@ -96,7 +73,7 @@
       "lineupBerth": "TECON1.2"
     },
     {
-      "dateTime": "16/11 09:00",
+      "dateTime": "16/11 17:00",
       "name": "KOTA ELOK",
       "draft": 12.6,
       "loa": 335.0,
@@ -121,7 +98,7 @@
     {
       "dateTime": "17/11 16:00",
       "name": "COSCO SHIPPING MEXICO",
-      "draft": 12.5,
+      "draft": 14.1,
       "loa": 335.9,
       "beam": 51.0,
       "maneuver": "E",
@@ -140,6 +117,29 @@
       "deadline": "13/11/26 12:00",
       "gateOpening": "10/11/26 08:00",
       "lineupBerth": "PROLONGAM"
+    },
+    {
+      "dateTime": "18/11 17:00",
+      "name": "PALENA",
+      "draft": 10.6,
+      "loa": 304.14,
+      "beam": 40.06,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONTPROLONG",
+      "berthingSide": "boreste",
+      "imo": "9306196",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "LIBERIA",
+      "terminal": "rio",
+      "service": "EXTRA CALL",
+      "serviceFull": "EXTRA CALL",
+      "consorcio": "Chamada Extra / Oportunidade",
+      "voyage": "2639S",
+      "operator": "HLC",
+      "deadline": "11/11/26 17:00",
+      "gateOpening": "07/11/26 03:00",
+      "lineupBerth": ""
     }
   ]
 }
