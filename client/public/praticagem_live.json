@@ -1,5 +1,5 @@
 {
-  "updatedAt": "14/11/2026 00:33",
+  "updatedAt": "14/11/2026 08:17",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 8,
   "maneuvers": [
@@ -29,7 +29,7 @@
     {
       "dateTime": "14/11 08:00",
       "name": "MAERSK ACADIA",
-      "draft": 11.5,
+      "draft": 10.8,
       "loa": 200.0,
       "beam": 36.4,
       "maneuver": "E",
@@ -73,9 +73,9 @@
       "lineupBerth": ""
     },
     {
-      "dateTime": "14/11 23:30",
+      "dateTime": "14/11 22:30",
       "name": "CMA CGM XIAMEN",
-      "draft": 12.6,
+      "draft": 14.2,
       "loa": 305.6,
       "beam": 40.06,
       "maneuver": "E",
