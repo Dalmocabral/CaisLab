@@ -1,5 +1,5 @@
 {
-  "updatedAt": "14/11/2026 08:17",
+  "updatedAt": "14/11/2026 16:14",
   "totalYear": 188,
   "totalMonth": 57,
   "totalAllTime": 211,
@@ -22,8 +22,8 @@
       "month": "2026-11",
       "label": "Nov/26",
       "total": 57,
-      "realizados": 21,
-      "esperados": 36
+      "realizados": 23,
+      "esperados": 34
     },
     {
       "month": "2026-12",
@@ -966,7 +966,7 @@
       "service": "SEAS 1",
       "operator": "PIL",
       "lastBerth": "PROLONGAM",
-      "lastDate": "15/11/26 18:00"
+      "lastDate": "16/11/26 09:00"
     },
     {
       "name": "SEASPAN EMISSARY",
@@ -1095,7 +1095,7 @@
       "count": 1
     }
   ],
-  "activeCount": 115,
+  "activeCount": 114,
   "items": [
     {
       "rowNum": 1,
@@ -1230,7 +1230,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 2,
@@ -1257,7 +1257,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 3,
@@ -1284,7 +1284,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 4,
@@ -1311,7 +1311,7 @@
       "remocoes": 8,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 5,
@@ -1338,7 +1338,7 @@
       "remocoes": 34,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 6,
@@ -1365,7 +1365,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 7,
@@ -1392,7 +1392,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 8,
@@ -1419,7 +1419,7 @@
       "remocoes": 2,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 9,
@@ -1446,7 +1446,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 10,
@@ -1473,7 +1473,7 @@
       "remocoes": 16,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 11,
@@ -1500,7 +1500,7 @@
       "remocoes": 14,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 12,
@@ -1527,7 +1527,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 13,
@@ -1554,7 +1554,7 @@
       "remocoes": 52,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 14,
@@ -1581,7 +1581,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 15,
@@ -1608,7 +1608,7 @@
       "remocoes": 372,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 16,
@@ -1635,7 +1635,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 17,
@@ -1662,7 +1662,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 18,
@@ -1689,7 +1689,7 @@
       "remocoes": 42,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 19,
@@ -1716,7 +1716,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 20,
@@ -1743,7 +1743,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 21,
@@ -1770,7 +1770,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 22,
@@ -1797,7 +1797,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 23,
@@ -1824,7 +1824,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 24,
@@ -1851,7 +1851,7 @@
       "remocoes": 210,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 25,
@@ -1878,7 +1878,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 139,
@@ -1905,7 +1905,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 27,
@@ -1932,7 +1932,7 @@
       "remocoes": 28,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 28,
@@ -1959,7 +1959,7 @@
       "remocoes": 41,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 29,
@@ -1986,7 +1986,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 30,
@@ -2013,7 +2013,7 @@
       "remocoes": 6,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 31,
@@ -2040,7 +2040,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 32,
@@ -2067,7 +2067,7 @@
       "remocoes": 4,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 33,
@@ -2094,7 +2094,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 34,
@@ -2121,7 +2121,7 @@
       "remocoes": 14,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 35,
@@ -2148,7 +2148,7 @@
       "remocoes": 57,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 36,
@@ -2175,7 +2175,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 54,
@@ -2202,7 +2202,7 @@
       "remocoes": 2,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 38,
@@ -2229,7 +2229,7 @@
       "remocoes": 132,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 39,
@@ -2256,7 +2256,7 @@
       "remocoes": 512,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 40,
@@ -2283,7 +2283,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 41,
@@ -2310,7 +2310,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 42,
@@ -2337,7 +2337,7 @@
       "remocoes": 4,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 43,
@@ -2364,7 +2364,7 @@
       "remocoes": 10,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 44,
@@ -2391,7 +2391,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 45,
@@ -2418,7 +2418,7 @@
       "remocoes": 8,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 48,
@@ -2445,7 +2445,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 47,
@@ -2472,7 +2472,7 @@
       "remocoes": 218,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 49,
@@ -2499,7 +2499,7 @@
       "remocoes": 6,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 50,
@@ -2526,7 +2526,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 51,
@@ -2553,7 +2553,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 52,
@@ -2580,7 +2580,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 53,
@@ -2607,7 +2607,7 @@
       "remocoes": 26,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 55,
@@ -2634,7 +2634,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 56,
@@ -2661,7 +2661,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 57,
@@ -2688,7 +2688,7 @@
       "remocoes": 14,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 58,
@@ -2715,7 +2715,7 @@
       "remocoes": 8,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 59,
@@ -2742,7 +2742,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 60,
@@ -2769,7 +2769,7 @@
       "remocoes": 14,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 61,
@@ -2796,7 +2796,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 62,
@@ -2823,7 +2823,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 63,
@@ -2850,7 +2850,7 @@
       "remocoes": 488,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 64,
@@ -2877,7 +2877,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 65,
@@ -2904,7 +2904,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 66,
@@ -2931,7 +2931,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 67,
@@ -2958,7 +2958,7 @@
       "remocoes": 2,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 68,
@@ -2985,7 +2985,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 69,
@@ -3012,7 +3012,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 70,
@@ -3039,7 +3039,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 71,
@@ -3066,7 +3066,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 72,
@@ -3093,7 +3093,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 73,
@@ -3120,7 +3120,7 @@
       "remocoes": 6,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 74,
@@ -3147,7 +3147,7 @@
       "remocoes": 14,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 75,
@@ -3174,7 +3174,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 76,
@@ -3201,7 +3201,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 77,
@@ -3228,7 +3228,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 78,
@@ -3255,7 +3255,7 @@
       "remocoes": 352,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 79,
@@ -3282,7 +3282,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 80,
@@ -3309,7 +3309,7 @@
       "remocoes": 503,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 81,
@@ -3336,7 +3336,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 82,
@@ -3363,7 +3363,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 83,
@@ -3390,7 +3390,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 84,
@@ -3417,7 +3417,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 85,
@@ -3444,7 +3444,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 86,
@@ -3471,7 +3471,7 @@
       "remocoes": 2,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 87,
@@ -3498,7 +3498,7 @@
       "remocoes": 86,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 88,
@@ -3525,7 +3525,7 @@
       "remocoes": 4,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 89,
@@ -3552,7 +3552,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 90,
@@ -3579,7 +3579,7 @@
       "remocoes": 692,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 91,
@@ -3606,7 +3606,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 92,
@@ -3633,7 +3633,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 93,
@@ -3660,7 +3660,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 94,
@@ -3687,7 +3687,7 @@
       "remocoes": 464,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 95,
@@ -3714,7 +3714,7 @@
       "remocoes": 712,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 96,
@@ -3741,7 +3741,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 97,
@@ -3768,7 +3768,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 98,
@@ -3795,7 +3795,7 @@
       "remocoes": 208,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 99,
@@ -3822,7 +3822,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 100,
@@ -3849,7 +3849,7 @@
       "remocoes": 86,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 101,
@@ -3876,7 +3876,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 102,
@@ -3903,7 +3903,7 @@
       "remocoes": 8,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 103,
@@ -3930,7 +3930,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 109,
@@ -3957,7 +3957,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 105,
@@ -3984,7 +3984,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 106,
@@ -4011,7 +4011,7 @@
       "remocoes": 32,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 107,
@@ -4038,7 +4038,7 @@
       "remocoes": 162,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 108,
@@ -4065,7 +4065,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 112,
@@ -4092,7 +4092,7 @@
       "remocoes": 0,
       "estado": "EM OPERACAO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 111,
@@ -4119,7 +4119,7 @@
       "remocoes": 598,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 110,
@@ -4146,7 +4146,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 127,
@@ -4173,7 +4173,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 118,
@@ -4215,19 +4215,19 @@
       "aberturaGate": "06/11/26 05:59",
       "deadline": "12/11/26 17:00",
       "previsaoChegada": "14/11/26 05:00",
-      "chegada": "",
+      "chegada": "13/11/26 03:39",
       "previsaoAtracacao": "14/11/26 06:30",
-      "atracacao": "",
-      "inicioOperacao": "",
+      "atracacao": "13/11/26 06:20",
+      "inicioOperacao": "13/11/26 07:00",
       "termino": "",
       "previsaoSaida": "14/11/26 20:30",
       "saida": "",
-      "cargas": 0,
-      "descargas": 0,
+      "cargas": 68,
+      "descargas": 81,
       "remocoes": 0,
-      "estado": "ABERTO",
-      "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "estado": "EM OPERACAO",
+      "tipoItemLineup": 1,
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 115,
@@ -4242,19 +4242,19 @@
       "aberturaGate": "07/11/26 07:00",
       "deadline": "12/11/26 17:00",
       "previsaoChegada": "14/11/26 08:00",
-      "chegada": "",
+      "chegada": "13/11/26 04:38",
       "previsaoAtracacao": "14/11/26 09:30",
-      "atracacao": "",
-      "inicioOperacao": "",
+      "atracacao": "13/11/26 09:27",
+      "inicioOperacao": "13/11/26 10:02",
       "termino": "",
       "previsaoSaida": "14/11/26 15:00",
       "saida": "",
-      "cargas": 0,
-      "descargas": 0,
-      "remocoes": 0,
-      "estado": "ABERTO",
-      "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "cargas": 16,
+      "descargas": 16,
+      "remocoes": 8,
+      "estado": "EM OPERACAO",
+      "tipoItemLineup": 1,
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 117,
@@ -4281,7 +4281,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 118,
@@ -4308,10 +4308,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
-      "rowNum": 121,
+      "rowNum": 120,
       "navio": "XIN CHANG SHA",
       "viagem": "415N",
       "joint": "LUX",
@@ -4335,7 +4335,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 119,
@@ -4362,10 +4362,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
-      "rowNum": 120,
+      "rowNum": 121,
       "navio": "KOTA ELOK",
       "viagem": "0002W",
       "joint": "SE1",
@@ -4376,9 +4376,9 @@
       "berco": "PROLONGAM",
       "aberturaGate": "04/11/26 00:01",
       "deadline": "10/11/26 12:00",
-      "previsaoChegada": "15/11/26 18:00",
+      "previsaoChegada": "16/11/26 09:00",
       "chegada": "",
-      "previsaoAtracacao": "15/11/26 20:00",
+      "previsaoAtracacao": "16/11/26 10:30",
       "atracacao": "",
       "inicioOperacao": "",
       "termino": "",
@@ -4389,7 +4389,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 122,
@@ -4416,7 +4416,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 123,
@@ -4443,7 +4443,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 124,
@@ -4470,7 +4470,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 125,
@@ -4524,7 +4524,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 128,
@@ -4551,7 +4551,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 130,
@@ -4578,7 +4578,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 131,
@@ -4605,7 +4605,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 132,
@@ -4632,7 +4632,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 133,
@@ -4659,7 +4659,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 134,
@@ -4686,7 +4686,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 135,
@@ -4713,7 +4713,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 136,
@@ -4740,7 +4740,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 138,
@@ -4767,7 +4767,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 140,
@@ -4794,7 +4794,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 141,
@@ -4821,7 +4821,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 142,
@@ -4848,7 +4848,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 143,
@@ -4875,7 +4875,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 144,
@@ -4902,7 +4902,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 145,
@@ -4929,7 +4929,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 146,
@@ -4956,7 +4956,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 147,
@@ -4983,7 +4983,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 149,
@@ -5010,7 +5010,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 150,
@@ -5037,7 +5037,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 152,
@@ -5064,7 +5064,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 153,
@@ -5091,7 +5091,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 154,
@@ -5118,7 +5118,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 155,
@@ -5145,7 +5145,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 156,
@@ -5172,7 +5172,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 157,
@@ -5199,7 +5199,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 159,
@@ -5226,7 +5226,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 160,
@@ -5253,7 +5253,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 161,
@@ -5280,7 +5280,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 162,
@@ -5307,7 +5307,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 163,
@@ -5334,7 +5334,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 164,
@@ -5361,7 +5361,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 165,
@@ -5388,7 +5388,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 166,
@@ -5415,7 +5415,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 167,
@@ -5442,7 +5442,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 168,
@@ -5469,7 +5469,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 169,
@@ -5496,7 +5496,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 170,
@@ -5523,7 +5523,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 171,
@@ -5550,7 +5550,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 172,
@@ -5577,7 +5577,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 173,
@@ -5604,7 +5604,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 174,
@@ -5631,7 +5631,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 175,
@@ -5658,7 +5658,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 176,
@@ -5685,7 +5685,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 177,
@@ -5712,7 +5712,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 178,
@@ -5739,7 +5739,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 179,
@@ -5766,7 +5766,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 180,
@@ -5793,7 +5793,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 181,
@@ -5820,7 +5820,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 182,
@@ -5847,7 +5847,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 183,
@@ -5874,7 +5874,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 184,
@@ -5901,7 +5901,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 185,
@@ -5928,7 +5928,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 186,
@@ -5955,7 +5955,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 187,
@@ -5982,7 +5982,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 188,
@@ -6009,7 +6009,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 189,
@@ -6036,7 +6036,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 190,
@@ -6063,7 +6063,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 191,
@@ -6090,7 +6090,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 192,
@@ -6117,7 +6117,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 193,
@@ -6144,7 +6144,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 194,
@@ -6171,7 +6171,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 195,
@@ -6198,7 +6198,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 196,
@@ -6225,7 +6225,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 197,
@@ -6252,7 +6252,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 198,
@@ -6279,7 +6279,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 199,
@@ -6306,7 +6306,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 200,
@@ -6333,7 +6333,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 201,
@@ -6360,7 +6360,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 202,
@@ -6387,7 +6387,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 203,
@@ -6414,7 +6414,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 204,
@@ -6441,7 +6441,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 205,
@@ -6468,7 +6468,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 206,
@@ -6495,7 +6495,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 207,
@@ -6522,7 +6522,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 208,
@@ -6549,7 +6549,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 209,
@@ -6576,7 +6576,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 210,
@@ -6603,7 +6603,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 148,
@@ -6630,7 +6630,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 113,
@@ -6649,15 +6649,15 @@
       "previsaoAtracacao": "12/11/26 19:00",
       "atracacao": "12/11/26 19:35",
       "inicioOperacao": "12/11/26 20:05",
-      "termino": "",
+      "termino": "14/11/26 07:40",
       "previsaoSaida": "14/11/26 11:00",
-      "saida": "",
+      "saida": "14/11/26 11:00",
       "cargas": 0,
-      "descargas": 1994,
+      "descargas": 2102,
       "remocoes": 2,
-      "estado": "EM OPERACAO",
-      "tipoItemLineup": 1,
-      "updatedAt": "14/11/2026 08:17"
+      "estado": "FECHADO",
+      "tipoItemLineup": 2,
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 116,
@@ -6684,7 +6684,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 129,
@@ -6711,7 +6711,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 137,
@@ -6738,7 +6738,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 151,
@@ -6765,7 +6765,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     },
     {
       "rowNum": 158,
@@ -6792,7 +6792,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "14/11/2026 08:17"
+      "updatedAt": "14/11/2026 16:14"
     }
   ]
 }
