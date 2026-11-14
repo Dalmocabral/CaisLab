@@ -1,5 +1,5 @@
 {
-  "updatedAt": "13/11/2026 22:15",
+  "updatedAt": "14/11/2026 00:33",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 8,
   "maneuvers": [
@@ -12,7 +12,7 @@
       "maneuver": "E",
       "berthFrom": "",
       "berthTo": "TECONT1",
-      "berthingSide": "boreste",
+      "berthingSide": "bombordo",
       "imo": "9351799",
       "type": "CONTAINER SHIP (FULLY CELLULAR)",
       "flag": "BRAZIL",
