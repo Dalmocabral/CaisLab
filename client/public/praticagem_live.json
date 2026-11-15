@@ -1,12 +1,12 @@
 {
-  "updatedAt": "15/11/2026 08:37",
+  "updatedAt": "15/11/2026 16:42",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 5,
   "maneuvers": [
     {
-      "dateTime": "15/11 13:30",
+      "dateTime": "15/11 13:00",
       "name": "MERCOSUL FORTALEZA",
-      "draft": 10.1,
+      "draft": 9.0,
       "loa": 185.97,
       "beam": 34.88,
       "maneuver": "E",
