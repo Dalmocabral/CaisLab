@@ -1,31 +1,8 @@
 {
-  "updatedAt": "15/11/2026 04:18",
+  "updatedAt": "15/11/2026 08:37",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 6,
+  "count": 5,
   "maneuvers": [
-    {
-      "dateTime": "15/11 02:30",
-      "name": "DANUBE",
-      "draft": 10.8,
-      "loa": 255.0,
-      "beam": 37.37,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "boreste",
-      "imo": "9954151",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "PORTUGAL (MAR)",
-      "terminal": "rio",
-      "service": "FALCON",
-      "serviceFull": "FALCON",
-      "consorcio": "MSC / Hapag-Lloyd",
-      "voyage": "25E",
-      "operator": "ZIM",
-      "deadline": "13/11/26 12:00",
-      "gateOpening": "08/11/26 00:01",
-      "lineupBerth": "PROLONGAM"
-    },
     {
       "dateTime": "15/11 13:30",
       "name": "MERCOSUL FORTALEZA",
