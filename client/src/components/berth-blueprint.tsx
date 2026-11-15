@@ -767,29 +767,7 @@ function renderContainerDeck(
             stroke="#0f172a"
             strokeWidth="0.8"
           />
-          {/* Rótulo das Bays do Passadiço na popa (ex: 41-43 para Maersk Acadia) */}
-          {(Boolean(vessel.bridgeBayStart) || (typeof vessel.name === "string" && vessel.name.toUpperCase().includes("ACADIA"))) && (
-            <text
-              transform={textTransform(aftHouseX + aftHouseW / 2)}
-              x={aftHouseX + aftHouseW / 2}
-              y={y - 3.2}
-              textAnchor="middle"
-              dominantBaseline="middle"
-              fontSize={labelSize}
-              fontWeight="800"
-              fill="#0284c7"
-              paintOrder="stroke"
-              stroke="#f8fbfc"
-              strokeWidth="0.7"
-              strokeLinejoin="round"
-            >
-              {typeof vessel.name === "string" && vessel.name.toUpperCase().includes("ACADIA")
-                ? "41-43"
-                : (vessel.bridgeBayEnd && vessel.bridgeBayEnd !== vessel.bridgeBayStart
-                    ? `${String(vessel.bridgeBayStart).padStart(2, "0")}-${String(vessel.bridgeBayEnd).padStart(2, "0")}`
-                    : String(vessel.bridgeBayStart).padStart(2, "0"))}
-            </text>
-          )}
+
         </g>
       )}
 
@@ -1169,23 +1147,6 @@ function renderContainerDeck(
                   stroke="#0f172a"
                   strokeWidth="0.7"
                 />
-                {/* Rótulo superior da baia 52 onde fica o passadiço */}
-                <text
-                  transform={textTransform(slotX + slotW / 2)}
-                  x={slotX + slotW / 2}
-                  y={y - 3.2}
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                  fontSize={labelSize}
-                  fontWeight="800"
-                  fill="#0284c7"
-                  paintOrder="stroke"
-                  stroke="#f8fbfc"
-                  strokeWidth="0.7"
-                  strokeLinejoin="round"
-                >
-                  52
-                </text>
               </>
             );
           })()}
@@ -1233,23 +1194,6 @@ function renderContainerDeck(
                   stroke="#0f172a"
                   strokeWidth="0.7"
                 />
-                {/* Rótulo superior da baia 48 onde fica o passadiço */}
-                <text
-                  transform={textTransform(slotX + slotW / 2)}
-                  x={slotX + slotW / 2}
-                  y={y - 3.2}
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                  fontSize={labelSize}
-                  fontWeight="800"
-                  fill="#0284c7"
-                  paintOrder="stroke"
-                  stroke="#f8fbfc"
-                  strokeWidth="0.7"
-                  strokeLinejoin="round"
-                >
-                  48
-                </text>
               </>
             );
           })()}
