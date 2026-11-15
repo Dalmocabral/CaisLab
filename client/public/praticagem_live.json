@@ -1,12 +1,12 @@
 {
-  "updatedAt": "15/11/2026 01:25",
+  "updatedAt": "15/11/2026 04:08",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 6,
   "maneuvers": [
     {
       "dateTime": "15/11 02:30",
       "name": "DANUBE",
-      "draft": 11.1,
+      "draft": 10.8,
       "loa": 255.0,
       "beam": 37.37,
       "maneuver": "E",
