@@ -1,33 +1,10 @@
 {
-  "updatedAt": "16/11/2026 03:48",
+  "updatedAt": "16/11/2026 12:15",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 5,
+  "count": 4,
   "maneuvers": [
     {
-      "dateTime": "16/11 06:00",
-      "name": "FRIO MARATHON",
-      "draft": 6.7,
-      "loa": 146.29,
-      "beam": 18.5,
-      "maneuver": "M",
-      "berthFrom": "LARGO",
-      "berthTo": "TECONT1",
-      "berthingSide": "bombordo",
-      "imo": "8916229",
-      "type": "REFRIGERATED CARGO SHIP",
-      "flag": "BAHAMAS",
-      "terminal": "rio",
-      "service": "GENERIC",
-      "serviceFull": "GENERIC",
-      "consorcio": "",
-      "voyage": "3426",
-      "operator": "GEN",
-      "deadline": "14/11/26 17:00",
-      "gateOpening": "05/11/26 00:01",
-      "lineupBerth": "TECON1.1"
-    },
-    {
-      "dateTime": "16/11 16:00",
+      "dateTime": "16/11 18:30",
       "name": "KOTA ELOK",
       "draft": 12.6,
       "loa": 335.0,
@@ -50,7 +27,7 @@
       "lineupBerth": "PROLONGAM"
     },
     {
-      "dateTime": "16/11 18:00",
+      "dateTime": "16/11 20:30",
       "name": "STEPHANIE C",
       "draft": 12.1,
       "loa": 255.0,
