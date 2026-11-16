@@ -1,31 +1,8 @@
 {
-  "updatedAt": "15/11/2026 22:16",
+  "updatedAt": "16/11/2026 03:48",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 6,
+  "count": 5,
   "maneuvers": [
-    {
-      "dateTime": "15/11 21:00",
-      "name": "XIN CHANG SHA",
-      "draft": 12.3,
-      "loa": 263.23,
-      "beam": 32.3,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "bombordo",
-      "imo": "9312559",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "CHINA, PEOPLE'S REPUBLIC OF",
-      "terminal": "rio",
-      "service": "LUX",
-      "serviceFull": "LUX",
-      "consorcio": "COSCO / ONE / OOCL",
-      "voyage": "415N",
-      "operator": "COS",
-      "deadline": "13/11/26 17:00",
-      "gateOpening": "10/11/26 01:00",
-      "lineupBerth": "TECON1.2"
-    },
     {
       "dateTime": "16/11 06:00",
       "name": "FRIO MARATHON",
