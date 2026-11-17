@@ -1,31 +1,8 @@
 {
-  "updatedAt": "17/11/2026 15:09",
+  "updatedAt": "17/11/2026 23:14",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 4,
+  "count": 3,
   "maneuvers": [
-    {
-      "dateTime": "17/11 14:30",
-      "name": "COSCO SHIPPING MEXICO",
-      "draft": 14.1,
-      "loa": 335.9,
-      "beam": 51.0,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
-      "berthingSide": "boreste",
-      "imo": "9945863",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "HONG KONG, CHINA",
-      "terminal": "rio",
-      "service": "SEAS 2",
-      "serviceFull": "SEAS 2 SUL",
-      "consorcio": "CMA CGM / COSCO / Evergreen / PIL / Yang Ming",
-      "voyage": "010W",
-      "operator": "COS",
-      "deadline": "13/11/26 12:00",
-      "gateOpening": "10/11/26 08:00",
-      "lineupBerth": "PROLONGAM"
-    },
     {
       "dateTime": "18/11 15:00",
       "name": "CMA CGM COBALT",
@@ -45,7 +22,7 @@
       "consorcio": "CMA CGM / COSCO / Evergreen / PIL / Yang Ming",
       "voyage": "0BDPIE1MA",
       "operator": "CMA",
-      "deadline": "16/11/26 15:00",
+      "deadline": "16/11/26 10:00",
       "gateOpening": "08/11/26 00:01",
       "lineupBerth": "PROLONGAM"
     },
