@@ -1,33 +1,10 @@
 {
-  "updatedAt": "17/11/2026 05:42",
+  "updatedAt": "17/11/2026 15:09",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 5,
+  "count": 4,
   "maneuvers": [
     {
-      "dateTime": "16/11 16:00",
-      "name": "KOTA ELOK",
-      "draft": 12.4,
-      "loa": 335.0,
-      "beam": 51.0,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
-      "berthingSide": "boreste",
-      "imo": "1081831",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "SINGAPORE",
-      "terminal": "rio",
-      "service": "SEAS 1",
-      "serviceFull": "SEAS 1",
-      "consorcio": "CMA CGM / Evergreen / COSCO / PIL",
-      "voyage": "0002W",
-      "operator": "PIL",
-      "deadline": "10/11/26 12:00",
-      "gateOpening": "04/11/26 00:01",
-      "lineupBerth": "PROLONGAM"
-    },
-    {
-      "dateTime": "17/11 14:00",
+      "dateTime": "17/11 14:30",
       "name": "COSCO SHIPPING MEXICO",
       "draft": 14.1,
       "loa": 335.9,
@@ -70,10 +47,10 @@
       "operator": "CMA",
       "deadline": "16/11/26 15:00",
       "gateOpening": "08/11/26 00:01",
-      "lineupBerth": ""
+      "lineupBerth": "PROLONGAM"
     },
     {
-      "dateTime": "18/11 21:00",
+      "dateTime": "18/11 20:00",
       "name": "NC BREDA",
       "draft": 8.4,
       "loa": 223.98,
