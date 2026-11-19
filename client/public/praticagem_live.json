@@ -1,12 +1,12 @@
 {
-  "updatedAt": "19/11/2026 05:00",
+  "updatedAt": "19/11/2026 14:55",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 4,
   "maneuvers": [
     {
       "dateTime": "19/11 17:00",
       "name": "PALENA",
-      "draft": 10.6,
+      "draft": 10.7,
       "loa": 304.14,
       "beam": 40.06,
       "maneuver": "E",
@@ -47,7 +47,7 @@
       "operator": "EMC",
       "deadline": "27/11/26 11:00",
       "gateOpening": "23/11/26 00:01",
-      "lineupBerth": ""
+      "lineupBerth": "PROLONGAM"
     },
     {
       "dateTime": "30/11 17:00",

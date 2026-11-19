@@ -193,7 +193,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "19/11/2026 05:00",
+    "updatedAt": "19/11/2026 14:55",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9729099",
     "imageUrl": "/vessels/cma_cgm_lisa_marie.jpg"
   },
@@ -248,7 +248,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "19/11/2026 05:00",
+    "updatedAt": "19/11/2026 14:55",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996769",
     "imageUrl": "/vessels/cma_cgm_silver.jpg"
   },
@@ -673,7 +673,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "19/11/2026 05:00",
+    "updatedAt": "19/11/2026 14:55",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850812",
     "imageUrl": "/vessels/ever_fine.jpg"
   },
@@ -1288,13 +1288,13 @@
     "name": "PALENA",
     "loa": 304.14,
     "beam": 40.06,
-    "draft": 10.6,
+    "draft": 10.7,
     "berthingSide": "boreste",
     "imo": "9306196",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "19/11/2026 05:00",
+    "updatedAt": "19/11/2026 14:55",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9306196",
     "imageUrl": "/vessels/palena.jpg"
   },
