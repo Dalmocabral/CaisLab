@@ -184,6 +184,20 @@
     "imageUrl": "/vessels/cma_cgm_krypton.jpg"
   },
   {
+    "name": "CMA CGM LISA MARIE",
+    "loa": 299.81,
+    "beam": 48.32,
+    "draft": 12.5,
+    "berthingSide": "boreste",
+    "imo": "9729099",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "MALTA",
+    "lastBerth": "TECONTPROLONG",
+    "updatedAt": "19/11/2026 05:00",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9729099",
+    "imageUrl": "/vessels/cma_cgm_lisa_marie.jpg"
+  },
+  {
     "name": "CMA CGM PUCCINI",
     "loa": 277,
     "beam": 40,
@@ -223,6 +237,20 @@
     "separateFunnel": false,
     "isManualLayout": true,
     "vesselType": "container"
+  },
+  {
+    "name": "CMA CGM SILVER",
+    "loa": 335.23,
+    "beam": 51.06,
+    "draft": 12.5,
+    "berthingSide": "boreste",
+    "imo": "9996769",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "MALTA",
+    "lastBerth": "TECONTPROLONG",
+    "updatedAt": "19/11/2026 05:00",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996769",
+    "imageUrl": "/vessels/cma_cgm_silver.jpg"
   },
   {
     "name": "CMA CGM THORIUM",
@@ -634,6 +662,20 @@
     "updatedAt": "10/11/2026 23:25",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850836",
     "imageUrl": "/vessels/ever_fashion.jpg"
+  },
+  {
+    "name": "EVER FINE",
+    "loa": 333.95,
+    "beam": 48.43,
+    "draft": 14.3,
+    "berthingSide": "boreste",
+    "imo": "9850812",
+    "type": "CONTAINER SHIP (FULLY CELLULAR)",
+    "flag": "LIBERIA",
+    "lastBerth": "TECONTPROLONG",
+    "updatedAt": "19/11/2026 05:00",
+    "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850812",
+    "imageUrl": "/vessels/ever_fine.jpg"
   },
   {
     "name": "EVER FIT",
@@ -1252,7 +1294,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "18/11/2026 14:47",
+    "updatedAt": "19/11/2026 05:00",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9306196",
     "imageUrl": "/vessels/palena.jpg"
   },
