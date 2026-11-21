@@ -1,31 +1,8 @@
 {
-  "updatedAt": "21/11/2026 13:53",
+  "updatedAt": "21/11/2026 20:18",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 8,
+  "count": 7,
   "maneuvers": [
-    {
-      "dateTime": "21/11 11:00",
-      "name": "SEASPAN EMISSARY",
-      "draft": 9.6,
-      "loa": 294.13,
-      "beam": 32.2,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONT1",
-      "berthingSide": "boreste",
-      "imo": "9407158",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "SINGAPORE",
-      "terminal": "rio",
-      "service": "CONOSUR",
-      "serviceFull": "ABAC CONOSUR",
-      "consorcio": "Maersk / Sealand / Hapag-Lloyd",
-      "voyage": "647W",
-      "operator": "HLC",
-      "deadline": "20/11/26 12:00",
-      "gateOpening": "16/11/26 00:01",
-      "lineupBerth": "PROLONGAM"
-    },
     {
       "dateTime": "22/11 02:00",
       "name": "CMA CGM RABELAIS",
@@ -96,7 +73,7 @@
       "lineupBerth": "PROLONGAM"
     },
     {
-      "dateTime": "23/11 09:00",
+      "dateTime": "23/11 10:00",
       "name": "MERCOSUL GUARUJA",
       "draft": 11.0,
       "loa": 228.15,
