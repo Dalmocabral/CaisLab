@@ -1,12 +1,12 @@
 {
-  "updatedAt": "21/11/2026 04:46",
+  "updatedAt": "21/11/2026 13:53",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 7,
+  "count": 8,
   "maneuvers": [
     {
       "dateTime": "21/11 11:00",
       "name": "SEASPAN EMISSARY",
-      "draft": 9.8,
+      "draft": 9.6,
       "loa": 294.13,
       "beam": 32.2,
       "maneuver": "E",
@@ -50,7 +50,7 @@
       "lineupBerth": "TECON1.2"
     },
     {
-      "dateTime": "22/11 12:30",
+      "dateTime": "22/11 13:30",
       "name": "TINOS EXPRESS",
       "draft": 12.0,
       "loa": 272.08,
@@ -73,6 +73,29 @@
       "lineupBerth": "PROLONGAM"
     },
     {
+      "dateTime": "22/11 18:30",
+      "name": "NAVIOS DOMINO",
+      "draft": 11.8,
+      "loa": 260.66,
+      "beam": 32.3,
+      "maneuver": "E",
+      "berthFrom": "",
+      "berthTo": "TECONT1",
+      "berthingSide": "boreste",
+      "imo": "9478494",
+      "type": "CONTAINER SHIP (FULLY CELLULAR)",
+      "flag": "LIBERIA",
+      "terminal": "rio",
+      "service": "LUX",
+      "serviceFull": "LUX",
+      "consorcio": "COSCO / ONE / OOCL",
+      "voyage": "026N",
+      "operator": "ONE",
+      "deadline": "21/11/26 11:00",
+      "gateOpening": "17/11/26 00:00",
+      "lineupBerth": "PROLONGAM"
+    },
+    {
       "dateTime": "23/11 09:00",
       "name": "MERCOSUL GUARUJA",
       "draft": 11.0,
@@ -91,9 +114,9 @@
       "consorcio": "Mercosul (Slot LOG-IN)",
       "voyage": "BRA0B0N99",
       "operator": "MER",
-      "deadline": "21/11/26 11:00",
+      "deadline": "21/11/26 12:00",
       "gateOpening": "15/11/26 06:00",
-      "lineupBerth": "PROLONGAM"
+      "lineupBerth": "TECON1.2"
     },
     {
       "dateTime": "29/11 08:00",
@@ -139,7 +162,7 @@
       "operator": "CMA",
       "deadline": "27/11/26 11:00",
       "gateOpening": "24/11/26 00:01",
-      "lineupBerth": ""
+      "lineupBerth": "TECON1.1"
     },
     {
       "dateTime": "01/12 16:00",
@@ -162,7 +185,7 @@
       "operator": "CMA",
       "deadline": "01/12/26 12:00",
       "gateOpening": "26/11/26 03:00",
-      "lineupBerth": ""
+      "lineupBerth": "PROLONGAM"
     }
   ]
 }
