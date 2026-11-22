@@ -1,31 +1,8 @@
 {
-  "updatedAt": "22/11/2026 01:47",
+  "updatedAt": "22/11/2026 09:02",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 7,
+  "count": 6,
   "maneuvers": [
-    {
-      "dateTime": "22/11 02:00",
-      "name": "CMA CGM RABELAIS",
-      "draft": 14.2,
-      "loa": 299.93,
-      "beam": 40.0,
-      "maneuver": "M",
-      "berthFrom": "VISITA S",
-      "berthTo": "TECONT1",
-      "berthingSide": "boreste",
-      "imo": "9406635",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "MALTA",
-      "terminal": "rio",
-      "service": "BRAZEX",
-      "serviceFull": "BRAZEX",
-      "consorcio": "CMA CGM / COSCO (Slot Maersk - ONE)",
-      "voyage": "0GBGXN1MA",
-      "operator": "CMA",
-      "deadline": "20/11/26 17:00",
-      "gateOpening": "15/11/26 16:00",
-      "lineupBerth": "TECON1.2"
-    },
     {
       "dateTime": "22/11 13:30",
       "name": "TINOS EXPRESS",
