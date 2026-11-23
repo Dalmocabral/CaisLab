@@ -1,5 +1,5 @@
 {
-  "updatedAt": "22/11/2026 22:57",
+  "updatedAt": "23/11/2026 04:44",
   "totalYear": 192,
   "totalMonth": 57,
   "totalAllTime": 214,
@@ -22,8 +22,8 @@
       "month": "2026-11",
       "label": "Nov/26",
       "total": 57,
-      "realizados": 35,
-      "esperados": 22
+      "realizados": 36,
+      "esperados": 21
     },
     {
       "month": "2026-12",
@@ -1022,7 +1022,7 @@
       "service": "GENERIC",
       "operator": "GEN",
       "lastBerth": "TECON1.1",
-      "lastDate": "21/11/26 07:00"
+      "lastDate": "25/11/26 07:00"
     },
     {
       "name": "COSCO MALAYSIA",
@@ -1111,7 +1111,7 @@
       "count": 1
     }
   ],
-  "activeCount": 108,
+  "activeCount": 107,
   "items": [
     {
       "rowNum": 1,
@@ -1654,7 +1654,7 @@
       "updatedAt": "22/11/2026 22:57"
     },
     {
-      "rowNum": 3,
+      "rowNum": 1,
       "navio": "LOGIN PANTANAL",
       "viagem": "617S",
       "joint": "FED",
@@ -1678,10 +1678,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 4,
+      "rowNum": 2,
       "navio": "MAERSK ACADIA",
       "viagem": "639W",
       "joint": "COS",
@@ -1705,10 +1705,10 @@
       "remocoes": 42,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 5,
+      "rowNum": 3,
       "navio": "TINA I",
       "viagem": "040N",
       "joint": "BZX",
@@ -1732,10 +1732,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 6,
+      "rowNum": 4,
       "navio": "NC BRUMA",
       "viagem": "028S",
       "joint": "NCS",
@@ -1759,10 +1759,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 7,
+      "rowNum": 5,
       "navio": "MERCOSUL GUARUJA",
       "viagem": "0BCOON1RC",
       "joint": "BCO",
@@ -1786,10 +1786,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 8,
+      "rowNum": 6,
       "navio": "BOCHEM BRISBANE",
       "viagem": "002",
       "joint": "QUI",
@@ -1813,10 +1813,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 9,
+      "rowNum": 7,
       "navio": "KOTA PAHLAWAN",
       "viagem": "0045E",
       "joint": "TRP",
@@ -1840,10 +1840,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 10,
+      "rowNum": 8,
       "navio": "STEPHANIE C",
       "viagem": "638N",
       "joint": "TGO",
@@ -1867,10 +1867,10 @@
       "remocoes": 210,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 11,
+      "rowNum": 9,
       "navio": "COSCO SHIPPING CHILE",
       "viagem": "008W",
       "joint": "S2S",
@@ -1894,10 +1894,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 126,
+      "rowNum": 124,
       "navio": "NAVIOS VERMILION",
       "viagem": "165N",
       "joint": "LUX",
@@ -1921,10 +1921,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 13,
+      "rowNum": 11,
       "navio": "LONCOMILLA",
       "viagem": "35N",
       "joint": "ZGT",
@@ -1948,10 +1948,10 @@
       "remocoes": 28,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 14,
+      "rowNum": 12,
       "navio": "MALIAKOS",
       "viagem": "640W",
       "joint": "COS",
@@ -1975,10 +1975,10 @@
       "remocoes": 41,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 15,
+      "rowNum": 13,
       "navio": "NC BRAVO",
       "viagem": "028S",
       "joint": "NCS",
@@ -2002,10 +2002,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 16,
+      "rowNum": 14,
       "navio": "NC BRAVO",
       "viagem": "028",
       "joint": "NCS",
@@ -2029,10 +2029,10 @@
       "remocoes": 6,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 17,
+      "rowNum": 15,
       "navio": "LOGIN PANTANAL",
       "viagem": "618S",
       "joint": "FED",
@@ -2056,10 +2056,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 18,
+      "rowNum": 16,
       "navio": "CMA CGM PUCCINI",
       "viagem": "0GBGJN1MA",
       "joint": "BZX",
@@ -2083,10 +2083,10 @@
       "remocoes": 4,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 19,
+      "rowNum": 17,
       "navio": "TOKYO EXPRESS",
       "viagem": "640W",
       "joint": "COS",
@@ -2110,10 +2110,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 20,
+      "rowNum": 18,
       "navio": "CMA CGM SANTOS",
       "viagem": "0BCOQN1RC",
       "joint": "BCO",
@@ -2137,10 +2137,10 @@
       "remocoes": 14,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 21,
+      "rowNum": 19,
       "navio": "COSCO SHIPPING ARGENTINA",
       "viagem": "011W",
       "joint": "S2S",
@@ -2164,10 +2164,10 @@
       "remocoes": 57,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 22,
+      "rowNum": 20,
       "navio": "OCEAN MERMAID",
       "viagem": "0001",
       "joint": "GEN",
@@ -2191,10 +2191,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 40,
+      "rowNum": 38,
       "navio": "COSCO SHIPPING CHILE",
       "viagem": "008E",
       "joint": "S2N",
@@ -2218,10 +2218,10 @@
       "remocoes": 2,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 24,
+      "rowNum": 22,
       "navio": "MAERSK FORTALEZA",
       "viagem": "639N",
       "joint": "TGO",
@@ -2245,10 +2245,10 @@
       "remocoes": 132,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 25,
+      "rowNum": 23,
       "navio": "EVER FAR",
       "viagem": "1709-032W",
       "joint": "SE1",
@@ -2272,10 +2272,10 @@
       "remocoes": 512,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 26,
+      "rowNum": 24,
       "navio": "CMA CGM OSMIUM",
       "viagem": "0BDOXE1MA",
       "joint": "S2N",
@@ -2299,10 +2299,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 27,
+      "rowNum": 25,
       "navio": "NC BREDA",
       "viagem": "029S",
       "joint": "NCS",
@@ -2326,10 +2326,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 28,
+      "rowNum": 26,
       "navio": "KOTA PAHLAWAN",
       "viagem": "0045W",
       "joint": "SE1",
@@ -2353,10 +2353,10 @@
       "remocoes": 4,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 29,
+      "rowNum": 27,
       "navio": "FELIXSTOWE",
       "viagem": "530N",
       "joint": "ZGT",
@@ -2380,10 +2380,10 @@
       "remocoes": 10,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 30,
+      "rowNum": 28,
       "navio": "LOGIN PANTANAL",
       "viagem": "619S",
       "joint": "FED",
@@ -2407,10 +2407,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 31,
+      "rowNum": 29,
       "navio": "MAERSK EVERGLADES",
       "viagem": "641W",
       "joint": "COS",
@@ -2434,10 +2434,10 @@
       "remocoes": 8,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 34,
+      "rowNum": 32,
       "navio": "MAERSK CALLAO",
       "viagem": "103",
       "joint": "QUI",
@@ -2461,10 +2461,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 33,
+      "rowNum": 31,
       "navio": "ALESSIA",
       "viagem": "041N",
       "joint": "BZX",
@@ -2488,10 +2488,10 @@
       "remocoes": 218,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 35,
+      "rowNum": 33,
       "navio": "CMA CGM VERACRUZ",
       "viagem": "BRA070N99N",
       "joint": "BCO",
@@ -2515,10 +2515,10 @@
       "remocoes": 6,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 36,
+      "rowNum": 34,
       "navio": "ANDROUSA",
       "viagem": "370N",
       "joint": "LUX",
@@ -2542,10 +2542,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 37,
+      "rowNum": 35,
       "navio": "EVER LEADER",
       "viagem": "0044W",
       "joint": "TRP",
@@ -2569,10 +2569,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 38,
+      "rowNum": 36,
       "navio": "COSCO SHIPPING ARGENTINA",
       "viagem": "011E",
       "joint": "S2N",
@@ -2596,10 +2596,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 39,
+      "rowNum": 37,
       "navio": "MAERSK FRANKFURT",
       "viagem": "640N",
       "joint": "TGO",
@@ -2623,10 +2623,10 @@
       "remocoes": 26,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 41,
+      "rowNum": 39,
       "navio": "NYK RUMINA",
       "viagem": "078N",
       "joint": "LUX",
@@ -2650,10 +2650,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 42,
+      "rowNum": 40,
       "navio": "SPYROS V",
       "viagem": "45N",
       "joint": "ZGT",
@@ -2677,10 +2677,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 43,
+      "rowNum": 41,
       "navio": "NC BRISA",
       "viagem": "030N",
       "joint": "NCS",
@@ -2704,10 +2704,10 @@
       "remocoes": 14,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 44,
+      "rowNum": 42,
       "navio": "LOGIN PANTANAL",
       "viagem": "620S",
       "joint": "FED",
@@ -2731,10 +2731,10 @@
       "remocoes": 8,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 45,
+      "rowNum": 43,
       "navio": "CMA CGM IRON",
       "viagem": "0BDPBW1MA",
       "joint": "S2S",
@@ -2758,10 +2758,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 46,
+      "rowNum": 44,
       "navio": "SEASPAN EMPIRE",
       "viagem": "642W",
       "joint": "COS",
@@ -2785,10 +2785,10 @@
       "remocoes": 14,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 47,
+      "rowNum": 45,
       "navio": "XIN WEI HAI",
       "viagem": "173N",
       "joint": "LUX",
@@ -2812,10 +2812,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 48,
+      "rowNum": 46,
       "navio": "CMA CGM FRANCOISE SAGAN",
       "viagem": "0GBGLN1MA",
       "joint": "BZX",
@@ -2839,10 +2839,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 49,
+      "rowNum": 47,
       "navio": "EVER FIT",
       "viagem": "1711-027W",
       "joint": "SE1",
@@ -2866,10 +2866,10 @@
       "remocoes": 488,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 50,
+      "rowNum": 48,
       "navio": "SEVEN RIO",
       "viagem": "001",
       "joint": "GEN",
@@ -2893,10 +2893,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 51,
+      "rowNum": 49,
       "navio": "MERCOSUL FORTALEZA",
       "viagem": "BRA010N99",
       "joint": "BCO",
@@ -2920,10 +2920,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 52,
+      "rowNum": 50,
       "navio": "WINDEA CURIE",
       "viagem": "002",
       "joint": "GEN",
@@ -2947,10 +2947,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 53,
+      "rowNum": 51,
       "navio": "COSCO SHIPPING BRAZIL",
       "viagem": "012W",
       "joint": "S2S",
@@ -2974,10 +2974,10 @@
       "remocoes": 2,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 54,
+      "rowNum": 52,
       "navio": "SEVEN WAVES",
       "viagem": "001",
       "joint": "SUP",
@@ -3001,10 +3001,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 55,
+      "rowNum": 53,
       "navio": "BOCHEM WALVIS BAY",
       "viagem": "0002",
       "joint": "QUI",
@@ -3028,10 +3028,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 56,
+      "rowNum": 54,
       "navio": "WIELAND",
       "viagem": "641N",
       "joint": "TGO",
@@ -3055,10 +3055,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 57,
+      "rowNum": 55,
       "navio": "LOGIN PANTANAL",
       "viagem": "621S",
       "joint": "FED",
@@ -3082,10 +3082,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 58,
+      "rowNum": 56,
       "navio": "DUSSELDORF EXPRESS",
       "viagem": "643W",
       "joint": "COS",
@@ -3109,10 +3109,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 59,
+      "rowNum": 57,
       "navio": "APL NEW JERSEY",
       "viagem": "0GBGNN1MA",
       "joint": "BZX",
@@ -3136,10 +3136,10 @@
       "remocoes": 6,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 60,
+      "rowNum": 58,
       "navio": "MERCOSUL GUARUJA",
       "viagem": "BRA030N99",
       "joint": "BCO",
@@ -3163,10 +3163,10 @@
       "remocoes": 14,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 61,
+      "rowNum": 59,
       "navio": "NYK DIANA",
       "viagem": "025N",
       "joint": "LUX",
@@ -3190,10 +3190,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 62,
+      "rowNum": 60,
       "navio": "COSCO SHIPPING BRAZIL",
       "viagem": "012E",
       "joint": "S2N",
@@ -3217,10 +3217,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 63,
+      "rowNum": 61,
       "navio": "NC BRAVO",
       "viagem": "029N",
       "joint": "NCS",
@@ -3244,10 +3244,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 64,
+      "rowNum": 62,
       "navio": "CMA CGM KRYPTON",
       "viagem": "0BDPFW1MA",
       "joint": "S2S",
@@ -3271,10 +3271,10 @@
       "remocoes": 352,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 65,
+      "rowNum": 63,
       "navio": "MAERSK FREEPORT",
       "viagem": "642N",
       "joint": "TGO",
@@ -3298,10 +3298,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 66,
+      "rowNum": 64,
       "navio": "CMA CGM IRON",
       "viagem": "0BDPCE1MA",
       "joint": "S2N",
@@ -3325,10 +3325,10 @@
       "remocoes": 503,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 67,
+      "rowNum": 65,
       "navio": "HYUNDAI TOKYO",
       "viagem": "0165W",
       "joint": "SX2",
@@ -3352,10 +3352,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 68,
+      "rowNum": 66,
       "navio": "BBC AMBER",
       "viagem": "1117045",
       "joint": "BBK",
@@ -3379,10 +3379,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 69,
+      "rowNum": 67,
       "navio": "KOTA SINGA",
       "viagem": "0084WE",
       "joint": "TRP",
@@ -3406,10 +3406,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 70,
+      "rowNum": 68,
       "navio": "BOCHEM WALVIS BAY",
       "viagem": "003",
       "joint": "QUI",
@@ -3433,10 +3433,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 71,
+      "rowNum": 69,
       "navio": "LOGIN PANTANAL",
       "viagem": "622S",
       "joint": "FED",
@@ -3460,10 +3460,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 72,
+      "rowNum": 70,
       "navio": "LORI",
       "viagem": "644W",
       "joint": "COS",
@@ -3487,10 +3487,10 @@
       "remocoes": 2,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 73,
+      "rowNum": 71,
       "navio": "CARDIFF",
       "viagem": "0GBGPN1MA",
       "joint": "BZX",
@@ -3514,10 +3514,10 @@
       "remocoes": 86,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 74,
+      "rowNum": 72,
       "navio": "CMA CGM SANTOS",
       "viagem": "BRA050N99",
       "joint": "BCO",
@@ -3541,10 +3541,10 @@
       "remocoes": 4,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 75,
+      "rowNum": 73,
       "navio": "ZIM WILMINGTON",
       "viagem": "28E",
       "joint": "ZFS",
@@ -3568,10 +3568,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 76,
+      "rowNum": 74,
       "navio": "EVER FAME",
       "viagem": "1712-030W",
       "joint": "SE1",
@@ -3595,10 +3595,10 @@
       "remocoes": 692,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 77,
+      "rowNum": 75,
       "navio": "NC BRUMA",
       "viagem": "029S",
       "joint": "NCS",
@@ -3622,10 +3622,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 78,
+      "rowNum": 76,
       "navio": "MAERSK MONTE AZUL",
       "viagem": "643N",
       "joint": "TGO",
@@ -3649,10 +3649,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 79,
+      "rowNum": 77,
       "navio": "SEVEN SUN",
       "viagem": "001",
       "joint": "GEN",
@@ -3676,10 +3676,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 80,
+      "rowNum": 78,
       "navio": "CMA CGM COBALT",
       "viagem": "0BDPHW1MA",
       "joint": "S2S",
@@ -3703,10 +3703,10 @@
       "remocoes": 464,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 81,
+      "rowNum": 79,
       "navio": "EVER FAIR",
       "viagem": "1713-028W",
       "joint": "SE1",
@@ -3730,10 +3730,10 @@
       "remocoes": 712,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 82,
+      "rowNum": 80,
       "navio": "NAVIOS AMARILLO",
       "viagem": "67N",
       "joint": "ZGT",
@@ -3757,10 +3757,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 84,
+      "rowNum": 82,
       "navio": "FINCH ARROW",
       "viagem": "2604",
       "joint": "BBK",
@@ -3784,10 +3784,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 85,
+      "rowNum": 83,
       "navio": "DALIAN EXPRESS",
       "viagem": "029E",
       "joint": "ZFS",
@@ -3811,10 +3811,10 @@
       "remocoes": 208,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 86,
+      "rowNum": 84,
       "navio": "LOGIN PANTANAL",
       "viagem": "623S",
       "joint": "FED",
@@ -3838,10 +3838,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 87,
+      "rowNum": 85,
       "navio": "SWANSEA",
       "viagem": "0GBGRN1MA",
       "joint": "BZX",
@@ -3865,10 +3865,10 @@
       "remocoes": 86,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 88,
+      "rowNum": 86,
       "navio": "MAERSK REDWOOD",
       "viagem": "645W",
       "joint": "COS",
@@ -3892,10 +3892,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 89,
+      "rowNum": 87,
       "navio": "CMA CGM VERACRUZ",
       "viagem": "BRA0F0N99",
       "joint": "BCO",
@@ -3919,10 +3919,10 @@
       "remocoes": 8,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 90,
+      "rowNum": 88,
       "navio": "XIN CHONG QING",
       "viagem": "187N",
       "joint": "LUX",
@@ -3946,10 +3946,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 96,
+      "rowNum": 94,
       "navio": "CMA CGM KRYPTON",
       "viagem": "0BDPGE1MA",
       "joint": "S2N",
@@ -3973,10 +3973,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 92,
+      "rowNum": 90,
       "navio": "PATMOS EXPRESS",
       "viagem": "2640N",
       "joint": "ZFS",
@@ -4000,10 +4000,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 93,
+      "rowNum": 91,
       "navio": "MAERSK MONTE ALEGRE",
       "viagem": "644N",
       "joint": "TGO",
@@ -4027,10 +4027,10 @@
       "remocoes": 32,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 94,
+      "rowNum": 92,
       "navio": "CMA CGM THORIUM",
       "viagem": "0BDPJW1MA",
       "joint": "S2S",
@@ -4054,10 +4054,10 @@
       "remocoes": 162,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 95,
+      "rowNum": 93,
       "navio": "DEEP ORIENT",
       "viagem": "001",
       "joint": "GEN",
@@ -4081,10 +4081,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 99,
+      "rowNum": 97,
       "navio": "FRIO MARATHON",
       "viagem": "3426",
       "joint": "GEN",
@@ -4108,10 +4108,10 @@
       "remocoes": 0,
       "estado": "EM OPERACAO",
       "tipoItemLineup": 1,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 98,
+      "rowNum": 96,
       "navio": "EVER FAITH",
       "viagem": "1714-037W",
       "joint": "SE1",
@@ -4135,10 +4135,10 @@
       "remocoes": 598,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 97,
+      "rowNum": 95,
       "navio": "MELINA",
       "viagem": "66N",
       "joint": "ZGT",
@@ -4162,10 +4162,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 119,
+      "rowNum": 116,
       "navio": "TINOS EXPRESS",
       "viagem": "2639N",
       "joint": "TRP",
@@ -4189,7 +4189,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
       "rowNum": 118,
@@ -4219,7 +4219,7 @@
       "updatedAt": "11/11/2026 09:07"
     },
     {
-      "rowNum": 101,
+      "rowNum": 99,
       "navio": "LOGIN PANTANAL",
       "viagem": "624S",
       "joint": "FED",
@@ -4243,10 +4243,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 102,
+      "rowNum": 100,
       "navio": "MAERSK ACADIA",
       "viagem": "646W",
       "joint": "COS",
@@ -4270,10 +4270,10 @@
       "remocoes": 26,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 103,
+      "rowNum": 101,
       "navio": "CMA CGM XIAMEN",
       "viagem": "0GBGTN1MA",
       "joint": "BZX",
@@ -4297,10 +4297,10 @@
       "remocoes": 102,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 104,
+      "rowNum": 102,
       "navio": "DANUBE",
       "viagem": "25E",
       "joint": "ZFS",
@@ -4324,10 +4324,10 @@
       "remocoes": 22,
       "estado": "EM OPERACAO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 106,
+      "rowNum": 104,
       "navio": "XIN CHANG SHA",
       "viagem": "415N",
       "joint": "LUX",
@@ -4351,10 +4351,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 105,
+      "rowNum": 103,
       "navio": "MERCOSUL FORTALEZA",
       "viagem": "BRA090N99",
       "joint": "BCO",
@@ -4378,10 +4378,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 107,
+      "rowNum": 105,
       "navio": "KOTA ELOK",
       "viagem": "0002W",
       "joint": "SE1",
@@ -4405,10 +4405,10 @@
       "remocoes": 26,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 108,
+      "rowNum": 106,
       "navio": "STEPHANIE C",
       "viagem": "645N",
       "joint": "TGO",
@@ -4432,10 +4432,10 @@
       "remocoes": 52,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 110,
+      "rowNum": 108,
       "navio": "CMA CGM COBALT",
       "viagem": "0BDPIE1MA",
       "joint": "S2N",
@@ -4459,10 +4459,10 @@
       "remocoes": 306,
       "estado": "EM OPERACAO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 109,
+      "rowNum": 107,
       "navio": "COSCO SHIPPING MEXICO",
       "viagem": "010W",
       "joint": "S2S",
@@ -4486,7 +4486,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
       "rowNum": 125,
@@ -4516,7 +4516,7 @@
       "updatedAt": "13/11/2026 22:15"
     },
     {
-      "rowNum": 111,
+      "rowNum": 109,
       "navio": "LONCOMILLA",
       "viagem": "36N",
       "joint": "ZGT",
@@ -4540,10 +4540,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 114,
+      "rowNum": 112,
       "navio": "LOGIN PANTANAL",
       "viagem": "625S",
       "joint": "FED",
@@ -4567,10 +4567,10 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 116,
+      "rowNum": 113,
       "navio": "SEASPAN EMISSARY",
       "viagem": "647W",
       "joint": "COS",
@@ -4594,10 +4594,10 @@
       "remocoes": 22,
       "estado": "EM OPERACAO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 117,
+      "rowNum": 114,
       "navio": "CMA CGM RABELAIS",
       "viagem": "0GBGXN1MA",
       "joint": "BZX",
@@ -4616,15 +4616,15 @@
       "termino": "",
       "previsaoSaida": "22/11/26 16:30",
       "saida": "22/11/26 16:30",
-      "cargas": 183,
+      "cargas": 188,
       "descargas": 103,
       "remocoes": 62,
       "estado": "EM OPERACAO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 120,
+      "rowNum": 117,
       "navio": "MERCOSUL GUARUJA",
       "viagem": "BRA0B0N99",
       "joint": "BCO",
@@ -4648,10 +4648,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 118,
+      "rowNum": 115,
       "navio": "NAVIOS DOMINO",
       "viagem": "026N",
       "joint": "LUX",
@@ -4663,22 +4663,22 @@
       "aberturaGate": "17/11/26 00:00",
       "deadline": "21/11/26 11:00",
       "previsaoChegada": "22/11/26 18:30",
-      "chegada": "",
+      "chegada": "22/11/26 18:31",
       "previsaoAtracacao": "22/11/26 20:00",
-      "atracacao": "",
-      "inicioOperacao": "",
+      "atracacao": "22/11/26 20:12",
+      "inicioOperacao": "22/11/26 21:54",
       "termino": "",
-      "previsaoSaida": "23/11/26 06:00",
+      "previsaoSaida": "23/11/26 10:00",
       "saida": "",
-      "cargas": 0,
-      "descargas": 0,
+      "cargas": 20,
+      "descargas": 24,
       "remocoes": 0,
-      "estado": "ABERTO",
-      "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "estado": "EM OPERACAO",
+      "tipoItemLineup": 1,
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 121,
+      "rowNum": 118,
       "navio": "CMA CGM THORIUM",
       "viagem": "0BDPKE1MA",
       "joint": "S2N",
@@ -4702,10 +4702,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 122,
+      "rowNum": 119,
       "navio": "MAERSK FORTALEZA",
       "viagem": "646N",
       "joint": "TGO",
@@ -4729,10 +4729,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 123,
+      "rowNum": 120,
       "navio": "NC BRISA",
       "viagem": "031N",
       "joint": "NCS",
@@ -4756,10 +4756,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 125,
+      "rowNum": 123,
       "navio": "MAERSK EVERGLADES",
       "viagem": "648W",
       "joint": "COS",
@@ -4783,10 +4783,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 127,
+      "rowNum": 125,
       "navio": "CMA CGM SANTOS",
       "viagem": "BRA0D0N99",
       "joint": "BCO",
@@ -4810,10 +4810,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 128,
+      "rowNum": 126,
       "navio": "EVER FINE",
       "viagem": "1717-029W",
       "joint": "SE1",
@@ -4837,10 +4837,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 132,
+      "rowNum": 130,
       "navio": "COSCO SHIPPING MEXICO",
       "viagem": "010E",
       "joint": "S2N",
@@ -4864,10 +4864,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 130,
+      "rowNum": 128,
       "navio": "CMA CGM SILVER",
       "viagem": "0BDPNW1MA",
       "joint": "S2S",
@@ -4891,10 +4891,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 131,
+      "rowNum": 129,
       "navio": "MAERSK FRANKFURT",
       "viagem": "647N",
       "joint": "TGO",
@@ -4918,10 +4918,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 146,
+      "rowNum": 144,
       "navio": "NC BRAVO",
       "viagem": "030N",
       "joint": "NCS",
@@ -4945,10 +4945,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 133,
+      "rowNum": 131,
       "navio": "COSCO SHIPPING URUGUAY",
       "viagem": "011W",
       "joint": "S2S",
@@ -4972,10 +4972,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 134,
+      "rowNum": 132,
       "navio": "NC BRUMA",
       "viagem": "030S",
       "joint": "NCS",
@@ -4999,10 +4999,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 137,
+      "rowNum": 135,
       "navio": "FELIXSTOWE",
       "viagem": "531N",
       "joint": "ZGT",
@@ -5026,10 +5026,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 138,
+      "rowNum": 136,
       "navio": "KOTA EMBUN",
       "viagem": "0008W",
       "joint": "SE1",
@@ -5053,10 +5053,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 140,
+      "rowNum": 138,
       "navio": "SEASPAN EMPIRE",
       "viagem": "649W",
       "joint": "COS",
@@ -5080,10 +5080,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 141,
+      "rowNum": 139,
       "navio": "CMA CGM PUCCINI",
       "viagem": "0GBH1N1MA",
       "joint": "BZX",
@@ -5107,10 +5107,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 142,
+      "rowNum": 140,
       "navio": "GARNET",
       "viagem": "1E",
       "joint": "ZFS",
@@ -5134,10 +5134,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 143,
+      "rowNum": 141,
       "navio": "CMA CGM VERACRUZ",
       "viagem": "BRA150N99",
       "joint": "BCO",
@@ -5161,10 +5161,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 144,
+      "rowNum": 142,
       "navio": "ANDROUSA",
       "viagem": "371N",
       "joint": "LUX",
@@ -5188,10 +5188,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 145,
+      "rowNum": 143,
       "navio": "COSCO SHIPPING PERU",
       "viagem": "010W",
       "joint": "S2S",
@@ -5215,10 +5215,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 148,
+      "rowNum": 146,
       "navio": "TENO",
       "viagem": "22E",
       "joint": "ZFS",
@@ -5242,10 +5242,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 149,
+      "rowNum": 147,
       "navio": "ALESSIA",
       "viagem": "042N",
       "joint": "BZX",
@@ -5269,10 +5269,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 150,
+      "rowNum": 148,
       "navio": "DUSSELDORF EXPRESS",
       "viagem": "650W",
       "joint": "COS",
@@ -5296,10 +5296,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 151,
+      "rowNum": 149,
       "navio": "CMA CGM SILVER",
       "viagem": "0BDPOE1MA",
       "joint": "S2N",
@@ -5323,10 +5323,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 152,
+      "rowNum": 150,
       "navio": "MERCOSUL FORTALEZA",
       "viagem": "131226",
       "joint": "BCO",
@@ -5350,10 +5350,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 153,
+      "rowNum": 151,
       "navio": "NYK RUMINA",
       "viagem": "079N",
       "joint": "LUX",
@@ -5377,10 +5377,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 154,
+      "rowNum": 152,
       "navio": "COSCO SHIPPING URUGUAY",
       "viagem": "011E",
       "joint": "S2N",
@@ -5404,10 +5404,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 155,
+      "rowNum": 153,
       "navio": "MAERSK FREEPORT",
       "viagem": "649N",
       "joint": "TGO",
@@ -5431,10 +5431,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 156,
+      "rowNum": 154,
       "navio": "NC BREDA",
       "viagem": "031N",
       "joint": "NCS",
@@ -5458,10 +5458,10 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 158,
+      "rowNum": 156,
       "navio": "SPYROS V",
       "viagem": "46N",
       "joint": "ZGT",
@@ -5485,10 +5485,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 159,
+      "rowNum": 157,
       "navio": "COSCO SHIPPING RHINE",
       "viagem": "043W",
       "joint": "SE1",
@@ -5512,10 +5512,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 160,
+      "rowNum": 158,
       "navio": "CMA CGM OSMIUM",
       "viagem": "0BDPVW1MA",
       "joint": "S2S",
@@ -5539,10 +5539,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 161,
+      "rowNum": 159,
       "navio": "LORI",
       "viagem": "651W",
       "joint": "COS",
@@ -5566,10 +5566,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 162,
+      "rowNum": 160,
       "navio": "CMA CGM FRANCOISE SAGAN",
       "viagem": "0GBH3N1MA",
       "joint": "BZX",
@@ -5593,10 +5593,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 163,
+      "rowNum": 161,
       "navio": "MERCOSUL GUARUJA",
       "viagem": "201226",
       "joint": "BCO",
@@ -5620,10 +5620,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 164,
+      "rowNum": 162,
       "navio": "XIN WEI HAI",
       "viagem": "174N",
       "joint": "LUX",
@@ -5647,10 +5647,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 165,
+      "rowNum": 163,
       "navio": "COSCO SHIPPING PERU",
       "viagem": "010E",
       "joint": "S2N",
@@ -5674,10 +5674,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 166,
+      "rowNum": 164,
       "navio": "MAERSK MONTE AZUL",
       "viagem": "650N",
       "joint": "TGO",
@@ -5701,10 +5701,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 167,
+      "rowNum": 165,
       "navio": "NC BRISA",
       "viagem": "032N",
       "joint": "NCS",
@@ -5728,10 +5728,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 168,
+      "rowNum": 166,
       "navio": "COSCO SHIPPING CHILE",
       "viagem": "009W",
       "joint": "S2S",
@@ -5755,10 +5755,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 170,
+      "rowNum": 168,
       "navio": "KOTA ELAN",
       "viagem": "0002W",
       "joint": "SE1",
@@ -5782,10 +5782,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 171,
+      "rowNum": 169,
       "navio": "MAERSK REDWOOD",
       "viagem": "652W",
       "joint": "COS",
@@ -5809,10 +5809,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 172,
+      "rowNum": 170,
       "navio": "APL NEW JERSEY",
       "viagem": "0GBH5N1MA",
       "joint": "BZX",
@@ -5836,10 +5836,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 173,
+      "rowNum": 171,
       "navio": "NYK DIANA",
       "viagem": "026N",
       "joint": "LUX",
@@ -5863,10 +5863,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 174,
+      "rowNum": 172,
       "navio": "CMA CGM SANTOS",
       "viagem": "281226",
       "joint": "BCO",
@@ -5890,10 +5890,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 175,
+      "rowNum": 173,
       "navio": "MAERSK MONTE ALEGRE",
       "viagem": "651N",
       "joint": "TGO",
@@ -5917,10 +5917,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 176,
+      "rowNum": 174,
       "navio": "COSCO SHIPPING ARGENTINA",
       "viagem": "012W",
       "joint": "S2S",
@@ -5944,10 +5944,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 177,
+      "rowNum": 175,
       "navio": "CMA CGM OSMIUM",
       "viagem": "0BDPWE1MA",
       "joint": "S2N",
@@ -5971,10 +5971,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 178,
+      "rowNum": 176,
       "navio": "EVER FAR",
       "viagem": "1723-033W",
       "joint": "SE1",
@@ -5998,10 +5998,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 180,
+      "rowNum": 178,
       "navio": "MAERSK ACADIA",
       "viagem": "653W",
       "joint": "COS",
@@ -6025,10 +6025,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 181,
+      "rowNum": 179,
       "navio": "CARDIFF",
       "viagem": "0GBH7N1MA",
       "joint": "BZX",
@@ -6052,10 +6052,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 182,
+      "rowNum": 180,
       "navio": "CMA CGM VERACRUZ",
       "viagem": "030127",
       "joint": "BCO",
@@ -6079,10 +6079,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 183,
+      "rowNum": 181,
       "navio": "COSCO SHIPPING CHILE",
       "viagem": "009E",
       "joint": "S2N",
@@ -6106,10 +6106,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 157,
+      "rowNum": 155,
       "navio": "NC BRAVO",
       "viagem": "031N",
       "joint": "NCS",
@@ -6133,10 +6133,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 184,
+      "rowNum": 182,
       "navio": "MERCOSUL FORTALEZA",
       "viagem": "100127",
       "joint": "BCO",
@@ -6160,10 +6160,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 185,
+      "rowNum": 183,
       "navio": "XIN CHONG QING",
       "viagem": "188N",
       "joint": "LUX",
@@ -6187,10 +6187,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 186,
+      "rowNum": 184,
       "navio": "COSCO SHIPPING ARGENTINA",
       "viagem": "012E",
       "joint": "S2N",
@@ -6214,10 +6214,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 187,
+      "rowNum": 185,
       "navio": "MAERSK FORTALEZA",
       "viagem": "653N",
       "joint": "TGO",
@@ -6241,10 +6241,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 136,
+      "rowNum": 134,
       "navio": "NC BRUMA",
       "viagem": "031N",
       "joint": "NCS",
@@ -6268,10 +6268,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 188,
+      "rowNum": 186,
       "navio": "COSCO SHIPPING BRAZIL",
       "viagem": "013E",
       "joint": "S2N",
@@ -6295,10 +6295,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 189,
+      "rowNum": 187,
       "navio": "EVER FIT",
       "viagem": "1725-028W",
       "joint": "SE1",
@@ -6322,10 +6322,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 196,
+      "rowNum": 194,
       "navio": "ZIM WILMINGTON",
       "viagem": "29E",
       "joint": "ZFS",
@@ -6349,10 +6349,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 190,
+      "rowNum": 188,
       "navio": "MAERSK EVERGLADES",
       "viagem": "702W",
       "joint": "COS",
@@ -6376,10 +6376,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 191,
+      "rowNum": 189,
       "navio": "MERCOSUL GUARUJA",
       "viagem": "170127",
       "joint": "BCO",
@@ -6403,10 +6403,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 192,
+      "rowNum": 190,
       "navio": "XIN CHANG SHA",
       "viagem": "416N",
       "joint": "LUX",
@@ -6430,10 +6430,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 193,
+      "rowNum": 191,
       "navio": "MAERSK FRANKFURT",
       "viagem": "701N",
       "joint": "TGO",
@@ -6457,10 +6457,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 194,
+      "rowNum": 192,
       "navio": "EVER FAME",
       "viagem": "1726-031W",
       "joint": "SE1",
@@ -6484,10 +6484,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 195,
+      "rowNum": 193,
       "navio": "SEASPAN EMPIRE",
       "viagem": "704W",
       "joint": "COS",
@@ -6511,10 +6511,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 197,
+      "rowNum": 195,
       "navio": "NAVIOS DOMINO",
       "viagem": "027N",
       "joint": "LUX",
@@ -6538,10 +6538,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 198,
+      "rowNum": 196,
       "navio": "DANUBE",
       "viagem": "26W",
       "joint": "ZFS",
@@ -6565,10 +6565,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 199,
+      "rowNum": 197,
       "navio": "NAVIOS VERMILION",
       "viagem": "166N",
       "joint": "LUX",
@@ -6592,10 +6592,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 200,
+      "rowNum": 198,
       "navio": "ANDROUSA",
       "viagem": "372N",
       "joint": "LUX",
@@ -6619,10 +6619,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 135,
+      "rowNum": 133,
       "navio": "CMA CGM LISA MARIE",
       "viagem": "1AAF1W1MA",
       "joint": "SE1",
@@ -6646,10 +6646,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 100,
+      "rowNum": 98,
       "navio": "TINOS EXPRESS",
       "viagem": "2639S",
       "joint": "TRP",
@@ -6673,10 +6673,10 @@
       "remocoes": 3,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 113,
+      "rowNum": 111,
       "navio": "PALENA",
       "viagem": "046E",
       "joint": "TRP",
@@ -6692,18 +6692,18 @@
       "previsaoAtracacao": "20/11/26 02:30",
       "atracacao": "20/11/26 03:25",
       "inicioOperacao": "20/11/26 03:53",
-      "termino": "",
+      "termino": "22/11/26 19:32",
       "previsaoSaida": "22/11/26 21:30",
-      "saida": "",
+      "saida": "22/11/26 21:30",
       "cargas": 1918,
       "descargas": 1228,
       "remocoes": 0,
-      "estado": "EM OPERACAO",
-      "tipoItemLineup": 1,
-      "updatedAt": "22/11/2026 22:57"
+      "estado": "FECHADO",
+      "tipoItemLineup": 2,
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 115,
+      "rowNum": 121,
       "navio": "ARCTOS",
       "viagem": "003727IW",
       "joint": "GEN",
@@ -6714,7 +6714,7 @@
       "berco": "TECON1.1",
       "aberturaGate": "11/11/26 07:00",
       "deadline": "12/11/26 05:00",
-      "previsaoChegada": "21/11/26 07:00",
+      "previsaoChegada": "25/11/26 07:00",
       "chegada": "",
       "previsaoAtracacao": "",
       "atracacao": "",
@@ -6727,10 +6727,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 124,
+      "rowNum": 122,
       "navio": "LOGIN PANTANAL",
       "viagem": "626S",
       "joint": "FED",
@@ -6754,10 +6754,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 139,
+      "rowNum": 137,
       "navio": "LOGIN PANTANAL",
       "viagem": "627S",
       "joint": "FED",
@@ -6781,10 +6781,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 147,
+      "rowNum": 145,
       "navio": "COSCO MALAYSIA",
       "viagem": "111W",
       "joint": "SE1",
@@ -6808,10 +6808,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 179,
+      "rowNum": 177,
       "navio": "ZIM NORFOLK",
       "viagem": "23E",
       "joint": "ZFS",
@@ -6835,10 +6835,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 83,
+      "rowNum": 81,
       "navio": "YM MOBILITY",
       "viagem": "0091W",
       "joint": "SX2",
@@ -6862,10 +6862,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     },
     {
-      "rowNum": 169,
+      "rowNum": 167,
       "navio": "NC BREDA",
       "viagem": "032N",
       "joint": "NCS",
@@ -6889,7 +6889,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "22/11/2026 22:57"
+      "updatedAt": "23/11/2026 04:44"
     }
   ]
 }
