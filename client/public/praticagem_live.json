@@ -1,5 +1,5 @@
 {
-  "updatedAt": "23/11/2026 04:44",
+  "updatedAt": "23/11/2026 16:50",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 6,
   "maneuvers": [
@@ -47,7 +47,7 @@
       "operator": "MSK",
       "deadline": "21/11/26 11:00",
       "gateOpening": "17/11/26 21:00",
-      "lineupBerth": ""
+      "lineupBerth": "MULTI.1"
     },
     {
       "dateTime": "25/11 07:00",
