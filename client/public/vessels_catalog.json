@@ -36,7 +36,7 @@
     "type": "CHEMICAL/PRODUCTS TANKER",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/11/2026 03:37",
+    "updatedAt": "24/11/2026 14:24",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9829409",
     "imageUrl": "/vessels/arctos.jpg"
   },
@@ -207,7 +207,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/11/2026 03:37",
+    "updatedAt": "24/11/2026 14:24",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9729099",
     "imageUrl": "/vessels/cma_cgm_lisa_marie.jpg"
   },
@@ -276,7 +276,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/11/2026 03:37",
+    "updatedAt": "24/11/2026 14:24",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996769",
     "imageUrl": "/vessels/cma_cgm_silver.jpg"
   },
@@ -382,7 +382,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/11/2026 03:37",
+    "updatedAt": "24/11/2026 14:24",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9448774",
     "imageUrl": "/vessels/cosco_malaysia.jpg"
   },
@@ -498,7 +498,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "HONG KONG, CHINA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/11/2026 03:37",
+    "updatedAt": "24/11/2026 14:24",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9945875",
     "imageUrl": "/vessels/cosco_shipping_peru.jpg"
   },
@@ -729,7 +729,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "24/11/2026 03:37",
+    "updatedAt": "24/11/2026 14:24",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850812",
     "imageUrl": "/vessels/ever_fine.jpg"
   },
@@ -1022,12 +1022,12 @@
     "name": "MAERSK FORTALEZA",
     "loa": 254.95,
     "beam": 40.0,
-    "draft": 13.3,
+    "draft": 12.5,
     "bayCount": 58,
     "bays": 58,
     "berthingSide": "boreste",
     "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
-    "updatedAt": "24/11/2026 03:37",
+    "updatedAt": "24/11/2026 14:24",
     "imageUrl": "/vessels/maersk_fortaleza.jpg",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/index/ships/all/keyword:MAERSK%20FORTALEZA",
     "imo": "9979278",

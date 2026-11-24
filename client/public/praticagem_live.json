@@ -1,12 +1,12 @@
 {
-  "updatedAt": "24/11/2026 03:37",
+  "updatedAt": "24/11/2026 14:24",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 7,
   "maneuvers": [
     {
-      "dateTime": "24/11 13:30",
+      "dateTime": "24/11 14:30",
       "name": "MAERSK FORTALEZA",
-      "draft": 13.3,
+      "draft": 12.5,
       "loa": 254.95,
       "beam": 40.0,
       "maneuver": "E",
