@@ -1,8 +1,8 @@
 {
-  "updatedAt": "24/11/2026 14:24",
-  "totalYear": 194,
+  "updatedAt": "25/11/2026 00:14",
+  "totalYear": 195,
   "totalMonth": 57,
-  "totalAllTime": 216,
+  "totalAllTime": 238,
   "monthlyStats": [
     {
       "month": "2026-09",
@@ -22,36 +22,43 @@
       "month": "2026-11",
       "label": "Nov/26",
       "total": 57,
-      "realizados": 38,
-      "esperados": 19
+      "realizados": 39,
+      "esperados": 18
     },
     {
       "month": "2026-12",
       "label": "Dec/26",
-      "total": 49,
+      "total": 50,
       "realizados": 0,
-      "esperados": 49
+      "esperados": 50
     },
     {
       "month": "2027-01",
       "label": "Jan/27",
-      "total": 20,
+      "total": 25,
       "realizados": 0,
-      "esperados": 20
+      "esperados": 25
     },
     {
       "month": "2027-02",
       "label": "Feb/27",
-      "total": 2,
+      "total": 14,
       "realizados": 0,
-      "esperados": 2
+      "esperados": 14
+    },
+    {
+      "month": "2027-03",
+      "label": "Mar/27",
+      "total": 4,
+      "realizados": 0,
+      "esperados": 4
     }
   ],
   "serviceStats": [
     {
       "service": "SEAS 2",
       "count": 35,
-      "percentage": 16.2,
+      "percentage": 14.7,
       "consorcio": "CMA CGM / COSCO / Evergreen / PIL / Yang Ming",
       "operators": [
         "CMA",
@@ -61,8 +68,40 @@
       "vesselsCount": 14
     },
     {
+      "service": "CONOSUR",
+      "count": 24,
+      "percentage": 10.1,
+      "consorcio": "Maersk / Sealand / Hapag-Lloyd",
+      "operators": [
+        "HLC",
+        "MSK"
+      ],
+      "vesselsCount": 9
+    },
+    {
+      "service": "BRACO",
+      "count": 23,
+      "percentage": 9.7,
+      "consorcio": "Mercosul (Slot LOG-IN)",
+      "operators": [
+        "MER"
+      ],
+      "vesselsCount": 4
+    },
+    {
+      "service": "LUX",
+      "count": 22,
+      "percentage": 9.2,
+      "consorcio": "COSCO / ONE / OOCL",
+      "operators": [
+        "COS",
+        "ONE"
+      ],
+      "vesselsCount": 8
+    },
+    {
       "service": "SEAS 1",
-      "count": 19,
+      "count": 21,
       "percentage": 8.8,
       "consorcio": "CMA CGM / Evergreen / COSCO / PIL",
       "operators": [
@@ -74,41 +113,9 @@
       "vesselsCount": 14
     },
     {
-      "service": "LUX",
-      "count": 19,
-      "percentage": 8.8,
-      "consorcio": "COSCO / ONE / OOCL",
-      "operators": [
-        "COS",
-        "ONE"
-      ],
-      "vesselsCount": 8
-    },
-    {
-      "service": "BRACO",
-      "count": 19,
-      "percentage": 8.8,
-      "consorcio": "Mercosul (Slot LOG-IN)",
-      "operators": [
-        "MER"
-      ],
-      "vesselsCount": 4
-    },
-    {
-      "service": "CONOSUR",
-      "count": 19,
-      "percentage": 8.8,
-      "consorcio": "Maersk / Sealand / Hapag-Lloyd",
-      "operators": [
-        "HLC",
-        "MSK"
-      ],
-      "vesselsCount": 9
-    },
-    {
       "service": "TANGO",
-      "count": 17,
-      "percentage": 7.9,
+      "count": 21,
+      "percentage": 8.8,
       "consorcio": "Hapag-Lloyd / Maersk",
       "operators": [
         "HLC",
@@ -118,8 +125,8 @@
     },
     {
       "service": "BRAZEX",
-      "count": 16,
-      "percentage": 7.4,
+      "count": 17,
+      "percentage": 7.1,
       "consorcio": "CMA CGM / COSCO (Slot Maersk - ONE)",
       "operators": [
         "CMA",
@@ -130,7 +137,7 @@
     {
       "service": "NORCOAST",
       "count": 16,
-      "percentage": 7.4,
+      "percentage": 6.7,
       "consorcio": "Norcoast",
       "operators": [
         "NCO"
@@ -139,8 +146,8 @@
     },
     {
       "service": "FEEDER",
-      "count": 14,
-      "percentage": 6.5,
+      "count": 15,
+      "percentage": 6.3,
       "consorcio": "Log-In / Maersk / CMA CGM / Mercosul / ZIM",
       "operators": [
         "LOG"
@@ -148,9 +155,20 @@
       "vesselsCount": 1
     },
     {
+      "service": "FALCON",
+      "count": 11,
+      "percentage": 4.6,
+      "consorcio": "MSC / Hapag-Lloyd",
+      "operators": [
+        "HLC",
+        "ZIM"
+      ],
+      "vesselsCount": 7
+    },
+    {
       "service": "EXTRA CALL",
       "count": 10,
-      "percentage": 4.6,
+      "percentage": 4.2,
       "consorcio": "Chamada Extra / Oportunidade",
       "operators": [
         "EMC",
@@ -162,7 +180,7 @@
     {
       "service": "ZIM GULF TOUCAN",
       "count": 9,
-      "percentage": 4.2,
+      "percentage": 3.8,
       "consorcio": "ZIM",
       "operators": [
         "ZIM"
@@ -170,20 +188,9 @@
       "vesselsCount": 6
     },
     {
-      "service": "FALCON",
-      "count": 9,
-      "percentage": 4.2,
-      "consorcio": "MSC / Hapag-Lloyd",
-      "operators": [
-        "HLC",
-        "ZIM"
-      ],
-      "vesselsCount": 7
-    },
-    {
       "service": "GENERIC",
       "count": 7,
-      "percentage": 3.2,
+      "percentage": 2.9,
       "consorcio": "",
       "operators": [
         "GEN"
@@ -193,7 +200,7 @@
     {
       "service": "QUIMICO",
       "count": 4,
-      "percentage": 1.9,
+      "percentage": 1.7,
       "consorcio": "Navio Tanque Químico",
       "operators": [
         "GEN",
@@ -204,7 +211,7 @@
     {
       "service": "BREAK BULK",
       "count": 2,
-      "percentage": 0.9,
+      "percentage": 0.8,
       "consorcio": "Carga Geral / Breakbulk",
       "operators": [
         "BBC",
@@ -215,7 +222,7 @@
     {
       "service": "SUPPLY BOAT",
       "count": 1,
-      "percentage": 0.5,
+      "percentage": 0.4,
       "consorcio": "",
       "operators": [
         "GEN"
@@ -226,35 +233,35 @@
   "vesselRanking": [
     {
       "name": "LOGIN PANTANAL",
-      "count": 14,
+      "count": 15,
       "service": "FEEDER",
       "operator": "LOG",
       "lastBerth": "TECON1.2",
-      "lastDate": "18/12/26 12:00"
+      "lastDate": "25/12/26 06:00"
     },
     {
       "name": "CMA CGM VERACRUZ",
-      "count": 5,
+      "count": 6,
       "service": "BRACO",
       "operator": "MER",
       "lastBerth": "PROLONGAM",
-      "lastDate": "03/01/27 06:00"
+      "lastDate": "31/01/27 06:00"
     },
     {
       "name": "MERCOSUL FORTALEZA",
-      "count": 5,
+      "count": 6,
       "service": "BRACO",
       "operator": "MER",
       "lastBerth": "TECON1.2",
-      "lastDate": "10/01/27 06:00"
+      "lastDate": "06/02/27 05:00"
     },
     {
       "name": "MERCOSUL GUARUJA",
-      "count": 5,
+      "count": 6,
       "service": "BRACO",
       "operator": "MER",
       "lastBerth": "TECON1.2",
-      "lastDate": "17/01/27 04:30"
+      "lastDate": "14/02/27 06:00"
     },
     {
       "name": "NC BRAVO",
@@ -265,12 +272,52 @@
       "lastDate": "16/12/26 02:00"
     },
     {
+      "name": "CMA CGM SANTOS",
+      "count": 5,
+      "service": "BRACO",
+      "operator": "MER",
+      "lastBerth": "TECON1.2",
+      "lastDate": "24/01/27 06:00"
+    },
+    {
+      "name": "MAERSK MONTE AZUL",
+      "count": 4,
+      "service": "TANGO",
+      "operator": "MSK",
+      "lastBerth": "TECON1.2",
+      "lastDate": "08/02/27 21:00"
+    },
+    {
+      "name": "MAERSK REDWOOD",
+      "count": 4,
+      "service": "CONOSUR",
+      "operator": "MSK",
+      "lastBerth": "TECON1.2",
+      "lastDate": "13/02/27 07:00"
+    },
+    {
+      "name": "MAERSK MONTE ALEGRE",
+      "count": 4,
+      "service": "TANGO",
+      "operator": "MSK",
+      "lastBerth": "PROLONGAM",
+      "lastDate": "15/02/27 21:00"
+    },
+    {
       "name": "CMA CGM OSMIUM",
       "count": 4,
       "service": "SEAS 2",
       "operator": "CMA",
       "lastBerth": "PROLONGAM",
       "lastDate": "29/12/26 15:00"
+    },
+    {
+      "name": "MAERSK ACADIA",
+      "count": 4,
+      "service": "CONOSUR",
+      "operator": "MSK",
+      "lastBerth": "PROLONGAM",
+      "lastDate": "20/02/27 07:00"
     },
     {
       "name": "NC BRUMA",
@@ -289,20 +336,20 @@
       "lastDate": "04/01/27 11:00"
     },
     {
-      "name": "CMA CGM SANTOS",
-      "count": 4,
-      "service": "BRACO",
-      "operator": "MER",
-      "lastBerth": "TECON1.2",
-      "lastDate": "28/12/26 06:00"
-    },
-    {
       "name": "COSCO SHIPPING ARGENTINA",
       "count": 4,
       "service": "SEAS 2",
       "operator": "COS",
       "lastBerth": "PROLONGAM",
       "lastDate": "11/01/27 11:00"
+    },
+    {
+      "name": "MAERSK FORTALEZA",
+      "count": 4,
+      "service": "TANGO",
+      "operator": "MSK",
+      "lastBerth": "TECON1.2",
+      "lastDate": "01/03/27 21:00"
     },
     {
       "name": "NC BREDA",
@@ -319,22 +366,6 @@
       "operator": "COS",
       "lastBerth": "TECON1.2",
       "lastDate": "18/01/27 01:00"
-    },
-    {
-      "name": "MAERSK MONTE AZUL",
-      "count": 3,
-      "service": "TANGO",
-      "operator": "MSK",
-      "lastBerth": "TECON1.2",
-      "lastDate": "21/12/26 21:00"
-    },
-    {
-      "name": "MAERSK REDWOOD",
-      "count": 3,
-      "service": "CONOSUR",
-      "operator": "MSK",
-      "lastBerth": "TECON1.2",
-      "lastDate": "26/12/26 07:00"
     },
     {
       "name": "COSCO SHIPPING URUGUAY",
@@ -361,36 +392,20 @@
       "lastDate": "21/12/26 11:00"
     },
     {
-      "name": "MAERSK MONTE ALEGRE",
-      "count": 3,
-      "service": "TANGO",
-      "operator": "MSK",
-      "lastBerth": "PROLONGAM",
-      "lastDate": "28/12/26 21:00"
-    },
-    {
-      "name": "MAERSK ACADIA",
-      "count": 3,
-      "service": "CONOSUR",
-      "operator": "MSK",
-      "lastBerth": "PROLONGAM",
-      "lastDate": "02/01/27 07:00"
-    },
-    {
-      "name": "MAERSK FORTALEZA",
-      "count": 3,
-      "service": "TANGO",
-      "operator": "MSK",
-      "lastBerth": "TECON1.2",
-      "lastDate": "11/01/27 21:00"
-    },
-    {
       "name": "MAERSK EVERGLADES",
       "count": 3,
       "service": "CONOSUR",
       "operator": "MSK",
       "lastBerth": "PROLONGAM",
       "lastDate": "16/01/27 07:00"
+    },
+    {
+      "name": "ALESSIA",
+      "count": 3,
+      "service": "BRAZEX",
+      "operator": "COS",
+      "lastBerth": "TECON1.2",
+      "lastDate": "05/02/27 21:00"
     },
     {
       "name": "ANDROUSA",
@@ -409,6 +424,14 @@
       "lastDate": "18/01/27 21:00"
     },
     {
+      "name": "NYK RUMINA",
+      "count": 3,
+      "service": "LUX",
+      "operator": "ONE",
+      "lastBerth": "TECON1.2",
+      "lastDate": "15/02/27 00:00"
+    },
+    {
       "name": "NC BRISA",
       "count": 3,
       "service": "NORCOAST",
@@ -425,12 +448,60 @@
       "lastDate": "23/01/27 07:00"
     },
     {
+      "name": "XIN WEI HAI",
+      "count": 3,
+      "service": "LUX",
+      "operator": "COS",
+      "lastBerth": "TECON1.2",
+      "lastDate": "22/02/27 01:00"
+    },
+    {
       "name": "COSCO SHIPPING BRAZIL",
       "count": 3,
       "service": "SEAS 2",
       "operator": "COS",
       "lastBerth": "PROLONGAM",
       "lastDate": "13/01/27 00:00"
+    },
+    {
+      "name": "DUSSELDORF EXPRESS",
+      "count": 3,
+      "service": "CONOSUR",
+      "operator": "HLC",
+      "lastBerth": "TECON1.2",
+      "lastDate": "30/01/27 01:00"
+    },
+    {
+      "name": "NYK DIANA",
+      "count": 3,
+      "service": "LUX",
+      "operator": "ONE",
+      "lastBerth": "TECON1.2",
+      "lastDate": "01/03/27 00:00"
+    },
+    {
+      "name": "MAERSK FREEPORT",
+      "count": 3,
+      "service": "TANGO",
+      "operator": "MSK",
+      "lastBerth": "TECON1.2",
+      "lastDate": "01/02/27 21:00"
+    },
+    {
+      "name": "LORI",
+      "count": 3,
+      "service": "CONOSUR",
+      "operator": "HLC",
+      "lastBerth": "TECON1.2",
+      "lastDate": "06/02/27 01:00"
+    },
+    {
+      "name": "DANUBE",
+      "count": 3,
+      "service": "FALCON",
+      "operator": "ZIM",
+      "lastBerth": "TECON1.2",
+      "lastDate": "30/01/27 16:00"
     },
     {
       "name": "CMA CGM XIAMEN",
@@ -521,22 +592,6 @@
       "lastDate": "02/12/26 17:00"
     },
     {
-      "name": "ALESSIA",
-      "count": 2,
-      "service": "BRAZEX",
-      "operator": "COS",
-      "lastBerth": "TECON1.2",
-      "lastDate": "12/12/26 02:00"
-    },
-    {
-      "name": "NYK RUMINA",
-      "count": 2,
-      "service": "LUX",
-      "operator": "ONE",
-      "lastBerth": "TECON1.2",
-      "lastDate": "14/12/26 00:00"
-    },
-    {
       "name": "SPYROS V",
       "count": 2,
       "service": "ZIM GULF TOUCAN",
@@ -551,14 +606,6 @@
       "operator": "CMA",
       "lastBerth": "PROLONGAM",
       "lastDate": "28/10/26 12:04"
-    },
-    {
-      "name": "XIN WEI HAI",
-      "count": 2,
-      "service": "LUX",
-      "operator": "COS",
-      "lastBerth": "TECON1.2",
-      "lastDate": "21/12/26 01:00"
     },
     {
       "name": "CMA CGM FRANCOISE SAGAN",
@@ -585,14 +632,6 @@
       "lastDate": "30/10/26 08:25"
     },
     {
-      "name": "DUSSELDORF EXPRESS",
-      "count": 2,
-      "service": "CONOSUR",
-      "operator": "HLC",
-      "lastBerth": "TECON1.2",
-      "lastDate": "12/12/26 07:00"
-    },
-    {
       "name": "APL NEW JERSEY",
       "count": 2,
       "service": "BRAZEX",
@@ -601,36 +640,12 @@
       "lastDate": "26/12/26 16:00"
     },
     {
-      "name": "NYK DIANA",
-      "count": 2,
-      "service": "LUX",
-      "operator": "ONE",
-      "lastBerth": "TECON1.2",
-      "lastDate": "28/12/26 00:00"
-    },
-    {
       "name": "CMA CGM KRYPTON",
       "count": 2,
       "service": "SEAS 2",
       "operator": "CMA",
       "lastBerth": "PROLONGAM",
       "lastDate": "11/11/26 13:00"
-    },
-    {
-      "name": "MAERSK FREEPORT",
-      "count": 2,
-      "service": "TANGO",
-      "operator": "MSK",
-      "lastBerth": "TECON1.2",
-      "lastDate": "14/12/26 21:00"
-    },
-    {
-      "name": "LORI",
-      "count": 2,
-      "service": "CONOSUR",
-      "operator": "HLC",
-      "lastBerth": "TECON1.2",
-      "lastDate": "19/12/26 07:00"
     },
     {
       "name": "CARDIFF",
@@ -665,6 +680,14 @@
       "lastDate": "18/11/26 17:00"
     },
     {
+      "name": "EVER FAIR",
+      "count": 2,
+      "service": "SEAS 1",
+      "operator": "EMC",
+      "lastBerth": "PROLONGAM",
+      "lastDate": "10/02/27 00:00"
+    },
+    {
       "name": "XIN CHONG QING",
       "count": 2,
       "service": "LUX",
@@ -697,14 +720,6 @@
       "lastDate": "20/11/26 03:25"
     },
     {
-      "name": "DANUBE",
-      "count": 2,
-      "service": "FALCON",
-      "operator": "ZIM",
-      "lastBerth": "TECON1.2",
-      "lastDate": "28/01/27 12:00"
-    },
-    {
       "name": "COSCO SHIPPING MEXICO",
       "count": 2,
       "service": "SEAS 2",
@@ -713,12 +728,36 @@
       "lastDate": "01/12/26 07:00"
     },
     {
+      "name": "SEASPAN EMISSARY",
+      "count": 2,
+      "service": "CONOSUR",
+      "operator": "HLC",
+      "lastBerth": "PROLONGAM",
+      "lastDate": "09/01/27 01:00"
+    },
+    {
+      "name": "EVER FINE",
+      "count": 2,
+      "service": "SEAS 1",
+      "operator": "EMC",
+      "lastBerth": "PROLONGAM",
+      "lastDate": "03/03/27 00:00"
+    },
+    {
       "name": "CMA CGM SILVER",
       "count": 2,
       "service": "SEAS 2",
       "operator": "CMA",
       "lastBerth": "TECON1.1",
       "lastDate": "12/12/26 17:00"
+    },
+    {
+      "name": "ZIM NORFOLK",
+      "count": 2,
+      "service": "FALCON",
+      "operator": "ZIM",
+      "lastBerth": "",
+      "lastDate": "20/03/27 16:00"
     },
     {
       "name": "COSCO SHIPPING DANUBE",
@@ -881,14 +920,6 @@
       "lastDate": "03/11/26 01:55"
     },
     {
-      "name": "EVER FAIR",
-      "count": 1,
-      "service": "SEAS 1",
-      "operator": "EMC",
-      "lastBerth": "PROLONGAM",
-      "lastDate": "04/11/26 17:15"
-    },
-    {
       "name": "NAVIOS AMARILLO",
       "count": 1,
       "service": "ZIM GULF TOUCAN",
@@ -969,22 +1000,6 @@
       "lastDate": "16/11/26 17:55"
     },
     {
-      "name": "SEASPAN EMISSARY",
-      "count": 1,
-      "service": "CONOSUR",
-      "operator": "HLC",
-      "lastBerth": "PROLONGAM",
-      "lastDate": "21/11/26 11:57"
-    },
-    {
-      "name": "EVER FINE",
-      "count": 1,
-      "service": "SEAS 1",
-      "operator": "EMC",
-      "lastBerth": "PROLONGAM",
-      "lastDate": "29/11/26 08:00"
-    },
-    {
       "name": "KOTA EMBUN",
       "count": 1,
       "service": "SEAS 1",
@@ -1033,14 +1048,6 @@
       "lastDate": "09/12/26 18:00"
     },
     {
-      "name": "ZIM NORFOLK",
-      "count": 1,
-      "service": "FALCON",
-      "operator": "ZIM",
-      "lastBerth": "",
-      "lastDate": "02/01/27 07:00"
-    },
-    {
       "name": "YM MOBILITY",
       "count": 1,
       "service": "SEAS 2",
@@ -1052,47 +1059,47 @@
   "operatorStats": [
     {
       "operator": "COS",
-      "count": 35
+      "count": 37
+    },
+    {
+      "operator": "MSK",
+      "count": 30
     },
     {
       "operator": "CMA",
       "count": 28
     },
     {
-      "operator": "MSK",
-      "count": 24
-    },
-    {
       "operator": "HLC",
-      "count": 23
+      "count": 26
     },
     {
       "operator": "MER",
-      "count": 19
+      "count": 23
+    },
+    {
+      "operator": "ZIM",
+      "count": 17
     },
     {
       "operator": "NCO",
       "count": 16
     },
     {
-      "operator": "ZIM",
+      "operator": "LOG",
       "count": 15
     },
     {
-      "operator": "LOG",
-      "count": 14
+      "operator": "ONE",
+      "count": 12
+    },
+    {
+      "operator": "EMC",
+      "count": 12
     },
     {
       "operator": "GEN",
       "count": 11
-    },
-    {
-      "operator": "ONE",
-      "count": 10
-    },
-    {
-      "operator": "EMC",
-      "count": 10
     },
     {
       "operator": "PIL",
@@ -1111,7 +1118,7 @@
       "count": 1
     }
   ],
-  "activeCount": 106,
+  "activeCount": 126,
   "items": [
     {
       "rowNum": 1,
@@ -1705,7 +1712,7 @@
       "remocoes": 42,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 2,
@@ -1732,7 +1739,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 3,
@@ -1759,7 +1766,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 4,
@@ -1786,7 +1793,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 5,
@@ -1813,7 +1820,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 6,
@@ -1840,7 +1847,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 7,
@@ -1867,7 +1874,7 @@
       "remocoes": 210,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 8,
@@ -1894,7 +1901,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 123,
@@ -1921,7 +1928,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 10,
@@ -1948,7 +1955,7 @@
       "remocoes": 28,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 11,
@@ -1975,7 +1982,7 @@
       "remocoes": 41,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 12,
@@ -2002,7 +2009,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 13,
@@ -2029,7 +2036,7 @@
       "remocoes": 6,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 14,
@@ -2056,7 +2063,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 15,
@@ -2083,7 +2090,7 @@
       "remocoes": 4,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 16,
@@ -2110,7 +2117,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 17,
@@ -2137,7 +2144,7 @@
       "remocoes": 14,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 18,
@@ -2164,7 +2171,7 @@
       "remocoes": 57,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 19,
@@ -2191,7 +2198,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 37,
@@ -2218,7 +2225,7 @@
       "remocoes": 2,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 21,
@@ -2245,7 +2252,7 @@
       "remocoes": 132,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 22,
@@ -2272,7 +2279,7 @@
       "remocoes": 512,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 23,
@@ -2299,7 +2306,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 24,
@@ -2326,7 +2333,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 25,
@@ -2353,7 +2360,7 @@
       "remocoes": 4,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 26,
@@ -2380,7 +2387,7 @@
       "remocoes": 10,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 27,
@@ -2407,7 +2414,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 28,
@@ -2434,7 +2441,7 @@
       "remocoes": 8,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 31,
@@ -2461,7 +2468,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 30,
@@ -2488,7 +2495,7 @@
       "remocoes": 218,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 32,
@@ -2515,7 +2522,7 @@
       "remocoes": 6,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 33,
@@ -2542,7 +2549,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 34,
@@ -2569,7 +2576,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 35,
@@ -2596,7 +2603,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 36,
@@ -2623,7 +2630,7 @@
       "remocoes": 26,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 38,
@@ -2650,7 +2657,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 39,
@@ -2677,7 +2684,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 40,
@@ -2704,7 +2711,7 @@
       "remocoes": 14,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 41,
@@ -2731,7 +2738,7 @@
       "remocoes": 8,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 42,
@@ -2758,7 +2765,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 43,
@@ -2785,7 +2792,7 @@
       "remocoes": 14,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 44,
@@ -2812,7 +2819,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 45,
@@ -2839,7 +2846,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 46,
@@ -2866,7 +2873,7 @@
       "remocoes": 488,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 47,
@@ -2893,7 +2900,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 48,
@@ -2920,7 +2927,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 49,
@@ -2947,7 +2954,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 50,
@@ -2974,7 +2981,7 @@
       "remocoes": 2,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 51,
@@ -3001,7 +3008,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 52,
@@ -3028,7 +3035,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 53,
@@ -3055,7 +3062,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 54,
@@ -3082,7 +3089,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 55,
@@ -3109,7 +3116,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 56,
@@ -3136,7 +3143,7 @@
       "remocoes": 6,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 57,
@@ -3163,7 +3170,7 @@
       "remocoes": 14,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 58,
@@ -3190,7 +3197,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 59,
@@ -3217,7 +3224,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 60,
@@ -3244,7 +3251,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 61,
@@ -3271,7 +3278,7 @@
       "remocoes": 352,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 62,
@@ -3298,7 +3305,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 63,
@@ -3325,7 +3332,7 @@
       "remocoes": 503,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 64,
@@ -3352,7 +3359,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 65,
@@ -3379,7 +3386,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 66,
@@ -3406,7 +3413,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 67,
@@ -3433,7 +3440,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 68,
@@ -3460,7 +3467,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 69,
@@ -3487,7 +3494,7 @@
       "remocoes": 2,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 70,
@@ -3514,7 +3521,7 @@
       "remocoes": 86,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 71,
@@ -3541,7 +3548,7 @@
       "remocoes": 4,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 72,
@@ -3568,7 +3575,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 73,
@@ -3595,7 +3602,7 @@
       "remocoes": 692,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 74,
@@ -3622,7 +3629,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 75,
@@ -3649,7 +3656,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 76,
@@ -3676,7 +3683,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 77,
@@ -3703,7 +3710,7 @@
       "remocoes": 464,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 78,
@@ -3730,7 +3737,7 @@
       "remocoes": 712,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 79,
@@ -3757,7 +3764,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 81,
@@ -3784,7 +3791,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 82,
@@ -3811,7 +3818,7 @@
       "remocoes": 208,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 83,
@@ -3838,7 +3845,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 84,
@@ -3865,7 +3872,7 @@
       "remocoes": 86,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 85,
@@ -3892,7 +3899,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 86,
@@ -3919,7 +3926,7 @@
       "remocoes": 8,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 87,
@@ -3946,7 +3953,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 93,
@@ -3973,7 +3980,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 89,
@@ -4000,7 +4007,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 90,
@@ -4027,7 +4034,7 @@
       "remocoes": 32,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 91,
@@ -4054,7 +4061,7 @@
       "remocoes": 162,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 92,
@@ -4081,7 +4088,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 96,
@@ -4108,7 +4115,7 @@
       "remocoes": 0,
       "estado": "EM OPERACAO",
       "tipoItemLineup": 1,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 95,
@@ -4135,7 +4142,7 @@
       "remocoes": 598,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 94,
@@ -4162,7 +4169,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 115,
@@ -4181,15 +4188,15 @@
       "previsaoAtracacao": "23/11/26 01:30",
       "atracacao": "23/11/26 01:26",
       "inicioOperacao": "23/11/26 01:55",
-      "termino": "",
-      "previsaoSaida": "24/11/26 11:30",
-      "saida": "",
-      "cargas": 1203,
+      "termino": "24/11/26 10:29",
+      "previsaoSaida": "24/11/26 12:30",
+      "saida": "24/11/26 12:30",
+      "cargas": 1215,
       "descargas": 0,
       "remocoes": 42,
-      "estado": "EM OPERACAO",
-      "tipoItemLineup": 1,
-      "updatedAt": "24/11/2026 14:24"
+      "estado": "FECHADO",
+      "tipoItemLineup": 2,
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 118,
@@ -4243,7 +4250,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 99,
@@ -4270,7 +4277,7 @@
       "remocoes": 26,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 100,
@@ -4297,7 +4304,7 @@
       "remocoes": 102,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 101,
@@ -4324,7 +4331,7 @@
       "remocoes": 22,
       "estado": "EM OPERACAO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 103,
@@ -4351,7 +4358,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 102,
@@ -4378,7 +4385,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 104,
@@ -4405,7 +4412,7 @@
       "remocoes": 26,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 105,
@@ -4432,7 +4439,7 @@
       "remocoes": 52,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 107,
@@ -4459,7 +4466,7 @@
       "remocoes": 306,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 106,
@@ -4486,7 +4493,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 125,
@@ -4540,7 +4547,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 111,
@@ -4567,7 +4574,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 112,
@@ -4594,7 +4601,7 @@
       "remocoes": 22,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 113,
@@ -4613,15 +4620,15 @@
       "previsaoAtracacao": "22/11/26 03:00",
       "atracacao": "22/11/26 04:30",
       "inicioOperacao": "22/11/26 04:40",
-      "termino": "",
+      "termino": "22/11/26 15:27",
       "previsaoSaida": "22/11/26 16:30",
       "saida": "22/11/26 16:30",
-      "cargas": 188,
-      "descargas": 103,
+      "cargas": 189,
+      "descargas": 105,
       "remocoes": 62,
-      "estado": "EM OPERACAO",
+      "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 117,
@@ -4641,14 +4648,14 @@
       "atracacao": "23/11/26 21:45",
       "inicioOperacao": "23/11/26 21:48",
       "termino": "",
-      "previsaoSaida": "24/11/26 12:00",
-      "saida": "",
-      "cargas": 68,
-      "descargas": 113,
-      "remocoes": 2,
+      "previsaoSaida": "24/11/26 18:30",
+      "saida": "24/11/26 18:30",
+      "cargas": 190,
+      "descargas": 139,
+      "remocoes": 102,
       "estado": "EM OPERACAO",
-      "tipoItemLineup": 1,
-      "updatedAt": "24/11/2026 14:24"
+      "tipoItemLineup": 2,
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 114,
@@ -4675,7 +4682,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 116,
@@ -4702,7 +4709,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 119,
@@ -4713,23 +4720,23 @@
       "servicoCompleto": "TANGO NB - ECNA TANGO",
       "consorcio": "Hapag-Lloyd / Maersk",
       "operador": "MSK",
-      "berco": "MULTI.1",
+      "berco": "PROLONGAM",
       "aberturaGate": "17/11/26 21:00",
       "deadline": "21/11/26 11:00",
       "previsaoChegada": "24/11/26 13:30",
-      "chegada": "",
+      "chegada": "24/11/26 12:58",
       "previsaoAtracacao": "24/11/26 14:30",
-      "atracacao": "",
-      "inicioOperacao": "",
+      "atracacao": "24/11/26 15:47",
+      "inicioOperacao": "24/11/26 17:00",
       "termino": "",
       "previsaoSaida": "25/11/26 05:00",
       "saida": "",
-      "cargas": 0,
-      "descargas": 0,
-      "remocoes": 0,
-      "estado": "ABERTO",
-      "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "cargas": 23,
+      "descargas": 51,
+      "remocoes": 8,
+      "estado": "EM OPERACAO",
+      "tipoItemLineup": 1,
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 118,
@@ -4756,7 +4763,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 122,
@@ -4783,7 +4790,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 124,
@@ -4810,7 +4817,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 125,
@@ -4823,7 +4830,7 @@
       "operador": "EMC",
       "berco": "PROLONGAM",
       "aberturaGate": "23/11/26 00:01",
-      "deadline": "27/11/26 11:00",
+      "deadline": "27/11/26 12:00",
       "previsaoChegada": "29/11/26 08:00",
       "chegada": "",
       "previsaoAtracacao": "29/11/26 10:00",
@@ -4837,7 +4844,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 128,
@@ -4864,7 +4871,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 130,
@@ -4877,7 +4884,7 @@
       "operador": "CMA",
       "berco": "TECON1.1",
       "aberturaGate": "24/11/26 00:01",
-      "deadline": "27/11/26 11:00",
+      "deadline": "27/11/26 12:00",
       "previsaoChegada": "01/12/26 09:30",
       "chegada": "",
       "previsaoAtracacao": "30/11/26 18:30",
@@ -4891,7 +4898,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 127,
@@ -4918,7 +4925,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 142,
@@ -4945,7 +4952,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 129,
@@ -4972,7 +4979,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 131,
@@ -4999,7 +5006,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 135,
@@ -5053,7 +5060,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 136,
@@ -5080,7 +5087,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 137,
@@ -5107,7 +5114,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 138,
@@ -5134,7 +5141,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 139,
@@ -5161,7 +5168,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 140,
@@ -5188,7 +5195,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 141,
@@ -5215,7 +5222,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 144,
@@ -5242,7 +5249,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 146,
@@ -5269,7 +5276,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 147,
@@ -5296,7 +5303,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 148,
@@ -5309,7 +5316,7 @@
       "operador": "CMA",
       "berco": "",
       "aberturaGate": "06/12/26 00:01",
-      "deadline": "11/12/26 12:00",
+      "deadline": "11/12/26 17:00",
       "previsaoChegada": "12/12/26 17:00",
       "chegada": "",
       "previsaoAtracacao": "",
@@ -5323,7 +5330,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 149,
@@ -5350,7 +5357,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 150,
@@ -5377,7 +5384,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 151,
@@ -5404,7 +5411,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 152,
@@ -5431,7 +5438,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 153,
@@ -5458,7 +5465,7 @@
       "remocoes": 0,
       "estado": "CANCELADO",
       "tipoItemLineup": 3,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 156,
@@ -5512,7 +5519,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 156,
@@ -5539,7 +5546,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 158,
@@ -5566,7 +5573,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 159,
@@ -5593,7 +5600,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 160,
@@ -5620,7 +5627,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 161,
@@ -5647,7 +5654,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 162,
@@ -5674,7 +5681,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 163,
@@ -5701,7 +5708,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 164,
@@ -5728,7 +5735,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 165,
@@ -5755,7 +5762,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 167,
@@ -5782,10 +5789,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 168,
+      "rowNum": 169,
       "navio": "MAERSK REDWOOD",
       "viagem": "652W",
       "joint": "COS",
@@ -5809,10 +5816,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 169,
+      "rowNum": 170,
       "navio": "APL NEW JERSEY",
       "viagem": "0GBH5N1MA",
       "joint": "BZX",
@@ -5836,10 +5843,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 170,
+      "rowNum": 171,
       "navio": "NYK DIANA",
       "viagem": "026N",
       "joint": "LUX",
@@ -5863,10 +5870,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 171,
+      "rowNum": 172,
       "navio": "CMA CGM SANTOS",
       "viagem": "281226",
       "joint": "BCO",
@@ -5890,10 +5897,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 172,
+      "rowNum": 173,
       "navio": "MAERSK MONTE ALEGRE",
       "viagem": "651N",
       "joint": "TGO",
@@ -5917,10 +5924,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 173,
+      "rowNum": 174,
       "navio": "COSCO SHIPPING ARGENTINA",
       "viagem": "012W",
       "joint": "S2S",
@@ -5944,10 +5951,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 174,
+      "rowNum": 175,
       "navio": "CMA CGM OSMIUM",
       "viagem": "0BDPWE1MA",
       "joint": "S2N",
@@ -5971,10 +5978,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 175,
+      "rowNum": 176,
       "navio": "EVER FAR",
       "viagem": "1723-033W",
       "joint": "SE1",
@@ -5998,10 +6005,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 177,
+      "rowNum": 178,
       "navio": "MAERSK ACADIA",
       "viagem": "653W",
       "joint": "COS",
@@ -6025,10 +6032,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 178,
+      "rowNum": 179,
       "navio": "CARDIFF",
       "viagem": "0GBH7N1MA",
       "joint": "BZX",
@@ -6052,10 +6059,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 179,
+      "rowNum": 180,
       "navio": "CMA CGM VERACRUZ",
       "viagem": "030127",
       "joint": "BCO",
@@ -6079,10 +6086,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 180,
+      "rowNum": 181,
       "navio": "COSCO SHIPPING CHILE",
       "viagem": "009E",
       "joint": "S2N",
@@ -6106,7 +6113,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 154,
@@ -6133,10 +6140,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 181,
+      "rowNum": 183,
       "navio": "MERCOSUL FORTALEZA",
       "viagem": "100127",
       "joint": "BCO",
@@ -6160,10 +6167,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 182,
+      "rowNum": 184,
       "navio": "XIN CHONG QING",
       "viagem": "188N",
       "joint": "LUX",
@@ -6187,10 +6194,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 183,
+      "rowNum": 185,
       "navio": "COSCO SHIPPING ARGENTINA",
       "viagem": "012E",
       "joint": "S2N",
@@ -6214,10 +6221,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 184,
+      "rowNum": 186,
       "navio": "MAERSK FORTALEZA",
       "viagem": "653N",
       "joint": "TGO",
@@ -6241,7 +6248,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 133,
@@ -6268,10 +6275,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 185,
+      "rowNum": 187,
       "navio": "COSCO SHIPPING BRAZIL",
       "viagem": "013E",
       "joint": "S2N",
@@ -6295,10 +6302,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 186,
+      "rowNum": 188,
       "navio": "EVER FIT",
       "viagem": "1725-028W",
       "joint": "SE1",
@@ -6322,10 +6329,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 193,
+      "rowNum": 195,
       "navio": "ZIM WILMINGTON",
       "viagem": "29E",
       "joint": "ZFS",
@@ -6349,10 +6356,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 187,
+      "rowNum": 189,
       "navio": "MAERSK EVERGLADES",
       "viagem": "702W",
       "joint": "COS",
@@ -6376,10 +6383,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 188,
+      "rowNum": 190,
       "navio": "MERCOSUL GUARUJA",
       "viagem": "170127",
       "joint": "BCO",
@@ -6403,10 +6410,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 189,
+      "rowNum": 191,
       "navio": "XIN CHANG SHA",
       "viagem": "416N",
       "joint": "LUX",
@@ -6430,10 +6437,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 190,
+      "rowNum": 192,
       "navio": "MAERSK FRANKFURT",
       "viagem": "701N",
       "joint": "TGO",
@@ -6457,10 +6464,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 191,
+      "rowNum": 193,
       "navio": "EVER FAME",
       "viagem": "1726-031W",
       "joint": "SE1",
@@ -6484,10 +6491,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 192,
+      "rowNum": 194,
       "navio": "SEASPAN EMPIRE",
       "viagem": "704W",
       "joint": "COS",
@@ -6511,10 +6518,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 194,
+      "rowNum": 197,
       "navio": "NAVIOS DOMINO",
       "viagem": "027N",
       "joint": "LUX",
@@ -6538,10 +6545,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 195,
+      "rowNum": 198,
       "navio": "DANUBE",
       "viagem": "26W",
       "joint": "ZFS",
@@ -6565,10 +6572,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 196,
+      "rowNum": 202,
       "navio": "NAVIOS VERMILION",
       "viagem": "166N",
       "joint": "LUX",
@@ -6592,10 +6599,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 197,
+      "rowNum": 207,
       "navio": "ANDROUSA",
       "viagem": "372N",
       "joint": "LUX",
@@ -6619,7 +6626,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 132,
@@ -6646,7 +6653,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 97,
@@ -6673,7 +6680,7 @@
       "remocoes": 3,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 110,
@@ -6700,7 +6707,7 @@
       "remocoes": 0,
       "estado": "FECHADO",
       "tipoItemLineup": 2,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 120,
@@ -6727,7 +6734,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 121,
@@ -6754,7 +6761,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 135,
@@ -6781,7 +6788,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 143,
@@ -6808,10 +6815,10 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
-      "rowNum": 176,
+      "rowNum": 177,
       "navio": "ZIM NORFOLK",
       "viagem": "23E",
       "joint": "ZFS",
@@ -6835,7 +6842,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 80,
@@ -6862,7 +6869,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 166,
@@ -6889,7 +6896,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 145,
@@ -6916,7 +6923,7 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
     },
     {
       "rowNum": 157,
@@ -6943,7 +6950,601 @@
       "remocoes": 0,
       "estado": "ABERTO",
       "tipoItemLineup": 0,
-      "updatedAt": "24/11/2026 14:24"
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 168,
+      "navio": "LOGIN PANTANAL",
+      "viagem": "630S",
+      "joint": "FED",
+      "servico": "FEEDER",
+      "servicoCompleto": "FEEDER",
+      "consorcio": "Log-In / Maersk / CMA CGM / Mercosul / ZIM",
+      "operador": "LOG",
+      "berco": "",
+      "aberturaGate": "19/12/26 06:00",
+      "deadline": "24/12/26 17:00",
+      "previsaoChegada": "25/12/26 06:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 182,
+      "navio": "SEASPAN EMISSARY",
+      "viagem": "702W",
+      "joint": "COS",
+      "servico": "CONOSUR",
+      "servicoCompleto": "ABAC CONOSUR",
+      "consorcio": "Maersk / Sealand / Hapag-Lloyd",
+      "operador": "HLC",
+      "berco": "",
+      "aberturaGate": "03/01/27 01:00",
+      "deadline": "07/01/27 17:00",
+      "previsaoChegada": "09/01/27 01:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 196,
+      "navio": "CMA CGM SANTOS",
+      "viagem": "240127",
+      "joint": "BCO",
+      "servico": "BRACO",
+      "servicoCompleto": "BRACO",
+      "consorcio": "Mercosul (Slot LOG-IN)",
+      "operador": "MER",
+      "berco": "",
+      "aberturaGate": "18/01/27 06:00",
+      "deadline": "22/01/27 12:00",
+      "previsaoChegada": "24/01/27 06:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 199,
+      "navio": "DUSSELDORF EXPRESS",
+      "viagem": "705W",
+      "joint": "COS",
+      "servico": "CONOSUR",
+      "servicoCompleto": "ABAC CONOSUR",
+      "consorcio": "Maersk / Sealand / Hapag-Lloyd",
+      "operador": "HLC",
+      "berco": "",
+      "aberturaGate": "24/01/27 01:00",
+      "deadline": "28/01/27 17:00",
+      "previsaoChegada": "30/01/27 01:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 200,
+      "navio": "DANUBE",
+      "viagem": "26E",
+      "joint": "ZFS",
+      "servico": "FALCON",
+      "servicoCompleto": "FALCON",
+      "consorcio": "MSC / Hapag-Lloyd",
+      "operador": "ZIM",
+      "berco": "",
+      "aberturaGate": "24/01/27 16:00",
+      "deadline": "27/01/27 12:00",
+      "previsaoChegada": "30/01/27 16:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 201,
+      "navio": "CMA CGM VERACRUZ",
+      "viagem": "310127",
+      "joint": "BCO",
+      "servico": "BRACO",
+      "servicoCompleto": "BRACO",
+      "consorcio": "Mercosul (Slot LOG-IN)",
+      "operador": "MER",
+      "berco": "",
+      "aberturaGate": "25/01/27 06:00",
+      "deadline": "29/01/27 12:00",
+      "previsaoChegada": "31/01/27 06:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 203,
+      "navio": "MAERSK FREEPORT",
+      "viagem": "703N",
+      "joint": "TGO",
+      "servico": "TANGO",
+      "servicoCompleto": "TANGO NB - ECNA TANGO",
+      "consorcio": "Hapag-Lloyd / Maersk",
+      "operador": "MSK",
+      "berco": "",
+      "aberturaGate": "26/01/27 21:00",
+      "deadline": "29/01/27 17:00",
+      "previsaoChegada": "01/02/27 21:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 204,
+      "navio": "ALESSIA",
+      "viagem": "043N",
+      "joint": "BZX",
+      "servico": "BRAZEX",
+      "servicoCompleto": "BRAZEX",
+      "consorcio": "CMA CGM / COSCO (Slot Maersk - ONE)",
+      "operador": "COS",
+      "berco": "",
+      "aberturaGate": "30/01/27 21:00",
+      "deadline": "05/02/27 12:00",
+      "previsaoChegada": "05/02/27 21:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 205,
+      "navio": "LORI",
+      "viagem": "706W",
+      "joint": "COS",
+      "servico": "CONOSUR",
+      "servicoCompleto": "ABAC CONOSUR",
+      "consorcio": "Maersk / Sealand / Hapag-Lloyd",
+      "operador": "HLC",
+      "berco": "",
+      "aberturaGate": "31/01/27 01:00",
+      "deadline": "04/02/27 17:00",
+      "previsaoChegada": "06/02/27 01:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 206,
+      "navio": "MERCOSUL FORTALEZA",
+      "viagem": "060227",
+      "joint": "BCO",
+      "servico": "BRACO",
+      "servicoCompleto": "BRACO",
+      "consorcio": "Mercosul (Slot LOG-IN)",
+      "operador": "MER",
+      "berco": "",
+      "aberturaGate": "31/01/27 05:00",
+      "deadline": "05/02/27 12:00",
+      "previsaoChegada": "06/02/27 05:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 208,
+      "navio": "MAERSK MONTE AZUL",
+      "viagem": "704N",
+      "joint": "TGO",
+      "servico": "TANGO",
+      "servicoCompleto": "TANGO NB - ECNA TANGO",
+      "consorcio": "Hapag-Lloyd / Maersk",
+      "operador": "MSK",
+      "berco": "",
+      "aberturaGate": "02/02/27 21:00",
+      "deadline": "05/02/27 17:00",
+      "previsaoChegada": "08/02/27 21:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 209,
+      "navio": "EVER FAIR",
+      "viagem": "1728-029W",
+      "joint": "SE1",
+      "servico": "SEAS 1",
+      "servicoCompleto": "SEAS 1",
+      "consorcio": "CMA CGM / Evergreen / COSCO / PIL",
+      "operador": "EMC",
+      "berco": "",
+      "aberturaGate": "04/02/27 00:00",
+      "deadline": "05/02/27 12:00",
+      "previsaoChegada": "10/02/27 00:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 210,
+      "navio": "MAERSK REDWOOD",
+      "viagem": "706W",
+      "joint": "COS",
+      "servico": "CONOSUR",
+      "servicoCompleto": "ABAC CONOSUR",
+      "consorcio": "Maersk / Sealand / Hapag-Lloyd",
+      "operador": "MSK",
+      "berco": "",
+      "aberturaGate": "07/02/27 07:00",
+      "deadline": "11/02/27 17:00",
+      "previsaoChegada": "13/02/27 07:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 211,
+      "navio": "MERCOSUL GUARUJA",
+      "viagem": "140227",
+      "joint": "BCO",
+      "servico": "BRACO",
+      "servicoCompleto": "BRACO",
+      "consorcio": "Mercosul (Slot LOG-IN)",
+      "operador": "MER",
+      "berco": "",
+      "aberturaGate": "08/02/27 06:00",
+      "deadline": "12/02/27 12:00",
+      "previsaoChegada": "14/02/27 06:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 212,
+      "navio": "NYK RUMINA",
+      "viagem": "080N",
+      "joint": "LUX",
+      "servico": "LUX",
+      "servicoCompleto": "LUX",
+      "consorcio": "COSCO / ONE / OOCL",
+      "operador": "ONE",
+      "berco": "",
+      "aberturaGate": "09/02/27 00:00",
+      "deadline": "12/02/27 17:00",
+      "previsaoChegada": "15/02/27 00:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 213,
+      "navio": "MAERSK MONTE ALEGRE",
+      "viagem": "705N",
+      "joint": "TGO",
+      "servico": "TANGO",
+      "servicoCompleto": "TANGO NB - ECNA TANGO",
+      "consorcio": "Hapag-Lloyd / Maersk",
+      "operador": "MSK",
+      "berco": "",
+      "aberturaGate": "09/02/27 21:00",
+      "deadline": "12/02/27 17:00",
+      "previsaoChegada": "15/02/27 21:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 214,
+      "navio": "MAERSK ACADIA",
+      "viagem": "707W",
+      "joint": "COS",
+      "servico": "CONOSUR",
+      "servicoCompleto": "ABAC CONOSUR",
+      "consorcio": "Maersk / Sealand / Hapag-Lloyd",
+      "operador": "MSK",
+      "berco": "",
+      "aberturaGate": "14/02/27 07:00",
+      "deadline": "18/02/27 17:00",
+      "previsaoChegada": "20/02/27 07:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 215,
+      "navio": "XIN WEI HAI",
+      "viagem": "175N",
+      "joint": "LUX",
+      "servico": "LUX",
+      "servicoCompleto": "LUX",
+      "consorcio": "COSCO / ONE / OOCL",
+      "operador": "COS",
+      "berco": "",
+      "aberturaGate": "16/02/27 01:00",
+      "deadline": "19/02/27 17:00",
+      "previsaoChegada": "22/02/27 01:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 216,
+      "navio": "NYK DIANA",
+      "viagem": "027N",
+      "joint": "LUX",
+      "servico": "LUX",
+      "servicoCompleto": "LUX",
+      "consorcio": "COSCO / ONE / OOCL",
+      "operador": "ONE",
+      "berco": "",
+      "aberturaGate": "23/02/27 00:00",
+      "deadline": "26/02/27 17:00",
+      "previsaoChegada": "01/03/27 00:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 217,
+      "navio": "MAERSK FORTALEZA",
+      "viagem": "707N",
+      "joint": "TGO",
+      "servico": "TANGO",
+      "servicoCompleto": "TANGO NB - ECNA TANGO",
+      "consorcio": "Hapag-Lloyd / Maersk",
+      "operador": "MSK",
+      "berco": "",
+      "aberturaGate": "23/02/27 21:00",
+      "deadline": "26/02/27 17:00",
+      "previsaoChegada": "01/03/27 21:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 218,
+      "navio": "EVER FINE",
+      "viagem": "1731-030W",
+      "joint": "SE1",
+      "servico": "SEAS 1",
+      "servicoCompleto": "SEAS 1",
+      "consorcio": "CMA CGM / Evergreen / COSCO / PIL",
+      "operador": "EMC",
+      "berco": "",
+      "aberturaGate": "25/02/27 00:00",
+      "deadline": "26/02/27 12:00",
+      "previsaoChegada": "03/03/27 00:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
+    },
+    {
+      "rowNum": 219,
+      "navio": "ZIM NORFOLK",
+      "viagem": "24W",
+      "joint": "ZFS",
+      "servico": "FALCON",
+      "servicoCompleto": "FALCON",
+      "consorcio": "MSC / Hapag-Lloyd",
+      "operador": "ZIM",
+      "berco": "",
+      "aberturaGate": "14/03/27 16:00",
+      "deadline": "17/03/27 12:00",
+      "previsaoChegada": "20/03/27 16:00",
+      "chegada": "",
+      "previsaoAtracacao": "",
+      "atracacao": "",
+      "inicioOperacao": "",
+      "termino": "",
+      "previsaoSaida": "",
+      "saida": "",
+      "cargas": 0,
+      "descargas": 0,
+      "remocoes": 0,
+      "estado": "ABERTO",
+      "tipoItemLineup": 0,
+      "updatedAt": "25/11/2026 00:14"
     }
   ]
 }
