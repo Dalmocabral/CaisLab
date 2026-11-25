@@ -1,31 +1,8 @@
 {
-  "updatedAt": "25/11/2026 10:41",
+  "updatedAt": "25/11/2026 20:50",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 7,
+  "count": 6,
   "maneuvers": [
-    {
-      "dateTime": "25/11 07:00",
-      "name": "ARCTOS",
-      "draft": 6.2,
-      "loa": 183.06,
-      "beam": 32.23,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
-      "berthingSide": "bombordo",
-      "imo": "9829409",
-      "type": "CHEMICAL/PRODUCTS TANKER",
-      "flag": "LIBERIA",
-      "terminal": "rio",
-      "service": "GENERIC",
-      "serviceFull": "GENERIC",
-      "consorcio": "",
-      "voyage": "003727IW",
-      "operator": "GEN",
-      "deadline": "12/11/26 05:00",
-      "gateOpening": "11/11/26 07:00",
-      "lineupBerth": "TECON1.1"
-    },
     {
       "dateTime": "29/11 08:00",
       "name": "EVER FINE",
@@ -70,7 +47,7 @@
       "operator": "CMA",
       "deadline": "27/11/26 12:00",
       "gateOpening": "24/11/26 00:01",
-      "lineupBerth": "TECON1.1"
+      "lineupBerth": "PROLONGAM"
     },
     {
       "dateTime": "02/12 12:00",
@@ -116,7 +93,7 @@
       "operator": "PIL",
       "deadline": "01/12/26 12:00",
       "gateOpening": "26/11/26 03:00",
-      "lineupBerth": ""
+      "lineupBerth": "PROLONGAM"
     },
     {
       "dateTime": "08/12 08:00",
@@ -139,7 +116,7 @@
       "operator": "COS",
       "deadline": "07/12/26 12:00",
       "gateOpening": "02/12/26 03:00",
-      "lineupBerth": ""
+      "lineupBerth": "PROLONGAM"
     },
     {
       "dateTime": "11/12 06:00",
@@ -162,7 +139,7 @@
       "operator": "COS",
       "deadline": "08/12/26 12:00",
       "gateOpening": "03/12/26 03:00",
-      "lineupBerth": ""
+      "lineupBerth": "PROLONGAM"
     }
   ]
 }
