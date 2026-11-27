@@ -1,10 +1,10 @@
 {
-  "updatedAt": "27/11/2026 15:49",
+  "updatedAt": "27/11/2026 23:49",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 10,
   "maneuvers": [
     {
-      "dateTime": "27/11 18:30",
+      "dateTime": "27/11 21:00",
       "name": "LOG-IN PANTANAL",
       "draft": 7.1,
       "loa": 182.47,
@@ -52,7 +52,7 @@
     {
       "dateTime": "28/11 21:00",
       "name": "NAVIOS VERMILION",
-      "draft": 12.0,
+      "draft": 11.5,
       "loa": 260.05,
       "beam": 32.3,
       "maneuver": "E",
