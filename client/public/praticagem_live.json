@@ -1,5 +1,5 @@
 {
-  "updatedAt": "28/11/2026 05:29",
+  "updatedAt": "28/11/2026 14:44",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
   "count": 9,
   "maneuvers": [
@@ -24,10 +24,10 @@
       "operator": "MSK",
       "deadline": "27/11/26 11:00",
       "gateOpening": "21/11/26 07:00",
-      "lineupBerth": "TECON1.2"
+      "lineupBerth": "PROLONGAM"
     },
     {
-      "dateTime": "28/11 21:00",
+      "dateTime": "29/11 06:00",
       "name": "NAVIOS VERMILION",
       "draft": 11.5,
       "loa": 260.05,
@@ -73,7 +73,7 @@
       "lineupBerth": "PROLONGAM"
     },
     {
-      "dateTime": "29/11 18:00",
+      "dateTime": "29/11 19:00",
       "name": "CMA CGM SANTOS",
       "draft": 10.5,
       "loa": 228.0,
