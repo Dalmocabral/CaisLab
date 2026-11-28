@@ -207,7 +207,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "27/11/2026 23:49",
+    "updatedAt": "28/11/2026 05:29",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9729099",
     "imageUrl": "/vessels/cma_cgm_lisa_marie.jpg"
   },
@@ -249,7 +249,7 @@
     "type": "Porta-Contêineres (Container Ship - Fully Cellular)",
     "flag": "BRAZIL",
     "lastBerth": "TECONT1",
-    "updatedAt": "27/11/2026 23:49",
+    "updatedAt": "28/11/2026 05:29",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9649835",
     "imageUrl": "/vessels/cma_cgm_santos.jpg",
     "bayCount": 50,
@@ -276,7 +276,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MALTA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "27/11/2026 23:49",
+    "updatedAt": "28/11/2026 05:29",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9996769",
     "imageUrl": "/vessels/cma_cgm_silver.jpg"
   },
@@ -382,7 +382,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "27/11/2026 23:49",
+    "updatedAt": "28/11/2026 05:29",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9448774",
     "imageUrl": "/vessels/cosco_malaysia.jpg"
   },
@@ -498,7 +498,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "HONG KONG, CHINA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "27/11/2026 23:49",
+    "updatedAt": "28/11/2026 05:29",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9945875",
     "imageUrl": "/vessels/cosco_shipping_peru.jpg"
   },
@@ -723,13 +723,13 @@
     "name": "EVER FINE",
     "loa": 333.95,
     "beam": 48.43,
-    "draft": 14.3,
+    "draft": 14.5,
     "berthingSide": "boreste",
     "imo": "9850812",
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "LIBERIA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "27/11/2026 23:49",
+    "updatedAt": "28/11/2026 05:29",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9850812",
     "imageUrl": "/vessels/ever_fine.jpg"
   },
@@ -872,7 +872,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "SINGAPORE",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "27/11/2026 23:49",
+    "updatedAt": "28/11/2026 05:29",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9968865",
     "imageUrl": "/vessels/kota_embun.jpg"
   },
@@ -1042,7 +1042,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "PANAMA",
     "lastBerth": "TECONTPROLONG",
-    "updatedAt": "27/11/2026 23:49",
+    "updatedAt": "28/11/2026 05:29",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9928205",
     "imageUrl": "/vessels/maersk_everglades.jpg"
   },
@@ -1252,7 +1252,7 @@
     "type": "CONTAINER SHIP (FULLY CELLULAR)",
     "flag": "MARSHALL ISLANDS",
     "lastBerth": "TECONT1",
-    "updatedAt": "27/11/2026 23:49",
+    "updatedAt": "28/11/2026 05:29",
     "marineTrafficUrl": "https://www.marinetraffic.com/en/ais/details/ships/imo:9324837",
     "imageUrl": "/vessels/navios_vermilion.jpg"
   },

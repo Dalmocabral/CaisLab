@@ -1,31 +1,8 @@
 {
-  "updatedAt": "27/11/2026 23:49",
+  "updatedAt": "28/11/2026 05:29",
   "terminal": "Tecon Rio (Prolongamento / Tecon 1)",
-  "count": 10,
+  "count": 9,
   "maneuvers": [
-    {
-      "dateTime": "27/11 21:00",
-      "name": "LOG-IN PANTANAL",
-      "draft": 7.1,
-      "loa": 182.47,
-      "beam": 25.2,
-      "maneuver": "E",
-      "berthFrom": "",
-      "berthTo": "TECONTPROLONG",
-      "berthingSide": "boreste",
-      "imo": "9351799",
-      "type": "CONTAINER SHIP (FULLY CELLULAR)",
-      "flag": "BRAZIL",
-      "terminal": "rio",
-      "service": "FEEDER",
-      "serviceFull": "FEEDER",
-      "consorcio": "Log-In / Maersk / CMA CGM / Mercosul / ZIM",
-      "voyage": "626S",
-      "operator": "LOG",
-      "deadline": "26/11/26 17:00",
-      "gateOpening": "20/11/26 00:01",
-      "lineupBerth": "TECON1.2"
-    },
     {
       "dateTime": "28/11 12:00",
       "name": "MAERSK EVERGLADES",
@@ -75,7 +52,7 @@
     {
       "dateTime": "29/11 08:00",
       "name": "EVER FINE",
-      "draft": 14.3,
+      "draft": 14.5,
       "loa": 333.95,
       "beam": 48.43,
       "maneuver": "E",
